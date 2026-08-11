@@ -2,7 +2,7 @@
 
 **Repository:** `Kajin-0/gedanken_3`  
 **Active experiment:** `experiments/01-equal-dstar-different-speed/`  
-**Current mode:** first-principles photodetector thought experiment. Four logical steps completed. The frontier is now finite-time SNR accumulation: Step 04 proved that complete magnitude `D*(f)` can fail under finite observation even after arbitrary constant latency compensation because nonlinear transfer phase redistributes signal energy in time. No generalized replacement metric and no novelty claim.
+**Current mode:** first-principles photodetector thought experiment. Five logical steps completed. The frontier is now operational deadline detection: Step 05 derived the exact finite-record maximum linear SNR and the normalized SNR-squared accumulation curve `eta(T)=rho_T^2/rho_infinity^2`. No universal replacement metric and no novelty claim.
 
 Read this file first, then:
 
@@ -11,6 +11,7 @@ Read this file first, then:
 3. `experiments/01-equal-dstar-different-speed/MATCHED_FILTER_SNR_STEP.md`
 4. `experiments/01-equal-dstar-different-speed/FINITE_WINDOW_PHASE_STEP.md`
 5. `experiments/01-equal-dstar-different-speed/LATENCY_COMPENSATED_DISPERSION_STEP.md`
+6. `experiments/01-equal-dstar-different-speed/SNR_ACCUMULATION_STEP.md`
 
 The repository follows the physics rather than a predetermined criticism of `D*`. Preserve assumptions, counterexamples, cancellations, negative results, invalidations, and unresolved branches.
 
@@ -80,7 +81,7 @@ Under equal area, equal low-frequency responsivity, equal additive white output 
 H_i(f)=\frac{1}{1+i2\pi f\tau_i},
 ```
 
-equal low-frequency/reference `D*` does not guarantee equal SNR for a 1 Hz optical tone. The explicit example gives
+equal low-frequency/reference `D*` does not guarantee equal SNR for a 1 Hz optical tone. Explicitly,
 
 ```math
 \mathrm{SNR}_A/\mathrm{SNR}_B\approx6.36.
@@ -98,7 +99,7 @@ For deterministic finite-energy optical waveform `p(t)`, LTI transfer `G(f)`, an
 
 ```math
 \boxed{
-\mathrm{SNR}_{\max}^2
+\rho_\infty^2
 =\int |P(f)|^2\frac{|G(f)|^2}{S_n(f)}df.
 }
 ```
@@ -111,7 +112,7 @@ D^*(f)=\frac{\sqrt A|G(f)|}{\sqrt{S_n(f)}},
 
 ```math
 \boxed{
-\mathrm{SNR}_{\max}^2
+\rho_\infty^2
 =\frac1A\int |P(f)|^2D^{*2}(f)df.
 }
 ```
@@ -124,7 +125,7 @@ Thus complete magnitude `D*(f)` is sufficient for this restricted known-waveform
 
 ### Unknown arrival time
 
-For stationary Gaussian noise, exact detector knowledge, unlimited observation, and unrestricted matched-filter delay search, identical complete `D*(f)` produces the same matched-filter search mean/covariance process.
+For stationary Gaussian noise, exact detector knowledge, unlimited observation, and unrestricted matched-filter delay search, identical complete `D*(f)` produces the same matched-filter search statistics.
 
 **DERIVED / CONDITIONAL:** unknown arrival time alone does not break equivalence.
 
@@ -161,38 +162,101 @@ D_A^*(f)=D_B^*(f)
 \qquad \forall f.
 ```
 
-Its group delay
+Its nonlinear group delay cannot be removed by any constant time shift. For a compact output pulse in A, B develops a nonzero tail while preserving total energy exactly.
 
-```math
-\tau_g(\omega)=\frac{2a}{a^2+\omega^2}
-```
-
-is frequency dependent and cannot be removed by any constant latency shift.
-
-Choose a physically regular modulation such that detector A outputs
-
-```math
-x(t)=\sin^2(\pi t/T),
-\qquad 0\le t\le T,
-```
-
-zero otherwise. Detector B's all-pass output has a nonzero exponential tail for every `t>T` while preserving total signal energy exactly.
-
-Therefore detector A captures all of its full matched-filter energy in one `T`-long window, whereas detector B cannot do so in **any** `T`-long window, even after arbitrary constant alignment:
+Therefore
 
 ```math
 \boxed{
-\max_\delta\rho_{B,T}^2<\rho_{A,T}^2.
+\max_\delta\rho_{B,T}^2<\rho_{A,T}^2
 }
 ```
 
-**DERIVED / COUNTEREXAMPLE:** complete magnitude `D*(f)` can be insufficient for finite-time detection because nonlinear phase / temporal dispersion controls the rate at which recoverable SNR appears in time.
+for equal-duration windows even after arbitrary constant alignment.
 
-This is not a pure clock-alignment artifact.
+**DERIVED / COUNTEREXAMPLE:** complete magnitude `D*(f)` can be insufficient for finite-time detection because nonlinear phase / temporal dispersion controls when recoverable SNR appears.
 
 ---
 
-## 8. Current scientific frontier
+## 8. Step 05 — exact SNR accumulation
+
+For output `y=s+n` observed only on `[0,T]`, let `C_T` be the additive-noise covariance operator restricted to that record.
+
+The exact maximum linear SNR available by the deadline is
+
+```math
+\boxed{
+\rho_T^2=\langle s_T,C_T^{-1}s_T\rangle.
+}
+```
+
+Define
+
+```math
+\boxed{
+\eta(T)=\frac{\rho_T^2}{\rho_\infty^2}.
+}
+```
+
+`eta(T)` is the fraction of eventual matched-filter **SNR squared** accessible by deadline `T`; the SNR-amplitude fraction is `sqrt(eta)`.
+
+For nested records,
+
+```math
+0\le\eta(T)\le1,
+```
+
+and `eta(T)` is nondecreasing.
+
+For white output noise `N`,
+
+```math
+\boxed{
+\eta(T)
+=\frac{\int_0^T|s(t)|^2dt}
+{\int_0^\infty|s(t)|^2dt}.
+}
+```
+
+For the minimal exponential waveform
+
+```math
+s_\tau(t)=S_0e^{-t/\tau}u(t),
+```
+
+```math
+\boxed{
+\eta_\tau(T)=1-e^{-2T/\tau}.
+}
+```
+
+At `T=1 us`:
+
+```text
+tau_A = 1 ns -> eta_A ~ 1
+
+tau_B = 1 s  -> eta_B ~ 2e-6
+```
+
+This is a normalized timing comparison against each detector's own eventual SNR, not automatically an absolute SNR comparison.
+
+For a selected squared-SNR fraction `q`,
+
+```math
+T_q=\inf\{T:\eta(T)\ge q\}
+```
+
+and for the exponential example
+
+```math
+T_q=-\frac{\tau}{2}\ln(1-q).
+```
+
+Important colored-noise caution: restriction to a finite record and infinite-record whitening do not generally commute. Use `C_T^{-1}` for the exact finite-window result.
+
+---
+
+## 9. Current scientific frontier
 
 The surviving hierarchy is:
 
@@ -205,25 +269,26 @@ complete magnitude D*(f)
 -> sufficient for ideal full-observation unknown-arrival Gaussian matched filtering
 -> insufficient for finite-window measurement
 
-pure delay
--> removable finite-window failure mechanism
-
 nonlinear phase / temporal dispersion
--> finite-window failure survives arbitrary constant latency compensation
+-> can alter temporal SNR accumulation even at equal complete D*(f)
+
+finite-record performance
+-> total eventual detectability: rho_infinity
+-> SNR-access dynamics: eta(T)=rho_T^2/rho_infinity^2
 ```
 
-The current open issue is not whether phase can matter — that is now established. The next question is how to quantify **SNR accumulation versus available observation time** without prematurely inventing a universal scalar figure of merit.
+The current open issue is operational detection probability by a deadline, not construction of a new scalar metric.
 
 ---
 
-## 9. Scope boundary — do not silently generalize
+## 10. Scope boundary — do not silently generalize
 
 Do not claim:
 
 - faster is universally better;
 - slower is universally worse;
 - a universal speed-detectivity tradeoff;
-- a universal scalar replacement for `D*`;
+- `eta(T)` is a universal detector-only replacement for `D*`;
 - phase dispersion is always harmful;
 - full complex `G(f)` plus PSD is sufficient under every possible protocol;
 - novelty.
@@ -232,8 +297,8 @@ Signal-dependent shot noise, saturation, dead time, nonlinear response, nonstati
 
 ---
 
-## 10. Single next question — DO NOT ANSWER UNTIL PROMPTED
+## 11. Single next question — DO NOT ANSWER UNTIL PROMPTED
 
-> For a finite observation time, what is the simplest exact quantity that measures how much of a detector's full matched-filter SNR has become available by a deadline `T`?
+> At a fixed false-alarm probability, how does finite-time `rho_T` translate into actual probability of detecting the optical event by deadline `T`, and can two detectors with equal asymptotic SNR have sharply different deadline detection probabilities?
 
-This returns directly to the original fast-versus-slow detector intuition while retaining the distinctions learned in Steps 01–04.
+This is the next logical test because Step 05 has quantified SNR accumulation but has not yet converted it into an operational detection probability.
