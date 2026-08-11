@@ -2,7 +2,7 @@
 
 **Repository:** `Kajin-0/gedanken_3`  
 **Active experiment:** `experiments/01-equal-dstar-different-speed/`  
-**Current mode:** first-principles photodetector thought experiment. Eighteen logical steps completed. Step 18 analyzes one shared physical electronics bandwidth, derives an electronics-limited crossover scale, and shows that no interior bandwidth optimum exists while accessible eventual SNR is artificially held fixed. No universal replacement metric and no novelty claim.
+**Current mode:** first-principles photodetector thought experiment. Nineteen logical steps completed. Step 19 removes the artificial equal-accessible-SNR normalization and shows that a genuine finite readout-bandwidth optimum appears for the large-speed-ratio/full-template unknown-time objective when physical signal/noise are held fixed. No universal replacement metric and no novelty claim.
 
 Read this file first, then:
 
@@ -25,11 +25,13 @@ Read this file first, then:
 17. `experiments/01-equal-dstar-different-speed/RARE_EVENT_UPCROSSING_STEP.md`
 18. `experiments/01-equal-dstar-different-speed/HIGH_THRESHOLD_CROSSOVER_ASYMPTOTICS_STEP.md`
 19. `experiments/01-equal-dstar-different-speed/FIXED_PHYSICAL_BANDWIDTH_STEP.md`
-20. `experiments/01-equal-dstar-different-speed/numerics/correlated_scan_mc.py`
-21. `experiments/01-equal-dstar-different-speed/numerics/regularized_scan_mc.py`
-22. `experiments/01-equal-dstar-different-speed/numerics/upcrossing_importance_sampling.py`
-23. `experiments/01-equal-dstar-different-speed/numerics/asymptotic_crossover.py`
-24. `experiments/01-equal-dstar-different-speed/numerics/fixed_physical_bandwidth.py`
+20. `experiments/01-equal-dstar-different-speed/PHYSICAL_BANDWIDTH_OPTIMUM_STEP.md`
+21. `experiments/01-equal-dstar-different-speed/numerics/correlated_scan_mc.py`
+22. `experiments/01-equal-dstar-different-speed/numerics/regularized_scan_mc.py`
+23. `experiments/01-equal-dstar-different-speed/numerics/upcrossing_importance_sampling.py`
+24. `experiments/01-equal-dstar-different-speed/numerics/asymptotic_crossover.py`
+25. `experiments/01-equal-dstar-different-speed/numerics/fixed_physical_bandwidth.py`
+26. `experiments/01-equal-dstar-different-speed/numerics/physical_bandwidth_optimum.py`
 
 The repository follows the physics rather than a predetermined criticism of `D*`. Preserve assumptions, cancellations, counterexamples, negative results, rejected shortcuts, failed numerical estimates, numerical validations, asymptotic limits, refinements, and unresolved branches.
 
@@ -64,8 +66,9 @@ Use explicitly where useful:
 - **REFINEMENT** — sharpens a prior statement without erasing it.
 - **NEGATIVE RESULT** — a natural candidate effect was tested and shown absent under the stated model.
 - **REJECTED SHORTCUT** — a tempting inference/formula was shown not to answer the actual question.
-- **FAILED NUMERICAL ESTIMATE** — a computed value failed convergence/validation and must never be reused as a result.
-- **NUMERICAL VALIDATION** — survived the stated numerical cross-checks within scope.
+- **FAILED NUMERICAL ESTIMATE** — failed convergence/validation and must never be reused as a result.
+- **NUMERICAL VALIDATION** — survived stated numerical cross-checks within scope.
+- **NUMERICAL SPOT CHECK** — supporting calculation that is not a complete optimization/convergence result.
 - **ASYMPTOTIC** — derived only in a controlled limiting regime.
 - **OPEN** — not established.
 - **INVALIDATED** — shown false under its stated generality.
@@ -97,34 +100,32 @@ Does equal conventional specific detectivity imply equal ability to detect an ar
 
 ## 4. Compact surviving chain
 
-### Steps 01–04 — scalar `D*`, full-observation equivalence, finite-window phase
-- Equal reference scalar `D*` does not guarantee equal arbitrary-signal SNR.
+### Steps 01–04 — `D*`, full observation, finite-window phase
+- Equal reference scalar `D*` does not guarantee equal arbitrary-temporal-signal SNR.
 - Complete magnitude `D*(f)` is sufficient for the restricted known-waveform/full-observation maximum-linear-SNR problem.
-- **NEGATIVE RESULT:** unknown timing alone does not break that ideal equivalence under stationary Gaussian full observation.
-- Finite windows can break it because magnitude `D*(f)` discards temporal phase/placement; an all-pass construction removes the pure-delay loophole.
+- **NEGATIVE RESULT:** unknown timing alone does not break that ideal stationary-Gaussian full-observation equivalence.
+- Finite windows can break it because magnitude `D*(f)` discards phase/temporal placement; an all-pass construction removes the pure-delay loophole.
 
 ### Steps 05–08 — finite-time SNR and timing search
 
 ```math
 \rho_t^2=\langle s_t,C_t^{-1}s_t\rangle,
-\qquad
-P_D(t;\alpha)=\Phi[\rho_t-\Phi^{-1}(1-\alpha)].
 ```
 
-Unknown timing raises a global threshold determined by the timing-scan covariance, not digital sample count.
+and unknown timing raises a global threshold governed by scan covariance, not sample count.
 
 ### Step 09 — finite-deadline correction and ranking reversal
-**REJECTED SHORTCUT:** finite-window SNR accumulation cannot be mixed with full-template timing bandwidth as one exact statistic.
+**REJECTED SHORTCUT:** finite-window SNR accumulation cannot be combined with full-template timing bandwidth as one exact statistic.
 
-For the controlled family
+For
 
 ```math
 s_\tau(t)=A_\tau t e^{-t/\tau}u(t),
 ```
 
-faster members acquire SNR sooner but can pay a larger unknown-time search penalty. Cross-detector ranking can reverse.
+faster members acquire SNR sooner but can pay a larger timing-search penalty. Ranking can reverse.
 
-### Steps 10–12 — detection-time surface and task boundary
+### Steps 10–12 — task surface and fast/slow boundary
 
 ```math
 \mathcal T_D(\alpha,\beta,L)
@@ -137,138 +138,154 @@ For the scaled family,
 \mathcal T_D=\tau X_D(\rho_0,\alpha,\beta,L/\tau).
 ```
 
-**NEGATIVE RESULT:** no finite interior integration optimum exists in that family.
+**NEGATIVE RESULT:** no finite interior integration-duration optimum.
 
-For `r=tau_s/tau_f`, the fast/slow boundary is
+Fast/slow boundary:
 
 ```math
 X_D(r\ell)-rX_D(\ell)=0.
 ```
 
-Task space has both-feasible, slow-only, and neither-feasible regions; fast-only feasibility is impossible under equal eventual SNR.
-
 ### Step 13 — failed rough-grid phase boundary
-Direct correlated Monte Carlo reproduced the broad regime structure but the apparent crossover moved with timing-grid refinement.
+**FAILED NUMERICAL ESTIMATE:** diagnostic `ell ~ 49` is invalid.
 
-**FAILED NUMERICAL ESTIMATE:** `ell ~ 49` is invalid.
-
-Exact cause:
+Cause:
 
 ```math
 R_x(y)=1-a_x|y|+O(y^2),
-\qquad
-a_x=2x^2e^{-2x}/\eta(x),
 ```
 
 so the ideal-white-noise finite scan is locally Brownian-like.
 
-### Steps 14–15 — genuine finite information bandwidth
-**REJECTED SHORTCUT:** an invertible noiseless common low-pass is not necessarily an information-band limit because whitening can undo it.
+### Steps 14–15 — genuine finite timing-information bandwidth
+**REJECTED SHORTCUT:** an invertible common low-pass is not necessarily an information-band limit because whitening can undo it.
 
-A genuine finite timing-information spectrum removes the cusp. The smooth surrogate
+Use the smooth surrogate
 
 ```math
-J_{x,\kappa}(\nu)=|H_x(\nu)|^2e^{-(\nu/\kappa)^2}
+J_{x,\kappa}=|H_x|^2e^{-(\nu/\kappa)^2}.
 ```
 
-has controlled timing-grid numerics and agrees with Rice/EC at validation points.
+Finite `kappa` removes the cusp; correlated numerics and Rice agree at validation points.
 
-### Step 16 — rare-event Palm identity
+### Step 16 — exact Palm rare-event identity
 
 ```math
-\boxed{
 P_{FA}(u)
 =Q(u)+\lambda_u
-E_\uparrow\!\left[
-\frac{1_{\{z(0)\le u\}}}{N_u^+}
-\right]
-}
+E_\uparrow[1_{z(0)\le u}/N_u^+].
 ```
 
-with
-
-```math
-\lambda_u=L\frac{\sigma}{2\pi}e^{-u^2/2}.
-```
-
-Thus Rice/EC is an upper bound; its error is multiple excursions plus endpoint overlap. A Palm sampler makes `alpha=1e-6` tractable with thousands of paths.
+Rice/EC is an upper bound; its error is multiple excursions plus endpoint overlap. Palm sampling makes `alpha=1e-6` practical.
 
 ### Step 17 — high-threshold law and extreme speed ratio
-The exact smooth crossover has Palm correction factors; the isolated-excursion approximation gives a compact endpoint-retaining Rice equation.
+Exact smooth crossover has Palm factors; isolated excursions give a compact endpoint-retaining Rice equation.
 
-**REJECTED SHORTCUT:** small global `alpha` does not justify dropping the endpoint `Q(u)` term.
+**REJECTED SHORTCUT:** small `alpha` does not justify dropping endpoint `Q(u)`.
 
-For finite hard windows,
+Rice accuracy is nonuniform into the finite-window rough limit.
+
+Extreme-speed-ratio branch:
 
 ```math
-\sigma_\kappa^2(x)\sim a_x\kappa/\sqrt\pi,
+L_\times\to\tau_f\ell_{crit,\kappa}.
 ```
 
-so Rice accuracy is not uniform as bandwidth tends toward the rough Step-13 limit.
-
-For the co-scaled extreme-speed-ratio branch,
+### Step 18 — same physical electronics bandwidth, equal accessible SNR
 
 ```math
-\boxed{L_\times\to\tau_f\ell_{crit,\kappa}}.
+\kappa_i=\Omega_B\tau_i.
 ```
 
-### Step 18 — same physical electronics bandwidth
-Use one common physical information scale
+Large-`r` crossover changes from electronics-limited
 
 ```math
-\kappa_f=\Omega_B\tau_f,
-\qquad
-\kappa_s=\Omega_B\tau_s.
+L_\times\sim1/\Omega_B
 ```
 
-Equal accessible eventual SNR is still imposed to isolate timing/search effects.
-
-**REFINEMENT:** the clean large-`r` law requires `ell_crit(kappa_f)/r -> 0`; `r->infinity` alone is insufficient if `kappa_f` simultaneously collapses.
-
-Under that condition,
+to detector-limited
 
 ```math
-\boxed{
-L_\times\to\tau_f\ell_{crit}(\Omega_B\tau_f).
-}
+L_\times\sim\tau_f.
 ```
 
-For the Gaussian information-band full template, the timing curvature `sigma_infinity(kappa)` increases strictly with `kappa`, giving the high-threshold limits
+**NEGATIVE RESULT / QUALIFICATION:** no finite bandwidth optimum appears while accessible eventual SNR is artificially held fixed.
+
+### Step 19 — fixed physical signal/noise; genuine bandwidth optimum
+Let `rho_full` be the unregularized full-template SNR. Then
 
 ```math
-\boxed{
-L_\times\sim\sqrt2\mathcal C/\Omega_B
-\quad(\Omega_B\tau_f\ll1),
-}
+\rho_\infty(\kappa)
+=\rho_{full}\sqrt{F(\kappa)},
+```
+
+where
+
+```math
+F(\kappa)
+=\frac{2}{\pi}
+\int\frac{e^{-(\nu/\kappa)^2}}{(1+\nu^2)^2}d\nu,
 ```
 
 and
 
 ```math
-\boxed{
-L_\times\to\mathcal C\tau_f
-\quad(\Omega_B\tau_f\gg1).
-}
+\sigma^2(\kappa)
+=\frac{\int \nu^2(1+\nu^2)^{-2}e^{-(\nu/\kappa)^2}d\nu}
+{\int (1+\nu^2)^{-2}e^{-(\nu/\kappa)^2}d\nu}.
 ```
 
-**FIRST NONTRIVIAL CONSEQUENCE:** once the intrinsic detector is faster than the accessible electronics, making it still faster no longer changes the task boundary at leading order.
+Narrow bandwidth drives accessible SNR to zero, so a finite minimum bandwidth is required for known-time feasibility.
 
-**NEGATIVE RESULT / QUALIFICATION:** no interior bandwidth optimum exists while accessible eventual SNR is artificially held fixed. A real optimum remains open because changing bandwidth changes eventual SNR in a fixed physical detector.
+Wide-band asymptotics:
+
+```math
+\rho_\infty(\kappa)
+=\rho_{full}[1-1/(2\kappa^2)+O(\kappa^{-3})],
+```
+
+but
+
+```math
+\sigma(\kappa)
+=1-2/(\sqrt\pi\kappa)+O(\kappa^{-2}).
+```
+
+Thus near infinite bandwidth:
+
+```text
+SNR penalty from narrowing          ~ O(kappa^-2)
+search-complexity benefit           ~ O(kappa^-1)
+```
+
+and for the large-`r` full-template Rice feasibility/crossover objective,
+
+```math
+\ell_{crit}(\kappa)
+=\ell_{crit}(\infty)
+[1+2/(\sqrt\pi\kappa)+O(\kappa^{-2})].
+```
+
+**DERIVED / CONDITIONAL:** if the full-band detector is strictly task-feasible, infinite bandwidth is suboptimal and at least one finite bandwidth optimum must exist in the chosen Gaussian information-band model.
+
+Step-16-calibrated illustration:
+
+```text
+rho_full ~= 6.240757
+alpha=1e-6, beta=0.90
+kappa_min ~= 3.14545
+kappa_opt^Rice ~= 42.23
+ell_crit,opt ~= 0.90083
+ell_crit,infinity ~= 0.88906
+```
+
+A `10000`-path Palm spot check preserves the finite-candidate-over-infinite ordering, but the exact Palm-optimal bandwidth and uniqueness remain open.
 
 ---
 
 ## 5. Current frontier
 
-The next physical branch is to stop renormalizing `rho_infinity` when `Omega_B` changes.
-
-The key unresolved question is whether the competing effects
-
-```text
-narrower bandwidth -> less timing-search complexity
-narrower bandwidth -> potentially less available SNR
-```
-
-produce a genuine finite optimum readout bandwidth.
+The next question is finite speed ratio with one common physical bandwidth and no SNR renormalization. Bandwidth then changes **both detectors'** accessible SNR and timing-search covariance simultaneously.
 
 ---
 
@@ -281,11 +298,12 @@ Do not claim:
 - the Step-13 `ell~49` diagnostic is real;
 - arbitrary low-pass filtering is a true information-band limitation;
 - the Gaussian information weighting is a literal circuit transfer function;
-- Rice is always accurate to the Step-16 level;
-- the Step-18 illustrative bandwidth numbers are hardware predictions;
-- a physical bandwidth optimum has already been found;
-- crossover uniqueness;
-- fixed physical bandwidth preserves every equal-`kappa` ordering;
+- Rice is always as accurate as in Step 16;
+- the Step-19 illustrative GHz optimum is a hardware recommendation;
+- bandwidth-optimum uniqueness;
+- the exact Palm optimum has been solved;
+- maximizing `L_cross` necessarily optimizes every fixed-`L` decision task;
+- finite-r common-bandwidth behavior has already been solved;
 - true-alignment crossing equals exact global rejection/localization;
 - novelty.
 
@@ -295,4 +313,4 @@ Unknown amplitudes/phases, signal-dependent shot noise, sequential stopping, non
 
 ## 7. Single next question — DO NOT ANSWER UNTIL PROMPTED
 
-> If physical detector signal and noise amplitudes are held fixed while `Omega_B` is varied—so reducing bandwidth can reduce eventual SNR as well as timing-search burden—does their competition produce a genuine finite optimal readout bandwidth for unknown-time detection?
+> Does the finite readout-bandwidth optimum survive when the speed ratio is finite and the same physical bandwidth simultaneously changes both detectors' accessible SNR and timing-search covariance, and can that produce multiple fast/slow preference reversals as bandwidth is swept?
