@@ -412,3 +412,124 @@ No universal scalar phase penalty or replacement metric is claimed. Phase disper
 ### Next question, held open
 
 For a finite observation time, what is the simplest exact quantity that measures how much of a detector's full matched-filter SNR has become available by a deadline `T`?
+
+---
+
+## 2026-08-11 12:18 EDT — Exact SNR accumulation by deadline
+
+### Prompted continuation
+
+Identify the simplest exact quantity measuring how much of a detector's full matched-filter SNR is available from data acquired by time `T`.
+
+### Exact finite-record result
+
+For output
+
+```math
+y(t)=s(t)+n(t)
+```
+
+restricted to `W_T=[0,T]`, let `C_T` be the restricted additive-noise covariance operator. Maximizing over all linear statistics supported in the record gives
+
+```math
+\boxed{
+\rho_T^2=\langle s_T,C_T^{-1}s_T\rangle.
+}
+```
+
+This is the exact finite-record maximum linear SNR. For colored noise, it is important not to replace this blindly by a truncated globally whitened signal; finite restriction and covariance inversion need not commute.
+
+### Normalized accumulation curve
+
+Define
+
+```math
+\boxed{
+\eta(T)=\frac{\rho_T^2}{\rho_\infty^2}.
+}
+```
+
+This is the fraction of eventual matched-filter `SNR^2` available by deadline `T`. The SNR-amplitude fraction is `sqrt(eta)`.
+
+For nested windows, `0<=eta<=1` and `eta(T)` is nondecreasing because a longer-record estimator can always ignore later data.
+
+### White-noise limit
+
+For white output-noise covariance `N delta(t-t')`,
+
+```math
+\rho_T^2=\frac1N\int_0^T|s(t)|^2dt,
+```
+
+so for a causal finite-energy signal
+
+```math
+\boxed{
+\eta(T)
+=\frac{\int_0^T|s(t)|^2dt}
+{\int_0^\infty|s(t)|^2dt}.
+}
+```
+
+Thus `eta` is exactly cumulative signal-energy fraction in white noise.
+
+### Return to the original time constants
+
+For the minimal exponential output
+
+```math
+s_tau(t)=S_0 exp(-t/tau)u(t),
+```
+
+```math
+\boxed{
+\eta_\tau(T)=1-e^{-2T/\tau}.
+}
+```
+
+At `T=1 us`:
+
+```text
+tau_A = 1 ns -> eta_A ~ 1
+
+tau_B = 1 s  -> eta_B ~ 2.0e-6
+```
+
+This is a comparison of each detector's fraction of its own eventual `SNR^2`; absolute deadline SNR additionally depends on `rho_infinity`. If eventual SNRs are equalized, the `eta` difference directly controls the finite-deadline SNR difference.
+
+### SNR-acquisition thresholds
+
+For a chosen squared-SNR fraction `q`, define
+
+```math
+T_q=inf{T: eta(T)>=q}.
+```
+
+For the exponential example,
+
+```math
+\boxed{
+T_q=-\frac{\tau}{2}\ln(1-q).
+}
+```
+
+Hence 50%, 90%, 95%, and 99% of eventual `SNR^2` arrive at approximately `0.3466 tau`, `1.1513 tau`, `1.4979 tau`, and `2.3026 tau`, respectively.
+
+### First new consequence
+
+**DERIVED / CONDITIONAL:** finite-time detector performance separates naturally into
+
+```text
+total eventual matched-filter detectability -> rho_infinity
+rate at which that detectability becomes available -> eta(T)
+```
+
+`eta(T)` is a task/protocol-specific accumulation curve, not a universal detector-only replacement for `D*`.
+
+### Stopping point
+
+No probability-of-detection calculation has yet been performed.
+
+### Next question, held open
+
+At fixed false-alarm probability, how does finite-time `rho_T` translate into actual probability of detecting the optical event by deadline `T`, and can detectors with equal asymptotic SNR have sharply different deadline detection probabilities?
