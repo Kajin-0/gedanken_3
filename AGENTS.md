@@ -2,15 +2,15 @@
 
 **Repository:** `Kajin-0/gedanken_3`  
 **Active experiment:** `experiments/01-equal-dstar-different-speed/`  
-**Current mode:** first-principles photodetector thought experiment. Twenty-four logical steps completed. Step 24 shows that the finite-band high-excursion problem is genuinely two-parameter: `chi=a_x u/sqrt(b_x)` describes hard-window roughness relative to the smooth excursion core, while `zeta=kappa/(sqrt(2)u sqrt(b_x))` describes finite-band smoothing relative to the excursion scale. The Step-23 `H_mix(chi)` is only the `zeta=infinity` endpoint. No proof yet excludes a bounded high-band re-entrant pocket. No universal replacement metric and no novelty claim.
+**Current mode:** first-principles photodetector thought experiment. Twenty-five logical steps completed. Step 25 proves that the finite-band two-parameter generalized Pickands constant `H(chi,zeta)` has a continuous Dieker–Yakir representation and is nondecreasing in both `chi` and `zeta`. A practical FFT estimator validates the monotonic trend. This rules out oscillation of the local extreme constant as the source of any remaining high-band re-entrant detector-preference pocket, but does not yet prove the full detector boundary monotone. No universal replacement metric and no novelty claim.
 
 Read first:
 
 1. `experiments/01-equal-dstar-different-speed/CURRENT_STATE.md`
 2. `experiments/01-equal-dstar-different-speed/PROGRESS_LOG.md`
 3. dedicated step files in chronological order
-4. latest: `experiments/01-equal-dstar-different-speed/FINITE_BAND_TANGENT_BRIDGE_STEP.md`
-5. latest numerical helper: `experiments/01-equal-dstar-different-speed/numerics/finite_band_tangent_bridge.py`
+4. latest: `experiments/01-equal-dstar-different-speed/TWO_PARAMETER_PICKANDS_DY_STEP.md`
+5. latest numerical helper: `experiments/01-equal-dstar-different-speed/numerics/two_parameter_pickands_dy.py`
 
 The repository follows the physics rather than a predetermined criticism of `D*`. Preserve assumptions, cancellations, counterexamples, negative results, rejected shortcuts, failed numerical estimates, numerical validations, invalidations, asymptotic limits, refinements, and unresolved branches.
 
@@ -60,24 +60,24 @@ Do not use `novel`, `universal`, `fundamental`, `first`, etc. without separate p
 ## 3. Compact surviving chain
 
 ### Steps 01–12
-Equal scalar reference `D*` does not determine arbitrary temporal-signal performance. Complete magnitude `D*(f)` is sufficient only for the restricted known-waveform/full-observation maximum-linear-SNR problem. Finite observation can make phase/temporal placement operationally relevant.
+Equal scalar `D*` does not determine arbitrary temporal-signal performance. Complete magnitude `D*(f)` is sufficient only for the restricted known-waveform/full-observation problem. Finite observation can make phase/temporal placement operationally relevant.
 
-Finite-record SNR is
+Finite-record SNR:
 
 ```math
-\rho_t^2=\langle s_t,C_t^{-1}s_t\rangle,
+\rho_t^2=\langle s_t,C_t^{-1}s_t\rangle.
 ```
 
-and task-level detection time is
+Task-level detection time:
 
 ```math
 \mathcal T_D(\alpha,\beta,L)
 =\inf\{t:\rho_t-\gamma_t(L,\alpha)\ge\Phi^{-1}(\beta)\}.
 ```
 
-For the controlled scaled family, faster SNR acquisition can be offset by larger unknown-time search burden.
+For the controlled scaled family, faster SNR acquisition can be offset by unknown-time search burden.
 
-**REJECTED SHORTCUT:** finite-window SNR cannot be combined directly with full-template timing bandwidth.
+**REJECTED SHORTCUT:** finite-window SNR cannot be mixed directly with full-template timing bandwidth.
 
 **NEGATIVE RESULT:** no finite interior integration-duration optimum in the original scaled family.
 
@@ -91,33 +91,23 @@ R_x(y)=1-a_x|y|+... .
 **FAILED NUMERICAL ESTIMATE:** rough-grid `ell~49` crossover invalid.
 
 ### Steps 14–17
-A genuine finite timing-information bandwidth removes the cusp. Smooth surrogate
-
-```math
-J_{x,\kappa}(\nu)=|H_x(\nu)|^2e^{-(\nu/\kappa)^2}
-```
-
-has controlled correlated-scan numerics.
-
-Exact smooth Palm identity:
+A genuine finite timing-information bandwidth removes the cusp. Exact smooth Palm identity:
 
 ```math
 P_{FA}=Q(u)+\lambda_u E_\uparrow[1_{z(0)\le u}/N_u^+].
 ```
 
-Rice/EC is an upper bound; Palm importance sampling makes `alpha=1e-6` practical.
-
-For finite hard windows `sigma_kappa^2~a_x kappa/sqrt(pi)`, so Rice accuracy is nonuniform toward the rough limit.
+Rice/EC is an upper bound; Palm sampling makes `alpha=1e-6` practical. For finite hard windows `sigma_kappa^2~a_x kappa/sqrt(pi)`, so Rice accuracy is nonuniform toward the rough limit.
 
 ### Steps 18–19
-With one shared physical bandwidth `kappa_i=Omega_B tau_i`, forcing accessible SNR equal produces electronics-limited and detector-limited regimes but **no** interior bandwidth optimum.
+With one shared physical bandwidth `kappa_i=Omega_B tau_i`, artificially forcing accessible SNR equal produces electronics-limited and detector-limited regimes but no finite bandwidth optimum.
 
 Holding physical signal/noise fixed instead gives wide-band SNR loss `O(1/kappa^2)` versus timing-search simplification `O(1/kappa)`.
 
-**DERIVED / CONDITIONAL:** a finite large-r bandwidth optimum exists; later Palm validation confirms survival beyond Rice.
+**DERIVED / CONDITIONAL:** a finite large-r bandwidth optimum exists; Palm validation later confirms survival beyond Rice.
 
 ### Steps 20–21
-At finite `r=2`, fixed physical bandwidth and `Lambda=0.895`, converged Rice produced apparent `slow -> fast -> slow` switches at `25.4898402` and `130.1945883`.
+At finite `r=2`, fixed physical bandwidth and `Lambda=0.895`, converged Rice produced apparent switches at `25.4898402` and `130.1945883`.
 
 Palm correction gives
 
@@ -125,7 +115,7 @@ Palm correction gives
 \boxed{\kappa_{\times,1}^{Palm}\approx21.7\pm0.3}
 ```
 
-for the surviving lower switch and **INVALIDATES** the upper Rice switch. Palm checks at `130`, `160`, and `300` keep fast preferred for `Lambda=0.895`.
+for the surviving lower switch and **INVALIDATES** the upper Rice switch. Palm checks at `130`, `160`, `300` keep fast preferred for `Lambda=0.895`.
 
 ### Step 22
 Palm boundary map:
@@ -141,125 +131,126 @@ kappa_f     Lambda_cross^Palm
 200         ~0.9099
 ```
 
-**REFINEMENT:** high-band slow-preferred tasks survive above the lifted boundary.
+High-band slow-preferred tasks survive above the lifted boundary.
 
-Large-r full-template Palm scan has shallow finite optimum:
-
-```text
-kappa~50–65: ell_crit^Palm ~0.912
-infinity:    ell_crit^Palm ~0.90897
-```
-
-**NUMERICAL VALIDATION / CONDITIONAL:** finite bandwidth optimum survives Palm correction with only `~0.3–0.4%` gain.
+Large-r Palm scan has a shallow finite optimum near `kappa~50–65`, only `~0.3–0.4%` above the infinite-band boundary.
 
 ### Step 23
-Exact finite-hard-window local expansion:
+Exact local expansion:
 
 ```math
-R_x(y)=1-a_x|y|-\frac{b_x}{2}y^2+O(|y|^3),
+R_x(y)=1-a_x|y|-\frac{b_x}{2}y^2+O(|y|^3).
 ```
 
-where
+Infinite-band matching coordinate:
 
 ```math
-a_x=\frac{2x^2e^{-2x}}{\eta(x)},
-\qquad
-b_x=\frac{1+e^{-2x}(2x^2-2x-1)}{\eta(x)}.
+\chi_x=a_xu/\sqrt{b_x}.
 ```
 
-Infinite-band rough/smooth high-excursion coordinate:
+On the high-excursion scale, tangent variance is `t^2+sqrt(2)chi|t|`.
 
-```math
-\boxed{\chi_x=a_xu/\sqrt{b_x}}.
-```
-
-On `q(u)=sqrt(2)/(u sqrt(b_x))`, the `kappa=infinity` tangent variance is
-
-```math
-\operatorname{Var}\eta_\chi(t)=t^2+\sqrt2\chi|t|.
-```
-
-A generalized Pickands constant `H_mix(chi)` bridges smooth and rough endpoint laws.
-
-At `u~5`, leading high-threshold asymptotics are not percent-level accurate enough. Exact occupation-time rare-event identity:
+At `u~5`, leading asymptotics are not accurate enough. Exact occupation-time identity:
 
 ```math
 P(\sup z>u)=\ell Q(u)E_{occ}[1/V_u].
 ```
 
-Direct `kappa=infinity` calculation for the `r=2` calibration gives
+Direct rough-limit boundary for the `r=2` calibration:
 
 ```math
-\Lambda_{cross}^{kappa=\infty}\approx0.905\pm0.004,
-\qquad X_{cross}\approx7.75.
+\Lambda_{cross}^{\infty}\approx0.905\pm0.004.
 ```
 
-Thus `Lambda=0.895` is fast-preferred again at the direct rough endpoint.
+Thus `Lambda=0.895` is fast-preferred at the rough endpoint.
 
-### Step 24 — current frontier
-The Step-23 one-parameter endpoint theory is insufficient for finite-band continuation.
-
-The universal Gaussian smoothing integral for the endpoint `1/nu^2` tail is
+### Step 24
+Finite bandwidth introduces a second coordinate
 
 ```math
-\boxed{
-J(y,\kappa)=
-\frac{\pi|y|}{2}\operatorname{erf}(\kappa|y|/2)
-+\frac{\sqrt\pi}{\kappa}[e^{-(\kappa y)^2/4}-1].
-}
+\zeta_x=\kappa/(\sqrt2u\sqrt{b_x}).
 ```
 
-Matched finite-band local covariance:
+The exact two-parameter tangent variogram is
 
 ```math
-1-R_{x,\kappa}(y)
-\sim\frac{b_x}{2}y^2+\frac{2a_x}{\pi}J(y,\kappa).
-```
-
-This reproduces
-
-```math
--R_{x,\kappa}''(0)
-\sim b_x+\frac{a_x\kappa}{\sqrt\pi}.
-```
-
-Finite bandwidth introduces a second high-excursion coordinate
-
-```math
-\boxed{
-\zeta_x=\frac{\kappa}{\sqrt2u\sqrt{b_x}}.
-}
-```
-
-Together with `chi`, the tangent variogram is
-
-```math
-\boxed{
 \begin{aligned}
 g_{\chi,\zeta}(t)
-&=t^2+\sqrt2\chi\Bigg[
+&=t^2+\sqrt2\chi\Big[
 |t|\operatorname{erf}(\zeta|t|)\\
-&\qquad+\frac{e^{-\zeta^2t^2}-1}{\sqrt\pi\zeta}
-\Bigg].
+&\qquad+(e^{-\zeta^2t^2}-1)/(\sqrt\pi\zeta)
+\Big].
 \end{aligned}
+```
+
+**REJECTED SHORTCUT:** the one-parameter `H_mix(chi)` is only the `zeta=infinity` endpoint.
+
+### Step 25 — current frontier
+For
+
+```math
+W_{\chi,\zeta}(t)=\sqrt2\eta_{\chi,\zeta}(t)-g_{\chi,\zeta}(t),
+```
+
+the generalized continuous Dieker–Yakir representation is
+
+```math
+\boxed{
+\mathcal H(\chi,\zeta)
+=E\left[\frac{\sup_t e^{W(t)}}{\int_{\mathbb R}e^{W(t)}dt}\right].
 }
 ```
 
-`zeta->infinity` recovers Step 23; `zeta->0` gives the smooth finite-band quadratic tangent.
-
-Define the two-parameter generalized Pickands constant `H(chi,zeta)` from this stationary-increment tangent field, with
+Efficient decomposition:
 
 ```math
-\boxed{H(chi,infinity)=H_mix(chi).}
+\eta_{\chi,\zeta}(t)
+=Zt+2^{1/4}\sqrt\chi B_\zeta(t),
 ```
 
-**REJECTED SHORTCUT / REFINEMENT:** `H_mix(chi)` alone cannot determine finite-band convergence or rule out a bounded re-entrant pocket. The correct local object is at least `H(chi,zeta)` plus finite-threshold control.
+with stationary derivative covariance
+
+```math
+E[B_\zeta'(0)B_\zeta'(t)]
+=\frac{\zeta}{\sqrt\pi}e^{-\zeta^2t^2}.
+```
+
+Therefore `H` is practical to estimate by FFT derivative synthesis plus integration.
+
+Exact variogram derivatives and Brown–Resnick Slepian comparison give
+
+```math
+\boxed{
+\partial_\zeta\mathcal H\ge0,
+\qquad
+\partial_\chi\mathcal H\ge0.
+}
+```
+
+and
+
+```math
+\boxed{
+1/\sqrt\pi\le H(\chi,\zeta)\le H_{mix}(\chi).
+}
+```
+
+Representative `chi=0.1` estimates:
+
+```text
+zeta:      1       3       9       19      40      infinity
+H_hat:   .58683  .62310  .67671  .70538  .72422   .76698
+```
+
+**REFINEMENT:** the local extreme constant cannot oscillate with bandwidth. Any re-entrant preference pocket must arise from the coupled detector trajectory through SNR, threshold, decision time, `chi`, and `zeta`.
+
+**REJECTED SHORTCUT:** monotonic `H` does not automatically make `Lambda_cross(kappa_f)` monotone.
 
 ---
 
 ## 4. Current frontier
 
-Evaluate `H(chi,zeta)` efficiently—preferably through a generalized Dieker–Yakir representation—and determine whether its dependence on `zeta` plus a controlled finite-`u` correction yields monotonic high-band convergence or can support a bounded re-entrant preference pocket.
+Insert deterministic/low-variance Dieker–Yakir estimates into the finite-threshold boundary and expand along the actual fast and slow trajectories to determine the sign of the high-band physical boundary derivative.
 
 ---
 
@@ -275,7 +266,8 @@ Do not claim:
 - Rice is uniformly accurate at high finite-window bandwidth;
 - Step-20 double reversal is an exact physical result;
 - `H_mix(chi)` alone controls finite-band convergence;
-- no bounded high-band re-entrant pocket can exist without a monotonicity/error proof;
+- monotonic `H(chi,zeta)` proves monotonic detector preference;
+- no bounded high-band re-entrant pocket exists yet;
 - Palm bandwidth optimum is unique or exactly located;
 - any GHz translation is a hardware recommendation;
 - novelty.
@@ -286,4 +278,4 @@ Unknown amplitudes/phases, signal-dependent noise, sequential stopping, nonlinea
 
 ## 6. Single next question — DO NOT ANSWER UNTIL PROMPTED
 
-> Can the two-parameter generalized Pickands constant `H(chi,zeta)` be evaluated efficiently using a Dieker–Yakir representation, and does its dependence on `zeta` have enough monotonic structure to control the finite-band approach and rule out a bounded re-entrant preference pocket?
+> Can the deterministic Dieker–Yakir estimates of `H(chi,zeta)` be inserted into the finite-`u` boundary equation and asymptotically expanded along the actual fast and slow detector trajectories to determine the sign of `d Lambda_cross / d kappa_f` at high bandwidth?
