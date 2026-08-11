@@ -2,7 +2,7 @@
 
 **Repository:** `Kajin-0/gedanken_3`  
 **Active experiment:** `experiments/01-equal-dstar-different-speed/`  
-**Current mode:** first-principles photodetector thought experiment. Five logical steps completed. The frontier is now operational deadline detection: Step 05 derived the exact finite-record maximum linear SNR and the normalized SNR-squared accumulation curve `eta(T)=rho_T^2/rho_infinity^2`. No universal replacement metric and no novelty claim.
+**Current mode:** first-principles photodetector thought experiment. Six logical steps completed. The frontier is now unknown-time monitoring: Step 06 mapped finite-time matched-filter SNR to fixed-false-alarm detection probability and showed that equal eventual SNR can coexist with radically unequal deadline detection probability. No universal replacement metric and no novelty claim.
 
 Read this file first, then:
 
@@ -12,6 +12,7 @@ Read this file first, then:
 4. `experiments/01-equal-dstar-different-speed/FINITE_WINDOW_PHASE_STEP.md`
 5. `experiments/01-equal-dstar-different-speed/LATENCY_COMPENSATED_DISPERSION_STEP.md`
 6. `experiments/01-equal-dstar-different-speed/SNR_ACCUMULATION_STEP.md`
+7. `experiments/01-equal-dstar-different-speed/DEADLINE_DETECTION_PROBABILITY_STEP.md`
 
 The repository follows the physics rather than a predetermined criticism of `D*`. Preserve assumptions, counterexamples, cancellations, negative results, invalidations, and unresolved branches.
 
@@ -162,7 +163,7 @@ D_A^*(f)=D_B^*(f)
 \qquad \forall f.
 ```
 
-Its nonlinear group delay cannot be removed by any constant time shift. For a compact output pulse in A, B develops a nonzero tail while preserving total energy exactly.
+Its nonlinear group delay cannot be removed by a constant time shift. For a compact output pulse in A, B develops a nonzero tail while preserving total energy exactly.
 
 Therefore
 
@@ -200,25 +201,17 @@ Define
 
 `eta(T)` is the fraction of eventual matched-filter **SNR squared** accessible by deadline `T`; the SNR-amplitude fraction is `sqrt(eta)`.
 
-For nested records,
-
-```math
-0\le\eta(T)\le1,
-```
-
-and `eta(T)` is nondecreasing.
-
-For white output noise `N`,
+For white output noise,
 
 ```math
 \boxed{
-\eta(T)
-=\frac{\int_0^T|s(t)|^2dt}
+\eta(T)=
+\frac{\int_0^T|s(t)|^2dt}
 {\int_0^\infty|s(t)|^2dt}.
 }
 ```
 
-For the minimal exponential waveform
+For the minimal exponential output
 
 ```math
 s_\tau(t)=S_0e^{-t/\tau}u(t),
@@ -240,23 +233,91 @@ tau_B = 1 s  -> eta_B ~ 2e-6
 
 This is a normalized timing comparison against each detector's own eventual SNR, not automatically an absolute SNR comparison.
 
-For a selected squared-SNR fraction `q`,
-
-```math
-T_q=\inf\{T:\eta(T)\ge q\}
-```
-
-and for the exponential example
-
-```math
-T_q=-\frac{\tau}{2}\ln(1-q).
-```
-
-Important colored-noise caution: restriction to a finite record and infinite-record whitening do not generally commute. Use `C_T^{-1}` for the exact finite-window result.
+Important colored-noise caution: finite-window covariance restriction and infinite-record whitening do not generally commute. Use `C_T^{-1}` for the exact finite-window result.
 
 ---
 
-## 9. Current scientific frontier
+## 9. Step 06 — operational detection probability by deadline
+
+For the simple finite-record Gaussian hypotheses
+
+```math
+H_0:y_T=n_T,
+```
+
+```math
+H_1:y_T=s_T+n_T,
+```
+
+with known signal waveform/timing/amplitude and the same covariance under both hypotheses, the normalized Neyman-Pearson statistic obeys
+
+```math
+z_T|H_0\sim\mathcal N(0,1),
+```
+
+```math
+z_T|H_1\sim\mathcal N(\rho_T,1).
+```
+
+At per-decision false-alarm probability `alpha`,
+
+```math
+\boxed{
+P_D(T;\alpha)
+=\Phi\!\left[
+\rho_\infty\sqrt{\eta(T)}
+-\Phi^{-1}(1-\alpha)
+\right].
+}
+```
+
+For equal eventual SNR
+
+```math
+\rho_{A,\infty}=\rho_{B,\infty}=6,
+```
+
+with the original exponential `tau_A=1 ns`, `tau_B=1 s`, deadline `T=1 us`, and `P_FA=1e-6`:
+
+```text
+P_D,A ~ 0.89372
+P_D,B ~ 1.043e-6
+```
+
+while both approach the same `P_D,infinity ~ 0.89372` as `T->infinity`.
+
+**DERIVED / CONDITIONAL:** equal total eventual detectability can coexist with radically unequal deadline detection probability solely because SNR accumulates on different time scales.
+
+For target `P_D=beta`,
+
+```math
+\rho_T\ge\Phi^{-1}(1-\alpha)+\Phi^{-1}(\beta),
+```
+
+so
+
+```math
+\eta_{req}=
+\left[
+\frac{\Phi^{-1}(1-\alpha)+\Phi^{-1}(\beta)}
+{\rho_\infty}
+\right]^2.
+```
+
+For the exponential accumulation law,
+
+```math
+T_{\alpha,\beta}
+=-\frac{\tau}{2}\ln(1-\eta_{req})
+```
+
+when the requested operating point is asymptotically feasible.
+
+This is one known-time fixed-deadline decision; it does not include unknown-time search or repeated/sequential looks.
+
+---
+
+## 10. Current scientific frontier
 
 The surviving hierarchy is:
 
@@ -275,13 +336,16 @@ nonlinear phase / temporal dispersion
 finite-record performance
 -> total eventual detectability: rho_infinity
 -> SNR-access dynamics: eta(T)=rho_T^2/rho_infinity^2
+
+fixed-deadline Gaussian decision
+-> P_D(T;alpha)=Phi[rho_infinity sqrt(eta(T))-Phi^{-1}(1-alpha)]
 ```
 
-The current open issue is operational detection probability by a deadline, not construction of a new scalar metric.
+The current open issue is how an **unknown event time within a monitoring interval** changes the false-alarm threshold because the experiment must search many correlated candidate arrival times.
 
 ---
 
-## 10. Scope boundary — do not silently generalize
+## 11. Scope boundary — do not silently generalize
 
 Do not claim:
 
@@ -290,15 +354,16 @@ Do not claim:
 - a universal speed-detectivity tradeoff;
 - `eta(T)` is a universal detector-only replacement for `D*`;
 - phase dispersion is always harmful;
+- `rho_infinity` and `eta(T)` suffice outside the stated Gaussian simple-hypothesis protocol;
 - full complex `G(f)` plus PSD is sufficient under every possible protocol;
 - novelty.
 
-Signal-dependent shot noise, saturation, dead time, nonlinear response, nonstationary noise, and globally optimal non-Gaussian decision theory remain untouched.
+Signal-dependent shot noise, unknown amplitudes/phases, repeated or sequential looks, saturation, dead time, nonlinear response, nonstationary noise, and globally optimal non-Gaussian decision theory remain untouched.
 
 ---
 
-## 11. Single next question — DO NOT ANSWER UNTIL PROMPTED
+## 12. Single next question — DO NOT ANSWER UNTIL PROMPTED
 
-> At a fixed false-alarm probability, how does finite-time `rho_T` translate into actual probability of detecting the optical event by deadline `T`, and can two detectors with equal asymptotic SNR have sharply different deadline detection probabilities?
+> If the optical event may occur at an unknown time within a monitoring interval, how does the requirement to search over many possible arrival times change the false-alarm threshold and the advantage conferred by rapid SNR accumulation?
 
-This is the next logical test because Step 05 has quantified SNR accumulation but has not yet converted it into an operational detection probability.
+This is the next logical step because Step 06 used one known-time decision and therefore did not include the trials factor / correlated-search threshold created by unknown event time.
