@@ -56,3 +56,107 @@ No pulse analysis, matched filtering, generalized metric, or speed-detectivity t
 ### Next question, held open
 
 For a specified optical waveform and fully specified linear detector transfer/noise spectrum, what determines maximum achievable SNR?
+
+---
+
+## 2026-08-11 11:32 EDT — Known-waveform optimal SNR
+
+### Prompted continuation
+
+Proceed to the single next question from Step 01: for a specified optical waveform and a fully specified linear detector with signal transfer and noise PSD, determine the maximum achievable measurement SNR.
+
+### Minimal model
+
+Use a deterministic finite-energy optical waveform `p(t)` with transform `P(f)`, an LTI optical-to-output transfer `G(f)`, and additive zero-mean wide-sense-stationary output noise with two-sided PSD `S_n(f)`.
+
+The output signal spectrum is
+
+```math
+S(f)=G(f)P(f).
+```
+
+For an arbitrary linear measurement filter `Q(f)`,
+
+```math
+\mathrm{SNR}_Q^2
+=\frac{
+\left|\int Q^*(f)S(f)df\right|^2
+}{
+\int |Q(f)|^2S_n(f)df
+}.
+```
+
+### Derivation
+
+Cauchy-Schwarz with noise whitening gives
+
+```math
+\boxed{
+\mathrm{SNR}_{\max}^2
+=\int_{-\infty}^{\infty}\frac{|S(f)|^2}{S_n(f)}df
+}
+```
+
+and
+
+```math
+\boxed{
+Q_{\mathrm{opt}}(f)\propto\frac{S(f)}{S_n(f)}.
+}
+```
+
+Therefore
+
+```math
+\boxed{
+\mathrm{SNR}_{\max}^2
+=\int |P(f)|^2\frac{|G(f)|^2}{S_n(f)}df.
+}
+```
+
+Using
+
+```math
+D^*(f)=\frac{\sqrt A|G(f)|}{\sqrt{S_n(f)}},
+```
+
+this becomes
+
+```math
+\boxed{
+\mathrm{SNR}_{\max}^2
+=\frac1A\int |P(f)|^2D^{*2}(f)df.
+}
+```
+
+All displayed integrals use the two-sided PSD convention.
+
+### First nontrivial consequence
+
+**DERIVED / CONDITIONAL:** in the known-waveform, LTI, additive-stationary-noise limit, maximum linear-filter SNR is a spectral overlap integral between the optical waveform and the detector's frequency-resolved signal-to-noise sensitivity.
+
+The detector factor is
+
+```math
+|G(f)|^2/S_n(f),
+```
+
+not bandwidth, response time, responsivity, or noise PSD separately.
+
+A single scalar `D*` is therefore only local information. The complete frequency dependence enters for broadband signals.
+
+### Important cancellation retained
+
+If the same transfer magnitude filters signal and dominant noise, it can cancel in `|G|^2/S_n`. If dominant additive noise enters after the signal pole, it does not. The formalism therefore contains the Step-01 counterexample and its cancellation case without contradiction.
+
+### Scope boundary
+
+This is only a maximum over linear filters with known timing, finite signal energy, full observation/delay freedom, LTI response, and additive stationary noise. Gaussianity is unnecessary for the maximum-linear-SNR result, but is required for the stronger standard known-signal Gaussian detection interpretation.
+
+### Stopping point
+
+No finite-window, unknown-arrival-time, nonlinear, signal-dependent-noise, or nonstationary analysis has been performed.
+
+### Next question, held open
+
+If two detectors have the same complete magnitude function `D*(f)` at every frequency, can they nevertheless differ in detectability once the optical event has an unknown arrival time or the observation window is finite?
