@@ -1,7 +1,7 @@
 # Current State — Experiment 01: Equal D*, Different Speed
 
-**Date:** 2026-08-11 12:18 EDT  
-**Status:** five logical steps completed. Step 01 showed scalar reference `D*` is insufficient for arbitrary temporal signals. Step 02 derived known-waveform full-observation matched-filter SNR. Step 03 showed unknown arrival time alone does not break equivalence for identical complete `D*(f)` under ideal Gaussian full-observation conditions, while a finite window can via phase/latency. Step 04 removed the pure-delay loophole using nonlinear all-pass phase. Step 05 identifies the exact finite-record SNR accumulation functional and reconnects it to the original `1 ns` versus `1 s` example. No universal replacement metric or novelty claim.
+**Date:** 2026-08-11 12:30 EDT  
+**Status:** six logical steps completed. Step 01 showed scalar reference `D*` is insufficient for arbitrary temporal signals. Step 02 derived known-waveform full-observation matched-filter SNR. Step 03 showed unknown arrival time alone does not break equivalence for identical complete `D*(f)` under ideal Gaussian full-observation conditions, while a finite window can via phase/latency. Step 04 removed the pure-delay loophole using nonlinear all-pass phase. Step 05 identified exact finite-record SNR accumulation. Step 06 maps that accumulated SNR to operational fixed-false-alarm detection probability by a deadline. No universal replacement metric or novelty claim.
 
 ---
 
@@ -138,24 +138,17 @@ See `LATENCY_COMPENSATED_DISPERSION_STEP.md`.
 
 ## 6. Step 05 — exact SNR accumulation by deadline
 
-Let the detector output be
+For output `y=s+n` observed only on `[0,T]`, let `C_T` be the additive-noise covariance operator restricted to that record.
 
-```math
-y(t)=s(t)+n(t)
-```
-
-and observe only `W_T=[0,T]`. Let `C_T` be the noise covariance operator restricted to that interval.
-
-For an arbitrary linear finite-record statistic, covariance-weighted Cauchy-Schwarz gives the exact maximum linear SNR available by the deadline:
+The exact maximum linear SNR available by the deadline is
 
 ```math
 \boxed{
-\rho_T^2
-=\langle s_T,C_T^{-1}s_T\rangle.
+\rho_T^2=\langle s_T,C_T^{-1}s_T\rangle.
 }
 ```
 
-Define the dimensionless **SNR-squared availability fraction**
+Define
 
 ```math
 \boxed{
@@ -163,25 +156,9 @@ Define the dimensionless **SNR-squared availability fraction**
 }
 ```
 
-The corresponding fraction of SNR amplitude is `sqrt(eta)`.
-
-For nested records,
-
-```math
-0\le\eta(T)\le1,
-```
-
-and `eta(T)` is nondecreasing because a longer-record estimator can always ignore the extra data. Under ordinary convergence assumptions, `eta(T)->1` as `T->infinity`.
+`eta(T)` is the fraction of eventual matched-filter **SNR squared** accessible by deadline `T`; the SNR-amplitude fraction is `sqrt(eta)`.
 
 For white output noise `N`,
-
-```math
-\boxed{
-\rho_T^2=\frac1N\int_0^T|s(t)|^2dt
-}
-```
-
-and therefore for a causal finite-energy signal
 
 ```math
 \boxed{
@@ -191,21 +168,11 @@ and therefore for a causal finite-energy signal
 }
 ```
 
-Important colored-noise qualification: finite-window covariance restriction and infinite-record whitening do not generally commute. The exact object is the restricted covariance inverse `C_T^{-1}`, not necessarily a naively truncated globally whitened waveform.
-
-See `SNR_ACCUMULATION_STEP.md`.
-
----
-
-## 7. Return to the original 1 ns versus 1 s intuition
-
-For the minimal causal exponential output
+For the minimal exponential output
 
 ```math
 s_\tau(t)=S_0e^{-t/\tau}u(t),
 ```
-
-the amplitude cancels in the normalized accumulation fraction. In white noise,
 
 ```math
 \boxed{
@@ -216,39 +183,163 @@ the amplitude cancels in the normalized accumulation fraction. In white noise,
 At `T=1 us`:
 
 ```text
-tau_A = 1 ns -> eta_A = 1 - exp(-2000) ~ 1
+tau_A = 1 ns -> eta_A ~ 1
 
-tau_B = 1 s  -> eta_B = 1 - exp(-2e-6) ~ 2.0e-6
+tau_B = 1 s  -> eta_B ~ 2e-6
 ```
 
-Thus essentially all of detector A's eventual `SNR^2` is available by `1 us`, whereas only about two parts per million of detector B's eventual `SNR^2` is available.
+Thus essentially all of A's eventual `SNR^2` is available by `1 us`, while only about two parts per million of B's is available.
 
-This compares each detector to its own asymptotic SNR. If the two are additionally normalized to have equal `rho_infinity`, then `eta(T)` directly controls the finite-deadline SNR comparison.
+Important colored-noise qualification: finite-window covariance restriction and infinite-record whitening do not generally commute. The exact object is `C_T^{-1}`.
 
-For a chosen accumulation fraction `q`, define
+See `SNR_ACCUMULATION_STEP.md`.
+
+---
+
+## 7. Step 06 — detection probability by deadline
+
+Now impose the simple Gaussian binary test on `[0,T]`:
 
 ```math
-T_q=\inf\{T:\eta(T)\ge q\}.
+H_0:y_T=n_T,
 ```
 
-For the exponential example,
+```math
+H_1:y_T=s_T+n_T,
+```
+
+with the same Gaussian covariance `C_T` under both hypotheses and known signal timing/waveform/amplitude.
+
+The Neyman-Pearson statistic can be normalized so that
+
+```math
+z_T|H_0\sim\mathcal N(0,1),
+```
+
+```math
+z_T|H_1\sim\mathcal N(\rho_T,1).
+```
+
+For per-decision false-alarm probability
+
+```math
+P_{FA}=\alpha,
+```
+
+the threshold is
+
+```math
+\gamma_\alpha=\Phi^{-1}(1-\alpha),
+```
+
+and the detection probability is
 
 ```math
 \boxed{
-T_q=-\frac{\tau}{2}\ln(1-q).
+P_D(T;\alpha)
+=\Phi\!\left(\rho_T-\gamma_\alpha\right).
 }
 ```
 
-Examples:
+Using
 
-```text
-50% SNR^2 -> 0.3466 tau
-90% SNR^2 -> 1.1513 tau
-95% SNR^2 -> 1.4979 tau
-99% SNR^2 -> 2.3026 tau
+```math
+\rho_T=\rho_\infty\sqrt{\eta(T)},
 ```
 
-These are task-specific accumulation thresholds, not universal detector constants.
+this becomes
+
+```math
+\boxed{
+P_D(T;\alpha)
+=
+\Phi\!\left[
+\rho_\infty\sqrt{\eta(T)}
+-\Phi^{-1}(1-\alpha)
+\right].
+}
+```
+
+This gives a direct operational meaning to the Step-05 separation:
+
+```text
+rho_infinity -> eventual decision-distribution separation
+eta(T)       -> fraction of squared separation available by deadline
+```
+
+### Explicit equal-asymptotic-SNR example
+
+Normalize the fast and slow exponential examples to
+
+```math
+\rho_{A,\infty}=\rho_{B,\infty}=6.
+```
+
+At `T=1 us`:
+
+```text
+rho_A,T ~ 6
+rho_B,T ~ 0.0084853
+```
+
+For
+
+```math
+P_{FA}=10^{-6},
+```
+
+```math
+\gamma_\alpha\approx4.753424.
+```
+
+Therefore
+
+```text
+P_D,A(1 us) ~ 0.89372
+P_D,B(1 us) ~ 1.043e-6
+```
+
+while both converge as `T->infinity` to the same eventual
+
+```text
+P_D,infinity ~ 0.89372.
+```
+
+**DERIVED / CONDITIONAL:** equal eventual detectability can coexist with radically unequal deadline detection probability purely because the SNR accumulation curves differ.
+
+For target detection probability `beta`, the required finite-time SNR is
+
+```math
+\boxed{
+\rho_T\ge\Phi^{-1}(1-\alpha)+\Phi^{-1}(\beta).
+}
+```
+
+Thus the required accumulation fraction is
+
+```math
+\boxed{
+\eta_{req}
+=
+\left[
+\frac{\Phi^{-1}(1-\alpha)+\Phi^{-1}(\beta)}
+{\rho_\infty}
+\right]^2,
+}
+```
+
+and for the exponential model the earliest deadline is
+
+```math
+\boxed{
+T_{\alpha,\beta}
+=-\frac{\tau}{2}\ln(1-\eta_{req})
+}
+```
+
+when the requested operating point is asymptotically feasible.
+
+See `DEADLINE_DETECTION_PROBABILITY_STEP.md`.
 
 ---
 
@@ -271,16 +362,12 @@ nonlinear phase / temporal dispersion
 finite-record comparison
 -> exact available SNR^2 is <s_T,C_T^{-1}s_T>
 -> normalized accumulation curve is eta(T)=rho_T^2/rho_infinity^2
+
+fixed-deadline Gaussian detection
+-> P_D(T;alpha)=Phi[rho_infinity sqrt(eta(T))-Phi^{-1}(1-alpha)]
 ```
 
-The thought experiment has therefore separated two quantities that conventional scalar performance summaries can conflate:
-
-```text
-total eventual detectability -> rho_infinity
-rate of access to that detectability -> eta(T)
-```
-
-`eta(T)` is explicitly waveform/noise/protocol dependent and is not claimed as a universal replacement for `D*`.
+The original `1 ns` versus `1 s` intuition now has a precise operational interpretation: a detector can possess the same eventual matched-filter detectability but fail a short decision deadline because insufficient SNR has accumulated.
 
 ---
 
@@ -294,6 +381,8 @@ rate of access to that detectability -> eta(T)
 - **DEFINED:** `eta(T)=rho_T^2/rho_infinity^2` measures the fraction of full matched-filter `SNR^2` accessible by a specified deadline.
 - **DERIVED:** in white noise, `eta(T)` is cumulative signal-energy fraction.
 - **DERIVED:** for a one-pole exponential output, `eta_tau(T)=1-exp(-2T/tau)`.
+- **DERIVED:** for the stated Gaussian simple-hypothesis problem, `rho_T` determines the ROC and therefore the operational deadline probability of detection.
+- **DERIVED / EXAMPLE:** two detectors with equal `rho_infinity=6` can have `P_D~0.894` versus `P_D~1e-6` at the same `1 us` deadline and `P_FA=1e-6`.
 
 ---
 
@@ -303,7 +392,8 @@ rate of access to that detectability -> eta(T)
 - No universal speed-detectivity tradeoff.
 - No universal scalar replacement for `D*`.
 - `eta(T)` is not detector-only; it depends on waveform, noise, timing convention, and observation protocol.
-- No probability-of-detection result yet.
+- No unknown-time finite-monitoring search threshold yet.
+- No repeated-look or sequential-detection result.
 - No signal-dependent shot noise, nonlinearities, saturation, dead time, nonstationary noise, or globally optimal non-Gaussian decisions.
 - No novelty claim.
 
@@ -311,6 +401,6 @@ rate of access to that detectability -> eta(T)
 
 ## 11. Single natural next question — DO NOT ANSWER YET
 
-> At a fixed false-alarm probability, how does the finite-time SNR `rho_T` translate into actual probability of detecting the optical event by deadline `T`, and can two detectors with equal asymptotic SNR have sharply different deadline detection probabilities?
+> If the optical event may occur at an unknown time within a monitoring interval, how does the requirement to search over many possible arrival times change the false-alarm threshold and the advantage conferred by rapid SNR accumulation?
 
-This is the next logical test because `eta(T)` has quantified SNR accumulation but has not yet connected that accumulation to an operational detection probability.
+This is the next logical step because Step 06 used one known-time decision and therefore did not include the trials factor / search-statistic threshold created by unknown event time.
