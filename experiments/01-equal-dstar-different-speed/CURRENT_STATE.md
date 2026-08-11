@@ -1,7 +1,7 @@
 # Current State — Experiment 01: Equal D*, Different Speed
 
-**Date:** 2026-08-11 12:47 EDT  
-**Status:** eight logical steps completed. The project has progressed from scalar `D*` insufficiency to an exact continuous-time Gaussian timing-search correlation structure. No universal replacement metric and no novelty claim.
+**Date:** 2026-08-11 13:01 EDT  
+**Status:** nine logical steps completed. Step 09 shows conditionally that a faster detector's larger unknown-time search penalty can reverse its finite-time detection ranking even while it still has more accumulated SNR. It also corrects a tempting but invalid shortcut: finite-deadline `eta(T)` cannot be combined directly with Step-08 full-observation `f_rms` without deriving the finite-deadline scan covariance. No universal replacement metric or novelty claim.
 
 ---
 
@@ -25,99 +25,45 @@ Original question: does equal conventional specific detectivity imply equal abil
 
 ---
 
-## 2. Step 01 — scalar reference D* is insufficient
+## 2. Surviving chain through Step 08
 
-Under equal area, equal low-frequency responsivity, equal additive white output-noise density, and first-order response
+### Step 01 — scalar reference D* is insufficient
 
-```math
-H_i(f)=\frac{1}{1+i2\pi f\tau_i},
-```
-
-equal low-frequency/reference `D*` does not guarantee equal SNR for a 1 Hz optical tone. The explicit example gives
-
-```math
-\mathrm{SNR}_A/\mathrm{SNR}_B\approx6.36.
-```
-
-**DERIVED / COUNTEREXAMPLE:** scalar reference `D*` is insufficient for arbitrary temporal signals.
+A physically allowed first-order + additive-output-noise construction gives unequal temporal-signal SNR despite equal reference `D*`.
 
 **Qualification:** if dominant noise is filtered by the same pole, signal/noise attenuation can cancel. Do not infer `fast is always better`.
 
----
-
-## 3. Step 02 — known-waveform full-observation SNR
-
-For optical waveform `P(f)`, LTI detector transfer `G(f)`, and additive stationary output-noise PSD `S_n(f)`,
+### Step 02 — known-waveform full-observation SNR
 
 ```math
 \boxed{
 \rho_\infty^2
-=\int |P(f)|^2\frac{|G(f)|^2}{S_n(f)}df.
-}
-```
-
-With
-
-```math
-D^*(f)=\frac{\sqrt A|G(f)|}{\sqrt{S_n(f)}},
-```
-
-```math
-\boxed{
-\rho_\infty^2
+=\int |P(f)|^2\frac{|G(f)|^2}{S_n(f)}df
 =\frac1A\int |P(f)|^2D^{*2}(f)df.
 }
 ```
 
-**DERIVED / CONDITIONAL:** complete magnitude `D*(f)` is sufficient for this restricted known-waveform/full-observation maximum-linear-SNR problem.
+Complete magnitude `D*(f)` is sufficient for this restricted known-waveform/full-observation maximum-linear-SNR problem.
 
-See `MATCHED_FILTER_SNR_STEP.md`.
+### Step 03 — unknown timing alone versus finite truncation
 
----
+Under stationary Gaussian full observation, identical complete `D*(f)` gives identical matched-filter timing-search statistics.
 
-## 4. Step 03 — unknown timing alone versus finite truncation
+Finite truncation can break the equivalence because magnitude `D*(f)` discards temporal phase/placement.
 
-For stationary Gaussian noise, exact detector knowledge, unlimited observation, and unrestricted matched-filter delay search, identical complete `D*(f)` gives identical full-observation search statistics.
+### Step 04 — pure-delay loophole removed
 
-**DERIVED / CONDITIONAL:** unknown arrival time by itself does not break the ideal full-observation equivalence.
+A causal all-pass phase factor can preserve complete magnitude `D*(f)` and total infinite-time SNR while changing finite-window SNR even after arbitrary latency compensation.
 
-A finite fixed record can break the equivalence because magnitude `D*(f)` discards phase/temporal placement.
+### Step 05 — exact finite-time SNR accumulation
 
-**Qualification:** a known pure delay can be removed by shifting the record.
-
-See `FINITE_WINDOW_PHASE_STEP.md`.
-
----
-
-## 5. Step 04 — latency-compensated phase dispersion
-
-A stable causal all-pass factor can preserve `|G(f)|`, complete magnitude `D*(f)`, magnitude bandwidth, and total infinite-time SNR while redistributing signal energy in time.
-
-For the constructed pair,
+For finite record `[0,T]`,
 
 ```math
 \boxed{
-\max_\delta\rho_{B,T}^2<\rho_{A,T}^2.
+\rho_T^2=\langle s_T,C_T^{-1}s_T\rangle,
 }
 ```
-
-**DERIVED / COUNTEREXAMPLE:** complete magnitude `D*(f)` can be insufficient for finite-time detection even after arbitrary constant latency compensation.
-
-See `LATENCY_COMPENSATED_DISPERSION_STEP.md`.
-
----
-
-## 6. Step 05 — exact SNR accumulation by deadline
-
-For finite record `[0,T]`, with restricted noise covariance operator `C_T`,
-
-```math
-\boxed{
-\rho_T^2=\langle s_T,C_T^{-1}s_T\rangle.
-}
-```
-
-Define
 
 ```math
 \boxed{
@@ -125,64 +71,27 @@ Define
 }
 ```
 
-In white noise,
+This separates eventual detectability from rate of access to it.
 
-```math
-\eta(T)=
-\frac{\int_0^T|s(t)|^2dt}
-{\int_0^\infty|s(t)|^2dt}.
-```
+### Step 06 — fixed-deadline detection probability
 
-For the ideal exponential output
-
-```math
-s_\tau(t)=S_0e^{-t/\tau}u(t),
-```
+For the simple known-time Gaussian decision,
 
 ```math
 \boxed{
-\eta_\tau(T)=1-e^{-2T/\tau}.
-}
-```
-
-At `T=1 us`, `tau_A=1 ns` gives `eta_A~1`, whereas `tau_B=1 s` gives `eta_B~2e-6`.
-
-**CONSEQUENCE:** eventual detectability `rho_infinity` and the rate at which it becomes accessible `eta(T)` are distinct.
-
-See `SNR_ACCUMULATION_STEP.md`.
-
----
-
-## 7. Step 06 — operational detection probability by deadline
-
-For the simple known-time Gaussian binary decision,
-
-```math
-\boxed{
-P_D(T;\alpha)
-=\Phi\!\left[
+P_D(T;\alpha)=
+\Phi\!\left[
 \rho_\infty\sqrt{\eta(T)}-
 \Phi^{-1}(1-\alpha)
 \right].
 }
 ```
 
-With equal eventual SNR `rho_infinity=6`, deadline `T=1 us`, and `P_FA=1e-6`, the exponential examples give approximately
+Equal eventual SNR can coexist with radically unequal early-deadline detection probability.
 
-```text
-fast: P_D ~ 0.89372
-slow: P_D ~ 1.043e-6
-```
+### Step 07 — independent-slot unknown-time search penalty
 
-while both have the same eventual detection probability.
-
-See `DEADLINE_DETECTION_PROBABILITY_STEP.md`.
-
----
-
-## 8. Step 07 — independent-slot unknown-arrival search penalty
-
-For `M` independent normalized Gaussian timing hypotheses scanned by their maximum, a global false-alarm probability `alpha` gives
+For `M` independent timing hypotheses scanned by their maximum,
 
 ```math
 \boxed{
@@ -191,93 +100,43 @@ For `M` independent normalized Gaussian timing hypotheses scanned by their maxim
 }
 ```
 
-The true signal-bearing slot crosses threshold with probability
+Unknown timing consumes additional SNR margin through a global look-elsewhere threshold.
+
+### Step 08 — continuous-time search correlation
+
+For full observation, define
 
 ```math
-\boxed{
-P_{D,true}
-=\Phi\!\left[
-\rho_\infty\sqrt{\eta(T)}-
-\gamma_{M,\alpha}
-\right].
-}
+K(f)=\frac{G(f)P(f)}{\sqrt{S_n(f)}},
 ```
-
-For `alpha=1e-6`, increasing from `M=1` to `M=1e6` raises the threshold from about `4.7534` to `7.0345` sigma.
-
-**DERIVED / CONDITIONAL:** unknown timing introduces a search-complexity threshold in addition to SNR accumulation.
-
-See `UNKNOWN_TIME_SEARCH_STEP.md`.
-
----
-
-## 9. Step 08 — continuous-time matched-filter search correlation
-
-Define the noise-whitened template
-
-```math
-K(f)=\frac{G(f)P(f)}{\sqrt{S_n(f)}}
-```
-
-and normalized SNR spectral weight
 
 ```math
 W(f)=\frac{|K(f)|^2}{\int|K(f')|^2df'}.
 ```
 
-For a stationary full-observation Gaussian matched-filter scan, the normalized noise-only covariance between two candidate arrival times separated by `Delta` is
+The normalized timing-scan covariance is
 
 ```math
 \boxed{
-r(\Delta)
-=\int W(f)e^{i2\pi f\Delta}df.
+r(\Delta)=\int W(f)e^{i2\pi f\Delta}df.
 }
 ```
 
-Using frequency-resolved detectivity,
+If the second spectral moment exists,
 
 ```math
 \boxed{
-W(f)=
-\frac{|P(f)|^2D^{*2}(f)}
-{\int |P(f')|^2D^{*2}(f')df'}.
+f_{\mathrm{rms}}^2=\int f^2W(f)df,
 }
 ```
-
-Therefore **digital sample count is not the timing trials factor**. Oversampling only evaluates the same correlated process more densely.
-
-For finite second spectral moment, define
 
 ```math
 \boxed{
-f_{\mathrm{rms}}^2
-=\int f^2W(f)df
-=\frac{
-\int f^2|P(f)|^2D^{*2}(f)df
-}{
-\int |P(f)|^2D^{*2}(f)df
-}.
+\tau_{\mathrm{curv}}=1/(2\pi f_{\mathrm{rms}}).
 }
 ```
 
-Then
-
-```math
-\boxed{
--r''(0)=(2\pi)^2f_{\mathrm{rms}}^2
-}
-```
-
-and the natural local curvature correlation scale is
-
-```math
-\boxed{
-\tau_{\mathrm{curv}}=
-\frac{1}{2\pi f_{\mathrm{rms}}}.
-}
-```
-
-For a differentiable unit-variance Gaussian scan, Rice's formula gives the **exact mean upcrossing rate** of threshold `u`:
+For a differentiable stationary Gaussian scan, Rice gives exact mean upcrossing density
 
 ```math
 \boxed{
@@ -285,105 +144,247 @@ For a differentiable unit-variance Gaussian scan, Rice's formula gives the **exa
 }
 ```
 
-For monitoring duration `L`,
-
-```math
-E[N_u^+]=L f_{\mathrm{rms}}e^{-u^2/2}.
-```
-
-At high thresholds, this yields the leading rare-excursion approximation
-
-```math
-P_{FA,global}(u)
-\approx Q(u)+L f_{\mathrm{rms}}e^{-u^2/2},
-```
-
-with endpoint and multiple-excursion corrections required for precision work.
-
-If one forces an independent-trial representation, the corresponding high-threshold
-
-```math
-M_{\mathrm{eff}}(u)
-\approx
-\frac{L f_{\mathrm{rms}}e^{-u^2/2}}{Q(u)}
-\sim\sqrt{2\pi}\,uL f_{\mathrm{rms}}
-```
-
-is threshold dependent. There is no universal threshold-independent `M_eff`.
-
-### Important refinement of Step 07
-
-For a fixed optical waveform, **identical complete `D*(f)` implies identical `W(f)`, scan covariance, `f_rms`, and full-observation continuous-time search penalty**. Phase-only detector differences do not change the trials factor in this restricted problem.
-
-A faster detector can increase search penalty only insofar as it broadens or changes the frequencies that actually contribute SNR.
-
-### Important regularity warning
-
-The ideal abrupt exponential `S_0 exp(-t/tau)u(t)` used in Steps 05–07 has a divergent SNR-weighted second spectral moment in ideal white noise. Therefore its continuous-time scan is not mean-square differentiable, and the Rice curvature/upcrossing result cannot be applied without physical high-frequency regularization or a smoother waveform.
-
-This does **not** invalidate its finite-energy SNR-accumulation results. It only limits the continuous-time crossing-density calculation.
-
-See `CONTINUOUS_TIME_SEARCH_CORRELATION_STEP.md`.
+**REFINEMENT:** higher ADC sampling rate alone does not raise the trials penalty. For the same waveform, identical complete magnitude `D*(f)` gives identical full-observation scan covariance and search penalty.
 
 ---
 
-## 10. Current scientific frontier
+## 3. Step 09 — finite-deadline search and ranking reversal
 
-The surviving structure is now
+### 3.1 Correction: finite-deadline eta and full-template f_rms are not one statistic
+
+For an unknown-arrival scan that must decide using only `T` seconds after each candidate arrival, the actual optimal filter is
+
+```math
+q_T=C_T^{-1}s_T.
+```
+
+Its translated normalized noise-only scan has exact covariance
+
+```math
+\boxed{
+r_T(\Delta)
+=
+\frac{
+\int |Q_T(f)|^2S_n(f)e^{i2\pi f\Delta}df
+}{
+\int |Q_T(f)|^2S_n(f)df
+},
+}
+```
+
+where `Q_T` is the transform of `q_T`.
+
+Therefore one must **not** combine Step-05 finite-window `rho_T` or `eta(T)` with Step-08 full-observation `f_rms` as though they were an exact single finite-deadline protocol.
+
+Hard truncation can also destroy differentiability at the window boundary, so the Step-08 Rice curvature formula may require physical bandwidth regularization or a non-differentiable extreme-value treatment.
+
+### 3.2 Equal-eventual-SNR time-scaled detector family
+
+Use the same optical event
+
+```math
+p(t)=e^{-bt}u(t),
+```
+
+and stable causal family
+
+```math
+G_\tau(s)
+=A_\tau\frac{s+b}{(s+1/\tau)^2}.
+```
+
+The output is
+
+```math
+s_\tau(t)=A_\tau t e^{-t/\tau}u(t).
+```
+
+With equal white output-noise PSD `N`, choose
+
+```math
+A_\tau=\frac{2\rho_0\sqrt N}{\tau^{3/2}},
+```
+
+so every detector has exactly
+
+```math
+\rho_{\tau,\infty}=\rho_0.
+```
+
+Its finite-time SNR-squared accumulation is
+
+```math
+\boxed{
+\eta_\tau(T)
+=1-e^{-2x}(1+2x+2x^2),
+\qquad x=T/\tau.
+}
+```
+
+Hence for `tau_f<tau_s`,
+
+```math
+\rho_{f,T}>\rho_{s,T}
+```
+
+for every finite `T`, while both converge to `rho_0`.
+
+### 3.3 Exact full-template search-threshold ordering
+
+For this family, the full-observation timing-scan covariance is
+
+```math
+\boxed{
+r_\tau(\Delta)
+=\left(1+\frac{|\Delta|}{\tau}\right)
+ e^{-|\Delta|/\tau}.
+}
+```
+
+Thus
+
+```math
+z_\tau(t)\overset d=z_1(t/\tau).
+```
+
+Searching a fixed physical monitoring duration `L` is equivalent to searching the base process over `[0,L/tau]`.
+
+Therefore the faster detector (`tau_f<tau_s`) has an exact full-template global threshold satisfying
+
+```math
+\boxed{
+\gamma_f^\infty(L,\alpha)
+>\gamma_s^\infty(L,\alpha)
+}
+```
+
+for ordinary nontrivial false-alarm quantiles.
+
+### 3.4 Conditional finite-deadline reversal theorem
+
+Let `gamma_{i,T}(L,alpha)` be the exact threshold of the actual finite-deadline scan. Assume the standard regular convergence
+
+```math
+\gamma_{i,T}\to\gamma_i^\infty
+\qquad (T\to\infty).
+```
+
+The fast finite-time SNR advantage
+
+```math
+\Delta\rho_T
+=\rho_{f,T}-\rho_{s,T}
+```
+
+is positive for every finite `T` but tends to zero.
+
+The search-threshold difference
+
+```math
+\Delta\gamma_T
+=\gamma_{f,T}-\gamma_{s,T}
+```
+
+converges to the strictly positive full-template threshold gap.
+
+Therefore, for sufficiently large but finite `T`,
+
+```math
+\boxed{
+0<\Delta\rho_T<\Delta\gamma_T.
+}
+```
+
+The Gaussian true-time crossing margin is
+
+```math
+m_i=\rho_{i,T}-\gamma_{i,T}.
+```
+
+Hence
+
+```math
+\boxed{
+m_f<m_s
+}
+```
+
+and therefore
+
+```math
+\boxed{
+P_{D,true,f}(T)<P_{D,true,s}(T)
+}
+```
+
+**even though**
+
+```math
+\boxed{
+\rho_{f,T}>\rho_{s,T}.
+}
+```
+
+**DERIVED / CONDITIONAL:** faster SNR accumulation is not guaranteed to dominate the statistical cost of finer unknown-arrival-time resolution.
+
+This does not contradict Step 03 because the present family has equal integrated asymptotic SNR but different SNR-weighted spectra; it does not have identical complete `D*(f)`.
+
+See `SEARCH_PENALTY_REVERSAL_STEP.md`.
+
+---
+
+## 4. Current scientific frontier
+
+The project now has one internally consistent task-level structure:
 
 ```text
-asymptotic signal/noise separation
-    -> rho_infinity
+rho_infinity
+    eventual known-time matched-filter separation
 
-finite-time accessibility of that separation
-    -> eta(T)
+rho_T / eta(T)
+    finite-deadline accessible separation
 
-known-time decision threshold
-    -> one Gaussian tail
+r_T(Delta)
+    finite-deadline unknown-time search covariance
 
-unknown-time search correlation
-    -> full covariance r(Delta)
+gamma_T(L,alpha)
+    global search threshold set by that covariance and monitoring interval
 
-local continuous timing scale, when differentiable
-    -> f_rms or tau_curv = 1/(2 pi f_rms)
-
-high-threshold search excursion density
-    -> nu_u^+ = f_rms exp(-u^2/2)
+P_D,true
+    controlled by rho_T - gamma_T in the simple Gaussian max-scan setting
 ```
 
-The search penalty is therefore controlled by the **SNR-weighted detector-waveform spectrum**, not sample count and not response time alone.
+The key lesson is no longer a monotonic `speed versus sensitivity` tradeoff. Deadline performance can be improved by faster SNR acquisition yet degraded by finer timing-search resolution, and either effect can dominate depending on the task.
 
 ---
 
-## 11. What has been established
+## 5. What has been established
 
-- Scalar reference `D*` does not determine arbitrary temporal-signal SNR.
+- Equal reference scalar `D*` does not determine arbitrary temporal-signal SNR.
 - Full-observation known-waveform SNR is `integral |P|^2|G|^2/S_n df`.
 - Complete magnitude `D*(f)` is sufficient for that restricted full-observation problem.
-- Finite observation can make magnitude `D*(f)` insufficient because phase/temporal dispersion can control SNR accumulation.
-- Exact finite-record SNR is `rho_T^2=<s_T,C_T^-1 s_T>`.
-- `eta(T)=rho_T^2/rho_infinity^2` separates SNR accumulation from eventual SNR.
-- In the simple Gaussian decision problem, `rho_T` maps directly to deadline detection probability.
-- Unknown timing raises a global search threshold.
-- Continuous-time scan covariance is the autocorrelation of the noise-whitened template.
-- When the second moment exists, `f_rms` determines local covariance curvature and Rice upcrossing density.
-- Higher sampling rate alone does not increase the continuous-time trials penalty.
+- Finite observation can make magnitude `D*(f)` insufficient because phase/temporal dispersion controls SNR accumulation.
+- Exact finite-record SNR is `rho_T^2=<s_T,C_T^-1s_T>`.
+- Unknown timing raises a global search threshold determined by the matched-filter scan covariance rather than sample count.
+- The exact finite-deadline search covariance is built from the finite-window optimal filter `q_T`, not the full template.
+- In a controlled equal-eventual-SNR time-scaled family, faster response gives more accumulated SNR at every finite deadline but also a larger full-template timing-search threshold.
+- **CONDITIONAL REVERSAL:** under standard finite-to-full scan convergence, the larger search penalty must eventually reverse the finite-time detection ranking at some finite deadline.
 
 ---
 
-## 12. What has not been established
+## 6. What has not been established
 
-- No universal statement that faster detectors are better.
+- No universal statement that faster detectors are better or worse.
 - No universal speed-detectivity tradeoff.
 - No universal scalar replacement for `D*`.
-- No universal threshold-independent effective timing-trial count.
-- `f_rms` alone does not determine the exact supremum distribution for arbitrary covariance; the full `r(Delta)` can matter.
-- No finite-window continuous-scan edge theory yet.
-- No repeated/sequential stopping, unknown amplitude/phase, signal-dependent noise, nonlinear response, saturation, dead time, or nonstationary treatment.
+- No exact closed-form finite-deadline supremum threshold for the Step-09 family.
+- No universal reversal deadline `T_0`.
+- No claim that ranking reversal is common in practical photodetectors; Step 09 is an existence/conditional result.
+- No Bayes-optimal unknown-time detector, repeated/sequential stopping, unknown amplitude/phase, signal-dependent noise, nonlinear response, saturation, dead time, or nonstationary treatment.
 - No novelty claim.
 
 ---
 
-## 13. Single natural next question — DO NOT ANSWER YET
+## 7. Single natural next question — DO NOT ANSWER YET
 
-> Given the two competing effects now identified — SNR accumulation `eta(T)` and continuous-time search width `f_rms` — can one construct two detectors with equal asymptotic SNR for which the faster detector's larger search penalty actually reverses the finite-time detection ranking, or is rapid SNR accumulation guaranteed to dominate under some broad conditions?
+> Is there a compact task-level description — perhaps a detection-time surface in `(P_FA, P_D, L)` rather than a scalar figure of merit — that contains both SNR accumulation and timing-search uncertainty without discarding the detector response information exposed in Steps 01–09?
