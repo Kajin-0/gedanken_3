@@ -2,15 +2,16 @@
 
 **Repository:** `Kajin-0/gedanken_3`  
 **Active experiment:** `experiments/01-equal-dstar-different-speed/`  
-**Current mode:** first-principles photodetector thought experiment. Step 01 established a scalar-`D*` insufficiency counterexample. Step 02 established the known-waveform matched-filter SNR functional. Stop before unknown-timing / finite-window analysis. No generalized replacement metric and no novelty claim.
+**Current mode:** first-principles photodetector thought experiment. Step 01 established scalar-`D*` insufficiency. Step 02 established the known-waveform matched-filter SNR functional. Step 03 established that unknown arrival time alone does not break equivalence for identical complete `D*(f)` under ideal full-observation Gaussian conditions, while a fixed finite observation window can because magnitude `D*(f)` discards phase/latency. Stop before latency-compensated dispersion analysis. No generalized replacement metric and no novelty claim.
 
 Read this file first, then:
 
 1. `experiments/01-equal-dstar-different-speed/CURRENT_STATE.md`
 2. `experiments/01-equal-dstar-different-speed/PROGRESS_LOG.md`
 3. `experiments/01-equal-dstar-different-speed/MATCHED_FILTER_SNR_STEP.md`
+4. `experiments/01-equal-dstar-different-speed/FINITE_WINDOW_PHASE_STEP.md`
 
-The repository follows the physics rather than a predetermined criticism of `D*`. Preserve assumptions, counterexamples, cancellations, invalidations, and unresolved branches.
+The repository follows the physics rather than a predetermined criticism of `D*`. Preserve assumptions, counterexamples, cancellations, negative results, invalidations, and unresolved branches.
 
 ---
 
@@ -98,41 +99,7 @@ Critical qualification: this is not `fast is always better`. If dominant noise i
 
 ## 5. Step 02 — known-waveform optimal SNR
 
-For a deterministic finite-energy optical waveform `p(t)` with Fourier transform `P(f)`, complete LTI optical-to-output transfer `G(f)`, and additive zero-mean stationary output noise with two-sided PSD `S_n(f)`, the output signal spectrum is
-
-```math
-S(f)=G(f)P(f).
-```
-
-For any linear measurement filter `Q(f)`,
-
-```math
-\mathrm{SNR}_Q^2
-=\frac{
-\left|\int Q^*(f)S(f)df\right|^2
-}{
-\int |Q(f)|^2S_n(f)df
-}.
-```
-
-Cauchy-Schwarz gives
-
-```math
-\boxed{
-\mathrm{SNR}_{\max}^2
-=\int_{-\infty}^{\infty}\frac{|S(f)|^2}{S_n(f)}df
-}
-```
-
-with
-
-```math
-\boxed{
-Q_{\mathrm{opt}}(f)\propto\frac{S(f)}{S_n(f)}.
-}
-```
-
-Therefore
+For deterministic finite-energy optical waveform `p(t)`, complete LTI transfer `G(f)`, and additive stationary output noise with two-sided PSD `S_n(f)`,
 
 ```math
 \boxed{
@@ -141,13 +108,11 @@ Therefore
 }
 ```
 
-For frequency-resolved detectivity
+For
 
 ```math
 D^*(f)=\frac{\sqrt A|G(f)|}{\sqrt{S_n(f)}},
 ```
-
-this becomes
 
 ```math
 \boxed{
@@ -156,48 +121,101 @@ this becomes
 }
 ```
 
-All displayed integrals use a two-sided PSD convention.
+This is valid for known timing, full observation, LTI response, additive stationary noise, and maximization over linear filters.
 
 ---
 
-## 6. Current scientific frontier
+## 6. Step 03 — unknown timing versus finite observation
 
-**DERIVED / CONDITIONAL:** in the known-waveform, LTI, additive-stationary-noise limit, maximum linear-filter SNR is determined by the spectral overlap
+### Unknown arrival time
 
-```math
-|P(f)|^2\times\frac{|G(f)|^2}{S_n(f)}.
-```
-
-The detector contribution is the ratio
+Define
 
 ```math
-|G(f)|^2/S_n(f),
+K_i(f)=\frac{G_i(f)P(f)}{\sqrt{S_{n,i}(f)}}.
 ```
 
-not response time, bandwidth, responsivity, or noise PSD separately.
+Equal complete `D*(f)` gives equal `|K_i(f)|^2`.
 
-A single scalar `D*` is only local information and cannot generally determine broadband-waveform SNR.
+For stationary Gaussian noise, unlimited observation, exact detector knowledge, and unrestricted matched-filter delay search, both the signal mean versus trial delay and the noise covariance of the search statistic depend only on the Fourier transform of `|K_i(f)|^2`.
 
-This formulation automatically preserves the Step-01 cancellation: if the same transfer magnitude multiplies signal and dominant noise, it can cancel in `|G|^2/S_n`; if dominant additive noise enters after the signal pole, it does not.
+**DERIVED / CONDITIONAL:** unknown arrival time alone does not break the ideal detectability equivalence of detectors with identical complete `D*(f)`.
+
+### Finite fixed observation window
+
+Use
+
+```math
+G_A(f)=1,
+\qquad
+G_B(f)=e^{-i2\pi f\Delta},
+```
+
+with identical white output-noise PSD `N`.
+
+Then
+
+```math
+D_A^*(f)=D_B^*(f)=\sqrt{A/N}
+```
+
+for every frequency.
+
+Record only `W=[0,T]`. For a finite-energy pulse lying inside the window for detector A, choose `Delta>T`, so detector B's delayed response lies outside the window.
+
+For white noise,
+
+```math
+\rho_{i,W}^2=\frac1N\int_0^T|s_i(t)|^2dt.
+```
+
+Thus
+
+```math
+\rho_{A,W}^2>0,
+\qquad
+\rho_{B,W}^2=0.
+```
+
+Therefore
+
+```math
+\boxed{
+D_A^*(f)=D_B^*(f)\ \forall f
+\not\Rightarrow
+\rho_{A,W}=\rho_{B,W}
+}
+```
+
+under a fixed finite observation window.
+
+**DERIVED / COUNTEREXAMPLE:** complete magnitude `D*(f)` discards transfer-function phase/latency, and finite time truncation can make that discarded information affect detectability.
+
+Critical qualification: if the window can be shifted to compensate a known pure delay, this specific counterexample disappears. Do not promote latency itself to an intrinsic sensitivity penalty.
 
 ---
 
-## 7. Scope boundary — do not silently generalize
+## 7. Current scientific frontier
 
-The Step-02 result assumes:
+The surviving hierarchy is:
 
 ```text
-known deterministic waveform including timing
-finite signal energy
-linear time-invariant detector/readout
-additive signal-independent stationary noise
-two-sided PSD convention
-full observation / enough delay to realize matched filter
-maximization over linear filters
-positive noise PSD over signal support
+single reference D*
+-> insufficient for arbitrary temporal signals
+
+complete magnitude D*(f)
+-> sufficient for the restricted known-waveform/full-observation maximum-linear-SNR problem
+-> still sufficient for ideal unknown-arrival matched-filter search in stationary Gaussian noise
+-> insufficient for a fixed finite observation window because phase/temporal placement can matter
 ```
 
-Gaussianity is not required for maximum linear SNR. It is required for the stronger standard optimal known-signal Gaussian detection interpretation.
+The first missing information exposed beyond complete magnitude `D*(f)` is the complex temporal response together with the measurement protocol.
+
+Do **not** yet claim that a full complex transfer function is universally sufficient.
+
+---
+
+## 8. Scope boundary — do not silently generalize
 
 Do not yet claim:
 
@@ -205,13 +223,17 @@ Do not yet claim:
 - slower is universally worse;
 - a universal speed-detectivity tradeoff;
 - a new scalar detector-performance metric;
-- that frequency-resolved `D*(f)` remains sufficient with unknown timing or finite observation windows;
+- that latency alone is a fundamental sensitivity loss;
+- that nontrivial phase/dispersion matters after latency compensation (not yet shown);
+- sufficiency of complex `G(f)` plus PSD under arbitrary nonlinear/nonstationary protocols;
 - novelty.
+
+Signal-dependent shot noise, saturation, dead time, nonlinear response, nonstationary noise, and globally optimal non-Gaussian decision theory remain untouched.
 
 ---
 
-## 8. Single next question — DO NOT ANSWER UNTIL PROMPTED
+## 9. Single next question — DO NOT ANSWER UNTIL PROMPTED
 
-> If two detectors have the same complete magnitude function `D*(f)` at every frequency, can they nevertheless differ in detectability once the optical event has an unknown arrival time or the observation window is finite?
+> After compensating any known overall latency, can two detectors with identical complete `D*(f)` still have different finite-window detectability because of nontrivial transfer-function phase or temporal dispersion?
 
-This is the next test because the matched-filter/full-observation derivation discarded phase/timing/window constraints while retaining only the spectral signal-to-noise magnitude weighting.
+This is the next test because it determines whether Step 03 is merely a clock-alignment counterexample or evidence that the full complex temporal response is genuinely needed for finite-time detector comparison.
