@@ -269,3 +269,146 @@ No nontrivial all-pass dispersion or latency-compensated phase comparison has be
 ### Next question, held open
 
 After compensating any known overall latency, can two detectors with identical complete `D*(f)` still have different finite-window detectability because of nontrivial transfer-function phase or temporal dispersion?
+
+---
+
+## 2026-08-11 12:09 EDT — Latency-compensated dispersion survives
+
+### Prompted continuation
+
+Test whether the finite-window insufficiency of complete magnitude `D*(f)` survives after removing the trivial pure-delay / clock-alignment mechanism.
+
+### Detector construction
+
+Use a common finite-bandwidth stable causal response
+
+```math
+G_0(s)=\frac{b}{s+b}
+```
+
+and
+
+```math
+G_A(s)=G_0(s),
+```
+
+```math
+G_B(s)=G_0(s)\frac{s-a}{s+a}.
+```
+
+The second factor is a stable causal all-pass, so
+
+```math
+|G_A(f)|=|G_B(f)|
+```
+
+for all frequency. With equal active area and equal white output-noise PSD `N`,
+
+```math
+D_A^*(f)=D_B^*(f)
+=\frac{\sqrt A|G_0(f)|}{\sqrt N}
+```
+
+for every frequency.
+
+Its group delay is
+
+```math
+\tau_g(\omega)=\frac{2a}{a^2+\omega^2},
+```
+
+which is frequency dependent and therefore cannot be removed by any constant latency correction.
+
+### Physically regular waveform
+
+Choose
+
+```math
+x(t)=\sin^2(\pi t/T)
+```
+
+on `0 <= t <= T`, zero otherwise, and choose optical small-signal modulation
+
+```math
+p(t)=x(t)+\frac1b\dot x(t).
+```
+
+Then detector A outputs exactly `x(t)`. The modulation is finite-energy and can be implemented around a sufficiently large positive optical DC level.
+
+For detector B,
+
+```math
+s_B(t)
+=x(t)-2a\int_0^t e^{-a(t-u)}x(u)du.
+```
+
+For `t>T`,
+
+```math
+s_B(t)
+=-2ae^{-at}\int_0^T e^{au}x(u)du\ne0.
+```
+
+Thus nonlinear all-pass phase spreads the signal into a nonzero exponential tail.
+
+### Infinite-time equality retained
+
+Because the added factor is all-pass,
+
+```math
+\int|s_A(t)|^2dt
+=\int|s_B(t)|^2dt
+=E,
+```
+
+with
+
+```math
+E=3T/8.
+```
+
+So full-observation matched-filter SNR remains exactly equal, consistent with Step 02.
+
+### Finite-time result after arbitrary alignment
+
+Detector A captures all `E` in a window of duration `T`.
+
+For detector B, allow any shifted window `[delta,delta+T]`. Because `s_B` has a nonzero tail extending to arbitrarily late times, no interval of duration `T` contains all its energy. The captured-energy function is continuous and tends to zero for extreme shifts, so its maximum is attained and remains strictly below `E`:
+
+```math
+\boxed{
+\max_\delta\int_\delta^{\delta+T}|s_B(t)|^2dt<E.
+}
+```
+
+Therefore with equal white noise,
+
+```math
+\boxed{
+\max_\delta\rho_{B,T}^2<\rho_{A,T}^2.
+}
+```
+
+### First new consequence
+
+**DERIVED / COUNTEREXAMPLE:** the finite-window insufficiency of complete magnitude `D*(f)` is not merely a clock-alignment artifact. It survives arbitrary constant latency compensation when the detector transfer phase is genuinely dispersive.
+
+Equal complete `D*(f)`, equal magnitude bandwidth, and equal total infinite-time matched-filter SNR do not imply equal finite-time SNR accumulation.
+
+### Illustrative tail size
+
+For the unshifted `[0,T]` window and `aT=1`, the chosen pulse has
+
+```text
+E_tail/E ~= 0.5068
+```
+
+outside the window. This numerical value is illustrative only; the strict latency-optimized inequality above is the actual result.
+
+### Scope boundary
+
+No universal scalar phase penalty or replacement metric is claimed. Phase dispersion need not always be harmful for every waveform. Signal-dependent noise, nonlinear response, dead time, saturation, and nonstationarity remain untouched.
+
+### Next question, held open
+
+For a finite observation time, what is the simplest exact quantity that measures how much of a detector's full matched-filter SNR has become available by a deadline `T`?
