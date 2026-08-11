@@ -2,9 +2,13 @@
 
 **Repository:** `Kajin-0/gedanken_3`  
 **Active experiment:** `experiments/01-equal-dstar-different-speed/`  
-**Current mode:** first-principles photodetector thought experiment; stop after the first nontrivial consequence; no generalized replacement metric and no novelty claim.
+**Current mode:** first-principles photodetector thought experiment. Step 01 established a scalar-`D*` insufficiency counterexample. Step 02 established the known-waveform matched-filter SNR functional. Stop before unknown-timing / finite-window analysis. No generalized replacement metric and no novelty claim.
 
-Read this file first.
+Read this file first, then:
+
+1. `experiments/01-equal-dstar-different-speed/CURRENT_STATE.md`
+2. `experiments/01-equal-dstar-different-speed/PROGRESS_LOG.md`
+3. `experiments/01-equal-dstar-different-speed/MATCHED_FILTER_SNR_STEP.md`
 
 The repository follows the physics rather than a predetermined criticism of `D*`. Preserve assumptions, counterexamples, cancellations, invalidations, and unresolved branches.
 
@@ -44,7 +48,7 @@ Do not use `novel`, `universal`, `fundamental`, `first`, etc. without a separate
 
 ---
 
-## 3. Active starting question
+## 3. Original starting question
 
 Two hypothetical detectors satisfy
 
@@ -64,146 +68,150 @@ Question:
 
 > Does equal conventional specific detectivity imply equal ability to detect an arbitrary optical signal?
 
-The current task is only to establish the first nontrivial consequence.
-
 ---
 
-## 4. Measurement discipline
+## 4. Step 01 — scalar D* is insufficient
 
-Never write bare `D*` as though it were a complete detector state.
-
-For a narrowband measurement at temporal frequency `f`, define output responsivity magnitude `R(f)` and one-sided output-noise amplitude spectral density `n_y(f)` locally over the measurement bandwidth. Then
+Interpret the quoted equality as equality at a low-frequency/reference condition. Use equal area `A`, equal low-frequency responsivity `R0`, equal additive white output-noise density `n0`, and first-order temporal responses
 
 ```math
-D^*(f)=\frac{\sqrt A\,R(f)}{n_y(f)}
+H_i(f)=\frac{1}{1+i2\pi f\tau_i}.
 ```
-
-for the spectral-density convention, equivalently
-
-```math
-D^*=\frac{\sqrt{A\,\Delta f}}{\mathrm{NEP}_{\Delta f}}
-```
-
-when `NEP_{Delta f}` is the total incident power needed for unit SNR in bandwidth `Delta f`.
-
-A quoted `D*` is therefore condition-dependent. At minimum track:
-
-```text
-wavelength / optical spectrum
-modulation frequency or temporal protocol
-active area
-noise bandwidth / estimator ENBW
-bias
-operating temperature
-responsivity convention
-noise spectral density and where the dominant noise enters
-```
-
----
-
-## 5. Minimal active detector model
-
-Use two linear first-order detectors with identical area `A`, identical low-frequency responsivity `R0`, and identical additive white output-noise density `n0`. They differ only in response time:
-
-```math
-H_i(f)=\frac{1}{1+i2\pi f\tau_i},
-```
-
-```math
-R_i(f)=R_0H_i(f).
-```
-
-The additive noise is intentionally placed after the detector pole (for example, dominant readout noise). This is physically consistent and makes the temporal response affect signal without automatically forcing the same filtering onto the dominant noise.
-
-At sufficiently low reference frequency,
-
-```math
-D_{A,0}^*=D_{B,0}^*=\frac{\sqrt A\,R_0}{n_0}.
-```
-
-This construction is a counterexample candidate, not a universal detector model.
-
----
-
-## 6. First nontrivial result
-
-Drive both detectors with the same small sinusoidal optical-power component of RMS amplitude `P_m` at frequency `f_m`, and estimate that Fourier component using the same equivalent noise bandwidth `B`.
 
 Then
 
 ```math
-\mathrm{SNR}_i
-=\frac{R_0|H_i(f_m)|P_m}{n_0\sqrt B}
-=\frac{P_mD_0^*}{\sqrt{AB}}|H_i(f_m)|.
+D_{A,0}^*=D_{B,0}^*=\frac{\sqrt A R_0}{n_0}.
 ```
 
-Therefore
-
-```math
-\frac{\mathrm{SNR}_A}{\mathrm{SNR}_B}
-=\frac{|H_A(f_m)|}{|H_B(f_m)|}.
-```
-
-At `f_m = 1 Hz`,
-
-```math
-|H_A|\approx1,
-```
-
-while for `tau_B = 1 s`,
-
-```math
-|H_B|=\frac{1}{\sqrt{1+(2\pi)^2}}\approx0.157.
-```
-
-Thus
+For the same 1 Hz optical tone and same estimator bandwidth,
 
 ```math
 \mathrm{SNR}_A/\mathrm{SNR}_B\approx6.36.
 ```
 
-**DERIVED / COUNTEREXAMPLE:** equal low-frequency conventional `D*` does **not** guarantee equal SNR for an arbitrary optical signal.
+**DERIVED / COUNTEREXAMPLE:** equal reference-condition scalar `D*` does not guarantee equal SNR for every optical signal.
+
+Critical qualification: this is not `fast is always better`. If dominant noise is filtered by the same temporal pole, signal and noise attenuation can cancel.
 
 ---
 
-## 7. Critical qualification — do not lose this
+## 5. Step 02 — known-waveform optimal SNR
 
-The result is not `fast detector always has higher SNR`.
-
-If the dominant noise is generated before the same temporal pole so that
+For a deterministic finite-energy optical waveform `p(t)` with Fourier transform `P(f)`, complete LTI optical-to-output transfer `G(f)`, and additive zero-mean stationary output noise with two-sided PSD `S_n(f)`, the output signal spectrum is
 
 ```math
-n_i(f)=n_0|H_i(f)|,
+S(f)=G(f)P(f).
 ```
 
-then signal and noise attenuation can cancel in the narrowband ratio. Likewise, if `D*_A(f_m)=D*_B(f_m)` is explicitly specified at the *actual measurement frequency* using each detector's actual `R_i(f_m)` and `n_i(f_m)`, then equal area, optical power, and estimator bandwidth give equal narrowband tone SNR by definition.
+For any linear measurement filter `Q(f)`,
 
-Therefore the present result is an **insufficiency result**:
+```math
+\mathrm{SNR}_Q^2
+=\frac{
+\left|\int Q^*(f)S(f)df\right|^2
+}{
+\int |Q(f)|^2S_n(f)df
+}.
+```
 
-> a single scalar `D*` equality at one reference condition does not determine arbitrary-signal SNR unless temporal signal transfer, noise transfer/spectrum, and measurement protocol are also fixed.
+Cauchy-Schwarz gives
 
-No generalized performance principle has yet been derived.
+```math
+\boxed{
+\mathrm{SNR}_{\max}^2
+=\int_{-\infty}^{\infty}\frac{|S(f)|^2}{S_n(f)}df
+}
+```
+
+with
+
+```math
+\boxed{
+Q_{\mathrm{opt}}(f)\propto\frac{S(f)}{S_n(f)}.
+}
+```
+
+Therefore
+
+```math
+\boxed{
+\mathrm{SNR}_{\max}^2
+=\int |P(f)|^2\frac{|G(f)|^2}{S_n(f)}df.
+}
+```
+
+For frequency-resolved detectivity
+
+```math
+D^*(f)=\frac{\sqrt A|G(f)|}{\sqrt{S_n(f)}},
+```
+
+this becomes
+
+```math
+\boxed{
+\mathrm{SNR}_{\max}^2
+=\frac1A\int |P(f)|^2D^{*2}(f)df.
+}
+```
+
+All displayed integrals use a two-sided PSD convention.
 
 ---
 
-## 8. What is established / not established
+## 6. Current scientific frontier
 
-### Established
+**DERIVED / CONDITIONAL:** in the known-waveform, LTI, additive-stationary-noise limit, maximum linear-filter SNR is determined by the spectral overlap
 
-- `D*` is a measurement-condition-dependent signal-to-noise normalization, not a complete temporal detector description.
-- Equal reference `D*` does not logically imply equal SNR for every optical waveform.
-- A physically consistent one-pole + additive-output-noise model provides an explicit counterexample.
+```math
+|P(f)|^2\times\frac{|G(f)|^2}{S_n(f)}.
+```
 
-### Not established
+The detector contribution is the ratio
 
-- Fast detectors are not proven superior in general.
-- Slow detectors are not proven inferior in general.
-- No universal bandwidth penalty or speed-detectivity tradeoff has been derived.
-- No claim has been made that conventional frequency-specific `D*(f)` fails for a narrowband measurement at that same frequency.
-- No replacement for `D*` has been proposed.
+```math
+|G(f)|^2/S_n(f),
+```
 
-### Single next question
+not response time, bandwidth, responsivity, or noise PSD separately.
 
-> For a completely specified linear detector with signal transfer `H(f)` and noise PSD `S_n(f)`, what quantity determines the maximum achievable SNR for a specified optical waveform?
+A single scalar `D*` is only local information and cannot generally determine broadband-waveform SNR.
 
-Do not answer this until explicitly prompted.
+This formulation automatically preserves the Step-01 cancellation: if the same transfer magnitude multiplies signal and dominant noise, it can cancel in `|G|^2/S_n`; if dominant additive noise enters after the signal pole, it does not.
+
+---
+
+## 7. Scope boundary — do not silently generalize
+
+The Step-02 result assumes:
+
+```text
+known deterministic waveform including timing
+finite signal energy
+linear time-invariant detector/readout
+additive signal-independent stationary noise
+two-sided PSD convention
+full observation / enough delay to realize matched filter
+maximization over linear filters
+positive noise PSD over signal support
+```
+
+Gaussianity is not required for maximum linear SNR. It is required for the stronger standard optimal known-signal Gaussian detection interpretation.
+
+Do not yet claim:
+
+- faster is universally better;
+- slower is universally worse;
+- a universal speed-detectivity tradeoff;
+- a new scalar detector-performance metric;
+- that frequency-resolved `D*(f)` remains sufficient with unknown timing or finite observation windows;
+- novelty.
+
+---
+
+## 8. Single next question — DO NOT ANSWER UNTIL PROMPTED
+
+> If two detectors have the same complete magnitude function `D*(f)` at every frequency, can they nevertheless differ in detectability once the optical event has an unknown arrival time or the observation window is finite?
+
+This is the next test because the matched-filter/full-observation derivation discarded phase/timing/window constraints while retaining only the spectral signal-to-noise magnitude weighting.
