@@ -2,7 +2,7 @@
 
 **Repository:** `Kajin-0/gedanken_3`  
 **Active experiment:** `experiments/01-equal-dstar-different-speed/`  
-**Current mode:** first-principles photodetector thought experiment. Fourteen logical steps completed. Step 14 introduces a true finite accessible measurement bandwidth, rejects the naive idea that any invertible low-pass automatically regularizes optimal detection, proves that genuine finite information bandwidth removes the Step-13 covariance cusp, and shows that the fast/slow task-regime boundary survives in a similarity-preserving finite-bandwidth family. No universal replacement metric and no novelty claim.
+**Current mode:** first-principles photodetector thought experiment. Fifteen logical steps completed. Step 15 validates a smooth finite-information-band correlated Gaussian timing scan numerically: practical timing-grid refinement is stable within Monte Carlo uncertainty and agrees with Rice/Euler-characteristic continuous-time predictions at the validation points. A Rice-based trend study shows the fast/slow crossover shifting to smaller normalized timing uncertainty as accessible high-frequency timing information increases. Those crossover values are approximate, not exact phase-boundary results. No universal replacement metric and no novelty claim.
 
 Read this file first, then:
 
@@ -21,9 +21,11 @@ Read this file first, then:
 13. `experiments/01-equal-dstar-different-speed/TASK_REGIME_BOUNDARY_STEP.md`
 14. `experiments/01-equal-dstar-different-speed/NUMERICAL_SCAN_CONVERGENCE_STEP.md`
 15. `experiments/01-equal-dstar-different-speed/FINITE_BANDWIDTH_REGULARIZATION_STEP.md`
-16. `experiments/01-equal-dstar-different-speed/numerics/correlated_scan_mc.py`
+16. `experiments/01-equal-dstar-different-speed/FINITE_BANDWIDTH_NUMERICAL_STEP.md`
+17. `experiments/01-equal-dstar-different-speed/numerics/correlated_scan_mc.py`
+18. `experiments/01-equal-dstar-different-speed/numerics/regularized_scan_mc.py`
 
-The repository follows the physics rather than a predetermined criticism of `D*`. Preserve assumptions, counterexamples, cancellations, negative results, rejected shortcuts, failed numerical estimates, refinements, invalidations, and unresolved branches.
+The repository follows the physics rather than a predetermined criticism of `D*`. Preserve assumptions, counterexamples, cancellations, negative results, rejected shortcuts, failed numerical estimates, refinements, validation limits, invalidations, and unresolved branches.
 
 ---
 
@@ -57,6 +59,7 @@ Use explicitly where useful:
 - **NEGATIVE RESULT** — a natural candidate effect was tested and shown absent under the stated model.
 - **REJECTED SHORTCUT** — a tempting inference/formula was shown not to answer the actual question.
 - **FAILED NUMERICAL ESTIMATE** — a computed value did not survive convergence/validation and must not be reused as a result.
+- **NUMERICAL VALIDATION** — a numerical method/result survived the explicitly stated convergence/cross-check tests, within reported uncertainty and scope.
 - **OPEN** — not established.
 - **INVALIDATED** — shown false under its stated generality.
 - **NON-CLAIM** — deliberately not asserted.
@@ -126,7 +129,7 @@ P_D(t;\alpha)=\Phi[\rho_t-\Phi^{-1}(1-\alpha)].
 \gamma_{M,\alpha}=\Phi^{-1}[(1-\alpha)^{1/M}].
 ```
 
-`M` is not digital sample count in a continuous scan.
+`M` is not digital sample count in a continuous timing scan.
 
 ### Step 08 — continuous-time full-template covariance
 Timing-search covariance is the autocorrelation of the noise-whitened template. When the second moment exists, `f_rms` controls local covariance curvature and Rice upcrossing density. Sample rate alone does not set timing trials.
@@ -188,74 +191,96 @@ and
 R_x(y)=1-a_x|y|+O(y^2).
 ```
 
-Therefore the finite scan is locally Brownian-like / mean-square nondifferentiable in ideal white noise, explaining slow grid convergence. The full-template limit is smooth, so the limits do not commute.
+Therefore the finite scan is locally Brownian-like / mean-square nondifferentiable in ideal white noise, explaining slow grid convergence.
 
 ### Step 14 — finite accessible bandwidth regularization
 
 **REJECTED SHORTCUT:** appending a noiseless invertible common low-pass does not necessarily reduce optimal-detection information bandwidth because whitening cancels the common magnitude where the transfer is nonzero.
 
-Use instead a true accessible angular-frequency band
+A genuine information-band limitation makes the timing spectrum have finite second moment and removes the Step-13 cusp.
+
+For a similarity-preserving finite-bandwidth family with fixed dimensionless `kappa`, equal band-limited eventual SNR, and time scaling,
 
 ```math
-|\omega|\le\Omega_B.
-```
-
-Then the finite-duration timing covariance satisfies
-
-```math
-\boxed{
--r_{t,B}''(0)
-=\int\omega^2W_{t,B}(\omega)d\omega
-\le\Omega_B^2.
-}
-```
-
-The Step-13 cusp disappears and the finite scan is mean-square differentiable. Rice-type continuous-time crossing methods become admissible again.
-
-For the similarity-preserving regularized family define
-
-```math
-\kappa=\Omega_B\tau
-```
-
-and hold `kappa` fixed while normalizing all members to equal **band-limited eventual SNR** `rho_0`.
-
-Then
-
-```math
-\boxed{
 \mathcal T_{D,\kappa}
-=\tau X_{D,\kappa}(\rho_0,\alpha,\beta,L/\tau).
-}
+=\tau X_{D,\kappa}(\rho_0,\alpha,\beta,L/\tau),
 ```
 
-The regularized fast/slow boundary retains the exact form
+and the fast/slow boundary retains
 
 ```math
-\boxed{
 X_{D,\kappa}(r\ell)-rX_{D,\kappa}(\ell)=0.
-}
 ```
 
-The normalized full-template threshold remains nondecreasing with search length, so both-feasible / slow-only / neither-feasible ordering and exclusion of fast-only feasibility survive. Under the same continuity/mixing conditions, at least one fast-to-slow crossover survives.
+**REFINEMENT:** the Step-13 cusp is not the source of the task-regime reversal.
 
-**REFINEMENT:** Step-13 roughness is a property of the infinite-white-bandwidth hard-window idealization, not the source of the task-regime reversal.
+### Step 15 — smooth-band numerical validation
 
-**OPEN:** if the same physical bandwidth is imposed on both unequal-`tau` detectors, then `kappa_f != kappa_s`; the simple similarity ordering no longer follows automatically.
+Choose the explicit Gaussian information weighting
+
+```math
+J_{x,\kappa}(\nu)=|H_x(\nu)|^2e^{-(\nu/\kappa)^2}.
+```
+
+This is a controlled high-frequency information/processing penalty, not an invertible common low-pass and not a unique physical readout law.
+
+A periodic FFT spectral-synthesis Monte Carlo directly simulates the correlated stationary Gaussian scan. It is implemented in
+
+```text
+numerics/regularized_scan_mc.py
+```
+
+and cross-checked against the differentiable-process Rice/Euler-characteristic threshold.
+
+Validation parameters:
+
+```text
+rho_0=5
+r=1.2
+alpha=0.01
+beta=0.90
+kappa=8
+```
+
+At the Rice-based provisional crossover:
+
+```text
+slow: x~3.78390, ell~54.7489, Gamma_Rice~3.66373
+fast: x~4.54068, ell~65.6986, Gamma_Rice~3.70181
+```
+
+Direct 99th-percentile thresholds at `delta=0.05` and `0.025` overlap within bootstrap tail uncertainty and are compatible with the Rice predictions. Period doubling changes the threshold by less than current Monte Carlo uncertainty.
+
+**NUMERICAL VALIDATION:** the systematic grid-to-continuum drift that invalidated Step 13 is absent in the smooth finite-`kappa` validation case.
+
+Rice/EC trend study for the same operating point:
+
+```text
+kappa      ell_cross^Rice
+2             75.56
+4             61.58
+8             54.75
+16            51.43
+32            49.89
+```
+
+**CONDITIONAL TREND:** restoring more high-frequency timing information moves the fast-to-slow switch to smaller `L/tau_s` for this tested regularization/model/parameter set.
+
+These crossover numbers are approximate Rice-based trends, not exact Monte Carlo phase boundaries. They do not rehabilitate the rejected Step-13 `ell~49` estimate.
 
 ---
 
 ## 5. Current frontier
 
-The preferred next numerical object is the smooth finite-bandwidth threshold
+Moderate-tail finite-`kappa` numerics are now locally validated. The next unresolved object is the rare-event threshold
 
 ```math
-\Gamma_\kappa(x,\ell,\alpha).
+\Gamma_\kappa(x,\ell,\alpha)
 ```
 
-Unlike Step 13's rough process, finite `kappa` permits controlled grid convergence and an independent Rice/extreme-value cross-check.
+for detector-relevant `alpha`, especially `alpha~10^-6`, where ordinary Monte Carlo is inefficient.
 
-The next task is to compute `Gamma_kappa`, solve the regularized crossover, and study how it moves as `kappa` increases toward the rough white-noise limit.
+The next task is to develop or adapt a rare-event/high-threshold method, validate it against direct Monte Carlo where overlap is possible, and compare the resulting crossover against Rice theory.
 
 ---
 
@@ -265,9 +290,11 @@ Do not claim:
 
 - faster is universally better or worse;
 - a universal speed-detectivity tradeoff or scalar replacement for `D*`;
-- the diagnostic `ell~49` crossover is real;
+- the diagnostic Step-13 `ell~49` crossover is real;
 - any arbitrary invertible low-pass is a true information-bandwidth limit;
-- fixed physical bandwidth has the same ordering as fixed dimensionless `kappa`;
+- the Step-15 Gaussian information weighting is the unique physical readout model;
+- the Rice crossover table is an exact phase boundary;
+- fixed physical bandwidth has the same ordering as fixed dimensionless bandwidth;
 - crossover uniqueness;
 - true-alignment crossing equals exact global rejection/localization;
 - novelty.
@@ -278,4 +305,4 @@ Unknown amplitudes/phases, signal-dependent shot noise, sequential stopping, non
 
 ## 7. Single next question — DO NOT ANSWER UNTIL PROMPTED
 
-> For finite dimensionless bandwidth `kappa`, can the now-smooth Gaussian timing scan be simulated with controlled grid convergence and Rice/extreme-value cross-checks to obtain a trustworthy `Gamma_kappa(x,ell,alpha)` and fast/slow crossover, and how does that crossover move as `kappa` is increased toward the rough white-noise limit?
+> Can a rare-event / high-threshold numerical method be built for the smooth regularized scan so that `Gamma_kappa(x,ell,alpha)` and the fast/slow crossover can be solved directly at detector-relevant false-alarm probabilities such as `alpha=10^-6`, and how different is that result from the Rice prediction?
