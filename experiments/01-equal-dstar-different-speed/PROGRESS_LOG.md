@@ -1,6 +1,6 @@
 # Progress Log — Experiment 01
 
-**Consolidation note — 2026-08-11 18:54 EDT:** compact chronology preserving every consequential result, correction, failed shortcut, invalidation, numerical validation, asymptotic qualification, and stopping point. Full derivations live in dedicated step files.
+**Consolidation note — 2026-08-11 19:21 EDT:** compact chronology preserving every consequential result, correction, rejected shortcut, invalidation, numerical validation, asymptotic qualification, and stopping point. Full derivations live in dedicated step files.
 
 ---
 
@@ -44,7 +44,7 @@ Restoring bandwidth-dependent accessible SNR gives wide-band SNR loss `O(1/kappa
 **DERIVED / CONDITIONAL:** large-r Rice unknown-time objective has a finite bandwidth optimum. Palm validation later confirms the optimum survives exact rare-event correction.
 
 ## Step 20 — finite-r Rice double reversal
-For `r=2`, `rho_full=6.2407571`, `alpha=1e-6`, `beta=0.90`, `Lambda=0.895`, converged finite-duration Rice gave apparent switches at `25.4898402` and `130.1945883`, i.e. apparent `slow -> fast -> slow`.
+For `r=2`, `rho_full=6.2407571`, `alpha=1e-6`, `beta=0.90`, `Lambda=0.895`, converged finite-duration Rice gave apparent switches `25.4898402` and `130.1945883`, i.e. apparent `slow -> fast -> slow`.
 
 ## Step 21 — Palm correction changes topology
 Use `u_avail=rho(x)-Phi^-1(beta)` and test `P_FA^Palm(u_avail)<=alpha` directly.
@@ -54,7 +54,7 @@ Use `u_avail=rho(x)-Phi^-1(beta)` and test `P_FA^Palm(u_avail)<=alpha` directly.
 - Palm checks at `kappa_f=130,160,300` keep fast preferred for `Lambda=0.895`;
 - cause: nonuniform Rice micro-upcrossing overcount, strongest for the shorter slow-detector finite window.
 
-## Step 22 — 18:42 EDT — Palm boundary map and survival of finite optimum
+## Step 22 — Palm boundary map and survival of finite optimum
 Representative finite-r Palm boundary:
 
 ```text
@@ -83,19 +83,8 @@ infinity    ~0.90897
 
 **NUMERICAL VALIDATION / CONDITIONAL:** finite bandwidth optimum survives Palm correction. It is broad (`kappa~50–65`) and shallow (`~0.3–0.4%` gain over infinite bandwidth).
 
-Full derivation: `PALM_BOUNDARY_MAP_STEP.md`.  
-Code: `numerics/palm_boundary_map.py`.
-
-## Step 23 — 18:54 EDT — matched rough/smooth high-band limit
-Derived the exact unregularized finite-window covariance
-
-```math
-R_x(y)=
-\frac{(1+y)e^{-y}-e^{-2x+y}(2x^2-2xy+2x-y+1)}{\eta(x)},
-\qquad 0\le y<x.
-```
-
-Its local expansion is
+## Step 23 — matched infinite-band rough/smooth limit
+Derived exact finite-hard-window covariance and local expansion
 
 ```math
 R_x(y)=1-a_x|y|-\frac{b_x}{2}y^2+O(|y|^3),
@@ -109,69 +98,126 @@ a_x=\frac{2x^2e^{-2x}}{\eta(x)},
 b_x=\frac{1+e^{-2x}(2x^2-2x-1)}{\eta(x)}.
 ```
 
-At threshold `u`, rough and smooth high-excursion geometry is organized by
+At threshold `u`, the `kappa=infinity` rough/smooth high-excursion field is organized by
 
 ```math
 \boxed{\chi_x=a_xu/\sqrt{b_x}}.
 ```
 
-On scale `q(u)=sqrt(2)/(u sqrt(b_x))`, the matched tangent process has stationary increments with variance
+On `q(u)=sqrt(2)/(u sqrt(b_x))`, tangent variance is
 
 ```math
 \operatorname{Var}\eta_\chi(t)=t^2+\sqrt2\chi|t|.
 ```
 
-A generalized Pickands constant `H_mix(chi)` bridges `H_mix(0)=1/sqrt(pi)` (smooth) to `H_mix(chi)~sqrt(2)chi` (rough).
+A generalized Pickands constant `H_mix(chi)` bridges smooth and rough high-threshold limits.
 
-**REFINEMENT:** finite-window nondifferentiability does not imply distinct high excursions are rough-controlled. For `chi<<1`, the cusp mainly creates micro-recrossings within a smooth-core excursion.
-
-At the present `u~5`, leading high-threshold asymptotics retain percent-level Mills-ratio error, too large to settle the boundary alone.
-
-Derived an exact occupation-time identity for the nondifferentiable rough process. If
+Because `u~5`, leading asymptotics retain percent-level finite-threshold error. Derived exact rough-process occupation identity
 
 ```math
-V_u=\int_0^\ell1_{z(t)>u}dt
-```
-
-and a uniformly selected search time is conditioned to lie above `u`, then
-
-```math
-\boxed{
 P(\sup z>u)=\ell Q(u)E_{occ}[1/V_u].
-}
 ```
 
-This avoids divergent upcrossing counts entirely.
-
-Direct `kappa=infinity` occupation-time importance sampling for the Step-20 `r=2` calibration gives
+Direct `kappa=infinity` occupation-time importance sampling for the `r=2` calibration gives
 
 ```math
-\boxed{
 \Lambda_{cross}^{kappa=\infty}\approx0.905\pm0.004,
 \qquad X_{cross}\approx7.75.
+```
+
+**REFINEMENT:** `Lambda=0.895` is fast-preferred in the direct infinite-band rough limit; the invalid Step-20 upper reversal does not reappear asymptotically.
+
+**OPEN:** a bounded re-entrant pocket at untested very high finite bandwidth was not yet excluded.
+
+## Step 24 — 19:21 EDT — finite-band tangent bridge is two-parameter
+The Step-23 one-parameter `H_mix(chi)` was tested as a possible deterministic finite-band continuation and rejected as incomplete.
+
+The hard endpoint gives a universal `1/nu^2` tail. Under the Gaussian information cutoff,
+
+```math
+J(y,\kappa)
+=\int_0^\infty\frac{1-\cos(\nu y)}{\nu^2}e^{-(\nu/\kappa)^2}d\nu
+```
+
+has the exact form
+
+```math
+\boxed{
+J(y,\kappa)=
+\frac{\pi|y|}{2}\operatorname{erf}(\kappa|y|/2)
++\frac{\sqrt\pi}{\kappa}[e^{-(\kappa y)^2/4}-1].
 }
 ```
 
-At representative `X=7.7528`, `Lambda=0.90513`, a `40000`-path run gives
+Matching to the hard-window coefficients gives
 
-```text
-fast P_FA/alpha = 1.0049 +/-0.0080
-slow P_FA/alpha = 0.9954 +/-0.0094.
+```math
+1-R_{x,\kappa}(y)
+\sim\frac{b_x}{2}y^2+\frac{2a_x}{\pi}J(y,\kappa).
 ```
 
-**REFINEMENT:** the old `Lambda=0.895` slice is fast-preferred in the direct infinite-band rough limit. The Step-20 second reversal therefore does not reappear asymptotically.
+For `kappa|y|<<1`,
 
-**OPEN:** no proof yet excludes a bounded re-entrant slow-preferred pocket at some untested very high finite bandwidth; monotonic convergence of the finite-`kappa` boundary is not established.
+```math
+-R_{x,\kappa}''(0)
+\sim b_x+\frac{a_x\kappa}{\sqrt\pi},
+```
 
-Full derivation: `HIGH_BAND_MATCHED_ROUGH_SMOOTH_STEP.md`.  
-Code: `numerics/rough_limit_occupation_is.py`.
+which recovers the Step-17 curvature growth directly.
+
+On the high-excursion scale, finite bandwidth introduces a second coordinate
+
+```math
+\boxed{
+\zeta_x=\frac{\kappa}{\sqrt2u\sqrt{b_x}}.
+}
+```
+
+Together with
+
+```math
+\chi_x=\frac{a_xu}{\sqrt{b_x}},
+```
+
+the tangent variogram is
+
+```math
+\boxed{
+\begin{aligned}
+g_{\chi,\zeta}(t)
+&=t^2+\sqrt2\chi\Bigg[
+|t|\operatorname{erf}(\zeta|t|)\\
+&\qquad+\frac{e^{-\zeta^2t^2}-1}{\sqrt\pi\zeta}
+\Bigg].
+\end{aligned}
+}
+```
+
+Limits:
+
+```math
+g_{\chi,\infty}(t)=t^2+\sqrt2\chi|t|
+```
+
+recovers Step 23; `zeta->0` recovers a purely quadratic finite-band tangent.
+
+Define the two-parameter generalized constant `H(chi,zeta)` from this stationary-increment tangent field. Then
+
+```math
+\boxed{H(chi,\infty)=H_mix(chi).}
+```
+
+**REJECTED SHORTCUT / REFINEMENT:** `H_mix(chi)` alone cannot determine finite-band convergence or rule out a bounded re-entrant pocket. At least the two-parameter object `H(chi,zeta)` plus finite-`u` control is required.
+
+Full derivation: `FINITE_BAND_TANGENT_BRIDGE_STEP.md`.  
+Calculator: `numerics/finite_band_tangent_bridge.py`.
 
 ---
 
 ## Current stopping point
 
-The noncommuting high-band limits are now organized by the matched coordinate `chi_x`, and the finite-r `kappa=infinity` boundary is directly anchored without upcrossing counts.
+The local finite-band problem is now reduced to a two-parameter generalized Pickands field.
 
 ### Single natural next question
 
-> Can `H_mix(chi)` and its finite-threshold correction be computed accurately enough to turn the Step-23 matched boundary into a deterministic formula and prove or exclude any bounded high-band re-entrant preference pocket without further full-process Monte Carlo?
+> Can `H(chi,zeta)` be evaluated efficiently using a Dieker–Yakir representation, and does its dependence on `zeta` have enough monotonic structure to control the finite-band approach and rule out a bounded re-entrant preference pocket?
