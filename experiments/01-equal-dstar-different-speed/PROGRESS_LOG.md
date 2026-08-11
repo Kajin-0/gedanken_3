@@ -1,6 +1,6 @@
 # Progress Log — Experiment 01
 
-**Consolidation note — 2026-08-11 14:10 EDT:** This log remains intentionally compact while preserving every scientific milestone, correction, negative result, rejected shortcut, failed numerical estimate, and stopping point. Full derivations live in dedicated step files.
+**Consolidation note — 2026-08-11 14:18 EDT:** This log remains intentionally compact while preserving every scientific milestone, correction, negative result, rejected shortcut, failed numerical estimate, numerical validation, and stopping point. Full derivations live in dedicated step files.
 
 ---
 
@@ -216,7 +216,7 @@ so
 E[(z(u+h)-z(u))^2]\sim2a_x|h|.
 ```
 
-The finite hard-window scan is locally Brownian-like / nondifferentiable in ideal white noise, causing slow grid-to-continuum convergence. The full-template limit is smooth, so the limits do not commute.
+The finite hard-window scan is locally Brownian-like / nondifferentiable in ideal white noise, causing slow grid-to-continuum convergence.
 
 Full derivation: `NUMERICAL_SCAN_CONVERGENCE_STEP.md`.  
 Prototype: `numerics/correlated_scan_mc.py`.
@@ -225,81 +225,117 @@ Prototype: `numerics/correlated_scan_mc.py`.
 
 ## 2026-08-11 14:10 EDT — True finite-bandwidth regularization
 
-### Route chosen
+**REJECTED SHORTCUT:** merely appending a noiseless invertible common low-pass does not necessarily regularize optimal detection because whitening can undo it.
 
-Rather than patching the rough continuous supremum numerically first, introduce a true finite accessible measurement bandwidth and ask whether the analytic fast/slow mechanism survives.
-
-### Rejected shortcut
-
-**REJECTED SHORTCUT:** merely appending a noiseless invertible common low-pass to signal and noise does not necessarily regularize optimal detection. Wherever `F(f) != 0`,
+For a true finite information band, the timing-spectrum second moment is finite and
 
 ```math
-|F S|^2/(|F|^2S_n)=|S|^2/S_n,
+-r_{t,B}''(0)=\int\omega^2W_{t,B}(\omega)d\omega.
 ```
 
-so optimal whitening can undo the common attenuation.
+The Step-13 cusp disappears and the scan becomes mean-square differentiable.
 
-A genuine regularizer must remove accessible high-frequency information, add irreducible out-of-band noise, constrain admissible processing bandwidth, or otherwise force a finite second moment of the noise-weighted timing spectrum.
-
-### Exact regularity result
-
-For a true accessible angular-frequency band
+For the similarity-preserving family with `kappa=Omega_B tau`, equal band-limited eventual SNR, and fixed `kappa`, the detection-time scaling and fast/slow boundary survive:
 
 ```math
-|\omega|\le\Omega_B,
-```
-
-the finite-duration scan covariance satisfies
-
-```math
-\boxed{
--r_{t,B}''(0)
-=\int\omega^2W_{t,B}(\omega)d\omega
-\le\Omega_B^2.
-}
-```
-
-Therefore the Step-13 `|Delta|` cusp disappears; the scan is mean-square differentiable and Rice-type continuous-time crossing methods are admissible again.
-
-**REFINEMENT:** Step-13 roughness is exact for the infinite-white-bandwidth hard-window idealization, but is not physically unavoidable.
-
-### Dimensionless bandwidth and survival of the boundary
-
-For the similarity-preserving regularized scaled family define
-
-```math
-\kappa=\Omega_B\tau
-```
-
-and hold `kappa` fixed while normalizing all members to the same **band-limited eventual SNR** `rho_0`.
-
-Then
-
-```math
-\boxed{
 \mathcal T_{D,\kappa}
-=\tau X_{D,\kappa}(\rho_0,\alpha,\beta,L/\tau).
-}
+=\tau X_{D,\kappa}(\rho_0,\alpha,\beta,L/\tau),
 ```
-
-For two members with `r=tau_s/tau_f`, the regularized fast/slow boundary remains
 
 ```math
-\boxed{
 X_{D,\kappa}(r\ell)-rX_{D,\kappa}(\ell)=0.
-}
 ```
 
-The full-template threshold remains nondecreasing with normalized search length, so the both-feasible / slow-only / neither-feasible structure and exclusion of fast-only feasibility survive. Under the same continuity/mixing assumptions, at least one fast-to-slow crossover survives.
-
-**CONSEQUENCE:** the task-regime reversal is not created by the Step-13 cusp; finite bandwidth removes the numerical singularity while retaining the mechanism.
-
-### New open branch
-
-If the **same physical bandwidth** is imposed on both detectors, then `kappa_f != kappa_s`. The simple similarity ordering need not survive automatically and requires separate analysis.
+**REFINEMENT:** the Step-13 roughness is not the source of the regime reversal.
 
 Full derivation: `FINITE_BANDWIDTH_REGULARIZATION_STEP.md`.
 
+---
+
+## 2026-08-11 14:18 EDT — Smooth-band numerical validation
+
+### Explicit numerical regularizer
+
+Choose the controlled Gaussian information weighting
+
+```math
+J_{x,\kappa}(\nu)
+=|H_x(\nu)|^2e^{-(\nu/\kappa)^2},
+```
+
+with
+
+```math
+H_x(\nu)
+=\frac{1-e^{-(1+i\nu)x}[1+(1+i\nu)x]}{(1+i\nu)^2}.
+```
+
+This is an explicit high-frequency information/processing penalty, not an invertible common low-pass and not claimed as a unique physical readout model.
+
+### Controlled correlated simulation
+
+Implemented periodic FFT spectral synthesis of the stationary correlated Gaussian scan in
+
+```text
+numerics/regularized_scan_mc.py
+```
+
+with timing-grid, period, bootstrap-tail, and Rice/EC checks.
+
+Validation task:
+
+```text
+rho_0=5
+r=1.2
+alpha=0.01
+beta=0.90
+kappa=8
+```
+
+Rice-based provisional crossover point:
+
+```text
+ell_s ~=54.7489
+slow x ~=3.78390, Gamma_Rice ~=3.66373
+fast x ~=4.54068, ell_f ~=65.6986, Gamma_Rice ~=3.70181
+```
+
+Direct 99th-percentile thresholds:
+
+```text
+slow delta=0.05, 15000 paths:
+    3.6401 [bootstrap95 3.5967,3.6821]
+slow delta=0.025, 12000 paths:
+    3.6470 [bootstrap95 3.5924,3.7012]
+
+fast delta=0.05, 15000 paths:
+    3.7041 [bootstrap95 3.6480,3.7530]
+fast delta=0.025, 12000 paths:
+    3.6649 [bootstrap95 3.6325,3.7017]
+```
+
+**NUMERICAL VALIDATION:** the two grid resolutions overlap within Monte Carlo tail uncertainty and are compatible with the continuous Rice predictions. The systematic upward threshold drift from Step 13 is absent. Doubling the synthesis period changes the threshold by less than the current tail uncertainty.
+
+### Bandwidth trend — approximate only
+
+Using Rice/Euler-characteristic theory as a trend estimator for the same operating point:
+
+```text
+kappa      ell_cross^Rice
+2             75.56
+4             61.58
+8             54.75
+16            51.43
+32            49.89
+```
+
+**CONDITIONAL TREND:** in this regularized model, increasing accessible high-frequency timing information moves the fast-to-slow switch to smaller `L/tau_s`.
+
+These values are not exact Monte Carlo phase boundaries and do not rehabilitate the rejected Step-13 `ell~49` number.
+
+Full derivation: `FINITE_BANDWIDTH_NUMERICAL_STEP.md`.  
+Code: `numerics/regularized_scan_mc.py`.
+
 ### Next question, held open
 
-For finite `kappa`, can the now-smooth Gaussian timing scan be simulated with controlled grid convergence and Rice/extreme-value cross-checks to obtain a trustworthy `Gamma_kappa(x,ell,alpha)` and fast/slow crossover, and how does that crossover move as `kappa` increases toward the rough white-noise limit?
+Can a rare-event / high-threshold numerical method be built for the smooth regularized scan so that `Gamma_kappa` and the crossover can be solved directly at `alpha~10^-6`, and how different is that result from Rice theory?
