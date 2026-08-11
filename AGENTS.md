@@ -2,15 +2,15 @@
 
 **Repository:** `Kajin-0/gedanken_3`  
 **Active experiment:** `experiments/01-equal-dstar-different-speed/`  
-**Current mode:** first-principles photodetector thought experiment. Twenty-two logical steps completed. Step 22 maps the Palm-corrected finite-r bandwidth boundary and validates that the Step-19 finite bandwidth optimum survives continuous rare-event correction. The high-band slow-preferred region survives above a lifted boundary near `Lambda~0.91`; the old `Lambda=0.895` second crossing remains invalid. No universal replacement metric and no novelty claim.
+**Current mode:** first-principles photodetector thought experiment. Twenty-three logical steps completed. Step 23 derives the matched rough/smooth high-band scaling, introduces an exact occupation-time rare-event identity valid in the nondifferentiable `kappa=infinity` limit, and anchors the `r=2` infinite-band boundary near `Lambda~0.905`. The old `Lambda=0.895` slice is fast-preferred in the direct rough limit; the Step-20 upper Rice switch remains invalid. No universal replacement metric and no novelty claim.
 
 Read first:
 
 1. `experiments/01-equal-dstar-different-speed/CURRENT_STATE.md`
 2. `experiments/01-equal-dstar-different-speed/PROGRESS_LOG.md`
 3. dedicated step files in chronological order
-4. latest: `experiments/01-equal-dstar-different-speed/PALM_BOUNDARY_MAP_STEP.md`
-5. latest numerical helper: `experiments/01-equal-dstar-different-speed/numerics/palm_boundary_map.py`
+4. latest: `experiments/01-equal-dstar-different-speed/HIGH_BAND_MATCHED_ROUGH_SMOOTH_STEP.md`
+5. latest numerical helper: `experiments/01-equal-dstar-different-speed/numerics/rough_limit_occupation_is.py`
 
 The repository follows the physics rather than a predetermined criticism of `D*`. Preserve assumptions, cancellations, counterexamples, negative results, rejected shortcuts, failed numerical estimates, numerical validations, invalidations, asymptotic limits, refinements, and unresolved branches.
 
@@ -63,21 +63,29 @@ Do not use `novel`, `universal`, `fundamental`, `first`, etc. without separate p
 Equal scalar reference `D*` does not determine arbitrary temporal-signal SNR. Complete magnitude `D*(f)` is sufficient only for the restricted known-waveform/full-observation maximum-linear-SNR problem. Unknown timing alone does not break that ideal stationary-Gaussian equivalence, but finite windows can because magnitude `D*(f)` discards phase/temporal placement.
 
 ### Steps 05–12
-Finite-record SNR is `rho_t^2=<s_t,C_t^-1s_t>`. Define task-level detection time
+Finite-record SNR is `rho_t^2=<s_t,C_t^-1s_t>`. Task-level detection time is
 
 ```math
 \mathcal T_D(\alpha,\beta,L)
 =\inf\{t:\rho_t-\gamma_t(L,\alpha)\ge\Phi^{-1}(\beta)\}.
 ```
 
-For the controlled scaled family, faster SNR accumulation can be offset by larger unknown-time search burden. **NEGATIVE RESULT:** no finite interior integration-duration optimum in that original family.
+For the controlled scaled family, faster SNR acquisition can be offset by larger unknown-time search burden.
+
+**REJECTED SHORTCUT:** finite-window SNR cannot be combined directly with full-template timing bandwidth.
+
+**NEGATIVE RESULT:** no finite interior integration-duration optimum in the original scaled family.
 
 ### Step 13
-Finite hard-window ideal-white-noise scan is locally Brownian-like: `R_x(y)=1-a_x|y|+...`.
+Finite hard-window ideal-white-noise scan is locally Brownian-like:
+
+```math
+R_x(y)=1-a_x|y|+... .
+```
 
 **FAILED NUMERICAL ESTIMATE:** rough-grid `ell~49` crossover invalid.
 
-### Steps 14–15
+### Steps 14–17
 A genuine finite timing-information bandwidth removes the cusp. Smooth surrogate
 
 ```math
@@ -86,7 +94,6 @@ J_{x,\kappa}(\nu)=|H_x(\nu)|^2e^{-(\nu/\kappa)^2}
 
 has controlled correlated-scan numerics.
 
-### Step 16
 Exact smooth Palm identity:
 
 ```math
@@ -95,41 +102,28 @@ P_{FA}=Q(u)+\lambda_u E_\uparrow[1_{z(0)\le u}/N_u^+].
 
 Rice/EC is an upper bound; Palm importance sampling makes `alpha=1e-6` practical.
 
-### Step 17
-Rice accuracy is nonuniform toward the finite-window rough limit because `sigma_kappa^2~a_x kappa/sqrt(pi)`. Co-scaled extreme-speed-ratio crossover tends to fast full-template feasibility edge.
+For finite hard windows `sigma_kappa^2~a_x kappa/sqrt(pi)`, so Rice accuracy is nonuniform toward the rough limit.
 
-### Step 18
-Common physical bandwidth with accessible SNR forced equal produces electronics-limited `~1/Omega_B` and detector-limited `~tau_f` regimes.
+### Steps 18–19
+With one shared physical bandwidth `kappa_i=Omega_B tau_i`, forcing accessible SNR equal produces electronics-limited and detector-limited regimes but **no** interior bandwidth optimum.
 
-**NEGATIVE RESULT:** no finite bandwidth optimum under artificial equal-accessible-SNR normalization.
+Holding physical signal/noise fixed instead gives wide-band SNR loss `O(1/kappa^2)` versus timing-search simplification `O(1/kappa)`.
 
-### Step 19
-Hold physical signal/noise fixed. Wide-band SNR loss is `O(1/kappa^2)` while timing-search simplification is `O(1/kappa)`.
+**DERIVED / CONDITIONAL:** a finite large-r bandwidth optimum exists; later Palm validation confirms survival beyond Rice.
 
-**DERIVED / CONDITIONAL:** a finite large-r Rice bandwidth optimum exists. Initial Palm spot check preserved finite-vs-infinite ordering.
+### Steps 20–21
+At finite `r=2`, fixed physical bandwidth and `Lambda=0.895`, converged Rice produced apparent `slow -> fast -> slow` switches at `25.4898402` and `130.1945883`.
 
-### Step 20
-Finite-r `r=2`, fixed physical bandwidth, `Lambda=0.895`: converged Rice produced apparent `slow -> fast -> slow` with switches `25.4898402` and `130.1945883`.
-
-### Step 21
-Palm correction changes the topology:
+Palm correction gives
 
 ```math
 \boxed{\kappa_{\times,1}^{Palm}\approx21.7\pm0.3}
 ```
 
-survives, while the upper Rice switch near `130.19` is **INVALIDATED**. Palm checks at `130`, `160`, and `300` keep fast preferred for `Lambda=0.895`.
+for the surviving lower switch and **INVALIDATES** the upper Rice switch. Palm checks at `130`, `160`, and `300` keep fast preferred for `Lambda=0.895`.
 
-### Step 22 — current frontier
-Map the Palm-corrected preference boundary by locally iterating
-
-```math
-\frac{\ell_{Rice,f}}{C_f}
-=
-r\frac{\ell_{Rice,s}}{C_s}.
-```
-
-For the same `r=2` calibration:
+### Step 22
+Palm boundary map:
 
 ```text
 kappa_f     Lambda_cross^Palm
@@ -142,32 +136,95 @@ kappa_f     Lambda_cross^Palm
 200         ~0.9099
 ```
 
-**REFINEMENT:** the high-band slow-preferred region survives. Palm correction lifted the boundary above the old `Lambda=0.895` slice; it did not erase the slow-preferred side of task space.
+**REFINEMENT:** high-band slow-preferred tasks survive above the lifted boundary.
 
-Higher-statistics large-r full-template Palm scan:
+Large-r full-template Palm scan has shallow finite optimum:
 
 ```text
-kappa       ell_crit^Palm
-50          ~0.91162
-55          ~0.91185
-60          ~0.9120
-65          ~0.91136
-infinity    ~0.90897
+kappa~50–65: ell_crit^Palm ~0.912
+infinity:    ell_crit^Palm ~0.90897
 ```
 
-**NUMERICAL VALIDATION / CONDITIONAL:** Step-19 finite bandwidth optimum survives Palm correction. It is shallower and broader than Rice predicted, with present localization `kappa_opt^Palm~50–65` and only `~0.3–0.4%` gain over infinite bandwidth for this calibration.
+**NUMERICAL VALIDATION / CONDITIONAL:** finite bandwidth optimum survives Palm correction with only `~0.3–0.4%` gain.
+
+### Step 23 — current frontier
+Exact finite-hard-window covariance:
+
+```math
+R_x(y)=
+\frac{(1+y)e^{-y}-e^{-2x+y}(2x^2-2xy+2x-y+1)}{\eta(x)}.
+```
+
+Local expansion:
+
+```math
+R_x(y)=1-a_x|y|-\frac{b_x}{2}y^2+O(|y|^3),
+```
+
+where
+
+```math
+a_x=\frac{2x^2e^{-2x}}{\eta(x)},
+\qquad
+b_x=\frac{1+e^{-2x}(2x^2-2x-1)}{\eta(x)}.
+```
+
+Matched rough/smooth coordinate:
+
+```math
+\boxed{\chi_x=a_xu/\sqrt{b_x}}.
+```
+
+On `q(u)=sqrt(2)/(u sqrt(b_x))`, the tangent process has stationary-increment variance
+
+```math
+\operatorname{Var}\eta_\chi(t)=t^2+\sqrt2\chi|t|.
+```
+
+A generalized Pickands constant `H_mix(chi)` bridges the smooth and rough high-threshold laws.
+
+**REFINEMENT:** mathematical nondifferentiability at finite `x` need not mean distinct excursions are rough-controlled; when `chi<<1`, the cusp mainly produces micro-recrossings inside a smooth-core excursion.
+
+Because the task has only `u~5`, leading high-threshold formulas retain percent-level finite-`u` error. Step 23 therefore introduces the exact occupation-time identity
+
+```math
+V_u=\int_0^\ell1_{z(t)>u}dt,
+```
+
+```math
+\boxed{
+P(\sup z>u)=\ell Q(u)E_{occ}[1/V_u].
+}
+```
+
+This remains valid in the nondifferentiable rough limit where crossing counts diverge.
+
+Direct `kappa=infinity` calculation for the Step-20 `r=2` calibration gives
+
+```math
+\boxed{
+\Lambda_{cross}^{kappa=\infty}\approx0.905\pm0.004,
+\qquad X_{cross}\approx7.75.
+}
+```
+
+Representative `40000`-path equality check:
+
+```text
+X=7.7528, Lambda=0.90513
+fast P_FA/alpha = 1.0049 +/-0.0080
+slow P_FA/alpha = 0.9954 +/-0.0094
+```
+
+**REFINEMENT:** `Lambda=0.895` is fast-preferred in the direct infinite-band rough limit, so the invalid Step-20 upper reversal does not reappear asymptotically.
+
+**OPEN:** a bounded re-entrant slow-preferred pocket at some untested very high finite bandwidth is not rigorously excluded because monotonic convergence of the finite-`kappa` boundary has not been proved.
 
 ---
 
 ## 4. Current frontier
 
-The topological questions from Step 21 are now answered within the mapped range:
-
-- high-band slow-preferred tasks still exist at larger `Lambda`;
-- the `Lambda=0.895` second crossing was spurious;
-- the large-r finite-band optimum survives exact rare-event correction.
-
-The unresolved problem is the analytic finite-r high-band boundary as `kappa_f->infinity`, where finite-hard-window roughness and smooth full-template convergence do not commute.
+Compute `H_mix(chi)` and the finite-threshold correction accurately enough to replace full-process rough-limit Monte Carlo with a deterministic boundary formula and determine whether any bounded high-band re-entrant preference pocket can exist.
 
 ---
 
@@ -182,8 +239,7 @@ Do not claim:
 - Gaussian information weighting is a literal circuit transfer function;
 - Rice is uniformly accurate at high finite-window bandwidth;
 - Step-20 double reversal is an exact physical result;
-- high-band slow-preferred region disappears after Palm correction;
-- exact finite-r `kappa_f->infinity` boundary is known;
+- no bounded high-band re-entrant pocket can exist without monotonicity proof;
 - Palm bandwidth optimum is unique or exactly located;
 - any GHz translation is a hardware recommendation;
 - novelty.
@@ -194,4 +250,4 @@ Unknown amplitudes/phases, signal-dependent noise, sequential stopping, nonlinea
 
 ## 6. Single next question — DO NOT ANSWER UNTIL PROMPTED
 
-> Can the high-band finite-r Palm boundary be derived asymptotically by matching the finite-hard-window rough excursion law to the smooth full-template limit, so that the `kappa_f -> infinity` boundary and the possibility of any additional reversals can be settled analytically rather than by Monte Carlo mapping?
+> Can `H_mix(chi)` and its finite-threshold correction be computed accurately enough to turn the Step-23 matched boundary into a deterministic formula and prove or exclude any bounded high-band re-entrant preference pocket without further full-process Monte Carlo?
