@@ -2,15 +2,15 @@
 
 **Repository:** `Kajin-0/gedanken_3`  
 **Active experiment:** `experiments/01-equal-dstar-different-speed/`  
-**Current mode:** first-principles photodetector thought experiment. Twenty-one logical steps completed. Step 21 applies the exact continuous Palm rare-event structure to the finite-r fixed-physics bandwidth sweep. The lower slow-to-fast bandwidth reversal survives at `kappa_f ~21.7 +/-0.3`; the reported Step-20 upper Rice switch near `130.19` is invalidated. No universal replacement metric and no novelty claim.
+**Current mode:** first-principles photodetector thought experiment. Twenty-two logical steps completed. Step 22 maps the Palm-corrected finite-r bandwidth boundary and validates that the Step-19 finite bandwidth optimum survives continuous rare-event correction. The high-band slow-preferred region survives above a lifted boundary near `Lambda~0.91`; the old `Lambda=0.895` second crossing remains invalid. No universal replacement metric and no novelty claim.
 
-Read this file first, then:
+Read first:
 
 1. `experiments/01-equal-dstar-different-speed/CURRENT_STATE.md`
 2. `experiments/01-equal-dstar-different-speed/PROGRESS_LOG.md`
 3. dedicated step files in chronological order
-4. latest: `experiments/01-equal-dstar-different-speed/PALM_CORRECTED_FINITE_R_BANDWIDTH_STEP.md`
-5. latest numerical helper: `experiments/01-equal-dstar-different-speed/numerics/finite_r_palm_validation.py`
+4. latest: `experiments/01-equal-dstar-different-speed/PALM_BOUNDARY_MAP_STEP.md`
+5. latest numerical helper: `experiments/01-equal-dstar-different-speed/numerics/palm_boundary_map.py`
 
 The repository follows the physics rather than a predetermined criticism of `D*`. Preserve assumptions, cancellations, counterexamples, negative results, rejected shortcuts, failed numerical estimates, numerical validations, invalidations, asymptotic limits, refinements, and unresolved branches.
 
@@ -22,11 +22,11 @@ Before every material write:
 
 1. fetch live `main` / current target;
 2. inspect intervening changes when needed;
-3. fetch the exact current blob SHA before replacing an existing file;
+3. fetch exact current blob SHA before replacing existing file;
 4. never overwrite stale state;
-5. preserve failed/corrected branches and explain why they changed;
+5. preserve failed/corrected branches and why they changed;
 6. make narrow edits or explicit compact consolidations;
-7. update `CURRENT_STATE.md` whenever the scientific frontier changes;
+7. update `CURRENT_STATE.md` whenever scientific frontier changes;
 8. append or explicitly consolidate `PROGRESS_LOG.md` for consequential work.
 
 **Live `main` overrides chat summaries, memory, and stale recovery notes.**
@@ -35,91 +35,50 @@ Before every material write:
 
 ## 2. Epistemic labels
 
-Use explicitly where useful:
+Use where useful:
 
 - **DEFINED** — convention/model definition.
-- **ASSUMED** — idealization introduced for the thought experiment.
+- **ASSUMED** — idealization.
 - **DERIVED** — follows mathematically from stated assumptions.
-- **COUNTEREXAMPLE** — construction sufficient to disprove an implication.
+- **COUNTEREXAMPLE** — construction sufficient to disprove implication.
 - **CONDITIONAL** — true only under listed assumptions.
-- **REFINEMENT** — sharpens a prior statement without erasing it.
+- **REFINEMENT** — sharpens prior statement without erasing it.
 - **NEGATIVE RESULT** — candidate effect tested and absent under stated model.
-- **REJECTED SHORTCUT** — tempting inference shown not to answer the actual question.
-- **FAILED NUMERICAL ESTIMATE** — failed convergence/validation; never reuse as a result.
-- **NUMERICAL VALIDATION** — survived stated numerical cross-checks within scope.
-- **NUMERICAL COUNTEREXAMPLE** — converged construction disproves a broader implication within stated approximation/model.
-- **INVALIDATED** — previously reported result shown not to survive the stronger calculation.
-- **ASYMPTOTIC** — derived only in a controlled limiting regime.
+- **REJECTED SHORTCUT** — tempting inference shown not to answer actual question.
+- **FAILED NUMERICAL ESTIMATE** — failed validation; never reuse as result.
+- **NUMERICAL VALIDATION** — survived stated cross-checks within scope.
+- **NUMERICAL COUNTEREXAMPLE** — converged numerical construction disproves broader implication within stated approximation/model.
+- **INVALIDATED** — previously reported result fails stronger calculation.
+- **ASYMPTOTIC** — controlled limiting regime only.
 - **OPEN** — not established.
 - **NON-CLAIM** — deliberately not asserted.
 
-Do not use `novel`, `universal`, `fundamental`, `first`, etc. without a separate prior-art audit.
+Do not use `novel`, `universal`, `fundamental`, `first`, etc. without separate prior-art audit.
 
 ---
 
-## 3. Original question
-
-Two detectors satisfy
-
-```math
-D_A^*=D_B^*
-```
-
-but initially have
-
-```math
-\tau_A=1\ \mathrm{ns},
-\qquad
-\tau_B=1\ \mathrm{s}.
-```
-
-Does equal conventional specific detectivity imply equal ability to detect an arbitrary optical signal?
-
----
-
-## 4. Compact surviving chain
+## 3. Compact surviving chain
 
 ### Steps 01–04
 Equal scalar reference `D*` does not determine arbitrary temporal-signal SNR. Complete magnitude `D*(f)` is sufficient only for the restricted known-waveform/full-observation maximum-linear-SNR problem. Unknown timing alone does not break that ideal stationary-Gaussian equivalence, but finite windows can because magnitude `D*(f)` discards phase/temporal placement.
 
-### Steps 05–08
-
-```math
-\rho_t^2=\langle s_t,C_t^{-1}s_t\rangle,
-```
-
-and known-time Gaussian detection obeys
-
-```math
-P_D(t;\alpha)=\Phi[\rho_t-\Phi^{-1}(1-\alpha)].
-```
-
-Unknown timing raises a global threshold governed by timing-scan covariance, not digital sample count.
-
-### Step 09
-**REJECTED SHORTCUT:** finite-window SNR accumulation cannot be mixed directly with full-template timing bandwidth. For the controlled time-scaled family, faster SNR acquisition can be outweighed by unknown-time search burden.
-
-### Steps 10–12
-Task-level detection time:
+### Steps 05–12
+Finite-record SNR is `rho_t^2=<s_t,C_t^-1s_t>`. Define task-level detection time
 
 ```math
 \mathcal T_D(\alpha,\beta,L)
 =\inf\{t:\rho_t-\gamma_t(L,\alpha)\ge\Phi^{-1}(\beta)\}.
 ```
 
-The scaled family has a fast/slow task boundary. **NEGATIVE RESULT:** no finite interior integration-duration optimum exists in that original family.
+For the controlled scaled family, faster SNR accumulation can be offset by larger unknown-time search burden. **NEGATIVE RESULT:** no finite interior integration-duration optimum in that original family.
 
 ### Step 13
-The ideal-white-noise finite hard window is locally Brownian-like:
+Finite hard-window ideal-white-noise scan is locally Brownian-like: `R_x(y)=1-a_x|y|+...`.
 
-```math
-R_x(y)=1-a_x|y|+O(y^2).
-```
-
-**FAILED NUMERICAL ESTIMATE:** the rough-grid `ell~49` crossover is invalid.
+**FAILED NUMERICAL ESTIMATE:** rough-grid `ell~49` crossover invalid.
 
 ### Steps 14–15
-A genuine finite timing-information bandwidth removes the cusp. The smooth surrogate
+A genuine finite timing-information bandwidth removes the cusp. Smooth surrogate
 
 ```math
 J_{x,\kappa}(\nu)=|H_x(\nu)|^2e^{-(\nu/\kappa)^2}
@@ -128,123 +87,104 @@ J_{x,\kappa}(\nu)=|H_x(\nu)|^2e^{-(\nu/\kappa)^2}
 has controlled correlated-scan numerics.
 
 ### Step 16
-Exact smooth one-dimensional Palm identity:
+Exact smooth Palm identity:
 
 ```math
-\boxed{
-P_{FA}(u)
-=Q(u)+\lambda_u
-E_\uparrow\!\left[
-\frac{1_{\{z(0)\le u\}}}{N_u^+}
-\right]
-}
+P_{FA}=Q(u)+\lambda_u E_\uparrow[1_{z(0)\le u}/N_u^+].
 ```
 
-Rice/EC is an upper bound; its error is multiple excursions plus endpoint overlap.
+Rice/EC is an upper bound; Palm importance sampling makes `alpha=1e-6` practical.
 
 ### Step 17
-A compact high-threshold crossover law follows in the isolated-excursion limit. Rice accuracy is **not uniform** as finite-window bandwidth tends to infinity:
-
-```math
-\sigma_\kappa^2(x)\sim a_x\kappa/\sqrt\pi.
-```
+Rice accuracy is nonuniform toward the finite-window rough limit because `sigma_kappa^2~a_x kappa/sqrt(pi)`. Co-scaled extreme-speed-ratio crossover tends to fast full-template feasibility edge.
 
 ### Step 18
-With one shared physical bandwidth and accessible SNR artificially forced equal, the large-r crossover transitions from electronics-limited `~1/Omega_B` to detector-limited `~tau_f`. **NEGATIVE RESULT:** no finite bandwidth optimum under that artificial normalization.
+Common physical bandwidth with accessible SNR forced equal produces electronics-limited `~1/Omega_B` and detector-limited `~tau_f` regimes.
+
+**NEGATIVE RESULT:** no finite bandwidth optimum under artificial equal-accessible-SNR normalization.
 
 ### Step 19
-Hold physical signal/noise fixed while bandwidth varies. SNR loss near wide band is `O(1/kappa^2)` while timing-search simplification is `O(1/kappa)`. **DERIVED / CONDITIONAL:** a finite large-r Rice bandwidth optimum exists; Palm spot checks preserve finite-vs-infinite ordering.
+Hold physical signal/noise fixed. Wide-band SNR loss is `O(1/kappa^2)` while timing-search simplification is `O(1/kappa)`.
+
+**DERIVED / CONDITIONAL:** a finite large-r Rice bandwidth optimum exists. Initial Palm spot check preserved finite-vs-infinite ordering.
 
 ### Step 20
-At finite `r=2`, common physical bandwidth without SNR renormalization gives the slower detector a narrow-band SNR advantage with
+Finite-r `r=2`, fixed physical bandwidth, `Lambda=0.895`: converged Rice produced apparent `slow -> fast -> slow` with switches `25.4898402` and `130.1945883`.
+
+### Step 21
+Palm correction changes the topology:
 
 ```math
-\rho_{\infty,s}/\rho_{\infty,f}\to\sqrt r.
+\boxed{\kappa_{\times,1}^{Palm}\approx21.7\pm0.3}
 ```
 
-Finite-duration Rice produced two apparent bandwidth switches:
+survives, while the upper Rice switch near `130.19` is **INVALIDATED**. Palm checks at `130`, `160`, and `300` keep fast preferred for `Lambda=0.895`.
+
+### Step 22 — current frontier
+Map the Palm-corrected preference boundary by locally iterating
+
+```math
+\frac{\ell_{Rice,f}}{C_f}
+=
+r\frac{\ell_{Rice,s}}{C_s}.
+```
+
+For the same `r=2` calibration:
 
 ```text
-25.4898402
-130.1945883
+kappa_f     Lambda_cross^Palm
+~10         ~0.794
+~20         ~0.891
+21.7         0.895
+30          ~0.9052
+60          ~0.9098
+100         ~0.9103
+200         ~0.9099
 ```
 
-and apparent topology `slow -> fast -> slow`. Spectral quadrature was converged, but exact Palm validation was explicitly open.
+**REFINEMENT:** the high-band slow-preferred region survives. Palm correction lifted the boundary above the old `Lambda=0.895` slice; it did not erase the slow-preferred side of task space.
 
-### Step 21 — current frontier
-For candidate duration `x`, use
-
-```math
-u_{avail}=\rho(x)-\Phi^{-1}(\beta)
-```
-
-and test directly
-
-```math
-P_{FA}^{Palm}(u_{avail})\le\alpha.
-```
-
-#### Lower switch survives
-Palm balance plus local-grid refinement gives
-
-```math
-\boxed{\kappa_{\times,1}^{Palm}\approx21.7\pm0.3.}
-```
-
-About `15%` below Rice `25.49`.
-
-#### Upper Rice switch fails
-At `kappa_f=130`:
+Higher-statistics large-r full-template Palm scan:
 
 ```text
-X=7.0: fast P_FA/alpha~0.9918, slow~1.2668
-X=7.5: fast~0.9897, slow~1.0444
+kappa       ell_crit^Palm
+50          ~0.91162
+55          ~0.91185
+60          ~0.9120
+65          ~0.91136
+infinity    ~0.90897
 ```
 
-Fast meets the task while slow does not. The same ordering is seen at Palm-checked `kappa_f=160` and `300`.
-
-**INVALIDATED:** `kappa_cross_2^Rice ~=130.1945883` as a continuous Palm switch.
-
-Cause: nonuniform Rice micro-upcrossing overcount, especially severe for the shorter slow-detector finite window.
-
-Directly validated topology through `kappa_f<=300`:
-
-```math
-\boxed{\text{slow}\to\text{fast}.}
-```
-
-**OPEN:** a different high-band Palm reversal is not rigorously excluded.
+**NUMERICAL VALIDATION / CONDITIONAL:** Step-19 finite bandwidth optimum survives Palm correction. It is shallower and broader than Rice predicted, with present localization `kappa_opt^Palm~50–65` and only `~0.3–0.4%` gain over infinite bandwidth for this calibration.
 
 ---
 
-## 5. Current frontier
+## 4. Current frontier
 
-Map the Palm-corrected boundary in
+The topological questions from Step 21 are now answered within the mapped range:
 
-```text
-(Lambda, kappa_f)
-```
+- high-band slow-preferred tasks still exist at larger `Lambda`;
+- the `Lambda=0.895` second crossing was spurious;
+- the large-r finite-band optimum survives exact rare-event correction.
 
-well enough to determine:
-
-1. whether the high-band slow-preferred region disappears entirely;
-2. whether the Step-19 finite-bandwidth optimum survives as a true maximum of the Palm-corrected boundary.
+The unresolved problem is the analytic finite-r high-band boundary as `kappa_f->infinity`, where finite-hard-window roughness and smooth full-template convergence do not commute.
 
 ---
 
-## 6. Scope boundary
+## 5. Scope boundary
 
 Do not claim:
 
 - faster detectors are universally better or worse;
 - a universal speed-detectivity tradeoff or scalar replacement for `D*`;
-- the Step-13 `ell~49` result is valid;
+- Step-13 `ell~49` is valid;
 - arbitrary low-pass filtering is a true information-band limitation;
-- the Gaussian information weighting is a literal circuit transfer function;
+- Gaussian information weighting is a literal circuit transfer function;
 - Rice is uniformly accurate at high finite-window bandwidth;
-- Step-20's double reversal is an exact physical result;
-- no high-band Palm reversal can exist anywhere without a full boundary proof;
-- Step-19's exact Palm optimum has been solved;
+- Step-20 double reversal is an exact physical result;
+- high-band slow-preferred region disappears after Palm correction;
+- exact finite-r `kappa_f->infinity` boundary is known;
+- Palm bandwidth optimum is unique or exactly located;
 - any GHz translation is a hardware recommendation;
 - novelty.
 
@@ -252,6 +192,6 @@ Unknown amplitudes/phases, signal-dependent noise, sequential stopping, nonlinea
 
 ---
 
-## 7. Single next question — DO NOT ANSWER UNTIL PROMPTED
+## 6. Single next question — DO NOT ANSWER UNTIL PROMPTED
 
-> Can the full Palm-corrected preference boundary in `(Lambda,kappa_f)` be mapped well enough to determine whether the high-band slow-preferred region disappears entirely, and whether the finite bandwidth optimum from Step 19 survives as a true Palm boundary maximum?
+> Can the high-band finite-r Palm boundary be derived asymptotically by matching the finite-hard-window rough excursion law to the smooth full-template limit, so that the `kappa_f -> infinity` boundary and the possibility of any additional reversals can be settled analytically rather than by Monte Carlo mapping?
