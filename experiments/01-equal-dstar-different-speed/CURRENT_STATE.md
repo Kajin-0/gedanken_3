@@ -1,7 +1,7 @@
 # Current State — Experiment 01: Equal D*, Different Speed
 
-**Date:** 2026-08-11 13:28 EDT  
-**Status:** eleven logical steps completed. Step 11 derives an exact dimensionless form of the Step-10 task-level detection-time surface for the controlled equal-eventual-SNR time-scaled family. It also yields a negative result: within this family the true-alignment task margin increases strictly with filter duration, so no finite interior optimal integration duration exists. No universal replacement metric and no novelty claim.
+**Date:** 2026-08-11 13:39 EDT  
+**Status:** twelve logical steps completed. Step 12 converts the prior existence result into an analytic task-regime structure for two time-scaled equal-eventual-SNR detectors: an exact implicit fast/slow detection-time boundary, a slow-only feasibility region, no fast-only feasibility region, and—under standard continuity/extreme-value conditions—at least one finite fast-to-slow crossover as timing uncertainty grows. No universal replacement metric and no novelty claim.
 
 ---
 
@@ -13,7 +13,7 @@ Two hypothetical detectors satisfy
 D_A^*=D_B^*,
 ```
 
-but have
+but have very different temporal responses, initially
 
 ```math
 \tau_A=1\ \mathrm{ns},
@@ -21,19 +21,21 @@ but have
 \tau_B=1\ \mathrm{s}.
 ```
 
-Original question: does equal conventional specific detectivity imply equal ability to detect an arbitrary optical signal?
+Question: does equal conventional specific detectivity imply equal ability to detect an arbitrary optical signal?
 
 ---
 
-## 2. Surviving chain through Step 04
+## 2. Surviving logical chain
 
-### Step 01 — scalar reference `D*` is insufficient
+### Step 01 — scalar reference D* is insufficient
 
-A physically allowed first-order response with additive output noise gives unequal temporal-signal SNR despite equal reference `D*`.
+A physically allowed first-order response plus additive output noise gives unequal temporal-signal SNR despite equal reference `D*`; the explicit 1 Hz example gives `SNR_A/SNR_B ~ 6.36`.
 
-**Qualification:** signal and noise filtering can cancel. Do not infer `fast is always better`.
+**COUNTEREXAMPLE / QUALIFICATION:** equal reference `D*` does not determine arbitrary-signal SNR. If dominant noise is filtered by the same pole, signal/noise attenuation can cancel. Do not infer `fast is always better`.
 
-### Step 02 — full-observation known-waveform SNR
+### Step 02 — known-waveform full-observation SNR
+
+For waveform `P(f)`, transfer `G(f)`, and stationary additive output-noise PSD `S_n(f)`,
 
 ```math
 \boxed{
@@ -45,27 +47,29 @@ A physically allowed first-order response with additive output noise gives unequ
 
 Complete magnitude `D*(f)` is sufficient for this restricted known-waveform/full-observation maximum-linear-SNR problem.
 
-### Step 03 — unknown timing alone versus finite truncation
+### Step 03 — unknown timing negative result; finite truncation counterexample
 
-Under stationary Gaussian full observation, identical complete `D*(f)` gives identical ideal timing-search statistics. Finite truncation can break the equivalence because magnitude `D*(f)` discards temporal phase/placement.
+Under stationary Gaussian full observation, identical complete `D*(f)` gives identical ideal unknown-arrival matched-filter search statistics.
+
+**NEGATIVE RESULT:** unknown arrival time alone does not break the ideal equivalence.
+
+A finite fixed record can nevertheless distinguish detectors with identical magnitude `D*(f)` because phase/temporal placement is discarded.
 
 ### Step 04 — pure-delay loophole removed
 
-A stable causal all-pass factor can preserve complete magnitude `D*(f)` and total infinite-time SNR while changing finite-window SNR even after arbitrary constant latency compensation.
+A stable causal all-pass factor preserves complete magnitude `D*(f)` and total infinite-time SNR while changing finite-window SNR even after arbitrary constant latency compensation.
 
----
+**COUNTEREXAMPLE:** nonlinear phase/dispersion can redistribute when recoverable SNR appears.
 
-## 3. Step 05 — exact finite-time SNR
+### Step 05 — exact finite-time SNR accumulation
 
-For a finite record `[0,t]`,
+For finite record `[0,t]`,
 
 ```math
 \boxed{
-\rho_t^2=\langle s_t,C_t^{-1}s_t\rangle.
+\rho_t^2=\langle s_t,C_t^{-1}s_t\rangle,
 }
 ```
-
-Define
 
 ```math
 \boxed{
@@ -75,11 +79,7 @@ Define
 
 This separates eventual detectability from the rate at which it becomes available.
 
----
-
-## 4. Step 06 — known-time Gaussian decision
-
-For the simple known-time test,
+### Step 06 — known-time Gaussian detection probability
 
 ```math
 \boxed{
@@ -92,11 +92,9 @@ P_D(t;\alpha)
 
 Equal eventual SNR can coexist with radically unequal early-deadline detection probability.
 
----
+### Step 07 — independent-slot unknown-time search penalty
 
-## 5. Step 07 — independent-slot unknown-time search
-
-For `M` independent candidate arrival times scanned by their maximum,
+For `M` independent candidate arrival times,
 
 ```math
 \boxed{
@@ -105,27 +103,19 @@ For `M` independent candidate arrival times scanned by their maximum,
 }
 ```
 
-Unknown timing consumes additional SNR margin through a global false-alarm threshold.
+Unknown timing consumes additional SNR margin through a global search threshold.
 
-**Warning:** `M` is not digital sample count in a continuous timing scan.
+**WARNING:** `M` is not digital sample count in a continuous timing scan.
 
----
-
-## 6. Step 08 — continuous-time full-template search
+### Step 08 — continuous-time full-template search correlation
 
 With
 
 ```math
 K(f)=\frac{G(f)P(f)}{\sqrt{S_n(f)}},
+\qquad
+W(f)=\frac{|K(f)|^2}{\int|K|^2df},
 ```
-
-and normalized SNR spectral weight
-
-```math
-W(f)=\frac{|K(f)|^2}{\int|K(f')|^2df'},
-```
-
-the normalized timing-scan covariance is
 
 ```math
 \boxed{
@@ -133,46 +123,33 @@ r(\Delta)=\int W(f)e^{i2\pi f\Delta}df.
 }
 ```
 
-When the second moment exists,
+When the second spectral moment exists, `f_rms^2=integral f^2W df`; differentiable Gaussian scans obey Rice upcrossing statistics.
+
+**REFINEMENT:** sample rate alone does not raise timing-search complexity. For the same waveform, identical complete `D*(f)` gives identical full-observation timing covariance.
+
+**REGULARITY WARNING:** the ideal abrupt exponential used earlier has divergent second spectral moment in ideal white noise, so Rice curvature requires physical high-frequency regularization or a smoother waveform.
+
+### Step 09 — exact finite-deadline scan and conditional ranking reversal
+
+The actual finite-deadline scan uses
 
 ```math
-f_{rms}^2=\int f^2W(f)df,
+q_t=C_t^{-1}s_t
 ```
 
-and a differentiable stationary Gaussian scan has Rice upcrossing density
-
-```math
-\nu_u^+=f_{rms}e^{-u^2/2}.
-```
-
-**REFINEMENT:** sample rate alone does not raise timing-search complexity. For the same waveform, identical complete magnitude `D*(f)` gives identical full-observation timing-search covariance.
-
----
-
-## 7. Step 09 — exact finite-deadline scan and conditional ranking reversal
-
-For a scan that uses only `t` seconds after each candidate event time, the correct finite filter is
-
-```math
-q_t=C_t^{-1}s_t.
-```
-
-Its exact stationary normalized noise-only scan covariance is
+with exact timing covariance
 
 ```math
 \boxed{
 r_t(\Delta)
-=\frac{
-\int |Q_t(f)|^2S_n(f)e^{i2\pi f\Delta}df
-}{
-\int |Q_t(f)|^2S_n(f)df
-}.
+=\frac{\int |Q_t(f)|^2S_n(f)e^{i2\pi f\Delta}df}
+{\int |Q_t(f)|^2S_n(f)df}.
 }
 ```
 
-**CORRECTION:** do not combine finite-window `eta(t)` with the Step-08 full-template `f_rms` as if they belonged to one exact finite-deadline statistic.
+**CORRECTION / INVALID SHORTCUT:** finite-window `eta(t)` cannot be combined directly with Step-08 full-template `f_rms` as one exact finite-deadline statistic.
 
-A controlled equal-eventual-SNR family was constructed using
+A controlled equal-eventual-SNR family was introduced:
 
 ```math
 p(t)=e^{-bt}u(t),
@@ -182,7 +159,7 @@ p(t)=e^{-bt}u(t),
 G_\tau(s)=A_\tau\frac{s+b}{(s+1/\tau)^2},
 ```
 
-with output
+with
 
 ```math
 s_\tau(t)=A_\tau t e^{-t/\tau}u(t)
@@ -190,314 +167,257 @@ s_\tau(t)=A_\tau t e^{-t/\tau}u(t)
 
 and amplitude scaling chosen so every member has the same `rho_infinity=rho_0`.
 
-For this family,
+Its accumulation is
 
 ```math
-\boxed{
-\eta_\tau(t)
-=1-e^{-2x}(1+2x+2x^2),
+\eta_\tau(t)=1-e^{-2x}(1+2x+2x^2),
 \qquad x=t/\tau.
-}
 ```
 
-The faster member has more finite-time SNR at every finite `t`, while the full-template timing covariance
+Faster members have more finite-time SNR at every finite duration, but their full-template timing search over fixed physical `L` has a larger threshold. Under standard finite-to-full threshold convergence, a finite-deadline cross-detector ranking reversal occurs.
+
+### Step 10 — task-level detection-time surface
+
+For each chosen filter duration `t`, compute finite SNR and timing-search threshold from the same filter.
 
 ```math
-\boxed{
-r_\tau(\Delta)
-=\left(1+\frac{|\Delta|}{\tau}\right)e^{-|\Delta|/\tau}
-}
+Z_{t,L}=\sup_{0\le\tau\le L}z_t(\tau),
 ```
 
-implies a larger unknown-time search threshold over the same physical monitoring duration `L`.
-
-Under standard convergence of finite-deadline thresholds to full-template thresholds, the detection ranking reverses for sufficiently large finite `t` even while the faster member still has more accumulated SNR.
-
-**DERIVED / CONDITIONAL:** rapid SNR acquisition is not guaranteed to dominate timing-search complexity.
-
----
-
-## 8. Step 10 — task-level detection-time surface
-
-For each chosen filter duration `t`, use the same finite-duration optimal filter to compute both `rho_t` and the timing scan.
-
-Let
-
 ```math
-Z_{t,L}=\sup_{0\le\tau\le L}z_t(\tau).
-```
-
-Define the exact global false-alarm threshold
-
-```math
-\boxed{
 \gamma_t(L,\alpha)
-=F^{-1}_{Z_{t,L}|H_0}(1-\alpha).
-}
+=F^{-1}_{Z_{t,L}|H_0}(1-\alpha),
 ```
 
-At the true event alignment,
-
 ```math
-\boxed{
 P_{D,true}(t;L,\alpha)
 =\Phi[\rho_t-\gamma_t(L,\alpha)].
-}
 ```
 
 Define
 
 ```math
-m(t;L,\alpha)=\rho_t-\gamma_t(L,\alpha).
-```
-
-For maximum allowed delay `T`, a rational measurement can choose any `t<=T`, so
-
-```math
-m^*(T;L,\alpha)
-=\sup_{0<t\le T}m(t;L,\alpha).
-```
-
-The task-level detection-time surface is
-
-```math
 \boxed{
 \mathcal T_D(\alpha,\beta,L)
-=\inf\left\{
-t>0:
-\rho_t-\gamma_t(L,\alpha)
-\ge\Phi^{-1}(\beta)
-\right\}.
+=\inf\{t>0:\rho_t-\gamma_t(L,\alpha)\ge\Phi^{-1}(\beta)\}.
 }
 ```
 
-This is task-specific, not a detector-only replacement for `D*`.
+This is a task-level surface, not a detector-only replacement for `D*`.
 
----
+A generic finite interior optimal filter duration was left open.
 
-## 9. Step 11 — exact dimensionless collapse
+### Step 11 — exact dimensionless collapse and negative filter-optimum result
 
-For the Step-09 family define
+For the Step-09 family,
 
 ```math
-x=\frac{t}{\tau},
+x=t/\tau,
 \qquad
-\ell=\frac{L}{\tau}.
+\ell=L/\tau,
 ```
 
-The finite-time SNR is
-
 ```math
-\boxed{
 \rho_{\tau,t}=\rho_0\sqrt{\eta(x)},
-}
 ```
 
-with
+and
 
 ```math
-\eta(x)=1-e^{-2x}(1+2x+2x^2).
-```
-
-The exact finite-duration white-noise timing covariance scales as
-
-```math
-\boxed{
-r_{\tau,t}(\Delta)
-=R_x(|\Delta|/\tau),
-}
+r_{\tau,t}(\Delta)=R_x(|\Delta|/\tau),
 ```
 
 where
 
 ```math
-\boxed{
 R_x(y)
-=\frac{
-\int_0^{x-y}v(v+y)e^{-2v-y}dv
-}{
-\int_0^x v^2e^{-2v}dv
-},
-\quad 0\le y<x,
-}
+=\frac{\int_0^{x-y}v(v+y)e^{-2v-y}dv}
+{\int_0^x v^2e^{-2v}dv}
 ```
 
-and `R_x(y)=0` for `y>=x`.
+for `0<=y<x`, zero otherwise.
 
-Therefore the exact global threshold has the dimensionless form
+Thus
+
+```math
+\gamma_{\tau,t}(L,\alpha)=\Gamma(x,\ell,\alpha),
+```
+
+and
 
 ```math
 \boxed{
-\gamma_{\tau,t}(L,\alpha)
-=\Gamma(x,\ell,\alpha).
+\mathcal T_D
+=\tau X_D\!\left(\rho_0,\alpha,\beta,\frac{L}{\tau}\right).
 }
 ```
 
-Define
+For fixed lag, `R_x` is nondecreasing with filter duration. Slepian comparison makes the global threshold nonincreasing with `x`, while `eta'(x)>0`.
+
+**NEGATIVE RESULT:** this family has no finite interior `t_opt`; the optimal filter uses all data allowed by the deadline. Step-09 reversal is therefore a cross-detector scaling effect, not poor filter-duration choice.
+
+### Step 12 — exact fast/slow task-regime boundary
+
+Let
 
 ```math
-M(x;\ell,\rho_0,\alpha)
-=\rho_0\sqrt{\eta(x)}-\Gamma(x,\ell,\alpha).
+r=\tau_s/\tau_f>1,
+\qquad
+\ell=L/\tau_s.
 ```
 
 Then
 
 ```math
-\boxed{
-\mathcal T_D(\alpha,\beta,L;\tau,\rho_0)
-=\tau\,
-X_D\!\left(
-\rho_0,\alpha,\beta,\frac{L}{\tau}
-\right),
-}
+T_{D,f}=\tau_f X_D(\rho_0,\alpha,\beta,r\ell),
 ```
-
-where
 
 ```math
-X_D
-=\inf\{x>0:M(x)\ge\Phi^{-1}(\beta)\}.
+T_{D,s}=r\tau_f X_D(\rho_0,\alpha,\beta,\ell).
 ```
 
-This is the exact dimensionless detection-surface collapse.
-
-### Filter-duration ordering
-
-For every fixed dimensionless lag `y`, `R_x(y)` is nondecreasing with `x`. The proof writes `R_x(y)` as a positive-weight average of the nondecreasing function
-
-```math
-H_y(v)=0\ (v<y),
-\qquad
-H_y(v)=e^y(1-y/v)\ (v\ge y).
-```
-
-Thus for `x_2>x_1`,
-
-```math
-R_{x_2}(y)\ge R_{x_1}(y)
-\qquad\forall y.
-```
-
-By Slepian Gaussian comparison, the more correlated longer-filter scan has a global supremum threshold satisfying
+The exact detection-time crossover boundary is
 
 ```math
 \boxed{
-\Gamma(x_2,\ell,\alpha)
-\le
-\Gamma(x_1,\ell,\alpha).
+B_r
+= X_D(\rho_0,\alpha,\beta,r\ell)
+-rX_D(\rho_0,\alpha,\beta,\ell)=0.
 }
 ```
 
-Meanwhile
+**REJECTED SHORTCUT:** equality of asymptotic margins is not the preference boundary. The slow detector has the better asymptotic search margin for every `L>0`, yet the fast detector wins at `L=0` and sufficiently small `L` because its physical time unit is smaller.
+
+Define
 
 ```math
-\eta'(x)=4x^2e^{-2x}>0.
+c=\rho_0-\Phi^{-1}(\beta)
 ```
 
-Therefore
+and the full-template threshold `Gamma_infinity(ell,alpha)`. Feasibility partitions exactly into:
+
+```text
+both feasible:
+    c > Gamma_infinity(r ell,alpha)
+
+slow-only feasible:
+    Gamma_infinity(ell,alpha) < c <= Gamma_infinity(r ell,alpha)
+
+neither feasible:
+    c <= Gamma_infinity(ell,alpha)
+```
+
+Because the fast member always has the larger normalized search domain, **fast-only feasibility is impossible** under equal `rho_0`.
+
+Define the dimensionless feasibility limit
 
 ```math
-\boxed{
-M(x;\ell,\rho_0,\alpha)
-\text{ is strictly increasing in }x.
-}
+\ell_{crit}
+=\sup\{\ell:\Gamma_\infty(\ell,\alpha)<\rho_0-\Phi^{-1}(\beta)\}.
 ```
 
-### Negative result: no finite interior `t_opt`
-
-For this family,
+Then
 
 ```math
-\boxed{
-\operatorname*{arg\,max}_{0<t\le T}
-[\rho_t-\gamma_t(L,\alpha)]
-=\{T\}.
-}
+\boxed{L_{crit}(\tau)=\tau\ell_{crit}.}
 ```
 
-So the optimal filter always uses all data allowed by the deadline. The generic finite-interior-`t_opt` possibility from Step 10 is **not realized** here.
-
-This does not undo Step 09. Each detector individually improves with longer filtering; the cross-detector reversal arises because, at fixed physical `L`, a faster detector has the larger dimensionless search domain
+Hence
 
 ```math
-L/\tau.
+\boxed{L_{crit,s}/L_{crit,f}=\tau_s/\tau_f=r.}
 ```
 
-See `DIMENSIONLESS_DETECTION_SURFACE_STEP.md`.
+Under standard continuity and Gaussian extreme-value growth, fast wins at `L=0`, fast becomes infeasible first as `L` grows, and slow remains feasible there. Therefore at least one finite crossover
+
+```math
+L_\times\in(0,L_{crit,f})
+```
+
+must occur. **No uniqueness has been proved.**
+
+A high-threshold Rice approximation can estimate `ell_crit`, but not the exact crossover surface; exact `Gamma(x,ell,alpha)` remains unresolved.
+
+See `TASK_REGIME_BOUNDARY_STEP.md`.
 
 ---
 
-## 10. Current scientific frontier
+## 3. Current scientific frontier
 
-The controlled family now has the exact task structure
+For the controlled family, the task hierarchy is now
 
 ```text
 rho_0
     equal eventual known-time SNR
 
 x=t/tau
-    dimensionless chosen filter duration
+    dimensionless filter duration
 
 ell=L/tau
-    dimensionless arrival-time uncertainty
+    dimensionless timing uncertainty
 
 eta(x)
     finite-time SNR accumulation
 
-R_x(y)
-    exact finite-duration timing-search covariance
+R_x
+    exact finite-duration timing covariance
 
 Gamma(x,ell,alpha)
-    exact global false-alarm threshold
+    exact global correlated-search threshold
 
-M(x)=rho_0 sqrt(eta)-Gamma
-    true-alignment task margin
+X_D
+    dimensionless minimum decision delay
 
-T_D/tau = X_D(rho_0,alpha,beta,L/tau)
-    dimensionless detection-time surface
+B_r=0
+    fast/slow detection-time crossover boundary
+
+Gamma_infinity vs rho_0-Phi^{-1}(beta)
+    feasibility partition
 ```
 
-A smaller `tau` has two competing consequences at fixed physical `L`:
+The project now predicts four qualitative task regimes as timing uncertainty grows:
 
 ```text
-smaller physical time unit -> helps
-larger L/tau search domain -> hurts
+small L -> fast wins
+intermediate L -> crossover within both-feasible region
+larger L -> slow-only feasible
+still larger L -> neither feasible
 ```
 
-For one fixed detector, however, longer filter duration always helps in this family.
+No fast-only feasibility regime exists in this equal-eventual-SNR scaled family.
 
 ---
 
-## 11. What has been established
+## 4. What has been established
 
-- Scalar reference `D*` does not determine arbitrary temporal-signal SNR.
-- Full-observation known-waveform SNR is `integral |P|^2|G|^2/S_n df`.
-- Complete magnitude `D*(f)` is sufficient for that restricted full-observation problem.
-- Finite observation can make magnitude `D*(f)` insufficient because temporal phase/dispersion controls finite-time SNR.
+- Equal reference scalar `D*` does not determine arbitrary temporal-signal SNR.
+- Complete magnitude `D*(f)` is sufficient only for the restricted full-observation known-waveform problem.
+- Finite observation can make magnitude `D*(f)` insufficient because temporal phase/dispersion controls SNR accumulation.
 - Exact finite-record SNR is `rho_t^2=<s_t,C_t^-1s_t>`.
-- Unknown timing raises a global threshold governed by matched-filter timing covariance rather than sample count.
-- The finite-deadline search covariance must be derived from the same finite filter used to obtain `rho_t`.
-- A controlled equal-eventual-SNR family permits conditional cross-detector ranking reversal.
-- A task-level detection-time surface packages finite-time SNR and unknown-time search without collapsing them into a universal scalar.
-- For the Step-09 family, that surface collapses exactly onto `rho_0`, `alpha`, `beta`, `t/tau`, and `L/tau`.
-- **NEGATIVE RESULT:** no finite interior integration optimum exists for this family; the task margin increases strictly with filter duration.
+- Unknown timing raises a global search threshold governed by matched-filter timing covariance, not sample count.
+- Finite-deadline SNR and timing search must be derived from the same finite filter.
+- The controlled equal-eventual-SNR family admits a conditional cross-detector ranking reversal.
+- Its task-level detection-time surface collapses exactly onto dimensionless variables.
+- **NEGATIVE RESULT:** no finite interior filter optimum exists for this family.
+- **DERIVED:** the fast/slow preference boundary is an implicit task-space surface `B_r=0`.
+- **DERIVED:** slow-only feasibility can occur, fast-only feasibility cannot, and physical timing-uncertainty tolerance scales linearly with `tau`.
+- **DERIVED / CONDITIONAL:** at least one finite fast-to-slow crossover exists as timing uncertainty grows.
 
 ---
 
-## 12. What has not been established
+## 5. What has not been established
 
 - No universal statement that faster detectors are better or worse.
-- No universal speed-detectivity tradeoff.
-- No universal scalar replacement for `D*`.
-- No closed-form exact correlated-scan threshold `Gamma(x,ell,alpha)`.
-- No universal monotonic ordering of detection time with detector `tau` at fixed physical `L`.
-- No claim that all detector families have monotone filter-duration margins.
-- No exact global-rejection/localization surface; current `P_D` is true-alignment threshold crossing.
+- No universal speed-detectivity tradeoff or scalar replacement for `D*`.
+- No exact closed form for the correlated Gaussian supremum threshold `Gamma(x,ell,alpha)`.
+- No exact numerical crossover `L_x` yet and no proof of crossover uniqueness.
+- No claim that the extreme `1 ns` versus `1 s` scaling is representative of practical photodetectors.
+- No exact global-rejection/localization boundary; the criterion remains true-alignment threshold crossing.
 - No Bayes-optimal unknown-time detector, sequential stopping, unknown amplitude/phase, signal-dependent noise, nonlinear response, saturation, dead time, or nonstationarity.
 - No novelty claim.
 
 ---
 
-## 13. Single natural next question — DO NOT ANSWER YET
+## 6. Single natural next question — DO NOT ANSWER YET
 
-> For two members of this family with different `tau` but equal `rho_0`, what is the boundary in task space `(L, alpha, beta)` where their detection-time surfaces cross — i.e. where the detector that reaches the required decision first switches from the faster member to the slower member?
+> Can the finite-duration Gaussian scan with covariance `R_x` be computed numerically accurately enough to map `Gamma(x,ell,alpha)`, solve `B_r=0`, and produce an actual fast/slow phase diagram for chosen `(rho_0,r,alpha,beta)` without reverting to an uncontrolled independent-trials approximation?
