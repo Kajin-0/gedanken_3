@@ -1,7 +1,7 @@
 # Current State — Experiment 01: Equal D*, Different Speed
 
-**Date:** 2026-08-12 06:14 EDT  
-**Status:** thirty-nine logical steps completed. Step 39 factorizes the exact physical excursion-cluster first moment as `N_a(u,q)=N_tan(u,q) R(u,q)`. For the established fast high-band witness (`X=7.16`, `Lambda=0.895`, `u~4.959`), the finite-threshold correction is **large in amplitude** (`R~1.56`) but **modest in threshold slope**. Combining Step-36 strip intensities with Step-33/34 first moments and the Step-38 tangent hazard gives an inferred `-d_u log R` roughly `0.07–0.68` across tested high-band points; `L_R~0.8` is retained only as a conservative numerical working envelope. Under a log-Lipschitz remainder assumption, the exact-cluster symmetric strip obeys an explicit ratio bound; at `delta=1e-4`, `L_R=0.8` raises the Step-38 tangent strip factor from `~9.89e-4` to only `~1.149e-3`, i.e. `~1.15e-9` absolute when `N_a~alpha=1e-6`. The next mathematical target is therefore a local finite-ratio/log-Lipschitz theorem for `R`, not a proof that `R` is close to one. No universal scalar replacement metric and no novelty claim.
+**Date:** 2026-08-12 07:24 EDT  
+**Status:** forty logical steps completed. Step 40 bypasses the Step-39 finite-`u` remainder factor for threshold continuity. Cameron–Martin change of measure gives a sharp probit translation bound for arbitrary Gaussian path events. An exactly constant shift is unnecessary: if the timing covariance has a positive floor `m_q` from the search midpoint, the normalized covariance kernel section is an RKHS barrier with norm `delta/m_q` and raises the entire path by at least `delta`. Therefore the exact false-alarm event obeys `p_q(u-delta)<=Phi(Phi^-1(p_q(u))+delta/m_q)` and `p_q(u+delta)>=Phi(Phi^-1(p_q(u))-delta/m_q)`. For the established high-band fast trajectory, deterministic covariance quadrature gives `m_q~0.92524`; using conservative numerical floor `m_*=0.92`, a `delta=1e-4` threshold decrease raises the Step-33 rough-endpoint fast upper probability only from `0.98968 alpha` to about `0.990213 alpha<alpha`. The threshold-buffer piece is therefore analytically controlled once a positive covariance floor is certified; the main remaining theorem gap is the sup-norm common-noise `q`-coupling tail `eta`. No universal scalar replacement metric and no novelty claim.
 
 ---
 
@@ -26,59 +26,79 @@ The normalized common-noise field is `L2`-Lipschitz in `q` through the rough end
 Fixed-class Pickands theory gives the high-threshold overshoot relation `N_a(u+s/u)/N_a(u)->exp(-s)` and therefore the rare-event scale `h_a~uN_a`. Step 38 proves the exact cross-ordering `H(chi,lambda zeta)<=H(lambda chi,zeta)` and hence `0<=zeta d_zeta log H<=chi d_chi log H`. Along fixed physical `kappa`, `H` is nondecreasing with threshold, so the matched tangent hazard satisfies `h_tan/N_tan<=phi/Q-1/u`. At `u~4.959`, this is `~4.9452`; the exact symmetric tangent-strip factor at `delta=1e-4` is `~9.89e-4`. **REFINEMENT:** the Step-36 excess is not caused by positive `zeta` elasticity; it is finite-`u` remainder physics.
 
 ### Step 39 — finite-`u` remainder factor
-Define
+Define `R=N_a/N_tan`. At the fast witness, `R~1.56`, so a small-amplitude second-order Pickands remainder is false at `u~5`. However, `-d_u log R=h_a/N_a-h_tan/N_tan` is inferred numerically to be only `~0.07–0.68`; `L_R=.8` was retained solely as a numerical working envelope. **REJECTED SHORTCUT:** proving `R~1` is neither true nor necessary.
+
+### Step 40 — Cameron–Martin covariance barrier
+For a centered Gaussian measure with Cameron–Martin vector `h`, `r=||h||_H`, and arbitrary event `A` of probability `p`, Cameron–Martin likelihood rearrangement gives the sharp translation bracket
 
 ```math
-R(u,q)=N_a(u,q)/N_{tan}(u,q).
+Phi(Phi^-1(p)-r) <= mu(A+h) <= Phi(Phi^-1(p)+r).
 ```
 
-For the fast witness, Step-30 canonical tangent intensities are approximately
-
-```text
-kappa_f      N_tan/alpha      N_a/alpha      R
-170             .6294           .9878       1.570
-300             .6297           .9862       1.566
-1000            .6306           .9842       1.561
-infinity        .6319           .9897       1.566
-```
-
-Thus `R-1~0.56`: a small-amplitude second-order expansion is inappropriate at `u~5`. But
-
-```math
--\partial_u\log R=h_a/N_a-h_tan/N_tan
-```
-
-is inferred numerically to be only `~0.07–0.68` over the tested tail. If
-
-```math
-|log R(v)-log R(u)|<=L_R|v-u|,
-```
-
-then with the Step-38 tangent ratios `A_-,A_+`,
+For the timing exceedance event `A_u={sup z>u}`, any RKHS function `h_delta>=delta` implies
 
 ```math
 \boxed{
-[N_a(u-d)-N_a(u+d)]/N_a(u)
-<=A_-e^{L_R d}-A_+e^{-L_R d}.
+p(u-delta)<=Phi(Phi^-1(p(u))+||h_delta||_H),
 }
 ```
 
-At `u~4.959`, `d=1e-4`, numerical working value `L_R=.8` gives `~1.149e-3`, consistent with Step-36 exact strip measurements. **QUALIFICATION:** `L_R=.8` is not an analytic bound or confidence interval.
+```math
+\boxed{
+p(u+delta)>=Phi(Phi^-1(p(u))-||h_delta||_H).
+}
+```
 
-See `FINITE_U_REMAINDER_FACTOR_STEP.md` and `numerics/finite_u_remainder_factor.py`.
+Choose midpoint `t0=ell/2`. The kernel section `R_q(t-t0)` has RKHS norm `1`. With
+
+```math
+m_q=inf_{t in [0,ell]}R_q(t-t0)>0,
+```
+
+the barrier
+
+```math
+h_delta(t)=delta R_q(t-t0)/m_q
+```
+
+satisfies `h_delta>=delta` and has exact norm `delta/m_q`. Hence
+
+```math
+\boxed{
+p_q(u-delta)-p_q(u+delta)
+<=Phi(z+delta/m_q)-Phi(z-delta/m_q),
+\quad z=Phi^-1(p_q(u)).
+}
+```
+
+The rough covariance is a positive autocorrelation; finite Gaussian information weighting convolves it with a positive Gaussian, so `m_q>0` for every high-band `q`, and compact continuity gives a uniform positive floor. Deterministic quadrature gives `m_q~0.92524` over `170<=kappa_f<=infinity`; conservative working floor `m_*=0.92` yields, from Step-33 endpoint upper `p_f(u)<=0.98968 alpha`,
+
+```math
+p_f(u-10^-4) <= 0.990213 alpha < alpha.
+```
+
+**PARTIAL CERTIFICATE:** the exact finite-threshold buffer is now controlled at event level without the tangent model or `R`. **QUALIFICATION:** `m_*=0.92` is a conservative numerical floor, not formal interval arithmetic.
+
+See `CAMERON_MARTIN_BARRIER_STEP.md` and `numerics/cameron_martin_barrier.py`.
 
 ---
 
 ## Current frontier
 
-The finite-`u` correction is nonperturbative in amplitude but slowly varying in threshold. The useful theorem is therefore a local finite-ratio/log-Lipschitz bound for `R`, ideally derived directly from Gaussian level shifting or Cameron-Martin comparison.
+The threshold anti-concentration/remainder problem is no longer the principal obstacle. The remaining theorem-level continuous-`q` gap is the probability that the **common-white-noise difference process** between neighboring bandwidths has a large sup norm. A useful result must bound
+
+```math
+eta=P(||z_q-z_r||_infinity>epsilon)
+```
+
+for `|q-r|<=.005` sharply enough to fit inside the remaining fast false-alarm margin.
 
 ### Single next question — DO NOT ANSWER YET
 
-> Can a Gaussian level-shift / Cameron-Martin argument produce a direct finite-ratio bound on `R(u+delta,q)/R(u,q)`—or on the exact cluster first moment itself—over `delta~1e-4`, avoiding any need for a small-amplitude second-order Pickands expansion?
+> Can the common-white-noise difference process `d_{q,r}(t)=z_q(t)-z_r(t)` be given a sharp Borell–TIS / metric-entropy sup-norm tail bound at `|q-r|<=0.005`, small enough that its failure probability `eta` fits inside the remaining `~1e-8` fast false-alarm margin?
 
 ---
 
 ## Scope boundary
 
-Do not claim: faster is universally better/worse; a universal scalar replacement for `D*`; Step-13 `ell~49`; the Step-20 double reversal; raw Step-27 fast values as continuum data; Step-31 empirical fit is exact or still necessary for the original conclusion; Step-34 is theorem-level continuous-parameter closure; Step-36 proves a uniform hazard density; Step-38 tangent hazard is an exact finite-`u` physical-cluster bound; `R~1`; `L_R=.8` is analytic; no re-entrant pocket for other task parameters; uniqueness of the bandwidth optimum; hardware meaning of illustrative GHz scales; novelty.
+Do not claim: faster is universally better/worse; a universal scalar replacement for `D*`; Step-13 `ell~49`; the Step-20 double reversal; raw Step-27 fast values as continuum data; Step-31 empirical fit is exact or still necessary for the original conclusion; Step-34 is theorem-level continuous-parameter closure; Step-36 proves a uniform hazard density; Step-38 tangent hazard is an exact finite-`u` physical-cluster bound; `R~1`; `L_R=.8` is analytic; `m_*=.92` is formal interval arithmetic; Step-40 alone closes the continuous-`q` problem; no re-entrant pocket for other task parameters; uniqueness of the bandwidth optimum; hardware meaning of illustrative GHz scales; novelty.
