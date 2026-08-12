@@ -1,6 +1,6 @@
 # Progress Log — Experiment 01
 
-**Consolidation note — 2026-08-12 18:55 EDT:** compact chronology preserving consequential results, corrections, invalidations, numerical validations, negative results, and the current stopping point. Full derivations remain in dedicated step files.
+**Consolidation note — 2026-08-12 19:12 EDT:** compact chronology preserving consequential results, corrections, invalidations, negative results, numerical validations, and the current stopping point. Full derivations remain in dedicated step files.
 
 ---
 
@@ -11,92 +11,105 @@ Equal scalar `D*` does not determine arbitrary temporal-signal performance; expl
 A genuine information bandwidth removes the cusp. Fixed physical signal/noise yields a shallow finite bandwidth optimum. Rice's apparent upper switch near `130.19` is **INVALIDATED**; Palm preserves only the lower switch `~21.7 +/- .3`. Rough endpoint `Lambda_cross^infinity~.905 +/- .004`, so `.895` remains fast-preferred.
 
 ## Steps 24–30
-Finite bandwidth yields a two-parameter generalized Pickands problem. **INVALIDATED INTERMEDIATE:** coupling coefficient `.8131`; correct pointwise coefficient `.8906480701 sqrt(chi/zeta)`. Brownian-parabola scaling gives the model-reduced canonical fast crossover. **INVALIDATED NUMERICAL INTERPRETATION:** raw Step-27 tiny-chi values were grid biased.
+Finite bandwidth yields a two-parameter generalized Pickands problem. **INVALIDATED INTERMEDIATE:** coupling coefficient `.8131`; correct pointwise coefficient `.8906480701 sqrt(chi/zeta)`. Brownian-parabola scaling gives a model-reduced canonical fast crossover. **INVALIDATED NUMERICAL INTERPRETATION:** raw Step-27 tiny-chi values were grid biased.
 
 ## Steps 31–34
 Step 31 empirical Palm bridge is superseded for the original high-band conclusion. Step 32 directly certifies through `kappa_f~170`, then raw crossing moments fail from micro-upcrossing multiplicity. Step 33 replaces crossings with finite-amplitude excursion clusters and exact occupation-Palm moments. Step 34 obtains a paired numerical high-band closure; its original continuous-q interpolation allowance was empirical.
 
 ## Steps 35–41
-Step 35 proves `L2` regularity in `q`; generic Gaussian supremum anti-concentration is too coarse. Step 36 supplies a rare-event-scaled cluster strip measure. Steps 37–38 obtain high-threshold overshoot scale and exact generalized-Pickands elasticity ordering. Step 39 rejects a small-amplitude finite-u remainder (`R~1.56`). Step 40 gives Cameron-Martin exact-event threshold translation. Step 41 replaces the empirical inter-node allowance with analytic Gaussian-process interpolation. **INVALIDATED NUMERICAL VALUE:** Step-35 tiny-q `0->.005` RMS `~5.4e-5` was cancellation damaged; asymptotics give `~2.69e-5`.
+Step 35 proves `L2` regularity in `q`; generic Gaussian supremum anti-concentration is too coarse. Step 36 supplies a rare-event-scaled cluster strip measure. Steps 37–38 obtain high-threshold overshoot scale and exact generalized-Pickands elasticity ordering. Step 39 rejects a small-amplitude finite-u remainder (`R~1.56`). Step 40 gives Cameron-Martin exact-event threshold translation. Step 41 replaces empirical inter-node interpolation with analytic Gaussian-process control. **INVALIDATED NUMERICAL VALUE:** Step-35 tiny-q `0->.005` RMS `~5.4e-5` was cancellation damaged; endpoint asymptotics give `~2.69e-5`.
 
 ## Step 42
-Raw inverse-duration Palm concentration fails distribution-free because the formal support is huge. Duration truncation yields exactly `P_FA<=E[C_long]+P(C_short>=1)` and reduces support 40x for `L0=.02`.
+Raw inverse-duration Palm concentration fails distribution-free because the formal support is huge. Duration truncation yields exactly `P_FA<=E[C_long]+P(C_short>=1)` and reduces support 40x at `L0=.02`.
 
 ## Step 43
 A successful cluster shorter than `.02` must traverse amplitude `.15` near the `~5 sigma` level inside `.02`. Fine-net Gaussian discordance plus conservative numerical covariance/metric envelopes gives `P(C_short>=1)<3.9e-11<3.9e-5 alpha`. **SHORT-CLUSTER GAUSSIAN ENVELOPE / PARTIAL CERTIFICATE.**
 
 ## Step 44
-Dedicated `L0=.02` rough-endpoint long-cluster runs pooled to `n=200000` give `mean=.992616066 alpha`, 95% empirical-Bernstein radius `.007302705 alpha`, and Step-43 short bound `.000039 alpha`, yielding
+Dedicated `L0=.02` rough-endpoint long-cluster runs pooled to `n=200000` give
 
-```math
-P_FA^{finite-grid,95\%}/alpha<.999957771<1.
+```text
+mean/alpha          .992616066144
+EB radius/alpha     .00730270506
+short bound/alpha   .000039
+finite-grid UCB     .999957771204 alpha
 ```
 
-**RIGOROUS FINITE-GRID STATISTICAL CERTIFICATE.** The remaining margin is only `.00004223 alpha`; timing-grid bias dominates.
+**RIGOROUS FINITE-GRID STATISTICAL CERTIFICATE:** `P_FA^(finite-grid,95%)/alpha<.9999578`. The remaining margin is only `.00004223 alpha`; timing-grid bias dominates.
 
 ## Step 45
-Common-random-number witness-time scan: `X=7.50` gains fast margin `~.001575 alpha` with slow lower `~1.089 alpha`; `X=7.70` gains `~.002006 alpha` but slow lower falls to `~1.013 alpha`. **NEGATIVE RESULT / REFINEMENT:** witness shifting alone does not eliminate the need for a continuum discretization analysis.
+Common-random-number witness-time scan: `X=7.50` gains fast margin `~.001575 alpha` with slow lower `~1.089 alpha`; `X=7.70` gains `~.002006 alpha` but slow lower falls to `~1.013 alpha`. **NEGATIVE RESULT / REFINEMENT:** witness shifting alone does not eliminate the need for continuum discretization analysis.
 
-## Step 46 — 18:55 EDT — rough-grid bias decomposition and Brownian scaling
-Use common continuous-spectrum paths sampled at nested timing meshes `dt=.001,.0005,.00025`. Pool two independent `12000`-path runs.
-
-Paired differences:
+## Step 46
+Nested common-path meshes `dt=.001,.0005,.00025`, pooled `24000` paths:
 
 ```text
 fine(.00025)-coarse(.001)  = +.00053010 alpha +/- .00025069
 fine(.00025)-medium(.0005) = +.00015785 alpha +/- .00015069
 ```
 
-For `.001 -> .00025`, exactly five fine-grid successful long components were missed on the coarse grid. Their total mean contribution is `.00052149 alpha`. On paths where both meshes detect the same long success, the duration-weight change contributes only `(8.61 +/- 4.13)e-6 alpha`.
+For `.001 -> .00025`, five fine-grid successful long components missed by the coarse grid contribute `.00052149 alpha`; duration-only weight change contributes only `(8.61 +/- 4.13)e-6 alpha`. **REFINEMENT:** missed between-sample threshold maxima dominate.
 
-**REFINEMENT:** missed between-sample final-threshold maxima dominate the continuum bias; linearly interpolated long-component duration is negligible at this scale.
-
-The hard-window rough endpoint has
+The rough cusp `R(h)=1-a_X|h|+O(h^2)`, `a_X~6.19142e-5`, gives local Brownian variance rate `2a_X`. Classical Brownian extreme discretization predicts
 
 ```math
-R(h)=1-a_X|h|+O(h^2),
-\qquad a_X\simeq6.19142e-5,
+Delta M_dt ~ beta sqrt(2a_Xdt),
+qquad beta=-zeta(1/2)/sqrt(2pi)~.582597.
 ```
 
-so local increment variance is `2a_X|h|`. Classical Brownian extreme-value discretization has `sqrt(dt)` error with mean continuity-correction constant
+With the measured high-level cluster hazard, Step 46 predicts `.001` continuum correction `~1.025e-3 alpha` and `.001 -> .00025` shift `~5.125e-4 alpha`, matching paired `(5.301 +/- 2.507)e-4 alpha`. **ASYMPTOTIC / NUMERICAL VALIDATION.** The finite-dt one-sided problem remained open.
+
+## Step 47 — 19:12 EDT — exact alpha=1 discrete Pickands correction
+For the canonical rough Pickands tangent
 
 ```math
-beta=-zeta(1/2)/sqrt(2pi)~.582597.
+W(s)=sqrt(2)B(s)-|s|,
 ```
 
-Thus the leading maximum amplitude correction is
+a physical timing step maps to canonical spacing
 
 ```math
-Delta M_dt ~ beta sqrt(2a_Xdt).
+\delta=a_Xu^2dt.
 ```
 
-Combining with Step-36 cluster hazard `h_a(u)~5 alpha` per threshold unit gives
+The continuous constant is `H_1^0=1`. Gaussian random-walk factorization of the discrete Pickands representation gives
 
 ```math
-Delta p_dt/alpha ~ 5 beta sqrt(2a_Xdt).
+\boxed{
+H_1^\delta
+=\frac1\delta
+\exp\left[-2\sum_{n>=1}\frac1n
+\Phi\left(-\sqrt{n\delta/2}\right)\right]
+=\nu(\sqrt{2\delta}).
+}
 ```
 
-Numerically:
+At `X=7.16`, `u~4.95898348`, `a_X~6.1914157e-5`:
 
 ```text
-dt=.00100   continuum correction ~1.025e-3 alpha
-dt=.00050   continuum correction ~7.248e-4 alpha
-dt=.00025   continuum correction ~5.125e-4 alpha
+dt         H_1^delta          loss
+.00100     .998983867710      1.016132290e-3
+.00050     .999281378993      7.186210075e-4
+.00025     .999491804717      5.081952830e-4
 ```
 
-Predicted `.001 -> .00025` shift is `5.125e-4 alpha`, versus paired observed `(5.301 +/- 2.507)e-4 alpha`; the coefficient was not fit to the paired data. **ASYMPTOTIC / NUMERICAL VALIDATION.**
+Exact canonical `.001 -> .00025` loss difference is `5.07937007e-4`, versus the Step-46 paired `(5.3010 +/- 2.5069)e-4 alpha`.
 
-At `X=7.16`, the leading `.001` continuum correction is about 24 times the Step-44 certified finite-grid margin. Requiring that leading correction alone to fit the tiny Step-44 margin would need `dt~1.7e-6`, so brute-force refinement is unattractive.
+**EXACT CANONICAL FINITE-GRID CORRECTION / REFINEMENT:** finite grid spacing is explicit inside the pure `alpha=1` Brownian tangent; Step 46's first-order `sqrt(dt)` law was already extremely accurate because the canonical spacing is tiny.
 
-**QUALIFICATION:** the Brownian continuity correction is asymptotic and is not yet a one-sided finite-`dt` theorem for the present Gaussian timing process.
+**NEGATIVE RESULT:** this does not give the exact finite-u physical grid/continuum ratio at `u~4.96`. The actual local extremal field retains the mixed Brownian-parabola structure of Steps 24–30, and finite-u cluster intensity is not equal to its leading tangent value.
 
-Full derivation: `ROUGH_GRID_DISCRETIZATION_SCALING_STEP.md`.  
-Helper: `numerics/rough_grid_discretization_scaling.py`.
+Full derivation: `EXACT_ALPHA1_DISCRETE_PICKANDS_STEP.md`.  
+Helper: `numerics/discrete_pickands_alpha1_correction.py`.
 
 ---
 
 ## Current stopping point
-The old `.002 alpha` grid allowance is now physically explained rather than opaque. The dominant missed-maximum bias follows the expected rough `sqrt(dt)` law and is about `.001 alpha` at the Step-44 mesh; duration interpolation is negligible. The next task is to promote the Brownian/Bessel extreme-value discretization asymptotic into a sharp one-sided finite-`dt` upper envelope for this covariance family.
+The finite-grid Brownian correction itself is no longer the theorem gap. The remaining task is to control **finite-threshold transfer** from the actual mixed Gaussian extreme problem to the exact pure-`alpha=1` discrete-Pickands ratio
+
+```math
+H_1^{a_Xu^2dt}=nu(u sqrt(2a_Xdt)).
+```
 
 ### Single natural next question
-> Can the Brownian/Bessel extreme-value discretization limit be converted into an explicit one-sided finite-`dt` upper envelope for the detector timing process, sharp enough to certify the `~1e-3 alpha` continuum correction rather than merely estimate it asymptotically?
+> Can the mixed Brownian-parabola tangent from Steps 24–30 be compared monotonically with the pure `alpha=1` Pickands tangent strongly enough to bound the finite-u grid/continuum ratio around the exact value `H_1^{a_Xu^2dt}`?
