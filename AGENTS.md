@@ -2,16 +2,16 @@
 
 **Repository:** `Kajin-0/gedanken_3`  
 **Active experiment:** `experiments/01-equal-dstar-different-speed/`  
-**Current mode:** first-principles photodetector thought experiment. Thirty-two logical steps completed. Step 32 derives a direct finite-`u` false-alarm enclosure from first- and second-order Rice moments. For the original `r=2`, `Lambda=0.895` task, this independently certifies fast preference through at least `kappa_f=170` in the tested sequence without the empirical Step-31 finite-threshold bridge. The ordinary second-moment enclosure then loses sharpness as the slow channel develops clustered micro-upcrossings; the next frontier is an excursion-cluster or occupation-time moment variable that survives the rough limit. No universal scalar replacement metric and no novelty claim.
+**Current mode:** first-principles photodetector thought experiment. Thirty-three logical steps completed. Step 33 replaces raw level-upcrossing multiplicity by a finite-amplitude excursion-cluster count whose event is exactly the false-alarm event. The first two cluster moments have an exact lower-level occupation-Palm representation and remain sharp at representative finite high bandwidths and directly at the rough endpoint. For the original `r=2`, `Lambda=0.895` task, cluster calculations separate fast and slow at `kappa_f=300`, `1000`, and `infinity`. The remaining frontier is continuous-interval numerical/statistical certification from the Step-32 bound near `kappa_f~170` to the endpoint. No universal scalar replacement metric and no novelty claim.
 
 Read first:
 
 1. `experiments/01-equal-dstar-different-speed/CURRENT_STATE.md`
 2. `experiments/01-equal-dstar-different-speed/PROGRESS_LOG.md`
 3. dedicated step files in chronological order
-4. latest: `experiments/01-equal-dstar-different-speed/FINITE_U_RICE_MOMENT_ENCLOSURE_STEP.md`
-5. latest numerical helper: `experiments/01-equal-dstar-different-speed/numerics/finite_u_rice_moment_enclosure.py`
-6. preceding bridge step: `experiments/01-equal-dstar-different-speed/UNIVERSAL_BRIDGE_BOUNDARY_CLOSURE_STEP.md`
+4. latest: `experiments/01-equal-dstar-different-speed/EXCURSION_CLUSTER_MOMENT_ENCLOSURE_STEP.md`
+5. latest numerical helper: `experiments/01-equal-dstar-different-speed/numerics/excursion_cluster_moment_enclosure.py`
+6. preceding finite-`u` enclosure: `experiments/01-equal-dstar-different-speed/FINITE_U_RICE_MOMENT_ENCLOSURE_STEP.md`
 
 The repository follows the physics rather than a predetermined criticism of `D*`. Preserve assumptions, cancellations, counterexamples, negative results, rejected shortcuts, failed numerical estimates, numerical validations, invalidations, asymptotic limits, refinements, and unresolved branches.
 
@@ -50,7 +50,8 @@ Use where useful:
 - **NUMERICAL COLLAPSE** — independent data collapse under a derived scaling variable.
 - **NUMERICAL ASYMPTOTIC** — numerically stable limiting law not yet fully proved.
 - **NUMERICAL CLOSURE** — multiple independent numerical/asymptotic pieces exclude a candidate behavior for the stated calibration, without constituting a theorem.
-- **PARTIAL CERTIFICATE** — an analytic inequality directly settles the stated comparison on a finite tested parameter range; numerical evaluation may still use non-interval floating-point quadrature.
+- **PARTIAL CERTIFICATE** — an analytic inequality settles the stated comparison on a tested parameter range; numerical evaluation may still be non-interval floating point or Monte Carlo.
+- **NUMERICAL ENDPOINT CERTIFICATE** — exact inequality plus statistically resolved endpoint moment estimates; not formal interval arithmetic.
 - **INVALIDATED** — previously reported result fails stronger calculation.
 - **INVALIDATED INTERMEDIATE** — provisional same-turn value shown wrong; preserve why.
 - **INVALIDATED NUMERICAL INTERPRETATION** — generated values remain data but stronger analysis shows they were not estimates of the quantity previously assigned to them.
@@ -64,32 +65,23 @@ Do not use `novel`, `universal`, `fundamental`, `first`, etc. without a separate
 
 ## 3. Compact surviving chain
 
-### Steps 01–12
-Equal scalar reference `D*` does not determine arbitrary temporal-signal performance. Complete magnitude `D*(f)` is sufficient only for the restricted known-waveform/full-observation problem. Finite observation can make temporal phase/placement operationally relevant. Finite-record SNR and task-level detection time are derived consistently. Faster SNR acquisition can be offset by unknown-time search burden.
+### Steps 01–13
+Equal scalar reference `D*` does not determine arbitrary temporal-signal performance. Complete magnitude `D*(f)` is sufficient only for the restricted known-waveform/full-observation problem; finite observation can make phase/temporal placement operationally relevant. Finite-record SNR and task-level detection time were derived. Faster SNR accumulation can be offset by unknown-time search burden.
 
 **REJECTED SHORTCUT:** finite-window SNR cannot be mixed directly with full-template timing bandwidth.  
-**NEGATIVE RESULT:** no finite interior integration-duration optimum in the original scaled family.
+**NEGATIVE RESULT:** no finite interior integration-duration optimum in the original scaled family.  
+**FAILED NUMERICAL ESTIMATE:** Step-13 rough-grid `ell~49` crossover invalid.
 
-### Step 13
-Finite hard-window ideal-white-noise scan is locally Brownian-like. **FAILED NUMERICAL ESTIMATE:** rough-grid `ell~49` crossover invalid.
+### Steps 14–23
+A genuine timing-information bandwidth removes the hard-window cusp. Exact smooth Palm rare-event identity is available; Rice is nonuniform as bandwidth grows. With common physical bandwidth, fixed physical signal/noise produces a genuine finite large-`r` optimum; Palm later confirms a shallow optimum.
 
-### Steps 14–17
-A genuine finite timing-information bandwidth removes the cusp. Exact smooth Palm rare-event identity available; Rice/EC is an upper bound. Finite hard windows make Rice nonuniform as bandwidth grows.
-
-### Steps 18–19
-Common physical bandwidth with artificially fixed accessible SNR gives no finite bandwidth optimum. Holding physical signal/noise fixed produces a genuine finite large-`r` optimum; Palm later confirms a shallow optimum survives beyond Rice.
-
-### Steps 20–21
-At finite `r=2`, `Lambda=0.895`, converged Rice produced apparent switches at `25.4898402` and `130.1945883`. Palm preserves only the lower switch `kappa_cross~21.7 +/-0.3`. The upper Rice switch is **INVALIDATED**. Palm checks at `130,160,300` keep fast preferred.
-
-### Steps 22–23
-Palm maps the finite-`r` boundary to about `Lambda~0.91` at moderate/high finite bandwidth. Direct occupation-time sampling gives rough endpoint `Lambda_cross^infinity~0.905 +/-0.004`; `Lambda=0.895` remains fast-preferred.
+At finite `r=2`, `Lambda=0.895`, converged Rice produced apparent switches at `25.4898402` and `130.1945883`; Palm preserves only the lower switch `~21.7 +/-0.3`. **INVALIDATED:** upper Rice switch. Palm maps the high-band boundary near `Lambda~0.91`. Direct occupation sampling gives rough endpoint `Lambda_cross^infinity~0.905 +/-0.004`; `Lambda=0.895` stays fast-preferred.
 
 ### Steps 24–28
-Finite bandwidth adds `zeta=kappa/(sqrt(2)u sqrt(b))`; generalized Pickands/Dieker–Yakir structure is two-parameter. Brown–Resnick Slepian comparison proves local monotonicity. Common-white-noise coupling yields the correct rough/smoothed path scale and correct RMS coefficient `0.8906480701 sqrt(chi/zeta)`; **INVALIDATED INTERMEDIATE:** `0.8131`. Brownian-extremum/two-sided-BES(3) zoom-in identifies a positive Gaussian-mollifier `zeta^-1/2` correction under stable-convergence/localization/UI.
+Finite bandwidth adds `zeta=kappa/(sqrt(2)u sqrt(b))`; generalized Pickands structure is two-parameter. Brown–Resnick Slepian comparison proves local monotonicity but not physical-boundary monotonicity. Common-white-noise coupling gives the correct rough/smoothed path scale. **INVALIDATED INTERMEDIATE:** `0.8131`; correct RMS coefficient is `0.8906480701 sqrt(chi/zeta)`. Two-sided-BES(3) Brownian-extremum zoom-in identifies a positive Gaussian-mollifier `zeta^-1/2` correction under stable-convergence/localization/UI.
 
 ### Steps 29–30
-Small `chi` introduces Brownian–parabola width/height `h_chi=sqrt(2)chi^(1/3)`, `m_chi=2chi^(2/3)` and crossover `mu=sqrt(2)zeta chi^(1/3)`. The difficult fast channel reduces to the canonical function
+Small `chi` introduces Brownian–parabola scales `h_chi=sqrt(2)chi^(1/3)`, `m_chi=2chi^(2/3)` and crossover `mu=sqrt(2)zeta chi^(1/3)`. The difficult fast channel reduces to
 
 ```math
 F(mu)=\frac{2}{\sqrt\pi}E[M_inf-M_mu].
@@ -98,22 +90,22 @@ F(mu)=\frac{2}{\sqrt\pi}E[M_inf-M_mu].
 Continuum-extrapolated canonical/full-field calculations agree at percent level. **INVALIDATED NUMERICAL INTERPRETATION:** raw Step-27 tiny-`chi` fast values were biased low by rough-maximum grid under-resolution. Fast asymptotic `C_H` refines to about `0.0088`.
 
 ### Step 31
-Insert `F(mu)` into the coupled tangent boundary and anchor residual finite-`u` offset to Palm/occupation results. The central bridge peaks near `kappa_f~94.9`, `Lambda~0.91068`, then decreases toward `Lambda_infinity~0.90513`. **NUMERICAL CLOSURE:** original `Lambda=0.895` task has no numerically supported bounded high-band re-entrant pocket. **CONDITIONAL:** the finite-`u` offset law remains empirical.
+Insert `F(mu)` into the coupled tangent boundary and anchor residual finite-`u` offset to Palm/occupation results. Central bridge peaks near `kappa_f~94.9`, `Lambda~0.91068`, then decreases toward `Lambda_infinity~0.90513`. **NUMERICAL CLOSURE:** original `Lambda=0.895` task has no numerically supported bounded high-band re-entrant pocket. **CONDITIONAL:** finite-`u` offset law remains empirical.
 
-### Step 32 — current frontier
-For a smooth finite-band scan define
+### Step 32
+For a smooth finite-band scan,
 
 ```math
-X_u=1_{\{z(0)\le u\}}N_u^+.
+X_u=1_{\{z(0)\le u\}}N_u^+,
 ```
 
-Then exactly
+and exactly
 
 ```math
 P_FA=Q(u)+P(X_u\ge1).
 ```
 
-With `m1=E[X_u]`, `lambda=E[N_u^+]`, and `lambda2=E[N_u^+(N_u^+-1)]`, Cauchy–Schwarz gives
+First-/second-order Rice moments give
 
 ```math
 \boxed{
@@ -123,26 +115,78 @@ Q(u)+\frac{m_1^2}{\lambda+\lambda_2}
 }
 ```
 
-The required moments are deterministic first-/second-order Rice integrals of the finite-band covariance. At `Lambda=0.895`, common physical time `X=7.04`:
+At `Lambda=0.895`, `X=7.04`, the fast upper is below `alpha` and slow lower above `alpha` through at least `kappa_f=170`. **PARTIAL CERTIFICATE.** Around `175–200`, the bound loses sharpness because slow-channel `lambda2` grows from micro-upcrossing clusters. **NEGATIVE RESULT:** raw crossing multiplicity is the wrong rough-tail variable.
 
-```text
-kappa_f   fast upper/alpha   slow lower/alpha
-100           0.99737             1.04649
-130           0.99861             1.02562
-160           0.99961             1.00950
-170           0.99990             1.00491
-175           1.00004             1.00275
+### Step 33 — current frontier
+Choose `Delta>0`, set
+
+```math
+\boxed{a=u-\Delta,}
 ```
 
-**PARTIAL CERTIFICATE:** through at least `kappa_f=170` in the tested sequence, fast is guaranteed feasible while slow is guaranteed infeasible at the same physical time, so fast preference is established without Step-31's empirical bridge.
+and decompose `{t:z(t)>a}` into connected components. Count only components whose maximum exceeds `u`; call this `C_Delta`.
 
-**NEGATIVE RESULT:** around `kappa_f~175–200` the second-moment enclosure loses sharpness because slow-channel `lambda2` grows rapidly from micro-upcrossing clusters. This is not evidence of a preference reversal; it identifies raw crossing multiplicity as the wrong high-band variable.
+Pathwise,
+
+```math
+\boxed{\sup z>u\iff C_\Delta\ge1.}
+```
+
+For fixed finite amplitude gap, `C_Delta` remains finite on continuous compact paths even as raw level-`u` crossings proliferate.
+
+Moment enclosure:
+
+```math
+\boxed{
+\frac{E[C_\Delta]^2}{E[C_\Delta^2]}
+\le P_FA
+\le E[C_\Delta].
+}
+```
+
+Under the lower-level occupation-Palm law `Q_a`, with selected-component duration `L`, success indicator `S`, and total successful count `C_Delta`, exact identities are
+
+```math
+\boxed{
+E[C_\Delta]=\ell Q(a)E_{Q_a}[S/L],
+}
+```
+
+```math
+\boxed{
+E[C_\Delta^2]=\ell Q(a)E_{Q_a}[S C_\Delta/L].
+}
+```
+
+No derivative/upcrossing count appears.
+
+For the original task at `X=7.16`, `Delta=0.15`:
+
+```text
+kappa_f    detector    lower/alpha    upper/alpha
+300        fast          0.98604        0.98624
+300        slow          1.19896        1.19990
+1000       fast          0.98417        0.98423
+1000       slow          1.21537        1.21725
+```
+
+Direct rough endpoint (`50000` paths, grid `~0.001`):
+
+```text
+             lower/alpha    upper/alpha    SE[E(C)]/alpha
+fast           0.98940        0.98968          0.00429
+slow           1.22367        1.22583          0.00474
+```
+
+**NUMERICAL ENDPOINT CERTIFICATE / CLUSTER-RENORMALIZED ENCLOSURE:** the cluster bounds remain sharp at `kappa=infinity` and separate fast/slow at the same physical time. The divergence seen in Step 32 belongs to the micro-upcrossing count, not the physical excursion event.
+
+**OPEN:** exact inequalities are analytic; displayed moments are finite-grid Monte Carlo estimates. The continuous interval `~170 < kappa_f < infinity` is not yet formally/statistically covered pointwise.
 
 ---
 
 ## 4. Current frontier
 
-Replace raw upcrossing count by an excursion-cluster or occupation-time variable whose moments remain finite and informative as the smooth finite-band process approaches the rough endpoint.
+Evaluate the excursion-cluster enclosure on an adaptive bandwidth grid, tune `Delta` for numerical efficiency, and control Monte Carlo/grid error strongly enough to close the entire interval from the Step-32 certificate to the rough endpoint.
 
 ---
 
@@ -158,8 +202,9 @@ Do not claim:
 - Step-20 double reversal is exact;
 - raw Step-27 fast values are continuum crossover data;
 - Step-31 empirical `delta(kappa)` is exact;
-- Step-32 second-moment crossing enclosure remains sharp in the rough limit;
-- Step-32 floating-point quadrature is formal interval arithmetic;
+- Step-32 raw crossing moments stay sharp in the rough limit;
+- Step-33 Monte Carlo moments are formal interval arithmetic;
+- the continuous `170<kappa_f<infinity` interval is certified yet;
 - no re-entrant pocket can occur for other task parameters;
 - Palm bandwidth optimum is unique or exactly located;
 - any GHz translation is a hardware recommendation;
@@ -169,4 +214,4 @@ Do not claim:
 
 ## 6. Single next question — DO NOT ANSWER UNTIL PROMPTED
 
-> Can an excursion-cluster or occupation-time variable provide a finite-`u` upper/lower enclosure that remains sharp as micro-upcrossing multiplicity diverges, thereby extending the Step-32 direct certificate continuously into the rough endpoint?
+> Can the excursion-cluster enclosure be evaluated on an adaptive bandwidth grid with controlled Monte Carlo/grid error and optimized `Delta`, so that the entire interval from `kappa_f~170` to the rough endpoint is closed without the empirical Step-31 boundary fit?
