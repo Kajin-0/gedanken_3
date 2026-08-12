@@ -1,6 +1,6 @@
 # Progress Log — Experiment 01
 
-**Consolidation note — 2026-08-11 23:04 EDT:** compact chronology preserving consequential derivations, corrections, invalidations, rejected shortcuts, numerical validations, asymptotic qualifications, and the current stopping point. Full derivations remain in dedicated step files.
+**Consolidation note — 2026-08-12 00:38 EDT:** compact chronology preserving consequential derivations, corrections, invalidations, rejected shortcuts, numerical validations, asymptotic qualifications, and the current stopping point. Full derivations remain in dedicated step files.
 
 ---
 
@@ -91,94 +91,105 @@ p_q(u_q+delta)-eta <= p(r) <= p_q(u_q-delta)+eta.
 Full derivation: `Q_COUPLING_CONTINUITY_OBSTRUCTION_STEP.md`.  
 Calculator: `numerics/q_coupling_continuity.py`.
 
-## Step 36 — 23:04 EDT — fixed-cluster maximum strip bound
-Freeze a lower level `a` and let `M_j` be maxima of the connected components of `{z>a}`. Define
+## Step 36
+Freeze a lower level `a`; let `M_j` be maxima of the connected components of `{z>a}` and define
 
 ```math
-C_a(y)=sum_j1_{M_j>y},
+C_a(y)=sum_j1_{M_j>y}.
 ```
 
-and for `a<y1<y2`,
+For `a<y1<y2`,
 
 ```math
 D_a(y1,y2)=C_a(y1)-C_a(y2)
 =sum_j1_{y1<M_j<=y2}.
 ```
 
-Then pathwise
-
-```math
-{y1<sup z<=y2} subset {D_a>=1},
-```
-
-so
-
-```math
-\boxed{
-P(y1<sup z<=y2)<=E[D_a(y1,y2)].
-}
-```
-
-Under the Step-33 lower-level occupation-Palm law,
-
-```math
-\boxed{
-E[D_a(y1,y2)]
-=ell Q(a)E_a[1_{y1<M_I<=y2}/L].
-}
-```
-
-Define the cluster-maximum intensity measure
-
-```math
-nu_a(B)=ell Q(a)E_a[1_{M_I in B}/L].
-```
-
 Then
 
 ```math
-P(y1<sup z<=y2)<=nu_a((y1,y2]).
+P(y1<sup z<=y2)<=E[D_a(y1,y2)].
 ```
 
-This is exact, finite-threshold, derivative-free, and valid at the rough endpoint.
-
-For the original fast high-band trajectory (`x=7.16`, `ell=0.895`, `Delta=0.15`, `u~4.959`), `12000`-path diagnostics at half-widths `w=.005,.01,.02` give
-
-```text
-kappa_f   nu((u-w,u+w])/(2w alpha)
-170                ~4.95–5.16
-300                ~5.03–5.17
-1000               ~5.17–5.54
-infinity           ~5.19–5.53
-```
-
-An independent `20000`-path rough-endpoint check gives the same `~5.1–5.5` scale.
-
-**NUMERICAL VALIDATION:** local cluster-max strip intensity is about
+Under lower-level occupation-Palm,
 
 ```math
-h_a(u)~5 alpha
+E[D_a(y1,y2)]
+=ell Q(a)E_a[1_{y1<M_I<=y2}/L].
 ```
 
-per unit threshold. Thus numerically
-
-```math
-nu_a((u-delta,u+delta])~10 delta alpha.
-```
-
-A linear extrapolation to `delta=1e-4` gives order `1e-9` absolute probability, versus the useless `O(1e-4)` global anti-concentration scale from Step 35.
-
-**QUALIFICATION:** exact strip inequality/occupation identity are analytic; the local density value and `delta=1e-4` extrapolation are numerical. No uniform density/hazard theorem yet.
+Thus the cluster-maximum measure `nu_a` gives an exact finite-threshold strip envelope that survives the rough endpoint. For the fast high-band trajectory near `u~4.959`, numerical strip intensity is `~5 alpha` per unit threshold across `kappa_f=170,300,1000,infinity`, giving observed `~10 delta alpha` symmetric-buffer scaling. **TAIL-SENSITIVE ENVELOPE / NUMERICAL VALIDATION.**
 
 Full derivation: `TAIL_SENSITIVE_CLUSTER_STRIP_CONTINUITY_STEP.md`.  
 Calculator: `numerics/cluster_maximum_strip.py`.
+
+## Step 37 — 00:38 EDT — high-threshold cluster overshoot hazard
+For fixed Gaussian local covariance class
+
+```math
+R(t)=1-c|t|^gamma+o(|t|^gamma),
+0<gamma<=2,
+```
+
+Pickands' tail law is
+
+```math
+P(sup z>u)
+~ell c^(1/gamma)H_gamma u^(2/gamma)Q(u).
+```
+
+Assuming asymptotically negligible multiple successful finite-amplitude clusters, `N_a(u)=E[C_a(u)]` has the same leading tail. Rather than differentiating an uncontrolled `o(1)` remainder, shift the threshold by `s/u`. Gaussian tail ratios then give the rigorous fixed-class overshoot relation
+
+```math
+\boxed{
+N_a(u+s/u)/N_a(u)->exp(-s)
+}
+```
+
+for fixed `s>=0`, hence
+
+```math
+\boxed{
+[N_a(u)-N_a(u+s/u)]/N_a(u)->1-exp(-s).
+}
+```
+
+Taking `s->0` after `u->infinity` yields the rare-event hazard scale
+
+```math
+h_a(u)~uN_a(u)
+```
+
+when a local density exists. The leading scale is the same for smooth `gamma=2` and rough `gamma=1` classes; this analytically explains the Step-36 `O(u delta alpha)` strip scale.
+
+At the physical `u~4.959`, pure endpoint leading models give finite hazard coefficients around `4.96` (smooth) and `4.74` (rough), while Step-36 diagnostics are `~5.0–5.5`. **REFINEMENT / REJECTED SHORTCUT:** the discrepancy is consistent with the previously established finite-band/Brownian-parabola crossover; fixed-class `gamma=1` asymptotics are not quantitatively uniform through `q->0` at this threshold.
+
+The matched tangent intensity
+
+```math
+N_tan=ell[u sqrt(b)/sqrt(2)]H(chi,zeta)Q(u)
+```
+
+implies the formal crossover hazard
+
+```math
+h_tan/N_tan
+=phi/Q-1/u
+ -(chi/u)d_chi log H
+ +(zeta/u)d_zeta log H.
+```
+
+Thus the remaining uniform hazard theorem reduces to controlling the logarithmic elasticities of the two-parameter generalized Pickands constant along the detector trajectory. Step 25 gives monotonicity signs but not a strong enough upper bound on the positive `zeta` term.
+
+Full derivation: `CLUSTER_HAZARD_OVERSHOOT_STEP.md`.  
+Calculator: `numerics/cluster_hazard_overshoot.py`.
 
 ---
 
 ## Current stopping point
 
-The threshold-buffer part of Step 35 has been converted into a rare physical-excursion cluster-maximum measure with the correct observed `O(alpha delta)` scale. The remaining mathematical gap is an analytic uniform bound on the local cluster-max intensity.
+The `h~uN` rare-event scale is analytically explained for fixed Gaussian local classes. The remaining gap is a uniform finite-crossover multiplier through the singular smooth/rough transition, naturally encoded by `H(chi,zeta)`.
 
 ### Single natural next question
 
-> Can the local cluster-maximum intensity `h_{a,q}(u)` be bounded analytically and uniformly over the high-band `q` interval—ideally by a rare-event hazard form such as `h_{a,q}(u) <= C u E[C_a(u)]`—so that the buffered-threshold term becomes theorem-level rather than numerically extrapolated?
+> Can variogram ordering and the Dieker–Yakir representation bound `chi d_chi log H` and `zeta d_zeta log H`, especially the positive `zeta` elasticity, strongly enough to produce an explicit uniform hazard multiplier along the detector-relevant high-band trajectory?
