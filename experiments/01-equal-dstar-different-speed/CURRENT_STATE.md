@@ -1,7 +1,7 @@
 # Current State — Experiment 01: Equal D*, Different Speed
 
-**Date:** 2026-08-11 20:40 EDT  
-**Status:** twenty-nine logical steps completed. Step 29 shows that the Step-28 Gaussian-mollifier/Bessel asymptotic is not quantitatively uniform in raw `zeta` when `chi` is small. The mixed rough/smooth endpoint has a Brownian-minus-parabola width `h_chi=sqrt(2) chi^(1/3)` and height `2 chi^(2/3)`, so the correct finite-band crossover coordinate is `mu=sqrt(2) zeta chi^(1/3)`. Step-27 paired data collapse strongly in these variables. For the `r=2` endpoint trajectory, the slow channel is already in the large-`mu` Bessel regime at the mapped high bandwidths, while the tiny-`chi` fast channel remains in crossover through `kappa_f=300`. This refines the numerical interpretation of Step 26 but does not invalidate its eventual fixed-`chi` sign. No finite certified onset bandwidth, universal replacement metric, or novelty claim.
+**Date:** 2026-08-11 20:57 EDT  
+**Status:** thirty logical steps completed. Step 30 derives a detector-independent small-`chi` Brownian-minus-parabola/Gaussian-mollifier crossover function `F(mu)=(2/sqrt(pi)) E[M_inf-M_mu]`. Continuum-extrapolated canonical simulations reproduce independently refined full fast-channel Dieker–Yakir gaps at the percent level. This exposes a numerical-resolution bias in the raw Step-27 tiny-`chi` fast points: the Brownian endpoint maximum was under-resolved on the shrinking `h_chi` scale. Step 29's `mu` scaling remains valid, but those raw fast values are not continuum crossover values. The universal bridge yields a refined fast asymptotic `C_H~0.0088` rather than the pre-asymptotic `~0.0061` used in Step 26, strengthening the eventual negative high-band boundary coefficient sign. No finite certified onset bandwidth, universal replacement metric, or novelty claim.
 
 ---
 
@@ -27,7 +27,7 @@ Does equal conventional specific detectivity imply equal ability to detect an ar
 
 ## 2. Surviving logical chain
 
-### Steps 01–04 — limits of scalar and magnitude-only `D*`
+### Steps 01–04 — scalar / magnitude-only `D*`
 Equal scalar reference `D*` does not guarantee equal arbitrary temporal-signal SNR; an explicit 1 Hz example gave `SNR_A/SNR_B~6.36`. Complete magnitude `D*(f)` is sufficient only for the restricted known-waveform/full-observation maximum-linear-SNR problem. **NEGATIVE RESULT:** unknown timing alone does not break that ideal stationary-Gaussian equivalence. Finite observation can because magnitude `D*(f)` discards temporal phase/placement.
 
 ### Steps 05–12 — finite records and task-level timing search
@@ -70,13 +70,7 @@ so Rice accuracy is nonuniform as `kappa -> infinity`.
 Use `kappa_i=Omega_B tau_i`. Artificially forcing accessible eventual SNR equal gives electronics- and detector-limited regimes but **no** finite bandwidth optimum. Holding physical signal/noise fixed restores bandwidth-dependent SNR. For the full template, SNR loss is `O(kappa^-2)` while search simplification is `O(kappa^-1)`, giving a finite large-`r` optimum. Later Palm work confirms a shallow finite optimum survives beyond Rice.
 
 ### Steps 20–21 — finite-`r` Rice double reversal corrected by Palm
-For
-
-```text
-r=2, rho_full=6.2407571, alpha=1e-6, beta=0.90, Lambda=0.895
-```
-
-converged Rice gave apparent switches `25.4898402` and `130.1945883`. Palm correction preserves only the lower switch:
+For `r=2`, `rho_full=6.2407571`, `alpha=1e-6`, `beta=0.90`, `Lambda=0.895`, converged Rice gave apparent switches `25.4898402` and `130.1945883`. Palm correction preserves only the lower switch:
 
 ```math
 \kappa_{\times,1}^{Palm}\approx21.7\pm0.3.
@@ -84,7 +78,7 @@ converged Rice gave apparent switches `25.4898402` and `130.1945883`. Palm corre
 
 The upper Rice switch is **INVALIDATED**. Direct Palm checks at `kappa_f=130,160,300` keep fast preferred for `Lambda=0.895`.
 
-### Step 22 — Palm boundary map and Palm bandwidth optimum
+### Step 22 — Palm boundary map and Palm finite optimum
 Representative finite-`r` Palm boundary:
 
 ```text
@@ -160,13 +154,7 @@ For physical admissible timing intervals `A_f,A_s`, exact implicit differentiati
 Finite-hard-window SNR recovery is `O(kappa^-1)`. Paired Dieker–Yakir data indicated `H_mix-H ~ C_H/sqrt(zeta)`. Conditional on a positive coefficient, the `r=2` boundary approaches the rough endpoint from above with eventual negative slope.
 
 ### Step 27 — exact Gaussian-mollifier coupling scale
-Use one white-noise field for rough and smoothed endpoints. The kernel is
-
-```math
-K_\zeta(t)=\sqrt2\zeta/\sqrt\pi\;e^{-2\zeta^2t^2}.
-```
-
-Exact coupled residual variance has maximum `v_max=0.2804576359...`, giving
+Use one white-noise field for rough and smoothed endpoints. Exact coupled residual variance gives
 
 ```math
 \sup_t SD[W_\infty-W_\zeta]_{random}
@@ -176,28 +164,7 @@ Exact coupled residual variance has maximum `v_max=0.2804576359...`, giving
 **INVALIDATED INTERMEDIATE:** `0.8131` used the large-lag variance instead of the true maximum. A conservative fixed-window bound gives `0 <= H_mix-H <= C_chi sqrt(log zeta/zeta)`. Paired common-random-number calculations sharply resolve the positive correction but do not by themselves prove a positive lower coefficient.
 
 ### Step 28 — two-sided-Bessel Gaussian-mollifier correction
-Define
-
-```math
-\sigma_\chi=2^{3/4}\sqrt\chi.
-```
-
-Under the standard Brownian-extremum stable zoom-in/localization assumptions,
-
-```math
-\frac{M_\infty-W_\infty(\tau_*+\varepsilon s)}
-{\sigma_\chi\sqrt\varepsilon}
-\Longrightarrow R_*(s),
-\qquad \varepsilon=1/\zeta,
-```
-
-with `R_*` a two-sided BES(3)-type extremal field. Gaussian smoothing uses `K_1(s)=sqrt(2/pi) exp(-2s^2)`. The local mollifier loss
-
-```math
-\mathcal M_K(R)=\inf_u\int K_1(v)R(u-v)dv
-```
-
-is strictly positive almost surely. The integrated Dieker–Yakir denominator perturbation is lower order under the stationary high-pass coupling. Thus, under stable convergence and uniform integrability,
+Under standard Brownian-extremum stable zoom-in/localization/UI assumptions,
 
 ```math
 H_{mix}(\chi)-H(\chi,\zeta)
@@ -210,16 +177,10 @@ with
 C_H(\chi)=2^{3/4}\sqrt\chi\,E[\Psi(W_\infty)\mathcal M_K(R_*)]>0.
 ```
 
-**REJECTED SHORTCUT:** do not factor the weighted expectation without an independence theorem. A finite certified onset bandwidth still requires quantitative remainder control.
+The integrated Dieker–Yakir denominator perturbation is lower order. **REJECTED SHORTCUT:** do not factor the weighted expectation without an independence theorem. A finite certified onset bandwidth still requires quantitative remainder control.
 
-### Step 29 — Brownian–parabola double scaling and nonuniformity in `chi`
-The fixed-`chi` Step-28 expansion is singular as `chi -> 0`. Around the smooth quadratic maximum, balance
-
-```text
-sigma_chi sqrt(h)  ~  h^2
-```
-
-to obtain the natural Brownian–parabola scales
+### Step 29 — Brownian–parabola double scaling
+The fixed-`chi` Step-28 expansion is singular as `chi -> 0`. Around the smooth quadratic maximum,
 
 ```math
 \boxed{
@@ -227,53 +188,127 @@ h_\chi=\sqrt2\chi^{1/3},
 \qquad m_\chi=2\chi^{2/3}.}
 ```
 
-Gaussian smoothing of width `~1/zeta` is therefore controlled by
+Gaussian smoothing is controlled by
 
 ```math
 \boxed{
-\mu=\zeta h_\chi
-=\sqrt2\zeta\chi^{1/3}.}
+\mu=\zeta h_\chi=\sqrt2\zeta\chi^{1/3}.}
 ```
 
-In the joint small-`chi`/large-`zeta` limit with `mu` fixed, the natural crossover form is
+Natural joint scaling:
+
+```math
+H_{mix}(\chi)-H(\chi,\zeta)
+=\chi^{2/3}\mathcal F(\mu)+o(\chi^{2/3}),
+```
+
+with `F(mu)~A_K mu^-1/2` for large `mu`. At the `r=2` endpoint,
+
+```math
+\mu_f\approx0.009776\kappa_f,
+\qquad
+\mu_s\approx0.16139\kappa_f.
+```
+
+Thus the slow channel is already in the Bessel tail at mapped high bandwidths while the tiny-`chi` fast channel is still in crossover through `kappa_f=300`. **REFINEMENT:** Step-26 fast `C_H~0.006` is a crossover effective coefficient, not a clean fixed-`chi` endpoint coefficient.
+
+### Step 30 — universal Brownian–parabola crossover function
+On the Step-29 local coordinate,
+
+```math
+Y_\infty(s)=B(s)-s^2,
+```
+
+and finite smoothing filters the white derivative of `B` with amplitude transfer
+
+```math
+e^{-q^2/(8\mu^2)}.
+```
+
+Let
+
+```math
+M_\infty=\sup_s[B(s)-s^2],
+\qquad
+M_\mu=\sup_s[B_\mu(s)-s^2].
+```
+
+Because the pure quadratic Dieker–Yakir ratio is exactly `1/sqrt(pi)`, the small-`chi` crossover reduces to
 
 ```math
 \boxed{
-H_{mix}(\chi)-H(\chi,\zeta)
-=\chi^{2/3}\mathcal F(\mu)+o(\chi^{2/3}),
+\mathcal F(\mu)
+=\frac{2}{\sqrt\pi}E[M_\infty-M_\mu].
 }
 ```
 
-with large-`mu` behavior `F(mu)~A_K mu^-1/2`, which recovers Step 28.
-
-**NUMERICAL COLLAPSE:** converting the Step-27 paired data to `(mu, Delta H/chi^(2/3))` collapses the slow endpoint and `chi=0.1` cases closely; for `mu >= ~10`, `sqrt(mu) F_emp` is approximately constant near one. The tiny-`chi` fast data at `mu=1.37,2.74,5.49` remain visibly pre-asymptotic.
-
-At the `r=2` endpoint trajectory,
+This is detector-independent. Endpoint and tail:
 
 ```math
-\boxed{
-\mu_f\approx0.009776\,\kappa_f,
-\qquad
-\mu_s\approx0.16139\,\kappa_f.}
+F(0)=\frac{2}{\sqrt\pi}E[M_\infty]\approx0.892,
 ```
 
-Thus at `kappa_f=100,200,300`, `mu_f~0.98,1.96,2.93`, while `mu_s~16.1,32.3,48.4`. The slow channel is already in the large-`mu` Bessel tail; the fast channel is still in crossover. **REFINEMENT:** the Step-26 fast `C_H~0.006` value from `zeta<=80` is an effective crossover coefficient, not a clean asymptotic coefficient. This changes the coefficient interpretation, not the eventual fixed-`chi` sign.
+```math
+F(\mu)\sim A_K/\sqrt\mu,
+\qquad
+A_K=(2/\sqrt\pi)E[M_K]\approx0.98
+```
 
-See `BROWNIAN_PARABOLA_DOUBLE_SCALING_STEP.md` and `numerics/double_scaling_crossover.py`.
+using the Step-28 unweighted canonical BES diagnostic `E[M_K]~0.87`.
+
+Continuum-extrapolated canonical estimates:
+
+```text
+mu        F(mu)      sqrt(mu)F
+0         ~0.892      --
+0.5       ~0.806      ~0.570
+1         ~0.729      ~0.729
+2         ~0.597      ~0.844
+3         ~0.512      ~0.886
+5         ~0.410      ~0.917
+10        ~0.297      ~0.939
+20        ~0.213      ~0.955
+infinity   --         ~0.98
+```
+
+The rough endpoint maximum has `O(sqrt(ds))` discretization bias, so Step 30 uses nested grids and extrapolates linearly in `sqrt(ds)`.
+
+**NUMERICAL VALIDATION / CORRECTION:** refining the full fast-channel paired Dieker–Yakir calculation in the same way gives
+
+```text
+zeta    mu      F_full,extrap   F_canonical
+20      1.371       ~0.675         ~0.68
+40      2.743       ~0.531         ~0.53
+80      5.485       ~0.394         ~0.40
+```
+
+The original raw Step-27/29 fast values `~0.551,0.438,0.324` were biased low because the rough maximum was under-resolved on the shrinking `h_chi` scale. **INVALIDATED NUMERICAL INTERPRETATION:** do not use those raw fast values as continuum `F(mu)` points. Step 29's scaling variable remains valid.
+
+The universal bridge gives
+
+```math
+C_{H,eff}=2^{-1/4}\sqrt\chi\,\sqrt\mu F(\mu),
+```
+
+so for `chi_f~1.1395e-4`,
+
+```text
+C_H,fast(infinity) ~0.0088,
+```
+
+rather than the pre-asymptotic `~0.0061` used in Step 26. Holding the other Step-26 surrogate inputs fixed moves the illustrative `C_Lambda` from `~0.020` to `~0.032`; the sign remains positive and is strengthened, but this is still not a finite-`K` proof.
+
+See `UNIVERSAL_CROSSOVER_FUNCTION_STEP.md` and `numerics/universal_crossover_function.py`.
 
 ---
 
 ## 3. Current frontier
 
-The quantitative high-band problem is now better posed. A remainder theorem uniform in raw `zeta` is not the natural target for the small-`chi` fast channel. The next object is the one-dimensional Brownian-minus-parabola/Gaussian-mollifier crossover function
-
-```math
-\boxed{\mathcal F(\mu)}.
-```
+The difficult small-`chi` fast-channel finite-band correction is now separated from the full detector process through a reusable one-dimensional function `F(mu)` and validated against refined full-field calculations.
 
 ### Single next question — DO NOT ANSWER YET
 
-> Can `F(mu)` be computed directly from the universal Brownian-minus-parabola local process, without simulating the full detector field, and can it provide a one-dimensional envelope from the crossover regime through the Bessel tail strong enough to close the remaining high-band interval?
+> If the universal `F(mu)` bridge is inserted into the coupled finite-`r` boundary equation, does the corrected boundary remain monotone on the entire high-band interval from the existing Palm map into the rough endpoint, thereby eliminating the last plausible bounded re-entrant pocket without requiring full-process Monte Carlo at every bandwidth?
 
 ---
 
@@ -288,10 +323,11 @@ Do not claim:
 - Rice is uniformly accurate at high finite-window bandwidth;
 - Step-20 double reversal is exact;
 - monotonic `H(chi,zeta)` alone proves monotonic detector preference;
-- the Step-28 fixed-`chi` expansion is quantitatively uniform in `chi` at moderate `zeta`;
-- the Step-26 fast `C_H~0.006` value is the final asymptotic coefficient;
+- Step-28 is quantitatively uniform in `chi` at moderate `zeta`;
+- the raw Step-27 tiny-`chi` fast points are continuum crossover values;
+- Step-26 fast `C_H~0.0061` is the final asymptotic coefficient;
+- the universal crossover table is an exact analytic evaluation;
 - a finite certified onset bandwidth is known;
-- the invalidated `0.8131` coupling coefficient is valid;
 - no bounded pre-asymptotic pocket exists yet;
 - the Palm bandwidth optimum is unique or exactly located;
 - any GHz translation is a hardware recommendation;
