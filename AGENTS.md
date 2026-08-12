@@ -2,15 +2,15 @@
 
 **Repository:** `Kajin-0/gedanken_3`  
 **Active experiment:** `experiments/01-equal-dstar-different-speed/`  
-**Current mode:** first-principles photodetector thought experiment. Twenty-six logical steps completed. Step 26 expands the actual finite-r physical task boundary at high common bandwidth. Conditional on the numerically stable `H_mix(chi)-H(chi,zeta) ~ C_H(chi)/sqrt(zeta)` smoothing law, the `r=2` boundary approaches its direct rough endpoint from above with eventual negative slope. This rules out an asymptotic second reversal but does **not** yet rigorously exclude a bounded pre-asymptotic re-entrant pocket because the square-root smoothing law and uniform remainder are not proved for this field. No universal replacement metric and no novelty claim.
+**Current mode:** first-principles photodetector thought experiment. Twenty-seven logical steps completed. Step 27 derives the exact common-white-noise coupling scale between the finite-band Gaussian-smoothed tangent field and the rough Brownian endpoint. It proves an `O(sqrt(chi/zeta))` pointwise path perturbation, gives a conservative `O(sqrt(log zeta/zeta))` Pickands convergence envelope, and uses a paired Dieker–Yakir estimator to sharply validate a positive `1/sqrt(zeta)` correction along the actual fast/slow endpoint trajectories. The missing theorem is now specifically a positive Brownian-extremum continuity correction for Gaussian mollification; no exact finite onset bandwidth `K` is certified yet. No universal replacement metric and no novelty claim.
 
 Read first:
 
 1. `experiments/01-equal-dstar-different-speed/CURRENT_STATE.md`
 2. `experiments/01-equal-dstar-different-speed/PROGRESS_LOG.md`
 3. dedicated step files in chronological order
-4. latest: `experiments/01-equal-dstar-different-speed/HIGH_BAND_BOUNDARY_DERIVATIVE_STEP.md`
-5. latest numerical helper: `experiments/01-equal-dstar-different-speed/numerics/high_band_boundary_derivative.py`
+4. latest: `experiments/01-equal-dstar-different-speed/GAUSSIAN_MOLLIFIER_COUPLING_STEP.md`
+5. latest numerical helper: `experiments/01-equal-dstar-different-speed/numerics/gaussian_mollifier_coupling.py`
 
 The repository follows the physics rather than a predetermined criticism of `D*`. Preserve assumptions, cancellations, counterexamples, negative results, rejected shortcuts, failed numerical estimates, numerical validations, invalidations, asymptotic limits, refinements, and unresolved branches.
 
@@ -48,12 +48,13 @@ Use where useful:
 - **NUMERICAL VALIDATION** — survived stated cross-checks within scope.
 - **NUMERICAL COUNTEREXAMPLE** — converged numerical construction disproves broader implication within stated approximation/model.
 - **INVALIDATED** — previously reported result fails stronger calculation.
+- **INVALIDATED INTERMEDIATE** — same-turn or provisional value shown wrong before finalizing the step; preserve why.
 - **ASYMPTOTIC** — controlled limiting regime only.
 - **NUMERICAL ASYMPTOTIC** — numerically stable limiting law not yet proved.
 - **OPEN** — not established.
 - **NON-CLAIM** — deliberately not asserted.
 
-Do not use `novel`, `universal`, `fundamental`, `first`, etc. without separate prior-art audit.
+Do not use `novel`, `universal`, `fundamental`, `first`, etc. without a separate prior-art audit.
 
 ---
 
@@ -62,7 +63,13 @@ Do not use `novel`, `universal`, `fundamental`, `first`, etc. without separate p
 ### Steps 01–12
 Equal scalar reference `D*` does not determine arbitrary temporal-signal performance. Complete magnitude `D*(f)` is sufficient only for the restricted known-waveform/full-observation problem. Finite observation can make phase/temporal placement operationally relevant.
 
-Finite-record SNR is `rho_t^2=<s_t,C_t^-1s_t>` and task-level detection time is
+Finite-record SNR is
+
+```math
+\rho_t^2=\langle s_t,C_t^{-1}s_t\rangle.
+```
+
+Task-level detection time is
 
 ```math
 \mathcal T_D(\alpha,\beta,L)
@@ -95,7 +102,7 @@ With one physical bandwidth `kappa_i=Omega_B tau_i`, artificially forcing access
 Holding physical signal/noise fixed instead produces a genuine finite large-r bandwidth optimum. Later Palm work confirms a shallow optimum survives beyond Rice.
 
 ### Steps 20–21
-At finite `r=2`, `Lambda=0.895`, converged Rice produced apparent switches at `25.4898402` and `130.1945883`.
+At finite `r=2`, `Lambda=0.895`, converged Rice produced apparent switches `25.4898402` and `130.1945883`.
 
 Palm correction gives
 
@@ -149,15 +156,13 @@ Brown–Resnick Slepian comparison gives exact coordinatewise monotonicity:
 
 **REFINEMENT:** local extreme statistics cannot oscillate with bandwidth, but this alone does not prove the physical boundary monotone.
 
-### Step 26 — current frontier
-Let `A_f(X,kappa)` and `A_s(X,kappa)` be admissible physical timing uncertainty for the two channels. The common-time equality gives
+### Step 26
+The exact common-time physical boundary derivative is
 
 ```math
-\boxed{
 \frac{d\Lambda_\times}{d\kappa}
 =\frac{A_{f,X}A_{s,\kappa}-A_{s,X}A_{f,\kappa}}
 {A_{f,X}-A_{s,X}}.
-}
 ```
 
 For a finite hard window,
@@ -169,46 +174,93 @@ For a finite hard window,
 
 so SNR recovery is `O(kappa^-1)`.
 
-Dieker–Yakir data show
+Dieker–Yakir data support
 
 ```math
 H_{mix}(\chi)-H(\chi,\zeta)
 \approx C_H(\chi)\zeta^{-1/2},
 ```
 
-with an exceptionally stable sequence at `chi=0.1` and compatible behavior along the actual endpoint fast/slow `chi` values.
+with positive coefficient. Conditional on that law, the `r=2` physical boundary has an eventual negative slope and approaches the direct rough endpoint from above.
 
-**NUMERICAL ASYMPTOTIC / NOT YET A THEOREM:** conditional on a positive square-root smoothing coefficient,
-
-```math
-\Lambda_\times(\kappa_f)
-=\Lambda_\infty+C_\Lambda\kappa_f^{-1/2}+O(\kappa_f^{-1}).
-```
-
-For the `r=2` calibration the finite-u tangent surrogate gives `C_Lambda~+2e-2`, hence eventual
+### Step 27 — current frontier
+Construct the rough Brownian endpoint and finite-band smoothed endpoint on one white-noise field. The smoothing multiplier is
 
 ```math
-\boxed{d\Lambda_\times/d\kappa_f<0.}
+e^{-\omega^2/(8\zeta^2)}
 ```
 
-The high-band boundary therefore approaches the rough endpoint from above in the asymptotic tail.
+and the time-domain kernel is
 
-**REFINEMENT / CONDITIONAL:** any hypothetical additional slow-preferred pocket must be bounded and pre-asymptotic; it cannot persist or recur arbitrarily far into the tail.
+```math
+K_\zeta(t)=\sqrt2\zeta/\sqrt\pi\;e^{-2\zeta^2t^2}.
+```
 
-**OPEN:** prove the `zeta^-1/2` smoothing law and a uniform remainder, then certify a finite `kappa` beyond which the exact boundary derivative is negative.
+Exact deterministic gap:
+
+```math
+0\le|t|-F_\zeta(t)\le1/(\sqrt\pi\zeta).
+```
+
+Exact coupled random difference:
+
+```math
+\operatorname{Var}[B_\infty(t)-B_\zeta(t)]
+=\zeta^{-1}v(\zeta|t|).
+```
+
+The explicit profile has
+
+```text
+s_*   = 0.7016406021...
+v_max = 0.2804576359...
+```
+
+and therefore
+
+```math
+\boxed{
+\sup_t SD[W_\infty-W_\zeta]_{random}
+\le0.8906480701\sqrt{\chi/\zeta}.
+}
+```
+
+**INVALIDATED INTERMEDIATE:** `0.8131 sqrt(chi/zeta)` used the large-lag variance rather than the true variance supremum and must not be propagated.
+
+On fixed truncation intervals the coupling plus Gaussian maximal bounds gives
+
+```math
+0\le H_{mix}(\chi)-H(\chi,\zeta)
+\le C_\chi\sqrt{\log\zeta/\zeta}.
+```
+
+A paired common-random-number Dieker–Yakir estimator sharply resolves the small correction. Representative values of `sqrt(zeta)[H_mix-H]`:
+
+```text
+chi_fast~1.14e-4:  0.00579, 0.00651, 0.00681  at zeta=20,40,80
+chi_slow~0.0645:   0.2037,  0.2072,  0.2116   at zeta=20,40,80
+chi=0.1:           0.2757,  0.2760,  0.2783   at zeta=20,40,80
+```
+
+with paired Monte-Carlo errors much smaller than the differences themselves.
+
+**NUMERICAL VALIDATION / NUMERICAL ASYMPTOTIC:** the positive square-root correction is strongly supported and now has an exact Brownian path-amplitude origin.
+
+**NEGATIVE RESULT:** the coupling is an upper-scale argument and does not prove a positive lower asymptotic coefficient. Thus there is still no theorem-level finite `K` beyond which the exact detector boundary derivative is certified negative.
+
+Classical Brownian grid-discretization results rigorously establish `sqrt(delta)` extreme-value continuity corrections and a two-sided-Bessel zoom-in field around extrema, but Gaussian convolution is a different approximation and requires its own continuity-correction argument.
 
 ---
 
 ## 4. Current frontier
 
-Prove or rigorously bound the Gaussian-smoothed Brownian Pickands convergence
+Adapt the Brownian-extremum zoom-in / two-sided-Bessel machinery to **Gaussian mollification** of the Dieker–Yakir spectral field. The desired result is a positive kernel-specific limit
 
 ```math
-H_{mix}(\chi)-H(\chi,\zeta)
-\sim C_H(\chi)/\sqrt\zeta
+\sqrt\zeta[H_{mix}(\chi)-H(\chi,\zeta)]\to C_H(\chi)>0
 ```
 
-with sufficient uniform control in the relevant `chi` range to turn conditional eventual monotonicity into a certified exact-process statement.
+with a uniform remainder over the relevant fast/slow `chi` range. That would finally convert the conditional Step-26 eventual negative slope into a certified exact-process statement.
 
 ---
 
@@ -223,7 +275,8 @@ Do not claim:
 - Rice is uniformly accurate at high finite-window bandwidth;
 - Step-20 double reversal is an exact physical result;
 - monotonic `H(chi,zeta)` alone proves monotonic detector preference;
-- the square-root smoothing law is already proved for this field;
+- the positive Gaussian-mollifier `1/sqrt(zeta)` coefficient is already proved;
+- the invalidated `0.8131` coupling coefficient is valid;
 - no bounded pre-asymptotic pocket exists yet;
 - Palm bandwidth optimum is unique or exactly located;
 - any GHz translation is a hardware recommendation;
@@ -235,4 +288,4 @@ Unknown amplitudes/phases, signal-dependent noise, sequential stopping, nonlinea
 
 ## 6. Single next question — DO NOT ANSWER UNTIL PROMPTED
 
-> Can `H_mix(chi)-H(chi,zeta) ~ C_H(chi)/sqrt(zeta)` be derived or bounded rigorously for the Gaussian-smoothed Brownian endpoint field, with a uniform remainder strong enough to certify a finite `kappa` beyond which the exact detector boundary must be monotone decreasing?
+> Can the Brownian-extremum zoom-in / two-sided-Bessel theorem be adapted from grid discretization to Gaussian mollification of the Dieker–Yakir spectral field, yielding a positive kernel-specific continuity-correction constant `C_H(chi)` and finally converting the Step-26 eventual negative slope into a theorem with a finite certified onset bandwidth?
