@@ -1,161 +1,134 @@
 # Progress Log — Experiment 01
 
-**Consolidation note — 2026-08-11 20:57 EDT:** compact chronology preserving consequential results, corrections, rejected shortcuts, invalidations, numerical validations, asymptotic qualifications, and the current stopping point. Full derivations remain in dedicated step files.
+**Consolidation note — 2026-08-11 21:17 EDT:** compact chronology preserving consequential results, corrections, invalidations, rejected shortcuts, numerical validations, asymptotic qualifications, and current stopping point. Full derivations remain in dedicated step files.
 
 ---
 
-## Steps 01–04 — scalar `D*`, full-observation equivalence, finite-window phase
+## Steps 01–04
 Equal scalar reference `D*` does not determine arbitrary temporal-signal SNR; explicit 1 Hz counterexample gave `SNR_A/SNR_B~6.36`. Complete magnitude `D*(f)` is sufficient only for the restricted known-waveform/full-observation problem. **NEGATIVE RESULT:** unknown timing alone does not break that ideal equivalence. Finite windows can because magnitude `D*(f)` discards temporal phase/placement.
 
-## Steps 05–12 — finite records and task boundary
-Derived finite-record optimal SNR and task-level detection time. In the controlled `t exp(-t/tau)` family, faster SNR accumulation can be offset by unknown-time search burden. **REJECTED SHORTCUT:** finite-window SNR cannot be mixed directly with full-template timing bandwidth. **NEGATIVE RESULT:** no finite interior integration-duration optimum in the original scaled family.
+## Steps 05–12
+Derived finite-record optimal SNR and task-level detection time. Faster SNR accumulation can be offset by unknown-time search burden. **REJECTED SHORTCUT:** finite-window SNR cannot be mixed directly with full-template timing bandwidth. **NEGATIVE RESULT:** no finite interior integration-duration optimum in the original scaled family.
 
-## Step 13 — rough hard-window obstruction
-Finite hard-window ideal-white-noise scan has `R_x(y)=1-a_x|y|+...`. **FAILED NUMERICAL ESTIMATE:** rough-grid crossover near `ell~49` invalid.
+## Step 13
+Finite hard-window ideal-white-noise scan is locally Brownian-like. **FAILED NUMERICAL ESTIMATE:** rough-grid `ell~49` crossover invalid.
 
-## Steps 14–17 — finite timing bandwidth and Palm rare events
-A genuine information-band limitation removes the cusp. Exact smooth Palm identity is available; Rice/EC is an upper bound. For finite hard windows `sigma_kappa^2~a_x kappa/sqrt(pi)`, so Rice accuracy is nonuniform toward the rough limit.
+## Steps 14–17
+A genuine finite timing bandwidth removes the cusp. Exact smooth Palm identity available; Rice/EC is an upper bound. Finite hard windows have `sigma_kappa^2~a_x kappa/sqrt(pi)`, making Rice nonuniform toward the rough limit.
 
-## Steps 18–19 — common physical bandwidth and finite optimum
-With `kappa_i=Omega_B tau_i`, forcing accessible SNR equal gives no finite bandwidth optimum. Holding physical signal/noise fixed restores bandwidth-dependent SNR and produces a finite large-`r` optimum; later Palm work confirms a shallow optimum survives beyond Rice.
+## Steps 18–19
+With `kappa_i=Omega_B tau_i`, forcing accessible SNR equal gives no finite bandwidth optimum. Holding physical signal/noise fixed produces a finite large-`r` optimum; later Palm work confirms a shallow optimum survives beyond Rice.
 
-## Steps 20–21 — finite-`r` Rice double reversal corrected by Palm
-For `r=2`, `rho_full=6.2407571`, `alpha=1e-6`, `beta=0.90`, `Lambda=0.895`, converged Rice gave apparent switches `25.4898402` and `130.1945883`. Palm preserves only the lower switch:
+## Steps 20–21
+For `r=2`, `rho_full=6.2407571`, `alpha=1e-6`, `beta=0.90`, `Lambda=0.895`, Rice gave switches `25.4898402` and `130.1945883`. Palm preserves only the lower switch `kappa_cross~21.7 +/-0.3`. **INVALIDATED:** upper Rice switch. Palm checks at `130,160,300` keep fast preferred.
 
-```math
-\kappa_{\times,1}^{Palm}\approx21.7\pm0.3.
-```
+## Step 22
+Palm boundary rises to about `Lambda~0.91` at moderate/high finite bandwidth. High-band slow-preferred tasks survive above it. Large-`r` Palm optimum broad near `kappa~50–65`, about `0.3–0.4%` above infinity.
 
-**INVALIDATED:** upper Rice switch. Palm checks at `130,160,300` keep fast preferred for that slice.
+## Step 23
+Matched rough/smooth finite-window limit and exact occupation-time importance sampling. Direct rough endpoint: `Lambda_cross^infinity~0.905 +/-0.004`; `Lambda=0.895` remains fast-preferred.
 
-## Step 22 — Palm boundary map and finite optimum
-Boundary rises to about `Lambda~0.91` at moderate/high finite bandwidth; high-band slow-preferred tasks survive above it. Large-`r` Palm optimum is broad near `kappa~50–65`, only `~0.3–0.4%` above infinity.
+## Step 24
+Finite bandwidth adds `zeta=kappa/(sqrt(2)u sqrt(b))`. **REJECTED SHORTCUT:** `H_mix(chi)` alone is only the infinite-band endpoint.
 
-## Step 23 — matched infinite-band rough/smooth limit
-Derived finite-window cusp/quadratic local expansion and `chi_x=a_xu/sqrt(b_x)`. Exact occupation-time importance sampling handles `u~5`. Direct rough endpoint gives `Lambda_cross^infinity~0.905 +/-0.004`; `Lambda=0.895` remains fast-preferred.
+## Step 25
+Generalized Pickands constant has continuous Dieker–Yakir representation. Brown–Resnick Slepian comparison proves monotonicity in `chi` and `zeta`, but not monotonicity of the physical detector boundary.
 
-## Step 24 — finite-band tangent bridge
-Finite bandwidth adds `zeta=kappa/(sqrt(2)u sqrt(b))`. **REJECTED SHORTCUT:** `H_mix(chi)` alone is only the `zeta=infinity` endpoint.
+## Step 26
+Exact implicit physical boundary derivative derived. Finite-hard-window SNR recovery is `O(kappa^-1)`. Positive `H_mix-H~C_H/sqrt(zeta)` would force eventual negative boundary slope.
 
-## Step 25 — Dieker–Yakir representation and monotonicity
-Generalized Pickands constant has continuous Dieker–Yakir form. Brown–Resnick Slepian comparison proves `partial_zeta H>=0` and `partial_chi H>=0`. Local extreme statistics cannot oscillate with bandwidth, but that alone does not make the physical boundary monotone.
+## Step 27
+Common-white-noise coupling gives exact `O(sqrt(chi/zeta))` path-amplitude scale and conservative convergence bound. **INVALIDATED INTERMEDIATE:** `0.8131` coupling coefficient; correct pointwise RMS coefficient is `0.8906480701`. Coupling alone gives no positive lower coefficient.
 
-## Step 26 — physical high-band derivative
-Exact implicit boundary derivative derived. Finite-hard-window SNR recovery is `O(kappa^-1)`. Paired Dieker–Yakir data supported positive `H_mix-H~C_H/sqrt(zeta)`. Conditional on that law, the `r=2` boundary approaches the rough endpoint from above with eventual negative slope.
+## Step 28
+Two-sided-BES(3) Brownian-extremum zoom-in plus Gaussian mollification identifies a positive `zeta^-1/2` coefficient under stable convergence/localization/UI. Dieker–Yakir denominator is lower order. Quantitative finite-band remainder remains open.
 
-## Step 27 — exact Gaussian-mollifier coupling scale
-Common-white-noise coupling yields
+## Step 29
+Small `chi` is singular. Brownian–parabola scales `h_chi=sqrt(2)chi^(1/3)`, `m_chi=2chi^(2/3)` give crossover variable `mu=sqrt(2)zeta chi^(1/3)`. At the `r=2` endpoint, `mu_f~0.009776 kappa_f`, `mu_s~0.16139 kappa_f`; slow already in Bessel tail at `100–300`, fast still in crossover. **REFINEMENT:** Step-26 fast `C_H~0.0061` is pre-asymptotic.
 
-```math
-\sup_t SD[W_\infty-W_\zeta]_{random}
-\le0.8906480701\sqrt{\chi/\zeta}.
-```
-
-**INVALIDATED INTERMEDIATE:** `0.8131` used the large-lag variance instead of the true maximum. Conservative convergence envelope `0<=H_mix-H<=C_chi sqrt(log zeta/zeta)`. Paired simulations resolve positive square-root scaling but do not alone prove a positive lower coefficient.
-
-## Step 28 — Bessel zoom-in positive coefficient
-Under stable Brownian-extremum zoom-in/localization/UI,
+## Step 30
+Small-`chi` crossover reduces to canonical Brownian-minus-parabola maximum loss
 
 ```math
-H_mix(chi)-H(chi,zeta)
-=C_H(chi) zeta^-1/2+o(zeta^-1/2),
-```
-
-with positive kernel-specific `C_H`. The Dieker–Yakir denominator is lower order. **REJECTED SHORTCUT:** do not factor the weighted Bessel expectation without independence. Finite onset bandwidth still requires quantitative control.
-
-## Step 29 — Brownian–parabola double scaling
-Small `chi` introduces
-
-```math
-h_chi=sqrt(2) chi^(1/3),
-qquad
-m_chi=2 chi^(2/3),
-```
-
-so the correct crossover coordinate is
-
-```math
-mu=sqrt(2) zeta chi^(1/3).
-```
-
-Natural form `H_mix-H=chi^(2/3)F(mu)+...`, with `F(mu)~A_K/sqrt(mu)`. At the `r=2` endpoint,
-
-```math
-mu_f~0.009776 kappa_f,
-qquad
-mu_s~0.16139 kappa_f.
-```
-
-Slow is already in the Bessel tail at `kappa_f~100–300`; fast is still in crossover. **REFINEMENT:** Step-26 fast `C_H~0.0061` is a crossover effective coefficient, not final asymptotic.
-
-## Step 30 — 20:57 EDT — universal Brownian–parabola crossover function
-The small-`chi` crossover can be simulated without the detector field. Define
-
-```math
-Y_inf(s)=B(s)-s^2,
-```
-
-and obtain `B_mu` by Gaussian filtering the white derivative with amplitude transfer `exp[-q^2/(8 mu^2)]`. Let
-
-```math
-M_inf=sup_s[B(s)-s^2],
-qquad
-M_mu=sup_s[B_mu(s)-s^2].
-```
-
-Because the pure quadratic Dieker–Yakir ratio is exactly `1/sqrt(pi)`, the universal function is
-
-```math
-\boxed{
 F(mu)=\frac{2}{\sqrt\pi}E[M_inf-M_mu].
-}
 ```
 
-Endpoint/tail:
-
-```text
-F(0) ~0.892
-F(mu) ~ A_K/sqrt(mu), A_K~0.98
-```
-
-using the Step-28 canonical BES diagnostic.
-
-Continuum-extrapolated canonical values:
+Continuum-extrapolated values:
 
 ```text
 mu:       0     .5     1      2      3      5      10     20
 F(mu):  .892   .806   .729   .597   .512   .410   .297   .213
 ```
 
-The rough maximum has `O(sqrt(ds))` discretization bias. Nested-grid continuum extrapolation is therefore mandatory.
+with `sqrt(mu)F(mu)->~0.98`. Nested-grid full fast-channel calculations agree at percent level. **INVALIDATED NUMERICAL INTERPRETATION:** raw Step-27 tiny-`chi` fast values were biased low by under-resolving the rough maximum. Fast endpoint asymptotic `C_H` refines to about `0.0088`.
 
-**NUMERICAL VALIDATION / INVALIDATED NUMERICAL INTERPRETATION:** full fast-channel paired Dieker–Yakir gaps, re-evaluated on nested grids and extrapolated in `sqrt(dt)`, agree with the canonical function at the percent level:
+## Step 31 — 21:17 EDT — Palm-anchored universal high-band boundary closure
+Insert the canonical fast-channel `F(mu)` bridge into the finite-`u` tangent boundary. Representative tangent shape:
 
 ```text
-zeta=20, mu=1.371: F_full~0.675 vs canonical~0.68
-zeta=40, mu=2.743: F_full~0.531 vs canonical~0.53
-zeta=80, mu=5.485: F_full~0.394 vs canonical~0.40
+kappa_f      Lambda_tan
+60           .88255
+100          .88604
+200          .88715
+300          .88714
+1000         .88660
+infinity      .88564
 ```
 
-The original raw Step-27/29 fast values `~0.551,0.438,0.324` were biased low by rough-maximum grid under-resolution and must not be treated as continuum `F(mu)` data. Step 29's scaling variable remains valid.
+The absolute tangent boundary has a known finite-`u` rare-event offset. Use Step-22 Palm anchors
 
-Universal bridge:
+```text
+kappa_f:      60       100      200
+Lambda_Palm: .9098    .9103    .9099
+```
+
+and Step-23 central rough endpoint `Lambda_inf=0.90513`. Define `delta=Lambda_exact-Lambda_tan`, fix `delta_inf=0.01949`, and fit the minimal relaxation
 
 ```math
-C_H,eff=2^{-1/4}\sqrt\chi\,\sqrt\mu F(mu).
+delta(kappa)=delta_inf+A kappa^{-p}.
 ```
 
-For the fast endpoint `chi_f~1.1395e-4`, the Bessel-tail limit is `C_H,fast~0.0088`, not the pre-asymptotic `~0.0061`. Holding the other Step-26 surrogate inputs fixed moves illustrative `C_Lambda` from `~0.020` to `~0.032`; sign remains positive and is strengthened.
+Fit:
 
-Full derivation: `UNIVERSAL_CROSSOVER_FUNCTION_STEP.md`.  
-Calculator: `numerics/universal_crossover_function.py`.
+```text
+A ~0.18206
+p ~0.77501
+```
+
+Central bridge:
+
+```text
+kappa_f      Lambda_bridge
+60           .90966
+80           .91056
+100          .91066
+130          .91042
+160          .91008
+200          .90964
+300          .90882
+500          .90790
+1000         .90695
+2000         .90632
+5000         .90583
+10000        .90559
+infinity      .90513
+```
+
+Dense interpolation gives one shallow maximum near `kappa_f~94.9`, `Lambda~0.91068`, then a strictly decreasing central bridge for `kappa_f>=100`.
+
+**NUMERICAL CLOSURE for original task:** `Lambda=0.895` remains below the whole high-band bridge and the rough endpoint. Even subtracting the previously reported `0.004` endpoint uncertainty gives about `0.9011>0.895`. No bounded high-band re-entrant slow-preferred pocket is numerically supported for this calibration.
+
+**CONDITIONAL / OPEN:** the finite-`u` discrepancy relaxation is empirical, so this is not a theorem-level interval enclosure and does not exclude other topologies for other task parameters.
+
+Full derivation: `UNIVERSAL_BRIDGE_BOUNDARY_CLOSURE_STEP.md`.  
+Calculator: `numerics/universal_bridge_boundary.py`.
 
 ---
 
 ## Current stopping point
 
-The difficult small-`chi` fast-channel bandwidth dependence is now represented by one reusable canonical function rather than full detector Monte Carlo.
+For the original `r=2`, `Lambda=0.895` task, the high-band re-entrant pocket is numerically closed. The remaining mathematical gap is the exact finite-`u` correction between the tangent/cluster description and the Palm/occupation boundary.
 
 ### Single natural next question
 
-> If the universal `F(mu)` bridge is inserted into the coupled finite-`r` boundary equation, does the corrected boundary remain monotone from the mapped Palm high-band region into the rough endpoint, eliminating the last plausible bounded re-entrant pocket without full-process Monte Carlo at every bandwidth?
+> Can the finite-`u` Palm/occupation discrepancy be derived or bounded directly, replacing the empirical `delta_infinity+A kappa^-p` anchoring with a certified interval enclosure for `Lambda_cross(kappa_f)`?
