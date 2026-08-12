@@ -1,6 +1,6 @@
 # Progress Log — Experiment 01
 
-**Consolidation note — 2026-08-12 06:14 EDT:** compact chronology preserving consequential results, corrections, invalidations, rejected shortcuts, numerical validations, asymptotic qualifications, and current stopping point. Full derivations remain in dedicated step files.
+**Consolidation note — 2026-08-12 07:24 EDT:** compact chronology preserving consequential results, corrections, invalidations, rejected shortcuts, numerical validations, asymptotic qualifications, and current stopping point. Full derivations remain in dedicated step files.
 
 ---
 
@@ -49,61 +49,98 @@ h_tan/N_tan<=phi/Q-1/u.
 
 At `u~4.959`, bound `~4.9452`; symmetric tangent-strip factor at `delta=1e-4` is `~9.89e-4`. **REFINEMENT / NEGATIVE RESULT:** Step-36 exact strip excess is finite-`u` remainder physics, not positive `zeta` elasticity.
 
-## Step 39 — 06:14 EDT — finite-`u` remainder factor
-Define
-
-```math
-R(u,q)=N_a(u,q)/N_tan(u,q).
-```
-
-Using the Step-30 canonical fast tangent model and Step-33/34 exact-cluster first moments:
-
-```text
-kappa_f      N_tan/alpha      N_a/alpha      R
-170             .6294           .9878       1.570
-300             .6297           .9862       1.566
-1000            .6306           .9842       1.561
-infinity        .6319           .9897       1.566
-```
-
-**REFINEMENT:** the prior `~5–10% excess` refers to the local hazard/strip coefficient. The first-moment amplitude correction is much larger: `R~1.56`, so a perturbation expansion in `R-1` is inappropriate at `u~5`.
-
-The continuity identity is
-
-```math
--\partial_u log R=h_a/N_a-h_tan/N_tan.
-```
-
-Combining Step-36 strip intensities with Step-33/34 `N_a` and deterministic tangent hazards gives inferred slopes `~0.07–0.68` over the tested high-band points. `L_R=.8` is retained only as a conservative **numerical working envelope**, not an analytic bound.
-
-If locally
-
-```math
-|log R(v)-log R(u)|<=L_R|v-u|,
-```
-
-then the Step-38 tangent ratios imply
-
-```math
-\boxed{
-[N_a(u-d)-N_a(u+d)]/N_a(u)
-<=A_-e^{L_R d}-A_+e^{-L_R d}.
-}
-```
-
-At `u~4.959`, `d=1e-4`, `L_R=.8`, this is `~1.149e-3`, versus tangent-only `~9.89e-4`; when `N_a~alpha`, absolute scale is `~1.15e-9`. The large amplitude mismatch therefore does not imply poor narrow-threshold continuity.
-
-**REJECTED SHORTCUT:** proving `R~1` is unnecessarily strong and false at the operating threshold. The correct next target is a local finite-ratio/log-Lipschitz theorem for `R`.
+## Step 39
+Define `R=N_a/N_tan`. The exact-cluster first moment exceeds the canonical tangent intensity by about `56%` (`R~1.56`), so `R~1` is false at `u~5`. But `-d_u log R=h_a/N_a-h_tan/N_tan` is inferred numerically to be only `~0.07–0.68`; `L_R=.8` is merely a conservative numerical working envelope. **REJECTED SHORTCUT:** a small-amplitude second-order Pickands remainder is the wrong theorem target.
 
 Full derivation: `FINITE_U_REMAINDER_FACTOR_STEP.md`.  
 Helper: `numerics/finite_u_remainder_factor.py`.
+
+## Step 40 — 07:24 EDT — Cameron–Martin RKHS barrier
+For a centered Gaussian measure and Cameron–Martin vector `h` with `r=||h||_H`, the Cameron–Martin density plus one-dimensional monotone rearrangement gives, for any event `A` of probability `p`,
+
+```math
+\boxed{
+Phi(Phi^-1(p)-r) <= mu(A+h) <= Phi(Phi^-1(p)+r).
+}
+```
+
+For the timing exceedance event `A_u={sup z>u}`, any RKHS barrier `h_delta(t)>=delta` gives
+
+```math
+\boxed{
+p(u-delta)<=Phi(Phi^-1(p(u))+||h_delta||_H),
+}
+```
+
+```math
+\boxed{
+p(u+delta)>=Phi(Phi^-1(p(u))-||h_delta||_H).
+}
+```
+
+An exactly constant Cameron–Martin shift is unnecessary. For a unit-variance covariance `R_q`, choose midpoint `t0=ell/2` and
+
+```math
+m_q=inf_{t in [0,ell]}R_q(t-t0).
+```
+
+The covariance kernel section has RKHS norm `1`, so
+
+```math
+h_delta(t)=delta R_q(t-t0)/m_q
+```
+
+is an exact barrier with norm `delta/m_q`. Therefore
+
+```math
+\boxed{
+p_q(u-delta)-p_q(u+delta)
+<=Phi(z+delta/m_q)-Phi(z-delta/m_q),
+\quad z=Phi^-1(p_q(u)).
+}
+```
+
+The rough covariance is a positive template autocorrelation; finite Gaussian bandwidth convolves its covariance numerator with a positive Gaussian. Hence `m_q>0` for every high-band `q`, and compact continuity gives existence of a uniform positive floor. Deterministic spectral quadrature gives
+
+```text
+kappa_f        m_q (midpoint barrier floor)
+170             ~0.925258
+200             ~0.925252
+300             ~0.925245
+500             ~0.925240
+1000            ~0.925239
+infinity        ~0.925238
+```
+
+so retain deliberately conservative numerical working floor `m_*=0.92`.
+
+Using Step-33 rough-endpoint fast upper `p_f(u)<=0.98968 alpha`, `alpha=1e-6`, and `delta=1e-4` gives
+
+```math
+\boxed{
+p_f(u-delta)<=0.990213 alpha<alpha.
+}
+```
+
+At the observed floor, the corresponding symmetric strip is about `1.06e-9` absolute. This is a direct exact-event rare-threshold bound and does not use the tangent model or `R`.
+
+**PARTIAL CERTIFICATE:** the finite-`u` threshold-buffer/remainder problem is no longer the conceptual bottleneck. **QUALIFICATION:** `m_*=0.92` is numerical rather than formal interval arithmetic.
+
+Full derivation: `CAMERON_MARTIN_BARRIER_STEP.md`.  
+Helper: `numerics/cameron_martin_barrier.py`.
 
 ---
 
 ## Current stopping point
 
-The finite-`u` correction is nonperturbative in amplitude but modest in threshold slope. The remaining theorem gap is a direct local ratio bound for `R`—or for the exact cluster first moment—over `delta~1e-4`, ideally from Gaussian level shifting/Cameron-Martin comparison.
+The threshold-buffer piece is now directly controlled by Cameron–Martin geometry. The main remaining continuous-parameter theorem gap is the sup-norm common-noise coupling failure probability
+
+```math
+eta=P(||z_q-z_r||_infinity>epsilon)
+```
+
+for neighboring `q` values.
 
 ### Single natural next question
 
-> Can a Gaussian level-shift / Cameron-Martin argument produce a direct finite-ratio bound on `R(u+delta,q)/R(u,q)`—or on the exact cluster first moment itself—over `delta~1e-4`, avoiding any need for a small-amplitude second-order Pickands expansion?
+> Can the common-white-noise difference process `d_{q,r}(t)=z_q(t)-z_r(t)` be given a sharp Borell–TIS / metric-entropy sup-norm tail bound at `|q-r|<=0.005`, small enough that its failure probability `eta` fits inside the remaining `~1e-8` fast false-alarm margin?
