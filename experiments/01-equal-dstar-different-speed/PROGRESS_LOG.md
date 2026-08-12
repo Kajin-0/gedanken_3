@@ -1,6 +1,6 @@
 # Progress Log — Experiment 01
 
-**Consolidation note — 2026-08-12 00:38 EDT:** compact chronology preserving consequential derivations, corrections, invalidations, rejected shortcuts, numerical validations, asymptotic qualifications, and the current stopping point. Full derivations remain in dedicated step files.
+**Consolidation note — 2026-08-12 01:11 EDT:** compact chronology preserving consequential derivations, corrections, invalidations, rejected shortcuts, numerical validations, asymptotic qualifications, and the current stopping point. Full derivations remain in dedicated step files.
 
 ---
 
@@ -26,16 +26,16 @@ F(mu)=(2/sqrt(pi))E[M_inf-M_mu].
 **INVALIDATED NUMERICAL INTERPRETATION:** raw Step-27 tiny-`chi` fast values were grid biased; continuum-extrapolated full-field values agree with the canonical curve. Fast asymptotic `C_H` refines to about `0.0088`.
 
 ## Step 31
-Canonical crossover inserted into the finite-`r` boundary; Palm/occupation anchoring gave a one-hump central bridge peaking near `kappa_f~94.9`, `Lambda~0.91068`, then descending toward `Lambda_infinity~0.90513`. **NUMERICAL CLOSURE:** no high-band re-entrant pocket supported for `Lambda=0.895`. **CONDITIONAL:** finite-`u` offset was empirical.
+Canonical crossover inserted into the finite-`r` boundary; Palm/occupation anchoring gave a one-hump central bridge peaking near `kappa_f~94.9`, `Lambda~0.91068`, then descending toward `Lambda_infinity~0.90513`. **NUMERICAL CLOSURE:** no high-band re-entrant pocket supported for `Lambda=0.895`. **CONDITIONAL:** finite-`u` offset was empirical; later direct finite-`u` steps remove dependence on this fit for the original conclusion.
 
 ## Step 32
-Finite-`u` first-/second-order Rice moment enclosure:
+Finite-`u` first-/second-order Rice moment enclosure
 
 ```math
-Q(u)+m1^2/(lambda+lambda2) <= P_FA <= Q(u)+m1.
+Q(u)+m1^2/(lambda+lambda2) <= P_FA <= Q(u)+m1
 ```
 
-At `X=7.04`, fast is directly certified feasible and slow infeasible through at least `kappa_f=170`. **PARTIAL CERTIFICATE.** Around `175–200`, raw crossing moments lose sharpness because one physical slow excursion contains many micro-upcrossings. **NEGATIVE RESULT:** raw crossing multiplicity is the wrong rough-tail variable.
+certifies fast feasible / slow infeasible through at least `kappa_f=170`. **PARTIAL CERTIFICATE.** Around `175–200`, raw crossing moments lose sharpness because one physical slow excursion contains many micro-upcrossings. **NEGATIVE RESULT:** raw crossing multiplicity is the wrong rough-tail variable.
 
 Full derivation: `FINITE_U_RICE_MOMENT_ENCLOSURE_STEP.md`.  
 Calculator: `numerics/finite_u_rice_moment_enclosure.py`.
@@ -78,118 +78,131 @@ dA_q/dq=-2q^3(w^2-M2(q))A_q,
 ||dA_q/dq||_2^2=4q^6 Var_q(w^2).
 ```
 
-The finite-window `1/w^2` spectral-mass tail makes the `q->0` derivative finite, so the common-noise field is `L2`-Lipschitz through the rough endpoint. Fast `x=7.16`, `Delta q=0.005` gives pointwise RMS process change `~<7.5e-5`; threshold motion `~<2.8e-5`.
-
-Exact event sandwich under a sup-norm coupling:
-
-```math
-p_q(u_q+delta)-eta <= p(r) <= p_q(u_q-delta)+eta.
-```
-
-**REJECTED SHORTCUT:** cluster counts/moments are not pathwise Lipschitz. **NEGATIVE RESULT:** generic Gaussian-supremum anti-concentration is orders of magnitude too coarse at `alpha=1e-6`; the theorem gap is tail-sensitive rare-excursion continuity.
+The finite-window `1/w^2` spectral-mass tail makes the `q->0` derivative finite, so the common-noise field is `L2`-Lipschitz through the rough endpoint. Fast `x=7.16`, `Delta q=0.005` gives pointwise RMS process change `~<7.5e-5`; threshold motion `~<2.8e-5`. **REJECTED SHORTCUT:** cluster moments are not pathwise Lipschitz. **NEGATIVE RESULT:** generic Gaussian-supremum anti-concentration is orders of magnitude too coarse at `alpha=1e-6`.
 
 Full derivation: `Q_COUPLING_CONTINUITY_OBSTRUCTION_STEP.md`.  
 Calculator: `numerics/q_coupling_continuity.py`.
 
 ## Step 36
-Freeze a lower level `a`; let `M_j` be maxima of the connected components of `{z>a}` and define
+Freeze a lower level `a`; let `M_j` be maxima of connected components of `{z>a}` and define the cluster-maximum measure
 
 ```math
-C_a(y)=sum_j1_{M_j>y}.
-```
-
-For `a<y1<y2`,
-
-```math
-D_a(y1,y2)=C_a(y1)-C_a(y2)
-=sum_j1_{y1<M_j<=y2}.
+nu_a(B)=ell Q(a)E_a[1_{M_I in B}/L].
 ```
 
 Then
 
 ```math
-P(y1<sup z<=y2)<=E[D_a(y1,y2)].
+P(y1<sup z<=y2)<=nu_a((y1,y2]).
 ```
 
-Under lower-level occupation-Palm,
-
-```math
-E[D_a(y1,y2)]
-=ell Q(a)E_a[1_{y1<M_I<=y2}/L].
-```
-
-Thus the cluster-maximum measure `nu_a` gives an exact finite-threshold strip envelope that survives the rough endpoint. For the fast high-band trajectory near `u~4.959`, numerical strip intensity is `~5 alpha` per unit threshold across `kappa_f=170,300,1000,infinity`, giving observed `~10 delta alpha` symmetric-buffer scaling. **TAIL-SENSITIVE ENVELOPE / NUMERICAL VALIDATION.**
+This is exact, finite-threshold, derivative-free, and rough-endpoint valid. Fast high-band diagnostics near `u~4.959` give local strip intensity `~5 alpha` per unit threshold across `kappa_f=170,300,1000,infinity`, hence observed symmetric-strip scaling `~10 delta alpha`. **TAIL-SENSITIVE ENVELOPE / NUMERICAL VALIDATION.**
 
 Full derivation: `TAIL_SENSITIVE_CLUSTER_STRIP_CONTINUITY_STEP.md`.  
 Calculator: `numerics/cluster_maximum_strip.py`.
 
-## Step 37 — 00:38 EDT — high-threshold cluster overshoot hazard
-For fixed Gaussian local covariance class
+## Step 37
+For fixed local Gaussian covariance class
 
 ```math
 R(t)=1-c|t|^gamma+o(|t|^gamma),
 0<gamma<=2,
 ```
 
-Pickands' tail law is
+Pickands' high-threshold tail plus asymptotic single-successful-cluster separation gives
 
 ```math
-P(sup z>u)
-~ell c^(1/gamma)H_gamma u^(2/gamma)Q(u).
+N_a(u+s/u)/N_a(u)->exp(-s),
 ```
 
-Assuming asymptotically negligible multiple successful finite-amplitude clusters, `N_a(u)=E[C_a(u)]` has the same leading tail. Rather than differentiating an uncontrolled `o(1)` remainder, shift the threshold by `s/u`. Gaussian tail ratios then give the rigorous fixed-class overshoot relation
+hence the rare-event hazard scale `h_a(u)~uN_a(u)` in the iterated local limit. This analytically explains the Step-36 `O(u delta alpha)` scaling for both smooth and rough endpoint classes.
 
-```math
-\boxed{
-N_a(u+s/u)/N_a(u)->exp(-s)
-}
-```
-
-for fixed `s>=0`, hence
-
-```math
-\boxed{
-[N_a(u)-N_a(u+s/u)]/N_a(u)->1-exp(-s).
-}
-```
-
-Taking `s->0` after `u->infinity` yields the rare-event hazard scale
-
-```math
-h_a(u)~uN_a(u)
-```
-
-when a local density exists. The leading scale is the same for smooth `gamma=2` and rough `gamma=1` classes; this analytically explains the Step-36 `O(u delta alpha)` strip scale.
-
-At the physical `u~4.959`, pure endpoint leading models give finite hazard coefficients around `4.96` (smooth) and `4.74` (rough), while Step-36 diagnostics are `~5.0–5.5`. **REFINEMENT / REJECTED SHORTCUT:** the discrepancy is consistent with the previously established finite-band/Brownian-parabola crossover; fixed-class `gamma=1` asymptotics are not quantitatively uniform through `q->0` at this threshold.
-
-The matched tangent intensity
+**REFINEMENT / REJECTED SHORTCUT:** fixed-class asymptotics are nonuniform through `q->0` at physical `u~4.96`. The matched tangent intensity
 
 ```math
 N_tan=ell[u sqrt(b)/sqrt(2)]H(chi,zeta)Q(u)
 ```
 
-implies the formal crossover hazard
+has formal hazard
 
 ```math
 h_tan/N_tan
 =phi/Q-1/u
  -(chi/u)d_chi log H
- +(zeta/u)d_zeta log H.
+ +(zeta/u)d_zeta log H,
 ```
 
-Thus the remaining uniform hazard theorem reduces to controlling the logarithmic elasticities of the two-parameter generalized Pickands constant along the detector trajectory. Step 25 gives monotonicity signs but not a strong enough upper bound on the positive `zeta` term.
+so Step 37 left the finite-crossover multiplier as a Pickands-elasticity problem.
 
 Full derivation: `CLUSTER_HAZARD_OVERSHOOT_STEP.md`.  
 Calculator: `numerics/cluster_hazard_overshoot.py`.
+
+## Step 38 — 01:11 EDT — exact Pickands cross-elasticity ordering
+For
+
+```math
+F_zeta(t)=|t|erf(zeta|t|)+(e^{-zeta^2t^2}-1)/(sqrt(pi)zeta),
+```
+
+exact differentiation and a convexity argument give
+
+```math
+\boxed{0<=zeta d_zeta F_zeta(t)<=F_zeta(t).}
+```
+
+Integrating this multiplicative derivative bound yields, for every `lambda>=1`,
+
+```math
+F_{lambda zeta}(t)<=lambda F_zeta(t).
+```
+
+Hence the tangent variograms obey
+
+```math
+g_{chi,lambda zeta}(t)<=g_{lambda chi,zeta}(t),
+```
+
+and Brown–Resnick Slepian comparison gives the exact generalized-Pickands cross-ordering
+
+```math
+\boxed{H(chi,lambda zeta)<=H(lambda chi,zeta).}
+```
+
+Where logarithmic derivatives exist,
+
+```math
+\boxed{0<=zeta d_zeta log H<=chi d_chi log H.}
+```
+
+The finite-`lambda` statement also yields the corresponding one-sided Dini-derivative inequality without assuming differentiability.
+
+Along a fixed-`kappa` threshold path, `chi~u` and `zeta~1/u`, so `H` is exactly nondecreasing with `u`. Therefore the matched tangent hazard has the explicit uniform bound
+
+```math
+\boxed{h_tan/N_tan<=phi(u)/Q(u)-1/u.}
+```
+
+At the physical fast threshold `u~4.959`, this is `~4.9452`. Finite-difference monotonicity also gives an exact symmetric tangent-strip factor
+
+```math
+B(u,delta)
+=((u-delta)/u)Q(u-delta)/Q(u)
+-((u+delta)/u)Q(u+delta)/Q(u).
+```
+
+For `delta=1e-4`, `B~9.89e-4`, so if `N_tan~alpha=1e-6` the tangent strip is bounded at about `9.9e-10` absolute scale.
+
+**NEGATIVE RESULT / REFINEMENT:** Step-36 exact finite-`u` strip diagnostics (`~5.0–5.5 alpha` per threshold unit) can exceed the tangent coefficient `~4.9452`. Therefore the positive `zeta` elasticity is not the source of the finite-crossover excess. The remaining discrepancy is the finite-threshold correction from the leading tangent/Pickands intensity to the exact cluster-maximum measure.
+
+Full derivation: `PICKANDS_ELASTICITY_ORDERING_STEP.md`.  
+Calculator: `numerics/pickands_elasticity_ordering.py`.
 
 ---
 
 ## Current stopping point
 
-The `h~uN` rare-event scale is analytically explained for fixed Gaussian local classes. The remaining gap is a uniform finite-crossover multiplier through the singular smooth/rough transition, naturally encoded by `H(chi,zeta)`.
+The generalized Pickands elasticity is now controlled exactly enough for the matched tangent hazard. The remaining theorem gap is one layer outward: finite-`u` remainder control between the tangent approximation and the exact physical excursion-cluster first moment, especially its threshold variation near `u~5`.
 
 ### Single natural next question
 
-> Can variogram ordering and the Dieker–Yakir representation bound `chi d_chi log H` and `zeta d_zeta log H`, especially the positive `zeta` elasticity, strongly enough to produce an explicit uniform hazard multiplier along the detector-relevant high-band trajectory?
+> Can the exact cluster first moment be factorized as `N_a(u,q)=N_tan(u,q) R(u,q)` with a controlled finite-threshold remainder, and can the threshold variation of `R` be bounded tightly enough at `u~5` to account for the observed `~5–10%` excess in the Step-36 strip intensity?
