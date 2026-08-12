@@ -2,14 +2,14 @@
 
 **Repository:** `Kajin-0/gedanken_3`  
 **Active experiment:** `experiments/01-equal-dstar-different-speed/`  
-**Current mode:** first-principles photodetector thought experiment. Forty-two logical steps completed. Step 42 tests rigorous finite-sample concentration for the weighted occupation-Palm node estimator. On the implemented finite grid, the inverse-duration contribution `Y=m_a S/L` is bounded because `L>=delta_t/2`, but the formal support is enormous relative to the observed variance. At the fast rough endpoint (`n=50000`) Maurer-Pontil empirical Bernstein gives a 95% radius `~.245 alpha`, dominated by the support/range term, so generic bounded-variable concentration does not certify the raw estimator. Step 42 derives the exact duration-truncated decomposition `P_FA<=E[C_long]+P(C_short>=1)`. For `L0=.02`, the long-cluster support is reduced 40x and the empirical-Bernstein range penalty drops from `~.2337 alpha` to `~.00584 alpha`. The active frontier is a Gaussian short-time excursion bound for a successful amplitude-`.15` cluster of duration `<L0`, followed by a new truncated-Palm run and rigorous concentration. No universal scalar replacement metric and no novelty claim.
+**Current mode:** first-principles photodetector thought experiment. Forty-three logical steps completed. Step 43 resolves the short-cluster probability introduced by the Step-42 duration truncation. A successful cluster shorter than `L0=.02` must traverse the full amplitude gap `Delta=.15` between a level-`a` boundary and a level-`u~4.959` point within lag `<.02`. A fine time net plus conservative high-band correlation floor `rho_*=.99980` and local increment metric `K_*=2e-4` reduces the event to highly discordant Gaussian pairs and gives `P(C_short>=1)<3.9e-11`, or `<3.9e-5 alpha` at `alpha=1e-6`; the net-modulus failure is below `10^-654`. Thus the huge raw inverse-duration support is an importance-weight support pathology, not a meaningful false-alarm contribution for `L0=.02`. The active frontier is a dedicated bounded long-cluster Palm run and rigorous empirical-Bernstein concentration. `rho_*` and `K_*` remain deterministic floating-point envelopes, not formal interval constants. No universal scalar replacement metric and no novelty claim.
 
 Read first:
 1. `experiments/01-equal-dstar-different-speed/CURRENT_STATE.md`
 2. `experiments/01-equal-dstar-different-speed/PROGRESS_LOG.md`
-3. latest step: `experiments/01-equal-dstar-different-speed/FINITE_SAMPLE_PALM_CONCENTRATION_STEP.md`
-4. latest helper: `experiments/01-equal-dstar-different-speed/numerics/palm_empirical_bernstein.py`
-5. preceding step: `experiments/01-equal-dstar-different-speed/GAUSSIAN_Q_SUPNORM_INTERPOLATION_STEP.md`
+3. latest step: `experiments/01-equal-dstar-different-speed/SHORT_CLUSTER_OSCILLATION_BOUND_STEP.md`
+4. latest helper: `experiments/01-equal-dstar-different-speed/numerics/short_cluster_oscillation_bound.py`
+5. preceding step: `experiments/01-equal-dstar-different-speed/FINITE_SAMPLE_PALM_CONCENTRATION_STEP.md`
 
 Live `main` overrides chat summaries or stale notes.
 
@@ -18,7 +18,7 @@ Live `main` overrides chat summaries or stale notes.
 ## Mandatory repository protocol
 Before material writes: fetch live target; fetch exact blob SHA before replacement; never overwrite stale state; preserve corrections/failed branches; update `CURRENT_STATE.md` and `PROGRESS_LOG.md` when frontier changes.
 
-Useful epistemic labels include: **DEFINED, ASSUMED, DERIVED, CONDITIONAL, CONDITIONAL THEOREM SKETCH, CONDITIONAL CLUSTER EXTENSION, COUNTEREXAMPLE, REFINEMENT, NEGATIVE RESULT, REJECTED SHORTCUT, FAILED NUMERICAL ESTIMATE, NUMERICAL VALIDATION, NUMERICAL COLLAPSE, NUMERICAL ASYMPTOTIC, NUMERICAL CLOSURE, PARTIAL CERTIFICATE, NUMERICAL ENDPOINT CERTIFICATE, PAIRED NUMERICAL INTERVAL CLOSURE, TAIL-SENSITIVE ENVELOPE, EXACT VARIOGRAM ORDERING, ANALYTIC INTER-NODE ENVELOPE, RIGOROUS FINITE-GRID CONCENTRATION TEST, INVALIDATED, INVALIDATED INTERMEDIATE, INVALIDATED NUMERICAL VALUE, INVALIDATED NUMERICAL INTERPRETATION, ASYMPTOTIC, OPEN, NON-CLAIM.**
+Useful epistemic labels include: **DEFINED, ASSUMED, DERIVED, CONDITIONAL, CONDITIONAL THEOREM SKETCH, CONDITIONAL CLUSTER EXTENSION, COUNTEREXAMPLE, REFINEMENT, NEGATIVE RESULT, REJECTED SHORTCUT, FAILED NUMERICAL ESTIMATE, NUMERICAL VALIDATION, NUMERICAL COLLAPSE, NUMERICAL ASYMPTOTIC, NUMERICAL CLOSURE, PARTIAL CERTIFICATE, NUMERICAL ENDPOINT CERTIFICATE, PAIRED NUMERICAL INTERVAL CLOSURE, TAIL-SENSITIVE ENVELOPE, EXACT VARIOGRAM ORDERING, ANALYTIC INTER-NODE ENVELOPE, RIGOROUS FINITE-GRID CONCENTRATION TEST, SHORT-CLUSTER GAUSSIAN ENVELOPE, INVALIDATED, INVALIDATED INTERMEDIATE, INVALIDATED NUMERICAL VALUE, INVALIDATED NUMERICAL INTERPRETATION, ASYMPTOTIC, OPEN, NON-CLAIM.**
 
 Do not use `novel`, `universal`, `fundamental`, `first`, etc. without a separate prior-art audit. `Universal` is allowed only for the explicitly model-reduced canonical crossover function.
 
@@ -53,48 +53,31 @@ Cameron–Martin likelihood rearrangement plus a positive covariance-kernel RKHS
 ### Step 41
 Analytic common-noise interpolation replaces Step-34's empirical `0.0006 alpha` mesh allowance. Near `q=0` use a deterministic net plus Brownian-type modulus/Borell bound; for `q,r>0` use an exact Rice upcrossing sup-tail envelope. **INVALIDATED NUMERICAL VALUE:** Step-35's tiny-`q` `0->.005` RMS `~5.4e-5` was cancellation damaged; asymptotic value is `~2.69e-5`. Conditional on sampled node/grid numerics, `p_f(q)<alpha` for every `0<=q<=.0767`. **ANALYTIC INTER-NODE ENVELOPE.**
 
-### Step 42 — current frontier
-For the implemented Step-33 first-moment Palm contribution
+### Step 42
+For the implemented Step-33 first-moment Palm contribution `Y=m_aS/L`, `L>=delta_t/2` implies exact finite-grid support `B=2m_a/delta_t`. At the fast rough endpoint, Maurer-Pontil empirical Bernstein at 95% gives radius `~.24538 alpha`, dominated by the range term. **NEGATIVE RESULT / REJECTED SHORTCUT:** generic bounded-variable concentration on the raw inverse-duration estimator is too weak. Duration truncation gives exactly `P_FA<=E[C_long]+P(C_short>=1)`. At `L0=.02`, the long-cluster support falls 40x and the 50k-path range penalty becomes `~.00584 alpha`.
+
+### Step 43 — current frontier
+A successful cluster shorter than `L0<ell` has an interior component boundary at `z=a` and a point exceeding `u` within lag `<L0`. On a `h=1e-5` net with `gamma=.0025`, it creates a Gaussian pair satisfying `X>=4.95648348`, `Y<=4.81148348`, lag `<=.02002`.
+
+The rough endpoint covariance is `R_0(.02002)~.9998009903`; finite-band deterministic checks are slightly larger. Retain `rho_*=.99980`. Conditional Gaussian regression gives pair probability `<1.075e-19`; at most `358451505` ordered candidate pairs gives `<3.86e-11`. A local metric envelope `K_*=2e-4` makes the net-modulus failure `<10^-654`. Hence
 
 ```math
-Y=m_a S/L,
+\boxed{P(C_short>=1)<3.9e-11<3.9e-5 alpha.}
 ```
 
-`L>=delta_t/2` implies exact finite-grid support `B=2m_a/delta_t`. At the fast rough endpoint:
-
-```text
-B ~= 1.35771e-3
-sample SD ~= 9.59e-7
-n=50000.
-```
-
-Maurer-Pontil empirical Bernstein at 95% gives radius
-
-```text
-~.24538 alpha
-```
-
-with `~.23373 alpha` coming from the range term alone. **NEGATIVE RESULT / REJECTED SHORTCUT:** generic bounded-variable concentration on the raw inverse-duration estimator is far too weak. The range term alone requires `n~>1.40e6` to fit the current endpoint margin.
-
-Choose duration cutoff `L0` and split successful clusters into long/short. Exactly,
-
-```math
-P_FA<=E[C_long]+P(C_short>=1).
-```
-
-The long-cluster Palm contribution has support `B0=m_a/L0`. At `L0=.02`, support falls 40x and the 50k-path 95% range penalty becomes `~.00584 alpha`. The short term is a physically structured event: the Gaussian path must traverse amplitude `Delta=.15` in less than `L0`.
+**SHORT-CLUSTER GAUSSIAN ENVELOPE / PARTIAL CERTIFICATE:** the short-duration term is negligible at the task false-alarm scale. The analytic probability bound is conditional on conservative numerical `rho_*` and `K_*` rather than formal interval constants.
 
 ---
 
 ## Current frontier
 
-Bound `P(C_short>=1)` analytically from the Gaussian short-time increment/modulus structure, preferably uniformly across the high-band family. Then rerun/store the truncated long-cluster Palm contributions and use rigorous empirical-Bernstein confidence bounds. Later gaps: simultaneous confidence allocation, slow lower-ratio concentration, continuum timing-grid bias, interval arithmetic.
+Run/store the `L0=.02` long-cluster occupation-Palm contributions and apply a genuine empirical-Bernstein upper confidence bound. The short-cluster probability no longer needs Monte Carlo. Later gaps: simultaneous confidence allocation, slow lower-ratio concentration, continuum timing-grid bias, formal interval arithmetic.
 
 ### Single next question — DO NOT ANSWER UNTIL PROMPTED
 
-> Can a successful amplitude-`Delta=.15` cluster shorter than a chosen `L0` be bounded directly by the Gaussian short-time increment/modulus structure tightly enough that the duration-truncated empirical-Bernstein estimator yields a rigorous endpoint node certificate?
+> With `P(C_short>=1)` negligible, does a dedicated `L0=.02` truncated occupation-Palm run give a rigorous empirical-Bernstein upper confidence bound on `E[C_long]` below the remaining fast endpoint budget?
 
 ---
 
 ## Scope boundary
-Do not claim: faster universally better/worse; universal scalar replacement for `D*`; Step-13 `ell~49`; Step-20 double reversal; raw Step-27 fast values as continuum data; Step-31 empirical fit exact/required for original high-band conclusion; Step-34 as fully formal theorem; Step-36 as uniform hazard theorem; `R~1`; `L_R=.8` analytic; `m_*=.92` formal interval arithmetic; Step-41 node estimates themselves rigorous; raw empirical Bernstein certifies Step-33; `L0=.02` optimal; no re-entrant pocket for other task parameters; uniqueness of bandwidth optimum; illustrative GHz scales as hardware recommendation; novelty.
+Do not claim: faster universally better/worse; universal scalar replacement for `D*`; Step-13 `ell~49`; Step-20 double reversal; raw Step-27 fast values as continuum data; Step-31 empirical fit exact/required for original high-band conclusion; Step-34 as fully formal theorem; Step-36 as uniform hazard theorem; `R~1`; `L_R=.8` analytic; `m_*=.92`, `rho_*=.99980`, or `K_*=2e-4` as formal interval constants; Step-41 node estimates themselves rigorous; raw empirical Bernstein certifies Step-33; `L0=.02` optimal; no re-entrant pocket for other task parameters; uniqueness of bandwidth optimum; illustrative GHz scales as hardware recommendation; novelty.
