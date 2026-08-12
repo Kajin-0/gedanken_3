@@ -2,16 +2,16 @@
 
 **Repository:** `Kajin-0/gedanken_3`  
 **Active experiment:** `experiments/01-equal-dstar-different-speed/`  
-**Current mode:** first-principles photodetector thought experiment. Thirty-three logical steps completed. Step 33 replaces raw level-upcrossing multiplicity by a finite-amplitude excursion-cluster count whose event is exactly the false-alarm event. The first two cluster moments have an exact lower-level occupation-Palm representation and remain sharp at representative finite high bandwidths and directly at the rough endpoint. For the original `r=2`, `Lambda=0.895` task, cluster calculations separate fast and slow at `kappa_f=300`, `1000`, and `infinity`. The remaining frontier is continuous-interval numerical/statistical certification from the Step-32 bound near `kappa_f~170` to the endpoint. No universal scalar replacement metric and no novelty claim.
+**Current mode:** first-principles photodetector thought experiment. Thirty-four logical steps completed. Step 34 uses the excursion-cluster variable from Step 33 in the natural coordinate `q=kappa_f^(-1/2)` and a common-random-number coupling to the rough endpoint. For the original `r=2`, `Lambda=0.895` task, a dense paired `q` scan plus explicit Monte Carlo/grid/inter-node allowances gives a conservative fast upper envelope `U_f/alpha~<0.99955` and slow lower envelope `L_s/alpha~>1.10` over the adaptively sampled/interpolated tail `170<=kappa_f<=infinity`. This removes the empirical Step-31 `delta(kappa)` fit from the original high-band conclusion. It remains a paired numerical interval closure, not formal interval arithmetic or a theorem-level continuity result. No universal scalar replacement metric and no novelty claim.
 
 Read first:
 
 1. `experiments/01-equal-dstar-different-speed/CURRENT_STATE.md`
 2. `experiments/01-equal-dstar-different-speed/PROGRESS_LOG.md`
 3. dedicated step files in chronological order
-4. latest: `experiments/01-equal-dstar-different-speed/EXCURSION_CLUSTER_MOMENT_ENCLOSURE_STEP.md`
-5. latest numerical helper: `experiments/01-equal-dstar-different-speed/numerics/excursion_cluster_moment_enclosure.py`
-6. preceding finite-`u` enclosure: `experiments/01-equal-dstar-different-speed/FINITE_U_RICE_MOMENT_ENCLOSURE_STEP.md`
+4. latest: `experiments/01-equal-dstar-different-speed/ADAPTIVE_CLUSTER_TAIL_CLOSURE_STEP.md`
+5. latest numerical helper: `experiments/01-equal-dstar-different-speed/numerics/adaptive_cluster_tail_closure.py`
+6. preceding cluster step: `experiments/01-equal-dstar-different-speed/EXCURSION_CLUSTER_MOMENT_ENCLOSURE_STEP.md`
 
 The repository follows the physics rather than a predetermined criticism of `D*`. Preserve assumptions, cancellations, counterexamples, negative results, rejected shortcuts, failed numerical estimates, numerical validations, invalidations, asymptotic limits, refinements, and unresolved branches.
 
@@ -52,6 +52,7 @@ Use where useful:
 - **NUMERICAL CLOSURE** — multiple independent numerical/asymptotic pieces exclude a candidate behavior for the stated calibration, without constituting a theorem.
 - **PARTIAL CERTIFICATE** — an analytic inequality settles the stated comparison on a tested parameter range; numerical evaluation may still be non-interval floating point or Monte Carlo.
 - **NUMERICAL ENDPOINT CERTIFICATE** — exact inequality plus statistically resolved endpoint moment estimates; not formal interval arithmetic.
+- **PAIRED NUMERICAL INTERVAL CLOSURE** — common-random-number differences plus explicit Monte Carlo/grid/mesh allowances cover an adaptively sampled/interpolated parameter interval; not a theorem-level continuity enclosure.
 - **INVALIDATED** — previously reported result fails stronger calculation.
 - **INVALIDATED INTERMEDIATE** — provisional same-turn value shown wrong; preserve why.
 - **INVALIDATED NUMERICAL INTERPRETATION** — generated values remain data but stronger analysis shows they were not estimates of the quantity previously assigned to them.
@@ -84,7 +85,7 @@ Finite bandwidth adds `zeta=kappa/(sqrt(2)u sqrt(b))`; generalized Pickands stru
 Small `chi` introduces Brownian–parabola scales `h_chi=sqrt(2)chi^(1/3)`, `m_chi=2chi^(2/3)` and crossover `mu=sqrt(2)zeta chi^(1/3)`. The difficult fast channel reduces to
 
 ```math
-F(mu)=\frac{2}{\sqrt\pi}E[M_inf-M_mu].
+F(mu)=(2/sqrt(pi))E[M_inf-M_mu].
 ```
 
 Continuum-extrapolated canonical/full-field calculations agree at percent level. **INVALIDATED NUMERICAL INTERPRETATION:** raw Step-27 tiny-`chi` fast values were biased low by rough-maximum grid under-resolution. Fast asymptotic `C_H` refines to about `0.0088`.
@@ -96,81 +97,41 @@ Insert `F(mu)` into the coupled tangent boundary and anchor residual finite-`u` 
 For a smooth finite-band scan,
 
 ```math
-X_u=1_{\{z(0)\le u\}}N_u^+,
-```
-
-and exactly
-
-```math
-P_FA=Q(u)+P(X_u\ge1).
+X_u=1_{z(0)<=u}N_u^+,
+P_FA=Q(u)+P(X_u>=1).
 ```
 
 First-/second-order Rice moments give
 
 ```math
-\boxed{
-Q(u)+\frac{m_1^2}{\lambda+\lambda_2}
-\le P_FA
-\le Q(u)+m_1.
-}
+Q(u)+m1^2/(lambda+lambda2) <= P_FA <= Q(u)+m1.
 ```
 
-At `Lambda=0.895`, `X=7.04`, the fast upper is below `alpha` and slow lower above `alpha` through at least `kappa_f=170`. **PARTIAL CERTIFICATE.** Around `175–200`, the bound loses sharpness because slow-channel `lambda2` grows from micro-upcrossing clusters. **NEGATIVE RESULT:** raw crossing multiplicity is the wrong rough-tail variable.
+At `Lambda=0.895`, `X=7.04`, fast upper is below `alpha` and slow lower above `alpha` through at least `kappa_f=170`. **PARTIAL CERTIFICATE.** Around `175–200`, the bound loses sharpness because slow-channel `lambda2` grows from micro-upcrossing clusters. **NEGATIVE RESULT:** raw crossing multiplicity is the wrong rough-tail variable.
 
-### Step 33 — current frontier
-Choose `Delta>0`, set
-
-```math
-\boxed{a=u-\Delta,}
-```
-
-and decompose `{t:z(t)>a}` into connected components. Count only components whose maximum exceeds `u`; call this `C_Delta`.
+### Step 33
+Choose `Delta>0`, set `a=u-Delta`, and decompose `{t:z(t)>a}` into connected components. Count only components whose maximum exceeds `u`; call this `C_Delta`.
 
 Pathwise,
 
 ```math
-\boxed{\sup z>u\iff C_\Delta\ge1.}
+sup z>u iff C_Delta>=1.
 ```
 
 For fixed finite amplitude gap, `C_Delta` remains finite on continuous compact paths even as raw level-`u` crossings proliferate.
 
-Moment enclosure:
+```math
+E[C_Delta]^2/E[C_Delta^2] <= P_FA <= E[C_Delta].
+```
+
+Under lower-level occupation-Palm `Q_a`, with selected-component duration `L`, success indicator `S`, and total successful count `C_Delta`,
 
 ```math
-\boxed{
-\frac{E[C_\Delta]^2}{E[C_\Delta^2]}
-\le P_FA
-\le E[C_\Delta].
-}
+E[C_Delta]=ell Q(a)E_a[S/L],
+E[C_Delta^2]=ell Q(a)E_a[S C_Delta/L].
 ```
 
-Under the lower-level occupation-Palm law `Q_a`, with selected-component duration `L`, success indicator `S`, and total successful count `C_Delta`, exact identities are
-
-```math
-\boxed{
-E[C_\Delta]=\ell Q(a)E_{Q_a}[S/L],
-}
-```
-
-```math
-\boxed{
-E[C_\Delta^2]=\ell Q(a)E_{Q_a}[S C_\Delta/L].
-}
-```
-
-No derivative/upcrossing count appears.
-
-For the original task at `X=7.16`, `Delta=0.15`:
-
-```text
-kappa_f    detector    lower/alpha    upper/alpha
-300        fast          0.98604        0.98624
-300        slow          1.19896        1.19990
-1000       fast          0.98417        0.98423
-1000       slow          1.21537        1.21725
-```
-
-Direct rough endpoint (`50000` paths, grid `~0.001`):
+At `X=7.16`, `Delta=0.15`, cluster bounds separate fast/slow at `kappa_f=300`, `1000`, and directly at `infinity`. Rough endpoint (`50000` paths, grid `~0.001`):
 
 ```text
              lower/alpha    upper/alpha    SE[E(C)]/alpha
@@ -178,15 +139,51 @@ fast           0.98940        0.98968          0.00429
 slow           1.22367        1.22583          0.00474
 ```
 
-**NUMERICAL ENDPOINT CERTIFICATE / CLUSTER-RENORMALIZED ENCLOSURE:** the cluster bounds remain sharp at `kappa=infinity` and separate fast/slow at the same physical time. The divergence seen in Step 32 belongs to the micro-upcrossing count, not the physical excursion event.
+**NUMERICAL ENDPOINT CERTIFICATE / CLUSTER-RENORMALIZED ENCLOSURE:** Step-32 divergence belongs to the micro-upcrossing count, not the physical excursion event.
 
-**OPEN:** exact inequalities are analytic; displayed moments are finite-grid Monte Carlo estimates. The continuous interval `~170 < kappa_f < infinity` is not yet formally/statistically covered pointwise.
+### Step 34 — current frontier
+Use
+
+```math
+q=kappa_f^(-1/2)
+```
+
+so the high-band tail is finite: `0<=q<=0.0767` corresponds to `infinity>=kappa_f>=~170`.
+
+A preliminary gap screen finds a broad low-variance region around `Delta~0.08–0.15`; no unique optimum. Retain `Delta=0.15` conservatively because Step 33 already validated it on the finest rough grid.
+
+For fast `U_f(q)=E[C_Delta(q)]`, generate finite-`q` and endpoint fields from common white noise, common truncated-normal uniforms, and common selected occupation times. Dense `3000`-path scan on `q=0,0.005,...,0.075,0.0767` plus refined midpoints gives
+
+```text
+max positive paired correction/alpha ~= +1.9e-8
+min paired correction/alpha          ~= -0.00188
+max paired SE/alpha                  ~= 0.00106
+max adjacent 0.005-node change/alpha ~= 0.000548.
+```
+
+Paired rough-grid check relative to a fine `~0.000751` timing grid gives only `~-0.00093 alpha` shift at `~0.00150` and `~-0.00134 alpha` at `~0.00300`.
+
+Using Step-33 endpoint anchor `0.98968 +/-0.00429`, one-sided Gaussian factor `1.645`, grid allowance `0.002`, and inter-node allowance `0.0006` gives
+
+```math
+U_f/alpha ~<0.99955<1.
+```
+
+Slow absolute `3000`-path scan has minimum central lower ratio `~1.18296` near `kappa_f~170`; even after deliberately conservative MC/grid/inter-node deductions its envelope remains
+
+```math
+L_s/alpha ~>1.10>1.
+```
+
+**PAIRED NUMERICAL INTERVAL CLOSURE:** at common witness time `X=7.16`, the original `Lambda=0.895` task is numerically separated over the adaptively sampled/interpolated tail `170<=kappa_f<=infinity` without the Step-31 empirical `delta(kappa)` fit.
+
+**QUALIFICATION:** the allowances are measured/conservative numerical scales, not formal interval arithmetic, exact confidence sequences, or an analytic continuity modulus for every unsampled `q`.
 
 ---
 
 ## 4. Current frontier
 
-Evaluate the excursion-cluster enclosure on an adaptive bandwidth grid, tune `Delta` for numerical efficiency, and control Monte Carlo/grid error strongly enough to close the entire interval from the Step-32 certificate to the rough endpoint.
+The original high-band re-entrant-pocket conclusion is now supported by direct finite-`u` cluster enclosures through the rough endpoint without the empirical Step-31 fit. The remaining mathematical task is analytic continuity of the cluster moments in `q`.
 
 ---
 
@@ -201,10 +198,10 @@ Do not claim:
 - Rice is uniformly accurate at high finite-window bandwidth;
 - Step-20 double reversal is exact;
 - raw Step-27 fast values are continuum crossover data;
-- Step-31 empirical `delta(kappa)` is exact;
+- Step-31 empirical `delta(kappa)` is exact or still necessary for the original high-band conclusion;
 - Step-32 raw crossing moments stay sharp in the rough limit;
-- Step-33 Monte Carlo moments are formal interval arithmetic;
-- the continuous `170<kappa_f<infinity` interval is certified yet;
+- Step-33/34 Monte Carlo estimates are formal interval arithmetic;
+- Step-34 is a theorem-level continuous-parameter enclosure;
 - no re-entrant pocket can occur for other task parameters;
 - Palm bandwidth optimum is unique or exactly located;
 - any GHz translation is a hardware recommendation;
@@ -214,4 +211,4 @@ Do not claim:
 
 ## 6. Single next question — DO NOT ANSWER UNTIL PROMPTED
 
-> Can the excursion-cluster enclosure be evaluated on an adaptive bandwidth grid with controlled Monte Carlo/grid error and optimized `Delta`, so that the entire interval from `kappa_f~170` to the rough endpoint is closed without the empirical Step-31 boundary fit?
+> Can the common-white-noise coupling be converted into an analytic continuity modulus for the excursion-cluster moments as a function of `q=kappa_f^(-1/2)`, replacing the empirical inter-node allowance and turning the Step-34 numerical tail closure into a theorem-level parameter-interval enclosure?
