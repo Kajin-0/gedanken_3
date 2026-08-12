@@ -1,7 +1,7 @@
 # Current State — Experiment 01: Equal D*, Different Speed
 
-**Date:** 2026-08-11 23:04 EDT  
-**Status:** thirty-six logical steps completed. Step 36 replaces the unusably global Gaussian-supremum anti-concentration bound from Step 35 with a fixed-excursion-cluster maximum strip measure. For a fixed lower declustering level `a`, the probability that the global maximum lies in `(y1,y2]` is bounded by the expected number of lower-level physical excursion components whose maxima lie in that strip. The strip first moment has an exact lower-level occupation-Palm representation and remains valid at the rough endpoint. For the original fast high-band trajectory, numerical evaluation gives a local strip intensity near `u~4.959` of about `5 alpha` per unit threshold across `kappa_f=170,300,1000,infinity`, so the buffered probability follows the rare-event scale `O(alpha delta)` rather than global `O(delta)`. A uniform analytic cluster-max density/hazard bound is still open. No universal scalar replacement metric and no novelty claim.
+**Date:** 2026-08-12 00:38 EDT  
+**Status:** thirty-seven logical steps completed. Step 37 explains analytically why the Step-36 cluster-maximum strip has the rare-event scale `O(u delta alpha)`: for every fixed Gaussian local roughness class, Pickands' high-threshold tail law implies an exponential overshoot on the `1/u` height scale, hence cluster hazard `h(u)~u N(u)` under asymptotic single-cluster separation. The leading hazard scale is the same for smooth (`gamma=2`) and rough (`gamma=1`) classes. However, this fixed-class result is nonuniform as `q=kappa_f^-1/2 -> 0`; finite `q` is infinitesimally smooth while `q=0` is rough, and the physical threshold `u~4.96` lies in the previously identified finite-band/Brownian-parabola crossover. The remaining theorem gap is an explicit uniform finite-crossover hazard multiplier, naturally encoded by logarithmic derivatives of the two-parameter generalized Pickands constant `H(chi,zeta)`. No universal scalar replacement metric and no novelty claim.
 
 ---
 
@@ -212,19 +212,14 @@ Pathwise,
 hence the exact tail-sensitive strip bound
 
 ```math
-\boxed{
-P(y1<sup z<=y2)
-<=E[D_a(y1,y2)].
-}
+P(y1<sup z<=y2)<=E[D_a(y1,y2)].
 ```
 
 Under lower-level occupation-Palm,
 
 ```math
-\boxed{
 E[D_a(y1,y2)]
 =ell Q(a) E_a[1_{y1<M_I<=y2}/L].
-}
 ```
 
 Define the cluster-maximum intensity measure
@@ -239,45 +234,85 @@ Then
 P(y1<sup z<=y2)<=nu_a((y1,y2]).
 ```
 
-This remains valid at the nondifferentiable rough endpoint.
+For the original fast high-band trajectory (`x=7.16`, `ell=0.895`, `Delta=0.15`, `u~4.959`), numerical diagnostics give local strip intensity about `5 alpha` per unit threshold over `kappa_f=170,300,1000,infinity`, hence the observed buffered probability scales as `~10 delta alpha`. **QUALIFICATION:** the exact strip inequality/occupation identity are analytic; the local density value is numerical.
 
-For the original fast high-band trajectory (`x=7.16`, `ell=0.895`, `Delta=0.15`, `u~4.959`), `12000`-path diagnostics at half-widths `w=0.005,0.01,0.02` give
-
-```text
-kappa_f     nu((u-w,u+w])/(2w alpha)
-170                  ~4.95–5.16
-300                  ~5.03–5.17
-1000                 ~5.17–5.54
-infinity              ~5.19–5.53
-```
-
-so the observed local strip intensity is approximately
+### Step 37 — high-threshold cluster overshoot hazard
+For a fixed local covariance class
 
 ```math
-h_a(u)~5 alpha
+R(t)=1-c|t|^gamma+o(|t|^gamma),
+0<gamma<=2,
 ```
 
-per unit threshold. This yields the rare-event scaling
+Pickands' theorem gives
 
 ```math
-nu_a((u-delta,u+delta])~10 delta alpha
+P(sup z>u)
+~ ell c^(1/gamma) H_gamma u^(2/gamma) Q(u).
 ```
 
-numerically. A linear extrapolation to `delta=1e-4` gives order `1e-9` absolute probability, the scale needed by the Step-34/35 inter-node problem.
+If multiple successful finite-amplitude clusters are asymptotically lower order, then `N_a(u)=E[C_a(u)]` has the same leading tail. For fixed `s>=0`, the threshold shift `delta=s/u` yields
 
-**QUALIFICATION:** the exact strip inequality/occupation identity are analytic; the `h_a(u)` value and `delta=1e-4` extrapolation are numerical. A uniform density/hazard theorem is still open.
+```math
+\boxed{
+N_a(u+s/u)/N_a(u) -> exp(-s).
+}
+```
 
-See `TAIL_SENSITIVE_CLUSTER_STRIP_CONTINUITY_STEP.md` and `numerics/cluster_maximum_strip.py`.
+Hence
+
+```math
+\boxed{
+[N_a(u)-N_a(u+s/u)]/N_a(u) -> 1-exp(-s),
+}
+```
+
+and, taking `s->0` after `u->infinity`, the cluster hazard obeys
+
+```math
+h_a(u)~u N_a(u)
+```
+
+when a local density exists. This explains analytically why the Step-36 strip mass is `O(u delta alpha)` rather than global `O(delta)`.
+
+The leading scale is the same for smooth `gamma=2` and rough `gamma=1` classes. At the physical `u~4.959`, however, the pure smooth and pure rough leading models give hazard coefficients around `4.96` and `4.74`, while Step-36 numerics give `~5.0–5.5`. **REFINEMENT / REJECTED SHORTCUT:** this finite discrepancy reflects the already identified Brownian-parabola / finite-band crossover; substituting the pure rough fixed-class Pickands asymptotic at `u~5` is not a quantitative certificate.
+
+The matched tangent intensity has
+
+```math
+N_tan(u;q)
+=ell [u sqrt(b)/sqrt(2)] H(chi,zeta) Q(u),
+```
+
+with
+
+```math
+chi=a_xu/sqrt(b),
+zeta=kappa/[sqrt(2)u sqrt(b)].
+```
+
+Its formal logarithmic hazard is
+
+```math
+h_tan/N_tan
+=phi(u)/Q(u)-1/u
+ -(chi/u) d_chi log H
+ +(zeta/u) d_zeta log H.
+```
+
+Thus the remaining uniform hazard theorem is equivalent to controlling the logarithmic elasticities of the two-parameter generalized Pickands constant along the detector-relevant trajectory. Step 25 supplies monotonicity signs, but not a sufficiently strong upper bound on the positive `zeta` elasticity.
+
+See `CLUSTER_HAZARD_OVERSHOOT_STEP.md` and `numerics/cluster_hazard_overshoot.py`.
 
 ---
 
 ## 3. Current frontier
 
-The threshold-buffer term in the Step-35 coupling problem is now represented by a rare physical-excursion cluster-maximum measure rather than a global Gaussian supremum density. The remaining mathematical task is to bound its local intensity analytically and uniformly over the high-band `q` interval.
+The rare-event hazard scale itself is now analytically explained. The remaining mathematical task is to bound the finite-crossover multiplier uniformly over the detector-relevant `(chi,zeta)` trajectory, especially the positive `zeta d_zeta log H` contribution.
 
 ### Single next question — DO NOT ANSWER YET
 
-> Can the local cluster-maximum intensity `h_{a,q}(u)` be bounded analytically and uniformly over the high-band `q` interval—ideally by a rare-event hazard form such as `h_{a,q}(u) <= C u E[C_a(u)]`—so that the buffered-threshold term becomes theorem-level rather than numerically extrapolated?
+> Can the variogram ordering and Dieker–Yakir representation bound the logarithmic elasticities `chi d_chi log H` and `zeta d_zeta log H`—especially the positive `zeta` term—strongly enough to give an explicit uniform hazard multiplier along the high-band detector trajectory?
 
 ---
 
@@ -299,7 +334,8 @@ Do not claim:
 - Step-35 process Lipschitz continuity implies cluster-moment Lipschitz continuity;
 - generic Gaussian anti-concentration is sharp enough at the rare-event scale;
 - Step-36 proves a uniform cluster-max density/hazard bound;
-- the `delta=1e-4` strip value is analytically certified;
+- Step-37 fixed-class Pickands asymptotics are quantitatively uniform through `q->0` at `u~5`;
+- the pure rough `gamma=1` hazard formula is a finite-u certificate for the fast endpoint;
 - no re-entrant pocket can occur for other task parameters;
 - the Palm bandwidth optimum is unique or exactly located;
 - any GHz translation is a hardware recommendation;
