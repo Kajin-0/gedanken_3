@@ -1,7 +1,7 @@
 # Current State — Experiment 01: Equal D*, Different Speed
 
 **Date:** 2026-08-12 23:22 EDT  
-**Status:** mathematical closure branch remains hard-stopped after 49 logical steps; Paper A acquisition-clock and scan-power claim-scope blockers repaired; **robust quantitative regime witness now established without reopening Step 50; deeper acquisition / optical-acquisition prior-art audit completed; novelty burden narrowed; novelty not established.** Active work is on draft PR #1, branch `agent/paper-a-guarantee-semantics`.
+**Status:** mathematical closure branch remains hard-stopped after Step 49. Paper A's acquisition-clock and scan-power claim-scope blockers are repaired. A robust quantitative regime witness is now established without reopening Step 50. A deeper acquisition / optical-acquisition / ladar prior-art audit has narrowed the novelty burden. **Novelty remains unestablished.** Active work is draft PR #1 on `agent/paper-a-guarantee-semantics`.
 
 Read next:
 
@@ -15,26 +15,25 @@ Read next:
 
 ---
 
-## 1. Authoritative Paper A object
+## Authoritative Paper A result
 
 Working title:
 
 > **Task-Dependent Guarantee-Time Ordering of Photodetector Channels with Equal Eventual Matched-Filter SNR**
 
-The authoritative manuscript on the active branch is `PAPER_A_DRAFT.md`.
-
-The physical construction is
+All channels receive the same optical event
 
 ```math
-p(t)=e^{-bt}u(t),
+p(t)=e^{-bt}u(t)
 ```
+
+through
 
 ```math
-G_\tau(s)
-=A_\tau\frac{s+b}{(s+1/\tau)^2},
+G_\tau(s)=A_\tau\frac{s+b}{(s+1/\tau)^2},
 ```
 
-so the same optical event produces
+so
 
 ```math
 s_\tau(t)=A_\tau t e^{-t/\tau}u(t).
@@ -58,7 +57,7 @@ gives equal **event-specific eventual matched-filter SNR**
 \rho_{\tau,\infty}=\rho_0.
 ```
 
-Finite-time SNR accumulation is
+Finite-time evidence accumulation is
 
 ```math
 \eta(x)=1-e^{-2x}(1+2x+2x^2),
@@ -67,37 +66,19 @@ Finite-time SNR accumulation is
 \qquad x=t/\tau.
 ```
 
-The finite-template timing covariance remains
+The full-template timing covariance is
 
 ```math
-R_x(y)
-=\frac{\int_0^{x-y}v(v+y)e^{-2v-y}dv}
-{\int_0^xv^2e^{-2v}dv},
-```
-
-for `0<=y<x`, and zero beyond the template overlap.
-
-The full-template limit is
-
-```math
-\boxed{
-R_\infty(y)=(1+|y|)e^{-|y|}.
-}
+\boxed{R_\infty(y)=(1+|y|)e^{-|y|}.}
 ```
 
 ---
 
-## 2. Operational guarantee-time semantics — repaired
+## Operational guarantee-time semantics
 
-Event arrival is known only to satisfy
+Event arrival is known only to lie in `[0,L]`. A duration-`t` matched filter applied at every candidate arrival requires data through `L+t`. The problem is therefore explicitly **batch**, not sequential.
 
-```math
-0\le\theta\le L.
-```
-
-A duration-`t` finite matched filter applied to every candidate arrival requires data through `L+t`. The paper therefore studies a **batch** receiver.
-
-The central object is
+Define
 
 ```math
 \boxed{
@@ -108,36 +89,37 @@ T_G=\text{minimum post-window integration duration satisfying the guarantee crit
 The wall-clock batch time is
 
 ```math
-\boxed{
-T_{wall}=L+T_G.
-}
+\boxed{T_{wall}=L+T_G.}
 ```
 
-At fixed `L`, `T_G` and `T_wall` induce identical pairwise channel ordering.
+At fixed `L`, `T_G` and `T_wall` induce the same pairwise channel ordering.
 
-The global noise-only threshold is
+For normalized search length
+
+```math
+\ell=L/\tau,
+```
+
+the global noise-only threshold is
 
 ```math
 \Gamma(x,\ell,\alpha)
 =\inf\left\{u:
 \Pr\left[\sup_{0\le q\le\ell}Z_x(q)>u\right]\le\alpha
-\right\},
-\qquad \ell=L/\tau.
+\right\}.
 ```
 
-At the generative true alignment `q0`, which is an **analysis variable only and is not supplied to the receiver**,
+At the generative true alignment `q_0`, which is an **analysis variable only** and is not supplied to the receiver,
 
 ```math
 P_{D,true}
 =\Phi[\rho_0\sqrt{\eta(x)}-\Gamma(x,\ell,\alpha)].
 ```
 
-The complete signal-present scan probability satisfies pathwise
+The complete signal-present scan satisfies
 
 ```math
-\boxed{
-P_D^{scan}\ge P_{D,true}.
-}
+\boxed{P_D^{scan}\ge P_{D,true}.}
 ```
 
 Thus the paper proves ordering of a **sufficient guarantee time**, not exact ordering of the first solutions of `P_D^scan=beta`.
@@ -146,9 +128,7 @@ Define
 
 ```math
 X_G(\rho_0,\alpha,\beta,\ell)
-=\inf\{x:
-\rho_0\sqrt{\eta(x)}-\Gamma(x,\ell,\alpha)
-\ge\Phi^{-1}(\beta)\}.
+=\inf\{x:\rho_0\sqrt{\eta(x)}-\Gamma(x,\ell,\alpha)\ge\Phi^{-1}(\beta)\}.
 ```
 
 Then
@@ -162,7 +142,7 @@ T_G(\alpha,\beta,L;\tau,\rho_0)
 
 ---
 
-## 3. Fast/slow theorem — current strengthened form
+## Fast/slow theorem — strengthened form
 
 For
 
@@ -174,7 +154,7 @@ r=\tau_s/\tau_f>1,
 \ell=L/\tau_s,
 ```
 
-the exact guarantee-time boundary is
+the exact guarantee-time preference boundary is
 
 ```math
 \boxed{
@@ -184,13 +164,13 @@ B_r(\ell)
 }
 ```
 
-The full-template guarantee-feasibility budget is
+With
 
 ```math
-c=\rho_0-\Phi^{-1}(\beta).
+c=\rho_0-\Phi^{-1}(\beta),
 ```
 
-The regimes are
+the full-template guarantee-feasibility regimes are
 
 ```math
 \begin{array}{ll}
@@ -202,32 +182,36 @@ The regimes are
 
 Fast-only guarantee feasibility is impossible in this equal-eventual-SNR scaled family.
 
-The physical feasibility limit obeys
-
-```math
-L_{crit}(\tau)=\tau\ell_{crit}.
-```
-
 Two former assumptions are now derived:
 
-1. `Gamma_infty(ell,alpha)->infinity` follows from `R_infty(y)->0` and Slepian comparison with widely separated/equicorrelated Gaussian samples.
-2. `X_G(ell)->infinity` as `ell->ell_crit` from below follows from `eta(x)<1`, `R_x<=R_infty`, threshold ordering, boundary equality, and continuity.
+1. because `R_infty(y)->0`, widely separated samples plus Slepian comparison imply
 
-Therefore, assuming known-time guarantee feasibility and ordinary threshold/first-crossing continuity:
+```math
+\Gamma_\infty(\ell,\alpha)\to\infty;
+```
+
+2. because `eta(x)<1`, `R_x<=R_infty`, and hence `Gamma(x)>=Gamma_infty`, continuity at the critical boundary implies
+
+```math
+X_G(\ell)\to\infty
+\quad(\ell\uparrow\ell_{crit}).
+```
+
+Therefore, given known-time guarantee feasibility and ordinary threshold/first-crossing continuity:
 
 ```text
 small L -> fast guarantee-time preference;
-near fast feasibility boundary -> slow preference / slow-only feasibility;
+near the fast feasibility boundary -> slow preference / slow-only feasibility;
 -> at least one finite fast-to-slow guarantee-time crossover.
 ```
 
-No uniqueness theorem.
+No uniqueness theorem is claimed.
 
 ---
 
-## 4. NEW — robust quantitative regime witness
+## Robust quantitative regime witness — RESOLVED
 
-File:
+Detailed record:
 
 `PAPER_A_QUANTITATIVE_REGIME_WITNESS_2026-08-12.md`
 
@@ -249,7 +233,7 @@ r=1.2.
 
 ### Known arrival
 
-The exact dimensionless root is
+The exact dimensionless guarantee root is
 
 ```math
 \boxed{x_0=1.80519795247.}
@@ -265,52 +249,56 @@ T_{G,f}(0)/\tau_f=1.80520,
 T_{G,s}(0)/\tau_f=2.16624,
 ```
 
-so fast is quantitatively preferred.
+so the fast channel is quantitatively preferred.
 
 ### Finite physical timing uncertainty
 
-Choose
+Choose the same physical uncertainty for both channels:
 
 ```math
-\boxed{
-L=3.30\tau_f=2.75\tau_s.
-}
+\boxed{L=3.30\tau_f=2.75\tau_s.}
 ```
 
 The full-template feasibility threshold is
 
 ```math
-c=\rho_0-\Phi^{-1}(\beta)
-=2.21844843446.
+c=\rho_0-\Phi^{-1}(\beta)=2.21844843446.
 ```
 
-A paired `120000`-path simulation of the smooth full-template process used `x_tail=12`, leaving only
+Production simulation:
+
+```text
+240000 paired paths
+seed = 20260818
+x_tail = 16
+delta = 0.01, 0.005, 0.0025 nested grids
+```
+
+The omitted squared-template-energy fraction at `x_tail=16` is only
 
 ```math
-1-\eta(12)=1.18\times10^{-8}
+1-\eta(16)=6.90\times10^{-12}.
 ```
 
-of squared template energy outside the numerical filter.
-
-Nested timing grids gave:
+Results:
 
 | `delta` | slow `ell=2.75` PFA | fast `ell=3.30` PFA |
 |---:|---:|---:|
-| `0.0100` | `0.0472083` | `0.0539250` |
-| `0.0050` | `0.0472417` | `0.0539583` |
-| `0.0025` | `0.0472417` | `0.0539583` |
+| `0.0100` | `0.04733333` | `0.05362917` |
+| `0.0050` | `0.04736250` | `0.05365000` |
+| `0.0025` | `0.04737083` | `0.05365833` |
 
-Finest-grid exact 95% Clopper-Pearson intervals:
+Finest-grid exact 95% Clopper-Pearson **sampling** intervals:
 
 ```math
-P_{FA,s}\in[0.0460481,0.0484572],
+P_{FA,s}\in[0.0465243,0.0482283],
 ```
 
 ```math
-P_{FA,f}\in[0.0526866,0.0552516].
+P_{FA,f}\in[0.0527601,0.0545674].
 ```
 
-Since `alpha=0.05` lies cleanly between them:
+Because `alpha=0.05` lies cleanly between them,
 
 ```math
 \boxed{
@@ -320,69 +308,60 @@ Since `alpha=0.05` lies cleanly between them:
 
 at that same physical `L`.
 
-This is a **regime witness**, not a numerical localization of `L_x`.
+Important numerical wording: the Clopper-Pearson intervals quantify **Monte Carlo sampling uncertainty only**. Timing-grid and filter-tail approximation were checked separately through nested-grid stability and the `6.9e-12` omitted squared-energy fraction. This remains a strong numerical regime witness, not a computer-assisted continuum proof and not a numerical localization of `L_\times`.
 
-The key methodological advantage is that the witness uses the smooth **full-template feasibility process**, so it does not suffer the Step-13 hard-window covariance cusp. The Step-49 hard stop remains intact.
-
-The severe review's request for a robust quantitative Paper-A example is therefore considered **resolved**.
+The severe review's quantitative-example objection is considered resolved.
 
 ---
 
-## 5. NEW — closest prior-art / acquisition-lineage audit
+## Closest prior-art / novelty audit — completed, burden narrowed
 
-File:
+Detailed record:
 
 `PAPER_A_CLOSEST_PRIOR_ART_AUDIT_2026-08-12.md`
 
-The deeper audit materially narrowed the novelty burden.
-
-Classical PN/spread-spectrum acquisition already establishes that acquisition time depends on combinations of:
+Classical spread-spectrum/PN acquisition already establishes acquisition-time dependence on:
 
 ```text
 unknown code phase / delay search region;
 a priori epoch information;
 predetection SNR;
-detection probability;
-false-alarm probability;
+detection and false-alarm probability;
 dwell / integration strategy;
-matched-filter / correlator receiver structure;
-serial / parallel / sequential search architecture.
+matched-filter / correlator structure;
+serial / parallel / sequential search.
 ```
 
-Canonical matched-filter acquisition sources include Polydoros & Weber (1984) and Su (1988).
+Optical acquisition is also established through optical-CDMA synchronization/acquisition and direct-detection ladar in a specified range window.
 
-The same conceptual structure exists in **optical** systems:
+Additional ladar literature establishes pulse-width / range-resolution and range-estimation tradeoffs. Those are adjacent, not a direct reproduction of the Paper-A theorem.
 
-- Mustapha & Ormondroyd 2000: optical-CDMA sequential synchronization / mean acquisition time;
-- Keshavarzian & Salehi 2002: optical orthogonal code serial-search acquisition;
-- Pham & Yashima 2005: multiple-dwell serial-search optical-CDMA acquisition;
-- Milstein et al. 2008: direct-detection Geiger-mode APD ladar acquisition in a specified range window under constant false alarm.
-
-Therefore Paper A must NOT claim novelty for
+Therefore do **not** claim novelty for:
 
 ```text
-unknown delay search;
+unknown-delay search;
 search-size penalties;
 acquisition time depending on dwell/integration;
 PFA/Pd tradeoffs;
-optical acquisition itself.
+optical acquisition;
+pulse-width / range-resolution tradeoffs.
 ```
 
-The only remaining plausible synthesis contribution is narrower:
+The only remaining plausible synthesis contribution is:
 
 ```text
 same optical event
-+ causal photodetector channel family
-+ equal eventual matched-filter SNR
++ causal detector family
++ equal event-specific eventual matched-filter SNR
 + detector time-scale variation
 + simultaneous rescaling of evidence accumulation and timing-search correlation length
-+ one fixed physical arrival uncertainty
--> fast/slow guarantee-time ordering reversal and slow-only feasibility.
++ one fixed physical arrival-time uncertainty
+-> fast/slow guarantee-time reversal and slow-only feasibility.
 ```
 
-No direct source reproducing that full detector-scaling construction was found in this audit.
+No direct source reproducing that complete detector-scaling construction was found in the audits performed so far.
 
-Disposition remains:
+Disposition:
 
 ```text
 POSSIBLE SYNTHESIS CONTRIBUTION / NOVELTY NOT ESTABLISHED.
@@ -392,29 +371,29 @@ No `first`, `novel`, or priority language is authorized.
 
 ---
 
-## 6. Historical numerical hard stop — remains active
+## Mathematical companion — HARD STOP REMAINS ACTIVE
 
 **DO NOT CREATE STEP 50 BY DEFAULT.**
 
-Preserve these invalidations/corrections:
+Preserve the correction history:
 
 - Step-13 `ell~49` hard-window grid crossover invalid;
-- an invertible noiseless common low-pass does not by itself impose finite information bandwidth;
+- an invertible noiseless common low-pass does not impose a genuine information bandwidth;
 - Step-20 upper Rice switch invalidated by Palm correction;
 - raw Step-27 tiny-`chi` values grid biased;
-- Step-44 is a finite-grid pointwise certificate, not continuum truth;
+- Step-44 is finite-grid only, not continuum truth;
 - Step-46 missed-event run supports sign/scale only, not a precise coefficient;
-- Step-47 pure-alpha1 correction is not the exact finite-`u` false-alarm ratio;
-- Steps 48–49 show higher-order covariance structure does not cancel the dominant rough-grid loss at the needed scale;
-- Step 49 intentionally stopped before another publication-grade finite-`u` closure branch.
+- Step-47 canonical discrete correction is not the exact finite-`u` false-alarm ratio;
+- Steps 48–49 show higher-order covariance does not cancel the dominant rough-grid loss at the needed scale;
+- Step 49 intentionally stopped before another publication-grade finite-`u` transfer branch.
 
-The new Paper-A witness avoids this branch rather than overriding it.
+The new quantitative witness avoids this branch rather than overriding it.
 
 ---
 
-## 7. Exact current claim boundary
+## Exact current claim boundary
 
-Paper A now establishes, within the stated idealized family and batch guarantee protocol:
+Paper A establishes, within the stated idealized family and batch guarantee protocol:
 
 ```text
 same optical event;
@@ -429,7 +408,7 @@ at least one finite fast-to-slow guarantee-time crossover;
 a robust finite-scale regime witness.
 ```
 
-It does NOT establish:
+It does **not** establish:
 
 ```text
 exact online or sequential latency;
@@ -444,19 +423,19 @@ novelty or priority.
 
 ---
 
-## 8. Active next phase
+## Active next phase
 
-The two major open items from the previous state are now resolved:
+The previous two major open items are now resolved:
 
 ```text
-robust Paper-A quantitative example -> RESOLVED via full-template regime witness;
-deeper acquisition prior-art audit -> COMPLETED, novelty burden narrowed.
+robust quantitative Paper-A example -> RESOLVED;
+deeper acquisition / optical-acquisition prior-art audit -> COMPLETED.
 ```
 
-The next appropriate action is **final adversarial manuscript and citation QA** on the current integrated `PAPER_A_DRAFT.md`.
+The next appropriate action is **final integrated adversarial manuscript and citation QA** on `PAPER_A_DRAFT.md`.
 
 Do not reopen the Gaussian-extremes branch unless that final audit identifies a genuinely new mathematical defect requiring it.
 
 ### Current single next question
 
-> Does the integrated Paper A now survive a fresh hostile-review pass when its theorem, numerical witness, acquisition-theory positioning, references, and claim boundaries are checked together?
+> Does the integrated Paper A survive a fresh hostile-review pass when its theorem, numerical witness, acquisition-theory positioning, references, and claim boundaries are checked together?
