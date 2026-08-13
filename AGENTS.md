@@ -2,16 +2,17 @@
 
 **Repository:** `Kajin-0/gedanken_3`  
 **Active experiment:** `experiments/01-equal-dstar-different-speed/`  
-**Current mode:** detector-facing manuscript drafting. **MATHEMATICAL CLOSURE HARD-STOPPED. PRIOR-ART AUDIT COMPLETED. PAPER ARCHITECTURE FIXED. PAPER A DRAFTED THROUGH SECTION IV. NOVELTY NOT ESTABLISHED.** Step 49 is the final default proof step. The active manuscript is now `PAPER_A_DRAFT.md`. `PAPER_A_DRAFT_OPENING.md` is retained as the opening-draft milestone. Steps 13–49 are technical companion material, not the default main-paper narrative. Do not restart the Gaussian-extremes closure chain or invent a new scalar metric by default.
+**Current mode:** detector-facing manuscript drafting. **MATHEMATICAL CLOSURE HARD-STOPPED. PRIOR-ART AUDIT COMPLETED. PAPER ARCHITECTURE FIXED. PAPER A DRAFTED THROUGH SECTION IV; SECTION V DRAFTED AS A SEPARATE MODULE. NOVELTY NOT ESTABLISHED.** Step 49 is the final default proof step. Active core manuscript: `PAPER_A_DRAFT.md`. Discussion/conclusion module: `PAPER_A_SECTION_V.md`. `PAPER_A_DRAFT_OPENING.md` is retained as a milestone. Steps 13–49 are technical companion material, not the default main-paper narrative. Do not restart the Gaussian-extremes closure chain or invent a new scalar metric by default.
 
 Read first:
 1. `experiments/01-equal-dstar-different-speed/CURRENT_STATE.md`
 2. `experiments/01-equal-dstar-different-speed/PAPER_A_DRAFT.md`
-3. `experiments/01-equal-dstar-different-speed/PAPER_ARCHITECTURE_TASK_REVERSAL.md`
-4. `experiments/01-equal-dstar-different-speed/PRIOR_ART_AUDIT_DETECTOR_TASK_REVERSAL.md`
-5. `experiments/01-equal-dstar-different-speed/DIMENSIONLESS_DETECTION_SURFACE_STEP.md`
-6. `experiments/01-equal-dstar-different-speed/TASK_REGIME_BOUNDARY_STEP.md`
-7. `experiments/01-equal-dstar-different-speed/PROGRESS_LOG.md`
+3. `experiments/01-equal-dstar-different-speed/PAPER_A_SECTION_V.md`
+4. `experiments/01-equal-dstar-different-speed/PAPER_ARCHITECTURE_TASK_REVERSAL.md`
+5. `experiments/01-equal-dstar-different-speed/PRIOR_ART_AUDIT_DETECTOR_TASK_REVERSAL.md`
+6. `experiments/01-equal-dstar-different-speed/DIMENSIONLESS_DETECTION_SURFACE_STEP.md`
+7. `experiments/01-equal-dstar-different-speed/TASK_REGIME_BOUNDARY_STEP.md`
+8. `experiments/01-equal-dstar-different-speed/PROGRESS_LOG.md`
 
 Live `main` overrides chat summaries or stale notes.
 
@@ -33,15 +34,13 @@ Working title:
 
 > **Task-Dependent Ordering of Photodetectors with Equal Asymptotic Sensitivity**
 
-Active manuscript:
+### Core manuscript through Section IV
 
-`experiments/01-equal-dstar-different-speed/PAPER_A_DRAFT.md`
+Active file: `experiments/01-equal-dstar-different-speed/PAPER_A_DRAFT.md`.
 
-### Manuscript through Section II
+The manuscript contains:
 
-The draft contains:
-
-- Abstract and Introduction with established detector/signal-detection ingredients explicitly cited as prior art.
+- Abstract and Introduction with established detector/signal-detection ingredients treated explicitly as prior art.
 - Controlled time-scaled family
 
 ```math
@@ -69,21 +68,17 @@ r_{\tau,t}(\Delta)=R_{t/\tau}(|\Delta|/\tau).
 
 ### Section III — dimensionless task surface
 
-Define the global correlated-scan threshold by
-
 ```math
 \Pr\left[\sup_{0\le q\le\ell}Z_x(q)>\Gamma(x,\ell,\alpha)\right]=\alpha,
 \qquad \ell=L/\tau.
 ```
-
-The true-alignment decision margin is
 
 ```math
 M(x;\ell,\rho_0,\alpha)
 =\rho_0\sqrt{\eta(x)}-\Gamma(x,\ell,\alpha).
 ```
 
-The Step-11 covariance ordering plus standard Gaussian comparison gives
+Covariance ordering plus Gaussian comparison gives
 
 ```math
 x_2>x_1
@@ -91,14 +86,16 @@ x_2>x_1
 \Gamma(x_2,\ell,\alpha)\le\Gamma(x_1,\ell,\alpha),
 ```
 
-so `M` is strictly increasing. Define
+so `M` is strictly increasing and
 
 ```math
 X_D(\rho_0,\alpha,\beta,\ell)
-=\inf\{x:M(x)\ge\Phi^{-1}(\beta)\}.
+=\inf\{x:M(x)\ge\Phi^{-1}(\beta)\}
 ```
 
-Then
+is well defined whenever feasible.
+
+Central exact scaling:
 
 ```math
 \boxed{
@@ -107,7 +104,7 @@ T_D(\alpha,\beta,L;\tau,\rho_0)
 }
 ```
 
-This is the exact central scaling for the controlled family. The reversal is therefore a cross-detector scaling effect, not a finite integration-time optimum.
+This is a cross-detector scaling effect, not a finite integration-time optimum.
 
 ### Section IV — task boundary and feasibility proof
 
@@ -156,22 +153,9 @@ physical feasibility scales as
 L_{\mathrm{crit}}(\tau)=\tau\ell_{\mathrm{crit}}.
 ```
 
-The exact feasibility regimes are:
+The exact regimes are both-feasible / slow-only / neither. Fast-only feasibility is excluded in this deliberately normalized family.
 
-```text
-both feasible:
-    c > Gamma_infty(r ell, alpha)
-
-slow only:
-    Gamma_infty(ell, alpha) < c <= Gamma_infty(r ell, alpha)
-
-neither feasible:
-    c <= Gamma_infty(ell, alpha)
-```
-
-Fast-only feasibility is excluded in this deliberately normalized family.
-
-**Proposition 1 assumptions are explicit in the manuscript:** known-time feasibility; continuity of `X_D` away from singularities; unbounded growth of `Gamma_infty` with search length; divergence of `X_D` at the feasibility boundary.
+**Proposition 1 assumptions are explicit:** known-time feasibility; continuity of `X_D` away from singularities; unbounded growth of `Gamma_infty` with search length; divergence of `X_D` at the feasibility boundary.
 
 Under those assumptions:
 
@@ -183,7 +167,24 @@ therefore at least one finite fast-to-slow crossover exists.
 
 No crossover uniqueness is established.
 
-**Scope:** task/protocol result only. Do not state that faster detectors are generally worse or that the scan is universally optimal.
+### Section V — interpretation and implications
+
+New file: `experiments/01-equal-dstar-different-speed/PAPER_A_SECTION_V.md`.
+
+The discussion must preserve these conclusions:
+
+1. The ordering is a **detector–task ordering**, not a detector-only ordering.
+2. The key task dependence enters through `L/tau` together with `rho_0`, `alpha`, `beta`, and the chosen decision rule.
+3. The paper does **not** propose a new scalar sensitivity-speed metric; such products already exist and would erase the task dependence responsible for the crossover.
+4. Device characterization and task qualification are distinct. `D*`, responsivity, noise, bandwidth, and response time remain useful device descriptors but do not alone rank every finite-time unknown-arrival task.
+5. The crossover is not an intrinsic penalty for speed: eventual SNR is fixed and every family member benefits from more observation time.
+6. Scope is explicit: linear time-scaled family, additive stationary Gaussian noise, equal eventual SNR, arrival-time nuisance only, and a true-alignment criterion with a global scan threshold. No automatic extension to Bayesian/minimax/sequential receivers, localization requirements, unknown amplitude/phase, nonlinear response, saturation, dead time, or nonstationarity.
+
+Detector-facing closing statement:
+
+> **Detector specifications rank devices only relative to the task for which the ranking is being made. When arrival time is uncertain, response time affects both signal accumulation and the statistical size of the timing search.**
+
+Within the controlled family, that coupling is sufficient to reverse fast/slow detection-time ordering despite equal eventual matched-filter sensitivity.
 
 ---
 
@@ -232,9 +233,11 @@ Critical preserved corrections:
 
 Stay inside **Paper A**.
 
+The detector-facing narrative is complete in modular form. The next logical action is to merge `PAPER_A_SECTION_V.md` into `PAPER_A_DRAFT.md` and perform a full consistency/compression pass: remove duplication, standardize notation/terminology, check assumptions against abstract and conclusion, and verify novelty/prior-art language. Do not add new theorem claims or numerical phase-diagram claims during that pass.
+
 ### Single next question — DO NOT ANSWER UNTIL PROMPTED
 
-> Can Section V now be drafted to finish the detector-facing narrative, with the practical implication stated strongly but without broadening the theorem beyond the defined task/protocol?
+> Can Section V now be merged into the active manuscript and the full Paper A draft receive a consistency/compression pass without broadening the theorem or reopening the mathematical companion?
 
 ---
 
