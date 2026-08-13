@@ -2,83 +2,66 @@
 
 **Repository:** `Kajin-0/gedanken_3`  
 **Active experiment:** `experiments/01-equal-dstar-different-speed/`  
-**Current mode:** first-principles photodetector thought experiment. **Forty-nine logical steps completed. Mathematical closure branch HARD-STOPPED.** Step 49 executes the final target permitted by the Step-48 stopping rule: the exact finite-window covariance remainder beyond the mixed tangent. The exact covariance is simulated through an exact two-state linear-filter representation with delayed subtraction. Two independent `3000`-path runs (`6000` paired paths) comparing physical `dt=.001` with `dt/32` give exact-covariance relative grid loss `8.3682629e-4`, paired SE `6.8953e-6`, approximate normal 95% interval `[8.2331e-4,8.5034e-4]`. The exact pure-alpha1 benchmark for the same refinement is `8.3657896e-4`, leaving exact-covariance minus pure residual only `+2.47e-7 +/-6.90e-6` (1 SE). Higher-order finite-window covariance therefore does not cancel the rough-grid effect at order `1e-4`. The remaining publication-grade mapping from exact-covariance spectral intensity to the exact finite-search false-alarm event is no longer proportionate to the detector question. **Do not continue to Step 50 of this proof chain by default.** Next phase: consolidate detector/detection-theory core, separate mathematical companion material, and perform prior-art/novelty audit. No universal scalar replacement metric and no novelty claim.
+**Current mode:** detector-facing consolidation after a forty-nine-step mathematical closure branch. **MATHEMATICAL CLOSURE HARD-STOPPED. PRIOR-ART AUDIT COMPLETED. NOVELTY NOT ESTABLISHED.** Step 49 is the final default proof step. A focused detector/detection-theory literature audit now finds direct prior art for pulse/energy detectivity from frequency-dependent `D*(f)`, sensitivity–bandwidth joint metrics, and unknown-arrival matched-filter false-alarm penalties controlled by template correlation. No direct hit was found for the complete equal-eventual-SNR photodetector construction in which different temporal scales reverse finite-time detection ranking under one global-false-alarm unknown-arrival scan. That construction is only a **POSSIBLE SYNTHESIS CONTRIBUTION**, not a novelty claim. Do not restart the Gaussian-extremes closure chain or invent a new scalar metric by default.
 
 Read first:
 1. `experiments/01-equal-dstar-different-speed/CURRENT_STATE.md`
-2. `experiments/01-equal-dstar-different-speed/PROGRESS_LOG.md`
-3. latest/final closure step: `experiments/01-equal-dstar-different-speed/EXACT_COVARIANCE_GRID_TRANSFER_STOP_STEP.md`
-4. latest helper: `experiments/01-equal-dstar-different-speed/numerics/exact_covariance_grid_transfer.py`
-5. preceding step: `experiments/01-equal-dstar-different-speed/MIXED_TANGENT_GRID_TRANSFER_STEP.md`
+2. `experiments/01-equal-dstar-different-speed/PRIOR_ART_AUDIT_DETECTOR_TASK_REVERSAL.md`
+3. `experiments/01-equal-dstar-different-speed/PROGRESS_LOG.md`
+4. final closure step: `experiments/01-equal-dstar-different-speed/EXACT_COVARIANCE_GRID_TRANSFER_STOP_STEP.md`
+5. final closure helper: `experiments/01-equal-dstar-different-speed/numerics/exact_covariance_grid_transfer.py`
 
 Live `main` overrides chat summaries or stale notes.
 
 ---
 
 ## Mandatory repository protocol
-Before material writes: fetch live target and exact blob SHA; never overwrite stale state; preserve failed/corrected paths. `CURRENT_STATE.md` and `PROGRESS_LOG.md` must move whenever the frontier changes.
+Before material writes: fetch live target and exact blob SHA; never overwrite stale state; preserve failed/corrected paths. `CURRENT_STATE.md`, `PROGRESS_LOG.md`, and this file must move whenever the research frontier changes.
 
-Useful epistemic labels include: **DEFINED, ASSUMED, DERIVED, CONDITIONAL, COUNTEREXAMPLE, REFINEMENT, NEGATIVE RESULT, REJECTED SHORTCUT, FAILED NUMERICAL ESTIMATE, NUMERICAL VALIDATION, PARTIAL CERTIFICATE, PAIRED NUMERICAL INTERVAL CLOSURE, EXACT VARIOGRAM ORDERING, ANALYTIC INTER-NODE ENVELOPE, RIGOROUS FINITE-GRID STATISTICAL CERTIFICATE, PAIRED NESTED-GRID DIAGNOSTIC, EXACT CANONICAL FINITE-GRID CORRECTION, EXACT CELLWISE BRIDGE DECOMPOSITION, PAIRED FINITE-LEVEL TRANSFER INTERVAL, PAIRED EXACT-COVARIANCE TRANSFER INTERVAL, HARD-GATE PASSED, HARD-STOP TRIGGERED, INVALIDATED, ASYMPTOTIC, OPEN, NON-CLAIM.**
+Useful epistemic labels include: **DEFINED, ASSUMED, DERIVED, CONDITIONAL, COUNTEREXAMPLE, REFINEMENT, NEGATIVE RESULT, REJECTED SHORTCUT, FAILED NUMERICAL ESTIMATE, NUMERICAL VALIDATION, PARTIAL CERTIFICATE, RIGOROUS FINITE-GRID STATISTICAL CERTIFICATE, PAIRED NESTED-GRID DIAGNOSTIC, EXACT CANONICAL FINITE-GRID CORRECTION, EXACT CELLWISE BRIDGE DECOMPOSITION, PAIRED FINITE-LEVEL TRANSFER INTERVAL, PAIRED EXACT-COVARIANCE TRANSFER INTERVAL, HARD-GATE PASSED, HARD-STOP TRIGGERED, PRIOR-ART AUDIT, POSSIBLE SYNTHESIS CONTRIBUTION, NOVELTY NOT ESTABLISHED, INVALIDATED, ASYMPTOTIC, OPEN, NON-CLAIM.**
 
-Do not use `novel`, `universal`, `fundamental`, `first`, etc. without a separate prior-art audit. `Universal` is allowed only for the explicitly model-reduced canonical crossover function.
+Do not use `novel`, `universal`, `fundamental`, `first`, or equivalent novelty language without a deeper audit that actually supports it. `Universal` remains allowed only for the explicitly model-reduced canonical crossover function.
 
 ---
 
-## Compact surviving chain
+## Detector-facing core — Steps 01–12
 
-### Steps 01–12 — detector result
-Scalar reference `D*` does not determine arbitrary temporal-signal performance. Complete magnitude `D*(f)` is sufficient only for the restricted known-waveform/full-observation stationary-Gaussian problem. Finite records make phase/time placement operationally relevant. Unknown arrival introduces a global-false-alarm timing search. In the defined scanning protocol, a controlled equal-eventual-SNR family can reverse fast/slow ranking because speed changes both evidence accumulation and timing-search complexity. This is protocol/task specific, not a universal detector theorem.
+The surviving detector result is:
 
-### Steps 13–23
-Hard-window scan is locally Brownian-like. **FAILED NUMERICAL ESTIMATE:** early `ell~49` crossover invalid. Genuine finite information bandwidth removes cusp; fixed physical signal/noise yields shallow finite bandwidth optimum. Rice upper switch near `130` is **INVALIDATED**; Palm preserves lower switch `~21.7 +/- .3`. Rough endpoint `Lambda_cross^infinity~.905 +/- .004`; original `.895` numerically fast-preferred.
+- Scalar reference `D*` does not determine arbitrary temporal-signal performance.
+- Complete magnitude `D*(f)` is sufficient only for the restricted known-waveform/full-observation stationary-Gaussian problem.
+- Finite windows make phase/time placement operationally relevant even with identical magnitude response; an all-pass construction removes the trivial pure-delay objection.
+- Finite-time optimal SNR is `rho_T^2=<s_T,C_T^-1 s_T>`.
+- Unknown arrival introduces a global-false-alarm timing search governed by matched-filter scan covariance rather than raw ADC sample count.
+- In the controlled equal-eventual-SNR family, faster response accumulates evidence sooner but shortens timing correlation length. Under the **defined scanning protocol**, those effects can reverse the fast/slow detection ranking.
+- The constructed task surface obeys `T_D=tau X_D(rho0,alpha,beta,L/tau)`.
 
-### Steps 24–30
-Finite bandwidth creates generalized Pickands variogram `t^2+sqrt(2)chi F_zeta`. Exact Brown-Resnick Slepian monotonicity does not imply physical-boundary monotonicity. **INVALIDATED INTERMEDIATE:** `.8131` coupling coefficient; corrected `.8906480701 sqrt(chi/zeta)`. Brownian-parabola scaling uses `mu=sqrt(2)zeta chi^(1/3)`. Raw tiny-chi Step-27 values grid biased.
+**Scope:** this is a task/protocol result. Do not state that faster detectors are generally worse or that the scan is universally optimal.
 
-### Steps 31–41
-Crossing moments work through `kappa_f~170`, then fail from micro-upcrossings; finite-amplitude excursion clusters replace them. Step 34 numerical high-band closure. Step 35 q-regularity; generic anti-concentration fails at rare-event scale. Step 36 cluster-strip measure. Steps 37–38 overshoot scale and exact Pickands cross-elasticity. Step 39 `R=N_a/N_tan~1.56`; small-amplitude remainder rejected. Step 40 Cameron-Martin threshold translation. Step 41 analytic inter-node q control. **INVALIDATED NUMERICAL VALUE:** tiny-q pair RMS `~5.4e-5`; corrected `~2.69e-5`.
+---
 
-### Steps 42–44
-Raw inverse-duration Palm concentration is formally bounded but useless. Duration truncation at `L0=.02` separates bounded long contributions from analytically negligible short clusters. Step 44 pools `n=200000` and obtains pointwise finite-grid 95% bound `P_FA/alpha<.999957771`; remaining margin `.00004223 alpha`, so continuum bias dominates.
+## Mathematical companion — Steps 13–49
 
-### Step 45
-Witness retuning: `X=7.50` gains fast `~.001575 alpha` with slow lower `~1.089`; `X=7.70` gains `~.002006 alpha` but slow lower `~1.013`. **NEGATIVE RESULT:** retuning alone trades one knife-edge for another.
+Keep these as technical companion/appendix material unless an external reviewer identifies a decision-relevant gap.
 
-### Step 46
-Nested `.001 -> .00025` correction `(5.301 +/-2.507)e-4 alpha`; five missed maxima account for `.00052149 alpha`, duration-only interpolation only `(8.61 +/-4.13)e-6 alpha`. **WORDING CORRECTION:** five-event result supports sign/scale consistency only, not precise coefficient verification.
+Key surviving corrections and closure results:
 
-### Step 47
-Pure alpha1 Brownian finite-grid correction is explicit:
-
-```math
-H_1^delta=nu(sqrt(2delta)),
-\qquad delta=a_Xu^2dt.
-```
-
-At `dt=.001`, exact canonical loss `1.0161323e-3`. Do not equate this with exact finite-u false-alarm ratio.
-
-### Step 48
-Mixed finite-u tangent has exact Brownian-bridge cell decomposition. Paired DY (`9000` paths, `Delta` vs `Delta/128`) gives mixed relative loss `9.3748649e-4`, paired SE `5.5146e-6`; pure-alpha1 loss `9.2635965e-4`; mixed-pure residual `-1.11268e-5 +/-5.5088e-6`. **HARD-GATE PASSED:** mixed finite-u transfer is `O(1e-5)` versus `O(9e-4)` grid loss.
-
-### Step 49 — FINAL closure step
-Exact finite-window covariance:
-
-```math
-R_x(y)=e^{-y}[I_2(x-y)+yI_1(x-y)]/D_x.
-```
-
-Exact filter-state construction:
-
-```math
-dU=-Udt+dW,
-\qquad dV=(U-V)dt,
-```
-
-```math
-Z_raw(t)=V(t)-e^{-x}[V(t-x)+xU(t-x)].
-```
-
-Two independent `3000`-path exact-covariance runs, `dt=.001` vs `dt/32`, pooled `6000` paths:
+- **FAILED NUMERICAL ESTIMATE:** Step-13 rough-grid crossover `ell~49` invalid; hard-window scan is locally Brownian-like.
+- Genuine finite information bandwidth removes the cusp; an invertible noiseless low-pass does not because optimal whitening cancels it.
+- Rice's apparent upper switch near `kappa_f~130` is **INVALIDATED**; Palm preserves only the lower switch near `21.7 +/- .3`.
+- **INVALIDATED INTERMEDIATE:** coupling coefficient `.8131`; corrected `.8906480701 sqrt(chi/zeta)`.
+- **INVALIDATED NUMERICAL INTERPRETATION:** raw tiny-chi Step-27 values were grid biased.
+- Crossing moments fail from micro-upcrossings; finite-amplitude excursion clusters replace them.
+- Step 39 finds `R=N_a/N_tan~1.56`; finite-u correction is not a small-amplitude remainder.
+- Step 40 gives Cameron-Martin exact-event threshold translation.
+- Step 41 replaces empirical q interpolation with analytic Gaussian-process control.
+- **INVALIDATED NUMERICAL VALUE:** Step-35 tiny-q pair RMS `~5.4e-5`; corrected asymptotic `~2.69e-5`.
+- Duration truncation at `L0=.02` makes bounded-weight finite-sample concentration possible; Step 44 gives pointwise finite-grid 95% `P_FA/alpha<.999957771`, but only `.00004223 alpha` margin.
+- Step 45 shows witness retuning trades one near-boundary problem for another.
+- Step 46 isolates missed between-sample maxima as the dominant grid error. **WORDING CORRECTION:** the five-event paired result has ~47% relative SE and supports sign/scale consistency only, not precise coefficient validation.
+- Step 47 gives exact pure-alpha1 discrete Pickands correction `H_1^delta=nu(sqrt(2delta))`.
+- Step 48 gives mixed finite-u transfer only `O(1e-5)` relative to an `O(9e-4)` grid loss.
+- Step 49 evaluates the exact finite-window covariance directly. Physical `dt=.001` versus `dt/32`, pooled `6000` paired paths:
 
 ```text
 H_exact^Delta          .5528146649
@@ -90,17 +73,61 @@ pure-alpha1 loss       8.3657896e-4
 exact-minus-pure       +2.47e-7 +/-6.90e-6
 ```
 
-**PAIRED EXACT-COVARIANCE TRANSFER INTERVAL:** higher-order covariance does not cancel the rough-grid effect at order `1e-4`.
+**HARD-STOP TRIGGERED:** the remaining publication-grade mapping from exact-covariance spectral intensity to exact finite-search false-alarm probability is no longer proportionate to the detector question. Do not create Step 50 of this proof chain by default.
 
-**HARD-STOP TRIGGERED:** no Step 50 of the same closure chain by default.
+---
+
+## Prior-art audit disposition
+
+Full focused audit: `experiments/01-equal-dstar-different-speed/PRIOR_ART_AUDIT_DETECTOR_TASK_REVERSAL.md`.
+
+### Established ingredients — not novelty targets
+
+1. **Pulse/energy detection from frequency-dependent detectivity:** R. Clark Jones treated this directly in 1960. Scalar `D*` insufficiency for arbitrary pulses is therefore not new.
+2. **Sensitivity–speed / detectivity–bandwidth comparison:** established in detector literature; `D* x bandwidth`-type metrics already exist. Do not propose a simple product as a new universal metric.
+3. **Unknown-arrival matched-filter search penalty:** established adjacent detection theory; false-alarm rate/threshold depends on the correlated peak process, template autocorrelation, and effective trial rate rather than raw sample count.
+4. **All-pass magnitude preservation with altered dispersion:** standard systems theory. The photodetector finite-window counterexample may be useful pedagogically, but stand-alone novelty confidence is low.
+
+### Only plausible novelty-bearing object
+
+Focused search found no direct match for the complete construction:
+
+```text
+equal eventual matched-filter SNR
++ different detector temporal scales
++ fixed unknown-arrival interval
++ global false-alarm scan
++ finite-time evidence accumulation
++ template-dependent timing-search correlation
+→ explicit fast/slow detection-time ranking reversal.
+```
+
+Disposition:
+
+```text
+POSSIBLE SYNTHESIS CONTRIBUTION / NOVELTY NOT ESTABLISHED.
+```
+
+Absence of a direct hit is not proof of novelty. Adjacent radar, sonar, astronomy, gravitational-wave, sequential-detection, optical-receiver, and statistical decision literatures remain large. A deeper citation-network and patent audit would be needed before any novelty claim.
 
 ---
 
 ## Active next phase
-1. Consolidate detector/detection-theory result from Steps 01–12.
-2. Separate Steps 13–49 as technical companion/appendix material.
-3. Perform serious prior-art/novelty audit before novelty language.
-4. Reopen mathematical closure only if external review identifies a decision-relevant gap.
+
+Do **not** restart the Gaussian-extremes proof chain.
+
+The next logical task is detector-facing consolidation:
+1. compress Steps 01–12 into a short theorem/counterexample paper architecture;
+2. place the novelty burden only on the complete equal-eventual-SNR ranking-reversal synthesis;
+3. cite Jones, established detectivity–bandwidth work, and matched-filter search literature as prior art rather than rediscoveries;
+4. move Steps 13–49 into technical companion/appendix material;
+5. perform a deeper novelty audit only if the compressed result still looks publication-worthy.
+
+### Single next question — DO NOT ANSWER UNTIL PROMPTED
+
+> Can the detector-facing result be compressed into a short paper architecture whose central theorem is the protocol-specific equal-eventual-SNR ranking reversal, with established ingredients cited as prior art and Steps 13–49 moved out of the main narrative?
+
+---
 
 ## Scope boundary
-Do not claim: faster universally better/worse; universal scalar replacement for `D*`; scanning protocol universally optimal; Step-13 `ell~49`; Step-20 double reversal; raw Step-27 values as continuum truth; Step-34 fully formal theorem; Step-36 uniform hazard theorem; `R~1`; numerical covariance constants interval-certified; `L0=.02` optimal; Step-44 continuum certificate; Step-46 precise coefficient validation; Step-47 canonical ratio as exact finite-u false-alarm ratio; Step-48/49 Monte Carlo intervals as distribution-free theorem-level; `X=7.16` mathematically optimal; no re-entrant pocket for all task parameters; novelty.
+Do not claim: faster universally better/worse; a universal scalar replacement for `D*`; `D* x bandwidth` as new; unknown-arrival matched-filter search penalty as new; scanning protocol universally optimal; Step-13 `ell~49`; Step-20 double reversal; raw Step-27 values as continuum truth; Step-34 fully formal theorem; Step-36 uniform hazard theorem; `R~1`; numerical covariance constants interval-certified; `L0=.02` optimal; Step-44 as continuum certificate; Step-46 coefficient precisely verified; Step-47 canonical ratio as exact finite-u false-alarm ratio; Step-48/49 Monte Carlo intervals as distribution-free theorem-level results; `X=7.16` mathematically optimal; no re-entrant pocket for all task parameters; novelty.
