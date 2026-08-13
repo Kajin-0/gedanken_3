@@ -1,12 +1,28 @@
 # Progress Log — Experiment 01
 
-**Consolidation note — 2026-08-12 20:31 EDT:** mathematical closure stopped after Step 49; detector-facing prior-art audit completed. Novelty is not established. Full derivations remain in dedicated step files.
+**Consolidation note — 2026-08-12 20:42 EDT:** mathematical closure stopped after Step 49; detector-facing prior-art audit and short-paper architecture completed. Novelty is not established. Full derivations remain in dedicated step files.
 
 ---
 
 ## Steps 01–12 — detector/detection-theory core
 
 Equal scalar reference `D*` does not determine arbitrary temporal-signal performance. Full magnitude `D*(f)` is sufficient only for the restricted known-waveform/full-observation stationary-Gaussian problem. Finite windows make phase/time placement relevant. Unknown arrival introduces global false-alarm timing-search complexity. In the defined continuous scanning protocol, a controlled equal-eventual-SNR family can reverse fast/slow ranking because temporal compression changes both early evidence accumulation and timing-search correlation length. This is protocol/task specific, not a universal detector theorem.
+
+The exact detector-facing scaling is
+
+```math
+T_D(\alpha,\beta,L;\tau,\rho_0)
+=\tau X_D(\rho_0,\alpha,\beta,L/\tau).
+```
+
+For two time scales with `r=tau_s/tau_f>1` and `ell=L/tau_s`, the exact task boundary is
+
+```math
+B_r(\ell)=X_D(\rho_0,\alpha,\beta,r\ell)
+-rX_D(\rho_0,\alpha,\beta,\ell)=0.
+```
+
+Under the Step-12 continuity/extreme-value assumptions: fast wins at known time; approaching the fast feasibility boundary, fast detection time diverges while slow remains feasible; therefore at least one finite fast-to-slow crossover exists. Slow-only feasibility is possible, fast-only feasibility is excluded in this equal-eventual-SNR scaled family, and uniqueness is not established.
 
 ## Steps 13–23 — continuous search / bandwidth
 
@@ -36,13 +52,7 @@ with only `.00004223 alpha` margin. Continuum timing-grid bias becomes dominant.
 
 ## Step 46 — rough-grid mechanism
 
-Nested `.001,.0005,.00025` grids, 24k paired paths:
-
-```text
-fine(.00025)-coarse(.001)  = +.00053010 alpha +/- .00025069
-```
-
-Five missed fine-grid successes contribute `.00052149 alpha`; duration-only interpolation contributes only `(8.61 +/-4.13)e-6 alpha`. **WORDING CORRECTION:** because this result is driven by five events with ~47% relative SE, it is only statistically consistent with theory in sign/scale, not a precise coefficient verification.
+Nested `.001,.0005,.00025` grids, 24k paired paths give coarse-to-fine correction `(5.301 +/-2.507)e-4 alpha`. Five missed fine-grid successes contribute `.00052149 alpha`; duration-only interpolation contributes only `(8.61 +/-4.13)e-6 alpha`. **WORDING CORRECTION:** the five-event result supports sign/scale consistency only, not precise coefficient verification.
 
 ## Step 47 — exact canonical alpha=1 correction
 
@@ -56,16 +66,7 @@ At `dt=.001`, exact canonical loss is `1.0161323e-3`. **EXACT CANONICAL FINITE-G
 
 ## Step 48 — hard-gated mixed-tangent transfer
 
-Mixed finite-u tangent has exact Brownian-bridge cell decomposition. Paired DY on `9000` paths, `Delta` versus `Delta/128`:
-
-```text
-mixed relative loss      9.3748649e-4
-paired SE                5.5146e-6
-pure alpha=1 loss        9.2635965e-4
-mixed-pure residual     -1.11268e-5 +/-5.5088e-6
-```
-
-**HARD-GATE PASSED:** finite-u Brownian-parabola transfer is `O(1e-5)`, much smaller than the `O(9e-4)` grid effect.
+Paired DY on `9000` paths, `Delta` versus `Delta/128`, gives mixed relative loss `9.3748649e-4`, paired SE `5.5146e-6`; pure alpha=1 loss `9.2635965e-4`; mixed-pure residual `-1.11268e-5 +/-5.5088e-6`. **HARD-GATE PASSED:** finite-u Brownian-parabola transfer is `O(1e-5)`, much smaller than the `O(9e-4)` grid effect.
 
 ## Step 49 — exact finite-window covariance transfer / HARD STOP
 
@@ -85,28 +86,20 @@ exact-minus-pure       +2.47e-7 +/-6.90e-6
 
 **HARD-STOP TRIGGERED:** the remaining publication-grade theorem connecting exact-covariance spectral intensity to the exact finite-search false-alarm event is no longer proportionate to the detector question. Stop this mathematical closure branch.
 
-Full derivation: `EXACT_COVARIANCE_GRID_TRANSFER_STOP_STEP.md`.
-
 ---
 
 # Detector-facing prior-art audit — 20:31 EDT
 
 Full audit: `PRIOR_ART_AUDIT_DETECTOR_TASK_REVERSAL.md`.
 
-Focused literature search found:
+Direct prior art establishes:
 
-### Direct prior art
+- pulse/energy detectivity from frequency-dependent detector response (Jones 1960);
+- sensitivity-speed / detectivity-bandwidth joint benchmarking;
+- unknown-arrival matched-filter search penalties controlled by correlated peak statistics/template autocorrelation;
+- standard all-pass magnitude preservation with altered phase/dispersion.
 
-- R. Clark Jones, *JOSA* 50, 883–886 (1960), explicitly distinguishes ordinary `D*(f)` from pulse/energy detectivity and derives pulse-detection capability from frequency-dependent detectivity. **Therefore scalar-D* insufficiency for arbitrary pulses is not novel.**
-- Garcia & Dereniak, *Applied Optics* 29, 559–569 (1990), explicitly report a detectivity-bandwidth product for a high-speed infrared photoconductor. **Sensitivity-speed joint benchmarking is established.**
-- Yang et al., *Nature Communications* 17, 6077 (2026), explicitly define `USBL = D* × bandwidth`. **Do not propose a simple D*×bandwidth replacement metric as new.**
-- Vio/Andreani and related matched-filter work show that unknown signal position changes false-alarm statistics because one searches peaks of a correlated Gaussian field.
-- Morras et al., *Physical Review D* 107, 023027 (2023), show matched-filter false-alarm rate depends on template autocorrelation and can be represented using a template/PSD/threshold-dependent effective sampling rate. **Template correlation length controlling global false-alarm burden is established adjacent detection theory.**
-- Correlator-bank work such as Croce et al., *Physical Review D* 70, 122001 (2004), treats bank-wide false-alarm thresholds and detection efficiency under correlated template searches.
-
-### No direct match found in this focused audit
-
-No direct prior-art hit was located for the complete detector construction:
+No direct hit was found in the focused audit for the complete construction
 
 ```text
 equal eventual matched-filter SNR
@@ -115,27 +108,66 @@ equal eventual matched-filter SNR
 + global false-alarm scan
 + finite-time evidence accumulation
 + template-dependent scan correlation
-→ explicit fast/slow detection-time ranking reversal.
+-> explicit fast/slow detection-time ranking reversal.
 ```
 
-Disposition:
+Disposition remains
 
 ```text
 POSSIBLE SYNTHESIS CONTRIBUTION / NOVELTY NOT ESTABLISHED.
 ```
 
-The strongest likely paper value, if deeper novelty search survives, is the photodetector-facing synthesis and explicit task construction—not the individual ingredients.
+---
 
-Search limitations: not exhaustive citation-network traversal, patent-family search, Scopus/Web of Science search, non-English literature search, or legal novelty analysis.
+# Detector-facing paper architecture — 20:42 EDT
+
+Full architecture: `PAPER_ARCHITECTURE_TASK_REVERSAL.md`.
+
+**CONSOLIDATION RESULT:** the main detector paper should not reproduce the Gaussian-extremes closure chain. Its core is only five sections:
+
+1. established detector-metric context and the actual finite-task question;
+2. controlled equal-eventual-SNR family;
+3. dimensionless detection-time surface;
+4. task-reversal theorem and feasibility partition;
+5. interpretation and limits.
+
+Working title:
+
+> **Task-Dependent Ordering of Photodetectors with Equal Asymptotic Sensitivity**
+
+Main equations:
+
+```math
+T_D=\tau X_D(\rho_0,\alpha,\beta,L/\tau)
+```
+
+and
+
+```math
+B_r(\ell)=X_D(r\ell)-rX_D(\ell)=0.
+```
+
+Main theorem-level message:
+
+```text
+known/low timing uncertainty -> fast reaches the decision first;
+under stated assumptions -> at least one finite fast-to-slow crossover;
+near the fast feasibility boundary -> slow remains feasible while fast diverges;
+fast-only feasibility is excluded in the equal-eventual-SNR scaled family.
+```
+
+No crossover uniqueness, universal faster/slower ordering, universal scan optimality, or novelty is claimed.
+
+Three-figure maximum proposed: evidence-vs-search competition, dimensionless task surface, task-regime diagram. Any numerical regime curve must be regenerated from validated continuum numerics; invalidated Step-13 and knife-edge Step-44 results are not main-paper evidence.
+
+Steps 13–49 are formally assigned to a separate technical companion/appendix track.
 
 ---
 
 ## Current stopping point
 
-Do not continue to Step 50 of the mathematical proof chain.
-
-The next logical task is detector-facing consolidation: compress Steps 01–12 into a short paper architecture whose novelty burden rests only on the protocol-specific equal-eventual-SNR ranking-reversal construction, with established ingredients cited as prior art and Steps 13–49 moved to a technical companion.
+Stay inside **Paper A**. Do not continue Step 50 of the mathematical closure chain.
 
 ### Single next question
 
-> Can the detector-facing result now be compressed into a short theorem/counterexample paper whose novelty burden rests only on the complete equal-eventual-SNR ranking-reversal construction?
+> Can the central theorem, abstract, and opening two pages now be drafted in publication-style language from `PAPER_ARCHITECTURE_TASK_REVERSAL.md`, with established ingredients cited as prior art and all scope/novelty restrictions explicit?
