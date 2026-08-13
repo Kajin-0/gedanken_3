@@ -1,54 +1,50 @@
 # Paper A — Final Integrated Adversarial QA
 
 **Date:** 2026-08-12  
-**Status:** TECHNICAL CORE PASSES / NO NEW FATAL MATHEMATICAL DEFECT FOUND / FINAL MANUSCRIPT SYNCHRONIZATION REQUIRED / NOVELTY NOT ESTABLISHED
+**Status:** TECHNICAL CORE PASSES / AUTHORITATIVE MANUSCRIPT SYNCHRONIZED / NOVELTY NOT ESTABLISHED
+
+This file is the final disposition after the complete Step-01–49 history, the severe adversarial review, the guarantee-time semantic repair, the acquisition-lineage audit, the continuum feasibility witness, and the final manuscript regression pass were checked together. The longer pre-synchronization version of this audit remains preserved in Git history; `PROGRESS_LOG.md` preserves the detailed path, failed branches, corrections, and reasons.
 
 ---
 
-## 1. Referee-style disposition
+## Final referee-style disposition
 
-After re-reading the full Step-01–49 correction history, the adversarial-review repair, the current Paper-A manuscript, the new continuum feasibility witness, and the deeper acquisition-lineage audit, I do **not** find a new fatal contradiction in the central result.
-
-The appropriate disposition has improved from
+I do **not** find a fatal mathematical, probabilistic, or operational contradiction in the current Paper-A technical core.
 
 ```text
-MAJOR REVISION BEFORE SUBMISSION
+INTERNAL MATHEMATICAL CONSISTENCY: PASS
+OPERATIONAL TASK DEFINITION: PASS
+CLAIM SCOPE: PASS
+CONTINUUM QUANTITATIVE WITNESS: PASS
+HARD-STOP DISCIPLINE: PASS
+PRIOR-ART HONESTY: PASS
+NOVELTY: NOT ESTABLISHED
+CROSSOVER UNIQUENESS: NOT ESTABLISHED / NOT CLAIMED
+EXACT FULL-SCAN DETECTION-TIME REVERSAL: NOT ESTABLISHED / NOT CLAIMED
 ```
 
-to
-
-```text
-TECHNICAL CORE PASSES.
-FINAL CLAIM/CITATION/MANUSCRIPT SYNCHRONIZATION REQUIRED.
-NOVELTY NOT ESTABLISHED.
-```
-
-The two original blocking problems are genuinely repaired:
-
-1. the acquisition clock is now operationally explicit;
-2. the theorem is explicitly about a conservative guarantee time, not the exact full signal-present scan detection time.
-
-The new continuum quantitative witness also removes the strongest numerical-presentation objection without reopening the Step-49 hard stop.
+No additional Gaussian-extremes closure branch is justified by the present manuscript.
 
 ---
 
-## 2. Central detector normalization — PASS
+## 1. Detector normalization — PASS
 
 For
 
 ```math
-s_\tau(t)=A_\tau t e^{-t/\tau}u(t)
+s_\tau(t)=A_\tau t e^{-t/\tau}u(t),
 ```
 
-and
+with
 
 ```math
 E[n(t)n(t')]=N\delta(t-t'),
 ```
 
+the eventual matched-filter SNR is
+
 ```math
 \rho_{\tau,\infty}^2
-=\frac1N\int_0^\infty s_\tau^2(t)dt
 =\frac{A_\tau^2\tau^3}{4N}.
 ```
 
@@ -58,55 +54,43 @@ Thus
 A_\tau=\frac{2\rho_0\sqrt N}{\tau^{3/2}}
 ```
 
-indeed gives
+gives
 
 ```math
-\rho_{\tau,\infty}=\rho_0.
+\rho_{\tau,\infty}=\rho_0
 ```
 
-The finite squared-SNR fraction remains
+for every channel in the family. The finite squared-SNR fraction remains
 
 ```math
 \eta(x)=1-e^{-2x}(1+2x+2x^2),
-```
-
-with
-
-```math
+\qquad
 \eta'(x)=4x^2e^{-2x}>0.
 ```
 
-No factor-of-two or normalization regression was found.
+No normalization regression was found.
 
 ---
 
-## 3. Physical detector realization — VALID EXISTENCE CONSTRUCTION, BUT PRESENT IT HONESTLY
+## 2. Physical realization — PASS AS AN EXISTENCE CONSTRUCTION
 
-The manuscript uses the common optical event
+All channels receive
 
 ```math
 p(t)=e^{-bt}u(t)
 ```
 
-and detector channel
+through
 
 ```math
 G_\tau(s)=A_\tau\frac{s+b}{(s+1/\tau)^2},
 ```
 
-which yields
+which is causal, stable, and proper and gives the required output family.
 
-```math
-G_\tau(s)P(s)=\frac{A_\tau}{(s+1/\tau)^2}
-```
+The authoritative manuscript now explicitly says that the pole-zero matching is a **controlled existence construction**, not a generic microscopic detector model.
 
-and therefore the desired output family.
-
-This is causal, stable, and proper for `b,tau>0`.
-
-A hostile reviewer may nevertheless object that the zero at `-b` is deliberately matched to the chosen event pole. That objection does **not** invalidate the counterexample, but the paper should not imply that this is a generic microscopic photodetector transfer function.
-
-There is an additional useful physical check. The detector impulse response is
+The channel impulse response is
 
 ```math
 \boxed{
@@ -116,74 +100,40 @@ g_\tau(t)
 }
 ```
 
-For a compared pair with `tau_f<tau_s`, choosing
+For a finite pair `tau_f<tau_s`, choosing
 
 ```math
-\boxed{b\ge1/\tau_f}
+b\ge1/\tau_f
 ```
 
-makes
-
-```math
-g_{\tau_f}(t)\ge0,
-\qquad
-g_{\tau_s}(t)\ge0
-```
-
-for all `t>=0`. Thus the existence construction need not rely on a sign-changing detector impulse response.
-
-### Required final wording
-
-Add a compact sentence making both points explicit:
-
-```text
-The pole-zero matching is part of the controlled existence construction, not a claim of generic detector microphysics; for a finite fast/slow pair one may choose b>=1/tau_f, which makes both channel impulse responses nonnegative.
-```
-
-**Disposition:** NOT BLOCKING after this wording.
+makes both compared impulse responses nonnegative for all `t>=0`.
 
 ---
 
-## 4. Equal eventual SNR versus equal D* — CLAIM BOUNDARY MUST REMAIN EXPLICIT
+## 3. Equal eventual SNR versus equal D* — PASS
 
-The project began from equal conventional `D*`, but Paper A's theorem now uses the cleaner event-specific normalization
+Paper A does **not** assume that equal scalar conventional `D*` implies equal eventual event SNR.
+
+The active theorem instead imposes the distinct event-specific normalization
 
 ```math
-\rho_{\tau,\infty}=\rho_0.
+\rho_{\tau,\infty}=\rho_0
 ```
 
-These are not equivalent statements.
+to remove eventual matched-filter sensitivity as a confounding variable for the chosen optical event.
 
-Equal event-specific eventual matched-filter SNR is a deliberate normalization that removes eventual sensitivity advantage for the chosen event. It does **not** prove equal `D*`, and equal scalar `D*` would not in general imply equal `rho0` for an arbitrary event.
-
-The manuscript mostly handles this correctly. One phrase such as "stronger than equal D*" can still be read as a logical implication rather than a task-specific fairness condition.
-
-### Required final wording
-
-Prefer:
-
-```text
-This event-specific normalization is chosen to remove eventual matched-filter sensitivity as a confound; it is distinct from, and should not be identified with, equality of a scalar reference D*.
-```
-
-**Disposition:** PRESENTATION FIX, NOT THEOREM DEFECT.
+The synchronized manuscript explicitly states that this normalization must not be identified with equality of scalar `D*`.
 
 ---
 
-## 5. Batch acquisition clock — PASS
+## 4. Acquisition clock — ORIGINAL BLOCKER RESOLVED
 
-The receiver now has an explicit operational record:
+The event is known to arrive in `[0,L]`. A duration-`t` matched filter evaluated at every candidate arrival requires a record through `L+t`.
 
-```text
-arrival uncertainty window: [0,L]
-finite post-arrival template duration: t
-required record end: L+t.
-```
-
-The optimized quantity is
+The paper therefore defines
 
 ```math
-T_G=\text{required post-window integration duration},
+T_G=\text{minimum required post-window integration duration}
 ```
 
 and
@@ -192,74 +142,47 @@ and
 T_{wall}=L+T_G.
 ```
 
-For fixed physical `L`,
+For fixed `L`, the added term is common to both channels and does not change the ordering.
 
-```math
-T_{wall,f}-T_{wall,s}
-=T_{G,f}-T_{G,s}.
-```
-
-Therefore the fast/slow ordering is unchanged by using the correct wall clock.
-
-The manuscript no longer represents `T_G` as a generic sequential detection latency.
-
-**Disposition:** BLOCKER RESOLVED.
+The result is explicitly batch, not a generic sequential or online detection-latency theorem.
 
 ---
 
-## 6. True-alignment guarantee semantics — PASS
+## 5. True-alignment guarantee — STRONGEST ORIGINAL BLOCKER RESOLVED
 
-The manuscript now distinguishes
+The manuscript distinguishes
 
 ```math
-P_{D,true}
-=\Pr[Y_x(q_0)>\Gamma]
+P_{D,true}=\Pr[Y_x(q_0)>\Gamma]
 ```
 
 from
 
 ```math
-P_D^{scan}
-=\Pr[\sup_qY_x(q)>\Gamma].
+P_D^{scan}=\Pr[\sup_qY_x(q)>\Gamma].
 ```
+
+`q_0` is analysis-only and is not supplied to the receiver.
 
 Pathwise,
-
-```math
-\{Y_x(q_0)>\Gamma\}
-\subseteq
-\{\sup_qY_x(q)>\Gamma\},
-```
-
-so
 
 ```math
 \boxed{P_D^{scan}\ge P_{D,true}.}
 ```
 
-The manuscript also states that `q_0` is an analysis variable under the signal-present hypothesis and is **not** receiver side information.
+Thus `P_D,true>=beta` is a sufficient guarantee that the complete scan detects with probability at least `beta`.
 
-Thus satisfying
-
-```math
-P_{D,true}\ge\beta
-```
-
-is a valid sufficient guarantee of full-scan detection probability at least `beta`.
-
-The paper now explicitly states that it does not prove ordering of the exact first solutions of
+The theorem orders the corresponding **guarantee time**. It does not claim ordering of the exact first solutions of
 
 ```math
 P_D^{scan}(t)=\beta.
 ```
 
-**Disposition:** STRONGEST ORIGINAL BLOCKER RESOLVED.
-
 ---
 
-## 7. Covariance ordering / monotone guarantee margin — PASS
+## 6. Covariance ordering and guarantee-time surface — PASS
 
-The weighted-average representation of `R_x(y)` shows that for each fixed lag
+The finite-template timing covariance is monotone in integration duration:
 
 ```math
 x_2>x_1
@@ -267,171 +190,99 @@ x_2>x_1
 R_{x_2}(y)\ge R_{x_1}(y).
 ```
 
-All processes have unit variance. Slepian therefore gives
+Slepian comparison therefore gives
 
 ```math
 \Gamma(x_2,\ell,\alpha)
 \le\Gamma(x_1,\ell,\alpha).
 ```
 
-Since the SNR term increases strictly with `x`, the guarantee margin increases strictly.
+Together with increasing signal accumulation, the guarantee margin is strictly increasing in `x`.
 
-The full-template limit satisfies
-
-```math
-R_x(y)\le R_\infty(y)=(1+|y|)e^{-|y|},
-```
-
-so
+The physical scaling is
 
 ```math
-\Gamma(x,\ell,\alpha)
-\ge\Gamma_\infty(\ell,\alpha).
+\boxed{
+T_G(\alpha,\beta,L;\tau,\rho_0)
+=\tau X_G(\rho_0,\alpha,\beta,L/\tau).
+}
 ```
-
-The Slepian directions remain correct after revision.
-
-**Disposition:** PASS.
 
 ---
 
-## 8. Full-template convergence — ACCEPTABLE WITH STATED REGULARITY
+## 7. Full-template limit and theorem strengthening — PASS
 
-The manuscript now defines `Gamma_infty` directly from the stationary Gaussian process with covariance `R_infty`.
-
-The normalized templates satisfy
+The full-template covariance is
 
 ```math
-\|\hat h_x-\hat h_\infty\|_2\to0,
+R_\infty(y)=(1+|y|)e^{-|y|}.
 ```
 
-and
+The manuscript defines its threshold directly and relates the finite templates through
 
 ```math
 \sup_y|R_x(y)-R_\infty(y)|
-\le2\|\hat h_x-\hat h_\infty\|_2\to0.
+\le2\|\hat h_x-\hat h_\infty\|_2
+\to0.
 ```
 
-The paper then invokes ordinary compact-interval Gaussian-supremum/quantile continuity regularity to pass to the threshold limit.
+Threshold convergence is stated under ordinary compact-interval Gaussian-supremum/quantile continuity regularity rather than silently assumed as a proved theorem.
 
-A measure-theory specialist could demand a longer tightness/quantile-continuity lemma, but the current paper explicitly states the regularity assumption rather than hiding it.
+Two assumptions in the earlier crossover proposition are now derived:
 
-**Disposition:** ACCEPTABLE FOR THE PRESENT THEOREM; no reason to reopen Steps 13–49.
+```math
+\Gamma_\infty(\ell,\alpha)\to\infty
+\qquad(\ell\to\infty),
+```
+
+using widely separated samples and Slepian comparison, and
+
+```math
+X_G(\ell)\to\infty
+\qquad(\ell\uparrow\ell_{crit}),
+```
+
+using `eta(x)<1`, `R_x<=R_infty`, threshold ordering, boundary equality, and continuity.
 
 ---
 
-## 9. Large-search threshold divergence — PASS
+## 8. Feasibility partition and crossover — PASS
 
-For
-
-```math
-R_\infty(y)=(1+y)e^{-y}\to0,
-```
-
-select sufficiently separated points so every distinct covariance is at most `epsilon<1`. Compare the sampled vector with the equicorrelated vector
+For `tau_f<tau_s`, define
 
 ```math
-Y_i=\sqrt\epsilon V+\sqrt{1-\epsilon}E_i.
+r=\tau_s/\tau_f>1,
+\qquad
+\ell=L/\tau_s.
 ```
 
-The comparison vector has larger pairwise covariance, so Slepian gives a stochastically smaller maximum. Since
+The fast and slow normalized searches are `r ell` and `ell`.
+
+With
 
 ```math
-\max_iY_i\to\infty
+c=\rho_0-\Phi^{-1}(\beta),
 ```
 
-in probability as the number of points grows, so does the actual sampled maximum, hence the continuous supremum.
-
-Therefore
-
-```math
-\boxed{\Gamma_\infty(\ell,\alpha)\to\infty.}
-```
-
-This is now a derived property, not an assumed one.
-
-**Disposition:** PASS.
-
----
-
-## 10. Feasibility partition and boundary divergence — PASS
-
-Let
-
-```math
-c=\rho_0-\Phi^{-1}(\beta).
-```
-
-For the slow and fast channels, the normalized searches are `ell` and `r ell` respectively. Since `Gamma_infty` is nondecreasing in search length, only
+the family permits only
 
 ```text
-both feasible
-slow only
-neither
+both guarantee-feasible
+slow guarantee-feasible only
+neither guarantee-feasible
 ```
 
-are possible. Fast-only feasibility is excluded within this equal-eventual-SNR scaled family.
+and excludes fast-only feasibility.
 
-At the continuous critical boundary,
+Fast is preferred at known arrival. The fast channel reaches its physical feasibility boundary first and its guarantee time diverges there while the slow channel remains feasible. Under the stated continuity regularity, at least one finite fast-to-slow guarantee-time crossover follows.
 
-```math
-\Gamma_\infty(\ell_{crit},\alpha)=c.
-```
-
-For every finite `x`,
-
-```math
-\eta(x)<1,
-\qquad
-\Gamma(x,\ell_{crit},\alpha)\ge\Gamma_\infty(\ell_{crit},\alpha),
-```
-
-so no finite `x` reaches the boundary target. Continuity then gives
-
-```math
-\boxed{X_G(\ell)\to\infty}
-```
-
-as the boundary is approached from below.
-
-**Disposition:** PASS.
+No uniqueness theorem is claimed.
 
 ---
 
-## 11. Crossover proposition — PASS, WITH ITS STATED SCOPE
+## 9. Continuum quantitative witness — STRONG PASS
 
-At `L=0`, both channels have the same dimensionless first crossing `x0`, hence
-
-```math
-T_{G,f}(0)=\tau_fx_0
-<\tau_sx_0=T_{G,s}(0).
-```
-
-The fast physical feasibility boundary is
-
-```math
-L_{crit,f}=\tau_f\ell_{crit}
-```
-
-and occurs before
-
-```math
-L_{crit,s}=\tau_s\ell_{crit}.
-```
-
-As `L` approaches the fast boundary, `T_G,f` diverges while the slow channel remains strictly feasible. The intermediate-value argument therefore gives at least one finite crossover.
-
-The paper does not claim uniqueness.
-
-**Disposition:** PASS under the explicitly stated continuity regularity.
-
----
-
-## 12. NEW continuum quantitative witness — STRONG PASS
-
-The current controlling witness is now stronger than the earlier Monte Carlo example.
-
-Use
+The controlling example uses
 
 ```math
 \rho_0=3.5,
@@ -440,7 +291,7 @@ Use
 \qquad
 \beta=0.90,
 \qquad
-r=6.
+r=\tau_s/\tau_f=6.
 ```
 
 At known arrival,
@@ -449,64 +300,60 @@ At known arrival,
 x_0=1.80519795247291,
 ```
 
-so fast is exactly preferred.
+so the fast channel is exactly preferred.
 
-At
+Choose
 
 ```math
-L=9\tau_f=1.5\tau_s,
+\boxed{L=9\tau_f=1.5\tau_s.}
 ```
 
-the normalized search lengths are
+Then
 
 ```math
 \ell_f=9,
 \qquad
-\ell_s=1.5.
-```
-
-The threshold budget is
-
-```math
+\ell_s=1.5,
+\qquad
 c=2.21844843445540.
 ```
 
 ### Slow side
 
-Since `R_infty''(0)=-1`, exact Rice theory gives mean upcrossing rate
+Since
 
 ```math
-\nu_c^+=\frac1{2\pi}e^{-c^2/2}.
+R_\infty''(0)=-1,
 ```
 
-The event `sup Z>c` implies either a left-endpoint exceedance or at least one upcrossing, hence
+Rice's exact mean-upcrossing formula and a union bound give
 
 ```math
+\boxed{
 P_{FA,s}
 \le Q(c)+\frac{1.5}{2\pi}e^{-c^2/2}
 =0.0336427995841
 <0.05.
+}
 ```
-
-This is a rigorous continuous-time upper bound, not a rare-event approximation to `P_FA`.
 
 ### Fast side
 
-Take seven points over `[0,9]` at spacing `1.5`. Every distinct pair has covariance at most
+Take seven points over `[0,9]` at spacing `1.5`. Every off-diagonal covariance is at most
 
 ```math
 \epsilon=R_\infty(1.5)=0.557825400371075.
 ```
 
-Slepian comparison with the equicorrelated seven-vector gives
+Slepian comparison with a seven-dimensional equicorrelated Gaussian vector gives
 
 ```math
+\boxed{
 P_{FA,f}
 \ge0.0624701020698
 >0.05.
+}
 ```
-
-The comparison probability is obtained from a stable one-dimensional Gaussian integral.
 
 Therefore
 
@@ -518,97 +365,101 @@ P_{FA,s}\le0.0336428
 }
 ```
 
-This establishes a genuine continuous-time slow-only guarantee-feasibility point at finite physical scale.
+This is a continuous-process slow-only feasibility witness. It does not require a timing-grid continuum extrapolation, a rare-event approximation to `P_FA`, or a numerical localization of `L_\times`.
 
-No hard-window grid maximum, Pickands transfer, or Step-44-style knife edge is involved.
-
-**Disposition:** QUANTITATIVE-EXAMPLE OBJECTION RESOLVED.
+The previous full-template Monte Carlo witness remains only an independent cross-check.
 
 ---
 
-## 13. Acquisition prior art — CLAIMS NOW APPROPRIATELY NARROW
+## 10. Hard-stop discipline — PASS
 
-The deeper audit shows that the following are established:
+The final Paper-A argument does **not** revive the invalid or incomplete Step-13–49 branches.
 
-- unknown-delay/code-phase acquisition;
-- acquisition time versus uncertainty region;
-- Pd/Pfa/dwell/SNR/search-strategy tradeoffs;
-- matched-filter acquisition;
-- optical-CDMA acquisition and synchronization;
-- direct-detection ladar acquisition in a range window;
-- pulse-width/range-resolution and range-estimation tradeoffs.
+In particular, it does not use:
 
-The manuscript should not claim any of these as new.
+```text
+Step-13 ell~49 rough-grid crossover;
+Step-20 upper Rice switch;
+raw Step-27 tiny-chi values;
+Step-44 as continuum truth;
+Step-47 as an exact finite-u false-alarm ratio;
+Steps 48–49 as an exact finite-u scan-power closure.
+```
 
-No reviewed source directly reproduced the complete present construction:
+**Do not create Step 50 by default.**
+
+---
+
+## 11. Prior-art positioning — PASS, NOVELTY UNRESOLVED
+
+The manuscript now acknowledges as established:
+
+```text
+pulse/energy detectivity from frequency-dependent sensitivity;
+sensitivity-bandwidth combinations;
+unknown-delay/code-phase acquisition;
+search-region / SNR / Pd / Pfa / dwell tradeoffs;
+matched-filter acquisition;
+optical-CDMA acquisition and synchronization;
+direct-detection ladar acquisition in range windows;
+pulse-width / range-resolution and range-estimation tradeoffs.
+```
+
+The only remaining plausible synthesis contribution is the narrower coupling:
 
 ```text
 same optical event
 + causal detector family
 + equal event-specific eventual matched-filter SNR
 + detector time-scale variation
-+ simultaneous evidence-clock and timing-search-correlation rescaling
++ simultaneous evidence-clock and search-correlation rescaling
 + fixed physical arrival uncertainty
 -> fast/slow guarantee-time reversal and slow-only feasibility.
 ```
 
-However, absence of a direct hit is not a novelty proof.
+No reviewed source directly reproduced that complete construction, but absence of a direct hit is not proof of novelty.
 
-**Disposition:** POSSIBLE SYNTHESIS CONTRIBUTION / NOVELTY NOT ESTABLISHED.
-
-No `first`, `novel`, or priority language should appear.
-
----
-
-## 14. Reference QA
-
-The principal references used for claim boundaries are appropriate:
-
-- Jones 1960 for pulse/energy detectivity;
-- Garcia & Dereniak and Yang et al. for sensitivity/bandwidth context;
-- Pecunia et al. for detector-characterization context;
-- Vio/Andreani, Morras et al., and Croce et al. for correlated matched-filter false alarms;
-- Milstein et al. for direct-detection range-window acquisition;
-- Slepian for Gaussian comparison;
-- Polydoros/Weber and Su for classical matched-filter acquisition;
-- Mustapha/Ormondroyd, Keshavarzian/Salehi, and Pham/Yashima for optical code acquisition.
-
-Primary publisher records checked in the current audit support the acquisition/optical-acquisition framing.
-
-One optional improvement is to replace or supplement the arXiv-only Vio/Andreani citation with a peer-reviewed matched-filter false-alarm source if desired, but the manuscript already has Morras and Croce for peer-reviewed support.
-
-**Disposition:** NO BLOCKING CITATION ERROR FOUND.
-
----
-
-## 15. What must be changed in the authoritative manuscript before final formatting
-
-Three final synchronization edits are required:
-
-1. Replace the older `r=1.2` Monte Carlo regime witness in `PAPER_A_DRAFT.md` with the new continuum `r=6` Rice/Slepian feasibility bracket.
-2. Add the physical-realization sentence noting that the exact pole-zero matching is a controlled existence construction and that `b>=1/tau_f` makes both compared impulse responses nonnegative.
-3. Replace any wording that could imply equal eventual event SNR is logically "stronger than" equal `D*`; state instead that it is a distinct event-specific normalization chosen to remove eventual matched-filter sensitivity as a confound.
-
-These are manuscript synchronization/positioning edits, not new research branches.
-
----
-
-## 16. Final scientific disposition
-
-Subject to the three synchronization edits above:
+Final position:
 
 ```text
-INTERNAL MATHEMATICAL CONSISTENCY: PASS
-OPERATIONAL TASK DEFINITION: PASS
-CLAIM SCOPE: PASS
-QUANTITATIVE REGIME EVIDENCE: PASS
-HARD-STOP DISCIPLINE: PASS
-PRIOR-ART HONESTY: PASS
-NOVELTY: NOT ESTABLISHED
-CROSSOVER UNIQUENESS: NOT ESTABLISHED / NOT CLAIMED
-EXACT FULL-SCAN DETECTION-TIME REVERSAL: NOT ESTABLISHED / NOT CLAIMED
+POSSIBLE SYNTHESIS CONTRIBUTION / NOVELTY NOT ESTABLISHED.
 ```
 
-I would no longer recommend another mathematical closure branch before manuscript preparation.
+No `first`, `novel`, or priority language is authorized.
 
-The next step is to synchronize `PAPER_A_DRAFT.md` to this audit, re-read the resulting final text once, and only then move to figures/journal formatting or an external referee-style review.
+---
+
+## 12. Reference and regression QA — PASS
+
+The synchronized manuscript includes appropriate claim-boundary references for detector sensitivity, Gaussian comparison, acquisition theory, optical acquisition, direct-detection ladar, and Rice upcrossings.
+
+Regression search of `PAPER_A_DRAFT.md` found:
+
+```text
+obsolete T_D symbols: none
+old r=1.2 controlling witness: none
+"stronger than equal D*" wording: none
+q0 treated as receiver side information: no
+exact full-scan reversal claimed: no
+online/sequential latency claimed: no
+continuum r=6 witness present: yes
+Rice primary reference present: yes
+constructed-detector limitation present: yes
+```
+
+---
+
+## Final stopping point
+
+The current Paper-A technical core is internally coherent at the level tested here. I would **not** recommend another Gaussian-extremes or crossover-localization branch before manuscript preparation.
+
+The appropriate next phase is external-style review or paper preparation:
+
+```text
+figure / regime-diagram design;
+journal-specific formatting and citation checks;
+a genuinely independent referee pass;
+submission-target selection.
+```
+
+Keep novelty language conservative unless later priority work materially changes the evidence.
