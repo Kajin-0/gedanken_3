@@ -1,207 +1,93 @@
 # AGENTS.md — Research Recovery and Scientific Integrity Protocol
 
 **Repository:** `Kajin-0/gedanken_3`  
-**Active experiment:** `experiments/01-equal-dstar-different-speed/`  
-**Current mode:** detector-facing manuscript QA and repair. **MATHEMATICAL CLOSURE HARD-STOPPED. PRIOR-ART AUDIT COMPLETED. PAPER A MERGED. SEVERE ADVERSARIAL REVIEW COMPLETED. MAJOR REVISION REQUIRED. NOVELTY NOT ESTABLISHED.** Step 49 is the final default proof step. The authoritative manuscript remains `experiments/01-equal-dstar-different-speed/PAPER_A_DRAFT.md`; the authoritative reviewer audit is `experiments/01-equal-dstar-different-speed/PAPER_A_ADVERSARIAL_REVIEW_AUDIT.md`. Do not restart the Gaussian-extremes closure chain by default.
+**Active branch:** `agent/noise-coupling-study`  
+**Active experiment:** `experiments/02-isochronous-avalanche-photodetector/`
 
 Read first:
-1. `experiments/01-equal-dstar-different-speed/CURRENT_STATE.md`
-2. `experiments/01-equal-dstar-different-speed/PAPER_A_ADVERSARIAL_REVIEW_AUDIT.md`
-3. `experiments/01-equal-dstar-different-speed/PAPER_A_DRAFT.md`
-4. `experiments/01-equal-dstar-different-speed/PRIOR_ART_AUDIT_DETECTOR_TASK_REVERSAL.md`
-5. `experiments/01-equal-dstar-different-speed/PAPER_ARCHITECTURE_TASK_REVERSAL.md`
-6. `experiments/01-equal-dstar-different-speed/DIMENSIONLESS_DETECTION_SURFACE_STEP.md`
-7. `experiments/01-equal-dstar-different-speed/TASK_REGIME_BOUNDARY_STEP.md`
-8. `experiments/01-equal-dstar-different-speed/PROGRESS_LOG.md`
 
-Live `main` overrides chat summaries or stale notes.
+1. `experiments/02-isochronous-avalanche-photodetector/CURRENT_STATE.md`
+2. `experiments/02-isochronous-avalanche-photodetector/PROGRESS_LOG.md`
+3. `experiments/02-isochronous-avalanche-photodetector/REDUCED_ORDER_DEVICE_SURROGATE_2026-08-13.md`
+4. `experiments/02-isochronous-avalanche-photodetector/OPTIMAL_DELAY_MAP.md`
+5. `experiments/02-isochronous-avalanche-photodetector/RESIDUAL_JITTER_FLOOR.md`
+6. `experiments/02-isochronous-avalanche-photodetector/DIMENSIONLESS_FEASIBILITY_BOUND.md`
+7. `experiments/02-isochronous-avalanche-photodetector/PRIOR_ART_AUDIT_2026-08-13.md`
 
----
+Before material writes, fetch the live target and exact blob SHA. Preserve failed and corrected paths. Update `CURRENT_STATE.md`, `PROGRESS_LOG.md`, `agent.md`, and this file when the research frontier changes.
 
-## Mandatory repository protocol
+Do not use novelty or priority language without a dedicated prior-art audit.
 
-Before material writes: fetch live target and exact blob SHA; never overwrite stale state; preserve failed/corrected paths. `CURRENT_STATE.md`, `PROGRESS_LOG.md`, and this file must move whenever the research frontier changes.
+## Experiment 02 — controlling result
 
-Useful epistemic labels include: **DEFINED, ASSUMED, DERIVED, CONDITIONAL, COUNTEREXAMPLE, REFINEMENT, NEGATIVE RESULT, REJECTED SHORTCUT, FAILED NUMERICAL ESTIMATE, NUMERICAL VALIDATION, RIGOROUS FINITE-GRID STATISTICAL CERTIFICATE, EXACT CANONICAL FINITE-GRID CORRECTION, PAIRED FINITE-LEVEL TRANSFER INTERVAL, PAIRED EXACT-COVARIANCE TRANSFER INTERVAL, HARD-GATE PASSED, HARD-STOP TRIGGERED, PRIOR-ART AUDIT, PAPER ARCHITECTURE, MANUSCRIPT DRAFT, MANUSCRIPT CONSISTENCY PASS, ADVERSARIAL REVIEW, MAJOR REVISION, BLOCKING ISSUE, POSSIBLE SYNTHESIS CONTRIBUTION, NOVELTY NOT ESTABLISHED, INVALIDATED, ASYMPTOTIC, OPEN, NON-CLAIM.**
-
-Do not use `novel`, `universal`, `fundamental`, `first`, or equivalent novelty language without a deeper audit that supports it.
-
----
-
-## Paper A — authoritative manuscript
-
-Working title:
-
-> **Task-Dependent Ordering of Photodetectors with Equal Asymptotic Sensitivity**
-
-Active manuscript:
-
-`experiments/01-equal-dstar-different-speed/PAPER_A_DRAFT.md`
-
-Core mathematics currently retained:
+For absorption coordinate `X`,
 
 ```math
-s_\tau(t)=A_\tau t e^{-t/\tau}u(t),
-\qquad
-\rho_{\tau,\infty}=\rho_0,
+Var(T)=Var[m(X)]+E[Var(T|X)],
 ```
+
+where
 
 ```math
-\eta(x)=1-e^{-2x}(1+2x+2x^2),
+m(X)=t_o(X)+t_c(X)+t_e(X)+\mu_a(X).
 ```
+
+The target is to make the position-dependent conditional mean constant. For a joint absorption distribution `p(x,z)`, the optimum deterministic optical delay is
 
 ```math
-R_x(y)=\frac{\int_0^{x-y}v(v+y)e^{-2v-y}dv}
-{\int_0^x v^2e^{-2v}dv},
+d_opt(x)=C-E[t_c(Z)|X=x]
 ```
 
-```math
-\Pr\left[\sup_{0\le q\le\ell}Z_x(q)>\Gamma(x,\ell,\alpha)\right]=\alpha,
-\qquad
-M=\rho_0\sqrt{\eta(x)}-\Gamma,
-```
+with other position-dependent mean delays included when required.
 
-```math
-T_D=\tau X_D(\rho_0,\alpha,\beta,L/\tau).
-```
+The active hypothesis is specifically **transverse absorption-depth compensation**, not ordinary longitudinal traveling-wave velocity matching.
 
-For `tau_f<tau_s`, `r=tau_s/tau_f`, `ell=L/tau_s`:
+### First reduced-order device surrogate
 
-```math
-B_r(\ell)
-=X_D(\rho_0,\alpha,\beta,r\ell)
--rX_D(\rho_0,\alpha,\beta,\ell)=0.
-```
-
-Conditional Proposition 1: known-time fast preference + earlier fast feasibility boundary + divergence + continuity -> at least one finite fast-to-slow crossover. No uniqueness or universal ordering.
-
----
-
-## Severe adversarial review — controlling QA status
-
-Full report: `PAPER_A_ADVERSARIAL_REVIEW_AUDIT.md`.
-
-### Reviewer disposition
+Current scale:
 
 ```text
-MAJOR REVISION BEFORE SUBMISSION.
-NO FATAL INTERNAL MATHEMATICAL CONTRADICTION FOUND.
-BLOCKING OPERATIONAL / CLAIM-SCOPE ISSUES REMAIN.
+d=2 um
+v0=5e4 m/s
+vg=7.5e7 m/s
+T0=40 ps
+L=3 mm
+Pe=100
+local depth RMS=100 nm
+avalanche RMS=5 ps
+electronics RMS=2 ps
+optical RMS=1 ps
 ```
 
-### Blocking issue 1 — acquisition clock
-
-The current stationary scan implicitly assumes enough data to fit a full length-`t` template after every candidate arrival in an uncertainty window `L`, i.e. a batch record of about `L+t`.
-
-Do not call current `T_D=t` a general online detection latency. Preferred repair:
+Results:
 
 ```text
-define the batch acquisition protocol explicitly;
-call T_D the required post-window integration duration;
-or define T_wall=L+T_D and note fixed-L ordering is unchanged.
+direct control       12.645 ps RMS
+forward matched       7.460 ps RMS
+decorrelated control 16.253 ps RMS
+reverse anti-match   21.741 ps RMS
 ```
 
-### Blocking issue 2 — true-alignment guarantee versus exact scan detection
+A one-million-event first-passage Monte Carlo reproduces these values. The forward/direct reduction is about `41.0%`, so this reduced-order parameter point passes the selected 20–30% feasibility gate.
 
-Current criterion:
+At the same auxiliary assumptions, the 30% gate allows avalanche RMS up to about `8.34 ps` at `Pe=100`; `Pe=20` cannot reach 30% even with zero avalanche jitter.
 
-```math
-P_{D,true}
-=\Phi[\rho_0\sqrt{\eta(x)}-\Gamma(x,\ell,\alpha)].
-```
+### Important correction
 
-Exact signal-present scan probability would be
+Do not claim that the minimum total jitter must occur exactly at the geometric mean-delay match. In the present reduced-order velocity sweep, exact mean-delay cancellation is at `v/v0=1`, while the total-jitter minimum shifts to about `v/v0=1.2815` because residual transport variance also changes with drift speed.
 
-```math
-P_D^{scan}=Pr[\sup_q Z_{signal}(q)>\Gamma].
-```
+The stronger causal signature is the forward/reverse asymmetry.
 
-Because true-alignment exceedance is a subset of scan exceedance,
+### Next step
 
-```math
-P_D^{scan}\ge P_{D,true}.
-```
+Construct a finite **discrete optical-depth ladder** approximating the continuous optimal delay map. Determine the minimum number of localized absorbing sections and the depth/delay tolerances required to retain the 20–30% improvement and forward/reverse signature.
 
-Thus current `T_D` is a **sufficient / guaranteed integration time**, not necessarily the exact scan detection time. A reversal of these guarantee times is not by itself a theorem about exact signal-present scan detection times.
+Do not begin manuscript construction yet. Novelty remains unestablished.
 
-**Default repair path:** reframe Paper A explicitly around the true-alignment guarantee criterion. Do not reopen the full signal-present Gaussian-extremes theorem unless explicitly chosen later.
+## Experiment 01 — closed publication path
 
-### Major repair 3 — restore photodetector realization
+`experiments/01-equal-dstar-different-speed/`
 
-Reintroduce the fixed optical event and stable causal transfer family already derived:
+Paper A / Rev. 5 is **DO NOT SUBMIT AS A FULL RESEARCH ARTICLE**. The theorem remains mathematically valid, but the unknown-arrival mechanism and optimum-filter information-spectrum formulation reduce to established theory.
 
-```math
-p(t)=e^{-bt}u(t),
-```
-
-```math
-G_\tau(s)=A_\tau\frac{s+b}{(s+1/\tau)^2},
-```
-
-which yields the manuscript signal. State that equal eventual matched-filter SNR is **event-specific** and deliberately stronger than equal scalar `D*`.
-
-### Major repair 4 — strengthen Proposition 1
-
-Do not leave all of continuity / large-search growth / boundary divergence as naked assumptions if they can be proved or cited for this covariance. Add explicit Slepian and stationary-Gaussian extreme-value references. The divergence at the boundary can largely be derived from `eta(x)<1`, `Gamma(x)>=Gamma_infty`, boundary equality, and continuity.
-
-### Major repair 5 — add robust quantitative example after conceptual repairs
-
-The theorem currently establishes existence only. Add one continuum-validated non-knife-edge example/phase diagram with comfortable margins. Do not use invalid Step-13 or promote Step-44 finite-grid results to continuum truth.
-
-### Presentation repairs
-
-- distinguish `D*` noise-equivalent bandwidth normalization from detector temporal bandwidth;
-- define AWGN covariance/PSD convention exactly;
-- consider event-specific title wording instead of global "asymptotic sensitivity";
-- define `Phi`, standardize crossover notation;
-- add Yang DOI and Gaussian-comparison/extreme-value citations.
-
----
-
-## Prior-art / novelty status
-
-Established ingredients remain non-novel: pulse/energy detectivity from `D*(f)`, sensitivity-speed products, and unknown-arrival matched-filter search penalties.
-
-Additional adjacent prior art from audit: Milstein et al., *Applied Optics* 47, 296–311 (2008), DOI `10.1364/AO.47.000296`, on constant-false-alarm acquisition time in a specified range window for direct-detection ladar with Geiger-mode APDs.
-
-Disposition remains:
-
-```text
-POSSIBLE SYNTHESIS CONTRIBUTION / NOVELTY NOT ESTABLISHED.
-```
-
-No direct match to the complete equal-eventual-SNR fast/slow reversal has been found in the focused searches, but radar/sonar/ladar/synchronization literature remains a serious adjacent novelty risk.
-
----
-
-## Mathematical companion — Steps 13–49
-
-**HARD-STOP REMAINS ACTIVE.** Do not create Step 50 by default. The reviewer audit does not justify restarting Pickands/Palm/Rice closure work.
-
-Preserve correction history: invalid Step-13 `ell~49`; invalid upper Rice switch; corrected coupling and tiny-q values; Step-44 finite-grid only; Step-46 sign/scale-only numerical wording; Steps 47–49 discrete-Pickands/mixed/exact-covariance grid-transfer results.
-
----
-
-## Active next phase
-
-Do not format or submit Paper A yet.
-
-Repair order:
-
-1. define the batch acquisition clock and meaning of `T_D`;
-2. reframe the true-alignment criterion as a guaranteed scan-detection criterion;
-3. restore fixed optical input + detector transfer-function realization;
-4. strengthen/cite Proposition 1 assumptions;
-5. add one robust non-knife-edge numerical illustration;
-6. tighten `D*`, noise normalization, title, notation, and references;
-7. only then final novelty audit / figures / journal formatting.
-
-### Single next question — DO NOT ANSWER UNTIL PROMPTED
-
-> Can the manuscript be revised first to make the acquisition clock and the true-alignment guarantee criterion operationally exact, without changing the existing Gaussian-extremes hard stop or claiming a full signal-present scan theorem?
-
----
-
-## Scope boundary
-
-Do not claim: current `T_D` is exact online latency; current theorem proves exact full signal-present scan detection-time reversal; faster universally better/worse; a universal scalar replacement for `D*`; `D* × bandwidth` as new; unknown-arrival search penalties as new; universal scan optimality; crossover uniqueness; invalid Step-13/20/27 results; Step-44 continuum certification; precise Step-46 coefficient validation; Step-47 ratio as exact finite-u false-alarm ratio; Steps 48/49 as distribution-free theorem-level results; novelty.
+Do not reopen the Step-13–49 proof chain or manuscript polishing. Do not present `|R|^2/S_n`, `1/NEP^2`, RMS/effective timing bandwidth, or the unknown-arrival timing-cell penalty as new metrics.
