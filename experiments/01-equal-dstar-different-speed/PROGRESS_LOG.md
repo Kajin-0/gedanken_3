@@ -1,6 +1,6 @@
 # Progress Log — Experiment 01
 
-**Consolidation note — 2026-08-12 21:47 EDT:** mathematical closure stopped after Step 49; prior-art audit and short-paper architecture completed; **Paper A is now a single complete manuscript in `PAPER_A_DRAFT.md` after merging Section V and performing a consistency/compression pass. Novelty is not established.** Full derivations and failed/corrected branches remain in dedicated step files.
+**Consolidation note — 2026-08-12 22:09 EDT:** mathematical closure stopped after Step 49; prior-art audit and short-paper architecture completed; Paper A merged and consistency-compressed; **severe adversarial review now completed. Disposition: MAJOR REVISION / no fatal internal mathematical contradiction found / blocking operational-interpretation issues / novelty not established.**
 
 ---
 
@@ -48,20 +48,13 @@ Consequential corrections and surviving results:
 - Step 48 found mixed finite-u transfer only `O(1e-5)` relative to an `O(9e-4)` discretization loss.
 - Step 49 simulated the exact finite-window covariance directly and found the same grid-loss scale; higher-order covariance did not cancel it at order `1e-4`.
 
-**HARD-STOP TRIGGERED at Step 49:** the remaining publication-grade mapping from exact-covariance spectral intensity to exact finite-search false-alarm probability is no longer proportionate to the detector question. Do not create Step 50 by default.
+**HARD-STOP TRIGGERED at Step 49:** do not create Step 50 by default.
 
 ---
 
 ## Detector-facing prior-art audit — 20:31 EDT
 
-`PRIOR_ART_AUDIT_DETECTOR_TASK_REVERSAL.md` found direct prior art for:
-
-- pulse/energy detectivity from frequency-dependent detector response;
-- sensitivity-speed / detectivity-bandwidth joint benchmarking;
-- unknown-arrival matched-filter search penalties controlled by correlated peak statistics/template autocorrelation;
-- standard all-pass magnitude preservation with altered phase/dispersion.
-
-No direct hit was found in the focused audit for the complete equal-eventual-SNR photodetector task-reversal construction.
+`PRIOR_ART_AUDIT_DETECTOR_TASK_REVERSAL.md` found direct prior art for pulse/energy detectivity from frequency-dependent response, detectivity-bandwidth benchmarking, unknown-arrival matched-filter search penalties, and standard all-pass magnitude/phase separation.
 
 Disposition:
 
@@ -71,82 +64,115 @@ POSSIBLE SYNTHESIS CONTRIBUTION / NOVELTY NOT ESTABLISHED.
 
 ---
 
-## Paper architecture — 20:42 EDT
+## Paper A drafting and consolidation
 
-`PAPER_ARCHITECTURE_TASK_REVERSAL.md` fixed a five-section detector-facing paper:
+### 20:42 EDT — architecture
 
-1. established detector-metric context and finite-task question;
-2. controlled equal-eventual-SNR family;
-3. dimensionless detection-time surface;
-4. task-reversal theorem and feasibility partition;
-5. interpretation, limits, and detector-specification implications.
-
-The main paper excludes Pickands/Palm/Rice/high-band endpoint closure machinery.
-
----
-
-## Paper A drafting sequence
+`PAPER_ARCHITECTURE_TASK_REVERSAL.md` fixed a five-section detector-facing paper and moved Steps 13–49 out of the main narrative.
 
 ### 20:52 EDT — opening manuscript
 
-`PAPER_A_DRAFT_OPENING.md` drafted title, abstract, Introduction, and Section II through the exact finite-record timing covariance. Established `D*`, pulse, bandwidth, and unknown-arrival search results were conceded explicitly as prior art.
+`PAPER_A_DRAFT_OPENING.md` drafted title, abstract, Introduction, and Section II through exact finite-record timing covariance.
 
 ### 21:03 EDT — Sections III–IV
 
-`PAPER_A_DRAFT.md` added the correlated-scan threshold
+`PAPER_A_DRAFT.md` added the exact correlated-scan threshold, true-alignment margin, dimensionless task surface, feasibility partition, and Proposition 1 crossover proof.
 
-```math
-\Pr\left[\sup_{0\le q\le\ell}Z_x(q)>\Gamma(x,\ell,\alpha)\right]=\alpha,
+### 21:35 EDT — Section V
+
+`PAPER_A_SECTION_V.md` drafted detector-task interpretation, limitations, and experiment-design implications.
+
+### 21:47 EDT — merge and consistency pass
+
+`PAPER_A_DRAFT.md` became the single authoritative five-section manuscript. Section IV ends with the theorem/proof; Section V alone carries interpretation. Body terminology standardized on eventual matched-filter SNR. True-alignment criterion explicitly distinguished from full signal-present scan probability. No new theorem claims or Steps 13–49 machinery added.
+
+---
+
+## 22:09 EDT — severe adversarial reviewer audit
+
+New file: `PAPER_A_ADVERSARIAL_REVIEW_AUDIT.md`.
+
+### Core mathematics that survived
+
+Direct checking found no fatal internal contradiction in:
+
+```text
+A_tau normalization;
+eta(x);
+R_x(y);
+covariance ordering and Slepian direction;
+strict margin monotonicity;
+T_D=tau X_D(...,L/tau);
+feasibility partition;
+conditional intermediate-value crossover proof.
 ```
 
-the margin
+### Blocking issue A — acquisition clock
+
+The stationary full-template scan over an arrival window `L` implicitly requires a batch record of about `L+t`. Current `T_D=t` is therefore not automatically an online wall-clock detection latency. Define the batch protocol and either call `T_D` the required post-window integration duration or define `T_wall=L+T_D`.
+
+### Blocking issue B — true-alignment criterion
 
 ```math
-M(x;\ell,\rho_0,\alpha)
-=\rho_0\sqrt{\eta(x)}-\Gamma(x,\ell,\alpha),
+P_{D,true}=\Phi[\rho_0\sqrt{\eta(x)}-\Gamma]
 ```
 
-and the exact task scaling
+is not the exact full signal-present scan probability. It is a conservative guarantee because
 
 ```math
-\boxed{T_D=\tau X_D(\rho_0,\alpha,\beta,L/\tau).}
+P_D^{scan}\ge P_{D,true}.
 ```
 
-Covariance ordering plus Gaussian comparison makes `Gamma` nonincreasing with observation duration, so `M` is strictly increasing. The reversal is not a self-suboptimal integration-duration effect.
+A reversal of guarantee times does not by itself prove a reversal of exact scan detection times. Default repair: explicitly reframe Paper A around a **true-alignment guaranteed detection criterion** rather than reopening the full Gaussian-extremes theorem.
 
-Section IV formalized the task boundary, both/slow-only/neither feasibility partition, and Proposition 1 crossover proof. No uniqueness or universal faster/slower ordering is claimed.
+### Major issue C — physical detector realization
 
-### 21:35 EDT — Section V module
+Restore the fixed optical event and stable causal detector family:
 
-`PAPER_A_SECTION_V.md` established the discussion framework: detector–task ordering, device characterization versus task qualification, no new scalar sensitivity-speed metric, explicit protocol/model limitations, and the practical statement that timing uncertainty makes response time part of both evidence accumulation and nuisance-search geometry.
+```math
+p(t)=e^{-bt}u(t),
+```
 
-### 21:47 EDT — manuscript merge and consistency/compression pass
+```math
+G_\tau(s)=A_\tau\frac{s+b}{(s+1/\tau)^2},
+```
 
-**Authoritative manuscript:** `PAPER_A_DRAFT.md`.
+which produces the manuscript template. State that equal eventual matched-filter SNR is event-specific and deliberately stronger than equal scalar `D*`.
 
-Changes completed:
+### Major issue D — Proposition 1 assumptions
 
-- merged Section V into the main manuscript;
-- moved references after the conclusion;
-- removed the duplicate Section-IV interpretation block and let Section V carry interpretation;
-- tightened the abstract and Introduction while preserving all scope restrictions;
-- standardized body terminology on **eventual matched-filter SNR**;
-- kept “asymptotic sensitivity” primarily as title/context language;
-- checked Proposition 1 assumptions against the abstract and conclusion;
-- kept the true-alignment criterion explicitly distinct from the total signal-present scan-maximum probability;
-- preserved the conclusion that the relevant object is `X_D(rho_0,alpha,beta,L/tau)`, not a new detector-only scalar;
-- did not add new theorem claims, numerical phase-diagram claims, or Step-13–49 closure machinery.
+Strengthen rather than merely assume large-search growth and boundary divergence. The latter can largely be derived from `eta(x)<1`, `Gamma(x,ell)>=Gamma_infty(ell)`, boundary equality, and continuity. Add explicit Slepian and stationary-Gaussian extreme-value citations.
 
-Detector-facing closing statement:
+### Major issue E — no robust quantitative example
 
-> **Detector specifications rank devices only relative to the task for which the ranking is being made. When arrival time is uncertain, response time affects both signal accumulation and the statistical size of the timing search.**
+The existence theorem may cross only near the feasibility singularity. After conceptual repairs, add one continuum-validated non-knife-edge example/phase diagram with comfortable margins. Do not reuse invalidated Step-13 or treat Step-44 as continuum truth.
+
+### Presentation/citation repairs
+
+- distinguish `D*` noise-bandwidth normalization from detector temporal bandwidth;
+- define the white-noise PSD/covariance convention exactly;
+- reconsider title wording "equal asymptotic sensitivity" because `rho_0` is event-specific;
+- add Yang DOI `10.1038/s41467-026-72259-1`;
+- add Slepian/extreme-value citations;
+- define `Phi` and standardize crossover notation.
+
+### Additional novelty risk
+
+Milstein et al., *Applied Optics* 47, 296–311 (2008), DOI `10.1364/AO.47.000296`, studies constant-false-alarm acquisition time in a specified range window for direct-detection ladar with Geiger-mode APDs. It is not a direct fast/slow reversal match, but it confirms substantial adjacent prior art at the photodetection/unknown-delay/acquisition-time intersection.
+
+### Reviewer-style disposition
+
+```text
+MAJOR REVISION BEFORE SUBMISSION.
+Do not format or submit yet.
+```
 
 ---
 
 ## Current stopping point
 
-Stay inside **Paper A**. The scientific narrative is complete and compressed.
+Stay inside **Paper A**. Do not reopen the Gaussian-extremes branch.
 
 ### Single next question
 
-> Can the complete `PAPER_A_DRAFT.md` now receive a severe reviewer-style audit for mathematical correctness, hidden assumptions, citation adequacy, overclaiming, notation defects, and likely reviewer objections before formatting/submission work?
+> Can the manuscript be revised first to make the acquisition clock and the true-alignment guarantee criterion operationally exact, without changing the existing Gaussian-extremes hard stop or claiming a full signal-present scan theorem?
