@@ -1,188 +1,130 @@
 # Current State — Experiment 02: Equal Fluence, Different Pulse Shape
 
 **Date:** 2026-08-13
-**Status:** ACTIVE / FIRST NONTRIVIAL CONSEQUENCE ESTABLISHED / EARLY PRIOR-ART AUDIT IN PROGRESS
+**Status:** **EARLY STOP — GOOD GEDANKEN RESULT, BUT THE CORE TWO-PULSE NONLINEAR-RECOMBINATION METHOD IS ESTABLISHED EXCITATION-CORRELATION SPECTROSCOPY.**
 
 ## Starting question
 
-Two optical pulses deposit exactly the same number of absorbed photons into the same HgCdTe photoconductor.
+Two optical excitations deposit the same total absorbed carrier density into the same photoconductor. Must they produce the same integrated electrical response if their temporal shapes differ?
 
-- Pulse A is short and intense.
-- Pulse B is weak and spread out.
+## Exact linear benchmark
 
-Must the detector produce the same total electrical response?
-
-This is intentionally a device-physics question. Do not turn it into a signal-processing/acquisition problem.
-
-## Step 1 — linear benchmark
-
-Let `n(t)` denote a spatially uniform excess carrier density and `G(t)` the absorbed pair-generation rate density. Start with
+For
 
 ```math
-\frac{dn}{dt}=G(t)-\frac{n}{\tau},
+dn/dt=G(t)-n/\tau,
 ```
 
-with `n(-infinity)=n(+infinity)=0`.
-
-Integrating the rate equation over the complete transient gives
+with the detector returned to baseline before and after the event,
 
 ```math
-0=\int G(t)dt-\frac{1}{\tau}\int n(t)dt,
+\boxed{\int n(t)dt=\tau\int G(t)dt.}
 ```
 
-hence
+Thus equal absorbed fluence gives equal integrated photoconductive response in the linear one-lifetime model.
+
+## Nonlinear result
+
+For
 
 ```math
-\boxed{
-\int n(t)dt
-=\tau\int G(t)dt.
-}
+dn/dt=G(t)-n/\tau-Cn^3,
 ```
-
-Under fixed bias and approximately constant mobility, excess photoconductive current is proportional to `n(t)`, so the integrated electrical response is proportional to `integral n dt`.
-
-Therefore, in the linear single-lifetime model:
-
-```text
-same absorbed fluence => same integrated detector response
-```
-
-independent of temporal pulse shape.
-
-This is the baseline reciprocity statement.
-
-## Step 2 — minimal nonlinear recombination
-
-Add a cubic high-injection recombination term as the simplest Auger-like model:
-
-```math
-\frac{dn}{dt}
-=G(t)-\frac{n}{\tau}-Cn^3,
-\qquad C>0.
-```
-
-Integrating over the complete transient gives the exact identity
 
 ```math
 \boxed{
 \int n(t)dt
-=\tau\left[
-\int G(t)dt
--C\int n^3(t)dt
-\right].
+=\tau\left[\int G(t)dt-C\int n^3(t)dt\right].
 }
 ```
 
-Thus equal absorbed fluence no longer guarantees equal integrated response. The response also depends on the carrier-density history through `integral n^3 dt`.
+Equal fluence therefore no longer guarantees equal response.
 
-A pulse that drives a larger transient carrier density can lose more carriers to Auger recombination before they contribute to the time-integrated conductivity.
-
-This is the first nontrivial consequence.
-
-## Exact impulsive limit
-
-For an ideal instantaneous injection producing
-
-```math
-n(0^+)=n_0
-```
-
-followed by
-
-```math
-\frac{dn}{dt}=-\frac{n}{\tau}-Cn^3,
-```
-
-the integrated carrier response is exactly
+For one impulsive injection `n0`,
 
 ```math
 \boxed{
-A(n_0)
-\equiv\int_0^\infty n(t)dt
-=\sqrt{\frac{\tau}{C}}
-\arctan\!\left(n_0\sqrt{C\tau}\right).
+A(n_0)=\sqrt{\tau/C}\arctan(n_0\sqrt{C\tau}).
 }
 ```
 
-Define
+The response relative to the linear prediction is
 
 ```math
-z=n_0\sqrt{C\tau}.
+A/(\tau n_0)=\arctan z/z,
+\qquad z=n_0\sqrt{C\tau}.
 ```
 
-Relative to the linear prediction `tau n0`,
+## Exact split-pulse result
+
+For two equal impulsive injections of fixed total fluence, increasing their temporal separation strictly increases the integrated response in the cubic model. See `SPLIT_PULSE_STEP.md`.
+
+More generally, for autonomous recombination
+
+```math
+dn/dt=-R(n),
+```
+
+define
+
+```math
+\tau_eff(n)=n/R(n).
+```
+
+For two equal pulses separated by `Delta`,
 
 ```math
 \boxed{
-\frac{A}{\tau n_0}
-=\frac{\arctan z}{z}.
+\frac{dA_2}{d\Delta}
+=[\tau_eff(r+q)-\tau_eff(r)]r'(\Delta),
+\qquad r'(\Delta)<0.
 }
 ```
 
-Representative values:
+Hence:
 
 ```text
-z = 0.1  -> 0.9967 of linear response
-z = 1    -> 0.7854
-z = 3    -> 0.4163
-z = 10   -> 0.1471
+tau_eff decreases with density -> response rises with pulse separation
+tau_eff constant               -> response is separation-independent
+tau_eff increases with density -> response falls with pulse separation
 ```
 
-At weak injection,
+See `GENERAL_SIGN_THEOREM.md`.
+
+## Prior-art stop
+
+The underlying HgCdTe high-injection physics is old: Auger-limited photoconductive saturation and injection-dependent lifetime were measured decades ago.
+
+More importantly, excitation-correlation spectroscopy already performs the central two-pulse experiment. A close modern reference is:
+
+- E. Rojas-Gatjens et al., *J. Phys. Chem. C* (2023), DOI 10.1021/acs.jpcc.3c04755.
+
+That work applies two variably delayed femtosecond pulses, measures time-integrated photocurrent/photoluminescence, and explicitly models negative nonlinear photocurrent from
 
 ```math
-A=\tau n_0-\frac{C\tau^2n_0^3}{3}+O(n_0^5).
+\gamma n+B n^2
 ```
 
-In the formal strong-injection limit of this minimal model,
+and
 
 ```math
-\boxed{
-A\to\frac{\pi}{2}\sqrt{\frac{\tau}{C}}.
-}
+\gamma n+A n^3
 ```
 
-So the integrated carrier response saturates even though the initially injected carrier density continues to increase. Real devices will acquire additional physics before an arbitrarily large-injection limit is reached; this is a mathematical property of the minimal SRH-like-linear + cubic-Auger model, not a claim of unlimited physical validity.
+recombination laws.
 
-## Physical meaning
+Therefore the two-pulse diagnostic principle and its Auger/bimolecular interpretation are established prior art. The compact general sign identity is useful but not presently sufficient novelty for a theory paper.
 
-The same total absorbed photon number can produce different total electrical charge if recombination is nonlinear in carrier density.
+A targeted search did not immediately locate the same excitation-correlation photocurrent method applied specifically to HgCdTe. That could motivate a future experiment, but no experiment is available here and it does not create a new theoretical principle.
 
-The simplest predicted ordering is:
+## Disposition
 
 ```text
-short/high-density pulse -> more nonlinear recombination -> smaller integrated response
-long/low-density pulse   -> closer to linear reciprocity -> larger integrated response
+Gedanken value: strong
+Exact derivation: retained
+Device interpretation: useful
+Theory novelty: insufficient / not established
+HgCdTe experimental application: possible, not pursued here
 ```
 
-for otherwise identical absorbed fluence.
-
-## Early prior-art result
-
-The underlying high-injection physics is definitely not new.
-
-Established HgCdTe work includes:
-
-- Bartoli et al., J. Appl. Phys. 45, 2150–2154 (1974), DOI 10.1063/1.1663561: high-flux n-HgCdTe photoconductivity saturation attributed to Auger recombination; photoconductivity scales approximately as flux^(1/3) and response time as flux^(-2/3) in the high-flux regime.
-- 0.1 eV HgCdTe photoconductor work in Infrared Physics 17, 127–135 (1977): performance and GR noise described by Auger theory.
-- High-excess-carrier transient HgCdTe lifetime measurements report departures from exponential decay and injection-dependent lifetime.
-- Absolute-linearity measurements of HgCdTe PCs show response nonlinearity depends on irradiance, not merely total radiant power.
-
-A targeted search has not yet located the exact fixed-fluence integrated-response identity above as the central result, but novelty is **not established**. The result may be a simple reformulation of known nonlinear recombination / saturation physics.
-
-## Claim boundary
-
-Do not claim:
-
-- that Auger saturation in HgCdTe is new;
-- that equal-fluence pulse-shape dependence is yet novel;
-- that the cubic model is a complete HgCdTe Auger-1 model;
-- that spatial diffusion, sweepout, heating, mobility changes, trapping, radiative recombination, or contacts are negligible in a real device.
-
-## Next question
-
-The next step is narrow:
-
-> For two finite pulses with the same absorbed fluence, can we prove a useful ordering of the integrated response as one pulse is temporally spread relative to the other, and does that ordering survive a more realistic HgCdTe recombination law?
-
-Do not proceed to manuscript construction. Prior art remains an early gate.
+Do not build a manuscript from this branch unless a materially different microscopic HgCdTe consequence is found.
