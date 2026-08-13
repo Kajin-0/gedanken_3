@@ -20,7 +20,7 @@ The Paper-A theorem separates:
 R_\infty(y)=(1+|y|)e^{-|y|}.
 ```
 
-The new witness brackets the slow and fast full-template false-alarm probabilities on opposite sides of `alpha` **directly in continuous time**. No timing-grid extrapolation is needed.
+The witness brackets the slow and fast full-template false-alarm probabilities on opposite sides of `alpha` **directly in continuous time**. No timing-grid extrapolation is needed.
 
 ---
 
@@ -66,7 +66,7 @@ With
 \eta(x)=1-e^{-2x}(1+2x+2x^2),
 ```
 
-the exact scalar solution is
+the scalar solution is
 
 ```math
 \boxed{x_0=1.80519795247291.}
@@ -107,9 +107,9 @@ L=9\tau_f=1.5\tau_s.
 Thus
 
 ```math
-\ell_f=\frac{L}{\tau_f}=9,
+\ell_f=9,
 \qquad
-\ell_s=\frac{L}{\tau_s}=1.5.
+\ell_s=1.5.
 ```
 
 The two channels have the same normalized full-template covariance law; only the normalized search length differs.
@@ -151,14 +151,7 @@ Q(c)+\frac{\ell}{2\pi}e^{-c^2/2}.
 }
 ```
 
-At the slow-channel search length `ell_s=1.5`,
-
-```text
-Q(c) = 0.0132621359043
-(1/(2*pi)) exp(-c^2/2) = 0.0135871091198.
-```
-
-Therefore
+At `ell_s=1.5`,
 
 ```math
 \boxed{
@@ -168,46 +161,39 @@ P_{FA,s}
 }
 ```
 
-So the slow channel is **guarantee-feasible** at this physical `L`.
+Therefore
 
-This is an inequality for the continuous process, not a Rice approximation to the probability.
+```math
+\Gamma_\infty(1.5,0.05)<c,
+```
+
+and the slow channel is guarantee-feasible at this physical `L`.
+
+This is a one-sided inequality for the continuous process, not a Rice approximation to the false-alarm probability.
 
 ---
 
 ## 6. Fast channel: Slepian lower bound from seven sampled points
 
-For the fast channel, consider only seven points in `[0,9]` separated by
+For the fast channel, consider seven points in `[0,9]` separated by
 
 ```math
 d=1.5.
 ```
 
-Because `R_infty(y)` decreases for positive `y`, every off-diagonal covariance among these sampled points satisfies
+Because `R_infty(y)` decreases for positive `y`, every off-diagonal covariance among these sampled points is at most
 
 ```math
-\operatorname{Cov}(Z_i,Z_j)
-\le
-\epsilon,
-\qquad
-\epsilon=R_\infty(1.5).
-```
-
-Numerically,
-
-```math
-\boxed{
-\epsilon
-=(1+1.5)e^{-1.5}
+\epsilon=R_\infty(1.5)
 =0.557825400371075.
-}
 ```
 
 Compare the seven sampled values with the equicorrelated Gaussian vector
 
 ```math
 Y_i
-=\sqrt\epsilon\,V
-+\sqrt{1-\epsilon}\,E_i,
+=\sqrt\epsilon V
++\sqrt{1-\epsilon}E_i,
 \qquad i=1,\ldots,7,
 ```
 
@@ -252,7 +238,13 @@ P_{FA,f}
 }
 ```
 
-Thus the fast channel is **guarantee-infeasible** at the same physical `L`.
+Therefore
+
+```math
+\Gamma_\infty(9,0.05)>c,
+```
+
+and the fast channel is guarantee-infeasible at the same physical `L`.
 
 The reproducible calculation is
 
@@ -341,7 +333,7 @@ It also does not reopen Step 49. The full-template witness deliberately avoids t
 
 ## 10. Paper-A use
 
-The preferred quantitative statement is now:
+The preferred quantitative statement is:
 
 ```text
 rho0=3.5, alpha=.05, beta=.90, tau_s/tau_f=6:
@@ -352,10 +344,10 @@ L=9 tau_f=1.5 tau_s ->
     therefore slow-only guarantee feasibility.
 ```
 
-This is strong enough to answer the severe review's quantitative-example objection without locating `L_x` and without creating Step 50.
+This answers the severe review's quantitative-example objection without locating `L_x` and without creating Step 50.
 
 ---
 
 ## Stopping point
 
-The main Paper-A quantitative witness is now continuum-bracketed. The next action is final integrated hostile-review/citation QA and manuscript synchronization to this stronger witness.
+The main Paper-A quantitative witness is continuum-bracketed. The appropriate next phase is final external-style manuscript preparation/review, not another Gaussian-extremes branch by default.
