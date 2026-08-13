@@ -337,6 +337,14 @@ P_{FA,s}
 }
 ```
 
+This upper bound is sufficient to establish
+
+```math
+\Gamma_\infty(\ell_s,\alpha)<c,
+```
+
+so the slow channel is guarantee-feasible.
+
 ### Fast side
 
 Take seven points over `[0,9]` at spacing `1.5`. Every off-diagonal covariance is at most
@@ -354,6 +362,14 @@ P_{FA,f}
 >0.05.
 }
 ```
+
+This lower bound establishes
+
+```math
+\Gamma_\infty(\ell_f,\alpha)>c,
+```
+
+so the fast channel is guarantee-infeasible.
 
 Therefore
 
