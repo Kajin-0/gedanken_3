@@ -1,6 +1,6 @@
 # Progress Log — Experiment 01
 
-**Consolidation note — 2026-08-12 20:52 EDT:** mathematical closure stopped after Step 49; detector-facing prior-art audit and short-paper architecture completed; Paper A opening draft written. Novelty is not established. Full derivations remain in dedicated step files.
+**Consolidation note — 2026-08-12 21:03 EDT:** mathematical closure stopped after Step 49; prior-art audit and short-paper architecture completed; Paper A is now drafted through Section IV. Novelty is not established. Full derivations and all failed/corrected branches remain in dedicated step files.
 
 ---
 
@@ -24,77 +24,50 @@ B_r(\ell)=X_D(\rho_0,\alpha,\beta,r\ell)
 
 Under the Step-12 continuity/extreme-value assumptions: fast wins at known time; approaching the fast feasibility boundary, fast detection time diverges while slow remains feasible; therefore at least one finite fast-to-slow crossover exists. Slow-only feasibility is possible, fast-only feasibility is excluded in this equal-eventual-SNR scaled family, and uniqueness is not established.
 
-## Steps 13–23 — continuous search / bandwidth
+---
 
-Hard-window scan is locally Brownian-like. **FAILED NUMERICAL ESTIMATE:** early `ell~49` crossover invalid. Genuine finite information bandwidth removes the cusp; fixed physical signal/noise gives a shallow finite bandwidth optimum. Rice upper switch near `130` is **INVALIDATED**; Palm preserves only lower switch `~21.7 +/- .3`. Rough endpoint `Lambda_cross^infinity~.905 +/- .004` leaves original `.895` numerically fast-preferred.
+## Steps 13–49 — mathematical stress-test branch
 
-## Steps 24–30 — generalized Pickands structure
+The later branch tested whether the difficult continuous timing-search problem invalidated the detector-facing construction.
 
-Finite bandwidth gives generalized Pickands variogram `t^2+sqrt(2)chi F_zeta`. Exact Brown-Resnick Slepian monotonicity does not imply physical-boundary monotonicity. **INVALIDATED INTERMEDIATE:** `.8131` coupling coefficient; corrected `.8906480701 sqrt(chi/zeta)`. Brownian-parabola scaling uses `mu=sqrt(2)zeta chi^(1/3)`. Raw tiny-chi Step-27 values were grid biased and invalidated as continuum values.
+Key corrections and failures retained:
 
-## Steps 31–41 — finite-u closure machinery
+- **FAILED NUMERICAL ESTIMATE:** Step-13 rough-grid crossover `ell~49` was invalid; hard-window timing scans are locally Brownian-like.
+- Genuine finite information bandwidth removes the cusp; an invertible noiseless low-pass does not because optimal whitening cancels it.
+- Rice's apparent upper switch near `kappa_f~130` was **INVALIDATED**; Palm analysis preserved only the lower switch near `21.7 +/- .3`.
+- **INVALIDATED INTERMEDIATE:** rough/smoothed coupling coefficient `.8131`; corrected `.8906480701 sqrt(chi/zeta)`.
+- **INVALIDATED NUMERICAL INTERPRETATION:** raw Step-27 tiny-chi values were grid biased.
+- Crossing counts fail at high bandwidth because one physical excursion contains many micro-upcrossings; finite-amplitude excursion clusters replace them.
+- Step 39 found `R=N_a/N_tan~1.56`, rejecting the shortcut that the finite-u correction is a small-amplitude remainder.
+- Step 40 introduced Cameron-Martin exact-event threshold translation.
+- Step 41 replaced empirical q interpolation with analytic Gaussian-process control.
+- **INVALIDATED NUMERICAL VALUE:** Step-35 tiny-q pair RMS `~5.4e-5`; corrected asymptotic `~2.69e-5`.
+- Raw inverse-duration Palm concentration was formally bounded but useless; duration truncation enabled a finite-sample endpoint calculation.
+- Step 44 produced a genuine pointwise finite-grid 95% bound `P_FA/alpha<.999957771`, but with only `.00004223 alpha` margin, so continuum grid bias dominated.
+- Step 45 showed witness retuning trades one near-boundary problem for another.
+- Step 46 isolated missed between-sample maxima as the dominant grid error. **WORDING CORRECTION:** the five-event paired result has ~47% relative SE and supports sign/scale consistency only, not precise coefficient verification.
+- Step 47 obtained the exact pure-alpha1 discrete Pickands correction.
+- Step 48 found the mixed Brownian-parabola finite-level transfer correction only `O(1e-5)` relative to an `O(9e-4)` discretization loss.
+- Step 49 simulated the exact finite-window covariance directly and found the same grid-loss scale; higher-order covariance did not cancel it at order `1e-4`.
 
-Crossing moments work through `kappa_f~170`, then fail from micro-upcrossings; finite-amplitude excursion clusters replace them. Step 34 gives paired numerical high-band closure. Step 35 proves `L2` q-regularity; generic anti-concentration is too coarse. Step 36 gives rare-event cluster-strip control. Steps 37–38 derive overshoot scale and exact Pickands cross-elasticity. Step 39 finds `R=N_a/N_tan~1.56`, rejecting a small-amplitude remainder. Step 40 gives Cameron-Martin exact-event threshold translation. Step 41 gives analytic inter-node q control. **INVALIDATED NUMERICAL VALUE:** Step-35 tiny-q pair RMS `~5.4e-5`; corrected asymptotic `~2.69e-5`.
-
-## Steps 42–44 — finite-sample endpoint statistics
-
-Raw inverse-duration Palm concentration is formally bounded but useless because support is huge. Duration truncation at `L0=.02` separates bounded long weights from analytically negligible short clusters. Step 44 pools `n=200000` and gives genuine pointwise finite-grid 95% upper bound
-
-```text
-P_FA/alpha < .999957771
-```
-
-with only `.00004223 alpha` margin. Continuum timing-grid bias becomes dominant.
-
-## Step 45 — witness-time test
-
-`X=7.50` gains fast `~.001575 alpha` while slow lower remains `~1.089`; `X=7.70` gains `~.002006 alpha` but slow lower falls to `~1.013`. **NEGATIVE RESULT:** witness retuning alone trades one knife-edge for another.
-
-## Step 46 — rough-grid mechanism
-
-Nested `.001,.0005,.00025` grids, 24k paired paths give coarse-to-fine correction `(5.301 +/-2.507)e-4 alpha`. Five missed fine-grid successes contribute `.00052149 alpha`; duration-only interpolation contributes only `(8.61 +/-4.13)e-6 alpha`. **WORDING CORRECTION:** the five-event result supports sign/scale consistency only, not precise coefficient verification.
-
-## Step 47 — exact canonical alpha=1 correction
-
-For pure rough tangent `W(s)=sqrt(2)B(s)-|s|`, `delta=a_Xu^2dt` and
-
-```math
-H_1^delta=nu(sqrt(2delta)).
-```
-
-At `dt=.001`, exact canonical loss is `1.0161323e-3`. **EXACT CANONICAL FINITE-GRID CORRECTION.** Do not equate this with the exact finite-u physical false-alarm ratio.
-
-## Step 48 — hard-gated mixed-tangent transfer
-
-Paired DY on `9000` paths, `Delta` versus `Delta/128`, gives mixed relative loss `9.3748649e-4`, paired SE `5.5146e-6`; pure alpha=1 loss `9.2635965e-4`; mixed-pure residual `-1.11268e-5 +/-5.5088e-6`. **HARD-GATE PASSED:** finite-u Brownian-parabola transfer is `O(1e-5)`, much smaller than the `O(9e-4)` grid effect.
-
-## Step 49 — exact finite-window covariance transfer / HARD STOP
-
-The exact finite-window covariance is simulated through an exact two-state filter representation. Two independent `3000`-path runs, physical `dt=.001` versus `dt/32`, pooled `6000` paired paths:
-
-```text
-H_exact^Delta          .5528146649
-H_exact^(Delta/32)     .5532776622
-relative loss          8.3682629e-4
-paired SE              6.8953e-6
-approx 95% interval    [8.2331e-4,8.5034e-4]
-pure-alpha1 loss       8.3657896e-4
-exact-minus-pure       +2.47e-7 +/-6.90e-6
-```
-
-**PAIRED EXACT-COVARIANCE TRANSFER INTERVAL:** higher-order finite-window covariance terms do not generate an order-`1e-4` cancellation of the discretization effect.
-
-**HARD-STOP TRIGGERED:** the remaining publication-grade theorem connecting exact-covariance spectral intensity to the exact finite-search false-alarm event is no longer proportionate to the detector question. Stop this mathematical closure branch.
+**HARD-STOP TRIGGERED at Step 49:** the remaining publication-grade finite-u mapping from exact-covariance spectral intensity to exact finite-search false-alarm probability is no longer proportionate to the detector question. Do not create Step 50 by default.
 
 ---
 
-# Detector-facing prior-art audit — 20:31 EDT
+## Detector-facing prior-art audit — 20:31 EDT
 
 Full audit: `PRIOR_ART_AUDIT_DETECTOR_TASK_REVERSAL.md`.
 
-Direct prior art establishes pulse/energy detectivity from frequency-dependent response, sensitivity-speed/bandwidth joint benchmarking, unknown-arrival matched-filter search penalties controlled by correlated peak statistics/template autocorrelation, and standard all-pass magnitude preservation with altered phase/dispersion.
+Direct prior art establishes:
 
-No direct hit was found in the focused audit for the complete equal-eventual-SNR detector construction leading to an explicit fast/slow task reversal. Disposition remains
+- pulse/energy detectivity from frequency-dependent detector response;
+- sensitivity-speed / detectivity-bandwidth joint benchmarking;
+- unknown-arrival matched-filter search penalties controlled by correlated peak statistics/template autocorrelation;
+- standard all-pass magnitude preservation with altered phase/dispersion.
+
+No direct hit was found in the focused audit for the complete equal-eventual-SNR photodetector construction leading to an explicit fast/slow task reversal.
+
+Disposition:
 
 ```text
 POSSIBLE SYNTHESIS CONTRIBUTION / NOVELTY NOT ESTABLISHED.
@@ -102,78 +75,144 @@ POSSIBLE SYNTHESIS CONTRIBUTION / NOVELTY NOT ESTABLISHED.
 
 ---
 
-# Detector-facing paper architecture — 20:42 EDT
+## Detector-facing paper architecture — 20:42 EDT
 
-Full architecture: `PAPER_ARCHITECTURE_TASK_REVERSAL.md`.
+`PAPER_ARCHITECTURE_TASK_REVERSAL.md` fixed a five-section short paper:
 
-**CONSOLIDATION RESULT:** the main detector paper contains only five conceptual sections: prior-art framing, controlled equal-eventual-SNR family, dimensionless detection-time surface, task-reversal theorem/feasibility partition, and interpretation/limits. The mathematical closure chain is moved to a companion track.
+1. established detector-metric context and actual finite-task question;
+2. controlled equal-eventual-SNR family;
+3. dimensionless detection-time surface;
+4. task-reversal theorem and feasibility partition;
+5. interpretation and limits.
 
-Working title:
-
-> **Task-Dependent Ordering of Photodetectors with Equal Asymptotic Sensitivity**
-
-Main equations:
-
-```math
-T_D=\tau X_D(\rho_0,\alpha,\beta,L/\tau)
-```
-
-and
-
-```math
-B_r(\ell)=X_D(r\ell)-rX_D(\ell)=0.
-```
-
-No crossover uniqueness, universal faster/slower ordering, universal scan optimality, or novelty is claimed.
+The main paper explicitly excludes Pickands/Palm/Rice/high-band endpoint closure machinery.
 
 ---
 
-# Paper A opening manuscript draft — 20:52 EDT
+## Paper A opening manuscript — 20:52 EDT
 
-New active manuscript: `PAPER_A_DRAFT_OPENING.md`.
+`PAPER_A_DRAFT_OPENING.md` drafted the title, abstract, Introduction, and Section II through the exact finite-record timing covariance.
 
-Drafted in publication style:
-
-1. working title;
-2. abstract;
-3. central Proposition 1 with continuity/divergence assumptions stated inside the proposition;
-4. full Introduction;
-5. Section II.A equal-eventual-SNR time-scaled template;
-6. Section II.B exact finite-record timing-scan covariance and physical scaling;
-7. references [1]–[7] drawn from the prior-art audit.
-
-Key rhetorical correction: the manuscript immediately concedes that scalar-`D*` pulse limitations, sensitivity-bandwidth tradeoffs, and unknown-arrival search penalties are established. The paper's actual question is isolated by enforcing
+Key rhetorical correction: established `D*`, pulse, bandwidth, and unknown-arrival search results are conceded immediately. The actual question is isolated by enforcing
 
 ```math
 \rho_{\tau,\infty}=\rho_0
 ```
 
-for every detector time scale.
+for every time scale.
 
-The opening derives
+---
+
+## Paper A Sections III–IV — 21:03 EDT
+
+New active manuscript: `PAPER_A_DRAFT.md`.
+
+### Section III — detection-time surface
+
+Defines the exact correlated-scan threshold
 
 ```math
-\eta(x)=1-e^{-2x}(1+2x+2x^2),
-\qquad
-\rho_{\tau,t}=\rho_0\sqrt{\eta(x)},
+\Pr\left[\sup_{0\le q\le\ell}Z_x(q)>\Gamma(x,\ell,\alpha)\right]=\alpha,
+```
+
+the true-alignment margin
+
+```math
+M(x;\ell,\rho_0,\alpha)
+=\rho_0\sqrt{\eta(x)}-\Gamma(x,\ell,\alpha),
 ```
 
 and
 
 ```math
-r_{\tau,t}(\Delta)=R_{t/\tau}(|\Delta|/\tau),
+X_D(\rho_0,\alpha,\beta,\ell)
+=\inf\{x:M(x)\ge\Phi^{-1}(\beta)\}.
 ```
 
-making the two competing effects explicit: faster evidence accumulation and a larger normalized timing search.
+The Step-11 covariance ordering plus standard Gaussian comparison gives
 
-No Pickands, Palm, Rice, high-band endpoint certificate, or Step-13–49 numerical closure material appears in the draft.
+```math
+x_2>x_1
+\Rightarrow
+\Gamma(x_2,\ell,\alpha)\le\Gamma(x_1,\ell,\alpha),
+```
+
+so `M` is strictly increasing. Thus the reversal is not caused by a self-suboptimal filter duration.
+
+The exact physical task collapse is
+
+```math
+\boxed{
+T_D=\tau X_D(\rho_0,\alpha,\beta,L/\tau).
+}
+```
+
+The full-template limit defines
+
+```math
+\Gamma_\infty(\ell,\alpha),
+\qquad
+M_\infty=\rho_0-\Gamma_\infty,
+```
+
+with finite feasibility when
+
+```math
+\Gamma_\infty(\ell,\alpha)<\rho_0-\Phi^{-1}(\beta).
+```
+
+### Section IV — exact task boundary and proof
+
+For `tau_f<tau_s`, `r=tau_s/tau_f`, `ell=L/tau_s`:
+
+```math
+T_{D,f}=\tau_f X_D(\rho_0,\alpha,\beta,r\ell),
+```
+
+```math
+T_{D,s}=r\tau_f X_D(\rho_0,\alpha,\beta,\ell),
+```
+
+so
+
+```math
+\boxed{
+B_r(\ell)=X_D(r\ell)-rX_D(\ell)=0
+}
+```
+
+is the exact implicit preference boundary.
+
+With
+
+```math
+c=\rho_0-\Phi^{-1}(\beta),
+```
+
+the exact feasibility partition is both-feasible / slow-only / neither; fast-only feasibility is excluded because `Gamma_infty` is nondecreasing with search length.
+
+The physical feasibility limit scales exactly as
+
+```math
+L_{\mathrm{crit}}(\tau)=\tau\ell_{\mathrm{crit}}.
+```
+
+Under the explicitly stated assumptions of known-time feasibility, continuity away from singularities, unbounded large-search threshold growth, and divergence on approach to the feasibility boundary:
+
+```text
+L=0 -> fast wins;
+L -> L_crit,f^- -> fast detection time diverges while slow remains finite;
+therefore at least one finite fast-to-slow crossover exists.
+```
+
+No crossover uniqueness is claimed. No universal ordering is claimed.
 
 ---
 
 ## Current stopping point
 
-Stay inside **Paper A**. Do not continue Step 50 of the mathematical proof chain.
+Stay inside **Paper A**.
 
 ### Single next question
 
-> Can Sections III and IV now be drafted in publication style, carrying `PAPER_A_DRAFT_OPENING.md` through the dimensionless detection-time surface and the fast/slow task-reversal proof without reintroducing the mathematical companion?
+> Can Section V now be drafted to finish the detector-facing narrative, with the practical implication stated strongly but without broadening the theorem beyond the defined task/protocol?
