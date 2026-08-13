@@ -295,7 +295,9 @@ with `Gamma` taken as the smallest threshold satisfying this inequality. This re
 
 ## C. True-alignment guarantee criterion
 
-Let `q_0` denote the true dimensionless event alignment. Under signal plus noise, the normalized matched-filter statistic at `q_0` has unit variance and mean
+Let `q_0` denote the true dimensionless event alignment under the signal-present hypothesis. **The receiver is not given `q_0`; it still scans the entire interval.** The symbol `q_0` is used only to evaluate performance at the generative true alignment.
+
+Under signal plus noise, the normalized matched-filter statistic at `q_0` has unit variance and mean
 
 ```math
 \rho_0\sqrt{\eta(x)}.
@@ -459,16 +461,57 @@ As `x\to\infty`,
 R_x(y)\to R_\infty(y)=(1+y)e^{-y}.
 ```
 
-Define
+Let `Z_\infty(q)` denote the stationary unit-variance Gaussian timing process with covariance
+
+```math
+\operatorname{Cov}[Z_\infty(q),Z_\infty(q')]
+=R_\infty(|q-q'|).
+```
+
+Define its global threshold directly by
 
 ```math
 \boxed{
 \Gamma_\infty(\ell,\alpha)
-=\lim_{x\to\infty}\Gamma(x,\ell,\alpha),
+=\inf\left\{u:
+\Pr\!\left[
+\sup_{0\le q\le\ell}Z_\infty(q)>u
+\right]\le\alpha
+\right\}.
 }
 ```
 
-and
+This full-template threshold is also the limit of the finite-template thresholds under the same ordinary supremum-quantile continuity regularity used below. To see the process convergence, normalize
+
+```math
+\hat h_x(v)
+=\frac{v e^{-v}1_{[0,x]}(v)}
+{\|v e^{-v}1_{[0,x]}\|_2},
+\qquad
+\hat h_\infty(v)
+=\frac{v e^{-v}1_{[0,\infty)}(v)}
+{\|v e^{-v}1_{[0,\infty)}\|_2}.
+```
+
+Then
+
+```math
+\|\hat h_x-\hat h_\infty\|_2\to0,
+```
+
+and the autocorrelation identity plus Cauchy-Schwarz gives the uniform covariance bound
+
+```math
+\boxed{
+\sup_y|R_x(y)-R_\infty(y)|
+\le2\|\hat h_x-\hat h_\infty\|_2
+\to0.
+}
+```
+
+Thus the finite-template Gaussian scans converge to the full-template scan on every fixed compact search interval at the covariance level, and `Gamma(x,ell,alpha)->Gamma_infty(ell,alpha)` under the stated threshold-continuity regularity.
+
+Define
 
 ```math
 \boxed{
@@ -486,7 +529,7 @@ Finite guarantee time exists when
 }
 ```
 
-If the reverse strict inequality holds, no finite or infinite amount of post-window integration can satisfy the true-alignment guarantee criterion.
+If the reverse strict inequality holds, the limiting full-template margin itself is below the requested guarantee level, so no finite post-window integration duration can satisfy the true-alignment guarantee criterion. Equality is the asymptotic boundary treated below.
 
 The threshold is nondecreasing in `ell` because increasing the search interval enlarges the supremum domain. In addition, for the present full-template covariance the threshold is unbounded as `ell\to\infty`. A short proof avoids placing this fact among the theorem assumptions.
 
