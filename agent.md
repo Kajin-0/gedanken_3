@@ -2,66 +2,77 @@
 
 Read [`AGENTS.md`](AGENTS.md) first for scientific-integrity rules.
 
-## Current project state
-
-### Experiment 01 — CLOSED as a publication path
+## Experiment 01 — CLOSED
 
 `experiments/01-equal-dstar-different-speed/`
 
-The original theorem is mathematically valid, but the central unknown-arrival search mechanism is established acquisition/detection theory. The device-engineer manuscript Rev. 5 is therefore:
+Paper A / Rev. 5 is **DO NOT SUBMIT AS A FULL RESEARCH ARTICLE**. The theorem is mathematically valid, but the unknown-arrival search mechanism and the optimum-filter information-spectrum reformulation are established prior art.
 
-```text
-DO NOT SUBMIT AS A FULL RESEARCH ARTICLE.
-```
+Read `experiments/01-equal-dstar-different-speed/INFORMATION_SPECTRUM_STOP_2026-08-13.md` first if Experiment 01 is ever revisited.
 
-This is a novelty disposition, not a mathematical retraction.
+Do not resume Rev. 5 polishing, Step 13–49 Gaussian-extremes work, or attempts to rename RMS/effective bandwidth, `|R|^2/S_n`, or the timing-cell penalty as new metrics.
 
-Read, in order:
+## Experiment 02 — EARLY STOP
 
-1. `experiments/01-equal-dstar-different-speed/INFORMATION_SPECTRUM_STOP_2026-08-13.md`
-2. `experiments/01-equal-dstar-different-speed/CURRENT_STATE.md`
-3. `experiments/01-equal-dstar-different-speed/REV5_REJECTION_AND_RESEARCH_DISPOSITION_2026-08-13.md`
-4. `experiments/01-equal-dstar-different-speed/PHOTOCONDUCTOR_INFORMATION_BANDWIDTH_2026-08-13.md`
-5. `experiments/01-equal-dstar-different-speed/PHYSICAL_NOISE_COUPLING_2026-08-13.md`
-6. `experiments/01-equal-dstar-different-speed/MIXED_NOISE_FINITE_PULSE_2026-08-13.md`
-7. `experiments/01-equal-dstar-different-speed/PAPER_A_DRAFT.md` only as preserved theorem history.
+`experiments/02-equal-fluence-different-pulse-shape/`
 
-### Experiment 01 final reduction
+Question: for the same total absorbed photons, can temporal concentration change the integrated photoconductive response through nonlinear recombination?
 
-For measured complex responsivity `R(f)` and output-noise PSD `S_n(f)`,
+Exact results retained:
 
 ```math
-W(f)=|R(f)|^2/S_n(f)=1/NEP^2(f)
+\int n(t)dt=\tau\int G(t)dt
 ```
 
-in consistent input-power units. For optical-event spectrum `P(f)`, all of the explored optimal linear-Gaussian timing quantities follow from
+for linear recombination, while cubic recombination gives
 
 ```math
-I_P(f)=|P(f)|^2W(f).
+\int n(t)dt
+=\tau[\int G(t)dt-C\int n^3(t)dt].
 ```
 
-- matched-filter SNR is its zeroth moment;
-- arrival-time Fisher information is its second moment;
-- unknown-arrival correlation is its normalized Fourier transform.
-
-These are classical optimum-filter quantities. Do not rename them as new metrics.
-
-The useful photoconductor interpretation retained from the branch is
+For an impulsive injection,
 
 ```math
-\tau_{info}=\tau/\sqrt{1+S_{GR,0}/S_W},
+A(n_0)=\sqrt{\tau/C}\arctan(n_0\sqrt{C\tau}).
 ```
 
-showing that responsivity bandwidth and optimally whitened information bandwidth can differ when GR noise shares the carrier-lifetime pole with the signal. Novelty is not established.
+For two equal pulses, increasing their separation strictly increases integrated response when effective lifetime decreases with carrier density.
 
-## Hard stops
+The general sign identity is
 
-- Do not resume Rev. 5 polishing or submission production.
-- Do not claim the unknown-arrival timing-cell penalty, RMS/effective bandwidth, `W(f)`, or `tau_info` as novel.
-- The Step-13–49 Gaussian-extremes branch remains hard-stopped. Do not create Step 50 by default.
-- Do not revive invalid historical finite-grid/Palm claims.
-- Never reference this research repository inside a manuscript intended for publication.
+```math
+\frac{dA_2}{d\Delta}
+=[\tau_{eff}(r+q)-\tau_{eff}(r)]r'(\Delta),
+\qquad
+\tau_{eff}(n)=n/R(n),\quad r'(\Delta)<0.
+```
 
-## Next research rule
+Read:
 
-Start a new photodetector gedanken experiment from a microscopic/device-physics premise, not from acquisition theory. Perform a prior-art audit early, before manuscript construction. If the result reduces to a known detector or signal-processing identity, document the closure and move on rather than forcing novelty.
+1. `experiments/02-equal-fluence-different-pulse-shape/CURRENT_STATE.md`
+2. `experiments/02-equal-fluence-different-pulse-shape/GENERAL_SIGN_THEOREM.md`
+3. `experiments/02-equal-fluence-different-pulse-shape/SPLIT_PULSE_STEP.md`
+4. `experiments/02-equal-fluence-different-pulse-shape/PROGRESS_LOG.md`
+
+### Why Experiment 02 stopped
+
+Excitation-correlation spectroscopy already uses two variably delayed pulses and time-integrated photocurrent/photoluminescence to probe nonlinear recombination. Rojas-Gatjens et al., J. Phys. Chem. C (2023), DOI 10.1021/acs.jpcc.3c04755, explicitly model negative nonlinear photocurrent from `gamma n + Bn^2` and `gamma n + An^3` kinetics.
+
+High-injection HgCdTe Auger saturation and injection-dependent lifetime are also longstanding results.
+
+The compact sign theorem is useful, but not presently sufficient novelty for a theory paper. A HgCdTe-specific excitation-correlation experiment might be useful, but no experimental work is available here.
+
+## Adjacent candidate screened and rejected before opening
+
+A proposed `signal-response pole = GR-noise pole` closure test was checked against prior art. HgCdTe literature already ties the GR-noise Lorentzian corner to effective carrier lifetime, and multi-region models explicitly generate multiple GR Lorentzians for multiple lifetimes.
+
+Treat this as a useful lab consistency check, not a new research direction.
+
+## Research rule going forward
+
+Continue **novelty-first screening**.
+
+Prefer simple microscopic/device-physics questions whose first nontrivial consequence is not already a standard detector-characterization or ultrafast-spectroscopy method. Audit prior art before building a large theory or manuscript.
+
+Never reference this research repository inside a publication manuscript.
