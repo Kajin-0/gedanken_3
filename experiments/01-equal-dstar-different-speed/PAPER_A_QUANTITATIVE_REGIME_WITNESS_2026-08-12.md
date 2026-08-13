@@ -1,34 +1,26 @@
-# Paper A — Quantitative Regime Witness Without Crossover Localization
+# Paper A — Continuum Quantitative Regime Witness Without Crossover Localization
 
 **Date:** 2026-08-12  
-**Status:** ROBUST NUMERICAL REGIME WITNESS / EXACT PAPER-A FULL-TEMPLATE FEASIBILITY PROCESS / NOT A NUMERICAL CROSSOVER LOCATION / STEP-49 HARD STOP PRESERVED
+**Status:** CONTINUUM-LEVEL FEASIBILITY BRACKET / EXACT FULL-TEMPLATE GAUSSIAN PROCESS / NOT A NUMERICAL CROSSOVER LOCATION / STEP-49 HARD STOP PRESERVED
 
 ---
 
 ## 1. Purpose
 
-The adversarial review asked for a quantitative example showing that the analytical fast/slow ordering theorem is not merely formal. Directly locating the finite-duration hard-window crossover was already shown in Steps 13–49 to be numerically delicate because the truncated template produces a locally rough timing scan. That branch is intentionally hard-stopped.
+The adversarial review asked for a quantitative example showing that the analytical fast/slow ordering theorem is not merely formal. Directly locating the finite-duration hard-window crossover was already shown in Steps 13–49 to be numerically delicate because the truncated template produces a locally rough timing scan. That branch remains intentionally hard-stopped.
 
-A cleaner quantitative example is available without reopening it. The Paper-A theorem separates two facts:
+A stronger example is available without reopening it.
 
-1. at known event time, both channels solve the same dimensionless finite-duration problem, so the faster channel wins exactly;
-2. guarantee feasibility is determined by the **full-template** timing process
+The Paper-A theorem separates:
+
+1. exact known-time fast preference; and
+2. full-template guarantee feasibility governed by the smooth stationary Gaussian process
 
 ```math
-R_\infty(y)=(1+|y|)e^{-|y|},
+R_\infty(y)=(1+|y|)e^{-|y|}.
 ```
 
-which is smooth and does not have the finite-window covariance cusp.
-
-The quantitative witness therefore combines
-
-```text
-an exact known-time fast-preferred point
-+
-a continuum-stable full-template slow-only feasibility point
-```
-
-without numerically claiming the exact crossover location.
+The new witness brackets the slow and fast full-template false-alarm probabilities on opposite sides of `alpha` **directly in continuous time**. No timing-grid extrapolation is needed.
 
 ---
 
@@ -43,44 +35,41 @@ Use
 \qquad
 \beta=0.90,
 \qquad
-r=\frac{\tau_s}{\tau_f}=1.2.
+r=\frac{\tau_s}{\tau_f}=6.
 ```
 
-A moderate global false-alarm probability is intentional. The theorem is not restricted to rare `alpha`; this example is designed for transparent ordinary Monte Carlo rather than to repeat the `10^-6` rare-event companion branch.
+The full-template feasibility threshold is
 
-```text
-z_(1-alpha) = 1.64485362695
-z_beta      = 1.28155156554.
+```math
+\boxed{
+c=\rho_0-\Phi^{-1}(\beta)
+=2.21844843445540.
+}
 ```
+
+The moderate false-alarm level is intentional. Paper A is not restricted to rare-event operation; the purpose is to give a transparent continuum witness without invoking the Step-13–49 rare-event machinery.
 
 ---
 
 ## 3. Known arrival: exact fast preference
 
-At `L=0`,
+At `L=0`, the scan collapses to one known alignment and
 
 ```math
-\rho_0\sqrt{\eta(x_0)}-z_{1-\alpha}=z_\beta,
+\rho_0\sqrt{\eta(x_0)}-\Phi^{-1}(1-\alpha)
+=\Phi^{-1}(\beta).
 ```
 
-with
+With
 
 ```math
-\eta(x)=1-e^{-2x}(1+2x+2x^2).
+\eta(x)=1-e^{-2x}(1+2x+2x^2),
 ```
 
-Thus
+the exact scalar solution is
 
 ```math
-\sqrt{\eta(x_0)}
-=\frac{z_{1-\alpha}+z_\beta}{\rho_0}
-=0.836115769285,
-```
-
-and
-
-```math
-\boxed{x_0=1.80519795247.}
+\boxed{x_0=1.80519795247291.}
 ```
 
 Therefore
@@ -96,206 +85,277 @@ while
 ```math
 \boxed{
 \frac{T_{G,s}(0)}{\tau_f}
-=r x_0
-=2.16623754297.
+=6x_0
+=10.83118771484.
 }
 ```
 
-The fast channel is quantitatively and exactly preferred at known arrival time.
+The fast channel is exactly preferred at known arrival.
 
 ---
 
-## 4. Full-template feasibility threshold
+## 4. Choose one common physical timing uncertainty
 
-The asymptotic guarantee-margin budget is
-
-```math
-c=\rho_0-z_\beta=2.21844843446.
-```
-
-For the full-template process, define
-
-```math
-p_\infty(\ell;c)
-=\Pr\left[
-\sup_{0\le q\le\ell}Z_\infty(q)>c
-\right].
-```
-
-At a continuous supremum distribution,
-
-```text
-p_infinity(ell;c) < alpha  -> Gamma_infinity(ell,alpha) < c -> feasible,
-p_infinity(ell;c) > alpha  -> Gamma_infinity(ell,alpha) > c -> infeasible.
-```
-
----
-
-## 5. One common physical uncertainty produces slow-only feasibility
-
-Choose
+Take
 
 ```math
 \boxed{
-L=3.30\,\tau_f=2.75\,\tau_s.
+L=9\tau_f=1.5\tau_s.
 }
 ```
 
-Hence
+Thus
 
 ```math
-\ell_f=3.30,
+\ell_f=\frac{L}{\tau_f}=9,
 \qquad
-\ell_s=2.75.
+\ell_s=\frac{L}{\tau_s}=1.5.
 ```
 
-The reproducible calculation is
-
-```text
-numerics/paper_a_full_template_feasibility.py
-```
-
-with production defaults
-
-```text
-seed       = 20260818
-paths      = 240000 paired paths
-x_tail     = 16
-delta_fine = 0.0025.
-```
-
-The simulation synthesizes the stationary moving-average process from
-
-```math
-h_\infty(v)=v e^{-v}u(v)
-```
-
-and evaluates both nested search lengths on the **same simulated paths**.
-
-At `x_tail=16`, the omitted squared-template-energy fraction is
-
-```math
-\boxed{
-1-\eta(16)=6.90\times10^{-12}.
-}
-```
-
-The `0.005` and `0.01` timing grids are exact nested subsets of the `0.0025` grid.
+The two channels have the same normalized full-template covariance law; only the normalized search length differs.
 
 ---
 
-## 6. Production numerical result
+## 5. Slow channel: rigorous continuous-time upper bound
 
-At
+For the full-template process,
 
 ```math
-c=2.21844843446,
+R_\infty''(0)=-1.
 ```
 
-the paired nested-grid results are:
+Hence the exact mean upcrossing rate of level `c` is, by Rice's formula,
 
-| grid spacing | slow `ell=2.75` PFA | fast `ell=3.30` PFA |
-|---:|---:|---:|
-| `0.0100` | `0.04733333` | `0.05362917` |
-| `0.0050` | `0.04736250` | `0.05365000` |
-| `0.0025` | `0.04737083` | `0.05365833` |
+```math
+\nu_c^+
+=\frac{1}{2\pi}e^{-c^2/2}.
+```
 
-On the finest grid, the exact two-sided 95% Clopper-Pearson binomial intervals are
+A continuous path whose supremum on `[0,ell]` exceeds `c` must either begin above `c` or contain at least one upcrossing. Therefore
+
+```math
+\Pr\left[
+\sup_{0\le q\le\ell}Z_\infty(q)>c
+\right]
+\le
+Q(c)+E[N_c^+]
+```
+
+and thus
+
+```math
+\boxed{
+P_{FA}(\ell;c)
+\le
+Q(c)+\frac{\ell}{2\pi}e^{-c^2/2}.
+}
+```
+
+At the slow-channel search length `ell_s=1.5`,
+
+```text
+Q(c) = 0.0132621359043
+(1/(2*pi)) exp(-c^2/2) = 0.0135871091198.
+```
+
+Therefore
 
 ```math
 \boxed{
 P_{FA,s}
-\in[0.0465243,\,0.0482283]
+\le0.0336427995841
+<0.05.
 }
 ```
 
-and
+So the slow channel is **guarantee-feasible** at this physical `L`.
+
+This is an inequality for the continuous process, not a Rice approximation to the probability.
+
+---
+
+## 6. Fast channel: Slepian lower bound from seven sampled points
+
+For the fast channel, consider only seven points in `[0,9]` separated by
+
+```math
+d=1.5.
+```
+
+Because `R_infty(y)` decreases for positive `y`, every off-diagonal covariance among these sampled points satisfies
+
+```math
+\operatorname{Cov}(Z_i,Z_j)
+\le
+\epsilon,
+\qquad
+\epsilon=R_\infty(1.5).
+```
+
+Numerically,
+
+```math
+\boxed{
+\epsilon
+=(1+1.5)e^{-1.5}
+=0.557825400371075.
+}
+```
+
+Compare the seven sampled values with the equicorrelated Gaussian vector
+
+```math
+Y_i
+=\sqrt\epsilon\,V
++\sqrt{1-\epsilon}\,E_i,
+\qquad i=1,\ldots,7,
+```
+
+where `V,E_1,...,E_7` are independent standard normal variables.
+
+The comparison vector has covariance at least as large as the actual sampled vector at every distinct pair. Slepian's inequality therefore gives
+
+```math
+\Pr\left[\max_i Z_i>c\right]
+\ge
+\Pr\left[\max_iY_i>c\right].
+```
+
+The equicorrelated probability is one-dimensional:
+
+```math
+\Pr[\max_iY_i\le c]
+=
+\int_{-\infty}^{\infty}
+\phi(v)
+\Phi\!\left(
+\frac{c-\sqrt\epsilon v}{\sqrt{1-\epsilon}}
+\right)^7dv.
+```
+
+High-accuracy quadrature gives
+
+```math
+\boxed{
+\Pr[\max_iY_i>c]
+=0.0624701020698.
+}
+```
+
+Because the continuous supremum contains the seven-point maximum,
 
 ```math
 \boxed{
 P_{FA,f}
-\in[0.0527601,\,0.0545674].
+\ge0.0624701020698
+>0.05.
 }
 ```
 
-The target
+Thus the fast channel is **guarantee-infeasible** at the same physical `L`.
 
-```math
-\alpha=0.05
+The reproducible calculation is
+
+```text
+numerics/paper_a_analytic_feasibility_bracket.py
 ```
 
-lies cleanly between these intervals.
+and uses only a one-dimensional quadrature for the equicorrelated comparison probability.
 
-Therefore the numerical classification is
+---
+
+## 7. Certified regime separation
+
+At one and the same physical arrival-time uncertainty,
+
+```math
+L=9\tau_f=1.5\tau_s,
+```
+
+the continuum bounds give
+
+```math
+\boxed{
+P_{FA,s}
+\le0.0336428
+<0.05
+<0.0624701
+\le P_{FA,f}.
+}
+```
+
+Therefore
 
 ```math
 \boxed{
 \text{slow channel guarantee-feasible},
 \qquad
-\text{fast channel guarantee-infeasible}
+\text{fast channel guarantee-infeasible}.
 }
 ```
 
-at the **same physical arrival-time uncertainty** `L=3.30 tau_f=2.75 tau_s`.
+Combined with the exact known-time result,
 
-The paired grid refinement is also benign: relative to `delta=0.01`, the finest grid adds only nine slow exceedances and seven fast exceedances out of `240000` paths. The classification is not a Step-13-type rough-grid knife edge.
+```text
+L=0 -> fast has smaller guarantee time,
+L=9 tau_f=1.5 tau_s -> slow-only guarantee feasibility,
+```
+
+and Proposition 1 forces at least one fast-to-slow guarantee-time crossover before the fast feasibility boundary.
+
+The witness provides a finite physical scale without numerically localizing the finite-duration crossover.
 
 ---
 
-## 7. What this establishes
+## 8. Why this is stronger than the earlier Monte Carlo witness
 
-For this concrete parameter set:
+An earlier Paper-A draft used a paired full-template Monte Carlo witness at `r=1.2`. That calculation was stable under nested grids and agreed comfortably with the expected regime structure, but its slow-channel classification still depended on a numerical approximation to a continuous supremum.
 
-```text
-L=0
--> both guarantee-feasible
--> fast has strictly smaller T_G.
-```
+The present `r=6` witness is preferable because:
 
-At
+- the slow side is bounded analytically by an exact Rice upcrossing expectation plus a union bound;
+- the fast side is bounded from below by a finite sampled subset and Slepian comparison;
+- no timing-grid continuum extrapolation is needed;
+- no hard-window rough-process calculation appears;
+- no rare-event asymptotic approximation is used.
 
-```text
-L=3.30 tau_f=2.75 tau_s
--> slow remains guarantee-feasible
--> fast is already guarantee-infeasible.
-```
-
-Proposition 1 then ensures at least one fast-to-slow guarantee-time crossover between the known-time regime and the fast feasibility boundary. The calculation supplies **physical scale and a robust regime witness** without pretending that the precise finite-duration crossover has been numerically localized.
+The prior Monte Carlo file `numerics/paper_a_full_template_feasibility.py` remains useful as an independent numerical cross-check but is no longer the controlling Paper-A witness.
 
 ---
 
-## 8. What this does NOT establish
+## 9. What this does NOT establish
 
-This calculation does not provide:
+The continuum bracket does not provide:
 
 - the numerical value of `L_x`;
 - the full finite-duration `X_G(ell)` surface;
 - crossover uniqueness;
 - a full signal-present scan-power crossover;
 - sequential/online acquisition time;
-- a rare-event `alpha=10^-6` continuum certificate;
-- any reopening of Step 49.
+- a general theorem outside the constructed equal-eventual-SNR family;
+- novelty.
 
-It does not erase the historical failure of Step 13. The reason this calculation is better conditioned is precisely that guarantee feasibility is governed by the smooth **full-template** process rather than the rough finite-duration truncated-template process.
+It also does not reopen Step 49. The full-template witness deliberately avoids the rough finite-window branch.
 
 ---
 
-## 9. Paper-A use
+## 10. Paper-A use
 
-This is the preferred quantitative example for the main manuscript:
+The preferred quantitative statement is now:
 
 ```text
-rho0=3.5, alpha=.05, beta=.90, r=1.2:
-known arrival -> fast preferred;
-L=3.30 tau_f=2.75 tau_s -> slow-only guarantee feasibility.
+rho0=3.5, alpha=.05, beta=.90, tau_s/tau_f=6:
+known arrival -> fast preferred exactly;
+L=9 tau_f=1.5 tau_s ->
+    slow PFA <= .0336428 < .05,
+    fast PFA >= .0624701 > .05,
+    therefore slow-only guarantee feasibility.
 ```
 
-That is enough to demonstrate a nontrivial finite physical scale while preserving the analytical theorem as the source of crossover existence.
+This is strong enough to answer the severe review's quantitative-example objection without locating `L_x` and without creating Step 50.
 
 ---
 
 ## Stopping point
 
-The severe review's quantitative-example objection is resolved without creating Step 50.
-
-The remaining manuscript task is final integrated adversarial/citation QA after the acquisition-lineage prior-art revision.
+The main Paper-A quantitative witness is now continuum-bracketed. The next action is final integrated hostile-review/citation QA and manuscript synchronization to this stronger witness.
