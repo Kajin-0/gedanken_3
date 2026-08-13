@@ -2,17 +2,16 @@
 
 **Repository:** `Kajin-0/gedanken_3`  
 **Active experiment:** `experiments/01-equal-dstar-different-speed/`  
-**Current mode:** detector-facing manuscript drafting. **MATHEMATICAL CLOSURE HARD-STOPPED. PRIOR-ART AUDIT COMPLETED. PAPER ARCHITECTURE FIXED. PAPER A DRAFTED THROUGH SECTION IV; SECTION V DRAFTED AS A SEPARATE MODULE. NOVELTY NOT ESTABLISHED.** Step 49 is the final default proof step. Active core manuscript: `PAPER_A_DRAFT.md`. Discussion/conclusion module: `PAPER_A_SECTION_V.md`. `PAPER_A_DRAFT_OPENING.md` is retained as a milestone. Steps 13–49 are technical companion material, not the default main-paper narrative. Do not restart the Gaussian-extremes closure chain or invent a new scalar metric by default.
+**Current mode:** detector-facing manuscript QA. **MATHEMATICAL CLOSURE HARD-STOPPED. PRIOR-ART AUDIT COMPLETED. PAPER ARCHITECTURE FIXED. PAPER A MERGED AND CONSISTENCY-COMPRESSED. NOVELTY NOT ESTABLISHED.** Step 49 is the final default proof step. The single authoritative detector-facing manuscript is now `experiments/01-equal-dstar-different-speed/PAPER_A_DRAFT.md`. `PAPER_A_SECTION_V.md` and `PAPER_A_DRAFT_OPENING.md` are milestones only. Steps 13–49 are technical companion material, not the main-paper narrative. Do not restart the Gaussian-extremes closure chain or invent a new scalar metric by default.
 
 Read first:
 1. `experiments/01-equal-dstar-different-speed/CURRENT_STATE.md`
 2. `experiments/01-equal-dstar-different-speed/PAPER_A_DRAFT.md`
-3. `experiments/01-equal-dstar-different-speed/PAPER_A_SECTION_V.md`
+3. `experiments/01-equal-dstar-different-speed/PRIOR_ART_AUDIT_DETECTOR_TASK_REVERSAL.md`
 4. `experiments/01-equal-dstar-different-speed/PAPER_ARCHITECTURE_TASK_REVERSAL.md`
-5. `experiments/01-equal-dstar-different-speed/PRIOR_ART_AUDIT_DETECTOR_TASK_REVERSAL.md`
-6. `experiments/01-equal-dstar-different-speed/DIMENSIONLESS_DETECTION_SURFACE_STEP.md`
-7. `experiments/01-equal-dstar-different-speed/TASK_REGIME_BOUNDARY_STEP.md`
-8. `experiments/01-equal-dstar-different-speed/PROGRESS_LOG.md`
+5. `experiments/01-equal-dstar-different-speed/DIMENSIONLESS_DETECTION_SURFACE_STEP.md`
+6. `experiments/01-equal-dstar-different-speed/TASK_REGIME_BOUNDARY_STEP.md`
+7. `experiments/01-equal-dstar-different-speed/PROGRESS_LOG.md`
 
 Live `main` overrides chat summaries or stale notes.
 
@@ -22,26 +21,25 @@ Live `main` overrides chat summaries or stale notes.
 
 Before material writes: fetch live target and exact blob SHA; never overwrite stale state; preserve failed/corrected paths. `CURRENT_STATE.md`, `PROGRESS_LOG.md`, and this file must move whenever the research frontier changes.
 
-Useful epistemic labels include: **DEFINED, ASSUMED, DERIVED, CONDITIONAL, COUNTEREXAMPLE, REFINEMENT, NEGATIVE RESULT, REJECTED SHORTCUT, FAILED NUMERICAL ESTIMATE, NUMERICAL VALIDATION, RIGOROUS FINITE-GRID STATISTICAL CERTIFICATE, EXACT CANONICAL FINITE-GRID CORRECTION, PAIRED FINITE-LEVEL TRANSFER INTERVAL, PAIRED EXACT-COVARIANCE TRANSFER INTERVAL, HARD-GATE PASSED, HARD-STOP TRIGGERED, PRIOR-ART AUDIT, PAPER ARCHITECTURE, MANUSCRIPT DRAFT, POSSIBLE SYNTHESIS CONTRIBUTION, NOVELTY NOT ESTABLISHED, INVALIDATED, ASYMPTOTIC, OPEN, NON-CLAIM.**
+Useful epistemic labels include: **DEFINED, ASSUMED, DERIVED, CONDITIONAL, COUNTEREXAMPLE, REFINEMENT, NEGATIVE RESULT, REJECTED SHORTCUT, FAILED NUMERICAL ESTIMATE, NUMERICAL VALIDATION, RIGOROUS FINITE-GRID STATISTICAL CERTIFICATE, EXACT CANONICAL FINITE-GRID CORRECTION, PAIRED FINITE-LEVEL TRANSFER INTERVAL, PAIRED EXACT-COVARIANCE TRANSFER INTERVAL, HARD-GATE PASSED, HARD-STOP TRIGGERED, PRIOR-ART AUDIT, PAPER ARCHITECTURE, MANUSCRIPT DRAFT, MANUSCRIPT CONSISTENCY PASS, POSSIBLE SYNTHESIS CONTRIBUTION, NOVELTY NOT ESTABLISHED, INVALIDATED, ASYMPTOTIC, OPEN, NON-CLAIM.**
 
-Do not use `novel`, `universal`, `fundamental`, `first`, or equivalent novelty language without a deeper audit that actually supports it.
+Do not use `novel`, `universal`, `fundamental`, `first`, or equivalent novelty language without a deeper audit that supports it.
 
 ---
 
-## Paper A — active manuscript track
+## Paper A — authoritative manuscript
 
 Working title:
 
 > **Task-Dependent Ordering of Photodetectors with Equal Asymptotic Sensitivity**
 
-### Core manuscript through Section IV
+Active file:
 
-Active file: `experiments/01-equal-dstar-different-speed/PAPER_A_DRAFT.md`.
+`experiments/01-equal-dstar-different-speed/PAPER_A_DRAFT.md`
 
-The manuscript contains:
+The manuscript now contains all five sections and references.
 
-- Abstract and Introduction with established detector/signal-detection ingredients treated explicitly as prior art.
-- Controlled time-scaled family
+### Controlled family
 
 ```math
 s_\tau(t)=A_\tau t e^{-t/\tau}u(t),
@@ -49,15 +47,11 @@ s_\tau(t)=A_\tau t e^{-t/\tau}u(t),
 \rho_{\tau,\infty}=\rho_0.
 ```
 
-- Finite-time evidence fraction
-
 ```math
 \eta(x)=1-e^{-2x}(1+2x+2x^2),
 \qquad
 \rho_{\tau,t}=\rho_0\sqrt{\eta(x)}.
 ```
-
-- Exact finite-record timing covariance
 
 ```math
 R_x(y)=\frac{\int_0^{x-y}v(v+y)e^{-2v-y}dv}
@@ -66,7 +60,7 @@ R_x(y)=\frac{\int_0^{x-y}v(v+y)e^{-2v-y}dv}
 r_{\tau,t}(\Delta)=R_{t/\tau}(|\Delta|/\tau).
 ```
 
-### Section III — dimensionless task surface
+### Dimensionless task surface
 
 ```math
 \Pr\left[\sup_{0\le q\le\ell}Z_x(q)>\Gamma(x,\ell,\alpha)\right]=\alpha,
@@ -104,9 +98,7 @@ T_D(\alpha,\beta,L;\tau,\rho_0)
 }
 ```
 
-This is a cross-detector scaling effect, not a finite integration-time optimum.
-
-### Section IV — task boundary and feasibility proof
+### Task boundary and Proposition 1
 
 For
 
@@ -117,14 +109,14 @@ For
 ```
 
 ```math
-T_{D,f}=\tau_f X_D(\rho_0,\alpha,\beta,r\ell),
+T_{D,f}=\tau_fX_D(\rho_0,\alpha,\beta,r\ell),
 ```
 
 ```math
-T_{D,s}=r\tau_f X_D(\rho_0,\alpha,\beta,\ell),
+T_{D,s}=r\tau_fX_D(\rho_0,\alpha,\beta,\ell),
 ```
 
-and
+with
 
 ```math
 \boxed{
@@ -134,28 +126,22 @@ B_r(\ell;\rho_0,\alpha,\beta)
 }
 ```
 
-With
-
-```math
-c=\rho_0-\Phi^{-1}(\beta),
-```
-
-and
+Let
 
 ```math
 \ell_{\mathrm{crit}}
-=\sup\{\ell:\Gamma_\infty(\ell,\alpha)<c\},
+=\sup\{\ell:\Gamma_\infty(\ell,\alpha)<\rho_0-\Phi^{-1}(\beta)\}.
 ```
 
-physical feasibility scales as
+Then
 
 ```math
 L_{\mathrm{crit}}(\tau)=\tau\ell_{\mathrm{crit}}.
 ```
 
-The exact regimes are both-feasible / slow-only / neither. Fast-only feasibility is excluded in this deliberately normalized family.
+Regimes: both feasible / slow-only / neither. Fast-only feasibility is excluded in this deliberately equal-eventual-SNR scaled family.
 
-**Proposition 1 assumptions are explicit:** known-time feasibility; continuity of `X_D` away from singularities; unbounded growth of `Gamma_infty` with search length; divergence of `X_D` at the feasibility boundary.
+**Proposition 1 assumptions must remain explicit:** known-time feasibility; continuity of `X_D` away from feasibility singularities; unbounded growth of `Gamma_infty` with search length; divergence of `X_D` at the feasibility boundary.
 
 Under those assumptions:
 
@@ -167,24 +153,25 @@ therefore at least one finite fast-to-slow crossover exists.
 
 No crossover uniqueness is established.
 
-### Section V — interpretation and implications
+---
 
-New file: `experiments/01-equal-dstar-different-speed/PAPER_A_SECTION_V.md`.
+## Manuscript consistency pass — completed
 
-The discussion must preserve these conclusions:
+`PAPER_A_SECTION_V.md` has been merged into `PAPER_A_DRAFT.md`.
 
-1. The ordering is a **detector–task ordering**, not a detector-only ordering.
-2. The key task dependence enters through `L/tau` together with `rho_0`, `alpha`, `beta`, and the chosen decision rule.
-3. The paper does **not** propose a new scalar sensitivity-speed metric; such products already exist and would erase the task dependence responsible for the crossover.
-4. Device characterization and task qualification are distinct. `D*`, responsivity, noise, bandwidth, and response time remain useful device descriptors but do not alone rank every finite-time unknown-arrival task.
-5. The crossover is not an intrinsic penalty for speed: eventual SNR is fixed and every family member benefits from more observation time.
-6. Scope is explicit: linear time-scaled family, additive stationary Gaussian noise, equal eventual SNR, arrival-time nuisance only, and a true-alignment criterion with a global scan threshold. No automatic extension to Bayesian/minimax/sequential receivers, localization requirements, unknown amplitude/phase, nonlinear response, saturation, dead time, or nonstationarity.
+Preserve these editorial decisions:
+
+1. Section IV should end with the theorem/proof; Section V carries interpretation.
+2. Body terminology uses **eventual matched-filter SNR** consistently. “Asymptotic sensitivity” is mainly title/context language.
+3. Abstract and conclusion must condition the crossover on Proposition 1 assumptions and must not imply a general preference for slow detectors.
+4. The true-alignment criterion must remain explicitly distinct from the total signal-present scan-maximum detection probability.
+5. The conclusion is **not** a new detector-only sensitivity-speed scalar. The relevant object is the detector–task surface `X_D(rho_0,alpha,beta,L/tau)`.
+6. Device characterization and task qualification remain explicitly distinguished.
+7. No Pickands/Palm/Rice/high-band endpoint material belongs in Paper A unless a reviewer identifies a concrete need.
 
 Detector-facing closing statement:
 
 > **Detector specifications rank devices only relative to the task for which the ranking is being made. When arrival time is uncertain, response time affects both signal accumulation and the statistical size of the timing search.**
-
-Within the controlled family, that coupling is sufficient to reverse fast/slow detection-time ordering despite equal eventual matched-filter sensitivity.
 
 ---
 
@@ -231,16 +218,16 @@ Critical preserved corrections:
 
 ## Active next phase
 
-Stay inside **Paper A**.
+Stay inside **Paper A**. The scientific narrative is complete.
 
-The detector-facing narrative is complete in modular form. The next logical action is to merge `PAPER_A_SECTION_V.md` into `PAPER_A_DRAFT.md` and perform a full consistency/compression pass: remove duplication, standardize notation/terminology, check assumptions against abstract and conclusion, and verify novelty/prior-art language. Do not add new theorem claims or numerical phase-diagram claims during that pass.
+The next logical task is a **severe reviewer-style audit of `PAPER_A_DRAFT.md`** before any formatting/submission work. Check mathematical correctness, hidden assumptions, citation adequacy, notation consistency, overclaiming, physical interpretation, and likely reviewer objections. Fixes should tighten the existing result rather than broaden it.
 
 ### Single next question — DO NOT ANSWER UNTIL PROMPTED
 
-> Can Section V now be merged into the active manuscript and the full Paper A draft receive a consistency/compression pass without broadening the theorem or reopening the mathematical companion?
+> Can the complete Paper A manuscript now receive a severe reviewer-style audit before formatting or submission work?
 
 ---
 
 ## Scope boundary
 
-Do not claim: faster universally better/worse; a universal scalar replacement for `D*`; `D* x bandwidth` as new; unknown-arrival matched-filter search penalty as new; scanning protocol universally optimal; crossover uniqueness; Step-13 `ell~49`; Step-20 double reversal; raw Step-27 values as continuum truth; Step-34 fully formal theorem; Step-36 uniform hazard theorem; `R~1`; numerical covariance constants interval-certified; `L0=.02` optimal; Step-44 as a continuum certificate; Step-46 coefficient precisely verified; Step-47 canonical ratio as exact finite-u false-alarm ratio; Step-48/49 Monte Carlo intervals as distribution-free theorem-level; `X=7.16` mathematically optimal; no re-entrant pocket for all task parameters; novelty.
+Do not claim: faster universally better/worse; a universal scalar replacement for `D*`; `D* x bandwidth` as new; unknown-arrival matched-filter search penalties as new; scanning protocol universally optimal; crossover uniqueness; Step-13 `ell~49`; Step-20 double reversal; raw Step-27 values as continuum truth; Step-34 fully formal theorem; Step-36 uniform hazard theorem; `R~1`; numerical covariance constants interval-certified; `L0=.02` optimal; Step-44 as a continuum certificate; Step-46 coefficient precisely verified; Step-47 canonical ratio as exact finite-u false-alarm ratio; Step-48/49 Monte Carlo intervals as distribution-free theorem-level; `X=7.16` mathematically optimal; no re-entrant pocket for all task parameters; novelty.
