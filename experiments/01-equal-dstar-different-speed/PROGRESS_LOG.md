@@ -1,6 +1,6 @@
 # Progress Log — Experiment 01
 
-**Consolidation note — 2026-08-12 21:03 EDT:** mathematical closure stopped after Step 49; prior-art audit and short-paper architecture completed; Paper A is now drafted through Section IV. Novelty is not established. Full derivations and all failed/corrected branches remain in dedicated step files.
+**Consolidation note — 2026-08-12 21:35 EDT:** mathematical closure stopped after Step 49; prior-art audit and short-paper architecture completed; Paper A is drafted through Section IV and Section V is now drafted separately for integration. Novelty is not established. Full derivations and all failed/corrected branches remain in dedicated step files.
 
 ---
 
@@ -105,17 +105,15 @@ for every time scale.
 
 ## Paper A Sections III–IV — 21:03 EDT
 
-New active manuscript: `PAPER_A_DRAFT.md`.
+Active manuscript: `PAPER_A_DRAFT.md`.
 
 ### Section III — detection-time surface
 
-Defines the exact correlated-scan threshold
+Defines
 
 ```math
 \Pr\left[\sup_{0\le q\le\ell}Z_x(q)>\Gamma(x,\ell,\alpha)\right]=\alpha,
 ```
-
-the true-alignment margin
 
 ```math
 M(x;\ell,\rho_0,\alpha)
@@ -129,36 +127,14 @@ X_D(\rho_0,\alpha,\beta,\ell)
 =\inf\{x:M(x)\ge\Phi^{-1}(\beta)\}.
 ```
 
-The Step-11 covariance ordering plus standard Gaussian comparison gives
+Covariance ordering plus Gaussian comparison gives `Gamma` nonincreasing with observation duration, so `M` is strictly increasing. The reversal is not a self-suboptimal filter-duration effect.
 
-```math
-x_2>x_1
-\Rightarrow
-\Gamma(x_2,\ell,\alpha)\le\Gamma(x_1,\ell,\alpha),
-```
-
-so `M` is strictly increasing. Thus the reversal is not caused by a self-suboptimal filter duration.
-
-The exact physical task collapse is
+Central exact task collapse:
 
 ```math
 \boxed{
 T_D=\tau X_D(\rho_0,\alpha,\beta,L/\tau).
 }
-```
-
-The full-template limit defines
-
-```math
-\Gamma_\infty(\ell,\alpha),
-\qquad
-M_\infty=\rho_0-\Gamma_\infty,
-```
-
-with finite feasibility when
-
-```math
-\Gamma_\infty(\ell,\alpha)<\rho_0-\Phi^{-1}(\beta).
 ```
 
 ### Section IV — exact task boundary and proof
@@ -176,28 +152,20 @@ T_{D,s}=r\tau_f X_D(\rho_0,\alpha,\beta,\ell),
 so
 
 ```math
-\boxed{
-B_r(\ell)=X_D(r\ell)-rX_D(\ell)=0
-}
+\boxed{B_r(\ell)=X_D(r\ell)-rX_D(\ell)=0}
 ```
 
 is the exact implicit preference boundary.
 
-With
+With `c=rho_0-Phi^-1(beta)`, the exact feasibility partition is both-feasible / slow-only / neither; fast-only feasibility is excluded because `Gamma_infty` is nondecreasing with search length.
 
-```math
-c=\rho_0-\Phi^{-1}(\beta),
-```
-
-the exact feasibility partition is both-feasible / slow-only / neither; fast-only feasibility is excluded because `Gamma_infty` is nondecreasing with search length.
-
-The physical feasibility limit scales exactly as
+The physical feasibility limit scales as
 
 ```math
 L_{\mathrm{crit}}(\tau)=\tau\ell_{\mathrm{crit}}.
 ```
 
-Under the explicitly stated assumptions of known-time feasibility, continuity away from singularities, unbounded large-search threshold growth, and divergence on approach to the feasibility boundary:
+Under the explicitly stated assumptions:
 
 ```text
 L=0 -> fast wins;
@@ -205,7 +173,36 @@ L -> L_crit,f^- -> fast detection time diverges while slow remains finite;
 therefore at least one finite fast-to-slow crossover exists.
 ```
 
-No crossover uniqueness is claimed. No universal ordering is claimed.
+No crossover uniqueness or universal faster/slower ordering is claimed.
+
+---
+
+## Paper A Section V — 21:35 EDT
+
+New module: `PAPER_A_SECTION_V.md`.
+
+**DISCUSSION / INTERPRETATION RESULT:** the practical message is deliberately not a new sensitivity-speed scalar. The theorem says that the ranking is conditional on the detector **and** the task because the detector time scale enters both the evidence-accumulation clock and the nuisance-search geometry through `L/tau`.
+
+The section makes four distinctions explicit:
+
+1. **Detector–task ordering:** `T_D` belongs to a detector plus a task, not to a detector alone.
+2. **Device characterization vs task qualification:** `D*`, responsivity, noise, bandwidth, and response time remain useful device descriptors; they do not by themselves rank every transient decision task.
+3. **Not a generic speed penalty:** the crossover is not a conventional sensitivity-speed tradeoff because eventual SNR is fixed and each detector benefits monotonically from more observation time.
+4. **Protocol-specific scope:** Bayesian, minimax, sequential, joint localization, unknown amplitude/phase, nonlinear/noisy real-device extensions can produce different task surfaces and are not claimed here.
+
+The section identifies the compact task descriptor for the model as
+
+```math
+X_D(\rho_0,\alpha,\beta,L/\tau),
+```
+
+rather than proposing another detector-only scalar.
+
+Closing statement:
+
+> **Detector specifications rank devices only relative to the task for which the ranking is being made. When arrival time is uncertain, response time affects both signal accumulation and the statistical size of the timing search.**
+
+Within the controlled equal-eventual-SNR family, that coupling is sufficient to reverse fast/slow detection-time ordering.
 
 ---
 
@@ -213,6 +210,8 @@ No crossover uniqueness is claimed. No universal ordering is claimed.
 
 Stay inside **Paper A**.
 
+The detector-facing narrative is now complete in modular form. Next action: merge `PAPER_A_SECTION_V.md` into `PAPER_A_DRAFT.md` and perform a full consistency/compression pass without adding new claims or reopening the mathematical companion.
+
 ### Single next question
 
-> Can Section V now be drafted to finish the detector-facing narrative, with the practical implication stated strongly but without broadening the theorem beyond the defined task/protocol?
+> Can Section V now be merged into the active manuscript and the full Paper A draft receive a consistency/compression pass without broadening the theorem or reopening the mathematical companion?
