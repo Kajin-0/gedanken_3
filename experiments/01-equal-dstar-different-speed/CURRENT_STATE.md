@@ -1,408 +1,336 @@
 # Current State — Experiment 01: Equal D*, Different Speed
 
-**Date:** 2026-08-13 01:14 EDT  
-**Status:** **PAPER A TECHNICAL CORE PASSES FINAL INTERNAL ADVERSARIAL QA; APPLIED OPTICS MANUSCRIPT HAS BEEN TYPESET AND PAGE-QA'D.** The Step-13–49 Gaussian-extremes branch remains hard-stopped. The scientific theorem is frozen unless a genuinely new defect appears. Novelty remains unestablished and no priority language is authorized.
+**Date:** 2026-08-13 10:58 EDT  
+**Status:** **REV. 5 IS NOT A SUBMISSION CANDIDATE. THE ORIGINAL THEOREM REMAINS MATHEMATICALLY SOUND, BUT ITS CENTRAL ACQUISITION MECHANISM IS TOO CLOSE TO ESTABLISHED PRIOR ART TO CARRY A FULL RESEARCH ARTICLE. ACTIVE WORK IS NOW A NOVELTY-FIRST PHYSICAL-NOISE EXTENSION.**
+
+The Step-13–49 Gaussian-extremes branch remains hard-stopped. Do not create Step 50 by default.
 
 ## Read next
 
-1. `PAPER_A_DRAFT.md` — authoritative audited theorem manuscript
-2. `PAPER_A_APPLIED_OPTICS_DRAFT.md` — journal-facing scientific text (Rev. 3; final rendered bibliography is superseded by the reference audit where noted)
-3. `PAPER_A_OPTICA_RENDER_QA_2026-08-13.md`
-4. `PAPER_A_REFERENCE_AUDIT_2026-08-13.md`
-5. `PAPER_A_APPLIED_OPTICS_COVER_LETTER.md`
-6. `PAPER_A_SUBMISSION_READINESS_2026-08-13.md`
-7. `PAPER_A_FINAL_ADVERSARIAL_QA_2026-08-12.md`
-8. `PAPER_A_QUANTITATIVE_REGIME_WITNESS_2026-08-12.md`
-9. `PROGRESS_LOG.md`
+1. `REV5_REJECTION_AND_RESEARCH_DISPOSITION_2026-08-13.md` — current publication/research decision
+2. `PHYSICAL_NOISE_COUPLING_2026-08-13.md` — exact common-path cancellation and mixed-noise result
+3. `RESPONSIVITY_SPEED_SCALING_2026-08-13.md` — exact responsivity-speed phase diagram
+4. `MIXED_NOISE_FINITE_PULSE_2026-08-13.md` — finite optical pulse + mixed-noise information spectrum
+5. `PAPER_A_DRAFT.md` — preserved original theorem
+6. `PAPER_A_FINAL_ADVERSARIAL_QA_2026-08-12.md` — historical theorem QA
+7. `PROGRESS_LOG.md`
+
+Do not resume by polishing the old manuscript.
 
 ---
 
-# Scientific theorem — frozen state
+# Publication decision
 
-All detector channels receive the same optical event
+The device-engineer rewrite, Rev. 5, successfully made the original thought experiment understandable, but a subsequent hostile novelty review exposed the decisive issue:
 
-```math
-p(t)=e^{-bt}u(t),
+> The unknown-arrival search penalty itself — shorter timing correlation, more effectively resolvable timing hypotheses, and a higher global false-alarm threshold — is established acquisition/detection theory.
+
+Independent checks of radar/communications and radiation-detector timing literature support that criticism.
+
+Therefore:
+
+```text
+REV. 5: DO NOT SUBMIT AS A FULL RESEARCH ARTICLE.
 ```
 
-through the controlled causal channel family
+This is a novelty disposition, not a mathematical retraction.
 
-```math
-G_\tau(s)=A_\tau\frac{s+b}{(s+1/\tau)^2},
-```
-
-giving
-
-```math
-s_\tau(t)=A_\tau t e^{-t/\tau}u(t).
-```
-
-The transfer family is an **existence construction** used to isolate temporal scaling, not a generic microscopic detector model. For a finite pair `tau_f<tau_s`, choosing `b>=1/tau_f` makes both channel impulse responses nonnegative.
-
-With
-
-```math
-E[n(t)n(t')]=N\delta(t-t'),
-```
-
-choose
-
-```math
-A_\tau=\frac{2\rho_0\sqrt N}{\tau^{3/2}}
-```
-
-so all channels have the same **event-specific eventual matched-filter SNR**
-
-```math
-\rho_{\tau,\infty}=\rho_0.
-```
-
-This is not the same assumption as equal conventional scalar `D*`.
-
-Finite-time evidence accumulation is
-
-```math
-\eta(x)=1-e^{-2x}(1+2x+2x^2),
-\qquad
-\rho_{\tau,t}=\rho_0\sqrt{\eta(x)},
-\qquad x=t/\tau.
-```
-
-The full-template timing covariance is
-
-```math
-R_\infty(y)=(1+|y|)e^{-|y|}.
-```
+The original theorem remains a valid controlled result and a useful pedagogical derivation.
 
 ---
 
-# Operational quantity and claim boundary
+# Original theorem — preserved claim boundary
 
-Arrival is known only to lie in `[0,L]`. A duration-`t` matched filter evaluated for every candidate requires data through `L+t`, so the protocol is explicitly **batch**.
+Paper A established a crossover in a **sufficient batch guarantee time** for an equal-eventual-SNR detector family under unknown arrival time.
 
-Define
+It did not establish:
 
-```math
-T_G=\text{minimum post-window integration duration satisfying the sufficient guarantee},
+- exact finite-time full-scan detection-time crossover;
+- online/sequential optimality;
+- crossover uniqueness;
+- universal slow-detector superiority;
+- equality with conventional scalar `D*`;
+- novelty or priority.
+
+The original continuum witness remains correct:
+
+```text
+rho0 = 3.5
+alpha = .05
+beta = .90
+tau_s/tau_f = 6
+L = 9 tau_f = 1.5 tau_s
 ```
 
 with
 
 ```math
-T_{wall}=L+T_G.
+P_{FA,s}\le0.0336428<0.05<0.0624701\le P_{FA,f}.
 ```
 
-For normalized search length
+This historical result should not be promoted as a new acquisition principle.
+
+---
+
+# Conventional first-order replacement witness
+
+The `unphysical pole-zero detector` criticism has been answered technically, although this does not rescue novelty.
+
+Use one common exponential optical pulse with
 
 ```math
-\ell=L/\tau,
+\tau_p=\tau_f,
 ```
 
-the global noise-only threshold is
+and standard first-order detector transfer functions
 
 ```math
-\Gamma(x,\ell,\alpha)
-=\inf\{u:\Pr[\sup_{0\le q\le\ell}Z_x(q)>u]\le\alpha\}.
+G_\tau(s)=\frac{R_{dc}}{1+s\tau}.
 ```
 
-At the true generative alignment `q_0`, used only for analysis,
+Take
 
 ```math
-P_{D,true}
-=\Phi[\rho_0\sqrt{\eta(x)}-\Gamma(x,\ell,\alpha)].
+\tau_s=10\tau_f.
 ```
 
-The receiver is not given `q_0`; it scans the full interval. Pathwise,
+With the same downstream white-noise PSD `N`, the eventual matched-filter SNR is
 
 ```math
-\boxed{P_D^{scan}\ge P_{D,true}.}
+\rho_\infty^2
+=\frac{R_{dc}^2}{2N(\tau_p+\tau)}.
 ```
 
-Therefore Paper A proves ordering of a **sufficient guarantee time**, not exact full-scan detection time and not online/sequential latency.
-
-Define
+Choose
 
 ```math
-X_G(\rho_0,\alpha,\beta,\ell)
-=\inf\{x:\rho_0\sqrt{\eta(x)}-\Gamma(x,\ell,\alpha)\ge\Phi^{-1}(\beta)\}.
+\frac{R_s}{R_f}
+=\sqrt{\frac{11}{2}}
+\approx2.34520788,
+```
+
+so both conventional first-order channels have exactly equal eventual matched-filter SNR for the same optical pulse.
+
+For
+
+```text
+rho0 = 3.5
+alpha = .05
+beta = .90
+```
+
+the known-arrival first crossings are
+
+```text
+fast:  1.80519795247 tau_f
+slow:  7.53280266002 tau_f
+```
+
+so fast wins strongly at known arrival.
+
+At
+
+```math
+L=7.5\tau_f,
+```
+
+the continuous one-sided bounds are
+
+```text
+slow Rice upper bound = 0.0454867946313 < .05
+fast six-point Slepian lower bound = 0.0561848873819 > .05
+```
+
+and a direct six-variate Gaussian calculation on six timing hypotheses gives
+
+```text
+P_FA,fast = 0.0662240
+P_FA,slow = 0.0358007.
+```
+
+Thus the slow-only separation survives a **finite six-correlator bank**. It is not an artifact of a continuous supremum.
+
+---
+
+# Physical noise-coupling result
+
+The active physical insight is that detector response time is not automatically the task-relevant time scale after optimal noise weighting.
+
+Let the optical signal pass through detector transfer `G_tau(f)`.
+
+If all relevant noise enters before and passes through exactly the same invertible transfer function,
+
+```math
+Y=G_\tau P + G_\tau W_{in},
+```
+
+then
+
+```math
+\boxed{
+\mathcal I_\tau(f)
+=\frac{|G_\tau P|^2}{N_{in}|G_\tau|^2}
+=\frac{|P(f)|^2}{N_{in}}.
+}
+```
+
+Therefore ideal full-record matched-filter SNR and timing covariance are independent of detector response time.
+
+With additional downstream noise,
+
+```math
+Y=G_\tau P+G_\tau W_{in}+W_{out},
+```
+
+so
+
+```math
+\boxed{
+\mathcal I_\tau(f)
+=\frac{|P(f)|^2|G_\tau(f)|^2}
+{N_{in}|G_\tau(f)|^2+N_{out}}.
+}
+```
+
+Detector response matters only insofar as changing it changes this **whitened information spectrum**.
+
+This principle is physically important but is not yet established as novel; optimum-filter literature already treats detector signals with different series/parallel noise transfer paths.
+
+---
+
+# Finite pulse + mixed noise: effective information time
+
+For a unit-area exponential optical pulse
+
+```math
+p(t)=\frac{1}{\tau_p}e^{-t/\tau_p}u(t),
+```
+
+and first-order detector
+
+```math
+G_\tau(i\omega)=\frac{R_{dc}}{1+i\omega\tau},
+```
+
+with mixed white noise, define
+
+```math
+\lambda_\tau=\frac{N_{in}R_{dc}^2}{N_{out}},
+```
+
+and
+
+```math
+\boxed{
+\tau_I=\frac{\tau}{\sqrt{1+\lambda_\tau}}.
+}
 ```
 
 Then
 
 ```math
 \boxed{
-T_G(\alpha,\beta,L;\tau,\rho_0)
-=\tau X_G(\rho_0,\alpha,\beta,L/\tau).
+\mathcal I_\tau(\omega)
+=I_0
+\frac{1}
+{(1+\omega^2\tau_p^2)(1+\omega^2\tau_I^2)}.
 }
 ```
 
+The full-template timing covariance is
+
+```math
+\boxed{
+R_\tau(\Delta)
+=\frac{\tau_p e^{-|\Delta|/\tau_p}
+-\tau_I e^{-|\Delta|/\tau_I}}
+{\tau_p-\tau_I}.
+}
+```
+
+At
+
+```math
+\tau_I=\tau_p,
+```
+
+this becomes
+
+```math
+\left(1+\frac{|\Delta|}{\tau_p}\right)e^{-|\Delta|/\tau_p},
+```
+
+which is exactly the Matérn-3/2 covariance used in the original Paper-A continuum proof.
+
+Interpretation:
+
+> raw detector response time `tau` and optimally whitened timing-information scale `tau_I` need not be the same quantity.
+
+This is currently an **interesting physical mapping, not an established novelty claim**.
+
 ---
 
-# Fast/slow theorem
+# Responsivity-speed scaling
 
 For
 
 ```math
-\tau_f<\tau_s,
-\qquad
-r=\tau_s/\tau_f>1,
-\qquad
-\ell=L/\tau_s,
+R_{dc}(\tau)\propto\tau^g
 ```
 
-the sufficient-guarantee-time boundary is
+in the short-pulse/downstream-white-noise first-order model,
 
 ```math
-B_r(\ell)
-=X_G(\rho_0,\alpha,\beta,r\ell)
--rX_G(\rho_0,\alpha,\beta,\ell)=0.
+\rho_\infty\propto\tau^{g-1/2}.
 ```
 
-With
+Exact known-arrival classification:
 
-```math
-c=\rho_0-\Phi^{-1}(\beta),
-```
+- `g<1/2`: fast dominates accumulated SNR at every finite time and eventually;
+- `g=1/2`: eventual SNR equal; fast dominates every finite time;
+- `1/2<g<1`: exactly one known-arrival evidence crossover;
+- `g>=1`: slow dominates finite-time known-arrival evidence.
 
-only three full-template feasibility regimes exist:
-
-```math
-\begin{array}{ll}
-\text{both feasible:} & c>\Gamma_\infty(r\ell,\alpha),\\
-\text{slow only:} & \Gamma_\infty(\ell,\alpha)<c\le\Gamma_\infty(r\ell,\alpha),\\
-\text{neither:} & c\le\Gamma_\infty(\ell,\alpha).
-\end{array}
-```
-
-Fast-only feasibility is impossible within this deliberately scaled family.
-
-The manuscript derives
-
-```math
-\Gamma_\infty(\ell,\alpha)\to\infty
-\quad(\ell\to\infty)
-```
-
-and
-
-```math
-X_G(\ell)\to\infty
-\quad(\ell\uparrow\ell_{crit}).
-```
-
-Thus fast is preferred at known arrival, reaches its physical guarantee-feasibility boundary first, and under ordinary continuity regularity at least one finite fast-to-slow guarantee-time crossover exists. Crossover uniqueness is not claimed.
+The original equal-eventual-SNR first-order normalization lies exactly at the critical boundary `g=1/2`.
 
 ---
 
-# Controlling continuum quantitative witness
+# Prior-art boundary now known
 
-Use
+Do not claim novelty for any of the following:
 
-```math
-\rho_0=3.5,
-\qquad
-\alpha=.05,
-\qquad
-\beta=.90,
-\qquad
-r=\tau_s/\tau_f=6.
-```
+- unknown-arrival matched-filter search penalty;
+- more timing resolution producing more global false-alarm opportunities;
+- matched filtering in colored noise;
+- whitening by the noise PSD;
+- optimum timing filters for arbitrary pulse shapes;
+- detector series/parallel noise sources with different transfer paths;
+- shaping-time / noise / throughput tradeoffs;
+- finite processing-window optimum filters.
 
-These are proof-friendly witness values chosen so the continuous-time bounds separate transparently. They are not recommended false-alarm specifications and are not claimed to be a representative detector pair.
-
-Known arrival gives
-
-```math
-x_0=1.80519795247291,
-```
-
-so fast is exactly preferred.
-
-At one common physical uncertainty
-
-```math
-\boxed{L=9\tau_f=1.5\tau_s,}
-```
-
-the threshold budget is
-
-```math
-c=2.21844843445540.
-```
-
-For the slow channel, Rice's exact expected upcrossing rate plus the endpoint event gives
-
-```math
-P_{FA,s}
-\le Q(c)+\frac{1.5}{2\pi}e^{-c^2/2}
-=0.0336427995841
-<.05.
-```
-
-For the fast channel, a seven-point sampled subset plus Slepian comparison to an equicorrelated Gaussian vector gives
-
-```math
-P_{FA,f}\ge0.0624701020698>.05.
-```
-
-Hence
-
-```math
-\boxed{
-P_{FA,s}\le.0336428<.05<.0624701\le P_{FA,f}.
-}
-```
-
-This is a **continuous-time slow-only guarantee-feasibility witness**. It does not numerically locate the crossover.
+Radiation-detector literature explicitly treats occurrence-time optimum filtering under arbitrary stationary noise and realistic series/parallel detector noise paths.
 
 ---
 
-# Applied Optics submission package
+# Manuscript constraints
 
-Current journal-facing title:
+If a future manuscript emerges:
 
-> **Task-dependent photodetector ordering under unknown arrival time**
-
-Current first target: **Applied Optics**.
-
-The manuscript is applications-facing rather than a claim of new Gaussian-extreme-value theory. It explicitly connects `L` to optical timing uncertainty such as trigger/synchronization uncertainty, asynchronous transient timing, or a time-of-flight/range gate.
-
-One dimensional mapping is illustrative only:
-
-```text
-tau_f = 10 microseconds
-tau_s = 60 microseconds
-L = 90 microseconds
-```
-
-No detector material is assigned to these numbers.
-
-Three main figures are generated by
-
-`numerics/paper_a_submission_figures.py`:
-
-1. accumulated matched-filter SNR fraction versus physical integration time;
-2. physical timing covariance over the same `L`;
-3. one-sided continuum false-alarm bounds around `alpha=.05`.
-
-No numerical `T_G(L)` crossover curve is authorized.
+1. **Never cite or mention the research repository in the manuscript.**
+2. Preserve device-engineer-readable title, abstract, opening, and conclusion.
+3. State classical acquisition penalties and optimum-filter theory as prior art.
+4. Do not revive the contrived pole-zero detector family as the main physical model.
+5. Do not claim exact finite-time scan crossover unless it is actually proved.
+6. Do not create a submission draft until novelty has been established against detector timing / optimum-filter literature.
 
 ---
 
-# Rendered manuscript QA
+# Current next question
 
-A standard single-file LaTeX version has been compiled locally into an **11-page letter-size PDF** and visually inspected page by page at the key title/figure/reference locations.
+Do not ask again whether the old crossover survives. It does, including in a conventional first-order finite-grid model.
 
-Production checks:
+The active research question is:
 
-```text
-LaTeX compile: PASS
-PDF opens/preflight: PASS
-no clipping/overlap/broken glyphs: PASS
-all three figure pages: PASS
-reference pages after citation repair: PASS
-```
+> **Is there a detector-specific, experimentally measurable relation between raw response time, physical noise-source placement, and the optimally whitened timing-information scale that is not already contained in classical optimum-filter theory?**
 
-The first TeX pass exposed a package conflict between `newtxmath` and redundant `amssymb`; removing `amssymb` fixed the compile without changing manuscript mathematics.
-
-After the first visual render, the title was made left-aligned and figure labels were changed from `Figure` to `Fig.`.
-
-See `PAPER_A_OPTICA_RENDER_QA_2026-08-13.md`.
-
----
-
-# Citation audit correction
-
-The final rendered source corrects two material bibliography errors that remained in the earlier Markdown Rev. 3:
-
-### Croce et al. 2004
-
-Correct author order/list:
-
-```text
-R. P. Croce; Th. Demma; M. Longo; S. Marano; V. Matta; V. Pierro; I. M. Pinto.
-```
-
-### Milstein et al. 2008
-
-Correct Applied Optics author list:
-
-```text
-Adam B. Milstein; Leaf A. Jiang; Jane X. Luu; Eric L. Hines; Kenneth I. Schultz.
-```
-
-The rendered LaTeX/PDF and `PAPER_A_REFERENCE_AUDIT_2026-08-13.md` are controlling for final citation metadata. The older Markdown Rev. 3 reference list is superseded where it conflicts with that audit.
-
-No scientific conclusion changed.
-
----
-
-# Prior art and novelty
-
-Established ingredients include:
-
-```text
-pulse/energy detectivity from D*(f);
-sensitivity-bandwidth combinations;
-unknown-delay/code-phase acquisition;
-search-region / Pd / Pfa / dwell / SNR acquisition tradeoffs;
-matched-filter acquisition;
-optical-CDMA acquisition and synchronization;
-direct-detection ladar acquisition in range windows;
-pulse-width/range-resolution and range-estimation tradeoffs.
-```
-
-The remaining possible synthesis contribution is the narrow detector-scaling construction:
-
-```text
-same optical event
-+ causal detector family
-+ equal event-specific eventual matched-filter SNR
-+ response-time variation
-+ simultaneous evidence-clock and timing-search-correlation rescaling
-+ fixed physical timing uncertainty
--> task-dependent sufficient-guarantee-time ordering and slow-only feasibility.
-```
-
-Final status remains:
-
-```text
-POSSIBLE SYNTHESIS CONTRIBUTION / NOVELTY NOT ESTABLISHED.
-```
-
-No `first`, `novel`, or priority language is authorized.
-
----
-
-# Historical hard stop
-
-**DO NOT CREATE STEP 50 BY DEFAULT.**
-
-Do not revive:
-
-- invalid Step-13 `ell~49` grid crossover;
-- invertible common low-pass as genuine finite information bandwidth;
-- invalid Step-20 upper Rice switch;
-- raw Step-27 tiny-`chi` values;
-- Step-44 finite-grid certificate as continuum truth;
-- Step-46 five-event run as a precise coefficient measurement;
-- Steps 47–49 as exact finite-`u` scan-power closure.
-
-The controlling Paper-A continuum witness avoids this branch entirely.
-
----
-
-# Remaining before real submission
-
-The following are now the only obvious production blockers:
-
-1. confirm author name(s), affiliation(s), and corresponding-author email;
-2. confirm Funding statement;
-3. confirm Disclosures/conflicts statement;
-4. decide whether to archive a versioned repository release/DOI for the final Data Availability statement;
-5. update the final journal-facing bibliography from the citation audit if using the Markdown source;
-6. submit the rendered manuscript plus required cover letter through Optica Prism only after author metadata are final.
-
-A cover-letter draft is in `PAPER_A_APPLIED_OPTICS_COVER_LETTER.md`.
-
-Do not reopen the mathematics unless external review identifies a genuinely new technical defect.
+If the answer is no, close this experiment as a useful pedagogical result rather than force a publication.
