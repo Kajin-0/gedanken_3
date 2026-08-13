@@ -1,12 +1,12 @@
 # Task-dependent photodetector ordering under unknown arrival time
 
 **Target:** Applied Optics — Research Article  
-**Status:** journal-facing Rev. 2 / figures defined / external-style major comments addressed / not yet submission-formatted  
+**Status:** journal-facing Rev. 3 / significance and readability review addressed / not yet template-formatted  
 **Date:** 2026-08-13
 
 ## Abstract
 
-Photodetector response time is usually treated as an intrinsic speed advantage, but transient detection with unknown arrival time couples response time to the timing-search size. We construct causal detector channels with equal event-specific eventual matched-filter SNR and analyze a batch matched-filter receiver with fixed global false-alarm probability. The required post-window guarantee time scales as `tau X_G(rho_0,alpha,beta,L/tau)`. Faster response accumulates evidence sooner but enlarges the normalized search. We prove at least one fast-to-slow ordering crossover and give a continuous-time feasibility witness in which the slow channel remains feasible while the fast channel does not.
+With eventual event-specific sensitivity held fixed, a shorter photodetector response time accelerates known-arrival transient measurements. When arrival time is uncertain, however, it also enlarges the normalized timing search. We construct causal optical-to-electrical detector channels with equal eventual matched-filter SNR and analyze a batch matched-filter receiver at fixed global false-alarm probability. The sufficient post-window guarantee time scales as `tau X_G(rho_0,alpha,beta,L/tau)`. We prove at least one fast-to-slow ordering crossover and give a continuous-time Rice/Slepian witness in which the slow channel remains feasible while the fast channel does not.
 
 ---
 
@@ -69,13 +69,13 @@ G_\tau(s)=A_\tau\frac{s+b}{(s+1/\tau)^2}.
 }
 ```
 
-Then
+Here `G_tau` is interpreted as a linear small-signal optical-to-electrical channel for the selected event; its purpose is to isolate temporal response rather than a particular microscopic carrier-transport mechanism. Then
 
 ```math
 G_\tau(s)P(s)=\frac{A_\tau}{(s+1/\tau)^2},
 ```
 
-and the detector output for the selected event is
+and the output signal is
 
 ```math
 \boxed{
@@ -83,7 +83,7 @@ s_\tau(t)=A_\tau t e^{-t/\tau}u(t).
 }
 ```
 
-The pole-zero matching is a controlled **existence construction** used to isolate temporal scaling; it is not proposed as a generic microscopic model of a specific photodetector material or architecture. Its impulse response is
+The pole-zero matching is a controlled **existence construction**; it is not proposed as a generic microscopic model of a specific photodetector material or architecture. Its impulse response is
 
 ```math
 \boxed{
@@ -196,6 +196,8 @@ Suppose the event arrival time is known only to lie in
 ```math
 0\le\theta\le L.
 ```
+
+In an optical measurement, `L` can represent an asynchronous transient window, trigger or synchronization uncertainty, a prior time-of-flight/range gate, or another finite timing interval established before the detector record is searched. The theorem requires only that the same physical `L` apply to the channels being compared.
 
 A duration-`t` template must be evaluable even for the latest candidate `theta=L`, so the batch record must extend through `L+t`. The normalized search length is
 
@@ -343,6 +345,8 @@ Choose
 \qquad
 r=\frac{\tau_s}{\tau_f}=6.
 ```
+
+These values are chosen to give an analytically transparent finite-scale witness in which the continuous-time upper and lower bounds separate cleanly. They are **not** proposed as a recommended false-alarm specification or as a representative fast/slow detector pair.
 
 At known arrival, the scalar guarantee equation gives
 
@@ -593,6 +597,8 @@ The result is a failure of **detector-only ordering**, not a failure of detector
 The mechanism also differs from a generic sensitivity-bandwidth product. Sensitivity-speed combinations are established detector metrics [2,3], but the present decision surface contains the external task variable `L/tau` together with `rho_0`, `alpha`, and `beta`. Compressing these into one detector-only scalar would erase the nuisance-domain dependence responsible for the crossover.
 
 The result should also be read against classical acquisition theory rather than in competition with it. Unknown-delay search penalties, matched-filter acquisition, false alarms, dwell time, and uncertainty-region size are established [6–14]. The specific construction here couples that established acquisition geometry to a detector response scale while holding eventual event-specific matched-filter SNR equal. The contribution is therefore the detector-facing synthesis and explicit ordering result, not the individual ingredients.
+
+In practical optical measurements, the relevant `L/tau` can arise from trigger jitter, asynchronous transient timing, a time-of-flight gate, or another externally supplied arrival-time window. The result therefore does not say that a slower detector is intrinsically preferable. It says that translating detector response time into a task-level operating time requires the timing uncertainty and the global decision rule as well.
 
 The equal-`rho_0` condition is deliberately event-specific. It is not equivalent to equal conventional `D*`, and the theorem does not require the channels to have equal `D*`. The normalization simply removes eventual matched-filter sensitivity advantage for the selected optical event so that the temporal mechanism can be isolated.
 
