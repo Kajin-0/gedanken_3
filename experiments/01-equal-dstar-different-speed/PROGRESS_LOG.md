@@ -1,6 +1,6 @@
 # Progress Log — Experiment 01
 
-**Consolidation note — 2026-08-12 23:22 EDT:** mathematical closure remains hard-stopped after Step 49. Paper A's operational/claim-scope blockers are repaired, its central theorem survives final adversarial checking, the main quantitative witness is now continuum-bracketed without timing-grid extrapolation, and acquisition/optical-acquisition prior art has been explicitly incorporated. **Novelty remains unestablished.**
+**Consolidation note — 2026-08-12 23:22 EDT:** mathematical closure remains hard-stopped after Step 49. Paper A's operational/claim-scope blockers are repaired, its central theorem survives final adversarial checking, the controlling quantitative witness is now continuum-bracketed without timing-grid extrapolation, acquisition/optical-acquisition prior art is explicitly incorporated, and the authoritative manuscript/recovery files are synchronized. **Novelty remains unestablished.**
 
 ---
 
@@ -69,7 +69,7 @@ holds the event-specific eventual matched-filter SNR fixed:
 11. The same time scale `tau` controls both evidence accumulation and the physical correlation length of the unknown-arrival timing scan.
 12. For `tau_f<tau_s`, the faster channel wins at known arrival but reaches the global-search feasibility boundary at a smaller physical arrival-time uncertainty. This led to the task-dependent fast/slow crossover theorem and the both / slow-only / neither feasibility partition.
 
-Historical notation used `T_D`. The final manuscript replaces it by operational guarantee time `T_G`; see the major-revision entries below.
+Historical notation used `T_D`. The final manuscript replaces it by operational guarantee time `T_G`.
 
 ---
 
@@ -185,7 +185,6 @@ The batch protocol now defines
 \boxed{
 T_G=\text{minimum required post-window integration duration},
 }
-```
 
 with
 
@@ -326,7 +325,7 @@ POSSIBLE SYNTHESIS CONTRIBUTION / NOVELTY NOT ESTABLISHED.
 
 ---
 
-## Final hostile review — continuum feasibility witness found
+## Final hostile review — continuum feasibility witness
 
 The last hostile pass found a stronger way to answer the quantitative objection without any timing-grid continuum extrapolation.
 
@@ -387,6 +386,12 @@ P_{FA,s}
 }
 ```
 
+This establishes
+
+```math
+\Gamma_\infty(1.5,.05)<c.
+```
+
 ### Fast side — Slepian lower bound
 
 Select seven points across `[0,9]` at spacing `1.5`. Every off-diagonal covariance is at most
@@ -395,20 +400,26 @@ Select seven points across `[0,9]` at spacing `1.5`. Every off-diagonal covarian
 \epsilon=R_\infty(1.5)=0.557825400371075.
 ```
 
-Compare with the equicorrelated vector
+Compare with
 
 ```math
 Y_i=\sqrt\epsilon V+\sqrt{1-\epsilon}E_i.
 ```
 
-Slepian gives the sampled fast maximum at least as large in tail probability as this comparison maximum. A one-dimensional Gaussian integral yields
+Slepian plus a one-dimensional Gaussian integral gives
 
 ```math
 \boxed{
 P_{FA,f}
 \ge0.0624701020698
->.05.
+>.05,
 }
+```
+
+which establishes
+
+```math
+\Gamma_\infty(9,.05)>c.
 ```
 
 Therefore
@@ -432,13 +443,13 @@ No Step 50 or hard-window grid analysis was required.
 
 ---
 
-## Final integrated adversarial QA
+## Final integrated adversarial QA and synchronization
 
-`PAPER_A_FINAL_ADVERSARIAL_QA_2026-08-12.md` found no new fatal mathematical defect.
+`PAPER_A_FINAL_ADVERSARIAL_QA_2026-08-12.md` now records the final synchronized disposition.
 
-Final manuscript-only fixes applied:
+Final manuscript/recovery fixes include:
 
-1. the authoritative `PAPER_A_DRAFT.md` now uses the continuum `r=6` Rice/Slepian witness;
+1. `PAPER_A_DRAFT.md` uses the continuum `r=6` Rice/Slepian witness;
 2. the constructed pole-zero matching is explicitly identified as an existence construction;
 3. the detector impulse response is shown to be
 
@@ -448,12 +459,13 @@ g_\tau(t)
 \left[1+\left(b-\frac1\tau\right)t\right]u(t),
 ```
 
-and choosing `b>=1/tau_f` makes both compared channel responses nonnegative;
+and choosing `b>=1/tau_f` makes both compared responses nonnegative;
 4. equal eventual event SNR is explicitly distinguished from equal scalar `D*`;
-5. S. O. Rice's original random-noise paper was added as the primary upcrossing reference;
-6. regression search found no obsolete `T_D`, no old `r=1.2` controlling witness, and no accidental exact-scan/online claim.
+5. Rice's original random-noise paper is cited for the upcrossing formula;
+6. the feasibility implications of the slow upper bound and fast lower bound are stated explicitly;
+7. regression search found no obsolete `T_D`, no old `r=1.2` controlling witness, and no accidental exact-scan/online claim.
 
-Final internal scientific disposition:
+Final internal disposition:
 
 ```text
 MATHEMATICAL CONSISTENCY: PASS
@@ -473,6 +485,6 @@ EXACT FULL-SCAN DETECTION-TIME REVERSAL: NOT ESTABLISHED / NOT CLAIMED
 
 No further Gaussian-extremes or crossover-localization theory is justified by the current manuscript.
 
-The appropriate next phase is **external-style manuscript preparation/review**, e.g. final figure design, journal-format manuscript rendering, or a fresh independent referee report on the now-consolidated Paper A.
+The appropriate next phase is **external-style manuscript preparation/review**, e.g. final figure design, journal-format manuscript rendering, submission-target selection, or a fresh independent referee report.
 
 The repository should remain explicit that novelty is unresolved and that the result is a task-specific guarantee-time theorem for a constructed equal-eventual-SNR detector family.
