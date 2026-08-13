@@ -1,28 +1,38 @@
-# Task-Dependent Ordering of Photodetectors with Equal Asymptotic Sensitivity
+# Task-Dependent Guarantee-Time Ordering of Photodetector Channels with Equal Eventual Matched-Filter SNR
 
-**Draft status:** Paper A complete detector-facing manuscript / consistency-compressed / novelty not established  
+**Draft status:** Paper A major-revision manuscript / operational semantics repaired / novelty not established  
 **Date:** 2026-08-12
 
 ## Abstract
 
-Specific detectivity is a useful measure of detector sensitivity under stated operating conditions, but pulse detection and sensitivity–bandwidth tradeoffs are already known to require temporal or spectral information beyond a single scalar figure of merit. Here we ask a different question: if two detector channels are deliberately normalized to have the same eventual matched-filter signal-to-noise ratio, does the faster detector necessarily reach a prescribed detection decision first when event arrival time is unknown? For a controlled time-scaled Gaussian detector family under a specified global-false-alarm matched-filter scan, the detection time takes the exact dimensionless form
+Specific detectivity, `D*`, is useful for comparing photodetector sensitivity under stated measurement conditions, but it does not by itself define the outcome of an arbitrary time-dependent detection task. Here we study a narrower question. Two causal linear photodetector channels observe the same optical event and are deliberately normalized to have the same eventual matched-filter signal-to-noise ratio `rho_0`, while their response time scales differ. Event arrival is known only to lie in a fixed physical window of duration `L`. A batch receiver scans all candidate arrival times with a finite-duration matched filter and sets one threshold from the maximum of the correlated noise-only timing scan so that the global false-alarm probability is `alpha`.
+
+To make the acquisition clock explicit, a candidate filter duration `t` requires a record of duration `L+t`: the arrival window closes after `L`, followed by `t` additional integration time so that every candidate arrival receives the same finite post-arrival record. We therefore define `T_G` as the minimum **post-window integration duration** for which the statistic at the true event alignment exceeds the global threshold with probability at least `beta`. Because true-alignment threshold crossing is a subset of threshold crossing by the complete signal-present scan, this criterion guarantees total scan-detection probability at least `beta`, but it is not the exact signal-present scan-power criterion.
+
+For the controlled time-scaled family, the guarantee time has the exact dimensionless form
 
 ```math
-T_D(\alpha,\beta,L;\tau,\rho_0)
-=\tau X_D\!\left(\rho_0,\alpha,\beta,\frac{L}{\tau}\right),
+T_G(\alpha,\beta,L;\tau,\rho_0)
+=\tau X_G\!\left(\rho_0,\alpha,\beta,\frac{L}{\tau}\right),
 ```
 
-where `tau` is the detector time scale, `L` is the physical arrival-time uncertainty interval, `alpha` is the allowed global false-alarm probability, `beta` is the required true-alignment detection probability, and `rho_0` is the common eventual matched-filter SNR. Shortening `tau` accelerates evidence accumulation but also increases the normalized search interval `L/tau` and shortens the correlation length of the timing scan. Under stated continuity and large-search assumptions, these competing effects imply at least one finite fast-to-slow detection-time crossover in the constructed equal-eventual-SNR family, together with a slow-only feasibility region near the faster detector's search-limited boundary. The result is task- and protocol-specific: it neither establishes a general preference for slower photodetectors nor introduces a universal replacement for `D*`.
+while the batch wall-clock decision time measured from the opening of the arrival window is
+
+```math
+T_{\rm wall}=L+T_G.
+```
+
+At fixed `L`, `T_wall` and `T_G` induce the same detector ordering. Shortening `tau` accelerates evidence accumulation but also increases the normalized timing-search interval `L/tau`. For the family constructed here, these competing effects imply at least one finite fast-to-slow **guarantee-time** crossover and a slow-only guarantee-feasibility region. The result is task- and protocol-specific. It does not prove a reversal of the exact full signal-present scan detection times, does not establish a general preference for slower photodetectors, and does not introduce a universal replacement for `D*`.
 
 ---
 
 # I. Introduction
 
-Specific detectivity, `D*`, is one of the most widely used figures of merit for comparing photodetectors. It combines responsivity, noise, active area, and measurement bandwidth into a normalized sensitivity measure and is useful when the operating condition to which it refers is specified. It is not, however, a complete descriptor of arbitrary time-dependent detection. That limitation is longstanding rather than new. Jones treated the energy detectable from radiation pulses using frequency-dependent detectivity in 1960 [1], detector characterization has long treated temporal bandwidth as a separate performance dimension [2,3], and modern guidance emphasizes that detector figures of merit are meaningful only together with their measurement conditions [4].
+Specific detectivity, `D*`, is one of the most widely used figures of merit for photodetector comparison. Its conventional normalization includes detector area and noise-equivalent measurement bandwidth; that bandwidth normalization should not be confused with the detector's temporal response bandwidth or `-3 dB` speed. `D*` remains useful when the operating condition to which it refers is specified, but it is not a complete descriptor of arbitrary time-dependent detection. That limitation is longstanding rather than new. Jones treated energy detection from radiation pulses using frequency-dependent detectivity in 1960 [1], detector characterization has long treated temporal bandwidth as a separate performance dimension [2,3], and modern guidance emphasizes application- and protocol-dependent characterization [4].
 
-The appropriate signal-detection quantity also depends on the task. For a known deterministic waveform observed for sufficiently long time in stationary Gaussian noise, the maximum matched-filter SNR is determined by the spectral overlap of the signal with the detector and noise response. In that restricted problem, a complete frequency-dependent sensitivity description can be sufficient. Unknown arrival time changes the problem. The receiver must search over a nuisance parameter—the event time—and a fixed global false-alarm probability must be imposed over the resulting correlated timing scan. This search penalty is established in matched-filter detection theory: false-alarm behavior depends on the correlation structure of the filtered process and cannot generally be identified with the raw digital sample count [5–7].
+The relevant signal-detection quantity also depends on the task. For a known deterministic waveform observed for sufficiently long time in stationary Gaussian noise, maximum matched-filter SNR is set by the spectral overlap of signal and noise. Unknown arrival time changes the problem because event time becomes a nuisance parameter. A fixed global false-alarm probability must then be imposed over a correlated timing scan, and the threshold depends on the correlation structure of that scan rather than on raw digital sample count alone [5–7]. Similar acquisition-time / range-window questions have long appeared in radar, sonar, synchronization, and optical ranging [8].
 
-These observations motivate a narrower question than whether `D*` “contains bandwidth.” Suppose two detector channels are deliberately normalized so that neither has an eventual matched-filter sensitivity advantage. They produce the same eventual matched-filter SNR for the event of interest, but one responds on a shorter time scale than the other. If the event time were known, the faster detector would accumulate any fixed fraction of its available evidence sooner. If the event time is unknown, however, temporal compression also shortens the physical correlation length of the matched-filter output. Over one fixed physical arrival-time interval, the faster detector therefore presents a larger normalized timing-search domain.
+The present question is therefore deliberately narrower than whether `D*` “contains bandwidth.” Suppose two detector channels are normalized so that neither has an eventual matched-filter SNR advantage for one specified optical event. One channel responds faster than the other. If event time were known, the faster channel would accumulate any fixed fraction of its available evidence sooner. If event time is uncertain over one fixed physical interval, however, temporal compression also shortens the physical correlation length of the matched-filter timing statistic. The faster channel therefore spans a larger normalized search domain.
 
 The two effects oppose one another:
 
@@ -37,48 +47,110 @@ shorter detector time scale
     -> larger normalized unknown-arrival search.
 ```
 
-The question studied here is whether that competition can prevent a detector-only ordering by response time even after eventual matched-filter SNR has been equalized.
+The issue is whether this competition can prevent a detector-only ordering by response time even after eventual matched-filter SNR has been equalized.
 
-We answer the question in a deliberately controlled family rather than attempt to model every physical detector mechanism. The family is time-scaled, linear, and observed in additive white Gaussian output noise. Its members are normalized to the same eventual matched-filter SNR `rho_0`. Event arrival is unknown over a physical interval `L`; one threshold is chosen to satisfy a global false-alarm probability `alpha`; and detection time is defined by reaching a specified true-alignment detection probability `beta`. The decision rule is explicit, but it is not asserted to be Bayes-optimal, minimax-optimal, or sequentially optimal for the general unknown-arrival problem.
+A critical distinction is made at the outset. The paper does **not** solve a sequential online stopping problem, and it does **not** derive the exact signal-present scan detection probability. Instead, it defines a batch acquisition protocol and a conservative sufficient criterion: the matched-filter statistic at the true arrival alignment must exceed a threshold calibrated against the maximum of the complete noise-only scan. Meeting that true-alignment criterion with probability `beta` guarantees that the complete signal-present scan declares a detection with probability at least `beta`.
 
-Within this construction, detector time scale enters the decision problem twice: it sets the physical rate of evidence accumulation and rescales the nuisance-parameter domain through `L/tau`. The resulting detection time therefore takes the task-dependent form
+Within this explicit protocol, detector time scale enters the guarantee problem twice. It sets the physical rate of evidence accumulation and rescales the nuisance-parameter domain through `L/tau`. The resulting post-window guarantee time is
 
 ```math
-T_D
-=\tau X_D\!\left(\rho_0,\alpha,\beta,\frac{L}{\tau}\right).
+T_G
+=\tau X_G\!\left(\rho_0,\alpha,\beta,\frac{L}{\tau}\right),
 ```
 
-At known arrival time the faster member reaches the required decision first. As timing uncertainty grows, however, the faster detector searches the larger dimensionless interval and reaches its search-limited feasibility boundary at a smaller physical `L`. Under the assumptions stated below, these facts guarantee at least one finite fast-to-slow detection-time crossover. The result is a counterexample, within the constructed family, to a detector-only monotonic ordering by response time. It is not a claim that slower detectors are generally better.
+and the batch wall-clock time is `L+T_G`. At known arrival time the faster member reaches the guarantee criterion first. As timing uncertainty grows, the faster member reaches its search-limited guarantee-feasibility boundary at a smaller physical `L`. Under the finite-dimensional continuity condition stated below, these facts force at least one fast-to-slow guarantee-time crossover.
 
-Section II defines the equal-eventual-SNR family and derives its finite-time SNR and timing-scan covariance. Section III introduces the dimensionless detection-time surface. Section IV derives the fast/slow task boundary and feasibility partition. Section V discusses interpretation, limitations, and implications for detector specification and experiment design.
+Section II defines a common optical event, a realizable time-scaled detector family, and its finite-time matched-filter statistics. Section III defines the batch acquisition protocol, global scan threshold, and guarantee-time surface. Section IV proves the feasibility partition and crossover. Section V states the physical interpretation and, equally importantly, the limits of what the theorem establishes.
 
 ---
 
-# II. Controlled equal-eventual-SNR detector family
+# II. Controlled equal-eventual-SNR photodetector family
 
-## A. Time-scaled matched-filter template
+## A. Common optical event and causal detector realization
 
-We choose a family whose output signal for the event of interest is
+To keep the construction detector-facing, all channels receive the same incident optical event
 
 ```math
-s_\tau(t)=A_\tau t e^{-t/\tau}u(t),
+p(t)=e^{-bt}u(t),
+\qquad b>0,
 ```
 
-where `u(t)` is the unit step and `tau` sets the detector time scale. The waveform can be generated by a stable causal linear response, but here it is used primarily because temporal scaling is explicit and all members can be normalized to identical eventual matched-filter SNR.
-
-Assume additive white Gaussian output noise with two-sided spectral density `N` under a consistent normalization. Choosing
+with Laplace transform
 
 ```math
-A_\tau=\frac{2\rho_0\sqrt{N}}{\tau^{3/2}}
+P(s)=\frac{1}{s+b}.
+```
+
+For each detector time scale `tau>0`, define the causal stable proper transfer function
+
+```math
+\boxed{
+G_\tau(s)
+=A_\tau\frac{s+b}{(s+1/\tau)^2}.
+}
+```
+
+The output signal is then
+
+```math
+G_\tau(s)P(s)
+=\frac{A_\tau}{(s+1/\tau)^2},
+```
+
+so
+
+```math
+\boxed{
+s_\tau(t)=A_\tau t e^{-t/\tau}u(t).
+}
+```
+
+Thus the compared waveforms are not independently chosen templates: they arise from one fixed optical event passed through a realizable family of causal detector channels. The construction is intentionally idealized and is not asserted to represent a unique microscopic photodetector mechanism.
+
+## B. Noise convention and equal eventual matched-filter SNR
+
+Let the additive output noise be zero-mean white Gaussian noise with
+
+```math
+\boxed{
+E[n(t)n(t')]=N\,\delta(t-t').
+}
+```
+
+Under this convention, the matched-filter squared SNR for a deterministic signal segment is
+
+```math
+\rho^2=\frac{1}{N}\int s^2(t)\,dt.
+```
+
+For the full output waveform,
+
+```math
+\rho_{\tau,\infty}^2
+=\frac{A_\tau^2}{N}
+\int_0^\infty t^2e^{-2t/\tau}dt
+=\frac{A_\tau^2\tau^3}{4N}.
+```
+
+Choosing
+
+```math
+\boxed{
+A_\tau=\frac{2\rho_0\sqrt N}{\tau^{3/2}}
+}
 ```
 
 gives
 
 ```math
-\boxed{\rho_{\tau,\infty}=\rho_0}
+\boxed{
+\rho_{\tau,\infty}=\rho_0
+}
 ```
 
-for every `tau`. The comparison therefore removes eventual matched-filter sensitivity as an explanatory variable: any difference in finite-task performance must arise from temporal scaling and its interaction with the decision protocol.
+for every `tau`.
+
+This equality is **event-specific**: all channels have the same eventual matched-filter SNR for the specified optical input `p(t)`. It is deliberately stronger and more task-specific than equality of one scalar reference `D*`; it should not be read as equality of detector sensitivity for every possible waveform or wavelength.
 
 Let
 
@@ -86,7 +158,7 @@ Let
 x=\frac{t}{\tau}
 ```
 
-be observation duration in detector-time units. The fraction of total squared matched-filter SNR accumulated by time `t` is
+be the available post-arrival signal duration in detector-time units. The accumulated fraction of total squared matched-filter SNR is
 
 ```math
 \eta(x)
@@ -103,23 +175,23 @@ so
 }
 ```
 
-Because
+Since
 
 ```math
 \eta'(x)=4x^2e^{-2x}>0
 ```
 
-for `x>0`, each detector monotonically accumulates available evidence. At fixed physical time, the smaller-`tau` member has the larger `x` and therefore reaches any fixed fraction of its eventual SNR earlier.
+for `x>0`, every channel monotonically accumulates evidence, and at any fixed physical `t` the smaller-`tau` channel reaches a larger fraction of its eventual SNR.
 
-## B. Unknown arrival time converts the same temporal scale into a search scale
+## C. Finite-template timing covariance
 
-Let the event arrival time be unknown within a physical interval of length `L`. At observation duration `t`, the normalized finite-record matched-filter template is proportional to
+At finite integration duration `t`, the normalized template in detector-time units is proportional to
 
 ```math
-h_x(v)=v e^{-v}\,1_{[0,x]}(v)
+h_x(v)=v e^{-v}1_{[0,x]}(v).
 ```
 
-in detector-time units. Under noise alone, scanning this template across candidate arrival times produces a stationary Gaussian process whose normalized covariance depends only on the dimensionless lag
+Under noise alone, scanning this template across candidate arrival times produces a zero-mean unit-variance stationary Gaussian process. Its covariance depends only on dimensionless lag
 
 ```math
 y=\frac{|\Delta|}{\tau}.
@@ -137,91 +209,180 @@ R_x(y)
 }
 ```
 
-with
+and
 
 ```math
 R_x(y)=0,\qquad y\ge x.
 ```
 
-Thus, in physical time,
+In physical time,
 
 ```math
 \boxed{
-r_{\tau,t}(\Delta)=R_{t/\tau}(|\Delta|/\tau).}
+r_{\tau,t}(\Delta)=R_{t/\tau}(|\Delta|/\tau).
+}
 ```
 
-Reducing `tau` therefore does two things simultaneously: it accelerates signal accumulation and compresses the timing-scan covariance in physical lag. For one fixed physical uncertainty interval `L`, the faster detector searches the larger dimensionless interval
+For one fixed physical arrival-time uncertainty interval `L`, the normalized search length is therefore
 
 ```math
-\boxed{\ell=\frac{L}{\tau}.}
+\boxed{
+\ell=\frac{L}{\tau}.
+}
 ```
 
-This is the competition formalized below.
+Reducing `tau` simultaneously accelerates signal accumulation and enlarges this normalized timing-search interval.
 
 ---
 
-# III. Detection time as a dimensionless task surface
+# III. Batch acquisition and the guarantee-time surface
 
-## A. Global threshold for the correlated timing scan
+## A. Operational acquisition clock
 
-Let `Z_x(q)` denote the normalized noise-only matched-filter scan at dimensionless trial arrival time `q`. For `x=t/tau`, `Z_x` is a zero-mean, unit-variance stationary Gaussian process with covariance
+Let the event arrival time `theta` be known a priori to lie in
+
+```math
+0\le\theta\le L.
+```
+
+For a candidate post-arrival integration duration `t`, every candidate arrival must be evaluated with the same finite template support `[0,t]`. The latest candidate arrival, `theta=L`, therefore requires data through physical time `L+t`. The protocol is consequently:
+
+```text
+1. open the allowed event-arrival window at time 0;
+2. close the arrival window at time L;
+3. acquire t additional seconds of data;
+4. scan all candidate arrivals in [0,L] with the same duration-t matched filter;
+5. compare the scan maximum with one global threshold.
+```
+
+The quantity optimized below is the required **post-window integration duration**. If that duration is `T_G`, then the wall-clock batch decision time measured from the opening of the arrival window is
+
+```math
+\boxed{
+T_{\rm wall}=L+T_G.
+}
+```
+
+This is a batch protocol, not a sequential stopping rule. Because `L` is common to both detectors in a comparison,
+
+```math
+T_{{\rm wall},f}-T_{{\rm wall},s}
+=T_{G,f}-T_{G,s},
+```
+
+so detector ordering is identical whether it is expressed in `T_G` or `T_wall`.
+
+## B. Global false-alarm threshold
+
+Let `Z_x(q)` denote the normalized noise-only matched-filter scan at dimensionless candidate arrival time `q`. For `x=t/tau`,
 
 ```math
 \operatorname{Cov}[Z_x(q),Z_x(q')]
 =R_x(|q-q'|).
 ```
 
-For fixed `(x,ell,alpha)`, define the global threshold `Gamma(x,ell,alpha)` by
+For fixed `(x,ell,alpha)`, define the generalized global threshold `Gamma(x,ell,alpha)` by
 
 ```math
 \boxed{
 \Pr\!\left[
 \sup_{0\le q\le\ell}Z_x(q)>\Gamma(x,\ell,\alpha)
-\right]=\alpha,
+\right]\le\alpha,
 }
 ```
 
-with the usual generalized-quantile interpretation when necessary. This definition retains the correlated timing search rather than replacing it by an independent-trials approximation. In physical units,
+with `Gamma` taken as the smallest threshold satisfying this inequality. This retains the correlated timing scan and makes no independent-trials approximation.
+
+## C. True-alignment guarantee criterion
+
+Let `q_0` denote the true dimensionless event alignment. Under signal plus noise, the normalized matched-filter statistic at `q_0` has unit variance and mean
 
 ```math
-\gamma_{\tau,t}(L,\alpha)
-=\Gamma\!\left(\frac{t}{\tau},\frac{L}{\tau},\alpha\right).
+\rho_0\sqrt{\eta(x)}.
 ```
 
-At the true event alignment, the normalized matched-filter output under signal plus noise has unit variance and mean `rho_0 sqrt(eta(x))`. Under the true-alignment criterion used here,
+Let `Y_x(q)` denote the complete normalized signal-present timing scan. Define
+
+```math
+P_{D,\mathrm{true}}(x)
+=\Pr\left[Y_x(q_0)>\Gamma(x,\ell,\alpha)\right].
+```
+
+Then
 
 ```math
 \boxed{
 P_{D,\mathrm{true}}(x)
 =\Phi\!\left[
 \rho_0\sqrt{\eta(x)}-\Gamma(x,\ell,\alpha)
-\right].
+\right],
 }
 ```
 
-Define the dimensionless decision margin
+where `Phi` is the standard-normal cumulative distribution function.
+
+The complete scan detection probability is
+
+```math
+P_D^{\mathrm{scan}}(x)
+=\Pr\left[
+\sup_{0\le q\le\ell}Y_x(q)>\Gamma(x,\ell,\alpha)
+\right].
+```
+
+Pathwise,
+
+```math
+\{Y_x(q_0)>\Gamma\}
+\subseteq
+\{\sup_qY_x(q)>\Gamma\},
+```
+
+therefore
 
 ```math
 \boxed{
-M(x;\ell,\rho_0,\alpha)
+P_D^{\mathrm{scan}}(x)
+\ge P_{D,\mathrm{true}}(x).
+}
+```
+
+Accordingly, the condition
+
+```math
+P_{D,\mathrm{true}}(x)\ge\beta
+```
+
+is a conservative sufficient condition guaranteeing
+
+```math
+P_D^{\mathrm{scan}}(x)\ge\beta.
+```
+
+This one-sided implication is central to the scope of the paper. The theorem below orders the time required to satisfy this **guarantee criterion**. It does not order the exact first integration durations obtained by solving `P_D^{scan}=beta` directly.
+
+Define the guarantee margin
+
+```math
+\boxed{
+M_G(x;\ell,\rho_0,\alpha)
 =\rho_0\sqrt{\eta(x)}-\Gamma(x,\ell,\alpha).
 }
 ```
 
-The required detection probability `beta` is reached when
+Let
 
 ```math
-M(x;\ell,\rho_0,\alpha)
-\ge z_\beta,
-\qquad
-z_\beta\equiv\Phi^{-1}(\beta).
+z_\beta=\Phi^{-1}(\beta).
 ```
 
-This criterion is narrower than the total probability that the maximum of the entire signal-present scan crosses threshold. It asks when the matched filter at the true alignment reaches the specified operating point while the threshold is set by the global noise-only search.
+The guarantee criterion is
 
-## B. Monotone first-crossing time
+```math
+M_G(x;\ell,\rho_0,\alpha)\ge z_\beta.
+```
 
-For this family, increasing observation duration improves the decision margin. The signal term increases strictly because `eta'(x)>0`. The global threshold does not increase.
+## D. Monotonicity with integration duration
 
 For fixed dimensionless lag `y`, write
 
@@ -252,7 +413,7 @@ R_{x_2}(y)\ge R_{x_1}(y)
 \quad\text{for all }y.
 ```
 
-Standard Gaussian comparison then gives
+Slepian's Gaussian comparison inequality [9] then gives
 
 ```math
 \boxed{
@@ -261,34 +422,34 @@ Standard Gaussian comparison then gives
 }
 ```
 
-Therefore `M(x;ell,rho_0,alpha)` is strictly increasing with `x`. Each detector individually benefits from additional observation time; the cross-detector reversal derived in Section IV is not produced by assigning one detector a self-suboptimal integration duration.
+The signal term increases strictly while the threshold does not increase, so `M_G` is strictly increasing in `x`. Every channel benefits from additional integration time; the cross-channel reversal is not produced by assigning one channel a self-suboptimal duration.
 
-Define
+Define the dimensionless guarantee time
 
 ```math
 \boxed{
-X_D(\rho_0,\alpha,\beta,\ell)
+X_G(\rho_0,\alpha,\beta,\ell)
 =\inf\left\{
 x>0:
-M(x;\ell,\rho_0,\alpha)\ge z_\beta
+M_G(x;\ell,\rho_0,\alpha)\ge z_\beta
 \right\}.
 }
 ```
 
-Whenever the requested operating point is feasible, this first crossing is unambiguous. Returning to physical time gives the central scaling relation
+Whenever the guarantee criterion is feasible,
 
 ```math
 \boxed{
-T_D(\alpha,\beta,L;\tau,\rho_0)
-=\tau X_D\!\left(
+T_G(\alpha,\beta,L;\tau,\rho_0)
+=\tau X_G\!\left(
 \rho_0,\alpha,\beta,\frac{L}{\tau}
 \right).
 }
 ```
 
-The scaling exposes the two opposing roles of `tau`: a smaller value shortens the physical time unit but evaluates the same dimensionless task surface at a larger search length `L/tau`.
+This is the central scaling relation of the paper.
 
-## C. Full-template limit and task feasibility
+## E. Full-template limit and guarantee feasibility
 
 As `x\to\infty`,
 
@@ -303,7 +464,7 @@ Define
 ```math
 \boxed{
 \Gamma_\infty(\ell,\alpha)
-=\lim_{x\to\infty}\Gamma(x,\ell,\alpha)
+=\lim_{x\to\infty}\Gamma(x,\ell,\alpha),
 }
 ```
 
@@ -311,12 +472,12 @@ and
 
 ```math
 \boxed{
-M_\infty(\ell;\rho_0,\alpha)
+M_{G,\infty}(\ell)
 =\rho_0-\Gamma_\infty(\ell,\alpha).
 }
 ```
 
-Because the finite-time margin increases toward this limit, a finite detection time exists when
+Finite guarantee time exists when
 
 ```math
 \boxed{
@@ -325,39 +486,90 @@ Because the finite-time margin increases toward this limit, a finite detection t
 }
 ```
 
-If the reverse strict inequality holds, the requested operating point cannot be reached at any observation duration under the stated criterion. Equality defines the asymptotic feasibility boundary; under the strict-convergence assumption used below, it is approached only as `T_D\to\infty`.
+If the reverse strict inequality holds, no finite or infinite amount of post-window integration can satisfy the true-alignment guarantee criterion.
 
-The function `Gamma_infty(ell,alpha)` is nondecreasing in `ell` because enlarging the search interval enlarges the supremum domain. This monotonicity determines the feasibility structure without requiring a closed form for the correlated-scan quantile.
+The threshold is nondecreasing in `ell` because increasing the search interval enlarges the supremum domain. In addition, for the present full-template covariance the threshold is unbounded as `ell\to\infty`. A short proof avoids placing this fact among the theorem assumptions.
 
----
-
-# IV. Task-dependent fast/slow ordering
-
-## A. Exact task boundary
-
-Consider two members of the family with equal eventual matched-filter SNR `rho_0` and
+Choose any `0<epsilon<1`. Since
 
 ```math
-\tau_f<\tau_s.
+R_\infty(y)=(1+y)e^{-y}\to0,
 ```
 
-Define
+there exists a spacing `d_epsilon` such that
 
 ```math
-\boxed{r=\frac{\tau_s}{\tau_f}>1}
+R_\infty(d_\epsilon)\le\epsilon.
 ```
 
-and measure timing uncertainty in units of the slower detector,
+Sample the process at `n` points separated by `d_epsilon`. Their off-diagonal covariances satisfy
 
 ```math
-\boxed{\ell=\frac{L}{\tau_s}.}
+R_\infty(kd_\epsilon)\le\epsilon,
+\qquad k\ge1.
 ```
 
-The faster detector then searches the normalized interval `r ell`, while the slower detector searches `ell`. Section III gives
+Compare this vector with an equicorrelated Gaussian vector
+
+```math
+Y_i=\sqrt\epsilon\,V
++\sqrt{1-\epsilon}\,E_i,
+```
+
+where `V,E_1,...,E_n` are independent standard normals. The comparison vector has larger off-diagonal covariance, so Slepian gives
+
+```math
+\Pr\left[\max_i Z_i\le u\right]
+\le
+\Pr\left[\max_iY_i\le u\right].
+```
+
+But
+
+```math
+\max_iY_i
+=\sqrt\epsilon\,V
++\sqrt{1-\epsilon}\max_iE_i
+\to\infty
+```
+
+in probability as `n\to\infty`. Hence the sampled maximum, and therefore the continuous supremum, exceeds every fixed level with probability tending to one over sufficiently long intervals. Thus
 
 ```math
 \boxed{
-T_{D,f}=\tau_fX_D(\rho_0,\alpha,\beta,r\ell),
+\Gamma_\infty(\ell,\alpha)\to\infty
+\qquad(\ell\to\infty).
+}
+```
+
+The guarantee-feasibility boundary is therefore finite whenever known-time operation is feasible.
+
+---
+
+# IV. Task-dependent fast/slow guarantee ordering
+
+## A. Exact guarantee-time boundary
+
+Consider two channels with
+
+```math
+\tau_f<\tau_s,
+\qquad
+r=\frac{\tau_s}{\tau_f}>1,
+```
+
+and define timing uncertainty in slow-channel units,
+
+```math
+\ell=\frac{L}{\tau_s}.
+```
+
+The fast channel searches `r ell`, while the slow channel searches `ell`. Therefore
+
+```math
+\boxed{
+T_{G,f}
+=\tau_fX_G(\rho_0,\alpha,\beta,r\ell),
 }
 ```
 
@@ -365,84 +577,86 @@ and
 
 ```math
 \boxed{
-T_{D,s}=r\tau_fX_D(\rho_0,\alpha,\beta,\ell).
+T_{G,s}
+=r\tau_fX_G(\rho_0,\alpha,\beta,\ell).
 }
 ```
 
-The exact preference boundary is the zero set
+The exact guarantee-time preference boundary is
 
 ```math
 \boxed{
 B_r(\ell;\rho_0,\alpha,\beta)
-=X_D(\rho_0,\alpha,\beta,r\ell)
--rX_D(\rho_0,\alpha,\beta,\ell)=0.
+=X_G(\rho_0,\alpha,\beta,r\ell)
+-rX_G(\rho_0,\alpha,\beta,\ell)=0.
 }
 ```
 
-This boundary must compare the full finite-time task surfaces. Comparing only eventual margins is insufficient: for every `L>0` the slower member has the smaller normalized search burden, yet at known arrival time the faster member reaches the same dimensionless decision point in less physical time.
+Because `T_wall=L+T_G`, this is also the batch wall-clock ordering boundary at fixed `L`.
 
-## B. Feasibility partition
+## B. Guarantee-feasibility partition
 
 Let
 
 ```math
-\boxed{c=\rho_0-z_\beta.}
+\boxed{
+c=\rho_0-z_\beta.
+}
 ```
 
-For the slower detector, finite detection time requires
+The slow channel has finite guarantee time when
 
 ```math
 \Gamma_\infty(\ell,\alpha)<c,
 ```
 
-whereas the faster detector requires
+whereas the fast channel requires
 
 ```math
 \Gamma_\infty(r\ell,\alpha)<c.
 ```
 
-Since `Gamma_infty` is nondecreasing in search length,
+Since `Gamma_infty` is nondecreasing,
 
 ```math
 \Gamma_\infty(r\ell,\alpha)
 \ge\Gamma_\infty(\ell,\alpha).
 ```
 
-The task therefore has three feasibility regimes:
+Thus only three guarantee-feasibility regimes are possible:
 
 ```math
 \boxed{
 \begin{array}{ll}
-\text{both feasible:}
+\text{both guarantee-feasible:}
 & c>\Gamma_\infty(r\ell,\alpha),\\[4pt]
-\text{slow only:}
+\text{slow guarantee-feasible only:}
 & \Gamma_\infty(\ell,\alpha)<c
 \le\Gamma_\infty(r\ell,\alpha),\\[4pt]
-\text{neither feasible:}
+\text{neither guarantee-feasible:}
 & c\le\Gamma_\infty(\ell,\alpha).
 \end{array}
 }
 ```
 
-A fast-only feasibility region is excluded within this deliberately equal-eventual-SNR scaled family.
+A fast-only guarantee-feasibility region is impossible in this equal-eventual-SNR scaled family.
 
-Define the critical normalized uncertainty
+Define
 
 ```math
 \boxed{
-\ell_{\mathrm{crit}}
+\ell_{\rm crit}
 =\sup\left\{\ell\ge0:
-\Gamma_\infty(\ell,\alpha)
-<\rho_0-z_\beta
+\Gamma_\infty(\ell,\alpha)<\rho_0-z_\beta
 \right\}.
 }
 ```
 
-The corresponding physical boundary is
+Then
 
 ```math
 \boxed{
-L_{\mathrm{crit}}(\tau)=\tau\ell_{\mathrm{crit}},
+L_{\rm crit}(\tau)=\tau\ell_{\rm crit},
 }
 ```
 
@@ -450,193 +664,262 @@ so
 
 ```math
 \boxed{
-\frac{L_{\mathrm{crit},s}}
-{L_{\mathrm{crit},f}}
+\frac{L_{{\rm crit},s}}{L_{{\rm crit},f}}
 =\frac{\tau_s}{\tau_f}=r.
 }
 ```
 
-The slower member therefore remains feasible over a proportionally larger physical arrival-time interval in this normalized family.
+## C. Boundary divergence is a consequence, not an assumption
 
-## C. Proposition 1: existence of a fast-to-slow crossover
-
-**Proposition 1 (task-dependent fast/slow ordering).** Consider the equal-eventual-SNR family above with `tau_f<tau_s`. Assume:
-
-1. the requested `(alpha,beta)` operating point is feasible when event arrival time is known;
-2. `X_D(rho_0,alpha,beta,ell)` varies continuously with `ell` away from feasibility singularities;
-3. `Gamma_infty(ell,alpha)` grows without bound as `ell\to\infty`, so a finite critical search length exists for the chosen operating point;
-4. as `ell\uparrow ell_crit`, the required dimensionless detection time diverges.
-
-Then at least one finite physical arrival-time uncertainty `L_x` exists at which the two detectors have equal detection time. The faster detector is preferred for sufficiently small `L`, whereas the slower detector is preferred near the faster detector's feasibility boundary.
-
-**Proof.** At `L=0`, both detectors solve the same dimensionless decision problem. Let
+Assume the ordinary finite-dimensional regularity needed for the threshold to vary continuously with `(x,ell)` and for `Gamma_infty(ell,alpha)` to be continuous at `ell_crit`. Then
 
 ```math
-x_0=X_D(\rho_0,\alpha,\beta,0).
+\Gamma_\infty(\ell_{\rm crit},\alpha)=c.
 ```
 
-Known-time feasibility makes `x_0` finite, so
+For every finite `x`,
 
 ```math
-T_{D,f}(0)=\tau_fx_0,
+\eta(x)<1.
+```
+
+Also, since `R_x(y)\le R_\infty(y)` pointwise, Slepian gives
+
+```math
+\Gamma(x,\ell,\alpha)
+\ge\Gamma_\infty(\ell,\alpha).
+```
+
+Therefore at `ell=ell_crit`, for every finite `x`,
+
+```math
+\begin{aligned}
+M_G(x;\ell_{\rm crit})
+&=\rho_0\sqrt{\eta(x)}
+-\Gamma(x,\ell_{\rm crit},\alpha)\\
+&<\rho_0-\Gamma_\infty(\ell_{\rm crit},\alpha)\\
+&=z_\beta.
+\end{aligned}
+```
+
+No finite `x` reaches the guarantee boundary itself. If `X_G(ell)` remained bounded along a sequence `ell\uparrow ell_crit`, continuity would produce a finite limiting `x` satisfying the criterion at `ell_crit`, contradicting the strict inequality above. Hence
+
+```math
+\boxed{
+X_G(\ell)\to\infty
 \qquad
-T_{D,s}(0)=\tau_sx_0,
+(\ell\uparrow\ell_{\rm crit}).
+}
+```
+
+The divergence previously carried as a separate assumption is therefore a consequence of the specific family plus the stated continuity regularity.
+
+## D. Proposition 1: existence of a fast-to-slow guarantee-time crossover
+
+**Proposition 1 (task-dependent guarantee-time ordering).** Consider the equal-eventual-SNR family above with `tau_f<tau_s`. Suppose:
+
+1. the requested `(alpha,beta)` criterion is guarantee-feasible for known arrival time;
+2. the finite-dimensional threshold / first-crossing surface is continuous in the interior of its guarantee-feasible domain, and `Gamma_infty(ell,alpha)` is continuous at the critical boundary.
+
+Then at least one finite physical arrival-time uncertainty
+
+```math
+L_\times\in(0,L_{{\rm crit},f})
+```
+
+exists at which the two channels have equal guarantee time. The fast channel has smaller guarantee time for sufficiently small `L`; the slow channel has smaller guarantee time sufficiently near the fast channel's guarantee-feasibility boundary.
+
+**Proof.** At `L=0`, both channels solve the same dimensionless known-time problem. Let
+
+```math
+x_0=X_G(\rho_0,\alpha,\beta,0).
+```
+
+Known-time guarantee feasibility gives finite `x_0`, so
+
+```math
+T_{G,f}(0)=\tau_fx_0,
+\qquad
+T_{G,s}(0)=\tau_sx_0,
 ```
 
 and therefore
 
 ```math
-\boxed{T_{D,f}(0)<T_{D,s}(0).}
+\boxed{
+T_{G,f}(0)<T_{G,s}(0).
+}
 ```
 
-By continuity, the faster detector remains preferred for a nonzero neighborhood of `L=0`.
+By continuity, fast preference persists over a nonzero neighborhood of `L=0`.
 
-The critical physical search lengths satisfy
+The critical physical uncertainties are
 
 ```math
-L_{\mathrm{crit},f}=\tau_f\ell_{\mathrm{crit}},
+L_{{\rm crit},f}=\tau_f\ell_{\rm crit},
 \qquad
-L_{\mathrm{crit},s}=\tau_s\ell_{\mathrm{crit}}
-=rL_{\mathrm{crit},f}.
+L_{{\rm crit},s}=\tau_s\ell_{\rm crit}
+=rL_{{\rm crit},f}.
 ```
 
-Thus the faster detector reaches its feasibility boundary first. As
+Thus the fast channel reaches its guarantee-feasibility boundary first. As
 
 ```math
-L\uparrow L_{\mathrm{crit},f},
+L\uparrow L_{{\rm crit},f},
 ```
 
-its normalized search length approaches `ell_crit`, so assumption 4 gives
+its normalized search length approaches `ell_crit`, and Section IV.C gives
 
 ```math
-T_{D,f}(L)\to\infty.
+T_{G,f}(L)\to\infty.
 ```
 
-At the same physical `L`, the slower detector's normalized search length approaches
+At the same physical `L`, the slow channel's normalized search length approaches
 
 ```math
-\frac{L_{\mathrm{crit},f}}{\tau_s}
-=\frac{\ell_{\mathrm{crit}}}{r}
-<\ell_{\mathrm{crit}},
+\frac{L_{{\rm crit},f}}{\tau_s}
+=\frac{\ell_{\rm crit}}{r}
+<\ell_{\rm crit},
 ```
 
-so the slower detector remains strictly feasible and has finite detection time. Hence
+so the slow channel remains strictly inside its guarantee-feasible domain and has finite `T_G`. Therefore
 
 ```math
-D(L)=T_{D,f}(L)-T_{D,s}(L)
+D_G(L)=T_{G,f}(L)-T_{G,s}(L)
 ```
 
-is negative at `L=0` and positive for `L` sufficiently close to `L_crit,f`. Continuity implies that at least one
-
-```math
-\boxed{
-L_\times\in(0,L_{\mathrm{crit},f})
-}
-```
-
-satisfies
+is negative at `L=0` and positive sufficiently near `L_{{\rm crit},f}`. Continuity implies at least one
 
 ```math
 \boxed{
-T_{D,f}(L_\times)=T_{D,s}(L_\times).
+L_\times\in(0,L_{{\rm crit},f})
 }
 ```
 
-This proves existence of a finite fast-to-slow crossover. `\square`
+for which
 
-The proposition establishes existence, not uniqueness. `B_r(ell)` may in principle have more than one zero. The argument also does not extend automatically to detector families unrelated by the present temporal scaling, unequal eventual SNR, or different composite-hypothesis decision rules.
+```math
+\boxed{
+T_{G,f}(L_\times)=T_{G,s}(L_\times).
+}
+```
+
+Because adding the common `L` leaves differences unchanged,
+
+```math
+T_{{\rm wall},f}(L_\times)
+=T_{{\rm wall},s}(L_\times)
+```
+
+at the same crossover. `\square`
+
+The proposition establishes existence, not uniqueness. More importantly, it establishes a crossover in the **sufficient guarantee times**. It does not imply that the exact solutions of
+
+```math
+P_D^{\rm scan}(t)=\beta
+```
+
+must cross at the same `L`, or cross at all.
 
 ---
 
-# V. Interpretation, limitations, and implications for detector comparison
+# V. Interpretation, limitations, and implications
 
-## A. Detector characterization versus task qualification
+## A. What is ordered
 
-The result is easiest to misread if detector speed is treated only as a device-side bandwidth parameter. In the present task, changing `tau` changes both the physical rate at which signal evidence becomes available and the normalized nuisance-parameter search `L/tau`. The first effect favors the faster detector; the second can favor the slower detector because the slower response produces a more strongly correlated timing scan over the same physical arrival-time interval.
-
-A detector specification such as `D*`, response time, or bandwidth describes a device under stated measurement conditions. A decision time such as `T_D`, by contrast, belongs to a detector together with a task. Here,
+The ordered object is not an intrinsic detector latency. It is the post-window integration duration required by one explicit batch protocol to guarantee a global-scan detection probability through a true-alignment sufficient condition:
 
 ```math
 \boxed{
-T_D
-=\tau X_D\!\left(\rho_0,\alpha,\beta,\frac{L}{\tau}\right),
+T_G
+=\tau X_G\!\left(\rho_0,\alpha,\beta,\frac{L}{\tau}\right).
 }
 ```
 
-so the ordering cannot be reduced to `tau` alone even after eventual matched-filter SNR has been fixed. The same two detector channels can occupy different preference regimes as arrival-time uncertainty or the decision criterion changes.
+The corresponding wall-clock batch time is `L+T_G`. At fixed `L`, these two clocks induce identical channel rankings.
 
-This does not make conventional figures of merit incorrect. It identifies the level at which they cease to define an ordering. For a finite-time decision with unknown event time, a statement that one detector is “better” than another is incomplete unless the task specifies the relevant waveform and noise model, arrival-time uncertainty, and false-alarm/detection criterion.
+This distinction matters because an online receiver can use partial information before the arrival window closes, and a full signal-present scan can cross threshold because of off-alignment signal contributions even when the true-alignment statistic has not yet crossed. Neither effect is modeled as an exact stopping-time theorem here.
 
-The result therefore separates **device characterization** from **task qualification**. Device characterization can report responsivity, noise, detectivity, bandwidth, and temporal response. Task qualification asks what those properties imply under a specified measurement protocol. Proposition 1 concerns the second problem.
+## B. Detector characterization versus task qualification
 
-## B. Why the conclusion is not another scalar sensitivity–speed metric
+A detector specification such as `D*`, responsivity, noise, response time, or bandwidth describes a device under stated measurement conditions. `T_G` belongs to a detector **and** a task. The same pair of detector channels can therefore occupy different preference regimes as `L`, `alpha`, or `beta` changes.
 
-Sensitivity–speed combinations are already established in detector literature, and the present result does not motivate a new universal product. The relevant variable is not merely `tau` or bandwidth but
+The result does not make conventional detector figures of merit incorrect. It identifies a level at which detector-only scalars no longer determine ordering. Device characterization reports physical response and noise properties; task qualification asks what those properties imply under a specified acquisition and decision protocol.
+
+## C. Why the conclusion is not another sensitivity-speed product
+
+Sensitivity-speed products are already established in detector literature [2,3], and the present result does not propose a new universal scalar. The relevant search variable is
 
 ```math
 \frac{L}{\tau},
 ```
 
-while the decision surface also depends on
+while the guarantee surface also depends on
 
 ```math
-\rho_0,\qquad \alpha,\qquad \beta,
+\rho_0,\qquad\alpha,\qquad\beta,
 ```
 
-and on the chosen search rule. Two tasks performed with the same detector can therefore correspond to different normalized search geometries. A scalar formed only from detector properties would erase the task dependence that produces the crossover.
+and on the decision rule. A scalar formed only from detector properties would remove precisely the task dependence that produces the crossover.
 
-The practical lesson is consequently not to replace `D*` with another detector-only number. It is to attach detector comparisons to the measurement problem for which the comparison is intended. For the present model, the compact object is the task surface
+## D. Physical origin of the guarantee-time reversal
+
+Every member is normalized to the same eventual matched-filter SNR for the specified event, and every member benefits monotonically from longer integration. The reversal is therefore not created by assigning the slower channel more eventual signal evidence or by stopping the faster channel prematurely.
+
+It arises from the geometry of the unknown-arrival search. Compressing the detector response in physical time compresses the timing-scan correlation length. For fixed physical `L`, the faster channel spans a larger normalized search domain and consequently pays a larger global false-alarm threshold. At small `L`, the physical time-scale advantage dominates. Near the fast channel's guarantee-feasibility boundary, the search penalty dominates strongly enough that the slow channel still satisfies the guarantee while the fast channel does not.
+
+## E. Scope limitations
+
+The construction is intentionally narrow.
+
+First, the channels are linear and time-scaled, and the output noise is additive, stationary, white, and Gaussian. Real detectors may exhibit colored or signal-dependent noise, nonlinear response, saturation, drift, dead time, temperature dependence, and other effects.
+
+Second, equal eventual matched-filter SNR is event-specific. Unequal eventual sensitivity would introduce another task axis and could reinforce or oppose the search effect.
+
+Third, arrival time is the only nuisance parameter. Unknown amplitude, phase, spectrum, background, or multiple events enlarge the composite-hypothesis space.
+
+Fourth, the global threshold is calibrated from the noise-only scan, but power is guaranteed using the true-alignment statistic. The exact signal-present scan probability satisfies
 
 ```math
-X_D(\rho_0,\alpha,\beta,L/\tau),
+P_D^{\rm scan}\ge P_{D,\mathrm{true}},
 ```
 
-not a universal scalar ranking.
+so the criterion is conservative. The theorem does **not** prove ordering of exact scan-power times.
 
-## C. Physical meaning and scope of the crossover
+Fifth, the protocol is batch. It does not claim optimal online latency, Bayesian optimality, minimax optimality, localization accuracy, or sequential optimality.
 
-The fast-to-slow crossover is not an intrinsic penalty for fast response. Every member is normalized to the same eventual matched-filter SNR,
+Finally, Proposition 1 proves at least one crossover but not uniqueness. The purpose is to construct a clean failure of detector-only guarantee-time ordering, not a complete theory of transient photodetection.
 
-```math
-\rho_{\tau,\infty}=\rho_0,
-```
+## F. Numerical status
 
-and Section III showed that every member benefits monotonically from additional observation time. The reversal is therefore neither a conventional sensitivity–speed tradeoff nor an artifact of choosing a poor integration duration.
+The analytical existence result does not by itself establish that a crossover occurs far from the fast guarantee-feasibility singularity for a practically representative parameter set. The repository's later numerical stress-test branch deliberately explored this issue and also documented several invalidated shortcuts. In particular, the original hard-window Step-13 grid crossover was rejected because the finite template produces a locally rough timing process, and the later Step-44 result was certified only on a finite grid and was too close to the continuum discretization correction to use as a publication-grade example.
 
-Instead, it arises from the statistical geometry of the unknown-arrival search. Compressing the response in physical time compresses the matched-filter correlation length. For fixed physical uncertainty `L`, the faster channel then spans a larger normalized timing domain. Maintaining the same global false-alarm probability requires a correspondingly more stringent threshold. At small `L`, the physical time-scale advantage dominates. Near the faster detector's feasibility boundary, the search burden is large enough that the slower detector remains feasible while the faster detector does not.
+A smooth finite-information surrogate was independently validated against correlated-process Monte Carlo and continuous Rice theory, showing that the search mechanism survives regularization, but that surrogate is not substituted here for the exact hard-window theorem. A robust continuum-validated quantitative example for the exact Paper A model therefore remains a **separate open presentation task**, not something inferred from the invalidated or knife-edge calculations.
 
-This interpretation is protocol specific. A Bayesian rule with an explicit arrival-time prior, a minimax test, a sequential procedure, or a joint detection/localization objective can produce a different task surface. Proposition 1 states what follows for the global-threshold matched-filter scan defined here; it is not a theorem about every statistically admissible receiver.
+## G. Implications for detector specification and experiment design
 
-Several additional assumptions delimit the result. The detector family is linear and time-scaled, and the output noise is additive, stationary, Gaussian, and white under the chosen normalization. Real photodetectors can exhibit colored or signal-dependent noise, nonlinear response, saturation, dead time, drift, temperature dependence, and other effects. The channels are deliberately normalized to equal eventual matched-filter SNR; unequal eventual sensitivity adds another axis to the comparison. Arrival time is the only nuisance parameter; unknown amplitude, phase, spectral shape, background, or multiple nuisance parameters would enlarge the search space. Finally, detection probability is evaluated at the true alignment while the threshold is set by the global noise-only scan; this is narrower than a full signal-present maximum test and does not impose localization accuracy.
+A task-oriented comparison should report enough information to reconstruct the decision problem rather than only a detector scalar. In the present setting, the essential quantities are the event-specific eventual matched-filter SNR or its ingredients, the detector temporal response, the physical arrival-time uncertainty interval, and the global false-alarm / guaranteed-detection criteria.
 
-Proposition 1 proves existence of at least one crossover under the stated continuity and large-search assumptions. It does not establish uniqueness and does not imply that every practical parameter set contains a broad slow-preferred region. These restrictions are features of the construction: the aim is to exhibit a clean failure of detector-only ordering, not to claim a complete theory of transient photodetection.
-
-## D. Implications for detector specification and experiment design
-
-Reference-condition sensitivity remains useful for establishing the available signal-to-noise budget, and temporal response determines how quickly that budget can be accumulated. When event timing is uncertain and a global false-alarm requirement is imposed, however, the correlation structure of the timing statistic also becomes part of the measurement problem.
-
-A task-oriented detector comparison should therefore report enough information to reconstruct the decision problem rather than only a device scalar. In the present setting the essential quantities are the eventual matched-filter SNR or the ingredients needed to calculate it, the temporal response or matched-filter template, the physical arrival-time uncertainty interval, and the required global false-alarm and detection probabilities. More general noise models or decision rules require the corresponding noise spectrum and protocol definition as well.
-
-This is especially relevant when detectors with substantially different temporal responses are compared for transient measurements. A bandwidth or rise-time advantage does not automatically translate into a lower decision time once the detector is embedded in an unknown-arrival search. Conversely, the theorem does not license choosing a slower detector merely to reduce the search burden; at low timing uncertainty the faster detector remains preferred in the constructed family. The comparison must be made at the operating point of interest.
+This is especially relevant when detectors with substantially different response times are compared for transient measurements. A response-time advantage does not automatically imply a shorter guarantee time once the detector is embedded in an unknown-arrival global-threshold search. Conversely, the theorem does not license choosing a slower detector merely to reduce search complexity. The operating task determines the ordering.
 
 The central practical statement is therefore:
 
-> **Detector specifications rank devices only relative to the task for which the ranking is being made. When arrival time is uncertain, response time affects both signal accumulation and the statistical size of the timing search.**
+> **For an unknown-arrival batch detection task, detector response time affects both evidence accumulation and the statistical size of the timing search. Equal eventual matched-filter SNR therefore need not imply a detector-only ordering of the integration time required to guarantee a specified global-scan operating point.**
 
-Within the controlled family studied here, that coupling is sufficient to reverse the fast/slow detection-time ordering even though eventual matched-filter sensitivity is identical.
+## H. Conclusion
 
-## E. Conclusion
+We considered causal time-scaled photodetector channels driven by the same optical event and normalized to equal eventual matched-filter SNR. Event arrival is unknown over a fixed window `L`, and a batch global-threshold matched-filter scan is performed after acquiring `t` additional seconds beyond the end of that window.
 
-We considered two time-scaled photodetector channels normalized to equal eventual matched-filter SNR and asked whether the faster channel must reach a fixed detection operating point first when event arrival time is unknown. For the specified global-false-alarm matched-filter scan, the problem collapses to
+The minimum post-window integration duration that guarantees the requested scan-detection probability through the true-alignment sufficient condition is
 
 ```math
-T_D(\alpha,\beta,L;\tau,\rho_0)
-=\tau X_D\!\left(\rho_0,\alpha,\beta,\frac{L}{\tau}\right).
+T_G(\alpha,\beta,L;\tau,\rho_0)
+=\tau X_G\!\left(\rho_0,\alpha,\beta,\frac{L}{\tau}\right).
 ```
 
-The faster channel benefits from a smaller physical time scale but pays a larger normalized timing-search burden. Under the assumptions of Proposition 1, these effects imply at least one finite fast-to-slow crossover and a slow-only feasibility region before the slower detector reaches its own search-limited boundary.
+The faster channel benefits from a smaller physical time scale but pays a larger normalized timing-search burden. For the constructed equal-eventual-SNR family, the full-template threshold grows without bound with search length, the guarantee time diverges at a finite search-feasibility boundary, and at least one fast-to-slow guarantee-time crossover follows under ordinary threshold-continuity regularity.
 
-The result is not a preference for slow detectors and does not replace established detector figures of merit. Its narrower implication is that equal eventual matched-filter sensitivity does not define a detector-only ordering for this finite-time, unknown-arrival task. The ordering belongs to the detector together with the measurement protocol.
+The result is intentionally narrower than an exact unknown-arrival scan-power theorem. It establishes task-dependent ordering of a conservative, operationally defined guarantee time. Whether the exact signal-present scan detection times exhibit the same reversal is a distinct problem and is not claimed here.
 
 ---
 
@@ -646,7 +929,7 @@ The result is not a preference for slow detectors and does not replace establish
 
 [2] J. P. Garcia and E. L. Dereniak, “Extrinsic silicon photodetector characterization,” *Applied Optics* **29**, 559–569 (1990). DOI: 10.1364/AO.29.000559.
 
-[3] Y. Yang *et al.*, “Overcoming the sensitivity–speed trade-off in two-dimensional photodetectors via a functional oxide interlayer,” *Nature Communications* **17**, 6077 (2026).
+[3] Y. Yang *et al.*, “Overcoming the sensitivity–speed trade-off in two-dimensional photodetectors via a functional oxide interlayer,” *Nature Communications* **17**, 6077 (2026). DOI: 10.1038/s41467-026-72259-1.
 
 [4] V. Pecunia *et al.*, “Guidelines for accurate evaluation of photodetectors based on emerging semiconductor technologies,” *Nature Photonics* **19**, 1178–1188 (2025). DOI: 10.1038/s41566-025-01759-1.
 
@@ -655,3 +938,7 @@ The result is not a preference for slow detectors and does not replace establish
 [6] G. Morras, J. F. Nuño Siles, J. Garcia-Bellido, and E. Ruiz Morales, “The False Alarms induced by Gaussian Noise in Gravitational Wave Detectors,” *Physical Review D* **107**, 023027 (2023). DOI: 10.1103/PhysRevD.107.023027.
 
 [7] R. P. Croce *et al.*, “Correlator Bank Detection of GW chirps. False-Alarm Probability, Template Density and Thresholds: Behind and Beyond the Minimal-Match Issue,” *Physical Review D* **70**, 122001 (2004). DOI: 10.1103/PhysRevD.70.122001.
+
+[8] A. B. Milstein *et al.*, “Acquisition algorithm for direct-detection ladars with Geiger-mode avalanche photodiodes,” *Applied Optics* **47**, 296–311 (2008). DOI: 10.1364/AO.47.000296.
+
+[9] D. Slepian, “The One-Sided Barrier Problem for Gaussian Noise,” *Bell System Technical Journal* **41**, 463–501 (1962). DOI: 10.1002/j.1538-7305.1962.tb02419.x.
