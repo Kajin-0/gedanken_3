@@ -264,6 +264,14 @@ P_{FA,s}
 <.05.
 ```
 
+This bound is sufficient to establish
+
+```math
+\Gamma_\infty(1.5,.05)<c,
+```
+
+so the slow channel is guarantee-feasible in continuous time.
+
 ### Fast channel
 
 Seven samples over `[0,9]` at spacing `1.5` have off-diagonal covariance at most
@@ -280,6 +288,14 @@ P_{FA,f}
 >.05.
 ```
 
+This lower bound establishes
+
+```math
+\Gamma_\infty(9,.05)>c,
+```
+
+so the fast channel is guarantee-infeasible at the same physical `L`.
+
 Hence
 
 ```math
@@ -288,7 +304,7 @@ P_{FA,s}\le.0336428<.05<.0624701\le P_{FA,f},
 }
 ```
 
-so the slow channel is guarantee-feasible while the fast channel is guarantee-infeasible at the same finite physical `L`.
+which brackets the two channels on opposite sides of the full-template guarantee-feasibility boundary.
 
 This is a continuous-process feasibility bracket. It does not locate `L_\times` numerically and does not reopen the rough finite-window branch.
 
