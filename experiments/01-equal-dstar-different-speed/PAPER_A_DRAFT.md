@@ -905,7 +905,7 @@ Q(c)+\frac{1.5}{2\pi}e^{-c^2/2}\\
 \end{aligned}
 ```
 
-Thus the slow channel is guarantee-feasible in continuous time.
+Thus the slow channel is guarantee-feasible in continuous time. This implication is one-way in the conservative direction needed here: the bound `P_{FA,s}<alpha` is sufficient to establish `Gamma_infty(ell_s,alpha)<c`.
 
 For the fast channel, `ell_f=9`. Consider only seven points separated by `d=1.5`. Every distinct pair has covariance at most
 
@@ -958,7 +958,9 @@ P_{FA,f}
 >0.05.
 ```
 
-Therefore, at the same physical `L`,
+Thus `Gamma_infty(ell_f,alpha)>c`, so the fast channel is guarantee-infeasible at the same physical `L`.
+
+Therefore
 
 ```math
 \boxed{
@@ -968,15 +970,7 @@ P_{FA,s}\le0.0336428
 }
 ```
 
-so
-
-```math
-\boxed{
-\text{slow channel guarantee-feasible},
-\qquad
-\text{fast channel guarantee-infeasible}.
-}
-```
+which brackets the two channels on opposite sides of the guarantee-feasibility boundary.
 
 This is a continuum feasibility bracket, not a numerical measurement of `L_x`. Combined with the exact fast preference at `L=0` and Proposition 1, it gives a concrete finite physical scale across which at least one guarantee-time crossover must occur. The reproducible calculation is `numerics/paper_a_analytic_feasibility_bracket.py`.
 
