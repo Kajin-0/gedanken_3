@@ -1,12 +1,12 @@
 # Task-dependent photodetector ordering under unknown arrival time
 
 **Target:** Applied Optics — Research Article  
-**Status:** journal-facing Rev. 3 / significance and readability review addressed / not yet template-formatted  
+**Status:** journal-facing Rev. 4 / referee comments triaged / robustness additions incorporated / not yet template-formatted  
 **Date:** 2026-08-13
 
 ## Abstract
 
-With eventual event-specific sensitivity held fixed, a shorter photodetector response time accelerates known-arrival transient measurements. When arrival time is uncertain, however, it also enlarges the normalized timing search. We construct causal optical-to-electrical detector channels with equal eventual matched-filter SNR and analyze a batch matched-filter receiver at fixed global false-alarm probability. The sufficient post-window guarantee time scales as `tau X_G(rho_0,alpha,beta,L/tau)`. We prove at least one fast-to-slow ordering crossover and give a continuous-time Rice/Slepian witness in which the slow channel remains feasible while the fast channel does not.
+With eventual event-specific sensitivity held fixed, a shorter photodetector response time accelerates known-arrival transient measurements but enlarges the normalized timing search when arrival is uncertain. We analyze causal optical-to-electrical channels with equal eventual matched-filter SNR under a batch global-false-alarm scan. We prove a fast-to-slow crossover of the **sufficient post-window guarantee time**, not of the exact scan detection time. A continuous Rice/Slepian witness gives slow-only guarantee feasibility, complete-scan Monte Carlo points in the same direction, and a single-pole corollary shows that the crossover mechanism is not unique to the double-pole construction.
 
 ---
 
@@ -31,7 +31,9 @@ shorter detector time scale
     -> larger normalized search over the same physical arrival-time interval.
 ```
 
-We construct a causal time-scaled detector family for which this competition can be analyzed exactly. The receiver uses one global noise-only threshold and a conservative true-alignment condition that guarantees the complete scan has detection probability at least `beta`. The resulting quantity is therefore a **sufficient batch guarantee time**, not an intrinsic detector latency and not the exact first crossing time of the full signal-present scan.
+The construction intentionally removes the ordinary sensitivity-speed/noise-bandwidth tradeoff by normalizing eventual matched-filter SNR while holding the output-noise convention fixed. The effect studied here is therefore **separate from** the conventional increase of detector noise with measurement bandwidth. The purpose is to isolate the timing-search mechanism after that familiar tradeoff has been removed as a confounding variable.
+
+We first construct a causal time-scaled detector family for which this competition can be analyzed exactly. The receiver uses one global noise-only threshold and a conservative true-alignment condition that guarantees the complete scan has detection probability at least `beta`. The resulting quantity is therefore a **sufficient batch guarantee time**, not an intrinsic detector latency and not the exact first crossing time of the full signal-present scan.
 
 The main scaling relation is
 
@@ -40,7 +42,9 @@ T_G(\alpha,\beta,L;\tau,\rho_0)
 =\tau X_G\!\left(\rho_0,\alpha,\beta,\frac{L}{\tau}\right).
 ```
 
-At known arrival the faster channel wins. At a finite timing uncertainty we give a continuous-time example in which the slower channel remains guarantee-feasible while the faster channel is already guarantee-infeasible. The general feasibility structure then implies at least one fast-to-slow guarantee-time crossover under ordinary continuity regularity.
+At known arrival the faster channel wins. At a finite timing uncertainty we give a continuous-time example in which the slower channel remains guarantee-feasible while the faster channel is already guarantee-infeasible. The general feasibility structure then implies at least one fast-to-slow **sufficient-guarantee-time** crossover under ordinary continuity regularity.
+
+Two robustness checks are added. First, exact state-space Monte Carlo of the complete full-template signal-present scan shows the same slow/fast separation at the witness point. Second, a standard first-order single-pole detector family satisfies the same covariance-ordering and feasibility argument, so the crossover mechanism is not unique to the critically damped double-pole example used for the analytic continuum witness.
 
 ---
 
@@ -92,7 +96,7 @@ g_\tau(t)=A_\tau e^{-t/\tau}
 }
 ```
 
-For a finite fast/slow pair with `tau_f<tau_s`, choosing `b>=1/tau_f` makes both impulse responses nonnegative. The construction therefore does not require a sign-changing detector response.
+For a finite fast/slow pair with `tau_f<tau_s`, choosing `b>=1/tau_f` makes both impulse responses nonnegative. After the pole-zero cancellation in the selected event response, all SNR, covariance, threshold, and guarantee-time equations used below are independent of `b`; `b` remains only in the physical realization constraint.
 
 ## 2.2. Equal eventual matched-filter SNR
 
@@ -129,7 +133,7 @@ gives
 \boxed{\rho_{\tau,\infty}=\rho_0}
 ```
 
-for every channel. This normalization is **event-specific** and is distinct from equality of a scalar conventional `D*`. It is imposed only to remove eventual matched-filter sensitivity advantage for the selected optical event.
+for every channel. This normalization is **event-specific** and is distinct from equality of a scalar conventional `D*`. It is imposed only to remove eventual matched-filter sensitivity advantage for the selected optical event. It also deliberately suppresses the usual detector bandwidth/noise tradeoff; any ordering reversal obtained below is therefore not produced by assigning the faster detector a larger white-noise floor.
 
 For a post-arrival integration duration `t`, let
 
@@ -300,6 +304,23 @@ T_{wall}=L+T_G.
 
 At fixed `L`, the two clocks give identical detector ordering.
 
+### Notation summary
+
+| Symbol | Meaning |
+|---|---|
+| `tau` | detector response-time scale |
+| `tau_f`, `tau_s` | fast and slow channel time scales |
+| `r=tau_s/tau_f` | speed ratio |
+| `L` | physical arrival-time uncertainty interval |
+| `ell=L/tau` | dimensionless search length |
+| `rho_0` | common eventual matched-filter SNR for the selected event |
+| `alpha` | allowed global false-alarm probability |
+| `beta` | requested detection guarantee |
+| `Gamma` | finite-template global noise-only scan threshold |
+| `Gamma_infinity` | full-template global threshold |
+| `X_G` | dimensionless first time satisfying the sufficient guarantee |
+| `T_G=tau X_G` | physical post-window sufficient guarantee time |
+
 ---
 
 # 3. Results
@@ -388,7 +409,7 @@ c=\rho_0-\Phi^{-1}(\beta)
 
 Define `Q(c)=1-\Phi(c)`.
 
-For the slow channel, `R_infty''(0)=-1`, so Rice's exact mean upcrossing formula [16] gives
+For the slow channel, `R_infinity''(0)=-1`, so Rice's exact mean upcrossing formula [16] gives
 
 ```math
 \nu_c^+=\frac{1}{2\pi}e^{-c^2/2}.
@@ -468,6 +489,8 @@ Define the full-template threshold
 \right\}.
 ```
 
+Enlarging the search interval enlarges the supremum domain pathwise, so `Gamma_infinity(ell,alpha)` is nondecreasing in `ell`.
+
 Normalized-template `L2` convergence gives
 
 ```math
@@ -487,7 +510,7 @@ Finite guarantee time is possible when
 }
 ```
 
-Because `R_infty(y)->0`, a Slepian comparison of widely separated samples with an equicorrelated Gaussian vector gives
+Because `R_infinity(y)->0`, a Slepian comparison of widely separated samples with an equicorrelated Gaussian vector gives
 
 ```math
 \Gamma_\infty(\ell,\alpha)\to\infty
@@ -534,7 +557,7 @@ Let
 c=\rho_0-\Phi^{-1}(\beta).
 ```
 
-Since `Gamma_infty` is nondecreasing with search length, only three feasibility regimes exist:
+Since `Gamma_infinity` is nondecreasing with search length, only three feasibility regimes exist:
 
 ```math
 \boxed{
@@ -586,7 +609,112 @@ for which
 \boxed{T_{G,f}(L_\times)=T_{G,s}(L_\times).}
 ```
 
-This proves crossover existence, not uniqueness. It also concerns the sufficient guarantee time `T_G`; it does not establish the ordering of the exact first integration times solving `P_D^scan=beta`.
+This proves crossover existence, not uniqueness. It also concerns the **sufficient guarantee time** `T_G`; it does not establish the ordering of the exact first integration times solving `P_D^scan=beta`.
+
+## 3.4. Complete full-template scan validation
+
+The preceding theorem uses the true-alignment event only as a sufficient certificate. To test whether the complete signal-present scan points in the same direction, we numerically evaluate the **full-template** scan at the same witness.
+
+The full-template noise covariance
+
+```math
+R_\infty(y)=(1+|y|)e^{-|y|}
+```
+
+is Matérn-3/2 and admits the exact stationary state-space realization
+
+```math
+\frac{d}{dq}
+\begin{bmatrix}Z\\V\end{bmatrix}
+=
+\begin{bmatrix}0&1\\-1&-2\end{bmatrix}
+\begin{bmatrix}Z\\V\end{bmatrix}
++
+\begin{bmatrix}0\\2\end{bmatrix}\xi(q).
+```
+
+For a full matched signal at true alignment `q_0`, the deterministic scan mean is
+
+```math
+m(q)=\rho_0R_\infty(|q-q_0|).
+```
+
+We generated `100000` stationary Gaussian paths using the exact matrix-exponential state transition and evaluated nested timing grids `Delta=0.020,0.010,0.005`. The numerical noise-only 95th-percentile threshold sets `alpha=.05`; then the complete scan power is estimated from the maximum of `Z(q)+m(q)`.
+
+At the finest grid, the results are:
+
+| channel | `ell` | tested `q_0/L` | `P_D^{scan,infinity}` |
+|---|---:|---|---|
+| slow | 1.5 | 0, .25, .50, .75, 1 | 0.9455 to 0.9547 |
+| fast | 9 | 0, .25, .50, .75, 1 | 0.8566 to 0.8847 |
+
+The nested-grid values are essentially unchanged across the three spacings. Thus every tested slow-channel arrival placement lies comfortably above `beta=.90`, while every tested fast-channel placement remains below it.
+
+This numerical result is deliberately narrower than a theorem: it does **not** prove that finite-time `P_D^scan(x)` is monotone, nor that the first finite solutions of `P_D^scan(x)=beta` reverse ordering. It does show that, at the controlling finite physical uncertainty, the **complete** full-template scan agrees with the direction of the conservative guarantee witness rather than contradicting it. The calculation is reproduced by `numerics/paper_a_full_scan_validation.py`.
+
+## 3.5. Robustness to a standard first-order detector response
+
+The analytic witness above uses a double-pole family because its smooth full-template covariance permits the simple Rice bound. The crossover mechanism itself does not depend on that choice.
+
+Consider an ideal impulsive optical event and the standard causal first-order channel
+
+```math
+G_\tau(s)=\frac{A_\tau}{s+1/\tau},
+```
+
+so
+
+```math
+s_\tau(t)=A_\tau e^{-t/\tau}u(t).
+```
+
+Choosing
+
+```math
+\boxed{
+A_\tau=\rho_0\sqrt{\frac{2N}{\tau}}
+}
+```
+
+again gives equal eventual matched-filter SNR `rho_0`. The finite squared-SNR fraction is
+
+```math
+\eta_1(x)=1-e^{-2x}.
+```
+
+For `0<=y<x`, the finite-template timing covariance is
+
+```math
+\boxed{
+R_{1,x}(y)
+=\frac{e^{-y}-e^{-2x+y}}{1-e^{-2x}},
+}
+```
+
+with `R_{1,x}(y)=0` for `y>=x`, and
+
+```math
+\boxed{R_{1,\infty}(y)=e^{-y}.}
+```
+
+For fixed `y>0`, set `a=e^{-2x}`. Then
+
+```math
+\frac{\partial R_{1,x}}{\partial a}
+=\frac{e^{-y}-e^y}{(1-a)^2}<0,
+\qquad
+\frac{da}{dx}<0,
+```
+
+so
+
+```math
+\frac{\partial R_{1,x}(y)}{\partial x}>0.
+```
+
+Also `R_{1,x}(y)<R_{1,infinity}(y)` for finite `x`, and `R_{1,infinity}(y)->0` as `y->infinity`. Consequently the same Slepian threshold ordering, finite feasibility boundary, boundary divergence, and intermediate-value argument apply. Under the same continuity regularity, the first-order family therefore also has at least one finite fast-to-slow **sufficient-guarantee-time crossover**.
+
+This corollary is important for interpretation: the ordering reversal is not unique to the critically damped Gamma(2)-shaped output used for the main continuum witness. The double-pole family is retained because its differentiable full-template process makes the finite-scale Rice/Slepian bracket unusually transparent.
 
 ---
 
@@ -594,15 +722,15 @@ This proves crossover existence, not uniqueness. It also concerns the sufficient
 
 The result is a failure of **detector-only ordering**, not a failure of detector characterization. A conventional detector specification describes a device under stated conditions. The quantity `T_G` belongs jointly to a detector and a task because the decision threshold depends on the physical arrival-time uncertainty interval, the global false-alarm requirement, and the requested detection guarantee.
 
-The mechanism also differs from a generic sensitivity-bandwidth product. Sensitivity-speed combinations are established detector metrics [2,3], but the present decision surface contains the external task variable `L/tau` together with `rho_0`, `alpha`, and `beta`. Compressing these into one detector-only scalar would erase the nuisance-domain dependence responsible for the crossover.
+The mechanism also differs from a generic sensitivity-bandwidth product. Sensitivity-speed combinations are established detector metrics [2,3]. Here the ordinary sensitivity-speed/noise-bandwidth tradeoff is intentionally removed by the controlled normalization; the remaining decision surface contains the external task variable `L/tau` together with `rho_0`, `alpha`, and `beta`. Compressing these into one detector-only scalar would erase the nuisance-domain dependence responsible for the crossover.
 
 The result should also be read against classical acquisition theory rather than in competition with it. Unknown-delay search penalties, matched-filter acquisition, false alarms, dwell time, and uncertainty-region size are established [6–14]. The specific construction here couples that established acquisition geometry to a detector response scale while holding eventual event-specific matched-filter SNR equal. The contribution is therefore the detector-facing synthesis and explicit ordering result, not the individual ingredients.
 
 In practical optical measurements, the relevant `L/tau` can arise from trigger jitter, asynchronous transient timing, a time-of-flight gate, or another externally supplied arrival-time window. The result therefore does not say that a slower detector is intrinsically preferable. It says that translating detector response time into a task-level operating time requires the timing uncertainty and the global decision rule as well.
 
-The equal-`rho_0` condition is deliberately event-specific. It is not equivalent to equal conventional `D*`, and the theorem does not require the channels to have equal `D*`. The normalization simply removes eventual matched-filter sensitivity advantage for the selected optical event so that the temporal mechanism can be isolated.
+The equal-`rho_0` condition is deliberately event-specific. It is not equivalent to equal conventional `D*`, and the theorem does not require the channels to have equal `D*`. The normalization simply removes eventual matched-filter sensitivity advantage for the selected optical event so that the temporal search mechanism can be isolated.
 
-Several limitations are explicit. The channels are linear and time-scaled; output noise is additive, stationary, white, and Gaussian; arrival time is the only nuisance parameter; the transfer family is an existence construction; and the receiver is batch. Real detectors may couple response bandwidth, responsivity, and noise through additional device physics that are deliberately absent from this controlled family.
+Several limitations are explicit. The channels are linear and time-scaled; output noise is additive, stationary, white, and Gaussian; arrival time is the only nuisance parameter; the main double-pole transfer family is an existence construction; and the receiver is batch. Real detectors may couple response bandwidth, responsivity, and noise through additional device physics that are deliberately absent from this controlled comparison. The first-order corollary shows that the crossover proof is not unique to the double-pole response, but it retains the same equal-eventual-SNR thought-experiment normalization.
 
 Most importantly, the theorem uses
 
@@ -610,9 +738,9 @@ Most importantly, the theorem uses
 P_D^{scan}\ge P_{D,true}
 ```
 
-to define a sufficient guarantee. It does **not** prove that the exact full signal-present scan detection times reverse ordering. It also does not prove crossover uniqueness.
+to define a sufficient guarantee. It does **not** prove that the exact finite-time full signal-present scan detection times reverse ordering. The full-template Monte Carlo check makes the conservative-certificate interpretation less concerning at the witness point, but it remains numerical evidence rather than a replacement theorem. Crossover uniqueness is also not established.
 
-These limitations suggest direct extensions. Colored detector noise can be included through whitening and a modified timing covariance; unequal eventual sensitivity introduces an additional task axis; and exact signal-present scan power would replace the sufficient true-alignment condition with the full composite-alternative probability. Those questions are outside the present result.
+These limitations suggest direct extensions. Colored detector noise can be included through whitening and a modified timing covariance; unequal eventual sensitivity introduces an additional task axis; and exact finite-time signal-present scan power would replace the sufficient true-alignment condition with the full composite-alternative probability. Those questions are outside the present result.
 
 For transient detector qualification, the practical implication is modest but important: **response time should be interpreted together with the timing uncertainty and decision protocol, not only as a detector-isolated speed number.** A faster channel can accumulate evidence sooner yet pay a larger global-search penalty because it resolves more timing structure over the same physical uncertainty interval.
 
@@ -620,7 +748,9 @@ For transient detector qualification, the practical implication is modest but im
 
 # 5. Conclusion
 
-A controlled causal photodetector-channel family with equal event-specific eventual matched-filter SNR shows that detector response time can enter an unknown-arrival measurement in two opposing ways. Shorter `tau` accelerates evidence accumulation but increases the normalized search interval `L/tau`. A continuous-time Rice/Slepian witness gives a finite regime where the slow channel remains guarantee-feasible while the fast channel is not. More generally, the sufficient guarantee time `T_G=tau X_G(rho_0,alpha,beta,L/tau)` has at least one finite fast-to-slow ordering crossover under the stated continuity regularity. Exact full-scan detection-time ordering remains an open problem.
+A controlled causal photodetector-channel family with equal event-specific eventual matched-filter SNR shows that detector response time can enter an unknown-arrival measurement in two opposing ways. Shorter `tau` accelerates evidence accumulation but increases the normalized search interval `L/tau`. A continuous-time Rice/Slepian witness gives a finite regime where the slow channel remains guarantee-feasible while the fast channel is not. More generally, the **sufficient guarantee time** `T_G=tau X_G(rho_0,alpha,beta,L/tau)` has at least one finite fast-to-slow ordering crossover under the stated continuity regularity.
+
+Two independent robustness checks strengthen the interpretation. Complete full-template scan Monte Carlo at the witness gives `P_D^scan>0.94` for the slow channel and `<0.89` for the fast channel across the tested true-arrival positions, so the exact scan points in the same direction as the conservative certificate. Separately, the same crossover theorem holds for a standard first-order exponential detector response. Neither result proves a finite-time exact-scan crossover, which remains open.
 
 ---
 
@@ -644,7 +774,7 @@ A controlled causal photodetector-channel family with equal event-specific event
 
 ## Data availability
 
-The analytical derivations and reproduction scripts supporting the reported continuum feasibility witness and manuscript figures are available in the public research repository `https://github.com/Kajin-0/gedanken_3`, under `experiments/01-equal-dstar-different-speed/`.
+The analytical derivations and reproduction scripts supporting the reported continuum feasibility witness, full-template scan validation, and manuscript figures are available in the public research repository `https://github.com/Kajin-0/gedanken_3`, under `experiments/01-equal-dstar-different-speed/`. A versioned archival snapshot should be attached to the final submission package.
 
 ---
 
