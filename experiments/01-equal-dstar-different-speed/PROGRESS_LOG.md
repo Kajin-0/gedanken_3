@@ -1,6 +1,6 @@
 # Progress Log — Experiment 01
 
-**Consolidation note — 2026-08-12 22:09 EDT:** mathematical closure stopped after Step 49; prior-art audit and short-paper architecture completed; Paper A merged and consistency-compressed; **severe adversarial review now completed. Disposition: MAJOR REVISION / no fatal internal mathematical contradiction found / blocking operational-interpretation issues / novelty not established.**
+**Consolidation note — 2026-08-12 22:54 EDT:** mathematical closure remains hard-stopped after Step 49; prior-art audit and severe adversarial review completed; **Paper A blocking acquisition-clock and true-alignment claim-scope issues have now been repaired on the active revision branch.** The central theorem is now explicitly a task-dependent **guarantee-time** result. Robust exact-model quantitative example and final novelty audit remain open.
 
 ---
 
@@ -8,7 +8,7 @@
 
 Equal scalar reference `D*` does not determine arbitrary temporal-signal performance. Full magnitude `D*(f)` is sufficient only for the restricted known-waveform/full-observation stationary-Gaussian problem. Finite windows make phase/time placement relevant. Unknown arrival introduces global false-alarm timing-search complexity. In the defined scanning protocol, a controlled equal-eventual-SNR family can reverse fast/slow ranking because temporal compression changes both evidence accumulation and timing-search correlation length. This is protocol/task specific, not a universal detector theorem.
 
-Exact detector-facing scaling:
+Historical detector-facing scaling before the major-revision semantic repair:
 
 ```math
 T_D(\alpha,\beta,L;\tau,\rho_0)
@@ -23,6 +23,8 @@ B_r(\ell)=X_D(\rho_0,\alpha,\beta,r\ell)
 ```
 
 Under the Step-12 continuity/extreme-value assumptions: fast wins at known time; approaching the fast feasibility boundary, fast detection time diverges while slow remains feasible; at least one finite fast-to-slow crossover therefore exists. Slow-only feasibility is possible, fast-only feasibility is excluded in this deliberately equal-eventual-SNR scaled family, and uniqueness is not established.
+
+This historical notation is retained here for provenance. The active Paper A manuscript now replaces unqualified `T_D` by operational guarantee time `T_G`; see the 22:54 revision entry below.
 
 ---
 
@@ -141,7 +143,7 @@ which produces the manuscript template. State that equal eventual matched-filter
 
 ### Major issue D — Proposition 1 assumptions
 
-Strengthen rather than merely assume large-search growth and boundary divergence. The latter can largely be derived from `eta(x)<1`, `Gamma(x,ell)>=Gamma_infty(ell)`, boundary equality, and continuity. Add explicit Slepian and stationary-Gaussian extreme-value citations.
+Strengthen rather than merely assume large-search growth and boundary divergence. The latter can largely be derived from `eta(x)<1`, `Gamma(x,ell)>=Gamma_infty(ell)`, boundary equality, and continuity. Add explicit Slepian and stationary-Gaussian extreme-value support.
 
 ### Major issue E — no robust quantitative example
 
@@ -153,7 +155,7 @@ The existence theorem may cross only near the feasibility singularity. After con
 - define the white-noise PSD/covariance convention exactly;
 - reconsider title wording "equal asymptotic sensitivity" because `rho_0` is event-specific;
 - add Yang DOI `10.1038/s41467-026-72259-1`;
-- add Slepian/extreme-value citations;
+- add Slepian/extreme-value support;
 - define `Phi` and standardize crossover notation.
 
 ### Additional novelty risk
@@ -169,10 +171,135 @@ Do not format or submit yet.
 
 ---
 
+## 22:54 EDT — Paper A operational guarantee-time major revision
+
+New audit trail: `PAPER_A_MAJOR_REVISION_2026-08-12.md`.
+
+Revised authoritative manuscript: `PAPER_A_DRAFT.md` on the active revision branch.
+
+### Blocking issue A resolved — exact batch clock
+
+For every candidate arrival in `[0,L]` to receive the same duration-`t` post-arrival template, the record must extend to `L+t`.
+
+The paper now defines
+
+```math
+\boxed{
+T_G=\text{minimum required post-window integration duration}.
+}
+```
+
+The actual batch wall time is
+
+```math
+\boxed{
+T_{wall}=L+T_G.
+}
+```
+
+Since `L` is common to both channels, `T_wall` and `T_G` have identical pairwise ordering.
+
+### Blocking issue B resolved by exact claim narrowing
+
+The manuscript now explicitly defines complete signal-present scan power and proves only the one-sided implication
+
+```math
+\boxed{
+P_D^{scan}\ge P_{D,true}.
+}
+```
+
+Thus `P_D,true>=beta` is a sufficient guarantee, and the theorem concerns the time required to satisfy that guarantee.
+
+**No claim remains that the exact first solutions of `P_D^scan=beta` reverse ordering.**
+
+### Common optical event restored
+
+All channels now receive
+
+```math
+p(t)=e^{-bt}u(t)
+```
+
+through
+
+```math
+G_\tau(s)=A_\tau\frac{s+b}{(s+1/\tau)^2},
+```
+
+producing
+
+```math
+s_\tau(t)=A_\tau t e^{-t/\tau}u(t).
+```
+
+Equal eventual matched-filter SNR is explicitly event-specific.
+
+### Noise and detector terminology tightened
+
+The revision fixes
+
+```math
+E[n(t)n(t')]=N\delta(t-t'),
+\qquad
+\rho^2=(1/N)\int s^2dt,
+```
+
+and distinguishes `D*` noise-equivalent measurement-bandwidth normalization from detector temporal / `-3 dB` bandwidth.
+
+### Proposition 1 strengthened
+
+Two previous assumptions are now derived.
+
+1. `Gamma_infty(ell,alpha)->infinity` follows directly from `R_infty(y)=(1+y)e^{-y}->0`: widely separated samples are compared by Slepian with an equicorrelated Gaussian vector whose maximum diverges.
+2. `X_G->infinity` at `ell_crit` follows from `eta(x)<1`, `R_x<=R_infty`, `Gamma(x)>=Gamma_infty`, boundary equality, and continuity.
+
+The proposition now assumes only known-time guarantee feasibility and ordinary threshold/first-crossing continuity.
+
+### Hard stop explicitly preserved
+
+No Step 50 was created. No Pickands/Palm/Rice closure branch was reopened.
+
+The revision does **not** revive:
+
+```text
+Step-13 ell~49;
+Step-20 upper Rice switch;
+raw Step-27 tiny-chi values;
+Step-44 as continuum truth;
+Steps 47-49 as exact finite-u scan probabilities.
+```
+
+### Remaining major scientific presentation gap
+
+A robust exact-hard-window quantitative example is still required.
+
+The correct next numerical task is **margin-first design**, not rescue of the old `r=2, Lambda=.895` calibration. The example should show:
+
+```text
+low L: fast guarantee-time preference;
+intermediate L: crossover with both channels comfortably guarantee-feasible;
+larger L: slow-only guarantee feasibility;
+```
+
+with explicit continuum control.
+
+The smooth finite-information Steps 14–16 remain a valid companion stress test but are not substituted for the exact Paper A model.
+
+---
+
 ## Current stopping point
 
-Stay inside **Paper A**. Do not reopen the Gaussian-extremes branch.
+Paper A's two submission-blocking semantic issues are repaired, and the theorem is stronger and narrower.
+
+The repository remains **not submission-ready** because:
+
+```text
+robust exact-model quantitative example is open;
+final closest-prior-art / novelty audit is open;
+final citation and manuscript QA remain to be done after the example.
+```
 
 ### Single next question
 
-> Can the manuscript be revised first to make the acquisition clock and the true-alignment guarantee criterion operationally exact, without changing the existing Gaussian-extremes hard stop or claiming a full signal-present scan theorem?
+> Can a new continuum-controlled exact-hard-window example be chosen for numerical margin rather than proximity to the old feasibility-edge witness, without reopening the Step-49 closure program?
