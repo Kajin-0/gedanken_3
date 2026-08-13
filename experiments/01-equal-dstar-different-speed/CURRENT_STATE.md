@@ -1,34 +1,67 @@
 # Current State — Experiment 01: Equal D*, Different Speed
 
-**Date:** 2026-08-12 22:09 EDT  
-**Status:** mathematical closure branch hard-stopped after 49 logical steps; prior-art audit completed; Paper A drafted and consistency-compressed; **severe adversarial review completed. MAJOR REVISION REQUIRED. NOVELTY NOT ESTABLISHED.** The core algebra survives review, but the manuscript is **not submission-ready** because its acquisition clock and true-alignment detection criterion are not yet operationally framed tightly enough.
+**Date:** 2026-08-12 22:54 EDT  
+**Status:** mathematical closure branch hard-stopped after 49 logical steps; prior-art audit completed; severe adversarial review completed; **Paper A blocking acquisition-clock and true-alignment claim-scope issues repaired on the active revision branch.** Core theorem now concerns an operationally defined **post-window guarantee time**, not ordinary online latency or exact full signal-present scan detection time. **Robust exact-model quantitative example remains open. Novelty not established.**
 
 Read next:
-1. `PAPER_A_ADVERSARIAL_REVIEW_AUDIT.md`
-2. `PAPER_A_DRAFT.md`
-3. `PRIOR_ART_AUDIT_DETECTOR_TASK_REVERSAL.md`
-4. `PAPER_ARCHITECTURE_TASK_REVERSAL.md`
-5. `DIMENSIONLESS_DETECTION_SURFACE_STEP.md`
-6. `TASK_REGIME_BOUNDARY_STEP.md`
-7. `PROGRESS_LOG.md`
+1. `PAPER_A_DRAFT.md`
+2. `PAPER_A_MAJOR_REVISION_2026-08-12.md`
+3. `PAPER_A_ADVERSARIAL_REVIEW_AUDIT.md`
+4. `PRIOR_ART_AUDIT_DETECTOR_TASK_REVERSAL.md`
+5. `TASK_REGIME_BOUNDARY_STEP.md`
+6. `PROGRESS_LOG.md`
 
 ---
 
-## Paper A — authoritative manuscript
+## Paper A — revised authoritative manuscript on this branch
 
 Working title:
 
-> **Task-Dependent Ordering of Photodetectors with Equal Asymptotic Sensitivity**
+> **Task-Dependent Guarantee-Time Ordering of Photodetector Channels with Equal Eventual Matched-Filter SNR**
 
 Authoritative draft: `PAPER_A_DRAFT.md`.
 
-Central family:
+### Common optical event and detector realization
+
+All channels receive
 
 ```math
-s_\tau(t)=A_\tau t e^{-t/\tau}u(t),
-\qquad
-\rho_{\tau,\infty}=\rho_0.
+p(t)=e^{-bt}u(t)
 ```
+
+through
+
+```math
+G_\tau(s)=A_\tau\frac{s+b}{(s+1/\tau)^2},
+```
+
+so
+
+```math
+s_\tau(t)=A_\tau t e^{-t/\tau}u(t).
+```
+
+The output-noise convention is now explicit:
+
+```math
+E[n(t)n(t')]=N\delta(t-t'),
+```
+
+with
+
+```math
+\rho^2=\frac1N\int s^2(t)dt.
+```
+
+Choosing
+
+```math
+A_\tau=\frac{2\rho_0\sqrt N}{\tau^{3/2}}
+```
+
+gives the same **event-specific eventual matched-filter SNR** `rho_0` for every `tau`.
+
+Finite-time accumulation remains
 
 ```math
 \eta(x)=1-e^{-2x}(1+2x+2x^2),
@@ -37,197 +70,243 @@ s_\tau(t)=A_\tau t e^{-t/\tau}u(t),
 \qquad x=t/\tau.
 ```
 
+### Exact batch acquisition clock
+
+Event arrival is known only to lie in `[0,L]`. A duration-`t` matched filter must be available at every candidate arrival, including the latest candidate `L`, so the batch record extends through `L+t`.
+
+The revised object is
+
 ```math
-R_x(y)=\frac{\int_0^{x-y}v(v+y)e^{-2v-y}dv}
-{\int_0^x v^2e^{-2v}dv},
-\qquad
-r_{\tau,t}(\Delta)=R_{t/\tau}(|\Delta|/\tau).
+\boxed{
+T_G=\text{minimum post-window integration duration satisfying the guarantee criterion}.
+}
 ```
 
-Global timing-scan threshold:
+The physical wall-clock batch decision time is
 
 ```math
-\Pr\left[\sup_{0\le q\le\ell}Z_x(q)>\Gamma(x,\ell,\alpha)\right]=\alpha,
+\boxed{
+T_{wall}=L+T_G.
+}
+```
+
+At fixed `L`, `T_wall` and `T_G` induce exactly the same fast/slow ordering.
+
+### Global scan threshold and guarantee criterion
+
+Noise-only threshold:
+
+```math
+\Pr\left[\sup_{0\le q\le\ell}Z_x(q)>\Gamma(x,\ell,\alpha)\right]\le\alpha,
 \qquad \ell=L/\tau.
 ```
 
-True-alignment margin:
-
-```math
-M(x;\ell,\rho_0,\alpha)
-=\rho_0\sqrt{\eta(x)}-\Gamma(x,\ell,\alpha).
-```
-
-Covariance ordering plus Gaussian comparison gives
-
-```math
-x_2>x_1
-\Rightarrow
-\Gamma(x_2,\ell,\alpha)\le\Gamma(x_1,\ell,\alpha),
-```
-
-so the margin is strictly increasing with observation duration and
-
-```math
-T_D(\alpha,\beta,L;\tau,\rho_0)
-=\tau X_D(\rho_0,\alpha,\beta,L/\tau).
-```
-
-For `tau_f<tau_s`, `r=tau_s/tau_f>1`, `ell=L/tau_s`, the implicit task boundary is
-
-```math
-B_r(\ell)
-=X_D(\rho_0,\alpha,\beta,r\ell)
--rX_D(\rho_0,\alpha,\beta,\ell)=0.
-```
-
-With
-
-```math
-\ell_{crit}
-=\sup\{\ell:\Gamma_\infty(\ell,\alpha)<\rho_0-\Phi^{-1}(\beta)\},
-```
-
-physical feasibility scales as
-
-```math
-L_{crit}(\tau)=\tau\ell_{crit}.
-```
-
-Under Proposition 1 assumptions: known-time operation is feasible; `X_D` is continuous away from singularities; `Gamma_infty` grows without bound; and `X_D` diverges at the feasibility boundary. Then fast wins at `L=0`, fast diverges first, and at least one finite fast-to-slow crossover exists. No uniqueness or universal ordering is claimed.
-
----
-
-## Adversarial reviewer audit — completed 22:09 EDT
-
-Full audit: `PAPER_A_ADVERSARIAL_REVIEW_AUDIT.md`.
-
-### Disposition
-
-```text
-MAJOR REVISION / NO FATAL INTERNAL MATHEMATICAL CONTRADICTION FOUND
-/ BLOCKING OPERATIONAL-INTERPRETATION ISSUES
-/ NOVELTY NOT ESTABLISHED
-```
-
-### Mathematical pieces that survived direct audit
-
-- equal-eventual-SNR normalization `A_tau ∝ tau^(-3/2)`;
-- `eta(x)` and its monotonicity;
-- finite-template covariance `R_x(y)`;
-- the positive-weight-average covariance-ordering argument;
-- the Slepian comparison direction;
-- strict increase of the true-alignment margin with observation duration;
-- the dimensionless task scaling;
-- the both / slow-only / neither feasibility partition;
-- exclusion of fast-only feasibility in this scaled family;
-- the intermediate-value crossover proof **given the proposition assumptions**.
-
-### Blocking issue 1 — acquisition clock / meaning of `T_D`
-
-The current stationary scan with a full length-`t` template for every candidate arrival in a window of length `L` implicitly requires a batch record of duration approximately `L+t`. `T_D=t` is therefore not automatically an online wall-clock detection latency.
-
-Repair without changing the theorem:
-
-```text
-define the batch acquisition protocol explicitly;
-interpret T_D as required post-window integration duration;
-or define T_wall=L+T_D and note that fixed-L detector ordering is unchanged.
-```
-
-### Blocking issue 2 — `P_D,true` is a conservative guarantee criterion
-
-The manuscript uses
+True-alignment probability:
 
 ```math
 P_{D,true}
-=\Phi[\rho_0\sqrt{\eta(x)}-\Gamma(x,\ell,\alpha)],
+=\Phi[\rho_0\sqrt{\eta(x)}-\Gamma(x,\ell,\alpha)].
 ```
 
-which is not the full signal-present scan probability
+Complete signal-present scan probability:
 
 ```math
-P_D^{scan}=Pr[\sup_q Z_{signal}(q)>\Gamma].
+P_D^{scan}
+=\Pr\left[\sup_qY_x(q)>\Gamma\right].
 ```
 
-Because true-alignment exceedance implies scan exceedance,
+The revised manuscript now makes the exact one-sided logic central:
 
 ```math
+\boxed{
 P_D^{scan}\ge P_{D,true}.
+}
 ```
 
-Thus the present first-crossing time is a **guaranteed / sufficient integration duration** for the global scan, not necessarily the exact scan detection time. A reversal of these guarantee times does not by itself prove a reversal of exact signal-present scan detection times.
+Thus `P_D,true>=beta` is a **sufficient guarantee** that the complete scan detects with probability at least `beta`.
 
-Default repair path: reframe the theorem explicitly as a **true-alignment guarantee criterion** rather than reopening the full signal-present Gaussian-extremes problem.
+The paper does **not** claim that the exact first solution of `P_D^scan=beta` has the same fast/slow ordering.
 
-### Major issue 3 — restore the common optical input and detector transfer function
+### Guarantee-time scaling
 
-The paper should restore the already-derived physical realization
+Define
 
 ```math
-p(t)=e^{-bt}u(t),
+M_G(x;\ell,\rho_0,\alpha)
+=\rho_0\sqrt{\eta(x)}-\Gamma(x,\ell,\alpha),
 ```
+
+and
 
 ```math
-G_\tau(s)=A_\tau\frac{s+b}{(s+1/\tau)^2},
+X_G(\rho_0,\alpha,\beta,\ell)
+=\inf\{x:M_G(x;\ell)\ge\Phi^{-1}(\beta)\}.
 ```
 
-so the same optical event produces
+Then
 
 ```math
-s_\tau(t)=A_\tau t e^{-t/\tau}u(t)
+\boxed{
+T_G(\alpha,\beta,L;\tau,\rho_0)
+=\tau X_G(\rho_0,\alpha,\beta,L/\tau).
+}
 ```
 
-through causal, proper, stable detector channels. Otherwise the manuscript risks reading as generic signal processing rather than a photodetector construction.
-
-Also state that equal eventual matched-filter SNR is event-specific and deliberately stronger than equal scalar reference `D*`.
-
-### Major issue 4 — Proposition 1 is more conditional than necessary
-
-The divergence assumption can largely be derived from
+For `tau_f<tau_s`, `r=tau_s/tau_f`, `ell=L/tau_s`, the guarantee-time boundary is
 
 ```math
-eta(x)<1,
-\qquad
-Gamma(x,ell,alpha)\ge Gamma_\infty(ell,alpha),
+\boxed{
+B_r(\ell)
+=X_G(\rho_0,\alpha,\beta,r\ell)
+-rX_G(\rho_0,\alpha,\beta,\ell)=0.
+}
 ```
-
-plus boundary equality/continuity. Exponential decay of
-
-```math
-R_\infty(y)=(1+y)e^{-y}
-```
-
-places the full-template scan in standard stationary-Gaussian extreme-value theory, so unbounded large-search maxima should be cited/proved rather than merely assumed. Add an explicit Slepian citation.
-
-### Major issue 5 — no robust quantitative example in Paper A
-
-The existence theorem alone permits a crossover arbitrarily close to the fast feasibility boundary. After the conceptual blockers are repaired, add one continuum-validated, non-knife-edge example/phase diagram with comfortable margins. Do not reuse invalidated Step-13 or treat Step-44 finite-grid results as continuum truth.
-
-### Major presentation fixes
-
-- distinguish `D*` noise-equivalent bandwidth normalization from detector temporal/3-dB bandwidth;
-- define the white-noise convention exactly, e.g. `E[n(t)n(t')]=N delta(t-t')`;
-- consider replacing title phrase "equal asymptotic sensitivity" with event-specific matched-filter wording;
-- define `Phi` explicitly and standardize crossover notation;
-- add DOI `10.1038/s41467-026-72259-1` for Yang et al.;
-- add Slepian and stationary-Gaussian-extreme citations.
 
 ---
 
-## Prior-art / novelty status after adversarial audit
+## Proposition 1 — strengthened
 
-Verified established ingredients remain:
+The prior manuscript assumed both large-search threshold divergence and first-crossing divergence at the feasibility boundary. The revision derives both.
 
-- Jones 1960: pulse/energy detectivity from `D*(f)`;
-- Garcia & Dereniak 1990: explicit infrared `D* × bandwidth` benchmarking;
-- Yang et al. 2026: explicit `Detectivity × Bandwidth` USBL;
-- Pecunia et al. 2025: characterization/reporting/application benchmarking guidance;
-- Vio/Andreani, Morras et al., Croce et al.: unknown-position matched-filter/global-false-alarm statistics governed by correlated scan structure.
+### Large-search threshold divergence
 
-Additional adjacent prior art identified: Milstein et al., *Applied Optics* 47, 296–311 (2008), DOI `10.1364/AO.47.000296`, studies constant-false-alarm acquisition time in a specified range window for direct-detection ladar with Geiger-mode APDs.
+The full-template covariance is
 
-No direct match to the complete equal-eventual-SNR fast/slow reversal was found in this audit, but the adjacent radar/sonar/ladar/synchronization literature remains a serious novelty risk.
+```math
+R_\infty(y)=(1+y)e^{-y}\to0.
+```
+
+Widely separated samples have arbitrarily small pairwise covariance. Comparing them by Slepian with an equicorrelated Gaussian vector shows that the sampled maximum diverges in probability as the number of separated points grows. Therefore
+
+```math
+\boxed{
+\Gamma_\infty(\ell,\alpha)\to\infty
+\qquad(\ell\to\infty).
+}
+```
+
+A finite guarantee-feasibility boundary therefore exists whenever known-time operation is guarantee-feasible.
+
+### Boundary divergence
+
+For finite `x`,
+
+```math
+\eta(x)<1,
+\qquad
+R_x(y)\le R_\infty(y),
+\qquad
+\Gamma(x,\ell,\alpha)\ge\Gamma_\infty(\ell,\alpha).
+```
+
+At a continuous boundary satisfying
+
+```math
+\Gamma_\infty(\ell_{crit},\alpha)
+=\rho_0-\Phi^{-1}(\beta),
+```
+
+every finite `x` remains strictly below the guarantee requirement. Continuity then forces
+
+```math
+\boxed{
+X_G(\ell)\to\infty
+\quad\text{as}\quad
+\ell\uparrow\ell_{crit}.
+}
+```
+
+Thus Proposition 1 now assumes only known-time guarantee feasibility plus ordinary threshold/first-crossing continuity in the feasible region and at the boundary.
+
+### Result
+
+Fast wins for sufficiently small `L`. The fast channel reaches the guarantee-feasibility boundary first, while the slow channel remains strictly feasible there. Hence at least one finite fast-to-slow **guarantee-time** crossover exists.
+
+No uniqueness claim.
+
+---
+
+## Exact scope after major revision
+
+The manuscript now establishes:
+
+```text
+same optical event
++ causal time-scaled detector family
++ equal event-specific eventual matched-filter SNR
++ batch unknown-arrival scan
++ global noise-only false-alarm threshold
++ true-alignment sufficient detection guarantee
+-> task-dependent guarantee-time ordering
+-> both / slow-only / neither guarantee-feasibility partition
+-> at least one fast-to-slow guarantee-time crossover.
+```
+
+It does **not** establish:
+
+```text
+exact online/sequential detection latency;
+exact full signal-present scan detection-time reversal;
+Bayes/minimax/sequential optimality;
+crossover uniqueness;
+universal slow-detector preference;
+a universal scalar replacement for D*;
+novelty.
+```
+
+---
+
+## Quantitative example — still open
+
+The severe review's request for one robust non-knife-edge quantitative example remains valid.
+
+Do not use:
+
+- Step-13 `ell~49`: invalid rough-grid crossover;
+- Step-20 upper Rice reversal: invalidated by Palm correction;
+- Step-44 pointwise finite-grid certificate as continuum truth;
+- Steps 47–49 spectral-intensity grid transfer as exact finite-`u` scan probability.
+
+The smooth finite-information model from Steps 14–16 is a valid companion stress test and demonstrates that the mechanism survives regularization, but it is not the exact hard-window Paper A model.
+
+**Next numerical target:** choose a new parameter set for margin first and obtain a continuum-controlled exact-hard-window example showing fast preference at low `L`, a crossover while both channels are comfortably guarantee-feasible, and slow-only guarantee feasibility at larger `L`.
+
+Do not tune around the old `r=2, Lambda=0.895` knife edge.
+
+---
+
+## Mathematical companion — Steps 13–49
+
+**HARD STOP REMAINS ACTIVE. DO NOT CREATE STEP 50 BY DEFAULT.**
+
+Preserve the complete correction history:
+
+- Step-13 rough-grid crossover invalid;
+- finite information bandwidth regularizes the cusp, but an invertible common low-pass is not a physical information restriction;
+- Step-20 upper Rice switch invalidated;
+- raw Step-27 tiny-`chi` values grid biased;
+- excursion clusters replaced unstable micro-upcrossing counts;
+- Step-44 is finite-grid only;
+- Steps 46–49 show the rough-grid effect is real and not canceled by higher-order covariance structure;
+- Step-49 intentionally stopped before another publication-grade finite-`u` transfer branch.
+
+The Paper A revision does not reopen any of these branches.
+
+---
+
+## Prior-art / novelty status
+
+Established ingredients still include pulse/energy detectivity from frequency-dependent response, explicit detectivity-bandwidth benchmarking, correlated unknown-arrival matched-filter false alarms, and acquisition-time/range-window detection problems.
+
+The candidate contribution remains the narrower detector-facing synthesis:
+
+```text
+same optical event
+-> equal eventual matched-filter SNR channels
+-> time-scale-dependent unknown-arrival search geometry
+-> conservative global-scan guarantee criterion
+-> guarantee-feasibility partition and ordering reversal.
+```
 
 Disposition remains:
 
@@ -235,36 +314,17 @@ Disposition remains:
 POSSIBLE SYNTHESIS CONTRIBUTION / NOVELTY NOT ESTABLISHED.
 ```
 
----
-
-## Mathematical companion — Steps 13–49
-
-**HARD-STOP REMAINS ACTIVE.** Preserve the correction history and do not create Step 50 by default. The audit does not justify reopening the Gaussian-extremes branch; the preferred repair is narrower, operationally exact framing of the existing criterion.
-
-Key preserved corrections include invalid Step-13 `ell~49`, invalid upper Rice switch, corrected coupling/tiny-q values, finite-grid-only Step 44, Step-46 sign/scale-only wording, and Steps 47–49 exact-canonical/mixed/exact-covariance grid-transfer results.
+A deeper radar/sonar/ladar/synchronization citation-network audit is still required before any priority language.
 
 ---
 
 ## Active next phase
 
-Do **not** format or submit yet.
+1. Validate the revised Paper A manuscript against the adversarial-review blockers.
+2. Build one new **margin-first continuum-controlled quantitative example** for the exact hard-window model.
+3. Perform final closest-prior-art / citation audit.
+4. Only then consider figures, journal formatting, or submission.
 
-Repair in this order:
+### Current single next question
 
-1. operationally define the batch acquisition clock and `T_D`;
-2. reframe `P_D,true` as a guaranteed true-alignment criterion (default path), unless explicitly choosing the much harder full-scan theorem;
-3. restore fixed optical input + detector transfer-function realization;
-4. strengthen/cite Proposition 1 assumptions;
-5. add one robust non-knife-edge numerical example;
-6. tighten `D*`/noise/citation language;
-7. only then perform final novelty audit, figures, and journal formatting.
-
-### Single next question — DO NOT ANSWER UNTIL PROMPTED
-
-> Can the manuscript be revised first to make the acquisition clock and the true-alignment guarantee criterion operationally exact, without changing the existing Gaussian-extremes hard stop or claiming a full signal-present scan theorem?
-
----
-
-## Scope boundary
-
-Do not claim: exact online detection latency under the current batch protocol; exact full signal-present scan detection-time reversal; faster universally better/worse; a universal scalar replacement for `D*`; `D* × bandwidth` as new; unknown-arrival search penalties as new; scanning protocol universally optimal; crossover uniqueness; Step-13 `ell~49`; Step-20 double reversal; raw Step-27 values as continuum truth; Step-44 as a continuum certificate; Step-46 coefficient precisely verified; Step-47 canonical ratio as exact finite-u false-alarm ratio; Steps 48/49 Monte Carlo intervals as distribution-free theorem-level; novelty.
+> Can a robust exact-hard-window quantitative example be designed away from the old feasibility-edge calibration, without reopening the Step-49 closure program?
