@@ -1,15 +1,16 @@
 # Current State — Experiment 01: Equal D*, Different Speed
 
-**Date:** 2026-08-12 21:03 EDT  
-**Status:** mathematical closure branch stopped after 49 logical steps; prior-art audit and paper architecture completed; **Paper A is now drafted through Section IV, including the dimensionless detection-time surface and the fast/slow crossover proof. NOVELTY NOT ESTABLISHED.** The active manuscript is now `PAPER_A_DRAFT.md`. `PAPER_A_DRAFT_OPENING.md` is retained as the earlier opening-draft milestone. Do not create Step 50 of the old Gaussian-extremes proof chain by default.
+**Date:** 2026-08-12 21:35 EDT  
+**Status:** mathematical closure branch stopped after 49 logical steps; prior-art audit and paper architecture completed; **Paper A is drafted through Section IV and Section V is now drafted as a separate manuscript module. NOVELTY NOT ESTABLISHED.** Active core manuscript: `PAPER_A_DRAFT.md`. New discussion/conclusion module: `PAPER_A_SECTION_V.md`. `PAPER_A_DRAFT_OPENING.md` remains the earlier opening-draft milestone. Do not create Step 50 of the old Gaussian-extremes proof chain by default.
 
 Read next:
 1. `PAPER_A_DRAFT.md`
-2. `PAPER_ARCHITECTURE_TASK_REVERSAL.md`
-3. `PRIOR_ART_AUDIT_DETECTOR_TASK_REVERSAL.md`
-4. `DIMENSIONLESS_DETECTION_SURFACE_STEP.md`
-5. `TASK_REGIME_BOUNDARY_STEP.md`
-6. `PROGRESS_LOG.md`
+2. `PAPER_A_SECTION_V.md`
+3. `PAPER_ARCHITECTURE_TASK_REVERSAL.md`
+4. `PRIOR_ART_AUDIT_DETECTOR_TASK_REVERSAL.md`
+5. `DIMENSIONLESS_DETECTION_SURFACE_STEP.md`
+6. `TASK_REGIME_BOUNDARY_STEP.md`
+7. `PROGRESS_LOG.md`
 
 ---
 
@@ -19,7 +20,7 @@ Working title:
 
 > **Task-Dependent Ordering of Photodetectors with Equal Asymptotic Sensitivity**
 
-The manuscript now contains:
+The manuscript core contains:
 
 - Abstract and Introduction with established `D*`, pulse-detection, sensitivity-bandwidth, and unknown-arrival matched-filter search results explicitly treated as prior art.
 - Controlled equal-eventual-SNR family
@@ -46,7 +47,7 @@ R_x(y)=\frac{\int_0^{x-y}v(v+y)e^{-2v-y}dv}
 \qquad 0\le y<x,
 ```
 
-with `R_x(y)=0` for `y>=x` and physical scaling
+with `R_x(y)=0` for `y>=x` and
 
 ```math
 r_{\tau,t}(\Delta)=R_{t/\tau}(|\Delta|/\tau).
@@ -54,14 +55,14 @@ r_{\tau,t}(\Delta)=R_{t/\tau}(|\Delta|/\tau).
 
 ### Section III — dimensionless detection-time surface
 
-The global correlated-scan threshold is defined directly by
+The correlated-scan threshold is defined by
 
 ```math
 \Pr\left[\sup_{0\le q\le\ell}Z_x(q)>\Gamma(x,\ell,\alpha)\right]=\alpha,
 \qquad \ell=L/\tau.
 ```
 
-The true-alignment decision margin is
+The true-alignment margin is
 
 ```math
 M(x;\ell,\rho_0,\alpha)
@@ -74,14 +75,16 @@ and
 P_{D,\mathrm{true}}=\Phi[M].
 ```
 
-Using the exact covariance ordering from Step 11 plus standard Gaussian comparison, `Gamma(x,ell,alpha)` is nonincreasing in `x`, while the SNR term is strictly increasing. Hence `M` is strictly increasing and the first-crossing time is unambiguous:
+Using the exact covariance ordering plus standard Gaussian comparison, `Gamma(x,ell,alpha)` is nonincreasing in `x`, while the SNR term is strictly increasing. Hence `M` is strictly increasing and
 
 ```math
 X_D(\rho_0,\alpha,\beta,\ell)
-=\inf\{x>0:M(x;\ell,\rho_0,\alpha)\ge\Phi^{-1}(\beta)\}.
+=\inf\{x>0:M(x)\ge\Phi^{-1}(\beta)\}
 ```
 
-The central exact task scaling is
+is an unambiguous first crossing whenever feasible.
+
+The central exact scaling is
 
 ```math
 \boxed{
@@ -90,19 +93,17 @@ T_D(\alpha,\beta,L;\tau,\rho_0)
 }
 ```
 
-This also preserves the Step-11 negative result: the reversal is not caused by one detector using a self-suboptimal integration duration; each detector individually benefits from more observation time.
+This preserves the Step-11 negative result: the reversal is not caused by one detector using a self-suboptimal integration duration; each member benefits monotonically from more observation time.
 
 ### Section IV — task boundary and crossover proof
 
-For two members with
+For
 
 ```math
 \tau_f<\tau_s,
 \qquad r=\tau_s/\tau_f>1,
 \qquad \ell=L/\tau_s,
 ```
-
-the exact physical detection times are
 
 ```math
 T_{D,f}=\tau_f X_D(\rho_0,\alpha,\beta,r\ell),
@@ -112,7 +113,7 @@ T_{D,f}=\tau_f X_D(\rho_0,\alpha,\beta,r\ell),
 T_{D,s}=r\tau_f X_D(\rho_0,\alpha,\beta,\ell),
 ```
 
-and their task boundary is
+and the exact preference boundary is
 
 ```math
 \boxed{
@@ -122,7 +123,7 @@ B_r(\ell;\rho_0,\alpha,\beta)
 }
 ```
 
-Let
+With
 
 ```math
 c=\rho_0-\Phi^{-1}(\beta),
@@ -132,48 +133,65 @@ and
 
 ```math
 \ell_{\mathrm{crit}}
-=\sup\{\ell\ge0:\Gamma_\infty(\ell,\alpha)<c\}.
+=\sup\{\ell\ge0:\Gamma_\infty(\ell,\alpha)<c\},
 ```
 
-Then
+physical feasibility scales as
 
 ```math
 L_{\mathrm{crit}}(\tau)=\tau\ell_{\mathrm{crit}}.
 ```
 
-Since `Gamma_infty` is nondecreasing with search length, the exact feasibility partition is:
+The exact feasibility regimes are both-feasible / slow-only / neither; fast-only feasibility is excluded in this deliberately equal-eventual-SNR scaled family.
 
-```text
-both feasible:
-    c > Gamma_infty(r ell, alpha)
+Under the explicitly stated assumptions of known-time feasibility, continuity away from singularities, unbounded large-search threshold growth, and divergence at the feasibility boundary:
 
-slow only:
-    Gamma_infty(ell, alpha) < c <= Gamma_infty(r ell, alpha)
-
-neither feasible:
-    c <= Gamma_infty(ell, alpha)
-```
-
-Fast-only feasibility is excluded in this deliberately equal-eventual-SNR scaled family.
-
-Under the explicitly stated assumptions that known-time operation is feasible, `X_D` is continuous away from feasibility singularities, `Gamma_infty` grows without bound with search length, and `X_D` diverges on approach to the feasibility boundary:
-
-- at `L=0`, both detectors solve the same dimensionless task and `T_D,f<T_D,s` because `tau_f<tau_s`;
-- `L_crit,f=tau_f ell_crit < tau_s ell_crit=L_crit,s`;
+- `L=0`: fast reaches the decision first;
+- `L_{crit,f}=tau_f ell_crit < tau_s ell_crit=L_{crit,s}`;
 - as `L -> L_crit,f^-`, `T_D,f -> infinity` while the slow detector remains strictly feasible;
-- therefore continuity guarantees at least one
+- therefore at least one
 
 ```math
 L_\times\in(0,L_{\mathrm{crit},f})
 ```
 
-with
+satisfies
 
 ```math
 T_{D,f}(L_\times)=T_{D,s}(L_\times).
 ```
 
 **No crossover uniqueness is claimed.** The theorem is task/protocol specific and does not establish a universal faster/slower ordering.
+
+### Section V — interpretation, limitations, and detector-specification implications
+
+New module: `PAPER_A_SECTION_V.md`.
+
+The section fixes the practical interpretation:
+
+```text
+response time changes two things in the stated task:
+1. how quickly signal evidence is accumulated;
+2. the normalized size/correlation structure of the unknown-arrival search through L/tau.
+```
+
+The main conclusion is **not** to replace `D*` with a new detector-only sensitivity-speed scalar. The relevant ordering is a detector–task ordering. For the controlled model, the compact task descriptor is
+
+```math
+X_D(\rho_0,\alpha,\beta,L/\tau),
+```
+
+which explicitly contains arrival-time uncertainty and the global decision criterion.
+
+Section V distinguishes **device characterization** from **task qualification**: device metrics such as responsivity, noise, detectivity, bandwidth, and response time remain useful, but they do not by themselves rank devices for every finite-time unknown-arrival decision problem.
+
+Scope restrictions are explicit: linear time-scaled family, additive stationary Gaussian output noise, equal eventual matched-filter SNR, arrival time as the nuisance parameter, and a true-alignment detection criterion with a global noise-only scan threshold. No claim is made for Bayesian/minimax/sequential receivers, unknown amplitude/phase, nonlinear response, saturation, dead time, nonstationarity, or arbitrary practical detectors.
+
+The concluding detector-facing statement is:
+
+> **Detector specifications rank devices only relative to the task for which the ranking is being made. When arrival time is uncertain, response time affects both signal accumulation and the statistical size of the timing search.**
+
+Within the controlled family, that coupling is sufficient to reverse the fast/slow detection-time ordering despite equal eventual matched-filter sensitivity.
 
 ---
 
@@ -206,7 +224,7 @@ Critical preserved corrections/negative results include:
 - Step 39 finds `R=N_a/N_tan~1.56`; finite-u correction is not a small-amplitude remainder.
 - Step 40 gives Cameron-Martin exact-event threshold translation.
 - Step 41 replaces empirical q interpolation with analytic Gaussian-process control.
-- **INVALIDATED NUMERICAL VALUE:** Step-35 tiny-q pair RMS `~5.4e-5`; corrected asymptotic `~2.69e-5`.
+- **INVALIDATED NUMERICAL VALUE:** Step-35 tiny-q pair RMS `~5.4e-5`; corrected asymptotic value `~2.69e-5`.
 - Step 44 gives a genuine pointwise finite-grid 95% bound `P_FA/alpha<.999957771`, but with only `.00004223 alpha` margin.
 - Step 46 identifies missed between-sample maxima as the dominant continuum-grid error; its five-event coefficient supports sign/scale consistency only, not precise validation.
 - Step 47 gives the exact pure-alpha1 discrete Pickands correction.
@@ -219,11 +237,11 @@ Critical preserved corrections/negative results include:
 
 Stay inside **Paper A**.
 
-The next logical action is to draft **Section V only**: interpretation, limitations, and detector-specification implications, then perform a manuscript-level consistency pass. Do not add numerical phase-diagram claims or reopen specialized closure mathematics unless separately justified.
+The detector-facing narrative is now drafted in modular form through Section V. The next logical action is to **merge Section V into `PAPER_A_DRAFT.md` and perform a manuscript-level consistency/editing pass**: remove duplication, standardize notation and terminology, check theorem assumptions against the abstract/conclusion, and ensure the references and novelty language are internally consistent. Do not add new mathematical claims or numerical phase-diagram claims during that pass.
 
 ### Single next question — DO NOT ANSWER UNTIL PROMPTED
 
-> Can Section V now be drafted to finish the detector-facing narrative, with the practical implication stated strongly but without broadening the theorem beyond the defined task/protocol?
+> Can Section V now be merged into the active manuscript and the full Paper A draft receive a consistency/compression pass without broadening the theorem or reopening the mathematical companion?
 
 ---
 
