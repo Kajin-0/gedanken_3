@@ -1,219 +1,321 @@
-# Current State — Experiment 03: Can spontaneous pixel noise reveal photon recycling?
+# Current State — Experiment 03: When is photon recycling visible in terminal noise?
 
 **Date:** 2026-08-13
-**Status:** ACTIVE / POSSIBLE DETECTOR-APPLICATION NOVELTY / GENERAL EXCHANGE-NOISE MATHEMATICS IS PRIOR ART
+**Status:** ACTIVE / MAJOR DEVICE-CLASS BOUNDARY ESTABLISHED / NOVELTY NOT ESTABLISHED
 
-## Device question
+## Revised central question
 
-HgCdTe photon recycling can transfer a radiative recombination photon from one pixel to a neighboring pixel, where it is reabsorbed and creates a new electron-hole pair.
+HgCdTe photon recycling can move an excitation from one pixel to another by radiative recombination followed by photon reabsorption.
 
-Question:
+The original question was whether this exchange must appear as spontaneous inter-pixel electrical noise correlation.
 
-> Can the spontaneous electrical noise of two neighboring pixels reveal and quantify this photon exchange without deliberately illuminating one pixel?
+The answer is now more precise:
 
-This is a device-physics / characterization question. The general statistical fact that conservative exchange coupling produces cross-correlated equilibrium noise is not new.
-
-## Prior-art gate already established
-
-1. HgCdTe photon recycling and optical crosstalk are established. Jóźwikowska & Jóźwikowski, *Optical and Quantum Electronics* 51, 85 (2019), DOI 10.1007/s11082-019-1781-4, model radiative recombination photons emitted by one HgCdTe pixel and absorbed by a neighbor. Their calculated neighboring-pixel parasitic response is at roughly the percent level for small LWIR pixels.
-
-2. Cross-correlation noise spectroscopy of exchange coupling is established in another physical system. Roy et al., *Scientific Reports* 5, 9573 (2015), DOI 10.1038/srep09573, show that equilibrium spin exchange gives a cross-spectrum with a narrow positive component and broader negative component, a difference of equal-area Lorentzians with zero integrated cross-correlation.
-
-Therefore do **not** claim the sign-changing exchange spectrum as new statistical mechanics.
-
-A targeted detector-array search has not yet located a linear HgCdTe/photodiode-array experiment that uses spontaneous pixel current cross-spectra to infer radiative photon-recycling coupling. Novelty remains unestablished.
-
-## Minimal symmetric two-pixel model
-
-Let `x1,x2` be excess carrier-number fluctuations about equal mean `m`.
-
-Local birth/death relaxation occurs at rate `gamma`. Radiative exchange from either pixel to the other occurs at rate `k` per carrier. A transfer event removes one excitation from the emitting pixel and creates one in the neighbor.
-
-The linear drift is
-
-```math
-\dot x=
--\left[
-\gamma I+k
-\begin{pmatrix}1&-1\\-1&1\end{pmatrix}
-\right]x+\eta.
+```text
+NO — visibility depends qualitatively on what the terminal readout measures.
 ```
 
-The common and difference modes have exact relaxation rates
+The same internal exchange can produce a strong carrier-population cross-spectrum in an occupancy-sensitive photoconductor and **zero** cross-spectrum in an ideal endpoint-counting photodiode.
+
+This is now the central device-physics result of Experiment 03.
+
+## Prior-art boundaries already established
+
+Do not claim the following as new:
+
+- HgCdTe photon recycling / optical crosstalk;
+- sign-changing equilibrium cross-spectra from conservative exchange;
+- general fluctuation-response / network inference;
+- passive crosstalk correlation in SPAD arrays;
+- Poisson departure processes from independent linear routing networks;
+- Shockley-Ramo coupling of carrier motion to junction terminal current.
+
+Relevant adjacent prior art is documented in the experiment files.
+
+## Internal carrier exchange: exact two-pixel result
+
+For two identical carrier reservoirs with mean `m`, local non-transfer relaxation `gamma`, and conservative exchange rate `k`,
 
 ```math
-\boxed{\lambda_+=\gamma,\qquad \lambda_-=\gamma+2k.}
+M=\begin{pmatrix}
+\gamma+k&-k\\
+-k&\gamma+k
+\end{pmatrix}.
 ```
 
-Exchange conserves the total carrier population, so it leaves the common mode unchanged but speeds relaxation of the difference mode.
-
-For the chemical-Langevin birth/death/exchange process, the stationary equal-time covariance is
+Common and difference relaxation rates are
 
 ```math
-\boxed{P=mI.}
+\lambda_+=\gamma,
+\qquad
+\lambda_-=\gamma+2k.
 ```
 
-Thus
+The stationary equal-time covariance is
 
 ```math
-\boxed{\operatorname{Cov}(x_1,x_2)|_{t=0}=0}
+P=mI,
 ```
 
-even though the pixels dynamically exchange excitations.
+so distinct pixels have zero equal-time covariance despite dynamical coupling.
 
-## Exact intrinsic spectra
-
-Using a two-sided angular-frequency PSD convention,
-
-```math
-S_+(\omega)=\frac{2m\gamma}{\gamma^2+\omega^2},
-```
-
-```math
-S_-(\omega)=\frac{2m(\gamma+2k)}{(\gamma+2k)^2+\omega^2}.
-```
-
-Therefore
+The internal carrier cross-spectrum is
 
 ```math
 \boxed{
-S_{12}(\omega)=
+S_{x,12}(\omega)=
 m\left[
 \frac{\gamma}{\gamma^2+\omega^2}
--\frac{\gamma+2k}{(\gamma+2k)^2+\omega^2}
-\right].
-}
+-
+\frac{\gamma+2k}{(\gamma+2k)^2+\omega^2}
+\right].}
 ```
 
-Consequences:
+It is positive at low frequency, negative at high frequency, and crosses zero at
 
 ```math
-S_{12}(0)>0,
+\boxed{\omega_x=\sqrt{\gamma(\gamma+2k)}.}
 ```
 
-```math
-S_{12}(\omega)<0\quad\text{at sufficiently high frequency},
-```
-
-and the exact zero is
-
-```math
-\boxed{\omega_\times=\sqrt{\gamma(\gamma+2k)}.}
-```
-
-The integrated cross-spectrum is zero, consistent with zero equal-time covariance.
-
-Thus static frame-to-frame covariance can miss exchange that is visible in a frequency-resolved cross-spectrum.
-
-## Asymmetric equilibrium result
-
-Let local relaxation rates be `gamma1,gamma2`, transfer rates `k12,k21`, equilibrium means `m1,m2`, and impose detailed balance
-
-```math
-k_{12}m_1=k_{21}m_2\equiv J.
-```
-
-Let `lambda1,lambda2` be the two positive relaxation eigenrates. Their sum and product are
-
-```math
-\lambda_1+\lambda_2
-=\gamma_1+\gamma_2+k_{12}+k_{21},
-```
-
-```math
-\lambda_1\lambda_2
-=\gamma_1\gamma_2+\gamma_1k_{21}+\gamma_2k_{12}.
-```
-
-The exact real cross-spectrum is
+Time-domain cross covariance:
 
 ```math
 \boxed{
-S_{12}(\omega)=
-\frac{2J(\lambda_1\lambda_2-\omega^2)}
-{(\lambda_1\lambda_2-\omega^2)^2
-+(\lambda_1+\lambda_2)^2\omega^2}.
-}
+C_{12}(t)=\frac{m}{2}
+[e^{-\gamma|t|}-e^{-(\gamma+2k)|t|}].}
 ```
 
-Hence the sign reversal survives unequal pixels:
+Thus `C12(0)=0` but `C12(t)>0` for nonzero lag.
+
+The qualitative exchange-noise structure is old in other physical systems.
+
+## Deterministic / occupancy-noise closure
+
+Localized steady generation in pixel 1 gives the internal neighboring/self response
 
 ```math
-\boxed{\omega_\times=\sqrt{\lambda_1\lambda_2}.}
+\boxed{c_{dc}=\frac{k}{\gamma+k}.}
 ```
 
-This is the geometric mean of the two coupled relaxation rates.
-
-## Deterministic/noise closure for identical pixels
-
-Now deliberately illuminate pixel 1 with a small steady generation perturbation `g` and leave pixel 2 unilluminated. The steady linear equations give
+For the **internal population observable**,
 
 ```math
-\frac{x_2}{x_1}
-=\boxed{c_{dc}=\frac{k}{\gamma+k}}.
-```
-
-This is the ordinary small-signal neighboring/self crosstalk ratio of the two-state model.
-
-For the intrinsic equilibrium noise spectra,
-
-```math
-\boxed{
-\frac{S_{12}(0)}{S_{11}(0)}
-= c_{dc},
-}
-```
-
-while
-
-```math
-\boxed{
-\lim_{\omega\to\infty}
-\frac{S_{12}(\omega)}{S_{11}(\omega)}
-=-c_{dc}.
-}
-```
-
-Thus the same coupling parameter predicts both conventional illuminated crosstalk and passive cross-noise structure.
-
-Equivalently,
-
-```math
-\frac{k}{\gamma}=\frac{c_{dc}}{1-c_{dc}},
-```
-
-```math
-\frac{\lambda_-}{\lambda_+}
-=\frac{1+c_{dc}}{1-c_{dc}},
+\frac{S_{x,12}(0)}{S_{x,11}(0)}=+c_{dc},
 ```
 
 and
 
 ```math
-\frac{\omega_\times}{\gamma}
-=\sqrt{\frac{1+c_{dc}}{1-c_{dc}}}.
+\frac{S_{x,12}(\infty)}{S_{x,11}(\infty)}=-c_{dc}.
 ```
 
-This is a falsifiable fluctuation/response closure for the minimal exchange model.
+The full normalized spectrum is
 
-## Important limitation
+```math
+\boxed{
+\frac{S_{x,12}(\omega)}{S_{x,11}(\omega)}
+=c_{dc}
+\frac{\omega_x^2-\omega^2}
+{\omega_x^2+\omega^2},
+}
+```
 
-A sign-changing cross-spectrum establishes **exchange-like coupling**, not photon recycling uniquely.
+with
 
-Carrier diffusion or another conservative carrier-transfer mechanism can generate the same mathematics. Electrical readout mixing can also create correlations, although simple instantaneous readout mixing generally has a different spectral structure.
+```math
+\omega_x^2=\gamma^2\frac{1+c_{dc}}{1-c_{dc}}.
+```
 
-Photon recycling must therefore be identified by additional controls such as:
+If a terminal readout is proportional to carrier occupancy, this is a no-free-shape prediction once `gamma` and `c_dc` are independently measured.
 
-- optical isolation/trenches or absorbing barriers that change photon propagation while minimally changing carrier transport;
-- pixel spacing and geometry;
-- bias/temperature dependence of radiative efficiency;
-- comparison with deterministic optical-crosstalk measurements;
-- spatial range of the inferred coupling kernel.
+## N-pixel exchange graph
 
-Independent readout noise adds to individual auto-spectra but does not create the intrinsic cross-spectrum, so cross-correlation averaging can suppress uncorrelated readout noise.
+For symmetric exchange graph Laplacian `L`,
 
-## Next step
+```math
+M=\gamma I+L.
+```
 
-Extend to an `N`-pixel array. For symmetric photon exchange on a pixel graph, determine whether spatial Fourier/eigenmode noise spectra can reconstruct the coupling kernel and whether that provides a practical signature that differs from carrier diffusion and common-mode electronics.
+The equilibrium carrier cross-spectral matrix is
 
-Do not build a manuscript yet. The general exchange-noise theory is old; only a genuinely detector-specific, quantitatively useful consequence can justify publication.
+```math
+\boxed{
+S_x(\omega)=2mM(M^2+\omega^2I)^{-1}.}
+```
+
+Low frequency:
+
+```math
+S_x(0)=2mM^{-1},
+```
+
+which contains the same Green-function matrix as the steady deterministic response.
+
+High frequency:
+
+```math
+S_x(\omega)=\frac{2m}{\omega^2}M
+-\frac{2m}{\omega^4}M^3+O(\omega^{-6}).
+```
+
+A direct exchange edge gives
+
+```math
+S_{x,ij}\sim-2mk_{ij}/\omega^2.
+```
+
+No direct edge means the `1/omega^2` term vanishes.
+
+For continuous local diffusion across physical separation `d`, the high-frequency Green function is suppressed approximately as
+
+```math
+\omega^{-1/2}\exp[-d\sqrt{\omega/(2D)}],
+```
+
+so a long-range direct radiative jump and local diffusion have different ideal high-frequency structure. This is a candidate mechanism discriminator, not established novelty.
+
+## Photon-recycling factorization
+
+In the fast-photon limit, let `Gamma_r` be the small-signal radiative recombination event rate per pair and `p_ij` the probability that an emitted photon from pixel `i` is reabsorbed in pixel `j`.
+
+Then
+
+```math
+\boxed{k_{ij}=\Gamma_r p_{ij}.}
+```
+
+A radiative origin therefore predicts
+
+```math
+\boxed{k_{ij}/p_{ij}=\Gamma_r}
+```
+
+across the spatial coupling matrix if one source population is adequate.
+
+This could be compared against an independently calculated optical transfer kernel. Carrier diffusion has no reason to follow the same optical kernel.
+
+## CRITICAL NEW RESULT — ideal extraction current can erase the exchange noise
+
+See `EXTRACTION_CURRENT_CANCELLATION.md`.
+
+Split local loss into measured extraction `Gamma_e` plus other loss `Gamma_o`:
+
+```math
+\gamma=\Gamma_e+\Gamma_o.
+```
+
+Let the ideal terminal observable count final extraction events. In event-rate units,
+
+```math
+j_e=\Gamma_e x+\zeta_e,
+```
+
+where `zeta_e` is extraction shot noise.
+
+The same extraction event also removes the carrier from the internal state, so the state/output noises are correlated. Carrying that correlation through exactly gives
+
+```math
+\boxed{
+S_{j_e}(\omega)=\Gamma_e m I.
+}
+```
+
+Therefore
+
+```math
+\boxed{S_{j_e,12}(\omega)=0}
+```
+
+at every frequency, even though `S_x,12(omega)` is sign-changing and nonzero.
+
+This cancellation is not merely Gaussian. With independent Poisson generation and independent one-particle routing, each excitation receives one random final sink and delay. Poisson marking/thinning/displacement makes the final sink streams independent Poisson processes.
+
+### Counterintuitive consequence
+
+```text
+nonzero mean optical crosstalk
+DOES NOT imply
+nonzero passive extraction-current cross-noise.
+```
+
+An excitation can be routed from source pixel A to final collection in pixel B, changing the mean point-spread/crosstalk, while the two final count streams remain independent Poisson thinnings.
+
+## Why SPAD arrays behave differently
+
+SPAD crosstalk is branching rather than conservative routing: the avalanche in pixel A is already recorded, and avalanche luminescence can trigger an **additional** recorded avalanche in pixel B. One primary event can therefore create multiple measured outputs, so inter-pixel timing correlations appear naturally.
+
+This does not contradict the conservative-routing cancellation.
+
+## Device-class boundary
+
+### Photoconductor / occupancy-sensitive readout
+
+Under fixed bias,
+
+```math
+\delta I_i\approx g_{I,i}x_i.
+```
+
+Internal exchange noise is visible at the terminal, subject to filtering and additive readout noise.
+
+### Ideal endpoint-counting photodiode
+
+Final extraction streams can be exactly independent Poisson; internal exchange noise is invisible.
+
+### Real junction photodiode
+
+A real current can contain Shockley-Ramo induced current during carrier motion, finite transit/diffusion response, capacitance/charge storage, and other distributed transport effects. It is therefore not generally equivalent to endpoint counting.
+
+A real HgCdTe photodiode requires an explicit transport/Ramo readout model before a passive cross-noise prediction is valid.
+
+## Numerical validation
+
+An exact Gillespie simulation with
+
+```text
+gamma = 1
+gamma_e = 0.6
+gamma_o = 0.4
+k = 1.5
+m ~ 2 carriers per pixel
+```
+
+reproduced the internal population limits
+
+```text
+low-f S12/S11  ~ +0.57   (theory +0.60)
+high-f S12/S11 ~ -0.60   (theory -0.60)
+```
+
+while simultaneously counted extraction streams remained consistent with zero cross-spectrum in every tested band.
+
+See `numerics/extraction_current_cancellation_gillespie.py`.
+
+## Current novelty status
+
+```text
+exchange-noise mathematics: old
+Poisson-output cancellation mathematics: old
+SPAD passive crosstalk correlations: old
+HgCdTe deterministic photon recycling: old
+
+readout-observable boundary for HgCdTe photon-recycling noise:
+    useful / novelty not established
+```
+
+Do not build a manuscript yet.
+
+## Next question
+
+Derive the most general simple readout criterion using a Poisson-lineage / shot-noise description:
+
+> Under what terminal impulse response does one recycled excitation contribute to more than one pixel waveform, making the photon-recycling cross-spectrum observable?
+
+Then specialize that criterion to:
+
+1. a voltage-biased HgCdTe photoconductor;
+2. an ideal endpoint-counting photodiode;
+3. a finite-transit Shockley-Ramo photodiode;
+4. a branching/gain device such as a SPAD/e-APD.
+
+This is the correct next step before any further novelty claim.
