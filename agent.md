@@ -1,136 +1,67 @@
 # Agent recovery entrypoint
 
-The canonical scientific-integrity instructions are in [`AGENTS.md`](AGENTS.md). Read that file first.
+Read [`AGENTS.md`](AGENTS.md) first for scientific-integrity rules.
 
-## Active project
+## Current project state
 
-The active experiment is:
+### Experiment 01 — CLOSED as a publication path
 
 `experiments/01-equal-dstar-different-speed/`
 
-Paper A's theorem-level technical core has passed final internal adversarial QA. The manuscript has now also been converted into an **Applied Optics-oriented submission package and locally rendered/QA'd as an 11-page PDF**. The active work is submission production, not new theory.
-
-Read in this order:
-
-1. `experiments/01-equal-dstar-different-speed/CURRENT_STATE.md`
-2. `experiments/01-equal-dstar-different-speed/PAPER_A_DRAFT.md` — authoritative audited theorem manuscript
-3. `experiments/01-equal-dstar-different-speed/PAPER_A_APPLIED_OPTICS_DRAFT.md` — journal-facing Rev. 3 text
-4. `experiments/01-equal-dstar-different-speed/PAPER_A_OPTICA_RENDER_QA_2026-08-13.md`
-5. `experiments/01-equal-dstar-different-speed/PAPER_A_REFERENCE_AUDIT_2026-08-13.md`
-6. `experiments/01-equal-dstar-different-speed/PAPER_A_APPLIED_OPTICS_COVER_LETTER.md`
-7. `experiments/01-equal-dstar-different-speed/PAPER_A_SUBMISSION_READINESS_2026-08-13.md`
-8. `experiments/01-equal-dstar-different-speed/PAPER_A_FINAL_ADVERSARIAL_QA_2026-08-12.md`
-9. `experiments/01-equal-dstar-different-speed/PAPER_A_QUANTITATIVE_REGIME_WITNESS_2026-08-12.md`
-10. `experiments/01-equal-dstar-different-speed/PROGRESS_LOG.md`
-
-Do not resume from memory or a prior chat summary when live repository state is available.
-
-## Hard scientific constraints
-
-- The Step-13–49 Gaussian-extremes branch is **hard-stopped**. Do not create Step 50 by default.
-- Do not revive the invalid Step-13 `ell~49` grid crossover, the invalid Step-20 upper Rice switch, raw Step-27 tiny-`chi` values, or Step-44 as continuum truth.
-- Paper A concerns a **batch sufficient guarantee time** `T_G`, not exact online latency and not the exact first solution of the full signal-present scan-power equation.
-- Equal eventual matched-filter SNR is event-specific and is **not** the same assumption as equal scalar `D*`.
-- The controlling quantitative result is the **continuum Rice/Slepian feasibility bracket** at
+The original theorem is mathematically valid, but the central unknown-arrival search mechanism is established acquisition/detection theory. The device-engineer manuscript Rev. 5 is therefore:
 
 ```text
-rho0 = 3.5
-alpha = .05
-beta = .90
-tau_s/tau_f = 6
-L = 9 tau_f = 1.5 tau_s
+DO NOT SUBMIT AS A FULL RESEARCH ARTICLE.
 ```
 
-with
+This is a novelty disposition, not a mathematical retraction.
+
+Read, in order:
+
+1. `experiments/01-equal-dstar-different-speed/INFORMATION_SPECTRUM_STOP_2026-08-13.md`
+2. `experiments/01-equal-dstar-different-speed/CURRENT_STATE.md`
+3. `experiments/01-equal-dstar-different-speed/REV5_REJECTION_AND_RESEARCH_DISPOSITION_2026-08-13.md`
+4. `experiments/01-equal-dstar-different-speed/PHOTOCONDUCTOR_INFORMATION_BANDWIDTH_2026-08-13.md`
+5. `experiments/01-equal-dstar-different-speed/PHYSICAL_NOISE_COUPLING_2026-08-13.md`
+6. `experiments/01-equal-dstar-different-speed/MIXED_NOISE_FINITE_PULSE_2026-08-13.md`
+7. `experiments/01-equal-dstar-different-speed/PAPER_A_DRAFT.md` only as preserved theorem history.
+
+### Experiment 01 final reduction
+
+For measured complex responsivity `R(f)` and output-noise PSD `S_n(f)`,
 
 ```math
-P_{FA,s}\le0.0336428<0.05<0.0624701\le P_{FA,f}.
+W(f)=|R(f)|^2/S_n(f)=1/NEP^2(f)
 ```
 
-- `alpha=.05` and `r=6` are proof-friendly witness values, **not** recommended operating specifications or claimed representative detector values.
-- Novelty remains **unestablished**. Classical acquisition, optical-CDMA acquisition, direct-detection ladar acquisition, sensitivity-bandwidth combinations, and pulse-width/range-resolution tradeoffs are prior art. No `first`, `novel`, or priority language is authorized.
+in consistent input-power units. For optical-event spectrum `P(f)`, all of the explored optimal linear-Gaussian timing quantities follow from
 
-## Applied Optics submission package
-
-Current first journal target: **Applied Optics**.
-
-Current journal-facing title:
-
-> **Task-dependent photodetector ordering under unknown arrival time**
-
-The journal-facing draft is deliberately separate from `PAPER_A_DRAFT.md`; do not overwrite the audited theorem manuscript merely to satisfy journal style.
-
-Presentation choices now frozen unless rendered review exposes a concrete defect:
-
-- Introduction / Model and decision protocol / Results / Discussion / Conclusion structure;
-- continuum feasibility witness precedes the general crossover theorem;
-- `G_tau` is explicitly a small-signal optical-to-electrical **existence construction**;
-- `L` is tied to practical timing uncertainty such as trigger jitter, asynchronous transient timing, or a time-of-flight/range gate;
-- illustrative dimensional mapping only: `tau_f=10 us`, `tau_s=60 us`, `L=90 us`;
-- three main figures generated by `numerics/paper_a_submission_figures.py`;
-- Figure 3 shows one-sided bounds, not exact PFAs;
-- no numerical `T_G(L)` crossover curve is authorized.
-
-## Rendered-manuscript status
-
-A standard one-file LaTeX manuscript has been compiled locally into an **11-page letter-size PDF** and visually inspected at the title, all figure pages, back matter, and final reference pages.
-
-Current render disposition:
-
-```text
-LATEX COMPILE: PASS
-PDF PREFLIGHT: PASS
-PAGE-LEVEL VISUAL QA: PASS
-FIGURE CALLOUT ORDER: PASS
-FIGURE-BOUND SEMANTICS: PASS
-REFERENCE PAGE LAYOUT: PASS
+```math
+I_P(f)=|P(f)|^2W(f).
 ```
 
-The first TeX pass exposed a `newtxmath`/redundant-`amssymb` `\Bbbk` collision; removing the redundant package fixed compilation without changing manuscript mathematics.
+- matched-filter SNR is its zeroth moment;
+- arrival-time Fisher information is its second moment;
+- unknown-arrival correlation is its normalized Fourier transform.
 
-Two style fixes were made after visual rendering:
+These are classical optimum-filter quantities. Do not rename them as new metrics.
 
-- title left-aligned;
-- figure-caption labels changed to `Fig.`.
+The useful photoconductor interpretation retained from the branch is
 
-## Citation audit corrections
-
-The final rendered source corrects two material bibliography errors still present in the older Markdown Rev. 3:
-
-1. **Croce et al. 2004** — correct APS author order/list:
-
-```text
-R. P. Croce; Th. Demma; M. Longo; S. Marano; V. Matta; V. Pierro; I. M. Pinto.
+```math
+\tau_{info}=\tau/\sqrt{1+S_{GR,0}/S_W},
 ```
 
-2. **Milstein et al. 2008** — correct Applied Optics author list:
+showing that responsivity bandwidth and optimally whitened information bandwidth can differ when GR noise shares the carrier-lifetime pole with the signal. Novelty is not established.
 
-```text
-Adam B. Milstein; Leaf A. Jiang; Jane X. Luu; Eric L. Hines; Kenneth I. Schultz.
-```
+## Hard stops
 
-For final citation metadata, use `PAPER_A_REFERENCE_AUDIT_2026-08-13.md` and the rendered LaTeX/PDF over the stale Markdown bibliography where they conflict.
+- Do not resume Rev. 5 polishing or submission production.
+- Do not claim the unknown-arrival timing-cell penalty, RMS/effective bandwidth, `W(f)`, or `tau_info` as novel.
+- The Step-13–49 Gaussian-extremes branch remains hard-stopped. Do not create Step 50 by default.
+- Do not revive invalid historical finite-grid/Palm claims.
+- Never reference this research repository inside a manuscript intended for publication.
 
-## Remaining blockers before real submission
+## Next research rule
 
-Do **not** invent these fields. They require author confirmation:
-
-1. author name(s), affiliation(s), and corresponding-author email;
-2. Funding statement;
-3. Disclosures/conflicts statement;
-4. final Data Availability decision, preferably including whether to create a versioned repository archive/DOI;
-5. final cover-letter placeholders and not-under-consideration confirmation.
-
-A cover-letter draft exists in `PAPER_A_APPLIED_OPTICS_COVER_LETTER.md`.
-
-## Current next phase
-
-Do not reopen theory unless an external reviewer finds a genuinely new technical defect.
-
-Next actions are submission production only:
-
-1. freeze the final rendered source after author metadata are supplied;
-2. update the final bibliography from the reference audit if the Markdown version is retained;
-3. decide on repository versioning/archive for Data Availability;
-4. run one independent review of the actual rendered PDF;
-5. submit through Optica only after author-owned declarations are confirmed.
+Start a new photodetector gedanken experiment from a microscopic/device-physics premise, not from acquisition theory. Perform a prior-art audit early, before manuscript construction. If the result reduces to a known detector or signal-processing identity, document the closure and move on rather than forcing novelty.
