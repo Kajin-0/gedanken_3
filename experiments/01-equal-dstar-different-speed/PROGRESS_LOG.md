@@ -1,6 +1,6 @@
 # Progress Log — Experiment 01
 
-**Consolidation note — 2026-08-12 20:42 EDT:** mathematical closure stopped after Step 49; detector-facing prior-art audit and short-paper architecture completed. Novelty is not established. Full derivations remain in dedicated step files.
+**Consolidation note — 2026-08-12 20:52 EDT:** mathematical closure stopped after Step 49; detector-facing prior-art audit and short-paper architecture completed; Paper A opening draft written. Novelty is not established. Full derivations remain in dedicated step files.
 
 ---
 
@@ -8,14 +8,14 @@
 
 Equal scalar reference `D*` does not determine arbitrary temporal-signal performance. Full magnitude `D*(f)` is sufficient only for the restricted known-waveform/full-observation stationary-Gaussian problem. Finite windows make phase/time placement relevant. Unknown arrival introduces global false-alarm timing-search complexity. In the defined continuous scanning protocol, a controlled equal-eventual-SNR family can reverse fast/slow ranking because temporal compression changes both early evidence accumulation and timing-search correlation length. This is protocol/task specific, not a universal detector theorem.
 
-The exact detector-facing scaling is
+Exact detector-facing scaling:
 
 ```math
 T_D(\alpha,\beta,L;\tau,\rho_0)
 =\tau X_D(\rho_0,\alpha,\beta,L/\tau).
 ```
 
-For two time scales with `r=tau_s/tau_f>1` and `ell=L/tau_s`, the exact task boundary is
+For `r=tau_s/tau_f>1` and `ell=L/tau_s`, the exact task boundary is
 
 ```math
 B_r(\ell)=X_D(\rho_0,\alpha,\beta,r\ell)
@@ -92,26 +92,9 @@ exact-minus-pure       +2.47e-7 +/-6.90e-6
 
 Full audit: `PRIOR_ART_AUDIT_DETECTOR_TASK_REVERSAL.md`.
 
-Direct prior art establishes:
+Direct prior art establishes pulse/energy detectivity from frequency-dependent response, sensitivity-speed/bandwidth joint benchmarking, unknown-arrival matched-filter search penalties controlled by correlated peak statistics/template autocorrelation, and standard all-pass magnitude preservation with altered phase/dispersion.
 
-- pulse/energy detectivity from frequency-dependent detector response (Jones 1960);
-- sensitivity-speed / detectivity-bandwidth joint benchmarking;
-- unknown-arrival matched-filter search penalties controlled by correlated peak statistics/template autocorrelation;
-- standard all-pass magnitude preservation with altered phase/dispersion.
-
-No direct hit was found in the focused audit for the complete construction
-
-```text
-equal eventual matched-filter SNR
-+ different detector time scales
-+ fixed unknown-arrival interval
-+ global false-alarm scan
-+ finite-time evidence accumulation
-+ template-dependent scan correlation
--> explicit fast/slow detection-time ranking reversal.
-```
-
-Disposition remains
+No direct hit was found in the focused audit for the complete equal-eventual-SNR detector construction leading to an explicit fast/slow task reversal. Disposition remains
 
 ```text
 POSSIBLE SYNTHESIS CONTRIBUTION / NOVELTY NOT ESTABLISHED.
@@ -123,13 +106,7 @@ POSSIBLE SYNTHESIS CONTRIBUTION / NOVELTY NOT ESTABLISHED.
 
 Full architecture: `PAPER_ARCHITECTURE_TASK_REVERSAL.md`.
 
-**CONSOLIDATION RESULT:** the main detector paper should not reproduce the Gaussian-extremes closure chain. Its core is only five sections:
-
-1. established detector-metric context and the actual finite-task question;
-2. controlled equal-eventual-SNR family;
-3. dimensionless detection-time surface;
-4. task-reversal theorem and feasibility partition;
-5. interpretation and limits.
+**CONSOLIDATION RESULT:** the main detector paper contains only five conceptual sections: prior-art framing, controlled equal-eventual-SNR family, dimensionless detection-time surface, task-reversal theorem/feasibility partition, and interpretation/limits. The mathematical closure chain is moved to a companion track.
 
 Working title:
 
@@ -147,27 +124,56 @@ and
 B_r(\ell)=X_D(r\ell)-rX_D(\ell)=0.
 ```
 
-Main theorem-level message:
-
-```text
-known/low timing uncertainty -> fast reaches the decision first;
-under stated assumptions -> at least one finite fast-to-slow crossover;
-near the fast feasibility boundary -> slow remains feasible while fast diverges;
-fast-only feasibility is excluded in the equal-eventual-SNR scaled family.
-```
-
 No crossover uniqueness, universal faster/slower ordering, universal scan optimality, or novelty is claimed.
 
-Three-figure maximum proposed: evidence-vs-search competition, dimensionless task surface, task-regime diagram. Any numerical regime curve must be regenerated from validated continuum numerics; invalidated Step-13 and knife-edge Step-44 results are not main-paper evidence.
+---
 
-Steps 13–49 are formally assigned to a separate technical companion/appendix track.
+# Paper A opening manuscript draft — 20:52 EDT
+
+New active manuscript: `PAPER_A_DRAFT_OPENING.md`.
+
+Drafted in publication style:
+
+1. working title;
+2. abstract;
+3. central Proposition 1 with continuity/divergence assumptions stated inside the proposition;
+4. full Introduction;
+5. Section II.A equal-eventual-SNR time-scaled template;
+6. Section II.B exact finite-record timing-scan covariance and physical scaling;
+7. references [1]–[7] drawn from the prior-art audit.
+
+Key rhetorical correction: the manuscript immediately concedes that scalar-`D*` pulse limitations, sensitivity-bandwidth tradeoffs, and unknown-arrival search penalties are established. The paper's actual question is isolated by enforcing
+
+```math
+\rho_{\tau,\infty}=\rho_0
+```
+
+for every detector time scale.
+
+The opening derives
+
+```math
+\eta(x)=1-e^{-2x}(1+2x+2x^2),
+\qquad
+\rho_{\tau,t}=\rho_0\sqrt{\eta(x)},
+```
+
+and
+
+```math
+r_{\tau,t}(\Delta)=R_{t/\tau}(|\Delta|/\tau),
+```
+
+making the two competing effects explicit: faster evidence accumulation and a larger normalized timing search.
+
+No Pickands, Palm, Rice, high-band endpoint certificate, or Step-13–49 numerical closure material appears in the draft.
 
 ---
 
 ## Current stopping point
 
-Stay inside **Paper A**. Do not continue Step 50 of the mathematical closure chain.
+Stay inside **Paper A**. Do not continue Step 50 of the mathematical proof chain.
 
 ### Single next question
 
-> Can the central theorem, abstract, and opening two pages now be drafted in publication-style language from `PAPER_ARCHITECTURE_TASK_REVERSAL.md`, with established ingredients cited as prior art and all scope/novelty restrictions explicit?
+> Can Sections III and IV now be drafted in publication style, carrying `PAPER_A_DRAFT_OPENING.md` through the dimensionless detection-time surface and the fast/slow task-reversal proof without reintroducing the mathematical companion?
