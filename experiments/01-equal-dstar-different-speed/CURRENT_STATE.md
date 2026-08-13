@@ -1,26 +1,35 @@
 # Current State — Experiment 01: Equal D*, Different Speed
 
-**Date:** 2026-08-12 23:22 EDT  
-**Status:** **PAPER A TECHNICAL CORE PASSES FINAL INTERNAL ADVERSARIAL QA.** Mathematical closure remains hard-stopped after Step 49. The acquisition-clock and scan-power claim-scope blockers are repaired; the quantitative regime witness is continuum-bracketed without timing-grid extrapolation; acquisition/optical-acquisition/ladar prior art is explicitly incorporated; the authoritative manuscript has been synchronized to the final audit. **Novelty remains unestablished and no priority language is authorized.**
+**Date:** 2026-08-13 01:14 EDT  
+**Status:** **PAPER A TECHNICAL CORE PASSES FINAL INTERNAL ADVERSARIAL QA; EXTERNAL-PAPER PHASE ACTIVE.** The Step-13–49 mathematical closure branch remains hard-stopped. The authoritative theorem manuscript on `main` is unchanged scientifically. On branch `agent/paper-a-submission-package`, a journal-facing *Applied Optics* draft, journal-fit strategy, two external-style referee reviews, and reproducible figure-generation script have been added. **Novelty remains unestablished and no priority language is authorized.**
 
-Read next:
+## Read next
+
+For the scientific theorem:
 
 1. `PAPER_A_DRAFT.md`
 2. `PAPER_A_FINAL_ADVERSARIAL_QA_2026-08-12.md`
 3. `PAPER_A_QUANTITATIVE_REGIME_WITNESS_2026-08-12.md`
 4. `PAPER_A_CLOSEST_PRIOR_ART_AUDIT_2026-08-12.md`
-5. `PAPER_A_ADVERSARIAL_REVIEW_AUDIT.md`
-6. `PROGRESS_LOG.md`
+5. `PROGRESS_LOG.md`
+
+For the active submission phase:
+
+1. `PAPER_A_APPLIED_OPTICS_DRAFT.md`
+2. `PAPER_A_SUBMISSION_STRATEGY_2026-08-13.md`
+3. `PAPER_A_APPLIED_OPTICS_REFEREE_REVIEW_2026-08-13.md`
+4. `PAPER_A_APPLIED_OPTICS_REFEREE_REVIEW_REV2_2026-08-13.md`
+5. `numerics/paper_a_submission_figures.py`
 
 ---
 
-## Authoritative Paper A claim
+# 1. Authoritative Paper A theorem
 
-Working title:
+Working theorem title:
 
 > **Task-Dependent Guarantee-Time Ordering of Photodetector Channels with Equal Eventual Matched-Filter SNR**
 
-The compared channels receive the same optical event
+The compared channels receive one common optical event
 
 ```math
 p(t)=e^{-bt}u(t)
@@ -66,13 +75,13 @@ choose
 A_\tau=\frac{2\rho_0\sqrt N}{\tau^{3/2}}
 ```
 
-so every channel has the same **event-specific eventual matched-filter SNR**
+so each channel has the same **event-specific eventual matched-filter SNR**
 
 ```math
 \rho_{\tau,\infty}=\rho_0.
 ```
 
-This is distinct from equal scalar `D*`; Paper A does not claim the two are equivalent.
+This is distinct from equal scalar `D*`; Paper A does not claim the two assumptions are equivalent.
 
 Finite-time evidence accumulation is
 
@@ -91,9 +100,9 @@ The full-template timing covariance is
 
 ---
 
-## Operational guarantee time
+# 2. Operational guarantee time
 
-Event arrival is known only to lie in `[0,L]`. A duration-`t` finite matched filter applied at every candidate arrival requires data through `L+t`, so the theorem is explicitly a **batch** result.
+Event arrival is known only to lie in `[0,L]`. A duration-`t` finite matched filter applied at every candidate arrival requires data through `L+t`, so the result is explicitly a **batch** protocol.
 
 Define
 
@@ -108,8 +117,6 @@ with wall-clock batch time
 ```math
 \boxed{T_{wall}=L+T_G.}
 ```
-
-At fixed `L`, these induce identical channel ordering.
 
 For `ell=L/tau`, the global noise-only threshold is
 
@@ -151,7 +158,7 @@ T_G(\alpha,\beta,L;\tau,\rho_0)
 
 ---
 
-## Fast/slow theorem
+# 3. Fast/slow theorem
 
 For
 
@@ -163,7 +170,7 @@ r=\tau_s/\tau_f>1,
 \ell=L/\tau_s,
 ```
 
-the exact guarantee-time boundary is
+the exact sufficient-guarantee-time boundary is
 
 ```math
 \boxed{
@@ -191,7 +198,7 @@ The full-template feasibility partition is
 
 Fast-only guarantee feasibility is impossible in this scaled family.
 
-The manuscript now derives rather than assumes
+The manuscript derives rather than assumes
 
 ```math
 \Gamma_\infty(\ell,\alpha)\to\infty
@@ -202,24 +209,14 @@ and
 
 ```math
 X_G(\ell)\to\infty
-\quad(\ell\uparrow\ell_{crit}),
+\quad(\ell\uparrow\ell_{crit}).
 ```
 
-leaving only ordinary threshold/first-crossing continuity regularity plus known-time feasibility as theorem assumptions.
-
-Therefore at least one finite fast-to-slow **guarantee-time** crossover exists. Uniqueness is not established or claimed.
+Therefore, under ordinary threshold/first-crossing continuity regularity, at least one finite fast-to-slow **guarantee-time** crossover exists. Uniqueness is not established or claimed.
 
 ---
 
-## Controlling continuum quantitative witness
-
-Detailed record:
-
-`PAPER_A_QUANTITATIVE_REGIME_WITNESS_2026-08-12.md`
-
-Reproducible calculation:
-
-`numerics/paper_a_analytic_feasibility_bracket.py`
+# 4. Controlling continuum quantitative witness
 
 Use
 
@@ -247,15 +244,13 @@ At the common physical uncertainty
 \boxed{L=9\tau_f=1.5\tau_s,}
 ```
 
-the threshold budget is
+the full-template threshold budget is
 
 ```math
 c=2.21844843445540.
 ```
 
-### Slow channel
-
-For `R_infty''(0)=-1`, Rice's exact expected upcrossing rate gives
+For the slow channel, Rice's exact expected upcrossing rate plus the endpoint event gives
 
 ```math
 P_{FA,s}
@@ -264,37 +259,13 @@ P_{FA,s}
 <.05.
 ```
 
-This bound is sufficient to establish
-
-```math
-\Gamma_\infty(1.5,.05)<c,
-```
-
-so the slow channel is guarantee-feasible in continuous time.
-
-### Fast channel
-
-Seven samples over `[0,9]` at spacing `1.5` have off-diagonal covariance at most
-
-```math
-\epsilon=R_\infty(1.5)=0.557825400371075.
-```
-
-Slepian comparison with a seven-dimensional equicorrelated Gaussian vector gives
+For the fast channel, seven samples over `[0,9]` at spacing `1.5`, followed by Slepian comparison to an equicorrelated Gaussian vector, give
 
 ```math
 P_{FA,f}
 \ge0.0624701020698
 >.05.
 ```
-
-This lower bound establishes
-
-```math
-\Gamma_\infty(9,.05)>c,
-```
-
-so the fast channel is guarantee-infeasible at the same physical `L`.
 
 Hence
 
@@ -304,13 +275,81 @@ P_{FA,s}\le.0336428<.05<.0624701\le P_{FA,f},
 }
 ```
 
-which brackets the two channels on opposite sides of the full-template guarantee-feasibility boundary.
+which is a **continuous-time slow-only guarantee-feasibility witness** at finite physical `L`.
 
-This is a continuous-process feasibility bracket. It does not locate `L_\times` numerically and does not reopen the rough finite-window branch.
+This result does not locate `L_\times` numerically and does not reopen the rough finite-window branch.
+
+The values `alpha=.05` and `r=6` are used because they produce a transparent analytic separation of the continuum upper and lower bounds. They are **not** proposed as a recommended false-alarm specification or as a representative detector pair.
 
 ---
 
-## Prior-art / novelty position
+# 5. Active Applied Optics submission package
+
+Current journal-facing title:
+
+> **Task-dependent photodetector ordering under unknown arrival time**
+
+The journal-facing Rev. 3 draft is deliberately separate from the authoritative theorem manuscript.
+
+Current structure:
+
+```text
+Introduction
+Model and decision protocol
+Results
+    response time enters the task twice
+    continuum feasibility witness
+    general feasibility/crossover theorem
+Discussion
+Conclusion
+```
+
+The external-style review sequence produced these presentation changes:
+
+1. show the physical mechanism before the general theorem;
+2. present the continuum witness before the crossover proof;
+3. explicitly describe `G_tau` as a small-signal optical-to-electrical existence construction;
+4. give one scale illustration only:
+
+```text
+if tau_f = 10 microseconds,
+tau_s = 60 microseconds,
+L = 90 microseconds,
+```
+
+without associating it with a specific detector technology;
+5. explain that `L` can represent trigger/synchronization uncertainty, an asynchronous transient window, a time-of-flight/range gate, or another pre-specified timing window;
+6. explicitly state why `alpha=.05` and `r=6` were selected for the analytic witness;
+7. keep the abstract near the Optica approximately-100-word target;
+8. include Funding, Disclosures, and Data Availability placeholders without inventing author metadata.
+
+Three main figures are defined and generated reproducibly by
+
+`numerics/paper_a_submission_figures.py`:
+
+- **Fig. 1:** accumulated matched-filter SNR fraction versus physical integration time;
+- **Fig. 2:** physical full-template timing covariance for fast and slow channels over the same `L`;
+- **Fig. 3:** one-sided continuum feasibility bounds around `alpha=.05`.
+
+No smooth numerical `T_G(L)` crossover curve is authorized because no continuum-controlled crossover location has been computed and none is needed for the theorem.
+
+---
+
+# 6. Journal-target position
+
+Current first target: **Applied Optics**.
+
+Reason: the paper is most naturally an applications-centered optical detection / detector-qualification result rather than a claim of new Gaussian-extreme-value theory or a general device-physics model.
+
+Fallback: **Journal of Applied Physics** if a more device/theory-oriented framing becomes preferable.
+
+`Physical Review Applied` remains an aspirational target with a higher editorial-significance burden than the current novelty position justifies.
+
+Journal choice is a submission strategy, not a scientific claim.
+
+---
+
+# 7. Prior-art / novelty position
 
 Established prior art includes:
 
@@ -324,8 +363,6 @@ optical-CDMA synchronization/acquisition;
 direct-detection ladar acquisition in specified range windows;
 pulse-width / range-resolution and range-estimation tradeoffs.
 ```
-
-Therefore none of those broad ingredients are claimed as new.
 
 The remaining possible synthesis contribution is the narrower detector-scaling construction:
 
@@ -341,7 +378,7 @@ same optical event
 
 No reviewed source directly reproduced that complete construction, but absence of a direct hit does not establish novelty.
 
-Final position:
+Final position remains:
 
 ```text
 POSSIBLE SYNTHESIS CONTRIBUTION / NOVELTY NOT ESTABLISHED.
@@ -351,7 +388,7 @@ No `first`, `novel`, or priority language is authorized.
 
 ---
 
-## Historical hard stop
+# 8. Historical hard stop
 
 **DO NOT CREATE STEP 50 BY DEFAULT.**
 
@@ -371,37 +408,14 @@ The final Paper-A continuum witness avoids this branch entirely.
 
 ---
 
-## Final internal QA disposition
+# 9. Current next action
 
-From `PAPER_A_FINAL_ADVERSARIAL_QA_2026-08-12.md`:
+Do not reopen the mathematics unless a genuinely new technical defect appears.
 
-```text
-MATHEMATICAL CONSISTENCY: PASS
-OPERATIONAL TASK DEFINITION: PASS
-CLAIM SCOPE: PASS
-CONTINUUM QUANTITATIVE WITNESS: PASS
-HARD-STOP DISCIPLINE: PASS
-PRIOR-ART HONESTY: PASS
-NOVELTY: NOT ESTABLISHED
-CROSSOVER UNIQUENESS: NOT ESTABLISHED / NOT CLAIMED
-EXACT FULL-SCAN DETECTION-TIME REVERSAL: NOT ESTABLISHED / NOT CLAIMED
-```
+The next useful work is external submission preparation:
 
-Regression search of the synchronized manuscript found no obsolete `T_D`, no old `r=1.2` controlling witness, and no accidental full-scan/online claim.
-
----
-
-## Next phase
-
-No additional Gaussian-extremes closure work is currently justified.
-
-The appropriate next phase is external-style paper preparation or independent review:
-
-```text
-figure design / phase-regime graphic;
-journal-format rendering;
-fresh independent referee report;
-final journal-specific literature/citation check.
-```
-
-Keep novelty language conservative unless a subsequent priority audit provides materially stronger evidence.
+1. freeze the Rev. 3 journal-facing text after one final regression/readability check;
+2. retain the three generated figure files plus their reproduction script;
+3. create an Optica-compatible LaTeX/Word submission package only after the scientific text is frozen;
+4. perform journal-specific reference formatting and final citation verification;
+5. obtain a truly independent referee-style review of the rendered manuscript.
