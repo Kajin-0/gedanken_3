@@ -32,14 +32,21 @@ The script estimates
 
     P[sup_{0<=q<=ell} Z_infinity(q) > c]
 
-for ell_s=2.75 and ell_f=3.30.  If the slow probability is below alpha while
+for ell_s=2.75 and ell_f=3.30. If the slow probability is below alpha while
 the fast probability is above alpha, the slow channel is asymptotically
 guarantee-feasible and the fast channel is not.
 
-The full template h(v)=v exp(-v) is truncated only for simulation.  The default
-x_tail=12 leaves a squared-template-energy fraction below 1.2e-8 outside the
-simulation filter.  Maxima are evaluated on nested grids from one common finest
+The full template h(v)=v exp(-v) is truncated only for simulation. The default
+x_tail=16 leaves a squared-template-energy fraction below 7e-12 outside the
+simulation filter. Maxima are evaluated on nested grids from one common finest
 grid so grid-refinement changes are directly paired.
+
+Default production run:
+
+    240000 paired paths
+    delta_fine = 0.0025
+    nested grids = 0.01, 0.005, 0.0025
+    seed = 20260818
 
 This file is a Paper-A numerical witness, not Step 50 and not a reopening of the
 Step-13--49 rare-event closure branch.
@@ -64,9 +71,9 @@ R_DEFAULT = 1.2
 ELL_SLOW_DEFAULT = 2.75
 ELL_FAST_DEFAULT = 3.30
 DELTA_FINE_DEFAULT = 0.0025
-X_TAIL_DEFAULT = 12.0
-N_PATHS_DEFAULT = 120_000
-SEED_DEFAULT = 20260816
+X_TAIL_DEFAULT = 16.0
+N_PATHS_DEFAULT = 240_000
+SEED_DEFAULT = 20260818
 
 
 def eta(x: float) -> float:
@@ -174,7 +181,7 @@ def main() -> None:
     p.add_argument("--delta-fine", type=float, default=DELTA_FINE_DEFAULT)
     p.add_argument("--x-tail", type=float, default=X_TAIL_DEFAULT)
     p.add_argument("--paths", type=int, default=N_PATHS_DEFAULT)
-    p.add_argument("--batch", type=int, default=400)
+    p.add_argument("--batch", type=int, default=250)
     p.add_argument("--seed", type=int, default=SEED_DEFAULT)
     args = p.parse_args()
 
