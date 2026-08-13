@@ -2,15 +2,16 @@
 
 **Repository:** `Kajin-0/gedanken_3`  
 **Active experiment:** `experiments/01-equal-dstar-different-speed/`  
-**Current mode:** detector-facing consolidation. **MATHEMATICAL CLOSURE HARD-STOPPED. PRIOR-ART AUDIT COMPLETED. PAPER ARCHITECTURE FIXED. NOVELTY NOT ESTABLISHED.** Step 49 is the final default proof step. The active paper track is now defined in `PAPER_ARCHITECTURE_TASK_REVERSAL.md`: a short detector/detection-theory manuscript centered on the exact dimensionless detection-time surface and the protocol-specific equal-eventual-SNR fast/slow task boundary. Steps 13–49 are technical companion material, not the default main-paper narrative. Do not restart the Gaussian-extremes closure chain or invent a new scalar metric by default.
+**Current mode:** detector-facing manuscript drafting. **MATHEMATICAL CLOSURE HARD-STOPPED. PRIOR-ART AUDIT COMPLETED. PAPER ARCHITECTURE FIXED. PAPER A OPENING DRAFT WRITTEN. NOVELTY NOT ESTABLISHED.** Step 49 is the final default proof step. The active manuscript is `PAPER_A_DRAFT_OPENING.md`, centered on the exact dimensionless detection-time surface and the protocol-specific equal-eventual-SNR fast/slow task boundary. Steps 13–49 are technical companion material, not the default main-paper narrative. Do not restart the Gaussian-extremes closure chain or invent a new scalar metric by default.
 
 Read first:
 1. `experiments/01-equal-dstar-different-speed/CURRENT_STATE.md`
-2. `experiments/01-equal-dstar-different-speed/PAPER_ARCHITECTURE_TASK_REVERSAL.md`
-3. `experiments/01-equal-dstar-different-speed/PRIOR_ART_AUDIT_DETECTOR_TASK_REVERSAL.md`
-4. `experiments/01-equal-dstar-different-speed/TASK_REGIME_BOUNDARY_STEP.md`
-5. `experiments/01-equal-dstar-different-speed/PROGRESS_LOG.md`
-6. final mathematical closure step: `experiments/01-equal-dstar-different-speed/EXACT_COVARIANCE_GRID_TRANSFER_STOP_STEP.md`
+2. `experiments/01-equal-dstar-different-speed/PAPER_A_DRAFT_OPENING.md`
+3. `experiments/01-equal-dstar-different-speed/PAPER_ARCHITECTURE_TASK_REVERSAL.md`
+4. `experiments/01-equal-dstar-different-speed/PRIOR_ART_AUDIT_DETECTOR_TASK_REVERSAL.md`
+5. `experiments/01-equal-dstar-different-speed/TASK_REGIME_BOUNDARY_STEP.md`
+6. `experiments/01-equal-dstar-different-speed/PROGRESS_LOG.md`
+7. final mathematical closure step: `experiments/01-equal-dstar-different-speed/EXACT_COVARIANCE_GRID_TRANSFER_STOP_STEP.md`
 
 Live `main` overrides chat summaries or stale notes.
 
@@ -20,9 +21,74 @@ Live `main` overrides chat summaries or stale notes.
 
 Before material writes: fetch live target and exact blob SHA; never overwrite stale state; preserve failed/corrected paths. `CURRENT_STATE.md`, `PROGRESS_LOG.md`, and this file must move whenever the research frontier changes.
 
-Useful epistemic labels include: **DEFINED, ASSUMED, DERIVED, CONDITIONAL, COUNTEREXAMPLE, REFINEMENT, NEGATIVE RESULT, REJECTED SHORTCUT, FAILED NUMERICAL ESTIMATE, NUMERICAL VALIDATION, PARTIAL CERTIFICATE, RIGOROUS FINITE-GRID STATISTICAL CERTIFICATE, PAIRED NESTED-GRID DIAGNOSTIC, EXACT CANONICAL FINITE-GRID CORRECTION, EXACT CELLWISE BRIDGE DECOMPOSITION, PAIRED FINITE-LEVEL TRANSFER INTERVAL, PAIRED EXACT-COVARIANCE TRANSFER INTERVAL, HARD-GATE PASSED, HARD-STOP TRIGGERED, PRIOR-ART AUDIT, PAPER ARCHITECTURE, POSSIBLE SYNTHESIS CONTRIBUTION, NOVELTY NOT ESTABLISHED, INVALIDATED, ASYMPTOTIC, OPEN, NON-CLAIM.**
+Useful epistemic labels include: **DEFINED, ASSUMED, DERIVED, CONDITIONAL, COUNTEREXAMPLE, REFINEMENT, NEGATIVE RESULT, REJECTED SHORTCUT, FAILED NUMERICAL ESTIMATE, NUMERICAL VALIDATION, PARTIAL CERTIFICATE, RIGOROUS FINITE-GRID STATISTICAL CERTIFICATE, PAIRED NESTED-GRID DIAGNOSTIC, EXACT CANONICAL FINITE-GRID CORRECTION, EXACT CELLWISE BRIDGE DECOMPOSITION, PAIRED FINITE-LEVEL TRANSFER INTERVAL, PAIRED EXACT-COVARIANCE TRANSFER INTERVAL, HARD-GATE PASSED, HARD-STOP TRIGGERED, PRIOR-ART AUDIT, PAPER ARCHITECTURE, MANUSCRIPT DRAFT, POSSIBLE SYNTHESIS CONTRIBUTION, NOVELTY NOT ESTABLISHED, INVALIDATED, ASYMPTOTIC, OPEN, NON-CLAIM.**
 
 Do not use `novel`, `universal`, `fundamental`, `first`, or equivalent novelty language without a deeper audit that actually supports it.
+
+---
+
+## Paper A — active manuscript track
+
+Working title:
+
+> **Task-Dependent Ordering of Photodetectors with Equal Asymptotic Sensitivity**
+
+Active manuscript: `experiments/01-equal-dstar-different-speed/PAPER_A_DRAFT_OPENING.md`.
+
+The draft currently includes:
+
+- Abstract.
+- Central Proposition 1, with all continuity/divergence assumptions and scope restrictions explicit.
+- Introduction.
+- Section II.A: controlled time-scaled family
+
+```math
+s_\tau(t)=A_\tau t e^{-t/\tau}u(t)
+```
+
+with
+
+```math
+\rho_{\tau,\infty}=\rho_0.
+```
+
+- Finite-time SNR accumulation
+
+```math
+\eta(x)=1-e^{-2x}(1+2x+2x^2),
+\qquad
+\rho_{\tau,t}=\rho_0\sqrt{\eta(x)}.
+```
+
+- Section II.B: exact finite-record timing-scan covariance
+
+```math
+R_x(y)=\frac{\int_0^{x-y}v(v+y)e^{-2v-y}dv}
+{\int_0^x v^2e^{-2v}dv},
+\qquad 0\le y<x,
+```
+
+with `R_x(y)=0` for `y>=x` and
+
+```math
+r_{\tau,t}(\Delta)=R_{t/\tau}(|\Delta|/\tau).
+```
+
+- Prior-art references [1]–[7] from the focused audit.
+
+The main paper must keep the established ingredients clearly labeled as prior art. The novelty burden, if a deeper audit eventually supports novelty, rests only on the complete synthesis:
+
+```text
+equal eventual matched-filter SNR
++ different detector temporal scales
++ fixed physical unknown-arrival interval
++ one global false-alarm requirement
++ finite-time evidence accumulation
++ time-scale-dependent search correlation
+-> explicit fast/slow task boundary and reversal.
+```
+
+The next manuscript step is Section III + IV only: derive the dimensionless detection-time surface and present/prove the task-reversal/feasibility theorem. Do not jump back to specialized closure mathematics.
 
 ---
 
@@ -64,46 +130,6 @@ fast-only feasibility is excluded in this equal-eventual-SNR scaled family.
 No crossover uniqueness is established.
 
 **Scope:** task/protocol result only. Do not state that faster detectors are generally worse or that the scan is universally optimal.
-
----
-
-## Paper architecture — active main track
-
-Full architecture: `experiments/01-equal-dstar-different-speed/PAPER_ARCHITECTURE_TASK_REVERSAL.md`.
-
-Working title:
-
-> **Task-Dependent Ordering of Photodetectors with Equal Asymptotic Sensitivity**
-
-Main paper structure:
-
-1. established detector-metric context and actual finite-task question;
-2. controlled equal-eventual-SNR detector family;
-3. dimensionless detection-time surface;
-4. task-reversal theorem + feasibility partition;
-5. interpretation and limits.
-
-Main-paper equation:
-
-```math
-T_D=\tau X_D(\rho_0,\alpha,\beta,L/\tau).
-```
-
-Novelty burden, if a deeper audit supports novelty, rests only on the complete synthesis:
-
-```text
-equal eventual matched-filter SNR
-+ different detector temporal scales
-+ fixed physical unknown-arrival interval
-+ one global false-alarm requirement
-+ finite-time evidence accumulation
-+ time-scale-dependent search correlation
--> explicit fast/slow task boundary and reversal.
-```
-
-The main paper should use at most three figures: competing evidence/search scales, the dimensionless task surface, and the task-regime diagram.
-
-Do **not** put Pickands/Palm/Rice/high-band endpoint machinery in the main narrative.
 
 ---
 
@@ -159,19 +185,12 @@ Absence of a direct hit is not proof of novelty. A deeper citation-network/paten
 
 Stay inside **Paper A**.
 
-The next logical task is to draft from `PAPER_ARCHITECTURE_TASK_REVERSAL.md`:
-
-1. the central theorem/proposition in publication-style language;
-2. the abstract;
-3. the opening two pages / Introduction and controlled-family setup;
-4. with established ingredients cited as prior art and all novelty/scope restrictions explicit.
-
 ### Single next question — DO NOT ANSWER UNTIL PROMPTED
 
-> Can the central theorem, abstract, and opening two pages now be drafted in publication-style language from the fixed architecture, without reintroducing the mathematical companion into the main narrative?
+> Can Sections III and IV now be drafted in publication style, carrying `PAPER_A_DRAFT_OPENING.md` through the dimensionless detection-time surface and the fast/slow task-reversal proof without reintroducing the mathematical companion?
 
 ---
 
 ## Scope boundary
 
-Do not claim: faster universally better/worse; a universal scalar replacement for `D*`; `D* x bandwidth` as new; unknown-arrival matched-filter search penalty as new; scanning protocol universally optimal; crossover uniqueness; Step-13 `ell~49`; Step-20 double reversal; raw Step-27 values as continuum truth; Step-34 fully formal theorem; Step-36 uniform hazard theorem; `R~1`; numerical covariance constants interval-certified; `L0=.02` optimal; Step-44 as continuum certificate; Step-46 coefficient precisely verified; Step-47 canonical ratio as exact finite-u false-alarm ratio; Step-48/49 Monte Carlo intervals as distribution-free theorem-level results; `X=7.16` mathematically optimal; no re-entrant pocket for all task parameters; novelty.
+Do not claim: faster universally better/worse; a universal scalar replacement for `D*`; `D* x bandwidth` as new; unknown-arrival matched-filter search penalty as new; scanning protocol universally optimal; crossover uniqueness; Step-13 `ell~49`; Step-20 double reversal; raw Step-27 values as continuum truth; Step-34 fully formal theorem; Step-36 uniform hazard theorem; `R~1`; numerical covariance constants interval-certified; `L0=.02` optimal; Step-44 as a continuum certificate; Step-46 coefficient precisely verified; Step-47 canonical ratio as exact finite-u false-alarm ratio; Step-48/49 Monte Carlo intervals as distribution-free theorem-level; `X=7.16` mathematically optimal; no re-entrant pocket for all task parameters; novelty.
