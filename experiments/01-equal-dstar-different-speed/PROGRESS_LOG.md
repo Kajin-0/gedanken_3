@@ -1,6 +1,6 @@
 # Progress Log — Experiment 01
 
-**Consolidation note — 2026-08-12 22:54 EDT:** mathematical closure remains hard-stopped after Step 49; prior-art audit and severe adversarial review completed; **Paper A blocking acquisition-clock and true-alignment claim-scope issues have now been repaired on the active revision branch.** The central theorem is now explicitly a task-dependent **guarantee-time** result. Robust exact-model quantitative example and final novelty audit remain open.
+**Consolidation note — 2026-08-12 23:22 EDT:** mathematical closure remains hard-stopped after Step 49; Paper A semantic blockers repaired; robust full-template quantitative regime witness established; deeper acquisition / optical-acquisition prior-art audit completed; final integrated hostile-review QA is now the active task. **Novelty not established.**
 
 ---
 
@@ -270,36 +270,280 @@ Step-44 as continuum truth;
 Steps 47-49 as exact finite-u scan probabilities.
 ```
 
-### Remaining major scientific presentation gap
+---
 
-A robust exact-hard-window quantitative example is still required.
+## 23:06 EDT — finite-information robustness companion consolidated
 
-The correct next numerical task is **margin-first design**, not rescue of the old `r=2, Lambda=.895` calibration. The example should show:
+New file: `PAPER_A_FINITE_INFORMATION_COMPANION.md`.
+
+The already-validated smooth finite-information calculation was extracted from the historical Steps 14–16 rather than recomputed as part of a new Gaussian-extremes branch.
+
+For the documented calibration near
 
 ```text
-low L: fast guarantee-time preference;
-intermediate L: crossover with both channels comfortably guarantee-feasible;
-larger L: slow-only guarantee feasibility;
+rho0 ~ 6.2
+r = 1.2
+alpha = 1e-6
+beta = 0.90
+kappa = 8,
 ```
 
-with explicit continuum control.
+continuous Rice theory gave
 
-The smooth finite-information Steps 14–16 remain a valid companion stress test but are not substituted for the exact Paper A model.
+```text
+ell_s = 0.571441752,
+```
+
+while Palm-corrected rare-event validation gave approximately
+
+```text
+ell_s = 0.5721 +/- 0.001.
+```
+
+The relative shift is only about `0.12%`.
+
+This is retained strictly as **robustness evidence for a smooth finite-information companion model**, not the exact hard-window Paper-A phase boundary.
+
+---
+
+## 23:14 EDT — post-revision hostile audit and cleanup
+
+New files:
+
+- `PAPER_A_POST_REVISION_AUDIT_2026-08-12.md`
+- `PAPER_A_POST_REVISION_AUDIT_ADDENDUM_2026-08-12.md`
+
+The revised theorem was re-audited after the semantic repair.
+
+Two presentation-level issues were found and fixed:
+
+1. `q_0` is now explicitly an **analysis variable only**, never receiver side information.
+2. `Gamma_infty` is now defined directly from the full-template process rather than only through a limit symbol.
+
+The finite-template/full-template link was tightened using normalized-template `L2` convergence and the uniform covariance bound
+
+```math
+\sup_y|R_x(y)-R_\infty(y)|
+\le2\|\hat h_x-\hat h_\infty\|_2
+\to0.
+```
+
+No new fatal contradiction was found.
+
+---
+
+## 23:22 EDT — robust Paper-A quantitative regime witness
+
+New file:
+
+`PAPER_A_QUANTITATIVE_REGIME_WITNESS_2026-08-12.md`
+
+New reproducible numerical script:
+
+`numerics/paper_a_full_template_feasibility.py`
+
+### Strategy
+
+Do **not** numerically relocalize the rough finite-duration crossover.
+
+Instead combine:
+
+```text
+exact known-time fast preference
++
+full-template slow-only guarantee-feasibility witness
++
+analytic crossover theorem.
+```
+
+This avoids the Step-13 covariance-cusp failure because the feasibility boundary is governed by the smooth full-template process
+
+```math
+R_\infty(y)=(1+|y|)e^{-|y|}.
+```
+
+### Parameters
+
+```math
+\rho_0=3.5,
+\qquad
+\alpha=0.05,
+\qquad
+\beta=0.90,
+\qquad
+r=1.2.
+```
+
+At known arrival,
+
+```math
+\boxed{x_0=1.80519795247,}
+```
+
+so
+
+```text
+T_G,f(0)/tau_f = 1.80520
+T_G,s(0)/tau_f = 2.16624
+```
+
+and fast is strictly preferred.
+
+Choose the common physical uncertainty
+
+```math
+\boxed{L=3.30\tau_f=2.75\tau_s.}
+```
+
+The full-template feasibility threshold is
+
+```math
+c=\rho_0-\Phi^{-1}(\beta)=2.21844843446.
+```
+
+### Production numerical run
+
+```text
+240000 paired paths
+seed = 20260818
+x_tail = 16
+delta = .01, .005, .0025 nested grids
+```
+
+Tail truncation:
+
+```math
+1-\eta(16)=6.90\times10^{-12}.
+```
+
+Nested-grid PFA results:
+
+| `delta` | slow `ell=2.75` | fast `ell=3.30` |
+|---:|---:|---:|
+| `.0100` | `.04733333` | `.05362917` |
+| `.0050` | `.04736250` | `.05365000` |
+| `.0025` | `.04737083` | `.05365833` |
+
+Finest-grid exact 95% Clopper-Pearson **sampling** intervals:
+
+```math
+P_{FA,s}\in[0.0465243,0.0482283],
+```
+
+```math
+P_{FA,f}\in[0.0527601,0.0545674].
+```
+
+Since `alpha=.05` lies cleanly between the intervals,
+
+```text
+slow -> guarantee-feasible
+fast -> guarantee-infeasible
+```
+
+at the same physical `L`.
+
+The CP intervals quantify Monte Carlo sampling uncertainty only. Grid and filter-tail approximation were checked separately by nested-grid stability and the `6.9e-12` omitted squared-template-energy fraction.
+
+**Interpretation:** this is a robust finite-scale regime witness, not a numerical localization of `L_x` and not a computer-assisted continuum proof.
+
+The severe-review quantitative-example objection is considered resolved without creating Step 50.
+
+---
+
+## 23:22 EDT — deeper acquisition / optical-acquisition prior-art audit
+
+New file:
+
+`PAPER_A_CLOSEST_PRIOR_ART_AUDIT_2026-08-12.md`
+
+The novelty burden narrowed materially.
+
+### Direct conceptual prior art
+
+Classical PN/spread-spectrum acquisition already treats acquisition time as a function of combinations of:
+
+```text
+unknown code phase / delay uncertainty;
+a priori epoch information;
+predetection SNR;
+Pd and Pfa;
+dwell/integration time;
+matched-filter structure;
+serial/parallel/sequential search.
+```
+
+Canonical matched-filter acquisition lineage includes Polydoros & Weber (1984) and Su (1988).
+
+### Optical acquisition prior art
+
+Optical-CDMA literature already studies synchronization/acquisition time, including threshold and dwell/search effects. Direct-detection Geiger-mode APD ladar has also been studied for target acquisition within a specified range window under constant false alarm.
+
+Additional ladar literature establishes pulse-width / range-resolution and range-estimation tradeoffs.
+
+Therefore do **not** claim novelty for:
+
+```text
+unknown-delay search;
+search-size penalty;
+acquisition time versus dwell/integration;
+Pd/Pfa tradeoffs;
+optical acquisition;
+pulse-width / range-resolution tradeoffs.
+```
+
+### Remaining candidate contribution
+
+No reviewed source directly reproduced the complete construction
+
+```text
+same optical event
++ causal detector family
++ equal eventual matched-filter SNR
++ detector time-scale change
++ simultaneous evidence-clock and search-correlation rescaling
++ fixed physical arrival uncertainty
+-> fast/slow guarantee-time reversal and slow-only feasibility.
+```
+
+Disposition remains
+
+```text
+POSSIBLE SYNTHESIS CONTRIBUTION / NOVELTY NOT ESTABLISHED.
+```
+
+No `first`, `novel`, or priority language is authorized.
+
+---
+
+## 23:22 EDT — Paper A integrated with witness and acquisition positioning
+
+`PAPER_A_DRAFT.md` was revised so that:
+
+- the Introduction explicitly acknowledges mature acquisition theory and optical acquisition;
+- the candidate contribution is narrowed to the detector-time-scale coupling under equal event-specific eventual SNR;
+- the quantitative regime witness appears immediately after Proposition 1;
+- the paper no longer says the quantitative example or acquisition audit are open;
+- numerical language distinguishes a regime witness from a measured hard-window crossover;
+- the Step-49 hard stop remains explicit in the surrounding audit trail.
+
+A final production run with `x_tail=16` and `240000` paths strengthens the originally inserted `120000`-path witness; the dedicated quantitative-witness file and `CURRENT_STATE.md` carry the production numbers. The qualitative manuscript regime classification is unchanged. Before final typesetting, synchronize any preliminary numerical table values in `PAPER_A_DRAFT.md` to the production run if they are still present.
 
 ---
 
 ## Current stopping point
 
-Paper A's two submission-blocking semantic issues are repaired, and the theorem is stronger and narrower.
-
-The repository remains **not submission-ready** because:
+The prior two major Paper-A blockers beyond semantics are now resolved at the scientific-presentation level:
 
 ```text
-robust exact-model quantitative example is open;
-final closest-prior-art / novelty audit is open;
-final citation and manuscript QA remain to be done after the example.
+robust quantitative regime witness -> RESOLVED;
+deeper acquisition / optical-acquisition prior-art audit -> COMPLETED.
 ```
+
+The active task is a **final integrated hostile-review and citation QA**.
+
+Do not reopen the Gaussian-extremes branch unless that audit identifies a genuinely new mathematical defect.
 
 ### Single next question
 
-> Can a new continuum-controlled exact-hard-window example be chosen for numerical margin rather than proximity to the old feasibility-edge witness, without reopening the Step-49 closure program?
+> Does the integrated Paper A survive a fresh hostile-review pass when the theorem, quantitative witness, acquisition-theory positioning, references, and claim boundaries are tested together?
