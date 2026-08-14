@@ -19,13 +19,13 @@ No manuscript is justified yet.
 ## Read in this order
 
 1. `experiments/10-room-temperature-lwir-admissibility/CURRENT_STATE.md`
-2. `experiments/10-room-temperature-lwir-admissibility/KANE_VELOCITY_RESOURCE_BOUND_STEP_2026-08-14.md`
-3. `experiments/10-room-temperature-lwir-admissibility/MATCHED_DIRAC_ABSORPTION_DOS_STEP_2026-08-14.md`
-4. `experiments/10-room-temperature-lwir-admissibility/PROGRESS_LOG.md`
-5. founding/history files only as needed.
-6. Experiment-08 novelty stop before any zero-gap Kane limit.
+2. `experiments/10-room-temperature-lwir-admissibility/AUGER_KINEMATIC_CLOSURE_STEP_2026-08-14.md`
+3. `experiments/10-room-temperature-lwir-admissibility/KANE_VELOCITY_RESOURCE_BOUND_STEP_2026-08-14.md`
+4. `experiments/10-room-temperature-lwir-admissibility/MATCHED_DIRAC_ABSORPTION_DOS_STEP_2026-08-14.md`
+5. `experiments/10-room-temperature-lwir-admissibility/PROGRESS_LOG.md`
+6. founding/history files only as needed.
 
-## Fixed target
+Fixed target:
 
 ```math
 T=300\ \mathrm K,
@@ -37,37 +37,23 @@ E_g=0.1239841984\ \mathrm{eV},
 E_g/(k_BT)\approx4.796.
 ```
 
-Research target: a finite-gap band-structure admissibility theorem/bound/escape condition for room-temperature LWIR detector quality, not a materials leaderboard or scalar FOM.
-
 ---
 
 # CONTROLLING RESULTS
 
-## 1. Exact massive-Dirac matched-absorptance result
+## 1. Matched absorptance
 
-For
-
-```math
-H=\hbar v\tau_x\boldsymbol\sigma\cdot\mathbf k+\Delta\tau_z,
-\qquad
-\Delta=E_g/2,
-```
-
-with `N_D` equivalent species,
+For the exact finite-gap massive-Dirac model,
 
 ```math
 n_e\propto N_Dv^{-3},
 \qquad
-\alpha\propto N_Dv^{-1}.
-```
-
-Matching ideal single-pass absorptance gives
-
-```math
+\alpha\propto N_Dv^{-1},
+\qquad
 d\propto v/N_D.
 ```
 
-Hence
+Therefore
 
 ```math
 \boxed{
@@ -77,143 +63,109 @@ Hence
 }
 ```
 
-Ideal ballistic crossing time remains
+Ideal ballistic crossing time remains `v^0`.
 
-```math
-\boxed{\tau_{ball}\propto v^0.}
-```
+## 2. Microscopic velocity resource
 
-At 10 um / 300 K, the exact finite-gap carrier density is `1.8644x` the simple edge-parabolic estimate. Do not revert to the ordinary parabolic density formula.
+Using `v^2=E_P/(3m0)`, `Sigma_e ~ E_P^-1`.
 
-## 2. Kane energy form
+No generic upper-`v` bound was obtained from effective-mass sums, global optical f-sum over a fixed detector energy window, or remote-band energy separation alone.
 
-Use
-
-```math
-E_P=2m_0P^2/\hbar^2,
-\qquad
-v^2=E_P/(3m_0).
-```
-
-Therefore
-
-```math
-\boxed{\Sigma_e\propto E_P^{-1}.}
-```
-
-A factor `Q` column improvement requires `E_P -> Q E_P` and `v -> sqrt(Q) v`.
-
-Reference scale: HgCdTe work near the topological transition reports `v ~ 1.07e6 m/s` and accepted `E_P ~ 18.8 eV`.
-
-## 3. Negative bound results
-
-The following obvious mechanisms do **not** provide a useful material-independent upper bound on large `v`:
-
-```text
-multiband k.p effective-mass identity;
-global optical f-sum over a fixed photon-energy window;
-Kramers-Kronig low-energy dielectric loading;
-fixed remote-band separation in energy.
-```
-
-Reasoning:
-
-- effective-mass remote-band contributions have opposite denominator signs;
-- fixed-energy low-energy Dirac optical spectral weight scales as `1/v`, so large `v` consumes less of the total f-sum;
-- detector-required momentum radius at fixed energy scales as `1/v`.
-
-Do not revive these as proposed upper-v no-go mechanisms without a new assumption.
-
-## 4. Conditional microscopic lattice velocity bound
-
-For
-
-```math
-H(\mathbf k)=\sum_{\mathbf R}H_{\mathbf R}e^{i\mathbf k\cdot\mathbf R},
-```
-
-```math
-\hat v_i
-=\frac1\hbar\partial_{k_i}H
-=\frac{i}{\hbar}\sum_{\mathbf R}R_iH_{\mathbf R}e^{i\mathbf k\cdot\mathbf R}.
-```
-
-Thus
+For a Wannier Hamiltonian,
 
 ```math
 \boxed{
 \|\hat v_i\|
-\le
-\frac1\hbar\sum_{\mathbf R}|R_i|\|H_{\mathbf R}\|
-\equiv V_i^{hop}.
+\le\frac1\hbar\sum_R|R_i|\|H_R\|
+\equiv V_i^{hop},
 }
 ```
 
-Every group/interband velocity matrix element is bounded by this operator norm. Therefore, conditionally,
+so conditionally
 
 ```math
-\boxed{v\le V_{hop}.}
+\boxed{v\le V_{hop}}
 ```
 
-The ultraviolet resource is the hopping-range-weighted norm
+and
 
 ```math
-\mathcal J_i=\sum_R|R_i|\|H_R\|.
+\boxed{\Sigma_e\ge C/V_{hop}^2.}
 ```
 
-Without bounding this resource, no numerical material-independent upper `v` follows from the continuum theory.
+## 3. Exact symmetric-Dirac Auger closure
 
-## 5. First explicit admissibility inequality
-
-For matched ideal absorptance,
+For
 
 ```math
-\Sigma_e=C(T,E_g,A,r,n_b)/v^2.
+\varepsilon(k)=\sqrt{\Delta^2+(\hbar vk)^2},
+\qquad\Delta=E_g/2>0,
 ```
 
-Hence
+strict subadditivity gives
+
+```math
+\varepsilon(\mathbf p+\mathbf q)
+<\varepsilon(\mathbf p)+\varepsilon(\mathbf q).
+```
+
+Therefore normal-momentum impact ionization
+
+```text
+e_0 -> e_1 + e_2 + h_3
+```
+
+cannot satisfy energy and momentum conservation simultaneously. The inverse phononless `eeh` Auger channel has empty exact kinematic support; the `hhe` mirror is also closed under particle-hole symmetry.
+
+The exact minimum mismatch at hot energy `E` is
 
 ```math
 \boxed{
-\Sigma_e\ge C/V_{hop}^2.
+\Delta_A(E)=\sqrt{E^2+2E_g^2}-E.
 }
 ```
 
-For the existing witness
+At fixed `E/Eg`, `v` cancels completely.
+
+Hence:
 
 ```text
-T=300 K
-lambda_c=10 um
-r=1.2
-A=0.90
-n_b=3.5
+large v
+    -> thermodynamic matched-column lever;
+
+particle-hole-symmetric relativistic dispersion
+    -> Auger kinematic closure.
 ```
 
-```math
-C=1.06668\times10^{29}\ \mathrm{m^{-2}(m/s)^2}.
+These are distinct resources. Do not say high `v` itself closes Auger.
+
+At 10 um / 300 K:
+
+```text
+E/Eg    Delta_A (meV)    Delta_A/kBT
+1.5       69.62             2.69
+2.0       55.73             2.16
+3.0       39.26             1.52
+5.0       24.32             0.94
+10.0      12.34             0.48
 ```
 
-This is a conditional microscopic-resource detector bound, not a universal semiconductor constant.
+Massless limit: closure becomes marginal/collinear rather than strict.
 
 ---
 
-# Novelty boundary
+# Prior-art boundary
 
-Known ingredients are not novelty:
+Broad Dirac/symmetric-dispersion Auger suppression is established and unavailable as novelty. Mandatory comparators:
 
 ```text
-Kane k.p and E_P;
-3-D Dirac optical conductivity;
-HgCdTe Kane velocity;
-effective-mass sums;
-optical f-sum rules;
-Wannier/tight-binding Bloch Hamiltonians;
-alpha/G_th and alpha sqrt(tau) detector-material metrics;
-generic Auger band engineering;
-Experiment-08 zero-gap Kane statistics.
+Alymov et al., PRB 97, 205411 (2018);
+Alymov et al., ACS Photonics 7, 98–104 (2020);
+But et al., Nature Photonics 13, 783–787 (2019);
+Combescot & Combescot, PRB 37, 8781 (1988).
 ```
 
-Do not claim novelty for the operator-norm velocity bound itself.
+Real bulk HgCdTe is not the exact two-band symmetric model; heavy-hole/remote bands, disorder, phonons, linewidth, and many-body effects reopen channels.
 
 Current disposition:
 
@@ -225,14 +177,22 @@ POSSIBLE DETECTOR-SPECIFIC SYNTHESIS / NOVELTY NOT ESTABLISHED.
 
 # DO NOT DO
 
-Do not rank candidate compounds yet. Do not draft a paper. Do not reopen Experiment 08. Do not insert an empirical Auger coefficient as a free material parameter.
+Do not insert an empirical Auger coefficient. Do not rank candidate compounds. Do not draft a paper. Do not claim bulk HgCdTe has zero Auger recombination.
 
 # NEXT ACTION
 
-The high-`v` matched-absorptance lever has survived the obvious generic cancellation attacks.
+Add the smallest controlled particle-hole asymmetry and derive the exact Auger reopening boundary. Preferred model:
 
-Proceed to the first intrinsic nonradiative mechanism:
+```math
+E_\pm(k)=Dk^2\pm\sqrt{\Delta^2+(\hbar vk)^2}.
+```
 
-> For the finite-gap massive-Dirac/Kane family, derive the kinematically allowed Auger phase space from energy and crystal-momentum conservation. Determine how the threshold/phase space scales with `v`, `E_g`, and the minimum additional asymmetry or remote-band parameter, and whether the `Sigma_e ~ v^-2` advantage survives.
+Determine the dimensionless asymmetry needed to overcome
 
-Start with the simplest Coulomb process and exact kinematics before evaluating matrix elements or rates.
+```math
+\Delta_A(E)=\sqrt{E^2+2E_g^2}-E
+```
+
+over the thermally relevant finite-energy window at `E_g/kBT ~= 4.8`.
+
+Only after that boundary is derived should Coulomb matrix elements and finite rates be introduced.
