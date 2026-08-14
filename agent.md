@@ -8,121 +8,80 @@ Branch: `experiment-07-isotope-srh`
 
 ### Read in this order
 
-1. `experiments/07-isotope-srh/DLTS_OBSERVABILITY_AND_ISOTOPE_DECOMPOSITION_2026-08-14.md`
-2. `experiments/07-isotope-srh/DLTS_PIVOT_2026-08-14.md`
-3. `experiments/07-isotope-srh/REPEATED_CROSSOVER_AND_TEMPERATURE_SIGN_TEST_2026-08-14.md`
-4. `experiments/07-isotope-srh/HG_ISOTOPE_CROSSOVER_2026-08-13.md`
-5. `experiments/07-isotope-srh/TWO_STEP_SRH_KILL_TEST_2026-08-13.md`
-6. `experiments/07-isotope-srh/ISOTOPE_AXIS_FINGERPRINT_2026-08-13.md`
+1. `experiments/07-isotope-srh/ELECTRON_CAPTURE_BOTTLENECK_AND_REGISTRATION_2026-08-14.md`
+2. `experiments/07-isotope-srh/DLTS_OBSERVABILITY_AND_ISOTOPE_DECOMPOSITION_2026-08-14.md`
+3. `experiments/07-isotope-srh/DLTS_PIVOT_2026-08-14.md`
+4. `experiments/07-isotope-srh/REPEATED_CROSSOVER_AND_TEMPERATURE_SIGN_TEST_2026-08-14.md`
+5. `experiments/07-isotope-srh/HG_ISOTOPE_CROSSOVER_2026-08-13.md`
+6. `experiments/07-isotope-srh/TWO_STEP_SRH_KILL_TEST_2026-08-13.md`
+7. `experiments/07-isotope-srh/ISOTOPE_AXIS_FINGERPRINT_2026-08-13.md`
 
-Companion numerics:
+Companion numerics include `numerics/electron_capture_registration.py`, `numerics/dlts_observability.py`, `numerics/two_step_srh_isotope.py`, and `numerics/isotope_identifiability_core.py`.
 
-- `experiments/07-isotope-srh/numerics/dlts_observability.py`
-- `experiments/07-isotope-srh/numerics/isotope_identifiability_core.py`
-- `experiments/07-isotope-srh/numerics/two_step_srh_isotope.py`
-- `experiments/07-isotope-srh/numerics/isotope_threshold.py`
+## Controlling correction
 
-## Controlling scientific state
+The primary detector-relevant capture observable is now **electron capture `C_n`**, not hole capture `C_p`. Recent mercury-vacancy theory states that electron capture is substantially slower than hole capture and governs the SRH rate in narrow-gap HgCdTe. Hole capture remains secondary.
 
-The broad engineering claim has failed:
+For electron capture into trap level `E_t`, use
 
-```text
-heavy-isotope enrichment as a robust HgCdTe dark-current reduction strategy: STOP
-```
+`Delta_e = hbar*omega_op - (E_c-E_t)`.
 
-Natural->heavy phonon shifts are only ~0.1-0.2 meV and a >2x SRH change is washed out by modest bypass capture or spectral broadening unless the isotope-sensitive one-phonon path is almost perfectly dominant.
+Do not reuse the hole binding energy as the electron detuning. Isotope substitution changes both the phonon and electronic terms:
 
-The surviving HgCdTe-specific hypothesis is narrower:
+`delta Delta_e = hbar delta omega_op - delta(E_c-E_t)`.
 
-> Does the predicted single-optical-phonon mercury-vacancy capture channel show a reversible isotope dependence in its **direct carrier capture coefficient** that tracks the measured HgTe-like phonon shift?
+Therefore a reversible `C_n` change alone is not a phonon proof. Raman plus emission DLTS must reconstruct the actual detuning shift.
 
-General isotope-dependent nonradiative-defect dynamics are established prior art. Novelty is not established.
+## Leading metrology result
 
-## Why total lifetime was rejected
+For arbitrary reproducible spatial filling profile,
 
-Practical Hg isotope exchange favors a sub-micron modified layer. In such a thin HgCdTe film, surface/interface recombination can dominate total carrier lifetime. Therefore total-lifetime isotope spectroscopy is not the preferred experiment.
+`F(t;C_n)=integral w(z)[1-exp(-C_n n(z)t)]dz / integral w(z)dz`.
 
-## Leading observable — direct DLTS capture kinetics
+If isotope substitution multiplies the microscopic capture coefficient by `q` while electrostatics are reproduced,
 
-For a trap filling transient,
+`F_B(t)=F_A(q t)`.
 
-```math
-A(t_p)=A_\infty[1-exp(-C_p p t_p)],
-\qquad
-\tau_c=(C_p p)^{-1}.
-```
+Thus extract `q=C_n,B/C_n,A` by horizontal registration of the complete normalized filling curves. Trap density and absolute carrier-density scale need not be known to percent precision. Failure of one horizontal scale factor to collapse A/B is itself a falsification.
 
-Measure `C_p(T,M)` or `C_n(T,M)` directly from filling-pulse dependence. Use emission DLTS separately:
+A Fisher calculation for nine filling times from normalized `C n t=0.1...10`, separate saturation amplitudes in A/B/A, and linear cycle drift gives
 
-```math
-e_p=C_p N_v exp[-E_a/(kT)].
-```
+`sigma_ln(q) ~= 2.42 epsilon/sqrt(m)`.
 
-An isotope difference obeys
+For per-point normalized RMS noise `epsilon=0.5%`, 5-sigma detection needs roughly 2 repeats for a 5% effect, 10 for 2%, and 37 for 1%. At `epsilon=1%`, the corresponding counts are about 6, 37, and 147. Statistical precision is therefore not obviously fatal; electrostatic state reproducibility is more important.
 
-```math
-Delta ln e_p = Delta ln C_p + Delta ln N_v - Delta E_a/(kT).
-```
+HgCdTe DLTS enabling prior art already demonstrates electron traps in a p-type absorber using negative fill pulses. Existing electron-trap cross sections are only enabling scales; do not claim they equal the narrow-gap mercury-vacancy `C_n`.
 
-Therefore do **not** use an Arrhenius intercept alone as the isotope observable. Direct filling kinetics separates phonon-sensitive capture from isotope-induced electronic/trap-energy shifts.
+## Hg-only isotope stress
 
-Published HgCdTe trap cross-section scales imply capture times from tens of nanoseconds to hundreds of microseconds for controllable filling densities around `1e13-1e15 cm^-3`; the direct-capture route passes its first timing-feasibility gate.
+Natural Hg -> 204Hg shifts a 143-cm^-1 HgTe-like mode by about `-0.325%`, or `-0.0577 meV`.
 
-The normalized filling-curve sensitivity is maximized at `C_p p t_p=1`:
+Using the existing broadened/fixed-bypass optical-threshold surrogate only as a stress test, several-percent `C_n` changes remain possible for electron detuning `Delta_e` around `0.1-0.5 meV` when the one-phonon path is substantial. By `Delta_e~2 meV`, the Hg-only contrast is below about 1% in the tested parameter range.
 
-```math
-max d(A/A_inf)/d ln C_p = e^{-1}=0.368.
-```
+This is not a prediction because the actual electron detuning and narrow-gap `C_n` have not yet been recovered quantitatively from the primary theory.
 
-Thus a 2% capture-coefficient change gives ~0.74% of full transient amplitude near the optimal pulse duration. Multi-pulse fitting is required.
+## Current experiment
 
-## Temperature-sign correction
+Preferred first physical test remains a reversible/sister-piece Hg-isotope perturbation in a thin isotope-modified HgCdTe region, followed by shallow DLTS.
 
-For the minimal optical-phonon model
+Measure:
+- direct electron filling curves -> `C_n(T)` ratio by horizontal registration;
+- Raman -> actual isotope phonon shift;
+- emission DLTS -> electronic trap-separation shift;
+- C-V/Hall -> electrostatic consistency;
+- DLTS amplitude -> trap density;
+- SIMS on sacrificial material -> isotope depth profile.
 
-```math
-C_p ~ sqrt(Delta) exp[-Delta/(kT)],
-Delta=hbar omega-E_b,
-```
-
-```math
-K_C=d ln C_p/d ln omega
-=hbar omega[1/(2Delta)-1/(kT)].
-```
-
-The simple zero crossing is `kT_x=2Delta`, but thermal emission can make the trap unfillable at `T_x`.
-
-For `hbar omega~17.73 meV`, the direct DLTS sign-crossing test is self-consistent mainly for a very near-threshold channel (`Delta` roughly <=1 meV at modest injection). For larger detuning, measure low-temperature `C_p(T)` rather than chasing the crossover to high temperature.
-
-## Hg isotope exchange constraints
-
-Hg lattice isotope exchange is much slower than Hg-vacancy diffusion, so vacancy populations can in principle re-equilibrate during a long Hg-rich anneal. However radiotracer work shows reduced surface tracer incorporation in epitaxial material, so actual isotope uptake must be measured by SIMS and Raman; do not assume the ideal constant-surface diffusion fraction.
-
-A shallow depletion region (`~0.1-0.3 um`) can fit inside a `0.2-0.5 um` isotope-modified layer, making a thin DLTS test structure plausible.
-
-## Preferred first experiment
-
-1. Start from sister pieces of one narrow-gap HgCdTe wafer.
-2. Precondition with matched Hg-rich thermal history.
-3. Natural-Hg versus enriched-Hg anneal under matched chemical potential.
-4. SIMS isotope profile on sacrificial sister material; Raman on the actual measured pieces.
-5. Fabricate matched shallow MIS/diode structures after anneal.
-6. Measure C-V/Hall carrier density, DLTS trap spectrum and trap concentration.
-7. Measure direct filling kinetics over multiple pulse durations to extract `C_p(T)` and, if possible, `C_n(T)`.
-8. Test whether isotope-dependent `C(T)` follows the measured phonon shift while `E_a` and trap density are separately controlled.
+Require the A/B filling curves to collapse under one horizontal scale at several filling biases and require A-A-A natural-Hg controls to return `q~1`.
 
 ## Next hard step
 
-Build an uncertainty floor for direct isotope-dependent `C_p` measurement: carrier-density uncertainty, pulse calibration, transient noise, trap nonuniformity and device-processing scatter. Compare that floor against the broadened/bypass one-phonon model's predicted natural-Hg -> 204Hg contrast.
+Recover or bound the target narrow-gap mercury-vacancy `C_n` and its electron-side trap separation from the 2024-2026 theory. Determine whether the electron trap can be filled and emitted in a practical DLTS window. Then compare the measured/predicted `delta ln C_n` with the independently reconstructed
 
-If realistic `C_p` metrology cannot resolve the expected 1-5% range, close Experiment 07. If it can, proceed to a concrete shallow-junction structure and sample count.
+`delta Delta_e = hbar delta omega_op - delta(E_c-E_t)`.
+
+If the target electron capture cannot be isolated or the Hg-only contrast is below the reversible registration/systematic floor, close Experiment 07.
 
 ## Closed paths
 
-Experiment 06: SRH two-carrier provenance architecture closed by direct prior art.
-Experiment 05: active-volume/bandwidth theorem failed under arbitrary lossless matching.
-Experiment 04: passive nonreciprocal sensitivity path closed by trace bound.
-Experiment 02: migrating-depth APD dominated by fixed-depth waveguide comparator.
-Experiment 01: acquisition/information-spectrum paper path closed by prior art.
-
-Preserve negative results. Do not rescue closed paths without a new physical constraint. Do not draft a paper yet.
+Experiments 01, 02, 04, 05 and 06 remain closed for the documented reasons. Preserve negative results. Do not draft a paper yet. Novelty is not established.
