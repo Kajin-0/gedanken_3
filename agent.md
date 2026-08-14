@@ -4,7 +4,7 @@ Read `AGENTS.md` first, then this file. Do not infer chronology from `main` alon
 
 ## Hard scope
 
-Experiment 10 is analytical/theoretical only. Preserve failed/corrected/conditional paths. Do not use novelty or priority language without a dedicated audit.
+Experiment 10 is analytical/theoretical only. Preserve negative/corrected/conditional paths. Do not use novelty or priority language without a dedicated audit.
 
 # ACTIVE FRONTIER — Experiment 10
 
@@ -19,11 +19,12 @@ No manuscript is justified yet.
 ## Read in this order
 
 1. `experiments/10-room-temperature-lwir-admissibility/CURRENT_STATE.md`
-2. `experiments/10-room-temperature-lwir-admissibility/AUGER_ASYMMETRY_REOPENING_STEP_2026-08-14.md`
-3. `experiments/10-room-temperature-lwir-admissibility/AUGER_KINEMATIC_CLOSURE_STEP_2026-08-14.md`
-4. `experiments/10-room-temperature-lwir-admissibility/KANE_VELOCITY_RESOURCE_BOUND_STEP_2026-08-14.md`
-5. `experiments/10-room-temperature-lwir-admissibility/MATCHED_DIRAC_ABSORPTION_DOS_STEP_2026-08-14.md`
-6. `experiments/10-room-temperature-lwir-admissibility/PROGRESS_LOG.md`
+2. `experiments/10-room-temperature-lwir-admissibility/AUGER_NEAR_THRESHOLD_RATE_STEP_2026-08-14.md`
+3. `experiments/10-room-temperature-lwir-admissibility/AUGER_ASYMMETRY_REOPENING_STEP_2026-08-14.md`
+4. `experiments/10-room-temperature-lwir-admissibility/AUGER_KINEMATIC_CLOSURE_STEP_2026-08-14.md`
+5. `experiments/10-room-temperature-lwir-admissibility/KANE_VELOCITY_RESOURCE_BOUND_STEP_2026-08-14.md`
+6. `experiments/10-room-temperature-lwir-admissibility/MATCHED_DIRAC_ABSORPTION_DOS_STEP_2026-08-14.md`
+7. `experiments/10-room-temperature-lwir-admissibility/PROGRESS_LOG.md`
 
 Fixed target:
 
@@ -53,23 +54,17 @@ n_e\propto N_Dv^{-3},
 d\propto v/N_D,
 ```
 
-therefore
+so
 
 ```math
-\boxed{
-\Sigma_e=n_ed\propto v^{-2},
-\qquad
-\Sigma_e\text{ independent of }N_D.
-}
+\boxed{\Sigma_e=n_ed\propto v^{-2}}
 ```
 
-Ideal ballistic crossing time remains `v^0`.
+and equivalent Dirac-species degeneracy cancels from `Sigma_e`. Ideal ballistic crossing time is `v^0`.
 
 ## 2. Microscopic velocity resource
 
-No generic upper-`v` bound was obtained from low-energy effective-mass sums, a global optical f-sum over a fixed detector energy window, or remote-band energy separation alone.
-
-For a Wannier Hamiltonian,
+A lattice/Wannier Hamiltonian gives
 
 ```math
 \boxed{
@@ -79,7 +74,7 @@ For a Wannier Hamiltonian,
 }
 ```
 
-so conditionally
+hence conditionally
 
 ```math
 \boxed{v\le V_{hop}}
@@ -91,133 +86,171 @@ and
 \boxed{\Sigma_e\ge C/V_{hop}^2.}
 ```
 
-## 3. Exact symmetric-Dirac Auger closure
+## 3. Symmetric-Dirac direct Auger closure
 
 For
 
 ```math
 \varepsilon(k)=\sqrt{\Delta^2+(\hbar vk)^2},
-\qquad\Delta=E_g/2>0,
 ```
 
-normal-momentum phononless `eeh` and `hhe` Auger channels have empty exact kinematic support in the particle-hole-symmetric two-band model.
+normal-momentum phononless `eeh` and `hhe` Auger channels have empty exact support in the symmetric two-band model.
 
-The exact mismatch is
+The exact off-shell mismatch is
 
 ```math
-\boxed{
-\Delta_A(E)=\sqrt{E^2+2E_g^2}-E.
-}
+\boxed{\Delta_A(E)=\sqrt{E^2+2E_g^2}-E.}
 ```
 
-At fixed `E/Eg`, `v` cancels. High `v` and symmetry are distinct resources.
+At fixed `E/Eg`, `v` cancels. High `v` and electron-hole symmetry are distinct resources.
 
-## 4. Finite particle-hole asymmetry reopening
+## 4. Scalar asymmetry reopening
 
-Add
+For
 
 ```math
-E_\pm(k)=Dk^2\pm\sqrt{\Delta^2+(\hbar vk)^2}.
+E_\pm=Dk^2\pm\sqrt{\Delta^2+(\hbar vk)^2},
 ```
 
-Define
+with
 
 ```math
+\mathcal A_m=2|\beta|,
+\qquad
 \beta=D\Delta/(\hbar^2v^2),
 ```
 
-and
+the exact reduced-model threshold is in `AUGER_ASYMMETRY_REOPENING_STEP_2026-08-14.md`.
+
+Weak-asymmetry law:
+
+```math
+\boxed{K_{th}\sim E_g\mathcal A_m^{-1/3}.}
+```
+
+At 10 um / 300 K, the scalar model requires approximately
+
+```math
+\boxed{\mathcal A_m\lesssim0.0848}
+```
+
+to place the direct threshold above `10 kBT`.
+
+Do not treat this as a universal edge-mass criterion; finite-momentum dispersion symmetry is what matters.
+
+## 5. Near-threshold direct Auger rate
+
+For a fixed hot electron, the six-dimensional constrained final-state phase space gives
+
+```math
+\boxed{\Phi_{3body}\propto(K-K_{th})^2.}
+```
+
+If
+
+```math
+|V_{eff}|^2\propto(K-K_{th})^\nu,
+```
+
+then
+
+```math
+\boxed{\Gamma_{II}\propto(K-K_{th})^{2+\nu}.}
+```
+
+The phase-space exponent `2` is robust; the full-rate exponent is not universal because Kane/multiband overlap factors can vanish at threshold.
+
+Detailed balance gives the thermal event-rate structure
 
 ```math
 \boxed{
-\mathcal A_m
-=\frac{|m_e^{-1}-m_h^{-1}|}
-{m_e^{-1}+m_h^{-1}}
-=2|\beta|.
+G_A^{vol}
+\propto
+T^{3+\nu}
+\exp[-(E_g/2+K_{th})/(k_BT)].
 }
 ```
 
-The exact reduced-model reopening boundary is
+For `nu=0`, the low-T parabolic-edge limit recovers the classical direct-gap lifetime form
 
 ```math
-\boxed{
-\beta_c(q_0)
-=
-\min_{0\le x\le q_0/2}
-\frac{2s(x)+s(q_0-2x)-s(q_0)}
-{2(q_0-x)^2},
-\qquad s(q)=\sqrt{1+q^2}.
-}
+\tau_A^{-1}\propto T^{3/2}e^{-K_{th}/k_BT}.
 ```
 
-Weak-asymmetry asymptotic:
-
-```math
-\boxed{
-\beta_c\sim4/q_{th}^3,
-\qquad
-q_{th}\sim(4/|\beta|)^{1/3}.
-}
-```
-
-Therefore
-
-```math
-\boxed{
-K_{th}\sim E_g\mathcal A_m^{-1/3}.
-}
-```
-
-At the fixed 10-um / 300-K target:
+At the `K_th=10 kBT` witness:
 
 ```text
-A_m      K_th/kBT
-0.40       5.873
-0.20       7.536
-0.10       9.470
-0.04      12.848
-0.02      16.273
-0.01      20.675
+lifetime activation = 4.54e-5
+equilibrium event activation = 4.13e-6
 ```
 
-To place the direct-channel threshold above `10 kBT`, the exact toy model requires approximately
+## 6. Conditional Coulomb-v scaling
+
+Before interaction momentum dependence,
 
 ```math
-\boxed{\mathcal A_m\lesssim0.0848.}
+G_A^{area}\propto|V_{th}|^2v^{-8}
 ```
 
-Do not convert this into a universal real-material edge-mass rule. The actual requirement is small finite-momentum electron-hole dispersion asymmetry over the Auger-active window.
+at matched absorptance.
 
-Reproducible script:
+For the minimal static screened Coulomb interaction
 
-`experiments/10-room-temperature-lwir-admissibility/numerics/auger_asymmetry_threshold.py`
+```math
+V(Q)=\frac{e^2}{\epsilon_0\epsilon_r(Q^2+\kappa^2)}S_{cv},
+```
+
+with `Q_th ~ v^-1`,
+
+```math
+\boxed{
+G_A^{area}
+\propto
+\frac{|S_{cv}|^2}{\epsilon_r^2}
+\frac{v^{-4}}{(\mathcal Q_{th}^2+s_\kappa^2)^2}
+\left(\frac{k_BT}{\Delta}\right)^{3+\nu}
+\exp[-(\Delta+K_{th})/(k_BT)].
+}
+```
+
+Weak screening and intrinsic-Debye large-`v` asymptotics tend toward
+
+```math
+G_A^{area}\propto v^{-4}e^{-K_{th}/k_BT}
+```
+
+apart from the common intrinsic gap activation and interaction resources.
+
+Thus high `v` provides an algebraic rate advantage while small finite-`k` asymmetry provides an exponential threshold advantage.
 
 ---
 
 # Prior-art boundary
 
-Broad Dirac/symmetric-dispersion Auger suppression and large Auger thresholds near Dirac-like HgCdTe-QW regimes are established. Mandatory adjacent work includes Alymov et al. PRB 2018 and ACS Photonics 2020, Aleshkin et al. JPCM 2019, Morozov et al. ACS Photonics 2021, and classical threshold/anisotropy work.
+Established territory includes direct-gap Auger activation thresholds, Beattie-Landsberg thermal factors, anisotropy/warping corrections, Kane threshold-overlap zeros, quadratic/cubic impact-ionization threshold powers, and quasi-relativistic HgCdTe-QW Auger suppression.
 
-The cube-root law is retained as a reduced-model analytical result only.
+Do not claim novelty for any individual ingredient.
+
+Current disposition:
 
 ```text
-NOVELTY NOT ESTABLISHED.
+POSSIBLE DETECTOR-SPECIFIC JOINT ADMISSIBILITY SYNTHESIS / NOVELTY NOT ESTABLISHED.
 ```
-
-Real bulk HgCdTe is not the exact two-band model; heavy-hole/remote bands, phonons, disorder, linewidth, and many-body effects can reopen channels.
 
 ---
 
 # DO NOT DO
 
-Do not rank candidate compounds. Do not insert a phenomenological Auger coefficient and declare closure. Do not draft a paper yet.
+Do not rank candidate compounds. Do not replace the microscopic problem with an empirical Auger coefficient. Do not draft a paper yet.
 
 # NEXT ACTION
 
-Retain the exact threshold and derive the **leading near-threshold thermal/phase-space scaling** of the direct Auger rate with the minimum screened-Coulomb structure.
+Derive the **unavoidable radiative/background generation event floor under matched external absorptance and optical environment**.
 
-Question:
+Then compare it to the thresholded direct-Auger event rate and ask whether the branch can support a derived condition of the form
 
-> Does the thresholded rate combine with `Sigma_e ~ v^-2` into a detector-level room-temperature admissibility inequality whose dominant dependence is fixed by band structure before interaction-prefactor details enter?
+```math
+G_A\le G_{rad}+G_{bg}.
+```
 
-Separate universal threshold exponents from model-dependent Coulomb amplitude/screening.
+The objective is to replace the provisional `Xi_nr` bookkeeping quantity with a detector-level admissibility inequality whose radiative side is fixed by optical boundary conditions and whose Auger side is expressed through `v`, finite-momentum asymmetry, and explicit interaction resources.
