@@ -2,7 +2,7 @@
 
 **Date:** 2026-08-14  
 **Scope:** analytical/theoretical only  
-**Status:** ACTIVE PROVISIONAL / THREE EXACT REDUCED RESULTS RETAINED / NOVELTY NOT ESTABLISHED / NEXT STEP IS A PASSIVE-ARCHITECTURE NO-GO TEST
+**Status:** ACTIVE / FOUR CONNECTED EXACT RESULTS RETAINED / ONE-PORT ASSUMPTION REMOVED / PAPER-LEVEL NOVELTY AUDIT IS NOW THE NEXT GATE
 
 ## Minimal Gedanken premise
 
@@ -25,6 +25,7 @@ Read in order:
 1. `FIRST_PRINCIPLES_BRIGHT_STATE_DISCRIMINATION_2026-08-14.md`
 2. `DEPHASING_EXTRACTION_AND_DETAILED_BALANCE_2026-08-14.md`
 3. `CRITICAL_COUPLING_THERMAL_REVERSE_COST_2026-08-14.md`
+4. `GENERAL_PASSIVE_EXTRACTION_AFFINITY_BOUND_2026-08-14.md`
 
 ---
 
@@ -36,35 +37,31 @@ For the ideal coherent readout
 \Pi_B=|B\rangle\langle B|,
 ```
 
+signal acceptance is
+
 ```math
 \eta_\gamma=1,
 ```
 
-while
+while matched incoherent dark acceptance is
 
 ```math
 \boxed{
-\epsilon_D=\sum_jw_j^2=1/N_{eff}.
+\epsilon_D=\sum_jw_j^2=1/N_{eff},
+\qquad
+N_{eff}=1/\sum_jw_j^2.
 }
 ```
 
-with
+Among all POVM elements constrained to accept the photon state with probability one, `Pi_B` minimizes dark acceptance.
 
-```math
-N_{eff}=1/\sum_jw_j^2.
-```
-
-Among all POVM elements that accept the photon state with probability one, `Pi_B` minimizes dark acceptance. For uniform weights, `epsilon_D=1/N`.
-
-This is a detector specialization of established quantum-state-discrimination/state-verification mathematics; do not claim the generic theorem as new.
-
-General dark-generation covariance:
+For general dark-generation covariance
 
 ```math
 D=\sum_\alpha|l_\alpha\rangle\langle l_\alpha|,
 ```
 
-with optical coupling vector `g`. Then the accepted dark-generation rate is
+and optical coupling vector `g`, the accepted internal dark-generation rate is
 
 ```math
 \boxed{
@@ -73,15 +70,23 @@ with optical coupling vector `g`. Then the accepted dark-generation rate is
 }
 ```
 
-So the physically relevant quantity is Hilbert-space alignment of optical excitation and dark-generation covariance, not raw dark rate alone.
+For independent identical local dark channels, `D=dI`, so
 
-Thermal/background photons in the same accepted optical mode create the same bright state and cannot be rejected by this mechanism.
+```math
+\boxed{\Gamma_D^B=d}
+```
+
+independent of the number of participating sites even though raw internal dark generation scales as `Nd`.
+
+Thermal/background photons in the same accepted optical mode create the same bright state and are not rejected.
+
+Generic state-verification mathematics is established; the detector specialization is the object of the current novelty audit.
 
 ---
 
-## Result 2 — finite-time theorem under local dephasing
+## Result 2 — exact finite-time theorem under local dephasing
 
-For the uniform bright state, bright extraction rate `kappa`, and independent local pure-dephasing rate `gamma`, the surviving excitation probability `P` and bright population `b` obey exactly
+For uniform bright state, bright extraction rate `kappa`, and independent local pure-dephasing rate `gamma`, surviving excitation probability `P` and bright population `b` obey
 
 ```math
 \dot P=-\kappa b,
@@ -91,13 +96,13 @@ For the uniform bright state, bright extraction rate `kappa`, and independent lo
 \dot b=-(\kappa+\gamma)b+(\gamma/N)P.
 ```
 
-Therefore
+Hence
 
 ```math
 \ddot P+(\kappa+\gamma)\dot P+(\kappa\gamma/N)P=0,
 ```
 
-with rates
+with exact rates
 
 ```math
 r_\pm
@@ -105,119 +110,239 @@ r_\pm
 \pm\sqrt{(\kappa+\gamma)^2-4\kappa\gamma/N}}2.
 ```
 
-For every `gamma>0`, both signal and dark excitations are eventually extracted:
+For every `gamma>0`, both signal and initially dark excitations are eventually extracted:
 
 ```math
 C_S(\infty)=C_D(\infty)=1.
 ```
 
-Thus permanent dark rejection is impossible in this dephasing model. The effect is a finite-time separation.
+Therefore coherence selectivity is a finite-decision-window resource, not permanent rejection.
 
 For large `N`,
 
 ```math
 \boxed{
-r_-\simeq\frac{\kappa\gamma}{N(\kappa+\gamma)}}
-```
-
-and
-
-```math
-\boxed{
+r_-\simeq\frac{\kappa\gamma}{N(\kappa+\gamma)},
+\qquad
 \tau_{leak}\simeq N(1/\kappa+1/\gamma).
 }
 ```
 
-High fast-window signal collection requires `kappa>>gamma`.
-
-This is adjacent to established bright/dark dephasing and superradiance theory; photodetector-specific novelty remains unestablished.
+High fast-window photon collection requires `kappa >> gamma`.
 
 ---
 
-## Result 3 — passive critical-coupling reverse cost
+## Result 3 — one-port critical-coupling result retained as a special case
 
-In a one-port resonant model,
+For a one-port resonant model,
 
 ```math
 \eta=4\Gamma\kappa/(\Gamma+\kappa)^2.
 ```
 
-If collective optical coupling gives
+If collective optical coupling gives `Gamma=N gamma_o`, unit absorption requires `kappa=N gamma_o`.
+
+For a thermally reversible counted extractor,
 
 ```math
-\Gamma=N\gamma_o,
+\kappa_{rev}/\kappa=e^{-\Delta F/(kT)},
 ```
 
-perfect absorption requires
+so keeping the reverse bright-aligned floor fixed gives
 
 ```math
-\kappa=N\gamma_o.
+\Delta F_{extra}=kT\ln N.
 ```
 
-If the counted conversion reservoir is passive and thermally reversible with effective free-energy drop `Delta F`,
+This result is now superseded in generality by Result 4 below, but remains a useful concrete realization.
+
+---
+
+## Result 4 — generalized passive-extraction affinity bound
+
+For arbitrary parallel stationary counted channels `a` satisfying local detailed balance,
 
 ```math
-\kappa_{rev}/\kappa=e^{-\Delta F/(kT)}.
+\bar\kappa_a/\kappa_a=e^{-\beta\Delta F_a},
 ```
 
-Hence at critical coupling
+let
 
 ```math
-\kappa_{rev}=N\gamma_o e^{-\Delta F/(kT)}.
+K_\to=\sum_a\kappa_a,
+\qquad
+K_\leftarrow=\sum_a\bar\kappa_a.
 ```
 
-Holding this reverse bright-aligned dark floor fixed as `N` grows requires
+With forward weights `p_a=\kappa_a/K_\to`, exactly
 
 ```math
 \boxed{
-\Delta(\Delta F)=kT\ln N.
+\frac{K_\leftarrow}{K_\to}
+=\sum_a p_a e^{-\beta\Delta F_a}
+=e^{-\beta\Delta F_{eff}}.
 }
 ```
 
-This is a **conditional resource theorem**, not a universal detector thermodynamic law. It assumes stationary one-port critical coupling and a passive thermally reversible counted conversion channel.
+Thus
+
+```math
+\boxed{
+\Delta F_{eff}
+=-kT\ln\left(\sum_a p_a e^{-\beta\Delta F_a}\right).
+}
+```
+
+and
+
+```math
+\min_a\Delta F_a
+\le\Delta F_{eff}
+\le\sum_a p_a\Delta F_a
+\le\max_a\Delta F_a.
+```
+
+So many passive pathways and affinity heterogeneity do not beat the best microscopic suppression; at fixed mean affinity, heterogeneity worsens reverse suppression.
+
+If useful counted extraction is collectively enhanced by a factor
+
+```math
+K_\to(N)=\mathcal C(N)K_\to(1),
+```
+
+then holding the reverse bright-injection coefficient fixed requires
+
+```math
+\boxed{
+\Delta F_{eff}(N)-\Delta F_{eff}(1)
+\ge kT\ln\mathcal C(N).
+}
+```
+
+The earlier `kT ln N` result is only the special case `mathcal C=N`.
+
+Equivalent no-go form: if every microscopic channel has `Delta F_a<=Delta F_max`,
+
+```math
+\boxed{
+K_\leftarrow
+\ge K_\to e^{-\beta\Delta F_{max}}.
+}
+```
+
+Therefore a collective increase of the forward counted rate necessarily appears in the reverse coefficient unless the available thermodynamic affinity grows.
+
+### Hidden passive-state network
+
+For an equilibrium detailed-balanced Markov network, Gibbs symmetrization makes the generator symmetric. Eliminating arbitrary hidden intermediate states by the quasistatic Schur complement preserves that symmetry and therefore preserves effective boundary detailed balance:
+
+```math
+\boxed{
+\pi_iK_{i\to j}^{eff}
+=\pi_jK_{j\to i}^{eff}.
+}
+```
+
+Passive intermediate-state complexity therefore cannot create an equilibrium one-way counted transition.
 
 ---
 
-## Prior-art status
+# Combined scalability statement
 
-Strong adjacent established areas:
-
-- quantum hypothesis testing/state verification;
-- Dicke bright/dark collective states and superradiance;
-- dephasing-induced bright/dark scattering;
-- coherent excitonic photocurrent;
-- fully quantum photodetector coherence/backaction models;
-- quantum infrared detectors whose photocurrent is driven by collective electronic polarization and coherence-dependent extraction;
-- KMS/local detailed balance;
-- coherent perfect absorption / critical coupling.
-
-No priority language is authorized.
-
-Current status:
+The current detector-specific candidate can now be stated compactly:
 
 ```text
-simple Gedanken premise: useful and internally consistent
-static theorem: exact
-continuous-time theorem: exact in reduced symmetric model
-local KMS cancellation: NO
-passive extractor reverse-cost theorem: exact under stated reduced assumptions
-novel detector principle: NOT ESTABLISHED
-paper drafting: DO NOT BEGIN
+coherent optical excitation
++ incoherent local internal dark generation
+-> bright projection prevents accepted internal dark rate from scaling with site number;
+
+but
+
+collectively enhanced stationary counted extraction
++ local detailed balance
+-> bounded reverse bright dark floor requires extra affinity >= kT ln(mathcal C).
 ```
+
+This gives a three-way scaling constraint:
+
+```text
+A. increasing collective useful extraction;
+B. bounded thermodynamic affinity;
+C. bounded thermally reversed bright dark floor.
+```
+
+All three cannot remain scale-independent within the theorem class.
+
+At 77 K, `mathcal C=N` gives approximately
+
+```text
+N=10:    15.28 meV
+N=100:   30.56 meV
+N=1000:  45.84 meV
+```
+
+of additional effective affinity.
 
 ---
 
-## Single next hard question
+## Escape classes still outside the theorem
 
-> Is there any fully passive, time-independent architecture in which the accepted optical bright coupling and counted extraction both scale collectively, but the thermally reversed counted channel does not inherit the same collective enhancement, without violating unitarity, detailed balance, reciprocity, or established scattering/sum-rule bounds?
+1. **Static nonreciprocity / broken microscopic time reversal.** Pairwise local detailed balance can fail even at thermal equilibrium in nonreciprocal many-body systems; global second-law/fluctuation constraints remain. This needs separate treatment if it is to be used as an escape.
+2. **Time modulation / active gain / maintained nonequilibrium reservoirs / chemical bias.** These explicitly supply work or free energy and are outside the passive stationary theorem.
+3. **Strongly non-Markovian transient storage.** May delay reverse injection rather than eliminate long-time return; not covered by the effective-rate bound.
 
-Attack this as a theorem/no-go problem before adding more device detail.
+Do not silently claim these are impossible.
 
-If no passive escape exists, Experiment 09 may still close with a useful resource theorem:
+---
+
+## Prior-art status after the generalized theorem
+
+Primary sources screened in this step establish the individual neighboring structures:
+
+- local detailed balance and its coarse-graining behavior;
+- quantum detailed balance/KMS thermalization;
+- collectively enhanced reservoir-coupled currents/noise/entropy production;
+- collective electronic transport in quantum infrared detectors;
+- reciprocal and nonreciprocal thermal transport constraints.
+
+No direct source found in the focused search states the complete detector-specific chain
 
 ```text
-coherence can reject local incoherent dark generation,
-but scalable high-efficiency passive extraction restores a collective reverse-channel cost.
+coherent bright-state projection suppresses local incoherent internal-dark scaling
++
+collective counted-rate enhancement mathcal C
++
+local detailed balance
+
+-> extra effective affinity >= kT ln mathcal C for bounded reverse bright dark floor.
 ```
 
-If a passive escape does exist, identify exactly which assumption in the one-port critical-coupling argument it violates and whether that resource is genuinely distinct from ordinary mode filtering or non-equilibrium work.
+Absence of a hit is not proof of novelty.
+
+---
+
+## Current research decision
+
+Experiment 09 has now accumulated enough connected analytical structure that continuing to add arbitrary device detail would be the wrong next move.
+
+```text
+minimal Gedanken premise: SHARP
+static state-discrimination result: EXACT
+finite-time dephasing result: EXACT IN REDUCED MODEL
+one-port thermodynamic result: EXACT SPECIAL CASE
+general parallel-channel affinity theorem: EXACT UNDER LDB
+equilibrium hidden-state escape: CLOSED IN MARKOV REDUCTION
+paper-level coherent story: PRESENT
+novelty/significance: NOT YET ESTABLISHED
+```
+
+## Next gate
+
+Perform a **paper-level closest-prior-art audit of the combined claim**, not another generic screen.
+
+Specifically:
+
+1. search for photodetector / quantum-sensor work that explicitly uses the coherence of the photon-created material excitation to reject incoherent internal dark-generation events with identical populations;
+2. search for an existing theorem directly linking collective useful conversion enhancement to reverse detector noise/dark rate through a logarithmic thermodynamic-affinity cost;
+3. test whether the combination is merely a transparent application of standard state discrimination + detailed balance or whether the detector-specific synthesis yields a genuinely nontrivial research contribution;
+4. if no direct stronger result is found, begin manuscript architecture immediately and use a hostile referee-style review as the next research stress test rather than opening Experiment 10.
