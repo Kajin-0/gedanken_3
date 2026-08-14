@@ -2,67 +2,49 @@
 
 Read `AGENTS.md` first.
 
-## Active Experiment 07 — isotope-tuned HgCdTe SRH capture
+## Global user constraint — THEORETICAL / ANALYTICAL RESEARCH ONLY
+
+The user cannot perform real-life experiments. From 2026-08-14 onward, all active research must be analytical/theoretical.
+
+Do not make laboratory execution, sample procurement, fabrication, measurement pilots, instrument selection, anneal schedules, or experimental sample counts the next research step.
+
+Experimental arrangements may appear only as abstract thought experiments, prior-art comparators, or explanatory counterfactuals. They are not actionable research directions unless the user explicitly changes this constraint.
+
+## Active Experiment 07 — isotope-tuned HgCdTe SRH theory
 
 Branch: `experiment-07-isotope-srh`
 
-### Read first
+Read first:
 
-1. `experiments/07-isotope-srh/00_ACTIVE_FRONTIER_INTERNAL_REFERENCE_2026-08-14.md`
-2. `experiments/07-isotope-srh/NEGATIVE_U_INTERNAL_REFERENCE_SCREEN_2026-08-14.md`
-3. `experiments/07-isotope-srh/NATURAL_HG_PILOT_GATE_2026-08-14.md`
-4. `experiments/07-isotope-srh/ELECTROSTATIC_DEGENERACY_AND_CALIBRATION_2026-08-14.md`
-5. `experiments/07-isotope-srh/DLTS_SAMPLE_ARCHITECTURE_AND_REPLICATION_2026-08-14.md`
-6. `experiments/07-isotope-srh/ELECTRON_DETUNING_CLOSURE_2026-08-14.md`
-7. `experiments/07-isotope-srh/ELECTRON_CAPTURE_BOTTLENECK_AND_REGISTRATION_2026-08-14.md`
-8. `experiments/07-isotope-srh/DLTS_OBSERVABILITY_AND_ISOTOPE_DECOMPOSITION_2026-08-14.md`
-9. `experiments/07-isotope-srh/TWO_STEP_SRH_KILL_TEST_2026-08-13.md`
+1. `experiments/07-isotope-srh/00_THEORETICAL_ONLY_SCOPE_2026-08-14.md`
+2. `experiments/07-isotope-srh/00_ACTIVE_FRONTIER_INTERNAL_REFERENCE_2026-08-14.md`
+3. `experiments/07-isotope-srh/NEGATIVE_U_INTERNAL_REFERENCE_SCREEN_2026-08-14.md`
+4. `experiments/07-isotope-srh/ELECTRON_DETUNING_CLOSURE_2026-08-14.md`
+5. `experiments/07-isotope-srh/ELECTRON_CAPTURE_BOTTLENECK_AND_REGISTRATION_2026-08-14.md`
+6. `experiments/07-isotope-srh/TWO_STEP_SRH_KILL_TEST_2026-08-13.md`
+7. `experiments/07-isotope-srh/ISOTOPE_AXIS_FINGERPRINT_2026-08-13.md`
 
-Relevant numerics include `negative_u_two_capture_identifiability.py`, `electron_capture_registration.py`, `electron_detuning_observability.py`, `natural_hg_pilot_gate.py`, and earlier isotope/DLTS scripts.
+The physical natural-Hg pilot, sister-coupon fabrication, isotope-exchange anneal, DLTS implementation, and enriched-Hg procurement work are archived feasibility analyses only. Do not optimize or advance them.
 
-## Controlling physics
+## Controlling physics retained from Experiment 07
 
-The detector-relevant target is mercury-vacancy **electron capture `C_n`**. Current narrow-gap theory finds electron capture slower than hole capture and therefore rate-limiting for SRH.
+The detector-relevant target is mercury-vacancy electron capture `C_n`; current narrow-gap theory places electron capture slower than hole capture and therefore rate-limiting for the SRH cycle.
 
-For a one-optical-phonon electron transition use the electron-side energy release/detuning; do not reuse the hole binding energy. Isotope substitution can shift both the phonon energy and the electronic vacancy-band separation. A `C_n` change alone is not proof of a phonon mechanism.
-
-The strongest closure remains the isotope-temperature slope of direct capture compared with the independently reconstructed detuning shift from Raman plus emission/capture DLTS.
-
-## Critical metrology degeneracy
-
-Normalized filling-curve registration measures a product. If
+For a one-optical-phonon electron transition, the relevant detuning is electron-side and isotope substitution changes both phonon and electronic terms. Schematically,
 
 ```math
-C_B=q_C C_A,
-\qquad n_B(z)=q_n n_A(z),
-```
-
-then
-
-```math
-F_B(t)=F_A(q_Cq_n t),
+\Delta_e=\hbar\omega_{op}-\Delta E_e,
 ```
 
 so
 
 ```math
-q_{fit}=q_Cq_n.
+\delta\Delta_e=\hbar\,\delta\omega_{op}-\delta\Delta E_e.
 ```
 
-A common minority-density rescaling is exactly degenerate with a microscopic capture-coefficient change. Multi-bias curve collapse detects profile-shape changes but not this scalar rescaling.
+A change in `C_n` cannot therefore be assigned to phonon mass scaling alone without accounting for isotope-induced electronic-level renormalization.
 
-For an expected ~2% isotope effect, target common-density uncertainty is roughly <=0.5%.
-
-## Internal-reference result
-
-A second resolved electron capture in the same filling population would cancel the unknown density:
-
-```math
-D_{ij}=\ln[(\lambda_i/\lambda_j)_B/(\lambda_i/\lambda_j)_A]
-=\Delta_I\ln C_i-\Delta_I\ln C_j.
-```
-
-A same-defect negative-U version is possible in principle if two sequential electron captures are actually resolved. For
+The negative-U transient algebra remains valid. For two sequential electron captures
 
 ```text
 V0 --a=C1*n--> V- --b=C2*n--> V2-
@@ -72,42 +54,33 @@ V0 --a=C1*n--> V- --b=C2*n--> V2-
 \bar N_e(t)=2-\frac{2b-a}{b-a}e^{-at}+\frac{a}{b-a}e^{-bt}.
 ```
 
-The shape contains `b/a=C2/C1`, independent of `n`.
+The normalized unfilled signal is a two-exponential form. For `r=b/a<1/2` it is exactly identical to a positive mixture of two independent one-step capture populations; at `r=1/2` it becomes exactly single-exponential. This is a structural identifiability result, not an SNR issue.
 
-But this is **not the baseline solution**:
+Earlier filling-curve work also found an exact product degeneracy: a common carrier-density rescaling is indistinguishable from a capture-coefficient rescaling. Retain this only as an analytical inverse-problem result, not as motivation for new measurement hardware.
 
-- the Hg-vacancy intermediate charge state is negative-U and can be hidden in thermal measurements;
-- `b/a=1/2` gives an exact single exponential;
-- `b/a >> 1` also approaches a single exponential because the intermediate state is scarcely occupied;
-- available HgCdTe SRH theory does not establish that the operating recombination loop gives two simultaneously observable electron-capture rates.
+## New theoretical frontier
 
-Retain same-defect two-rate fitting only as a bonus if the natural-Hg pilot actually reveals it. Do not force the interpretation.
+The former experimental gate is replaced by:
 
-## Leading physical experiment
+> For a negative-U Hg-vacancy SRH center with arbitrary parallel capture pathways and isotope-induced shifts of phonon energies, electronic defect energies, and possibly matrix elements, what can be inferred or bounded analytically about the total SRH rate from isotope mass alone?
 
-Do **not** buy enriched Hg yet.
+Priority questions:
 
-Run a natural-Hg-only pilot using adjacent sister coupons, matched Hg anneals, then one common randomized post-anneal device-fabrication batch. Use ~10 independent sister pairs, several devices/coupon and several filling biases.
+1. derive the full logarithmic isotope sensitivity of a sequential SRH cycle;
+2. decompose it into phonon-frequency, electronic-level and matrix-element terms;
+3. include arbitrary isotope-insensitive and isotope-sensitive bypass channels;
+4. determine whether any isotope-axis ratio or temperature derivative remains invariant to those unknown channels;
+5. prove upper/lower bounds or no-go conditions on the total isotope leverage;
+6. compare the resulting theorem directly against established nonradiative-capture/isotope-effect theory before claiming novelty.
 
-The pilot must measure the false isotope-like pair shift. A practical pass target remains roughly <=0.3% pair RMS plus <=0.5% common minority-density correction for a 1-2% expected isotope effect.
+## Closed / archived paths
 
-Add one new requirement: acquire filling curves across 3-4 decades of pulse duration and explicitly test for a stable second electron-capture rate. If present and reproducible across bias/temperature, evaluate it as an internal density reference. If absent, retain external density calibration.
+- Experiment 07 heavy-isotope dark-current engineering: STOP.
+- Experiment 07 laboratory pilot / procurement / fabrication program: ARCHIVED, NOT ACTIVE.
+- Experiment 06: SRH two-carrier provenance architecture closed by prior art.
+- Experiment 05: active-volume/bandwidth theorem failed under arbitrary lossless matching.
+- Experiment 04: passive nonreciprocal sensitivity path closed by trace bound.
+- Experiment 02: migrating-depth APD dominated by fixed-depth waveguide comparator.
+- Experiment 01: acquisition/information-spectrum paper path closed by prior art.
 
-## Current disposition
-
-```text
-heavy-isotope dark-current engineering: STOP
-whole-lifetime isotope experiment: REJECT
-finished-device A-B-A anneal: REJECT BY DEFAULT
-post-anneal sister-coupon DLTS: LEADING ARCHITECTURE
-electron capture C_n: PRIMARY TARGET
-horizontal registration alone: INSUFFICIENT; measures C_n*n_fill
-same-defect negative-U internal reference: CONDITIONAL BONUS ONLY
-co-located reference electron trap: USEFUL IF ACTUALLY RESOLVED
-10-pair natural-Hg pilot: NEXT PHYSICAL GATE
-custom injection-DLTS: FALLBACK ONLY
-novelty: NOT ESTABLISHED
-paper drafting: DO NOT BEGIN
-```
-
-Preserve all negative results. Experiments 01, 02, 04, 05 and 06 remain closed unless a genuinely new physical constraint defeats their documented stop.
+Preserve negative results. Do not draft a paper until a theoretical result survives a dedicated prior-art audit.
