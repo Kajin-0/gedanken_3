@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the three main theory figures for Experiment-09 Paper Rev. 3.
+"""Generate the three main theory figures for Experiment-09 Paper Rev. 4.
 
 Outputs:
     paper_rev3_fig1_mechanism.svg/png
@@ -70,45 +70,54 @@ def save(fig, path: Path):
 
 def figure_1(output_dir: Path):
     fig, ax = plt.subplots(figsize=(8.0, 4.8))
-    ax.set_xlim(0, 10)
-    ax.set_ylim(0, 6)
+    ax.set_xlim(0.0, 10.0)
+    ax.set_ylim(0.0, 6.0)
     ax.axis("off")
 
-    # Local-state manifold / bright mode.
-    ax.text(0.45, 5.25, r"photon: coherent $|B\rangle=N^{-1/2}\sum_j|j\rangle$", fontsize=12)
-    ax.annotate("", xy=(3.0, 4.25), xytext=(2.0, 4.95), arrowprops=dict(arrowstyle="->", lw=1.7))
-
-    bright = plt.Rectangle((2.8, 3.55), 2.4, 1.15, fill=False, linewidth=1.8)
+    # Main state-space sectors.
+    bright = plt.Rectangle((3.0, 3.55), 2.35, 1.0, fill=False, linewidth=1.8)
+    dark = plt.Rectangle((3.0, 1.15), 2.35, 1.0, fill=False, linewidth=1.8)
+    sink = plt.Rectangle((7.35, 3.55), 1.55, 1.0, fill=False, linewidth=1.8)
     ax.add_patch(bright)
-    ax.text(4.0, 4.12, "bright counted sector", ha="center", va="center", fontsize=12)
-
-    dark = plt.Rectangle((2.8, 1.15), 2.4, 1.25, fill=False, linewidth=1.8)
     ax.add_patch(dark)
-    ax.text(4.0, 1.78, r"dark manifold ($N-1$ directions)", ha="center", va="center", fontsize=12)
-
-    ax.text(0.45, 1.1, r"internal event: local $|j\rangle$", fontsize=12)
-    ax.annotate("", xy=(2.8, 1.65), xytext=(1.95, 1.35), arrowprops=dict(arrowstyle="->", lw=1.7))
-    ax.text(1.0, 2.0, r"direct bright overlap $1/N$", fontsize=10)
-
-    # Dephasing and recycling.
-    ax.annotate("", xy=(4.0, 2.4), xytext=(4.0, 3.55), arrowprops=dict(arrowstyle="->", lw=1.8))
-    ax.text(4.15, 3.0, r"local dephasing $\gamma_N$", fontsize=11, va="center")
-
-    ax.annotate("", xy=(4.8, 3.55), xytext=(4.8, 2.4), arrowprops=dict(arrowstyle="->", lw=1.5, linestyle="--"))
-    ax.text(5.0, 2.95, r"slow return $r_-\sim\lambda_N/N$", fontsize=10, va="center")
-
-    # Counted sink.
-    sink = plt.Rectangle((7.2, 3.55), 1.8, 1.15, fill=False, linewidth=1.8)
     ax.add_patch(sink)
-    ax.text(8.1, 4.12, "counted sink", ha="center", va="center", fontsize=12)
-    ax.annotate("", xy=(7.2, 4.12), xytext=(5.2, 4.12), arrowprops=dict(arrowstyle="->", lw=2.0))
-    ax.text(6.2, 4.38, r"$\kappa_N$", fontsize=12, ha="center")
+    ax.text(4.175, 4.05, "bright counted sector", ha="center", va="center", fontsize=11.5)
+    ax.text(4.175, 1.65, r"dark manifold ($N-1$ directions)", ha="center", va="center", fontsize=10.5)
+    ax.text(8.125, 4.05, "counted sink", ha="center", va="center", fontsize=11.5)
 
-    ax.text(6.35, 1.05, "gate closes when", fontsize=11, ha="center")
-    ax.text(6.35, 0.65, r"$C_{S,N}(T_N)=\eta$", fontsize=12, ha="center")
-    ax.text(6.35, 0.22, r"count burden: $\mu_N=Nd\int_0^{T_N}C_{D,N}(u)du$", fontsize=11, ha="center")
+    # Signal and local event inputs.
+    ax.text(0.35, 4.95, r"photon creates $|B\rangle=N^{-1/2}\sum_j|j\rangle$", fontsize=11.5)
+    ax.annotate("", xy=(3.0, 4.05), xytext=(2.2, 4.7), arrowprops=dict(arrowstyle="->", lw=1.6))
+    ax.text(0.35, 0.55, r"internal event: local $|j\rangle$", fontsize=11.5)
+    ax.annotate("", xy=(3.0, 1.65), xytext=(2.15, 0.82), arrowprops=dict(arrowstyle="->", lw=1.6))
+    ax.text(0.55, 1.45, r"direct bright component $1/N$", fontsize=9.5)
 
-    ax.set_title("Coherence-selective detection: fast extraction versus slow dark-manifold recycling", fontsize=13)
+    # Fast extraction.
+    ax.annotate("", xy=(7.35, 4.05), xytext=(5.35, 4.05), arrowprops=dict(arrowstyle="->", lw=1.9))
+    ax.text(6.35, 4.32, r"fast extraction $\kappa_N$", fontsize=10.5, ha="center")
+
+    # Dephasing and slow return, separated spatially.
+    ax.annotate("", xy=(3.75, 2.15), xytext=(3.75, 3.55), arrowprops=dict(arrowstyle="->", lw=1.7))
+    ax.text(2.45, 2.86, r"local dephasing $\gamma_N$", fontsize=10.2, ha="right", va="center")
+    ax.annotate(
+        "",
+        xy=(4.75, 3.55),
+        xytext=(4.75, 2.15),
+        arrowprops=dict(arrowstyle="->", lw=1.5, linestyle="--"),
+    )
+    ax.text(5.02, 2.86, r"slow return $r_-\sim\lambda_N/N$", fontsize=10.2, ha="left", va="center")
+
+    # Operational gate definition.
+    ax.text(7.0, 1.65, "gate closes at minimum $T_N$ with", fontsize=10.5, ha="center")
+    ax.text(7.0, 1.18, r"$C_{S,N}(T_N)=\eta$", fontsize=11.5, ha="center")
+    ax.text(
+        7.0,
+        0.52,
+        r"$\mu_{\mathrm{loc},N}=Nd\int_0^{T_N}C_{D,N}(u)\,du$",
+        fontsize=10.7,
+        ha="center",
+    )
+
     save(fig, output_dir / "paper_rev3_fig1_mechanism")
 
 
@@ -136,7 +145,6 @@ def figure_2(output_dir: Path):
         values = np.asarray(values)
         ax.loglog(Ns, values, marker=marker, markersize=4, linewidth=1.5, label=label)
 
-        # Draw a local asymptotic slope guide normalized at the final exact point.
         Nguide = np.asarray([Ns[-5], Ns[-1]], dtype=float)
         guide = values[-1] * (Nguide / Ns[-1]) ** slope
         ax.loglog(Nguide, guide, linestyle="--", linewidth=1.2)
@@ -144,7 +152,6 @@ def figure_2(output_dir: Path):
 
     ax.set_xlabel(r"coherently participating states $N$")
     ax.set_ylabel(r"accepted local-dark mean $\mu_{\mathrm{loc},N}$")
-    ax.set_title("Exact finite-$N$ count burden approaches the predicted scaling classes")
     ax.grid(True, which="both", alpha=0.22)
     ax.legend(frameon=False, fontsize=9)
     save(fig, output_dir / "paper_rev3_fig2_scaling")
@@ -158,31 +165,41 @@ def figure_3(output_dir: Path):
     fig, ax = plt.subplots(figsize=(7.2, 4.9))
     ax.set_xlim(-1.0, 1.0)
     ax.set_ylim(0.0, 1.0)
-
-    # Use text/line structure rather than relying on color.
     ax.axvline(0.0, linewidth=1.6)
-    ax.hlines(q0, -0.03, 0.03, linewidth=2.2)
     ax.plot([0.0], [q0], marker="o", markersize=7)
 
     ax.text(-0.5, 0.72, "dephasing scales faster", ha="center", fontsize=12)
     ax.text(-0.5, 0.57, r"$\eta_{\rm sc}=0$", ha="center", fontsize=13)
-    ax.text(-0.5, 0.42, "no fixed positive efficiency\nkeeps local-dark burden bounded", ha="center", fontsize=10)
-
-    ax.text(0.5, 0.72, "extraction scales faster", ha="center", fontsize=12)
-    ax.text(0.5, 0.57, r"$\eta_{\rm sc}=1$", ha="center", fontsize=13)
-    ax.text(0.5, 0.42, "every fixed $\eta<1$ can\nremain locally scalable", ha="center", fontsize=10)
-
-    ax.annotate(
-        r"balanced line: $\eta_{\rm sc}=q_0=\kappa_0/(\kappa_0+\gamma_0)$",
-        xy=(0.0, q0),
-        xytext=(-0.83, 0.91),
-        arrowprops=dict(arrowstyle="->", linewidth=1.2),
+    ax.text(
+        -0.5,
+        0.42,
+        "no fixed positive efficiency\nkeeps local-dark burden bounded",
+        ha="center",
         fontsize=10,
     )
 
+    ax.text(0.5, 0.72, "extraction scales faster", ha="center", fontsize=12)
+    ax.text(0.5, 0.57, r"$\eta_{\rm sc}=1$", ha="center", fontsize=13)
+    ax.text(
+        0.5,
+        0.42,
+        r"every fixed $\eta<1$ can" + "\nremain locally scalable",
+        ha="center",
+        fontsize=10,
+    )
+
+    ax.text(
+        0.0,
+        0.965,
+        r"balanced: $\eta_{\rm sc}=q_0=\kappa_0/(\kappa_0+\gamma_0)$",
+        ha="center",
+        va="top",
+        fontsize=10.5,
+    )
+    ax.annotate("", xy=(0.0, q0 + 0.01), xytext=(0.0, 0.91), arrowprops=dict(arrowstyle="->", linewidth=1.1))
+
     ax.set_xlabel(r"rate-scaling imbalance $\alpha-\beta$")
     ax.set_ylabel(r"scalable fixed internal efficiency $\eta_{\rm sc}$")
-    ax.set_title("Scalable-efficiency ceiling under bounded per-site counted coupling")
     ax.set_xticks([-1, 0, 1], [r"$\alpha<\beta$", r"$\alpha=\beta$", r"$\alpha>\beta$"])
     ax.grid(True, axis="y", alpha=0.22)
     save(fig, output_dir / "paper_rev3_fig3_ceiling")
