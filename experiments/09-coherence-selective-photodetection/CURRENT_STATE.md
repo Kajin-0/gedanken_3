@@ -2,29 +2,28 @@
 
 **Date:** 2026-08-14  
 **Scope:** analytical/theoretical only  
-**Status:** **ACTIVE PAPER / PRA-FACING REV. 4 RENDERED AND QA'D / NO FATAL INTERNAL DEFECT IDENTIFIED / NOVELTY NOT ESTABLISHED**
+**Status:** **ACTIVE PAPER / PRA REV. 5 MAJOR REVISION / FIXED-d LOW-DENSITY OBJECTION REPAIRED / RENDERED AND QA'D / NOVELTY NOT ESTABLISHED**
 
 ## Read next
 
-1. `PAPER_DRAFT_REV4_PRA_2026-08-14.md` — active journal-facing scientific text
-2. `PAPER_REV4_PRA_RENDER_QA_2026-08-14.md` — final 7-page REVTeX render QA
-3. `PAPER_REV4_REFERENCE_AUDIT_2026-08-14.md` — verified working bibliography
-4. `PAPER_REV3_JOURNAL_STRATEGY_2026-08-14.md` — PRA Regular Article rationale
-5. `PAPER_REV3_SIGNIFICANCE_REVIEW_2026-08-14.md` — gate that authorized manuscript production
-6. `SCALABLE_EFFICIENCY_CEILING_2026-08-14.md` — headline theorem
-7. `RATE_SCALING_PHASE_DIAGRAM_2026-08-14.md` — full asymptotic classification
-8. `COLLECTIVE_EXTRACTION_RATE_BOUND_2026-08-14.md` — bounded-local-coupling proof
-9. `GATED_REVERSE_INJECTION_PHASE_LAW_2026-08-14.md` — corrected thermodynamic supporting result
-10. `RATE_SCALING_PRIOR_ART_ADDENDUM_2026-08-14.md` — closest current prior-art boundary
-11. numerical scripts under `numerics/`.
+1. `PAPER_DRAFT_REV5_PRA_2026-08-14.md` — active scientific manuscript source
+2. `PAPER_REV4_EXTERNAL_REFEREE_RESPONSE_2026-08-14.md` — external major-review objections and Rev. 5 disposition
+3. `PAPER_REV5_PRA_RENDER_QA_2026-08-14.md` — current 9-page REVTeX render QA
+4. `numerics/paper_rev5_figures.py` — current publication-figure generator
+5. `SCALABLE_EFFICIENCY_CEILING_2026-08-14.md` — pre-Rev.5 headline theorem history
+6. `RATE_SCALING_PHASE_DIAGRAM_2026-08-14.md` — full earlier asymptotic derivation history
+7. `COLLECTIVE_EXTRACTION_RATE_BOUND_2026-08-14.md` — bounded-local-coupling proof
+8. `GATED_REVERSE_INJECTION_PHASE_LAW_2026-08-14.md` — supporting thermodynamic result
+9. `PAPER_REV4_REFERENCE_AUDIT_2026-08-14.md` — verified working bibliography
+10. earlier Rev. 0–4 manuscripts/referee reports only as correction history.
 
-Earlier Rev. 0–3 manuscripts and referee reports are correction history. Do not resume from their superseded claims.
+Do **not** resume from Rev. 4's fixed-per-site-rate `d` asymptotic as the active theorem. It was superseded by the external hostile review.
 
 ---
 
 # Active paper
 
-> **Scalable internal-dark-count limits in a coherence-selective photodetector**
+> **Scalable internal false-count limits in a coherence-selective photodetector**
 
 Current first target:
 
@@ -33,79 +32,157 @@ Physical Review A — Regular Article
 suggested section: A-3E Quantum Technologies
 ```
 
-The Rev. 4 manuscript has been rendered locally with `revtex4-2` into a seven-page, two-column PRA-style PDF. All citations/cross-references resolve; all three figures pass visual QA; PDF preflight passes. Author name/affiliation remain placeholders.
+Rev. 5 has been rendered locally as a nine-page two-column REVTeX/PRA manuscript. The current render passes PDF preflight, citation/cross-reference checks, and page-level visual QA. Author/affiliation metadata remain placeholders.
 
 ---
 
-# Minimal model and exact kernel
+# Why Rev. 5 exists
 
-A photon prepares the symmetric bright state
+The external hostile referee review independently found no obvious algebraic defect in the core one-excitation dynamics, eigenvalues, asymptotic sectors, bounded-coupling proof, or reverse-count scaling. Its blocking objection was instead asymptotic self-consistency:
 
-```math
-|B\rangle=\frac1{\sqrt N}\sum_j|j\rangle,
+```text
+fixed per-site generation d
++ slow gate/lifetime growing with N
+-> the old model can leave a literal low-density regime as N->infinity.
 ```
 
-while internally generated dark events are local. Static `1/N` rejection of a uniform local event is **established coherent-mode/state-verification geometry**, not the paper novelty claim.
+That objection is accepted. Rev. 5 changes the primary observable rather than merely adding a caveat.
 
-With size-dependent bright extraction `kappa_N` and local pure dephasing `gamma_N`,
+---
+
+# Exact Lindblad model
+
+Use the symmetric bright state
 
 ```math
-\dot P=-\kappa_Nb,
+|B\rangle=\frac1{\sqrt N}\sum_j|j\rangle
+```
+
+and counted sink `|c>`. With
+
+```math
+\mathcal D[L]\rho
+=L\rho L^\dagger-\frac12\{L^\dagger L,\rho\},
+```
+
+the enlarged completely positive dynamics is
+
+```math
+\boxed{
+\dot\varrho
+=\kappa_N\mathcal D[|c\rangle\langle B|]\varrho
++\gamma_N\sum_j\mathcal D[|j\rangle\langle j|]\varrho.
+}
+```
+
+Projecting onto the surviving excitation manifold gives
+
+```math
+\dot\rho
+=-\frac{\kappa_N}{2}\{|B\rangle\langle B|,\rho\}
++\gamma_N\sum_j\mathcal D[|j\rangle\langle j|]\rho.
+```
+
+Define
+
+```math
+P=\operatorname{Tr}\rho,
+\qquad
+b=\langle B|\rho|B\rangle.
+```
+
+Exactly,
+
+```math
+\boxed{\dot P=-\kappa_Nb,}
 ```
 
 ```math
-\dot b=-(\kappa_N+\gamma_N)b+\frac{\gamma_N}{N}P,
+\boxed{
+\dot b
+=-(\kappa_N+\gamma_N)b
++\frac{\gamma_N}{N}P.
+}
 ```
 
-so
+Hence
 
 ```math
-\ddot P+(\kappa_N+\gamma_N)\dot P
+\ddot P
++(\kappa_N+\gamma_N)\dot P
 +\frac{\kappa_N\gamma_N}{N}P=0.
 ```
 
-The slow dark-manifold recycling rate is
+The exact rates are
 
 ```math
-r_{-,N}
-=\frac1N\frac{\kappa_N\gamma_N}{\kappa_N+\gamma_N}
-[1+O(N^{-1})].
+r_{\pm,N}
+=\frac{a_N\pm\sqrt{a_N^2-4\kappa_N\gamma_N/N}}2,
+\qquad
+a_N=\kappa_N+\gamma_N,
 ```
 
-For nonzero dephasing, both bright and local excitations are eventually counted; the discrimination is finite-time.
+and the emergent slow eigenvalue is
+
+```math
+\boxed{
+r_{-,N}
+=\frac1N
+\frac{\kappa_N\gamma_N}{\kappa_N+\gamma_N}
+[1+O(N^{-1})].
+}
+```
+
+`r_-` is an effective collective eigenmode, **not** a primitive microscopic dark-to-bright jump.
+
+For every nonzero `gamma_N`, both a bright excitation and a local excitation are eventually counted. The detector resource is therefore the temporal separation between the fast bright process and slow recycling.
 
 ---
 
-# Counting model — exact scope
+# Primary Rev. 5 observable — dilute accepted-event susceptibility
 
-Continuous internal generation is represented by an explicit extensive low-density independent-particle lift:
-
-```text
-N local sites;
-Poisson generation rate d per site;
-generated excitations distinguishable and noninteracting;
-each follows an independent copy of the exact one-body kernel.
-```
-
-Then
+Let
 
 ```math
-\mu_{loc,N}(T)=Nd\int_0^T C_{D,N}(u)du.
+C_{S,N}(t)
 ```
 
-Signal efficiency means **conditional internal collection after bright-state preparation**, not end-to-end photon QE.
-
-For fixed target `eta`:
+be the collection kernel for an initially bright photon-created excitation and
 
 ```math
-T_N(\eta)=\inf\{t:C_{S,N}(t)\ge\eta\},
+C_{loc,N}(t)
 ```
+
+for a uniformly local internally generated event.
+
+For required conditional internal collection efficiency `0<eta<1`, choose
 
 ```math
-\mu_{loc,N}(\eta)=Nd\int_0^{T_N(\eta)}C_{D,N}(u)du.
+\boxed{
+T_N(\eta)
+=\inf\{t:C_{S,N}(t)\ge\eta\}.
+}
 ```
 
-Same-mode optical background is not rejected.
+The primary internally generated false-event observable is
+
+```math
+\boxed{
+\chi_N(\eta)
+=N\int_0^{T_N(\eta)}C_{loc,N}(u)\,du
+=\lim_{d\to0}\frac{\mu_{loc,N}(\eta;d)}d.
+}
+```
+
+This order of limits is the central Rev. 5 repair.
+
+A finite-rate unsaturable independent-particle Poisson model gives
+
+```math
+\mu_{loc,N}(\eta;d)=d\chi_N(\eta),
+```
+
+but this is now a **secondary conditional realization**. Do not call fixed `d` plus arbitrary `N->infinity` a uniformly valid low-density physical limit.
 
 ---
 
@@ -119,12 +196,12 @@ Let
 \gamma_N=\gamma_0N^\beta.
 ```
 
-Then
+Then the active asymptotic classification is
 
 ```math
 \boxed{
 \begin{array}{c|c|c|c}
-\text{rate sector} & \text{efficiency} & T_N & \mu_{loc,N}\\
+\text{rate sector} & \text{efficiency} & T_N & \chi_N\\
 \hline
 \alpha>\beta & \eta<1 & N^{-\alpha} & N^{-\alpha}\\
 \alpha=\beta=s & \eta<q_0 & N^{-s} & N^{-s}\\
@@ -134,51 +211,147 @@ Then
 \end{array}}
 ```
 
-with
+where
 
 ```math
 q_0=\frac{\kappa_0}{\kappa_0+\gamma_0}.
 ```
 
-This is a detector-operational accepted-event scaling classification, **not** a claim of a new generic decoherence phase transition.
+Rev. 5 explicitly derives the leading collection kernels in each branch rather than only tabulating these powers.
+
+## Extraction-dominated branch
+
+With `v=kappa_N t` and `x_eta=-ln(1-eta)`,
+
+```math
+C_{S,N}\to1-e^{-v},
+```
+
+```math
+NC_{loc,N}\to1-e^{-v},
+```
+
+so
+
+```math
+T_N\sim\frac{x_\eta}{\kappa_0}N^{-\alpha},
+```
+
+```math
+\chi_N\sim\frac{x_\eta-\eta}{\kappa_0}N^{-\alpha}.
+```
+
+## Dephasing-dominated branch
+
+With `z=kappa_N t/N`,
+
+```math
+C_{S,N}\to1-e^{-z},
+\qquad
+C_{loc,N}\to1-e^{-z},
+```
+
+so
+
+```math
+T_N\sim\frac{x_\eta}{\kappa_0}N^{1-\alpha},
+```
+
+```math
+\chi_N\sim\frac{x_\eta-\eta}{\kappa_0}N^{2-\alpha}.
+```
+
+## Balanced branch
+
+For `alpha=beta=s`, define
+
+```math
+A=\kappa_0+\gamma_0,
+\qquad
+q_0=\kappa_0/A,
+\qquad
+\lambda_0=\kappa_0\gamma_0/A.
+```
+
+Fast branch `eta<q0`:
+
+```math
+C_{S,N}\to q_0(1-e^{-v}),
+```
+
+```math
+NC_{loc,N}
+\to q_0^2(1-e^{-v})+q_0(1-q_0)v,
+\qquad
+v=AN^st.
+```
+
+Slow branch `eta>q0`, on `t=N^(1-s)y`:
+
+```math
+C_{S,N}\to1-(1-q_0)e^{-\lambda_0y},
+```
+
+```math
+C_{loc,N}\to1-e^{-\lambda_0y}.
+```
+
+At `eta=q0`, the fast deficit balances the incipient slow contribution:
+
+```math
+v e^v\sim\frac{N}{(1-q_0)^2},
+```
+
+which produces
+
+```math
+T_N=\Theta(N^{-s}\ln N),
+```
+
+```math
+\chi_N=\Theta[N^{-s}(\ln N)^2].
+```
 
 ---
 
-# Bounded microscopic coupling
+# Bounded microscopic counted-coupling resource
 
-For linear counted extraction matrix
+For arbitrary linear counted sink channels, define
 
 ```math
-K=\sum_a|\ell_a\rangle\langle\ell_a|\ge0,
+K=\sum_a|\ell_a\rangle\langle\ell_a|\ge0.
 ```
 
-with per-local-state coupling budget
+If each microscopic state has an `N`-independent counted-coupling budget
 
 ```math
 K_{jj}\le\kappa_{loc},
 ```
 
+then
+
 ```math
 \boxed{
-\kappa_B\le\lambda_{max}(K)\le\operatorname{Tr}K\le N\kappa_{loc}.
+\kappa(\psi)
+\le\lambda_{max}(K)
+\le\operatorname{Tr}K
+\le N\kappa_{loc}.
 }
 ```
 
 Hence
 
 ```math
-\boxed{\alpha\le1.}
+\boxed{\alpha\le1}
 ```
 
-within this resource class, and any operating point strictly requiring slow dark-manifold recycling has
+**within the linear single-excitation resource class**.
 
-```math
-\boxed{\mu_{loc,N}=\Omega(N).}
-```
+This scope qualifier belongs to the theorem itself.
 
 ---
 
-# Headline theorem — scalable internal-efficiency ceiling
+# Headline theorem — bounded-response efficiency supremum
 
 Assume useful extraction does not weaken with size,
 
@@ -189,95 +362,194 @@ Assume useful extraction does not weaken with size,
 Define
 
 ```math
-\eta_{sc}=\sup\{\eta\in(0,1):\mu_{loc,N}(\eta)=O(1)\}.
+\boxed{
+\eta_{sc}
+=\sup\{\eta\in(0,1):\chi_N(\eta)=O(1)\}.
+}
 ```
 
 Then
 
 ```math
 \boxed{
-\eta_{sc}=
-\begin{cases}
+\eta_{sc}
+=\begin{cases}
 1,&\alpha>\beta,\\[4pt]
 \dfrac{\kappa_0}{\kappa_0+\gamma_0},&\alpha=\beta,\\[10pt]
 0,&\alpha<\beta.
 \end{cases}}
 ```
 
-This is the active paper centerpiece.
-
----
-
-# Corrected gated reverse-injection floor
-
-For a thermally reversible counted transition
-
-```math
-\bar\kappa_N=\kappa_Ne^{-\Delta F_N/(kT)},
-```
-
-at the same efficiency-selected gate
-
-```math
-\mu_{rev,N}=\bar\kappa_N\int_0^{T_N}C_{S,N}(u)du.
-```
-
-At fixed affinity:
-
-```math
-\mu_{rev,N}\sim
-\begin{cases}
-O(1),&\text{fast branch},\\
-O(\ln N),&\text{balanced boundary},\\
-O(N),&\text{strict slow branch}.
-\end{cases}
-```
-
-Thus the older blanket `kT ln(C)` interpretation is not the gated detector law.
-
----
-
-# Closest prior-art boundary
-
-Mandatory comparators:
+Interpretation:
 
 ```text
-Young/Sarovar/Leonard 2018 — coherence/backaction detector framework;
-Young/Sarovar/Leonard 2020 — closest coherent collective detector architecture and dark-to-active isolation condition;
-Shammah et al. 2017 — local-dephasing bright/dark scattering;
-Pisani et al. 2023 — collective quantum infrared detector extraction;
-Bassler/Lyne/Cuerda 2026 — collective/decoherence large-N scaling regimes;
-Schwarzhans et al. 2026 — detector thermodynamic performance tradeoffs.
+alpha > beta:
+    every fixed eta<1 has bounded dilute response;
+
+alpha = beta:
+    the supremum equals the fast branching fraction q0;
+
+alpha < beta:
+    no fixed positive eta has bounded dilute response.
+```
+
+Important precision:
+
+```text
+s=0 and eta=q0:
+    q0 is a supremum but is NOT attained,
+    because chi_N(q0)=Theta[(ln N)^2].
+
+s>0 and eta=q0:
+    the boundary itself is bounded because
+    N^(-s)(ln N)^2 -> 0.
+```
+
+`O(1)` means **nondivergent with system size**, not automatically an acceptably small false-count probability.
+
+A budgeted interpretation may be written
+
+```math
+\eta_{bud}(d,\mu_*)
+=\sup\left\{\eta:
+\limsup_{N\to\infty}d\chi_N(\eta)\le\mu_*
+\right\}
+```
+
+within the range where the linear-response mapping is physically appropriate. Rev. 5 defines but does not optimize this quantity.
+
+---
+
+# Robust slow-branch no-go
+
+Within the **linear single-excitation resource class**,
+
+```math
+\boxed{
+\text{strict slow-recycling operation}
+\Longrightarrow
+\chi_N=\Omega(N).
+}
+```
+
+The detailed `N^(2-alpha)` susceptibility powers describe the dilute linear response. Their physical finite-rate translation need not survive saturation.
+
+To stress the no-go, impose an extreme one-event-per-site-per-gate model:
+
+```math
+\mu_{1,N}(T)
+=N\int_0^T d e^{-ds}C_{loc,N}(T-s)ds.
+```
+
+Then
+
+```math
+\mu_{1,N}(T_N)
+\ge
+N(1-e^{-dT_N/2})C_{loc,N}(T_N/2).
+```
+
+On every strict slow branch in the bounded-coupling class, the two factors multiplying `N` remain bounded away from zero asymptotically, so
+
+```math
+\boxed{
+\mu_{1,N}(T_N)=\Theta(N).
+}
+```
+
+Thus:
+
+```text
+N^(2-alpha) finite-rate powers: MODEL-DEPENDENT.
+Strict slow-branch divergence: SURVIVES MAXIMAL PER-SITE SATURATION.
+```
+
+---
+
+# Supporting thermodynamic result
+
+The reversible counted-extraction result remains valid only under its assumed effective local-detailed-balance model and is now supporting material, not a coequal novelty claim.
+
+At the same efficiency-selected gate, fixed effective affinity gives
+
+```text
+fast branch:          O(1)
+balanced boundary:    O(log N)
+strict slow branch:   O(N)
+```
+
+for the reverse contribution.
+
+---
+
+# Figure / terminology state
+
+Rev. 5 reserves `dark manifold` for the state-space sector and calls noise-origin events `local internal events` or `false events`.
+
+Current figures:
+
+```text
+Fig. 1 — mechanism and two clocks;
+         gamma_N is microscopic dephasing;
+         r_- is explicitly an effective slow eigenmode;
+         local event shows bright weight 1/N and dark weight 1-1/N.
+
+Fig. 2 — exact finite-N chi_N approaching asymptotic scaling classes;
+         consistency illustration, not independent validation.
+
+Fig. 3 — scaling classification diagram for eta_sc.
+```
+
+---
+
+# Prior-art boundary
+
+Mandatory comparators remain:
+
+```text
+Young/Sarovar/Léonard 2018 — coherence/backaction detector framework;
+Young/Sarovar/Léonard 2020 — coherent collective detector architecture and dark-to-active isolation condition;
+Shammah et al. 2017 — local-dephasing bright/dark mixing;
+Pisani et al. 2023 — collective quantum IR detector extraction;
+Bassler/Lyne/Cuerda 2026 — collective/decoherence large-N scaling;
+Schwarzhans et al. 2026 — quantum-detector thermodynamic performance tradeoffs.
 ```
 
 These eliminate broad novelty claims.
 
-Focused searches have not found a direct statement of the complete Rev. 4 detector theorem, but **novelty remains unestablished**.
+The current narrow claim is the efficiency-selected internally generated response theorem under imperfect dark-state isolation and bounded microscopic extraction resource.
+
+Focused audits have not found a direct stronger match, but **novelty is not established**.
 
 ---
 
-# Rendered manuscript status
-
-Current production checks:
+# Current rendered manuscript status
 
 ```text
-PRA Rev. 4 scientific text: PASS current internal audit
+PRA Rev. 5 source: ACTIVE
 REVTeX two-column compile: PASS
-PDF pages: 7
+PDF pages: 9
+PDF SHA-256:
+  bb41ad84b0904a9d126c9150a784effed0a9a77875f8358f4f03b7867df0bb7a
 citations/cross-references: PASS
-three figures: PASS
-page-level visual QA: PASS
+figures: PASS CURRENT VISUAL QA
 PDF preflight: PASS
 author metadata: OPEN
 novelty: NOT ESTABLISHED
 ```
 
-The rendered PDF SHA-256 is recorded in `PAPER_REV4_PRA_RENDER_QA_2026-08-14.md`.
+See `PAPER_REV5_PRA_RENDER_QA_2026-08-14.md`.
 
 ---
 
-# Next action
+# Next gate
 
 Do **not** open Experiment 10.
 
-The next useful work is one final **adversarial review of the rendered Rev. 4 PDF itself**. If no new scientific defect appears, the remaining tasks are author metadata, final citation-network check immediately before submission, and the actual PRA submission package.
+The fixed-`d`/low-density objection is now closed by reformulation.
+
+The next useful action is one fresh **extreme hostile review of Rev. 5**, focused on the strongest remaining scientific risk:
+
+> Is the bounded-response theorem too dependent on exact permutation symmetry, or can the main no-go survive a controlled class of bounded heterogeneity in optical coupling, local dephasing, local event rates, or a finite-rank bright subspace?
+
+Only open more theory if that review identifies a concrete blocking defect. Otherwise proceed toward final author metadata, final citation-network audit, and PRA submission production.
