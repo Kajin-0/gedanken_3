@@ -4,7 +4,7 @@ Read `AGENTS.md` first, then this file. Do not infer research chronology from `m
 
 ## Hard global constraint — ANALYTICAL / THEORETICAL ONLY
 
-The project goal is a defensible theoretical photodetector paper grown from a simple Gedanken experiment. Do not open a new experiment while the current paper path remains scientifically alive.
+The project goal is a defensible theoretical photodetector paper grown from a simple Gedanken experiment.
 
 Active work may use first-principles derivation, exact toy models, analytical bounds/no-go results, numerical thought experiments, adversarial primary-literature audits, and theoretical manuscript development. Do not make laboratory work the next step.
 
@@ -12,436 +12,287 @@ Preserve failed/corrected paths and do not use novelty/priority language without
 
 ---
 
-# ACTIVE FRONTIER — Experiment 09 PRA Rev. 5
+# ACTIVE FRONTIER — Experiment 10
 
 Branch:
+
+```text
+experiment-10-room-temperature-lwir-admissibility
+```
+
+Working title for the research line only:
+
+> **Room-temperature LWIR band-structure admissibility**
+
+This is not yet a manuscript title.
+
+## Read in this order
+
+1. `experiments/10-room-temperature-lwir-admissibility/CURRENT_STATE.md`
+2. `experiments/10-room-temperature-lwir-admissibility/FOUNDING_GEDANKEN_2026-08-14.md`
+3. `experiments/10-room-temperature-lwir-admissibility/PRIOR_BRANCH_BOUNDARY_2026-08-14.md`
+4. `experiments/10-room-temperature-lwir-admissibility/PROGRESS_LOG.md`
+5. Experiment-08 novelty stop on branch `experiment-08-zero-gap-kane-statistics` before invoking Kane zero/small-gap limits.
+
+Parent research branch:
 
 ```text
 experiment-09-coherence-selective-photodetection
 ```
 
-Active manuscript:
-
-> **Scalable internal false-count limits in a coherence-selective photodetector**
-
-Current first target:
-
-```text
-Physical Review A — Regular Article
-suggested section: A-3E Quantum Technologies
-```
-
-## Read in this order
-
-1. `experiments/09-coherence-selective-photodetection/CURRENT_STATE.md`
-2. `experiments/09-coherence-selective-photodetection/PAPER_DRAFT_REV5_PRA_2026-08-14.md`
-3. `experiments/09-coherence-selective-photodetection/PAPER_REV4_EXTERNAL_REFEREE_RESPONSE_2026-08-14.md`
-4. `experiments/09-coherence-selective-photodetection/PAPER_REV5_PRA_RENDER_QA_2026-08-14.md`
-5. `experiments/09-coherence-selective-photodetection/numerics/paper_rev5_figures.py`
-6. `experiments/09-coherence-selective-photodetection/COLLECTIVE_EXTRACTION_RATE_BOUND_2026-08-14.md`
-7. earlier Rev. 0–4 files only as correction history.
-
-**Do not resume from Rev. 4's finite-`d` low-density asymptotic.** The external hostile review identified that formulation as self-inconsistent on much of the strict slow branch, and Rev. 5 replaces it.
+Experiment 09 is a separate paper lineage. Do not mix its collective-coherence theorem into this branch unless a later derivation produces a genuine logical connection.
 
 ---
 
-# Why Rev. 5 exists
+# Founding Gedanken experiment
 
-The external hostile referee review independently checked and accepted the principal one-excitation algebra and scaling exponents, but raised a major modeling objection:
+Reference detector `H` is HgCdTe. Comparator `X` is an unknown passive interband semiconductor whose electronic dispersion may be designed subject to physical consistency.
 
-```text
-fixed per-site rate d
-+ T_N or slow lifetime growing as N^(1-alpha)
--> per-site occupancy need not remain dilute as N->infinity.
-```
-
-The correct response was not another caveat. The primary asymptotic observable is now the **dilute accepted-event susceptibility**.
-
----
-
-# Exact Lindblad model
-
-Bright state:
+Start at
 
 ```math
-|B\rangle=N^{-1/2}\sum_j|j\rangle.
-```
-
-Counted sink `|c>` and local projectors `P_j=|j><j|`.
-
-With
-
-```math
-\mathcal D[L]\rho
-=L\rho L^\dagger-\frac12\{L^\dagger L,\rho\},
-```
-
-the enlarged evolution is
-
-```math
-\boxed{
-\dot\varrho
-=\kappa_N\mathcal D[|c\rangle\langle B|]\varrho
-+\gamma_N\sum_j\mathcal D[P_j]\varrho.
-}
-```
-
-Projecting onto the surviving excitation manifold and defining
-
-```math
-P=\operatorname{Tr}\rho,
+T=300\ \mathrm K,
 \qquad
-b=\langle B|\rho|B\rangle,
-```
-
-gives exactly
-
-```math
-\boxed{\dot P=-\kappa_Nb,}
-```
-
-```math
-\boxed{
-\dot b
-=-(\kappa_N+\gamma_N)b
-+\frac{\gamma_N}{N}P.
-}
-```
-
-Hence
-
-```math
-\ddot P
-+(\kappa_N+\gamma_N)\dot P
-+\frac{\kappa_N\gamma_N}{N}P=0.
-```
-
-The emergent slow eigenvalue is
-
-```math
-\boxed{
-r_{-,N}
-=\frac1N
-\frac{\kappa_N\gamma_N}{\kappa_N+\gamma_N}
-[1+O(N^{-1})].
-}
-```
-
-Important: `r_-` is an **effective slow eigenmode**, not a primitive microscopic return jump.
-
-For every `gamma_N>0`, both bright and local excitations are eventually counted. The useful discriminator is the coexistence of a fast bright clock and a slow recycling clock; the gate converts that temporal separation into detector selectivity.
-
----
-
-# PRIMARY REV. 5 OBSERVABLE — dilute accepted-event susceptibility
-
-Photon-created bright collection kernel:
-
-```math
-C_{S,N}(t).
-```
-
-Uniform local internally generated event kernel:
-
-```math
-C_{loc,N}(t).
-```
-
-For required conditional internal collection efficiency `eta`, choose
-
-```math
-\boxed{
-T_N(\eta)
-=\inf\{t:C_{S,N}(t)\ge\eta\}.
-}
-```
-
-Then define
-
-```math
-\boxed{
-\chi_N(\eta)
-=N\int_0^{T_N(\eta)}C_{loc,N}(u)du
-=\lim_{d\to0}\frac{\mu_{loc,N}(\eta;d)}d.
-}
-```
-
-This is now the paper's primary asymptotic quantity.
-
-A finite-rate unsaturable independent-particle Poisson model satisfies
-
-```math
-\mu_{loc,N}=d\chi_N,
-```
-
-but this is a secondary mapping only. Do not claim that a fixed finite `d` remains physically low-density on every `N->infinity` slow branch.
-
----
-
-# Rate-scaling classification
-
-Let
-
-```math
-\kappa_N=\kappa_0N^\alpha,
-\qquad
-\gamma_N=\gamma_0N^\beta.
+\lambda_c=10\ \mu\mathrm m.
 ```
 
 Then
 
 ```math
-\boxed{
-\begin{array}{c|c|c|c}
-\text{sector} & \text{efficiency} & T_N & \chi_N\\
-\hline
-\alpha>\beta & \eta<1 & N^{-\alpha} & N^{-\alpha}\\
-\alpha=\beta=s & \eta<q_0 & N^{-s} & N^{-s}\\
-\alpha=\beta=s & \eta=q_0 & N^{-s}\ln N & N^{-s}(\ln N)^2\\
-\alpha=\beta=s & \eta>q_0 & N^{1-s} & N^{2-s}\\
-\alpha<\beta & \eta>0 & N^{1-\alpha} & N^{2-\alpha}
-\end{array}}
+E_g=\frac{hc}{\lambda_c}\approx0.12398\ \mathrm{eV},
+```
+
+```math
+k_BT\approx25.85\ \mathrm{meV},
+```
+
+```math
+\boxed{E_g/(k_BT)\approx4.80.}
+```
+
+This ratio is the basic thermal difficulty: a room-temperature LWIR interband gap is only a few thermal energies.
+
+Initially match the two detectors in
+
+```text
+cutoff energy;
+temperature;
+area;
+accepted optical etendue;
+incident optical environment;
+external absorptance spectrum over the task band;
+response-time or bandwidth requirement.
+```
+
+Perfect contacts and no extrinsic SRH centers may be assumed initially to isolate intrinsic material limits.
+
+---
+
+# First heuristic only
+
+For a conventional nondegenerate 3-D parabolic semiconductor,
+
+```math
+n_i=\sqrt{N_cN_v}\exp[-E_g/(2k_BT)],
 ```
 
 with
 
 ```math
-q_0=\kappa_0/(\kappa_0+\gamma_0).
-```
-
-Rev. 5 explicitly derives the limiting signal/local kernels in each sector. Do not collapse this back to a bare exponent table.
-
----
-
-# Bounded local extraction resource
-
-For positive extraction matrix
-
-```math
-K=\sum_a|\ell_a\rangle\langle\ell_a|,
-```
-
-and bounded per-local-state counted coupling
-
-```math
-K_{jj}\le\kappa_{loc},
-```
-
-```math
-\boxed{
-\kappa(\psi)
-\le\lambda_{max}(K)
-\le\operatorname{Tr}K
-\le N\kappa_{loc}.
-}
+N_c\propto g_c(m_e^*T)^{3/2},
+\qquad
+N_v\propto g_v(m_h^*T)^{3/2}.
 ```
 
 Hence
 
 ```math
-\boxed{\alpha\le1}
+n_i\propto
+(g_cg_v)^{1/2}
+(m_e^*m_h^*)^{3/4}
+T^{3/2}
+\exp[-E_g/(2k_BT)].
 ```
 
-**within the linear single-excitation resource class**.
+At fixed `E_g,T`, this makes low DOS masses and low degeneracy look attractive.
 
-That qualifier must remain attached to the theorem.
+**Do not mistake this for the result.** The optical oscillator strength, thermal DOS, Auger phase space, and response time may not be independently tunable.
 
 ---
 
-# ACTIVE HEADLINE THEOREM — bounded-response efficiency supremum
+# Primary comparator — finite-gap massive Dirac/Kane
 
-Assume useful extraction does not weaken with size:
-
-```math
-0\le\alpha\le1.
-```
-
-Define
+Use
 
 ```math
-\boxed{
-\eta_{sc}
-=\sup\{\eta\in(0,1):\chi_N(\eta)=O(1)\}.
-}
+E_\pm(k)
+=\pm\sqrt{\Delta^2+(\hbar vk)^2},
+\qquad
+\Delta=E_g/2.
 ```
 
-Then
+Near the band edge,
 
 ```math
-\boxed{
-\eta_{sc}
-=\begin{cases}
-1,&\alpha>\beta,\\[4pt]
-\dfrac{\kappa_0}{\kappa_0+\gamma_0},&\alpha=\beta,\\[10pt]
-0,&\alpha<\beta.
-\end{cases}}
+\boxed{m_D=E_g/(2v^2).}
 ```
 
-Call this the **bounded-response efficiency supremum**, not an operational efficiency ceiling.
+The exact 3-D DOS shape is proportional to
 
-`O(1)` means nondivergent with size. It does not imply a small practical false-count probability.
+```math
+g(E)\propto
+\frac{|E|\sqrt{E^2-\Delta^2}}
+{\hbar^3v^3}.
+```
 
-Balanced-boundary precision:
+Working hypothesis:
 
 ```text
-s=0, eta=q0:
-    q0 is a supremum but is NOT attained;
-    chi_N = Theta[(ln N)^2].
-
-s>0, eta=q0:
-    the boundary itself is bounded because
-    N^(-s)(ln N)^2 -> 0.
+large v
+-> smaller thermodynamic DOS scale
+while interband velocity matrix elements may remain strong
+and Auger phase space may differ qualitatively.
 ```
+
+This is a hypothesis only. Do not call the massive-Dirac/Kane class optimal unless a constrained proof establishes it.
 
 ---
 
-# ROBUST NO-GO — survives maximal per-site saturation
+# Experiment-08 boundary — mandatory
 
-Within the **linear single-excitation resource class**,
-
-```math
-\boxed{
-\text{strict slow-recycling operation}
-\Longrightarrow
-\chi_N=\Omega(N).
-}
-```
-
-The detailed `N^(2-alpha)` powers are dilute-response properties. To test whether slow-branch divergence is merely an unlimited-particle artifact, impose at most one event per microscopic site during the gate:
+Experiment 08 already proved that the shortcut
 
 ```math
-\mu_{1,N}(T)
-=N\int_0^T d e^{-ds}C_{loc,N}(T-s)ds.
+m^*=E_g/(2v^2)
 ```
 
-Then
+inserted into a nondegenerate parabolic `n_i` formula and then extrapolated to `E_g -> 0` gives the wrong limit for the reduced Kane model.
 
-```math
-\mu_{1,N}(T_N)
-\ge N(1-e^{-dT_N/2})C_{loc,N}(T_N/2).
-```
+Its zero-gap novelty path is closed.
 
-On every strict slow branch in the bounded-coupling class the two factors multiplying `N` approach positive constants or one, hence
-
-```math
-\boxed{
-\mu_{1,N}(T_N)=\Theta(N).
-}
-```
-
-Therefore:
-
-```text
-N^(2-alpha) finite-rate powers: MODEL-SPECIFIC.
-Strict slow-branch divergence: ROBUST TO MAXIMAL PER-SITE SATURATION.
-```
+Experiment 10 fixes a finite LWIR gap near `0.1 eV` at 300 K and asks a different detector-performance question. Use exact Fermi-Dirac statistics whenever the Maxwell-Boltzmann approximation becomes questionable.
 
 ---
 
-# Supporting thermodynamic result
+# Novelty hazards already identified
 
-The effective local-detailed-balance reverse-extraction analysis is now supporting material only.
-
-At the efficiency-selected gate, fixed effective affinity gives
+The following are established territory and cannot be the paper:
 
 ```text
-fast branch:          O(1)
-balanced boundary:    O(log N)
-strict slow branch:   O(N)
+alpha/G_th detector-material merit;
+alpha sqrt(tau) detector-material merit;
+generic low intrinsic carrier density;
+generic radiative detailed balance;
+generic Auger suppression by band engineering;
+T2SL/quantum-well Auger suppression in general;
+zero-gap Kane charge-neutrality theory.
 ```
 
-for reverse injection.
+Mandatory early references include:
 
-Do not make this a coequal novelty claim.
+```text
+M. Kopytko and A. Rogalski,
+Infrared Phys. Technol. 122, 104063 (2022),
+DOI 10.1016/j.infrared.2022.104063.
+
+A. Rogalski,
+J. Appl. Phys. 137, 170701 (2025),
+DOI 10.1063/5.0260949.
+```
+
+The potential contribution must derive a more primitive joint constraint from the electronic structure itself.
 
 ---
 
-# Figures / terminology
+# Detector-quality constraint
 
-Reserve `dark manifold` for the coherent state-space sector.
+Do not optimize asymptotic scalar sensitivity while allowing the detector to become arbitrarily slow.
 
-Generated noise-origin events are `local internal events` / `false events`.
+Carry a finite temporal requirement such as
 
-Use:
-
-```text
-C_loc,N
-chi_N
+```math
+f_{3\mathrm{dB}}\ge f_0
 ```
 
-rather than overloading `D`/`dark`.
+or
 
-Current Fig. 1:
-
-```text
-local event -> bright weight 1/N + dark-subspace weight 1-1/N;
-gamma_N -> primitive local dephasing;
-r_- -> effective slow eigenmode;
-T_N and chi_N -> separate decision strip.
+```math
+\tau_{det}\le\tau_0.
 ```
 
-Fig. 2 plots exact finite-N `chi_N` approaching the asymptotic classes. It is a consistency illustration, not independent validation.
+A provisional nonradiative-excess ratio is
 
-Fig. 3 is a scaling-classification diagram.
+```math
+\Xi_{nr}
+=\frac{\Gamma_{nonrad}}
+{\Gamma_{rad}+\Gamma_{background}}.
+```
+
+Treat this as a bookkeeping idea only until the exact radiative/background fluctuation model is derived.
 
 ---
 
-# Render state
+# First hard derivation
 
-Current Rev. 5 render:
+Do **not** add Auger yet.
+
+Take two idealized 3-D two-band absorbers with the same finite `E_g`, `T`, optical environment, external absorptance target, and temporal target:
 
 ```text
-REVTeX/PRA compile: PASS
-pages: 9
-PDF SHA-256:
-  bb41ad84b0904a9d126c9150a784effed0a9a77875f8358f4f03b7867df0bb7a
-citations/cross-references: PASS
-vector figures: PASS
-visual QA: PASS
-PDF preflight: PASS
-author metadata: OPEN
-novelty: NOT ESTABLISHED
+A. parabolic dispersion;
+B. massive-Dirac dispersion.
 ```
 
-See `PAPER_REV5_PRA_RENDER_QA_2026-08-14.md`.
+Derive enough exact carrier statistics and interband absorption to answer:
+
+> At matched useful absorptance, can the massive-Dirac class have a lower equilibrium carrier population than the parabolic class, or is there an exact compensating DOS/oscillator-strength invariant?
+
+Possible dispositions:
+
+```text
+YES:
+    identify the surviving electronic-structure degree of freedom and its scaling;
+
+NO:
+    derive the invariant/no-go theorem;
+
+CONDITIONAL:
+    identify the exact extra microscopic assumption required.
+```
+
+Stop at the first nontrivial consequence and immediately compare it with the closest primary literature.
 
 ---
 
-# Prior-art boundary
+# Only after the first hard derivation
 
-Mandatory comparators remain:
+If a real degree of freedom survives the matched absorption problem, then add intrinsic Auger generation at the matrix-element/phase-space level rather than as an arbitrary lifetime coefficient.
 
-- Young/Sarovar/Léonard 2018 — coherence/backaction detector framework;
-- Young/Sarovar/Léonard 2020 — coherent collective detector architecture and dark-to-active isolation condition;
-- Shammah et al. 2017 — local-dephasing bright/dark mixing;
-- Pisani et al. 2023 — collective quantum IR detector extraction;
-- Bassler/Lyne/Cuerda 2026 — collective/decoherence large-N scaling;
-- Schwarzhans et al. 2026 — quantum-detector thermodynamic tradeoffs.
+The eventual target, if the line survives, is something like
 
-These eliminate broad novelty claims.
+```math
+\mathcal A(T,\lambda_c,A_0,f_0)
+```
 
-Focused audits have not found a direct statement of the complete Rev. 5 detector theorem, but **novelty remains unestablished**.
+—an admissible set of electronic structures satisfying the simultaneous optical, thermal-generation, nonradiative, and temporal constraints.
+
+Possible paper-level outcomes:
+
+```text
+broad-class no-go theorem;
+exact absorption/DOS invariant;
+Auger kinematic escape criterion;
+finite-gap admissibility region;
+proof that HgCdTe lies unusually near an optimal dispersion class;
+or proof that no passive interband material can substantially beat the reference under the matched constraints.
+```
+
+None of these is established yet.
 
 ---
 
 # NEXT ACTION
 
-Do **not** open Experiment 10.
+Proceed from the two-band matched-absorptance problem only.
 
-The external Rev. 4 fixed-`d` objection is repaired.
-
-The next useful stress test is one fresh hostile review of **Rev. 5**, centered on the strongest remaining significance risk:
-
-> Is the main bounded-response/no-go result structurally stable to a controlled class of bounded heterogeneity, or is it too dependent on exact permutation symmetry for PRA significance?
-
-Candidate stressors if needed:
-
-```text
-weakly heterogeneous optical weights g_j;
-bounded nonuniform local event rates;
-bounded disorder in local dephasing;
-finite-rank bright subspace;
-correlated generation covariance with controlled bright projection.
-```
-
-Do not expand all of these automatically. Open only the minimum theory needed if the next hostile review identifies exact symmetry as a blocking defect. Otherwise move to final author metadata, final citation-network audit, and submission production.
+Do not search for candidate compounds yet. Do not build a material leaderboard. Do not reopen Experiment 08. Do not draft a paper yet.
