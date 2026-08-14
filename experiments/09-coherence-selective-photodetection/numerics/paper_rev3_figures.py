@@ -74,7 +74,6 @@ def figure_1(output_dir: Path):
     ax.set_ylim(0.0, 6.0)
     ax.axis("off")
 
-    # Main state-space sectors.
     bright = plt.Rectangle((3.0, 3.55), 2.35, 1.0, fill=False, linewidth=1.8)
     dark = plt.Rectangle((3.0, 1.15), 2.35, 1.0, fill=False, linewidth=1.8)
     sink = plt.Rectangle((7.35, 3.55), 1.55, 1.0, fill=False, linewidth=1.8)
@@ -82,21 +81,18 @@ def figure_1(output_dir: Path):
     ax.add_patch(dark)
     ax.add_patch(sink)
     ax.text(4.175, 4.05, "bright counted sector", ha="center", va="center", fontsize=11.5)
-    ax.text(4.175, 1.65, r"dark manifold ($N-1$ directions)", ha="center", va="center", fontsize=10.5)
+    ax.text(4.175, 1.68, "dark manifold\n" + r"($N-1$ directions)", ha="center", va="center", fontsize=10.0)
     ax.text(8.125, 4.05, "counted sink", ha="center", va="center", fontsize=11.5)
 
-    # Signal and local event inputs.
     ax.text(0.35, 4.95, r"photon creates $|B\rangle=N^{-1/2}\sum_j|j\rangle$", fontsize=11.5)
     ax.annotate("", xy=(3.0, 4.05), xytext=(2.2, 4.7), arrowprops=dict(arrowstyle="->", lw=1.6))
     ax.text(0.35, 0.55, r"internal event: local $|j\rangle$", fontsize=11.5)
     ax.annotate("", xy=(3.0, 1.65), xytext=(2.15, 0.82), arrowprops=dict(arrowstyle="->", lw=1.6))
-    ax.text(0.55, 1.45, r"direct bright component $1/N$", fontsize=9.5)
+    ax.text(0.55, 1.25, r"direct bright component $1/N$", fontsize=9.5)
 
-    # Fast extraction.
     ax.annotate("", xy=(7.35, 4.05), xytext=(5.35, 4.05), arrowprops=dict(arrowstyle="->", lw=1.9))
     ax.text(6.35, 4.32, r"fast extraction $\kappa_N$", fontsize=10.5, ha="center")
 
-    # Dephasing and slow return, separated spatially.
     ax.annotate("", xy=(3.75, 2.15), xytext=(3.75, 3.55), arrowprops=dict(arrowstyle="->", lw=1.7))
     ax.text(2.45, 2.86, r"local dephasing $\gamma_N$", fontsize=10.2, ha="right", va="center")
     ax.annotate(
@@ -107,14 +103,13 @@ def figure_1(output_dir: Path):
     )
     ax.text(5.02, 2.86, r"slow return $r_-\sim\lambda_N/N$", fontsize=10.2, ha="left", va="center")
 
-    # Operational gate definition.
-    ax.text(7.0, 1.65, "gate closes at minimum $T_N$ with", fontsize=10.5, ha="center")
-    ax.text(7.0, 1.18, r"$C_{S,N}(T_N)=\eta$", fontsize=11.5, ha="center")
+    ax.text(7.75, 1.85, "gate closes at minimum $T_N$ with", fontsize=10.0, ha="center")
+    ax.text(7.75, 1.30, r"$C_{S,N}(T_N)=\eta$", fontsize=11.5, ha="center")
     ax.text(
-        7.0,
-        0.52,
+        7.75,
+        0.62,
         r"$\mu_{\mathrm{loc},N}=Nd\int_0^{T_N}C_{D,N}(u)\,du$",
-        fontsize=10.7,
+        fontsize=10.2,
         ha="center",
     )
 
