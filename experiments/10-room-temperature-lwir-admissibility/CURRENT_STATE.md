@@ -2,172 +2,302 @@
 
 **Date:** 2026-08-14  
 **Scope:** analytical/theoretical only  
-**Status:** ACTIVE PREMISE / FIRST-PRINCIPLES DERIVATION NOT YET CLOSED / NOVELTY NOT ESTABLISHED / NO MANUSCRIPT YET
+**Status:** **FIRST HARD DERIVATION CLOSED / MASSIVE-DIRAC MATCHED-ABSORPTANCE LEVER SURVIVES / CROSS-CLASS PARABOLIC COMPARATOR CONDITIONAL / NOVELTY NOT ESTABLISHED / NO MANUSCRIPT YET**
 
 ## Research question
 
 Can one derive, from first principles, the electronic-structure conditions that a passive LWIR photon-detector absorber must satisfy to operate near 300 K with HgCdTe-class or near-HgCdTe-class sensitivity **without sacrificing useful temporal response**?
 
-The objective is not initially to nominate a known material. The target is a **band-structure admissibility theorem or no-go result**.
+The objective remains a finite-gap **band-structure admissibility theorem or no-go result**, not a materials leaderboard and not a new scalar figure of merit.
 
-## Founding Gedanken experiment
-
-Compare two idealized interband photon detectors:
-
-- `H`: a reference HgCdTe detector;
-- `X`: an unknown semiconductor whose electronic dispersion may be chosen subject to physical consistency.
-
-Impose, at minimum,
+## Fixed target
 
 ```math
-T=300\ \mathrm{K},
+T=300\ \mathrm K,
 \qquad
-\lambda_c=10\ \mu\mathrm{m},
+\lambda_c=10\ \mu\mathrm m,
 ```
 
-with the same detector area, optical environment, accepted etendue, and external absorptance spectrum unless a later step explicitly relaxes one of these constraints.
-
-At `lambda_c = 10 um`,
-
 ```math
-E_g=\frac{hc}{\lambda_c}\approx 0.12398\ \mathrm{eV}.
-```
-
-At 300 K,
-
-```math
-k_B T\approx 25.85\ \mathrm{meV},
+E_g=0.1239841984\ \mathrm{eV},
 \qquad
-\frac{E_g}{k_B T}\approx 4.80.
+k_BT=0.0258519998\ \mathrm{eV},
 ```
 
-Thus the central thermal problem is already present before defects are introduced: an LWIR interband gap at room temperature is only a few `k_B T`.
-
-## Initial model hierarchy
-
-Start with the cleanest intrinsic model and add complexity only when forced:
-
-1. passive reciprocal absorber;
-2. direct interband detection;
-3. no extrinsic SRH centers initially;
-4. exact Fermi-Dirac carrier statistics where needed;
-5. radiative generation/recombination constrained by optical absorption and detailed balance;
-6. intrinsic Auger processes added only after the absorption/carrier-statistics relation is understood;
-7. explicit temporal-bandwidth or response-time requirement so the optimum cannot become arbitrarily slow.
-
-## First heuristic — not yet a theorem
-
-For a conventional nondegenerate 3-D parabolic semiconductor,
-
 ```math
-n_i=\sqrt{N_cN_v}\,e^{-E_g/(2k_BT)},
+\boxed{E_g/(k_BT)\approx4.796.}
 ```
 
-with
+## Controlling new derivation
+
+Read first:
+
+`MATCHED_DIRAC_ABSORPTION_DOS_STEP_2026-08-14.md`
+
+The model is an intrinsic isotropic 3-D massive Dirac absorber
 
 ```math
-N_c\propto g_c(m_e^*T)^{3/2},
+H=\hbar v\tau_x\boldsymbol\sigma\cdot\mathbf k+\Delta\tau_z,
 \qquad
-N_v\propto g_v(m_h^*T)^{3/2}.
+\Delta=E_g/2,
 ```
 
-Therefore, at fixed `E_g` and `T`,
+with `N_D` equivalent Dirac species.
+
+### Exact thermal density
+
+At intrinsic `mu=0`,
 
 ```math
-n_i\propto
-(g_cg_v)^{1/2}
-(m_e^*m_h^*)^{3/4}
-T^{3/2}
-e^{-E_g/(2k_BT)}.
+\boxed{
+n_e
+=\frac{N_D}{\pi^2}
+\left(\frac{k_BT}{\hbar v}\right)^3
+F_2(\delta),
+}
 ```
-
-This suggests low DOS masses and low valley degeneracy as favorable. It does **not** establish that these can be reduced independently of optical absorption, matrix elements, Auger phase space, or response time.
-
-Do not extrapolate this parabolic expression toward `E_g -> 0`. Experiment 08 already established the noncommuting-limit failure of that shortcut for Kane systems.
-
-## Candidate finite-gap comparison class
-
-A primary comparator is the isotropic massive-Dirac/Kane form
 
 ```math
-E_\pm(k)=\pm\sqrt{(E_g/2)^2+(\hbar vk)^2}.
+F_2(\delta)
+=\int_0^\infty
+\frac{x^2dx}
+{\exp(\sqrt{x^2+\delta^2})+1},
+\qquad
+\delta=\Delta/(k_BT).
 ```
 
-Near the band edge,
+Hence
 
 ```math
-m_D=\frac{E_g}{2v^2}.
+\boxed{n_e\propto N_Dv^{-3}.}
 ```
 
-The working hypothesis is that large band velocity `v` may simultaneously reduce thermodynamic DOS while retaining strong interband velocity matrix elements and altering Auger phase space.
-
-**This is a hypothesis, not a result and not a claim that the massive-Dirac class is optimal.**
-
-## Detector-quality constraint
-
-Do not optimize scalar `D*` in isolation. Any admissibility result must include a finite temporal requirement, for example
+At 10 um / 300 K,
 
 ```math
-f_{3\mathrm{dB}}\ge f_0
+\delta=2.39796146,
+\qquad
+F_2=0.7887622040.
 ```
 
-or an equivalent task-specific response constraint.
-
-A provisional dimensionless excess-generation quantity is
+For `N_D=1`, `v=1e6 m/s`,
 
 ```math
-\Xi_{nr}
-=\frac{\Gamma_{nonrad}}
-{\Gamma_{rad}+\Gamma_{background}}.
+n_e=4.8421\times10^{15}\ \mathrm{cm^{-3}}.
 ```
 
-The intuitive target `Xi_nr <= 1` means nonradiative internal generation is no larger than the unavoidable radiative/background contribution. This definition is **provisional** until the exact measurement/noise normalization is derived.
+### Parabolic finite-gap warning
 
-## Novelty boundary already known
+Using the band-edge mass
 
-The following are not available as novelty claims:
+```math
+m_D=\Delta/v^2
+```
 
-- generic `alpha/G_th` detector-material figures of merit;
-- generic `alpha sqrt(tau)` detector-material comparison;
-- the statement that small intrinsic carrier density is beneficial;
-- general radiative detailed-balance limits;
-- generic Auger suppression by band-structure engineering;
-- the zero-gap Kane carrier-statistics correction from Experiment 08.
+in the ordinary nondegenerate parabolic density gives
 
-The possible surviving contribution must be deeper, for example:
+```math
+\boxed{
+n_e^{Dirac}/n_e^{par}\approx1.8644
+}
+```
 
-- a general finite-gap band-structure admissibility inequality;
-- a no-go theorem for a specified dispersion class;
-- an escape condition identifying a dispersion class that can satisfy absorption, thermal-generation, Auger, and bandwidth requirements simultaneously;
-- an invariant showing that an apparently favorable DOS/absorption trade cannot actually improve detector SNR under matched optical constraints.
+at the actual 10-um / 300-K target. The finite-gap nonparabolic correction is therefore already large enough that the exact dispersion must be retained.
 
-## Immediate next derivation
+## Exact interband optical scaling
 
-Use two idealized 3-D two-band absorbers with the same
+The clean-limit interband conductivity is
+
+```math
+\boxed{
+\sigma_1(\omega)
+=
+\frac{N_De^2\omega}{12\pi\hbar v}
+\left(1+\frac{2\Delta^2}{\hbar^2\omega^2}\right)
+\sqrt{1-\frac{4\Delta^2}{\hbar^2\omega^2}}
+\tanh\left(\frac{\hbar\omega}{4k_BT}\right)
+}
+```
+
+above the gap.
+
+Therefore, at fixed `E_g,T` and normalized photon energy,
+
+```math
+\boxed{\alpha\propto N_Dv^{-1}.}
+```
+
+This inverse-velocity optical-conductivity scaling is established 3-D Dirac physics and is not itself a novelty claim.
+
+## Headline first result — matched absorptance
+
+For ideal single-pass absorptance
+
+```math
+A=1-e^{-\alpha d},
+```
+
+matching a fixed optical depth requires
+
+```math
+\boxed{d\propto v/N_D.}
+```
+
+The equilibrium electron column per detector area is
+
+```math
+\Sigma_e=n_ed.
+```
+
+Combining the exact thermal density and absorption gives
+
+```math
+\boxed{
+\Sigma_e\propto v^{-2},
+\qquad
+\Sigma_e\text{ is independent of }N_D.
+}
+```
+
+Thus, **inside the ideal massive-Dirac family, the low-DOS advantage is not exactly canceled by reduced absorption.** A larger `v` reduces the thermal carrier column at fixed absorptance.
+
+A second result corrects the founding heuristic: equivalent valley/species degeneracy is not a thermal-column lever after absorptance is matched, because its linear increase in carrier density is canceled by the corresponding linear increase in absorption.
+
+## Temporal check
+
+For a photon with
+
+```math
+r=\hbar\omega/E_g>1,
+```
+
+the excited quasiparticle speed is
+
+```math
+u_\omega=v\sqrt{1-r^{-2}}.
+```
+
+Since
+
+```math
+d\propto v,
+\qquad
+u_\omega\propto v,
+```
+
+```math
+\boxed{\tau_{ball}=d/u_\omega\propto v^0.}
+```
+
+So the simplest absorptance-versus-ballistic-transit tradeoff does **not** erase the `v^-2` thermal-column advantage.
+
+This is not yet a full detector-bandwidth theorem.
+
+## Numerical witness
+
+At
 
 ```text
-E_g,
-T,
-external absorptance target,
-optical environment,
-and response-time target.
+r = 1.2,
+n_b = 3.5,
+N_D = 1,
+A = 0.90,
 ```
 
-Compare:
+```text
+v (m/s)       n_e (cm^-3)      alpha (cm^-1)    d_90 (um)    Sigma_e (cm^-2)    tau_ball (ps)
+5.0e5         3.874e16          2090.5            11.015       4.267e13            39.85
+1.0e6         4.842e15          1045.2            22.029       1.067e13            39.85
+2.0e6         6.053e14           522.6            44.059       2.667e12            39.85
+```
 
-1. a conventional parabolic two-band dispersion;
-2. a finite-gap massive-Dirac dispersion.
+Doubling `v` gives exactly the predicted
 
-Before adding Auger, derive exactly enough of the Fermi-Dirac carrier density and interband absorption to answer one question:
+```text
+8x lower volume carrier density;
+2x larger thickness;
+4x lower carrier column;
+unchanged ballistic crossing time.
+```
 
-> At fixed finite gap and matched optical absorptance, can the massive-Dirac class reduce the equilibrium carrier population relative to a parabolic absorber, or does optical coupling impose a compensating invariant/tradeoff?
+## Important model correction — generic parabolic comparator is underconstrained
 
-Stop at the first nontrivial consequence. Do not jump directly to a generalized material survey.
+A generic parabolic model with independently adjustable
+
+```text
+m_e,
+m_h,
+p_cv or v_cv
+```
+
+cannot support a fundamental comparison because DOS and oscillator strength can be tuned independently by assumption.
+
+If the parabolic bands are instead required to be the low-`k` limit of a self-consistent two-band `k.p` Hamiltonian, their effective mass and optical matrix element are linked by the same velocity `v`; that parabolic model is simply the edge approximation to the massive-Dirac model.
+
+Therefore the intended cross-class comparison is currently
+
+```text
+CONDITIONAL:
+    a fair parabolic comparator requires multiband k.p / oscillator-strength / sum-rule constraints.
+```
+
+## Prior-art status
+
+The 3-D Dirac optical-conductivity ingredients are established, including inverse velocity scaling. A focused search has not yet found a direct statement of the combined
+
+```math
+\Sigma_e=n_ed\propto v^{-2}
+```
+
+matched-absorptance result together with equivalent-species cancellation and ballistic-transit invariance.
+
+This is **not sufficient to establish novelty**. Broader semiconductor `k.p`, oscillator-strength, infrared-detector, and Dirac-material audits remain mandatory.
+
+## What has actually been established
+
+```text
+DERIVED:
+    exact finite-gap massive-Dirac carrier density;
+
+DERIVED:
+    exact clean-limit interband optical conductivity for the toy model;
+
+DERIVED:
+    matched absorptance thermal column Sigma_e ~ v^-2;
+
+DERIVED:
+    equivalent Dirac-species degeneracy cancels from Sigma_e;
+
+DERIVED:
+    ideal ballistic transit time is independent of v;
+
+NUMERICAL VALIDATION:
+    exact 10-um / 300-K witness follows the scaling.
+```
+
+## What is not established
+
+```text
+massive Dirac global optimality;
+real-material tunability or upper range of v;
+HgCdTe-relative advantage;
+Auger generation scaling;
+SRH behavior;
+full electrical bandwidth;
+detector D* improvement;
+novelty.
+```
+
+## Single next question
+
+> Once full multiband `k.p` and oscillator-strength constraints are imposed at fixed finite `E_g`, is the Dirac velocity `v` genuinely a free material-design lever, or is there a microscopic upper bound/tradeoff that limits the `Sigma_e ~ v^-2` gain?
+
+**Do not add Auger until this question is resolved or cleanly bounded.**
 
 ## Read next
 
-1. `FOUNDING_GEDANKEN_2026-08-14.md`
-2. `PRIOR_BRANCH_BOUNDARY_2026-08-14.md`
-3. `PROGRESS_LOG.md`
-4. Experiment 08 novelty stop on branch `experiment-08-zero-gap-kane-statistics` before using Kane small-gap asymptotics.
-
+1. `MATCHED_DIRAC_ABSORPTION_DOS_STEP_2026-08-14.md`
+2. `FOUNDING_GEDANKEN_2026-08-14.md`
+3. `PRIOR_BRANCH_BOUNDARY_2026-08-14.md`
+4. `PROGRESS_LOG.md`
+5. Experiment 08 novelty stop before invoking zero/small-gap Kane asymptotics.
