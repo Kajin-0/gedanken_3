@@ -1,78 +1,95 @@
-# AGENTS.md — Research Recovery and Scientific Integrity Protocol
+# AGENTS.md — Research Objective, Recovery, and Scientific Integrity Protocol
 
 **Repository:** `Kajin-0/gedanken_3`  
-**Active branch:** `agent/noise-coupling-study`
+**Active branch:** `experiment-09-coherence-selective-photodetection`
 
 Before material writes, fetch the live target and exact blob SHA. Preserve failed, corrected, and negative paths. Do not use novelty or priority language without a dedicated prior-art audit.
 
-## Read first
+## Primary research objective — DO NOT LOSE THIS
 
-1. `agent.md`
-2. `experiments/02-isochronous-avalanche-photodetector/00_ACTIVE_FRONTIER_EXPERIMENT02_STOP_2026-08-13.md`
-3. `experiments/02-isochronous-avalanche-photodetector/FIXED_DEPTH_WAVEGUIDE_DOMINANCE_STOP_2026-08-13.md`
-4. `experiments/01-equal-dstar-different-speed/INFORMATION_SPECTRUM_STOP_2026-08-13.md`
+The purpose of this repository is to generate **genuinely new analytical/theoretical photodetector research from simple Gedanken experiments**.
 
-The older Experiment-02 `CURRENT_STATE.md` and `PROGRESS_LOG.md` preserve the derivation history but are superseded for frontier recovery by the dated stop pointer above.
+The goal is **not** to maximize the number of experiments, branches, derivations, or no-go screens. A Gedanken experiment is the seed. If one line survives adversarial checking and develops into a technically defensible research paper, the objective has been met for that line.
 
-## Experiment 02 — CLOSED default path
-
-The exact timing decomposition remains valid:
-
-```math
-Var(T)=Var[m(X)]+E[Var(T|X)],
-```
-
-with
-
-```math
-m(X)=t_o(X)+t_c(X)+t_e(X)+\mu_a(X).
-```
-
-The position-dependent mean term vanishes for `m(X)=constant`, and the deterministic optimal delay map is
-
-```math
-d_opt(x)=C-E[t_c(Z)|X=x]
-```
-
-with other mean delays included as needed.
-
-However, the proposed transverse absorption-depth migration is dominated for the present APD/SPAD timing objective once waveguide geometry is admitted. The strong comparator is:
+The intended progression is:
 
 ```text
-fixed shallow absorption depth
-+ longitudinal waveguide absorption
-+ optional ordinary optical/electrical velocity matching.
+simple physical question
+-> minimal first-principles model
+-> first nontrivial consequence
+-> strongest comparator / closest prior art
+-> kill early if already known or dominated
+-> if it survives, deepen the analytical structure
+-> exact theorem / bound / invariant / counterexample / scaling law
+-> quantitative or numerical thought-experiment witness where useful
+-> adversarial novelty and correctness audit
+-> manuscript architecture
+-> hostile referee-style review and revision
+-> rendered paper / submission-quality package when justified.
 ```
 
-On the same reduced-order benchmark, a fixed 200-nm absorber adjacent to the multiplication side gives about `5.74 ps RMS` for a 40-um absorption length, versus about `8.37 ps RMS` for the optimized three-state transverse-depth ladder. Without electrical velocity matching it still clears the historical 30% gate to roughly `1.98 mm` absorption length.
+Do **not** keep opening new numbered experiments merely because a current idea has become difficult. If the current line has enough coherent, defensible theory to support a paper, pivot toward the paper. Conversely, do not manufacture a paper from an idea that collapses under prior art or a stronger comparator.
 
-Therefore:
+Paper A in Experiment 01 is the methodological precedent for the desired research-development process: a simple Gedanken question was pushed through many failed branches, mathematical repair, a narrow surviving theorem, quantitative witness, prior-art audit, manuscript drafting, hostile review, revision, figures, and rendering. Its later novelty disposition does not change the fact that this is the intended workflow.
 
-```text
-exact isochronous identity: RETAIN
-finite-ladder/forward-reverse analyses: RETAIN AS CONDITIONAL RESULTS
-migrating depth-map APD/SPAD publication path: CLOSE
-five/six-state rescue: DO NOT PURSUE
-full Maxwell/TCAD optimization of migrating map: DO NOT PURSUE BY DEFAULT
-novelty/priority: NOT ESTABLISHED
-```
+## Hard global scope — ANALYTICAL / THEORETICAL ONLY
 
-Reopen only if a real physical constraint defeats the fixed-depth waveguide comparator, such as mandatory thick absorption volume for power/energy handling, necessarily multi-millimeter absorption with unavailable velocity matching, or a material system where fixed-depth localization is intrinsically unavailable.
+The user cannot perform real-life experiments. Active research is restricted to:
 
-## Experiment 01 — CLOSED publication path
+- first-principles derivations;
+- exact toy models;
+- analytical bounds, invariants, no-go theorems, counterexamples, and asymptotics;
+- numerical thought experiments supporting theory;
+- analytical comparison with established detector architectures;
+- adversarial primary-literature and patent audits where relevant;
+- theoretical manuscript development.
 
-`experiments/01-equal-dstar-different-speed/`
+Do not make fabrication, sample procurement, measurement pilots, instrumentation, annealing, device processing, or laboratory optimization the next research step.
 
-Paper A / Rev. 5 remains **DO NOT SUBMIT AS A FULL RESEARCH ARTICLE**. Its mathematical theorem remains valid, but the unknown-arrival mechanism and optimum-filter information-spectrum formulation reduce to established acquisition/optimum-filter theory.
+## Recovery order
 
-Do not reopen Step 13–49, Rev. 5 polishing, or attempts to rename `|R|^2/S_n`, `1/NEP^2`, RMS/effective bandwidth, or the timing-cell penalty as new metrics.
+1. Read this file.
+2. Read `agent.md` for the complete branch lineage, closed paths, and exact active results.
+3. Read `experiments/09-coherence-selective-photodetection/CURRENT_STATE.md`.
+4. Then read the Experiment-09 derivation files in the order given by `agent.md`.
 
-## Next-experiment protocol
+Do not infer chronology from `main` alone; later experiments live on divergent branches.
 
-Start from a microscopic/device-physics premise. Before a long derivation chain:
+## Novelty-first discipline
 
-1. identify the strongest established detector architecture that might remove the proposed problem;
-2. compare it quantitatively on the same resource assumptions;
-3. run a focused journal/patent audit;
-4. stop early if the comparator dominates or the result reduces to established theory;
-5. only after surviving those gates build detailed simulation or manuscript structure.
+For every candidate line:
+
+1. state the minimal physical premise in one or two sentences;
+2. derive the first nontrivial consequence before adding device complexity;
+3. identify the strongest existing theorem or architecture that might already contain or defeat it;
+4. search primary literature early;
+5. if the result reduces to established theory or is dominated on the same resource assumptions, stop and document why;
+6. if it survives, continue until either a hard closure appears or a paper-level contribution emerges.
+
+A result does not need to be a new detector architecture. A new theorem, resource bound, impossibility result, asymptotic law, counterexample, or previously unrecognized synthesis can be paper-worthy if the novelty and significance survive audit.
+
+## When to begin a manuscript
+
+Do not require impossible certainty before drafting. Begin manuscript architecture when the line has most of the following:
+
+- a sharply stated research question;
+- at least one nontrivial analytical result that is central rather than decorative;
+- an exact claim boundary and explicit assumptions;
+- a quantitative witness, asymptotic regime, or worked example if it materially clarifies the result;
+- the strongest obvious comparator defeated or cleanly distinguished;
+- a serious closest-prior-art audit with no direct stronger result found;
+- enough connected structure for an Introduction / Model / Results / Discussion / Conclusion story.
+
+At that point, manuscript drafting itself becomes part of the research stress test. Hostile review may still kill or narrow the paper.
+
+## Important closed-path reminder
+
+Experiment 01's final full-research submission path was later closed because the strongest novelty claim reduces too closely to established acquisition/optimum-filter theory. Experiments 02–08 and the QND screen also contain retained exact results but closed publication paths. `agent.md` records the details and must be treated as authoritative for those lineages.
+
+## Active frontier — Experiment 09
+
+Current premise: photon-created and internal dark-generated excitations are forced to have identical microscopic populations, differing only in coherence. The present exact reduced results include bright-state dark leakage, finite-time dephasing leakage, failure of the simplest local-KMS cancellation, and a conditional passive critical-coupling reverse-channel cost.
+
+The current hard question is whether a fully passive time-independent architecture can retain collective optical/accepted extraction scaling without the thermally reversed counted channel inheriting the same collective enhancement. Resolve that before adding material-specific complexity.
+
+If this line survives and develops a sufficiently strong theorem/construction, **the next objective is a paper, not Experiment 10**.
