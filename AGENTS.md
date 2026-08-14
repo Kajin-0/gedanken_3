@@ -1,7 +1,7 @@
 # AGENTS.md — Research Objective, Recovery, and Scientific Integrity Protocol
 
 **Repository:** `Kajin-0/gedanken_3`  
-**Active branch:** `experiment-09-coherence-selective-photodetection`
+**Active branch:** `experiment-10-room-temperature-lwir-admissibility`
 
 Before material writes, fetch the live target and exact blob SHA. Preserve failed, corrected, and negative paths. Do not use novelty or priority language without a dedicated prior-art audit.
 
@@ -9,9 +9,9 @@ Before material writes, fetch the live target and exact blob SHA. Preserve faile
 
 The purpose of this repository is to generate **genuinely new analytical/theoretical photodetector research from simple Gedanken experiments**.
 
-The goal is **not** to maximize the number of experiments, branches, derivations, or no-go screens. A Gedanken experiment is the seed. If one line survives adversarial checking and develops into a technically defensible research paper, the objective has been met for that line.
+The goal is not to maximize the number of experiments. A Gedanken experiment is the seed. If one line survives adversarial checking and develops into a technically defensible research paper, the objective has been met for that line.
 
-The intended progression is:
+Use the progression
 
 ```text
 simple physical question
@@ -19,77 +19,98 @@ simple physical question
 -> first nontrivial consequence
 -> strongest comparator / closest prior art
 -> kill early if already known or dominated
--> if it survives, deepen the analytical structure
--> exact theorem / bound / invariant / counterexample / scaling law
--> quantitative or numerical thought-experiment witness where useful
+-> deepen only if it survives
+-> theorem / bound / invariant / counterexample / scaling law
+-> quantitative thought-experiment witness where useful
 -> adversarial novelty and correctness audit
--> manuscript architecture
--> hostile referee-style review and revision
--> rendered paper / submission-quality package when justified.
+-> manuscript architecture only when justified
+-> hostile referee review and revision.
 ```
-
-Do **not** keep opening new numbered experiments merely because a current idea has become difficult. If the current line has enough coherent, defensible theory to support a paper, pivot toward the paper. Conversely, do not manufacture a paper from an idea that collapses under prior art or a stronger comparator.
-
-Paper A in Experiment 01 is the methodological precedent for the desired research-development process: a simple Gedanken question was pushed through many failed branches, mathematical repair, a narrow surviving theorem, quantitative witness, prior-art audit, manuscript drafting, hostile review, revision, figures, and rendering. Its later novelty disposition does not change the fact that this is the intended workflow.
 
 ## Hard global scope — ANALYTICAL / THEORETICAL ONLY
 
-The user cannot perform real-life experiments. Active research is restricted to:
-
-- first-principles derivations;
-- exact toy models;
-- analytical bounds, invariants, no-go theorems, counterexamples, and asymptotics;
-- numerical thought experiments supporting theory;
-- analytical comparison with established detector architectures;
-- adversarial primary-literature and patent audits where relevant;
-- theoretical manuscript development.
+Active research is restricted to first-principles derivations, exact toy models, analytical bounds/no-go theorems, counterexamples, asymptotics, numerical thought experiments supporting theory, analytical comparisons with established architectures, prior-art audits, and theoretical manuscript development.
 
 Do not make fabrication, sample procurement, measurement pilots, instrumentation, annealing, device processing, or laboratory optimization the next research step.
 
 ## Recovery order
 
 1. Read this file.
-2. Read `agent.md` for the complete branch lineage, closed paths, and exact active results.
-3. Read `experiments/09-coherence-selective-photodetection/CURRENT_STATE.md`.
-4. Then read the Experiment-09 derivation files in the order given by `agent.md`.
+2. Read `agent.md`.
+3. Read `experiments/10-room-temperature-lwir-admissibility/CURRENT_STATE.md`.
+4. Read `experiments/10-room-temperature-lwir-admissibility/FOUNDING_GEDANKEN_2026-08-14.md`.
+5. Read `experiments/10-room-temperature-lwir-admissibility/PRIOR_BRANCH_BOUNDARY_2026-08-14.md`.
+6. Read `experiments/10-room-temperature-lwir-admissibility/PROGRESS_LOG.md`.
+7. Before using Kane small-gap limits, read the Experiment-08 novelty stop on branch `experiment-08-zero-gap-kane-statistics`.
 
 Do not infer chronology from `main` alone; later experiments live on divergent branches.
 
-## Novelty-first discipline
+## Important lineage boundary
 
-For every candidate line:
+Experiment 09 remains a separate paper line on branch
 
-1. state the minimal physical premise in one or two sentences;
-2. derive the first nontrivial consequence before adding device complexity;
-3. identify the strongest existing theorem or architecture that might already contain or defeat it;
-4. search primary literature early;
-5. if the result reduces to established theory or is dominated on the same resource assumptions, stop and document why;
-6. if it survives, continue until either a hard closure appears or a paper-level contribution emerges.
+```text
+experiment-09-coherence-selective-photodetection
+```
 
-A result does not need to be a new detector architecture. A new theorem, resource bound, impossibility result, asymptotic law, counterexample, or previously unrecognized synthesis can be paper-worthy if the novelty and significance survive audit.
+and was the parent of this branch. Do not rewrite or silently absorb its theorem into Experiment 10.
 
-## When to begin a manuscript
+Experiment 08 is also directly relevant because it already closed the zero-gap Kane carrier-statistics novelty path. Experiment 10 must not rediscover that work under a room-temperature label.
 
-Do not require impossible certainty before drafting. Begin manuscript architecture when the line has most of the following:
+## Active frontier — Experiment 10
 
-- a sharply stated research question;
-- at least one nontrivial analytical result that is central rather than decorative;
-- an exact claim boundary and explicit assumptions;
-- a quantitative witness, asymptotic regime, or worked example if it materially clarifies the result;
-- the strongest obvious comparator defeated or cleanly distinguished;
-- a serious closest-prior-art audit with no direct stronger result found;
-- enough connected structure for an Introduction / Model / Results / Discussion / Conclusion story.
+Founding question:
 
-At that point, manuscript drafting itself becomes part of the research stress test. Hostile review may still kill or narrow the paper.
+> What electronic dispersion and matrix-element structure must an LWIR absorber possess to operate near 300 K with HgCdTe-class or near-HgCdTe-class intrinsic detector quality while retaining useful temporal response?
 
-## Important closed-path reminder
+Start with
 
-Experiment 01's final full-research submission path was later closed because the strongest novelty claim reduces too closely to established acquisition/optimum-filter theory. Experiments 02–08 and the QND screen also contain retained exact results but closed publication paths. `agent.md` records the details and must be treated as authoritative for those lineages.
+```math
+T=300\ \mathrm K,
+\qquad
+\lambda_c=10\ \mu\mathrm m,
+\qquad
+E_g\approx0.12398\ \mathrm{eV},
+\qquad
+E_g/(k_BT)\approx4.80.
+```
 
-## Active frontier — Experiment 09
+The target is **not** a materials ranking and **not** a new scalar figure of merit. The target is a finite-gap **band-structure admissibility theorem, no-go theorem, invariant, or escape condition**.
 
-Current premise: photon-created and internal dark-generated excitations are forced to have identical microscopic populations, differing only in coherence. The present exact reduced results include bright-state dark leakage, finite-time dephasing leakage, failure of the simplest local-KMS cancellation, and a conditional passive critical-coupling reverse-channel cost.
+Initially compare two matched passive interband absorbers:
 
-The current hard question is whether a fully passive time-independent architecture can retain collective optical/accepted extraction scaling without the thermally reversed counted channel inheriting the same collective enhancement. Resolve that before adding material-specific complexity.
+```text
+A. conventional parabolic two-band dispersion;
+B. finite-gap massive-Dirac/Kane dispersion.
+```
 
-If this line survives and develops a sufficiently strong theorem/construction, **the next objective is a paper, not Experiment 10**.
+Match cutoff, temperature, area, optical etendue, optical environment, external absorptance target, and a finite response-time/bandwidth requirement.
+
+The first hard question is:
+
+> At fixed finite gap and matched useful absorptance, can the massive-Dirac class reduce equilibrium carrier population relative to a parabolic absorber without an exact compensating optical cost?
+
+Derive the first nontrivial consequence before adding Auger.
+
+## Novelty-first discipline specific to Experiment 10
+
+Do not claim novelty for:
+
+- `alpha/G_th` or `alpha sqrt(tau)` material figures of merit;
+- low intrinsic carrier density as a generic design principle;
+- radiative detailed balance;
+- generic Auger suppression by band engineering;
+- T2SL or quantum-well Auger engineering in general;
+- Experiment-08 zero-gap Kane statistics.
+
+The branch survives only if it yields something more primitive and constraining, e.g. a joint relation derived from the electronic structure itself rather than treating absorption and thermal generation as independent phenomenological inputs.
+
+## Manuscript gate
+
+Do not begin a paper merely because the premise is attractive. Manuscript architecture becomes justified only after the branch has:
+
+- a sharply stated theorem/bound/invariant or equally strong analytical result;
+- an exact claim boundary;
+- a serious closest-prior-art audit;
+- at least one quantitative witness when useful;
+- a clear explanation of why the result is not reducible to established `alpha/G`, detailed-balance, Kane-statistics, or Auger-engineering theory.
