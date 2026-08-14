@@ -1,43 +1,60 @@
 # Agent recovery entrypoint
 
-Read [`AGENTS.md`](AGENTS.md) first.
+Read `AGENTS.md` first.
 
-## Experiment 06 — CLOSED
+## Active Experiment 07 — isotope-tuned HgCdTe SRH
 
-`experiments/06-srh-provenance/`
+Branch: `experiment-07-isotope-srh`
 
-Read:
-1. `experiments/06-srh-provenance/00_PRIOR_ART_STOP.md`
-2. `experiments/06-srh-provenance/CURRENT_STATE.md`
-3. `experiments/06-srh-provenance/FIRST_PRINCIPLES.md`
+Read in this order:
 
-Retain the ideal distinction between simultaneous photon pair creation and sequential SRH trap generation, including finite-window leakage and complementary Ramo-charge formulas.
+1. `experiments/07-isotope-srh/TWO_STEP_SRH_KILL_TEST_2026-08-13.md`
+2. `experiments/07-isotope-srh/ISOTOPE_AXIS_FINGERPRINT_2026-08-13.md`
+3. `experiments/07-isotope-srh/CURRENT_STATE.md`
+4. `experiments/07-isotope-srh/numerics/two_step_srh_isotope.py`
+5. `experiments/07-isotope-srh/numerics/isotope_threshold.py`
 
-Do not pursue the detector architecture as novel. Hitachi US 6,455,872 already claims separate electrometers for opposite-polarity photocarriers plus a comparator and explicitly describes requiring both electron and hole outputs to identify a photon and reject spurious one-sided events. Maione et al., Phys. Rev. B 83, 155309 (2011), already model individual trap capture/emission current pulses.
+### Controlling result
 
-Naive avalanche rescue is not clean because impact ionization creates counter-carriers and can manufacture the missing coincidence.
+A one-phonon mercury-vacancy capture channel can be strongly isotope-sensitive near a phonon threshold, but the practical natural->heavy isotope shift is small: about `0.094 meV` for the 10.56-meV HgTe-like acoustic cutoff and about `0.158 meV` for a 143-cm^-1 HgTe-like optical mode.
+
+Once a fixed isotope-insensitive bypass and finite capture-energy broadening are included in the complete two-step SRH cycle, natural->heavy enrichment is not a robust >2x dark-current engineering lever. Using a published HgCdTe HgTe-like LO FWHM of `8.9 cm^-1` only as a broadening stress, the reduced-order model requires about `99.5%` of natural capture to come through the isotope-sensitive one-phonon path to reach 2x suppression even in the favorable both-captures-sensitive case.
+
+Therefore:
 
 ```text
-Experiment 06 device/publication path: CLOSED
-paper construction: DO NOT BEGIN
+heavy-isotope dark-current engineering: STOP BY DEFAULT
+single-phonon threshold physics: RETAIN
+full light-vs-heavy isotope contrast as mechanism diagnostic: ACTIVE
+novelty: NOT ESTABLISHED
+paper drafting: DO NOT BEGIN
 ```
 
-## Experiment 05 — CLOSED
+### Surviving diagnostic
 
-The proposed universal active-volume/optical-bandwidth invariant failed once arbitrary lossless impedance transformation was allowed. Shrinking active volume shifts the resource to local field, saturation/throughput, optical matching complexity, and eventually volume-independent background/radiative/readout noise.
+Independent Hg, Cd and Te isotope substitutions can fingerprint phonon-mode character. In the ideal diatomic/one-mode limit:
 
-## Experiment 04 — CLOSED EARLY
+```text
+HgTe-like: (d ln tau/d ln M_Hg)/(d ln tau/d ln M_Te) ~= 0.636
+CdTe-like: (d ln tau/d ln M_Cd)/(d ln tau/d ln M_Te) ~= 1.135
+```
 
-Passive nonreciprocity can redirect directional thermal emission but cannot beat the reciprocal mode-selective comparator on total external radiative coupling because `Tr(I-S^dagger S)=Tr(I-SS^dagger)`.
+Measure actual isotope-dependent Raman/IR phonon shifts; the pure reduced-mass values are only first targets.
 
-## Experiment 02 — CLOSED
+### Next hard step
 
-The isochronous depth-map mathematics remains valid, but fixed shallow waveguide absorption plus ordinary traveling-wave engineering dominates the proposed device.
+Build an identifiability model for
 
-## Experiment 01 — CLOSED
+`1/tau_total = 1/tau_SRH + 1/tau_rad + 1/tau_Auger + 1/tau_other`
 
-Paper A / Rev. 5 remains DO NOT SUBMIT AS A FULL RESEARCH ARTICLE. Do not reopen Step 13–49.
+including phonon shift, independently measured bandgap shift, and defect-density/sample variation. Determine the precision and sample matching required before the isotope-axis fingerprint can be distinguished from ordinary sample-to-sample changes.
 
-## Next research rule
+## Closed paths
 
-Start a new microscopic photodetector question. Before extending it, identify the strongest prior architecture, measurement, or physical bound that could trivialize the premise. Kill occupied paths early.
+Experiment 06: SRH two-carrier provenance architecture closed by direct prior art.
+Experiment 05: active-volume/bandwidth theorem failed under arbitrary lossless matching.
+Experiment 04: passive nonreciprocal sensitivity path closed by trace bound.
+Experiment 02: migrating-depth APD dominated by fixed-depth waveguide comparator.
+Experiment 01: acquisition/information-spectrum paper path closed by prior art.
+
+Preserve negative results. Do not rescue closed paths without a new physical constraint.
