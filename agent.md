@@ -20,147 +20,115 @@ Branch:
 experiment-09-coherence-selective-photodetection
 ```
 
-## CRITICAL CURRENT STATUS
+Experiment 09 is now an **active concise theory-paper candidate**. Do not open Experiment 10 while Rev. 3 remains scientifically alive.
 
-Experiment 09 is an **active paper candidate**.
+## Active manuscript
 
-Rev. 0 was deliberately subjected to a hostile review and **failed as written**. Do not restore its old centerpiece.
+> **Scalable internal-dark-count limits in a coherence-selective photodetector**
 
-The hostile review found:
+File:
 
-```text
-static 1/N bright-state rejection:
-    mathematically close to standard normalized coherent-mode filtering;
-
-finite-rate Poisson counts under strict one-excitation model:
-    exactness overstated;
-
-C_S as "photon efficiency":
-    wrong scope; it is conditional internal collection after bright-state preparation;
-
-kT ln(mathcal C):
-    valid LDB consequence but too generic for coequal novelty.
-```
-
-The review also exposed a much stronger theorem. Rev. 1 has been rebuilt around it.
-
-```text
-Experiment 10: DO NOT OPEN WHILE REV. 1 REMAINS ALIVE
-```
-
----
+`experiments/09-coherence-selective-photodetection/PAPER_DRAFT_REV3_2026-08-14.md`
 
 ## Read in this order
 
 1. `experiments/09-coherence-selective-photodetection/CURRENT_STATE.md`
-2. `experiments/09-coherence-selective-photodetection/PAPER_DRAFT_REV1_2026-08-14.md`
-3. `experiments/09-coherence-selective-photodetection/EFFICIENCY_SCALABILITY_TRANSITION_2026-08-14.md`
-4. `experiments/09-coherence-selective-photodetection/PAPER_REV0_HOSTILE_REFEREE_REVIEW_2026-08-14.md`
-5. `experiments/09-coherence-selective-photodetection/PAPER_REV1_SCALING_PRIOR_ART_AUDIT_2026-08-14.md`
-6. `experiments/09-coherence-selective-photodetection/numerics/efficiency_scaling_transition_check.py`
-7. `experiments/09-coherence-selective-photodetection/PAPER_LEVEL_CLOSEST_PRIOR_ART_AUDIT_2026-08-14.md`
-8. earlier Experiment-09 derivation files only for history / supporting results.
+2. `experiments/09-coherence-selective-photodetection/PAPER_DRAFT_REV3_2026-08-14.md`
+3. `experiments/09-coherence-selective-photodetection/PAPER_REV2_HOSTILE_REFEREE_REVIEW_2026-08-14.md`
+4. `experiments/09-coherence-selective-photodetection/SCALABLE_EFFICIENCY_CEILING_2026-08-14.md`
+5. `experiments/09-coherence-selective-photodetection/RATE_SCALING_PHASE_DIAGRAM_2026-08-14.md`
+6. `experiments/09-coherence-selective-photodetection/COLLECTIVE_EXTRACTION_RATE_BOUND_2026-08-14.md`
+7. `experiments/09-coherence-selective-photodetection/GATED_REVERSE_INJECTION_PHASE_LAW_2026-08-14.md`
+8. `experiments/09-coherence-selective-photodetection/RATE_SCALING_PRIOR_ART_ADDENDUM_2026-08-14.md`
+9. numerical scripts under `experiments/09-coherence-selective-photodetection/numerics/`.
+
+Earlier Rev. 0–2 manuscripts and referee reports are correction history, not the active starting point.
 
 ---
 
-# Central Gedanken premise
+# Minimal Gedanken premise
 
-A photon prepares a coherent bright state across `N` local excited states,
-
-```math
-|B\rangle=\sum_j\sqrt{w_j}e^{i\phi_j}|j\rangle,
-```
-
-while the adversarial internal dark event has the same local populations but no coherence,
+A photon prepares one collective bright excitation across `N` local states,
 
 ```math
-\rho_D=\sum_jw_j|j\rangle\langle j|.
+|B\rangle=\frac1{\sqrt N}\sum_j|j\rangle,
 ```
 
-Thus energy, excitation number, and all local-basis diagonal observables are deliberately blind to provenance.
+while internal dark events are generated locally and incoherently.
 
-The uniform theorem uses
+Static bright projection gives `1/N` acceptance of a uniform local event. **This is established coherent-mode/state-verification geometry and is not the paper novelty claim.**
 
-```math
-|B\rangle=\frac1{\sqrt N}\sum_j|j\rangle.
-```
+The closest coherent detector precedent is Young, Sarovar, and Leonard, ACS Photonics 7, 821–830 (2020). Their ideal-efficiency conditions explicitly require relaxation not to couple dark states back to the optically active manifold.
 
-Static projection onto `|B>` gives `1/N` acceptance of a uniform incoherent local excitation, but treat this as **old mode-filtering/state-verification geometry**, not the paper claim.
+Experiment 09 asks what scalability penalty follows when this isolation is violated by local dephasing while the number of internally dark-generating sites grows.
+
+Same-mode optical background is not rejected.
 
 ---
 
-# Exact one-body dynamics
+# Exact one-body kernel
 
-Bright extraction rate `kappa`; independent local pure dephasing `gamma`.
+With size-dependent bright extraction `kappa_N` and local pure dephasing `gamma_N`:
 
 ```math
-\dot P=-\kappa b,
+\dot P=-\kappa_Nb,
 ```
 
 ```math
-\dot b=-(\kappa+\gamma)b+\frac\gamma N P.
+\dot b=-(\kappa_N+\gamma_N)b+\frac{\gamma_N}{N}P.
 ```
 
 Hence
 
 ```math
-\ddot P+(\kappa+\gamma)\dot P+\frac{\kappa\gamma}{N}P=0.
+\ddot P
++(\kappa_N+\gamma_N)\dot P
++\frac{\kappa_N\gamma_N}{N}P=0.
 ```
 
-Let
+The exact rates are
 
 ```math
-a=\kappa+\gamma,
+r_{\pm,N}
+=\frac{a_N\pm\sqrt{a_N^2-4\kappa_N\gamma_N/N}}2,
+\qquad
+a_N=\kappa_N+\gamma_N.
 ```
+
+The slow recycling rate is
 
 ```math
-\Delta_N=\sqrt{a^2-4\kappa\gamma/N},
+r_{-,N}
+=\frac1N
+\frac{\kappa_N\gamma_N}{\kappa_N+\gamma_N}
+[1+O(N^{-1})].
 ```
 
-```math
-r_{\pm,N}=(a\pm\Delta_N)/2.
-```
-
-Exact survival for initial bright population `b_0`:
-
-```math
-P_{b_0,N}(t)
-=
-\frac{r_{+,N}-\kappa b_0}{\Delta_N}e^{-r_{-,N}t}
-+
-\frac{\kappa b_0-r_{-,N}}{\Delta_N}e^{-r_{+,N}t}.
-```
-
-Collection `C=1-P`.
-
-Signal bright state: `b_0=1`.
-Uniform local dark event: `b_0=1/N`.
-
-For every `gamma>0`, both are eventually collected, and
-
-```math
-r_{-,N}\simeq\frac{\kappa\gamma}{N(\kappa+\gamma)}.
-```
+For nonzero dephasing, local and bright excitations are eventually counted; rejection is finite-time.
 
 ---
 
-# Required counting-model repair
+# Counting model — DO NOT REGRESS
 
-The one-excitation quantum kernel is lifted to continuous dark generation through an explicit independent-particle stochastic model:
+The one-body kernel does not by itself imply an exact finite-rate many-event Poisson process.
+
+Use the explicit independent-particle stochastic lift:
 
 ```text
-N local sites generate independent Poisson events at rate d;
-each event is distinguishable and noninteracting;
-each carries its own independent copy of the exact one-body kernel.
+N local sites;
+Poisson generation rate d per site;
+generated excitations distinguishable and noninteracting;
+each follows an independent copy of the one-body quantum kernel.
 ```
 
-Only under this lift is the accepted finite-rate count process claimed to be exactly Poisson:
+Then
 
 ```math
-\mu_N(T)=Nd\int_0^T C_{D,N}(u)du.
+\mu_{loc,N}(T)
+=Nd\int_0^T C_{D,N}(u)du.
 ```
 
-Signal performance is **conditional internal collection after bright-state preparation**:
+Signal efficiency means **conditional internal collection after bright-state preparation**:
 
 ```math
 \eta_{int,N}(T)=C_{S,N}(T).
@@ -168,254 +136,253 @@ Signal performance is **conditional internal collection after bright-state prepa
 
 Do not call it end-to-end photon QE.
 
----
-
-# MAIN RESULT — fixed-efficiency scalability transition
-
-Fix required conditional internal collection efficiency `0<eta<1`.
-
-Define
+For fixed target `eta`:
 
 ```math
 T_N(\eta)=\inf\{t:C_{S,N}(t)\ge\eta\},
 ```
 
-and
-
 ```math
-\mu_N(\eta)=Nd\int_0^{T_N(\eta)}C_{D,N}(u)du.
+\mu_{loc,N}(\eta)
+=Nd\int_0^{T_N(\eta)}C_{D,N}(u)du.
 ```
 
-Define
+---
+
+# General rate-scaling classification
+
+Let
 
 ```math
-\boxed{
-q=\eta_c=\frac{\kappa}{\kappa+\gamma}
-}
-```
-
-and
-
-```math
-\lambda=\frac{\kappa\gamma}{\kappa+\gamma}.
+\kappa_N=\kappa_0N^\alpha,
+\qquad
+\gamma_N=\gamma_0N^\beta.
 ```
 
 Then
 
 ```math
 \boxed{
-\begin{array}{c|c|c}
-\text{required internal efficiency} & T_N & \mu_N\\
+\begin{array}{c|c|c|c}
+\text{rate sector} & \text{efficiency} & T_N & \mu_{loc,N}\\
 \hline
-0<\eta<q & O(1) & O(1)\\
-\eta=q & \Theta(\ln N) & \Theta((\ln N)^2)\\
-q<\eta<1 & O(N) & O(N^2).
+\alpha>\beta & \eta<1 & N^{-\alpha} & N^{-\alpha}\\
+\alpha=\beta=s & \eta<q_0 & N^{-s} & N^{-s}\\
+\alpha=\beta=s & \eta=q_0 & N^{-s}\ln N & N^{-s}(\ln N)^2\\
+\alpha=\beta=s & \eta>q_0 & N^{1-s} & N^{2-s}\\
+\alpha<\beta & \eta>0 & N^{1-\alpha} & N^{2-\alpha}
 \end{array}}
 ```
 
-This is the active paper centerpiece.
-
-## Subcritical explicit limit
-
-For
+with
 
 ```math
-x_\eta=-\ln(1-\eta/q),
+q_0=\frac{\kappa_0}{\kappa_0+\gamma_0}.
 ```
 
-```math
-\boxed{aT_N\to x_\eta}
-```
+Explicit coefficients are in `RATE_SCALING_PHASE_DIAGRAM_2026-08-14.md`.
 
-and
-
-```math
-\boxed{
-\mu_N
-\to
-\frac d a
-\left[
-\frac{q(1-q)}2x_\eta^2+q^2x_\eta-q\eta
-\right].
-}
-```
-
-## Supercritical explicit limit
-
-```math
-\boxed{
-\frac{T_N}{N}
-\to
-\frac1\lambda\ln\frac{1-q}{1-\eta}
-}
-```
-
-and
-
-```math
-\boxed{
-\frac{\mu_N}{N^2}
-\to
-\frac d\lambda
-\left[
-\ln\frac{1-q}{1-\eta}
--
-\frac{\eta-q}{1-q}
-\right].
-}
-```
-
-## Critical boundary
-
-```math
-\boxed{
-aT_N(q)
-\sim W\left(\frac{N}{(1-q)^2}\right)
-}
-```
-
-so
-
-```math
-T_N=\Theta(\ln N),
-\qquad
-\mu_N=\Theta((\ln N)^2).
-```
-
-The Lambert-W coefficient is a boundary-layer asymptotic with slow finite-`N` convergence. Do not overstate its precision without a tighter remainder analysis.
+Do not call this a new generic decoherence phase diagram. Bassler, Lyne, and Cuerda 2026 already develop collective/decoherence large-`N` scaling regimes in Dicke superradiance.
 
 ---
 
-# Operational criterion
+# Bounded local extraction resource
 
-The scalable bounded branch requires
+For arbitrary linear counted sinks define
+
+```math
+K=\sum_a|\ell_a\rangle\langle\ell_a|\ge0.
+```
+
+If each local state has bounded counted coupling
+
+```math
+K_{jj}\le\kappa_{loc},
+```
+
+then
 
 ```math
 \boxed{
-\eta<\frac{\kappa}{\kappa+\gamma}.
+\kappa_B
+\le\lambda_{max}(K)
+\le\operatorname{Tr}K
+\le N\kappa_{loc}.
 }
 ```
 
-Equivalently
+Therefore
+
+```math
+\boxed{\alpha\le1.}
+```
+
+within this linear single-excitation resource class.
+
+Any operating point strictly requiring slow dark-manifold recycling then incurs
+
+```math
+\boxed{\mu_{loc,N}=\Omega(N).}
+```
+
+The formal `alpha>=2` slow-branch escape is unavailable unless per-site coupling itself grows with `N` or the model changes.
+
+---
+
+# ACTIVE HEADLINE THEOREM — scalable efficiency ceiling
+
+Assume useful extraction does not weaken with size,
+
+```math
+0\le\alpha\le1.
+```
+
+Define
+
+```math
+\eta_{sc}
+=\sup\{\eta\in(0,1):\mu_{loc,N}(\eta)=O(1)\}.
+```
+
+Then
 
 ```math
 \boxed{
-\frac{\kappa}{\gamma}>
-\frac{\eta}{1-\eta}.
-}
+\eta_{sc}
+=
+\begin{cases}
+1,&\alpha>\beta,\\[4pt]
+\dfrac{\kappa_0}{\kappa_0+\gamma_0},&\alpha=\beta,\\[10pt]
+0,&\alpha<\beta.
+\end{cases}}
 ```
 
-A 99% **internal collection** target therefore requires `kappa/gamma>99` to remain strictly subcritical as `N->infinity`.
+This is the Rev. 3 paper centerpiece.
 
----
-
-# gamma=0 result — COROLLARY ONLY
-
-When `gamma=0`, `q=1`; every fixed `eta<1` is subcritical.
-
-Exactly,
-
-```math
-\mu_N(\eta)
-=\frac d\kappa[-\ln(1-\eta)-\eta],
-```
-
-independent of `N`.
-
-Retain this as intuition/consistency check, not principal novelty.
-
----
-
-# Prior-art disposition after Rev. 1 audit
-
-Read `PAPER_REV1_SCALING_PRIOR_ART_AUDIT_2026-08-14.md`.
-
-Broad neighboring results are established:
+Interpretation:
 
 ```text
-coherence/backaction controls detector metrics;
-bright/dark collective modes;
-local-dephasing bright/dark scattering;
-coherence/dark-state photocells;
-collective electronic polarization + extractor current in IR detectors;
-large-N decoherence scaling transitions in Dicke/superabsorption systems;
-quantum-detector thermodynamic efficiency/dark-count tradeoffs.
+extraction scaling wins:
+    any fixed efficiency below unity can retain bounded local-dark burden;
+
+balanced extraction/dephasing scaling:
+    ceiling equals fast branching fraction q0;
+
+dephasing scaling wins:
+    no nonzero fixed efficiency retains bounded local-dark burden.
 ```
 
-Particularly important current sources:
+---
 
-- Bassler, Lyne, Cuerda, `arXiv:2607.28034` (2026): decoherence-controlled Dicke scaling regimes and transient critical behavior;
-- Álvarez-Cuartas and Reina, Phys. Rev. Research 8, 033035 (2026): dynamical scaling in quantum superabsorption;
-- Schwarzhans et al., PRX Quantum 7, 033001 (2026): nonequilibrium thermodynamic tradeoffs among detector efficiency, dark counts, jitter, and dead time;
-- Pisani et al., Nature Communications 14, 3914 (2023): collective quantum IR detector polarization coupled to electronic extraction.
+# Corrected gated reverse-injection result
+
+For a thermally reversible counted transition
+
+```math
+\bar\kappa_N
+=\kappa_Ne^{-\Delta F_N/(kT)},
+```
+
+the accepted reverse contribution at the same efficiency-selected gate is
+
+```math
+\mu_{rev,N}
+=\bar\kappa_N\int_0^{T_N}C_{S,N}(u)du.
+```
+
+At fixed affinity:
+
+```math
+\boxed{
+\mu_{rev,N}\sim
+\begin{cases}
+O(1),&\text{fast branch},\\
+O(\ln N),&\text{balanced boundary},\\
+O(N),&\text{strict slow branch}.
+\end{cases}}
+```
+
+Thus extra affinity required for bounded gated reverse burden is:
+
+```text
+fast branch:          O(1)
+balanced boundary:    kT ln ln N
+strict slow branch:   kT ln N
+```
+
+The older blanket `kT ln mathcal C` interpretation was a fixed-rate-coefficient statement and must not be presented as the detector's gated dark-count law.
+
+At favorable maximal collective scaling `kappa_N~N`, `gamma_N=O(1)`:
+
+```math
+\mu_{loc,N}\sim N^{-1},
+\qquad
+\mu_{rev,N}=O(1)
+```
+
+at fixed affinity. The reversible extractor becomes the asymptotic floor.
+
+---
+
+# Prior-art claim boundary
+
+Mandatory central comparators:
+
+- Young, Sarovar, Leonard 2018 — quantum coherence/backaction detector metrics;
+- Young, Sarovar, Leonard 2020 — coherently interacting nanoscale detector elements and dark-to-optically-active isolation condition;
+- Shammah et al. 2017 — local-dephasing bright/dark scattering;
+- Pisani et al. 2023 — collective quantum infrared detector polarization feeding electronic extraction;
+- Bassler, Lyne, Cuerda 2026 — collective/decoherence large-`N` scaling regimes;
+- Schwarzhans et al. 2026 — thermodynamic detector performance tradeoffs.
 
 These kill broad novelty claims.
 
-The focused audit did **not** find a direct match to the specific fixed-efficiency theorem
+The focused audit has not found a direct statement of the complete detector theorem
 
 ```text
-eta_c=kappa/(kappa+gamma)
-+
-minimal gate chosen by eta
-+
-O(1) / logarithmic / O(N^2) local-dark burden.
+prescribed conditional internal efficiency
++ extensive local internal generation
++ size-dependent extraction/dephasing
++ bounded per-site extraction resource
+-> scalable efficiency ceiling and accepted-event scaling.
 ```
 
-Absence of a hit is not proof of novelty.
+This remains **novelty not established**.
 
 ---
 
-# Thermodynamic affinity result — supporting only
+# Review history
 
-The locally detailed-balanced extraction result
+```text
+Rev. 0:
+    FAILED — static mode-projection centerpiece, counting-model exactness, and scope errors.
 
-```math
-\Delta F_{extra}\ge kT\ln\mathcal C
+Rev. 1:
+    fixed-rate three-regime theorem survived;
+    failed as universal scalability story;
+    Young 2020 identified as closer prior art;
+    rate scaling required.
+
+Rev. 2:
+    general alpha/beta rate classification survived;
+    bounded-local-coupling theorem and gated thermodynamic correction added;
+    referee requested compression around detector-facing efficiency ceiling.
+
+Rev. 3:
+    ACTIVE concise theory-paper candidate.
 ```
 
-remains correct under its stated assumptions, but it is now secondary. Do not sell it as a new thermodynamics theorem; current quantum-detector thermodynamics makes that untenable.
+Preserve all failures.
 
 ---
 
-# Manuscript state
-
-Current working paper:
-
-> **Efficiency-controlled dark-count scaling transition in a coherence-selective photodetector**
-
-File:
-
-`experiments/09-coherence-selective-photodetection/PAPER_DRAFT_REV1_2026-08-14.md`.
-
-Rev. 0 remains in history as a failed draft and should not be silently overwritten.
-
----
-
-# NEXT ACTION
+# Next action
 
 Do **not** open Experiment 10.
 
-Next:
+1. run one final significance/novelty review of Rev. 3 as a concise theory paper;
+2. if it survives, generate 2–3 theory figures from exact finite-`N` kernels and asymptotic laws;
+3. perform citation-production audit;
+4. select a realistic journal/format and render a submission-quality manuscript.
 
-1. perform a fresh hostile referee review of **Rev. 1**, focused on whether the fixed-efficiency theorem is actually publishable and sufficiently distinct from current Dicke/decoherence scaling literature;
-2. tighten the critical `eta=q` asymptotic if a referee would demand an error bound;
-3. if it survives, generate manuscript figures from the exact finite-`N` equations and asymptotic laws;
-4. complete citation-production audit and then consider journal-facing formatting.
-
-Current state:
-
-```text
-Rev. 0: FAIL AS WRITTEN
-Rev. 1: ACTIVE
-main theorem: FIXED-EFFICIENCY THREE-REGIME SCALING
-mathematical consistency: PASSES CURRENT CHECK
-focused prior-art screen: PASSES WITHOUT DIRECT MATCH
-novelty: NOT ESTABLISHED
-paper path: ACTIVE
-```
-
----
-
-# Closed-path reminders
-
-Experiments 01–08 and the QND screen contain retained results but closed publication paths. Do not reopen them merely because Rev. 1 becomes difficult. The project goal is a defensible paper, not a maximum number of branches.
+The project goal is now the paper, not more numbered Gedanken experiments.
