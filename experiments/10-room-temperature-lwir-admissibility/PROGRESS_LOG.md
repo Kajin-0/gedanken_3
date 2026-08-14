@@ -21,9 +21,7 @@ Novelty hazards excluded at founding: generic `alpha/G_th`, `alpha sqrt(tau)`, l
 
 ## 2026-08-14 — matched massive-Dirac absorptance
 
-Controlling file:
-
-`MATCHED_DIRAC_ABSORPTION_DOS_STEP_2026-08-14.md`
+Controlling file: `MATCHED_DIRAC_ABSORPTION_DOS_STEP_2026-08-14.md`.
 
 Derived
 
@@ -38,47 +36,24 @@ d\propto v/N_D,
 therefore
 
 ```math
-\boxed{
-\Sigma_e=n_ed\propto v^{-2},
-\qquad
-\Sigma_e\text{ independent of }N_D.
-}
+\boxed{\Sigma_e=n_ed\propto v^{-2}}
 ```
 
-Ideal ballistic crossing time is `v^0`.
+with equivalent-species cancellation. Ideal ballistic crossing time is `v^0`.
 
 At 10 um / 300 K, exact finite-gap Dirac carrier density is `1.8644x` the edge-parabolic estimate.
 
-Disposition:
-
-```text
-MATCHED-ABSORPTANCE HIGH-v LEVER SURVIVES.
-NOVELTY NOT ESTABLISHED.
-```
+Disposition: matched-absorptance high-`v` lever survives; novelty not established.
 
 ---
 
 ## 2026-08-14 — Kane velocity freedom and microscopic resource bound
 
-Controlling file:
+Controlling file: `KANE_VELOCITY_RESOURCE_BOUND_STEP_2026-08-14.md`.
 
-`KANE_VELOCITY_RESOURCE_BOUND_STEP_2026-08-14.md`
+Using `E_P=2m_0P^2/hbar^2` and `v^2=E_P/(3m_0)`, obtained `Sigma_e ~ E_P^-1`.
 
-Using
-
-```math
-E_P=2m_0P^2/\hbar^2,
-\qquad
-v^2=E_P/(3m_0),
-```
-
-obtained
-
-```math
-\Sigma_e\propto E_P^{-1}.
-```
-
-Generic upper-bound attempts based on the multiband effective-mass identity, global optical f-sum over a fixed detector energy window, and fixed remote-band energy did **not** provide a material-independent upper `v`.
+Generic upper-bound attempts based on the multiband effective-mass identity, fixed-window optical f-sum, and fixed remote-band energy did not provide a material-independent upper `v`.
 
 For a Wannier Hamiltonian,
 
@@ -102,20 +77,13 @@ and
 \boxed{\Sigma_e\ge C/V_{hop}^2.}
 ```
 
-Disposition:
-
-```text
-MICROSCOPIC-RESOURCE-CONDITIONED DETECTOR INEQUALITY DERIVED.
-NOVELTY NOT ESTABLISHED.
-```
+Disposition: microscopic-resource-conditioned detector inequality derived; novelty not established.
 
 ---
 
 ## 2026-08-14 — exact symmetric-Dirac Auger kinematic closure
 
-Controlling file:
-
-`AUGER_KINEMATIC_CLOSURE_STEP_2026-08-14.md`
+Controlling file: `AUGER_KINEMATIC_CLOSURE_STEP_2026-08-14.md`.
 
 For
 
@@ -128,12 +96,10 @@ strict subadditivity gives empty exact normal-momentum phononless `eeh` / `hhe` 
 The exact off-shell mismatch is
 
 ```math
-\boxed{
-\Delta_A(E)=\sqrt{E^2+2E_g^2}-E.
-}
+\boxed{\Delta_A(E)=\sqrt{E^2+2E_g^2}-E.}
 ```
 
-At fixed `E/Eg`, `v` cancels. Therefore high `v` and particle-hole symmetry are distinct design resources.
+At fixed `E/Eg`, `v` cancels. High `v` and particle-hole symmetry are distinct design resources.
 
 Broad Dirac/symmetric-dispersion Auger suppression is established prior art.
 
@@ -141,58 +107,26 @@ Broad Dirac/symmetric-dispersion Auger suppression is established prior art.
 
 ## 2026-08-14 — scalar particle-hole-asymmetry reopening law
 
-Controlling file:
+Controlling file: `AUGER_ASYMMETRY_REOPENING_STEP_2026-08-14.md`.
 
-`AUGER_ASYMMETRY_REOPENING_STEP_2026-08-14.md`
+Reproducible calculation: `numerics/auger_asymmetry_threshold.py`.
 
-Reproducible calculation:
-
-`numerics/auger_asymmetry_threshold.py`
-
-Add
+For
 
 ```math
-E_\pm(k)=Dk^2\pm\sqrt{\Delta^2+(\hbar vk)^2},
+E_\pm=Dk^2\pm\sqrt{\Delta^2+(\hbar vk)^2},
 ```
 
 with
 
 ```math
-\beta=D\Delta/(\hbar^2v^2),
+\mathcal A_m=2|D\Delta/(\hbar^2v^2)|,
 ```
 
-and
+the weak-asymmetry threshold obeys
 
 ```math
-\boxed{
-\mathcal A_m
-=\frac{|m_e^{-1}-m_h^{-1}|}
-{m_e^{-1}+m_h^{-1}}
-=2|\beta|.
-}
-```
-
-The exact reopening boundary is
-
-```math
-\boxed{
-\beta_c(q_0)
-=
-\min_{0\le x\le q_0/2}
-\frac{2s(x)+s(q_0-2x)-s(q_0)}
-{2(q_0-x)^2},
-\qquad s(q)=\sqrt{1+q^2}.
-}
-```
-
-For weak asymmetry,
-
-```math
-\boxed{
-\beta_c\sim4/q_{th}^3,
-\qquad
-K_{th}\sim E_g\mathcal A_m^{-1/3}.
-}
+\boxed{K_{th}\sim E_g\mathcal A_m^{-1/3}.}
 ```
 
 At 10 um / 300 K, exact inversion gives approximately
@@ -201,7 +135,7 @@ At 10 um / 300 K, exact inversion gives approximately
 \boxed{\mathcal A_m\lesssim0.0848}
 ```
 
-to place the direct threshold above `10 kBT` in the scalar-asymmetry model.
+to put the direct threshold above `10 kBT` in the scalar model.
 
 The edge-mass interpretation is model-specific; the physical requirement is finite-momentum electron-hole symmetry over the Auger-active window.
 
@@ -211,188 +145,192 @@ Broad threshold enhancement near quasi-relativistic HgCdTe-QW regimes is establi
 
 ## 2026-08-14 — near-threshold direct Auger phase space and thermal scaling
 
-Controlling file:
+Controlling file: `AUGER_NEAR_THRESHOLD_RATE_STEP_2026-08-14.md`.
 
-`AUGER_NEAR_THRESHOLD_RATE_STEP_2026-08-14.md`
+Reproducible check: `numerics/auger_near_threshold_phase_space.py`.
 
-Reproducible check:
-
-`numerics/auger_near_threshold_phase_space.py`
-
-### Fixed-hot-electron phase space
-
-After momentum conservation, the final state has six local relative coordinates. On the interior threshold branch, numerical Hessian checks confirm a positive-definite constrained minimum and a linear opening of available energy above threshold.
-
-Hence the pure energy-shell measure obeys
+For a fixed hot electron on the interior threshold branch,
 
 ```math
-\boxed{
-\Phi_{3body}(K)\propto(K-K_{th})^2.
-}
+\boxed{\Phi_{3body}\propto(K-K_{th})^2.}
 ```
 
-For a smooth nonzero threshold matrix element,
+If `|V_eff|^2 ~ (K-K_th)^nu`, then
 
 ```math
-\Gamma_{II}\propto(K-K_{th})^2.
+\boxed{\Gamma_{II}\propto(K-K_{th})^{2+\nu}.}
 ```
 
-However, if
+The phase-space exponent `2` is robust; the full-rate exponent is not universal because Kane/multiband overlap zeros can add powers.
 
-```math
-|V_{eff}|^2\propto(K-K_{th})^\nu,
-```
-
-then
-
-```math
-\boxed{
-\Gamma_{II}\propto(K-K_{th})^{2+\nu}.
-}
-```
-
-This distinction is required by Kane-model prior art: threshold overlap zeros can change the pre-exponential power. The phase-space exponent `2` is robust; the full-rate exponent is not universal without a microscopic spinor model.
-
-### Thermal activation
-
-Detailed balance through inverse impact ionization gives
+Detailed balance gives
 
 ```math
 \boxed{
 G_A^{vol}
 \propto
 T^{3+\nu}
-\exp\!\left[-\frac{E_g/2+K_{th}}{k_BT}\right]
+\exp[-(E_g/2+K_{th})/(k_BT)].
 }
 ```
 
-near threshold.
-
-For `nu=0`, low-T division by the parabolic-edge `n_i` reproduces the classical Beattie-Landsberg structure
-
-```math
-\tau_A^{-1}\propto T^{3/2}e^{-K_{th}/k_BT}.
-```
-
-This was used as a cross-check only; exact finite-gap Dirac statistics remain required for quantitative Experiment-10 carrier densities.
-
-At the `A_m ~= 0.08476` witness,
-
-```text
-K_th/kBT = 10
-exp(-K_th/kBT) = 4.54e-5
-exp[-(Eg/2+K_th)/kBT] = 4.13e-6
-```
-
-### High-v scaling at matched absorptance
-
-Before interaction momentum dependence,
-
-```math
-G_A^{vol}\propto|V_{th}|^2v^{-9},
-```
-
-and because `d~v`,
-
-```math
-G_A^{area}\propto|V_{th}|^2v^{-8}.
-```
-
-For the minimal screened Coulomb interaction
-
-```math
-V(Q)
-=\frac{e^2}{\epsilon_0\epsilon_r(Q^2+\kappa^2)}S_{cv},
-```
-
-with
-
-```math
-Q_{th}=\frac{\Delta}{\hbar v}\mathcal Q_{th},
-```
-
-obtained
+For the minimal static screened Coulomb model, matched absorptance gives
 
 ```math
 \boxed{
 G_A^{area}
 \propto
 \frac{|S_{cv}|^2}{\epsilon_r^2}
-\frac{v^{-4}}
-{(\mathcal Q_{th}^2+s_\kappa^2)^2}
+\frac{v^{-4}}{(\mathcal Q_{th}^2+s_\kappa^2)^2}
 \left(\frac{k_BT}{\Delta}\right)^{3+\nu}
-\exp[-(\Delta+K_{th})/(k_BT)],
+\exp[-(\Delta+K_{th})/(k_BT)].
 }
 ```
 
-where
+Weak screening and intrinsic-Debye large-`v` asymptotics approach `v^-4`; fixed physical screening length can strengthen the algebraic suppression toward `v^-8`.
 
-```math
-s_\kappa=\hbar v\kappa/\Delta.
-```
+Disposition: direct rate factorized as far as useful without a complete multiband wave-function model; novelty not established.
 
-Weak screening at the threshold transfer gives `G_A^area ~ v^-4`; fixed physical screening length can strengthen this toward `v^-8`. For intrinsic Debye screening, `s_kappa^2 ~ v^-1`, so the large-`v` asymptote tends toward `v^-4`.
+---
 
-### First joint rate-level structure
+## 2026-08-14 — external radiative boundary floor and direct-Auger admissibility ratio
 
-In the weak-screening, smooth-matrix limit,
+Controlling file:
+
+`RADIATIVE_BOUNDARY_ADMISSIBILITY_STEP_2026-08-14.md`
+
+Reproducible calculation:
+
+`numerics/radiative_boundary_floor.py`
+
+### Critical correction to optical matching
+
+Matching useful front-side absorptance and accepted scene etendue alone does **not** fix total radiative exchange. Extra backside/substrate optical ports provide a counterexample.
+
+The complete mode-resolved external optical boundary must be matched:
 
 ```math
 \boxed{
-G_A^{area}
-\sim
-\mathcal I_A
-v^{-4}
-\exp[-K_{th}(\mathcal A_m)/(k_BT)]
-\exp[-E_g/(2k_BT)].
+\mathcal A_\mu^{(A)}=\mathcal A_\mu^{(B)}
+\quad\text{for every external carrier-coupled optical channel.}
 }
 ```
 
-With
+For reciprocal passive structures, modal Kirchhoff reciprocity then fixes the external thermal emission and external background absorption independently of absorber chemistry.
+
+At thermal equilibrium,
 
 ```math
-K_{th}\sim E_g\mathcal A_m^{-1/3},
+\boxed{\Phi_{abs}^{ext}=\Phi_{em}^{ext}=\Phi_0,}
 ```
 
-large `v` provides algebraic direct-Auger suppression while small finite-`k` asymmetry provides exponential suppression.
+so the two-way unavoidable optical event traffic is `2 Phi_0`.
 
-This is the first formula in the branch where both favorable band-structure coordinates enter the same nonradiative event rate.
+### Photon-recycling correction
 
-Disposition:
+Internal bulk radiative recombination is not the invariant denominator. In the simple escape-probability picture,
+
+```math
+\Phi_{em}^{ext}=p_{esc}R_{rad}^{int},
+```
+
+so internal radiative event count can vary strongly at fixed external emission.
+
+In the low-frequency/coarse-grained carrier-number limit, recombination followed by photon reabsorption removes and then restores a carrier pair. The irreversible optical traffic is external absorption plus final photon escape/loss.
+
+### Derived event-traffic ratio
+
+Define
+
+```math
+\boxed{
+\Xi_A^{ext}
+=\frac{G_A^{gen}+R_A^{rec}}
+{\Phi_{abs}^{ext}+\Phi_{em}^{ext}}.
+}
+```
+
+At thermal equilibrium,
+
+```math
+\boxed{\Xi_A^{ext}=G_A/\Phi_0.}
+```
+
+The natural direct-channel admissibility condition is
+
+```math
+\boxed{\Xi_A^{ext}\le1.}
+```
+
+This replaces the provisional `Xi_nr` bookkeeping idea with a defined nonradiative-to-unavoidable-optical event-traffic ratio.
+
+### Ideal 10-um / 300-K radiative benchmark
+
+For unit absorptance above the gap over one hemisphere,
+
+```math
+\Phi_0
+=\frac{2\pi(k_BT)^3}{h^3c^2}I_2(E_g/k_BT).
+```
+
+Numerically:
 
 ```text
-RATE FACTORIZATION DERIVED IN CONTROLLED MODEL.
-FULL INTERACTION PREFactor NOT UNIVERSAL.
-NOVELTY NOT ESTABLISHED.
+Phi_0 = 4.89777e17 cm^-2 s^-1
+2 Phi_0 = 9.79555e17 cm^-2 s^-1
+q Phi_0 = 0.0784710 A/cm^2
+n_B(Eg) = 0.0083322
 ```
 
-### Prior-art notes
+### Activation-parity result
 
-Cross-checked against:
+The radiative boundary floor has Boltzmann factor `exp[-Eg/kBT]`, while direct Auger has `exp[-(Eg/2+K_th)/kBT]`.
 
-```text
-Combescot & Combescot, PRB 37, 8781 (1988): classical activated direct-gap lifetime and anisotropy-dependent prefactors;
-Gelmont, Phys. Lett. A 66, 323-324 (1978): Kane overlap zero at threshold changes pre-exponential behavior;
-Afanasiev, Greshnov & Zegrya: quadratic/cubic threshold impact-ionization contributions in multiband direct-gap semiconductors;
-Alymov / Morozov HgCdTe-QW work: symmetry-controlled Auger suppression.
+Therefore
+
+```math
+\boxed{
+\Xi_A^{ext}\propto_{exp}
+\exp[-(K_{th}-E_g/2)/(k_BT)].
+}
 ```
 
-No individual threshold or rate exponent is available as a novelty claim.
+The direct-Auger/radiative activation-parity line is
+
+```math
+\boxed{K_{th}=E_g/2.}
+```
+
+At the previous `K_th=10 kBT` witness, the additional direct-Auger/radiative thermal factor is
+
+```math
+\boxed{4.99\times10^{-4}}
+```
+
+before favorable high-`v` algebraic suppression and before unresolved interaction prefactors.
+
+Within the positive-curvature scalar-asymmetry family (`|beta|<1/2`),
+
+```math
+\boxed{K_{th}\ge\sqrt3\,E_g/2>E_g/2.}
+```
+
+Thus every member of that controlled family lies on the favorable side of activation parity, although prefactors can still prevent `Xi_A^ext <= 1`.
+
+### Prior-art disposition
+
+Radiative detailed balance, spectral/angular reciprocity, modal Kirchhoff laws, radiative dark-current formulas, photon recycling, and HgCdTe photon-transport/recycling effects are established prior art.
+
+The only possible surviving contribution remains the detector-specific joint admissibility construction. Novelty is not established.
 
 ---
 
 ## Active frontier
 
-The direct Auger channel is now factored as far as useful without choosing a complete multiband wave-function model.
+The two-band direct-Auger side and the external radiative-boundary side are now closed at the controlled-model level.
 
-Next derive the **radiative/background generation floor under matched external absorptance and optical environment**, then compare it to the thresholded Auger rate.
+The next intrinsic spoiler is a minimal **third-band/heavy-hole escape channel**:
 
-Target:
+> Add a heavy-hole-like reservoir to the high-`v` symmetric active pair and derive exact three-band Auger kinematics. Determine the minimum band offset/mass/velocity condition required to keep extra-band Auger event traffic below the fixed external optical floor.
 
-```math
-G_A\le G_{rad}+G_{bg}
-```
-
-with the right-hand side fixed by optical boundary conditions wherever detailed balance permits.
-
-This is the natural point to replace the provisional `Xi_nr` bookkeeping idea with a derived detector-level admissibility inequality.
+Do not rank real materials yet. Do not insert empirical lifetimes before the three-band kinematic support is understood.
