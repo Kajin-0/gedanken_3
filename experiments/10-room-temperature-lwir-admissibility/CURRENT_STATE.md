@@ -2,15 +2,13 @@
 
 **Date:** 2026-08-14  
 **Scope:** analytical/theoretical only  
-**Status:** **MATCHED-ABSORPTANCE LEVER SURVIVES / NO GENERIC UPPER-v BOUND FROM LOW-ENERGY SUM RULES / CONDITIONAL MICROSCOPIC LATTICE ADMISSIBILITY BOUND DERIVED / NOVELTY NOT ESTABLISHED / NO MANUSCRIPT YET**
+**Status:** **MATCHED-ABSORPTANCE HIGH-v LEVER SURVIVES / CONDITIONAL MICROSCOPIC VELOCITY BOUND DERIVED / EXACT SYMMETRIC-DIRAC AUGER CLOSURE DERIVED / BROAD AUGER-SUPPRESSION NOVELTY EXCLUDED / NO MANUSCRIPT YET**
 
 ## Research objective
 
-Derive, from first principles, the electronic-structure conditions a passive LWIR interband absorber must satisfy to approach HgCdTe-class intrinsic detector quality near 300 K without sacrificing useful temporal response.
+Derive from first principles the electronic-structure conditions a passive LWIR interband absorber must satisfy to approach HgCdTe-class intrinsic detector quality near 300 K without sacrificing useful temporal response.
 
-This is a finite-gap band-structure admissibility problem, not a materials leaderboard and not a new scalar figure of merit.
-
-## Fixed target
+Fixed target:
 
 ```math
 T=300\ \mathrm K,
@@ -24,50 +22,37 @@ E_g/(k_BT)\approx4.796.
 
 ## Read first
 
-1. `KANE_VELOCITY_RESOURCE_BOUND_STEP_2026-08-14.md`
-2. `MATCHED_DIRAC_ABSORPTION_DOS_STEP_2026-08-14.md`
-3. `PROGRESS_LOG.md`
-4. founding/history files only as needed.
+1. `AUGER_KINEMATIC_CLOSURE_STEP_2026-08-14.md`
+2. `KANE_VELOCITY_RESOURCE_BOUND_STEP_2026-08-14.md`
+3. `MATCHED_DIRAC_ABSORPTION_DOS_STEP_2026-08-14.md`
+4. `PROGRESS_LOG.md`
 
 ---
 
-# Result 1 — matched-absorptance massive-Dirac lever
+# Result A — matched-absorptance thermodynamic lever
 
-For
+For the intrinsic isotropic 3-D massive-Dirac model
 
 ```math
 H=\hbar v\tau_x\boldsymbol\sigma\cdot\mathbf k+\Delta\tau_z,
+\qquad \Delta=E_g/2,
+```
+
+with `N_D` equivalent species,
+
+```math
+n_e\propto N_Dv^{-3},
 \qquad
-\Delta=E_g/2,
-```
-
-with `N_D` equivalent Dirac species, exact finite-gap statistics give
-
-```math
-n_e
-=\frac{N_D}{\pi^2}
-\left(\frac{k_BT}{\hbar v}\right)^3F_2(\Delta/k_BT),
-```
-
-so
-
-```math
-n_e\propto N_Dv^{-3}.
-```
-
-The clean interband optical conductivity gives
-
-```math
 \alpha\propto N_Dv^{-1}.
 ```
 
-For matched ideal single-pass absorptance,
+Matched ideal single-pass absorptance requires
 
 ```math
-d\propto v/N_D.
+d\propto v/N_D,
 ```
 
-Therefore
+therefore
 
 ```math
 \boxed{
@@ -77,247 +62,217 @@ Therefore
 }
 ```
 
-The low-DOS advantage is not exactly canceled by reduced optical absorption inside this model.
-
-At fixed normalized photon energy, the ideal ballistic crossing time remains
+The ideal ballistic crossing time remains
 
 ```math
 \boxed{\tau_{ball}\propto v^0.}
 ```
 
-because both absorber thickness and photoexcited group speed scale linearly with `v`.
-
-At the actual 10-um / 300-K target, the exact finite-gap carrier density is about `1.8644x` the edge-parabolic estimate, so the simple parabolic density approximation is not quantitatively adequate.
+At 10 um / 300 K the exact finite-gap carrier density is `1.8644x` the edge-parabolic estimate; retain the exact dispersion in quantitative work.
 
 ---
 
-# Result 2 — Kane energy resource interpretation
+# Result B — microscopic velocity resource
 
 Using the simplified Kane normalization
 
 ```math
-E_P=\frac{2m_0P^2}{\hbar^2},
+E_P=2m_0P^2/\hbar^2,
+\qquad
+v^2=E_P/(3m_0),
 ```
-
-```math
-\boxed{v^2=E_P/(3m_0).}
-```
-
-Hence
 
 ```math
 \boxed{\Sigma_e\propto E_P^{-1}.}
 ```
 
-An improvement factor `Q` in matched thermal carrier column requires
+No useful material-independent upper bound on large `v` was obtained from the multiband effective-mass identity, global optical f-sum over a fixed detector energy window, or remote-band energy separation alone.
+
+For a Wannier/tight-binding Hamiltonian
 
 ```math
-E_P=Q E_{P,ref},
-\qquad
-v=\sqrt Q\,v_{ref}.
+H(\mathbf k)=\sum_R H_Re^{i\mathbf k\cdot R},
 ```
 
-Reference scales:
-
-```text
-v = 1.0e6 m/s  -> E_P = 17.06 eV
-v = 1.07e6 m/s -> E_P = 19.53 eV
-v = 2.0e6 m/s  -> E_P = 68.23 eV
-v = 3.0e6 m/s  -> E_P = 153.51 eV
-```
-
-HgCdTe magneto-optical work reports a Kane velocity near `1.07e6 m/s` and uses the accepted `E_P ~ 18.8 eV` scale near the topological transition. This is a reference point, not a theoretical upper bound.
-
----
-
-# Result 3 — generic low-energy constraints do NOT upper-bound large v
-
-## Multiband k.p effective-mass identity
-
-The band-edge inverse-mass tensor contains the signed remote-band sum
-
-```math
-\left(m_n^{-1}\right)_{ij}
-=\frac{\delta_{ij}}{m_0}
-+\frac{2}{m_0^2}
-\sum_{m\ne n}
-\frac{\langle n|p_i|m\rangle\langle m|p_j|n\rangle}
-{E_n-E_m}.
-```
-
-Bands above and below the target band enter with opposite denominator signs. Therefore a finite effective mass does not isolate a positive oscillator-strength budget that universally upper-bounds the fundamental interband `P`.
-
-Disposition:
-
-```text
-NO MATERIAL-INDEPENDENT UPPER-v BOUND FROM EFFECTIVE-MASS IDENTITY ALONE.
-```
-
-## Optical f-sum
-
-For any detector-relevant **fixed photon-energy interval**,
-
-```math
-W_{12}=\int_{\omega_1}^{\omega_2}\sigma_1(\omega)d\omega
-\propto v^{-1}.
-```
-
-Thus increasing `v` uses **less** low-energy optical spectral weight. A global positive optical sum rule does not obstruct large `v`; if anything, it can constrain an excessively small `v` for a specified low-energy sector.
-
-A fixed momentum cutoff gives different scaling, but that is an additional ultraviolet assumption and is not imposed by the detector task.
-
-## Remote-band energy
-
-For fixed required quasiparticle energy `E_req`,
-
-```math
-k_req
-=\frac{\sqrt{E_req^2-\Delta^2}}{\hbar v}
-\propto v^{-1}.
-```
-
-A fixed remote-band separation in energy therefore limits the valid energy window but does not itself upper-bound `v`.
-
----
-
-# Result 4 — conditional microscopic lattice velocity bound
-
-Write a translationally invariant Wannier/tight-binding Hamiltonian
-
-```math
-H(\mathbf k)=\sum_{\mathbf R}H_{\mathbf R}e^{i\mathbf k\cdot\mathbf R}.
-```
-
-Then
-
-```math
-\hat v_i(\mathbf k)
-=\frac{1}{\hbar}\frac{\partial H}{\partial k_i}
-=\frac{i}{\hbar}
-\sum_{\mathbf R}R_iH_{\mathbf R}e^{i\mathbf k\cdot\mathbf R}.
-```
-
-The operator norm gives
+the velocity operator obeys
 
 ```math
 \boxed{
-\|\hat v_i(\mathbf k)\|
-\le
-\frac{1}{\hbar}
-\sum_{\mathbf R}|R_i|\,\|H_{\mathbf R}\|
+\|\hat v_i\|
+\le\frac1\hbar\sum_R|R_i|\|H_R\|
 \equiv V_i^{hop}.
 }
 ```
 
-Every group-velocity expectation and interband velocity matrix element is bounded by this norm. Therefore an isotropic Kane/Dirac velocity satisfies, conditionally on the microscopic hopping resource,
+Thus conditionally
 
 ```math
-\boxed{v\le V_{hop}.}
+\boxed{v\le V_{hop},}
 ```
 
-The primitive resource is
-
-```math
-\boxed{
-\mathcal J_i
-=\sum_{\mathbf R}|R_i|\,\|H_{\mathbf R}\|,
-\qquad
-V_i^{hop}=\mathcal J_i/\hbar.
-}
-```
-
-Large `v` requires large hopping amplitude, long hopping range, or both.
-
-There is no numerical material-independent ceiling until this ultraviolet resource is itself bounded.
-
----
-
-# First explicit admissibility inequality
-
-For the clean matched-absorptance model,
-
-```math
-\Sigma_e
-=\frac{C(T,E_g,A,r,n_b)}{v^2}.
-```
-
-Combining with the microscopic velocity resource gives
+and the matched thermal carrier column satisfies
 
 ```math
 \boxed{
-\Sigma_e
-\ge
-\frac{C(T,E_g,A,r,n_b)}{V_{hop}^2}.
+\Sigma_e\ge C(T,E_g,A,r,n_b)/V_{hop}^2.
 }
 ```
 
-This is the first explicit microscopic-resource-conditioned admissibility inequality in Experiment 10.
-
-For the previous witness
-
-```text
-T = 300 K
-lambda_c = 10 um
-r = 1.2
-A = 0.90
-n_b = 3.5
-```
-
-```math
-C=1.06668\times10^{29}\ \mathrm{m^{-2}(m/s)^2}.
-```
-
-Hence
-
-```text
-V_hop = 1.0e6 m/s -> Sigma_e >= 1.067e13 cm^-2
-V_hop = 2.0e6 m/s -> Sigma_e >= 2.667e12 cm^-2
-V_hop = 3.0e6 m/s -> Sigma_e >= 1.185e12 cm^-2
-```
-
-These are conditional resource bounds, not universal semiconductor constants.
+This is a microscopic-resource-conditioned detector bound, not a universal numerical semiconductor limit.
 
 ---
 
-# Novelty status
+# Result C — exact symmetric massive-Dirac Auger closure
 
-Established ingredients include Kane `k.p`, band-edge effective-mass sums, optical conductivity sum rules, 3-D Dirac optical conductivity, HgCdTe Kane velocity measurements, and Wannier/tight-binding Bloch Hamiltonians.
+Controlling derivation:
 
-Do not claim novelty for the operator-norm velocity inequality itself. The possible research contribution, if it survives a broader audit and later intrinsic-noise analysis, is the detector-specific synthesis
+`AUGER_KINEMATIC_CLOSURE_STEP_2026-08-14.md`
+
+Use the positive quasiparticle dispersion
 
 ```math
-matched absorptance
-+ exact finite-gap Dirac statistics
-+ microscopic velocity resource
--> Sigma_e >= C/V_hop^2.
+\varepsilon(k)=\sqrt{\Delta^2+(\hbar vk)^2},
+\qquad \Delta>0.
 ```
 
-Disposition remains
+For arbitrary momenta `p,q`,
+
+```math
+\boxed{
+\varepsilon(\mathbf p+\mathbf q)
+<\varepsilon(\mathbf p)+\varepsilon(\mathbf q).
+}
+```
+
+Therefore for normal-momentum impact ionization
 
 ```text
-POSSIBLE USEFUL SYNTHESIS / NOVELTY NOT ESTABLISHED.
+e_0 -> e_1 + e_2 + h_3
+```
+
+with
+
+```math
+\mathbf k_0=\mathbf k_1+\mathbf k_2+\mathbf k_3,
+```
+
+one necessarily has
+
+```math
+\varepsilon(k_0)
+<\varepsilon(k_1)+\varepsilon(k_2)+\varepsilon(k_3),
+```
+
+so exact energy conservation cannot also hold.
+
+Hence, within the exact symmetric two-band model,
+
+```math
+\boxed{
+\text{normal-momentum phononless }eeh\text{ Auger/impact ionization has empty kinematic support.}
+}
+```
+
+The particle-hole mirror `hhe` channel is closed as well.
+
+## Exact closure margin
+
+At fixed total momentum `K`, strict convexity gives the minimum three-particle energy at equal momentum sharing. For hot quasiparticle energy
+
+```math
+E=\varepsilon(K),
+```
+
+the minimum mismatch is
+
+```math
+\boxed{
+\Delta_A(E)
+=3\varepsilon(K/3)-\varepsilon(K)
+=\sqrt{E^2+2E_g^2}-E>0.
+}
+```
+
+At fixed `E/E_g`, **`v` cancels completely**.
+
+Thus the two favorable resources are distinct:
+
+```text
+large v
+    -> lower matched-absorptance thermal carrier column, Sigma_e ~ v^-2;
+
+particle-hole-symmetric massive-Dirac shape
+    -> exact ideal direct Auger kinematic closure.
+```
+
+Increasing `v` by itself does not cause the Auger closure; it only rescales momentum space.
+
+For the 10-um / 300-K target:
+
+```text
+E/Eg    Delta_A (meV)    Delta_A/kBT
+1.5       69.62             2.69
+2.0       55.73             2.16
+3.0       39.26             1.52
+5.0       24.32             0.94
+10.0      12.34             0.48
+```
+
+These are off-shell mismatch scales, not ordinary activation energies.
+
+## Massless limit
+
+For `Delta -> 0`, strict closure becomes marginal: equality is possible only for collinear, co-directed momenta. This agrees with established Dirac-material Auger theory.
+
+---
+
+# Prior-art boundary
+
+Broad claims that symmetric/quasi-relativistic Dirac/Kane dispersion suppresses Auger recombination are established and unavailable as novelty.
+
+Mandatory comparators:
+
+```text
+Alymov et al., Phys. Rev. B 97, 205411 (2018), DOI 10.1103/PhysRevB.97.205411;
+Alymov et al., ACS Photonics 7, 98–104 (2020), DOI 10.1021/acsphotonics.9b01099;
+But et al., Nature Photonics 13, 783–787 (2019), DOI 10.1038/s41566-019-0496-1;
+Combescot & Combescot, Phys. Rev. B 37, 8781 (1988), DOI 10.1103/PhysRevB.37.8781.
+```
+
+Current possible contribution is only the narrower detector-specific synthesis:
+
+```text
+matched absorptance + exact finite-gap statistics + microscopic v resource
++ quantitative symmetry-breaking/Auger reopening condition.
+```
+
+```text
+NOVELTY NOT ESTABLISHED.
 ```
 
 ---
 
-# What is not established
+# Important real-material boundary
 
-```text
-a chemistry-independent numerical upper bound on v;
-a universal bound on hopping amplitude/range;
-that HgCdTe maximizes E_P or v;
-that the lattice bound is tight for a real semiconductor;
-actual detector D* improvement;
-Auger behavior;
-novelty.
-```
+Real bulk HgCdTe is not the exact symmetric two-band model. Heavy-hole and remote bands, disorder, phonons, finite linewidth, and many-body effects reopen Auger channels.
+
+Do not state that bulk HgCdTe has zero Auger recombination.
+
+---
 
 # NEXT ACTION
 
-The obvious absorption/DOS cancellation, ballistic-time cancellation, generic `k.p` sum-rule cancellation, and remote-band-energy cancellation have now all failed to remove the high-`v` lever.
+Do not evaluate an empirical Auger coefficient yet.
 
-The next unavoidable intrinsic mechanism is Auger generation/recombination.
+Add the **smallest controlled particle-hole asymmetry** and derive the exact reopening boundary. Preferred first perturbation:
 
-> For the same finite-gap massive-Dirac family, how does the **kinematically allowed Auger phase space** depend on `v`, `E_g`, and the minimal extra asymmetry/remote-band parameters, and does increasing `v` preserve the matched-absorptance advantage or introduce a stronger nonradiative cost?
+```math
+E_\pm(k)
+=Dk^2\pm\sqrt{\Delta^2+(\hbar vk)^2}.
+```
 
-Do not insert an empirical Auger coefficient as an independent free parameter. Begin from energy and crystal-momentum conservation plus the simplest Coulomb matrix-element structure.
+Question:
+
+> What dimensionless asymmetry parameter is required to close the mismatch `Delta_A(E)` and create nonempty Auger phase space over the thermally relevant energy window at `E_g/k_BT ~= 4.8`?
+
+Only after the reopening condition is known should Coulomb matrix elements and finite Auger rates be introduced.
