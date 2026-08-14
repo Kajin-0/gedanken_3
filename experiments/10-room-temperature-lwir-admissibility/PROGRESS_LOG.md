@@ -42,11 +42,7 @@ therefore
 }
 ```
 
-Ideal ballistic crossing time obeys
-
-```math
-\tau_{ball}\propto v^0.
-```
+Ideal ballistic crossing time obeys `tau_ball ~ v^0`.
 
 At 10 um / 300 K the exact finite-gap Dirac carrier density is `1.8644x` the edge-parabolic estimate.
 
@@ -77,11 +73,7 @@ v^2=E_P/(3m_0),
 
 Generic upper-bound attempts based on the multiband effective-mass identity, global optical f-sum over a fixed detector energy window, and fixed remote-band energy failed to provide a material-independent upper bound on `v`.
 
-For
-
-```math
-H(\mathbf k)=\sum_RH_Re^{i\mathbf k\cdot R},
-```
+For a Wannier Hamiltonian,
 
 ```math
 \boxed{
@@ -94,15 +86,13 @@ H(\mathbf k)=\sum_RH_Re^{i\mathbf k\cdot R},
 Hence conditionally
 
 ```math
-v\le V_{hop},
+v\le V_{hop}
 ```
 
 and
 
 ```math
-\boxed{
-\Sigma_e\ge C(T,E_g,A,r,n_b)/V_{hop}^2.
-}
+\boxed{\Sigma_e\ge C/V_{hop}^2.}
 ```
 
 Disposition:
@@ -116,133 +106,169 @@ NOVELTY NOT ESTABLISHED.
 
 ## 2026-08-14 — exact Auger kinematic closure
 
-Controlling file:
+Controlling file: `AUGER_KINEMATIC_CLOSURE_STEP_2026-08-14.md`.
 
-`AUGER_KINEMATIC_CLOSURE_STEP_2026-08-14.md`
-
-### Minimal process
-
-Analyze ordinary phononless `eeh` Auger through inverse impact ionization
-
-```text
-e_0 -> e_1 + e_2 + h_3
-```
-
-in the exact particle-hole-symmetric massive-Dirac model
+For the exact particle-hole-symmetric finite-gap massive-Dirac dispersion,
 
 ```math
 \varepsilon(k)=\sqrt{\Delta^2+(\hbar vk)^2},
-\qquad \Delta=E_g/2>0.
 ```
 
-### Exact no-go
+strict subadditivity gives empty exact normal-momentum phononless `eeh` Auger/impact-ionization support; the `hhe` mirror is also closed.
 
-For arbitrary vectors `p,q`, derived strict subadditivity
+The exact off-shell mismatch is
 
 ```math
 \boxed{
-\varepsilon(\mathbf p+\mathbf q)
-<\varepsilon(\mathbf p)+\varepsilon(\mathbf q).
+\Delta_A(E)=\sqrt{E^2+2E_g^2}-E.
 }
 ```
 
-Therefore, if normal crystal momentum is conserved,
+At fixed `E/E_g`, `v` cancels. Therefore large `v` and particle-hole symmetry are distinct resources.
+
+Broad Dirac/symmetric-dispersion Auger suppression is established prior art.
+
+---
+
+## 2026-08-14 — particle-hole-asymmetry reopening law
+
+Controlling file:
+
+`AUGER_ASYMMETRY_REOPENING_STEP_2026-08-14.md`
+
+Reproducible calculation:
+
+`numerics/auger_asymmetry_threshold.py`
+
+### Perturbation
+
+Add
 
 ```math
-\mathbf k_0=\mathbf k_1+\mathbf k_2+\mathbf k_3,
+E_\pm(k)=Dk^2\pm\sqrt{\Delta^2+(\hbar vk)^2}.
 ```
 
-then
+Define
 
 ```math
-\varepsilon(k_0)
-<\varepsilon(k_1)+\varepsilon(k_2)+\varepsilon(k_3),
+q=\hbar vk/\Delta,
+\qquad
+\beta=D\Delta/(\hbar^2v^2),
 ```
 
-so the simultaneous energy-conservation equality is impossible.
-
-Result:
+and normalized inverse-mass asymmetry
 
 ```math
 \boxed{
-\text{normal-momentum phononless }eeh\text{ Auger/impact ionization has empty kinematic support.}
+\mathcal A_m
+=\frac{|m_e^{-1}-m_h^{-1}|}
+{m_e^{-1}+m_h^{-1}}
+=2|\beta|.
 }
 ```
 
-By particle-hole symmetry, the mirror `hhe` channel is also closed.
+### Exact reduced-model reopening boundary
 
-### Exact mismatch
-
-At fixed total momentum `K`, convexity makes equal momentum sharing the minimum-energy three-particle configuration. For hot energy
-
-```math
-E=\varepsilon(K),
-```
-
-obtained
+For the favorable-sign `eeh` channel, the first on-shell configuration at fixed total dimensionless momentum `q_0` reduces to two equal electron momenta `x`, a hole momentum `q_0-2x`, and
 
 ```math
 \boxed{
-\Delta_A(E)
-=3\varepsilon(K/3)-\varepsilon(K)
-=\sqrt{E^2+2E_g^2}-E.
+\beta_c(q_0)
+=
+\min_{0\le x\le q_0/2}
+\frac{2\sqrt{1+x^2}
++\sqrt{1+(q_0-2x)^2}
+-\sqrt{1+q_0^2}}
+{2(q_0-x)^2}.
 }
 ```
 
-At fixed `E/E_g`, this contains **no `v`**.
+Selected unconstrained vector optimizations independently returned the same collinear minima.
 
-This separates the two material-design resources:
+### Weak-asymmetry asymptotic
+
+For small `|beta|`, the threshold occurs at large `q`. The optimal momentum partition tends to
 
 ```text
-high v:
-    Sigma_e ~ v^-2 at matched absorptance;
-
-particle-hole-symmetric relativistic dispersion:
-    exact ideal Auger closure.
+q1 = q2 = q0/4
+q3 = q0/2
 ```
 
-Increasing `v` does not itself strengthen the dimensionless Auger kinematics.
+and
 
-### 10-um / 300-K mismatch witness
+```math
+\boxed{\beta_c(q_0)\sim4/q_0^3.}
+```
+
+Hence
+
+```math
+\boxed{q_{th}\sim(4/|\beta|)^{1/3}.}
+```
+
+The hot-electron kinetic threshold above the conduction edge therefore obeys
+
+```math
+\boxed{
+K_{th}\sim E_g\mathcal A_m^{-1/3}.
+}
+```
+
+At fixed temperature,
+
+```math
+\boxed{
+K_{th}/k_BT
+\sim(E_g/k_BT)\mathcal A_m^{-1/3}.
+}
+```
+
+### 10-um / 300-K exact thresholds
 
 ```text
-E/Eg    Delta_A (meV)    Delta_A/kBT
-1.5       69.62             2.69
-2.0       55.73             2.16
-3.0       39.26             1.52
-5.0       24.32             0.94
-10.0      12.34             0.48
+A_m      K_th/kBT
+0.40       5.873
+0.20       7.536
+0.10       9.470
+0.04      12.848
+0.02      16.273
+0.01      20.675
 ```
 
-These are off-shell mismatch scales, not ordinary thermal activation barriers.
+Inverting the exact relation:
 
-### Massless limit
+```text
+required K_th/kBT    max A_m
+8                     0.1671
+10                    0.08476
+12                    0.04900
+15                    0.02536
+```
 
-For `Delta -> 0`, closure becomes marginal and equality survives only for collinear co-directed momenta, consistent with established Dirac-material Auger theory.
+Thus the scalar `Dk^2` model requires approximately
+
+```math
+\mathcal A_m\lesssim0.0848
+```
+
+to place the direct-channel threshold above `10 k_BT` at the fixed Experiment-10 target.
+
+The edge-mass interpretation is model-specific; the physical requirement is symmetry over the finite Auger-active momentum window.
 
 ### Prior-art disposition
 
-Broad symmetry/Dirac Auger suppression is established by prior theory and HgCdTe-QW work. Mandatory comparators include:
+Full HgCdTe-QW theory already shows strongly enhanced/diverging normalized Auger thresholds near Dirac-like regimes, and later work explicitly ties massive-Dirac Auger suppression to electron-hole symmetry and nonparabolicity. Therefore the broad threshold concept is old.
+
+The compact reduced-model cube-root law is retained as a derived analytical result only.
 
 ```text
-Alymov et al., Phys. Rev. B 97, 205411 (2018);
-Alymov et al., ACS Photonics 7, 98–104 (2020);
-But et al., Nature Photonics 13, 783–787 (2019);
-Combescot & Combescot, Phys. Rev. B 37, 8781 (1988).
+NOVELTY NOT ESTABLISHED.
 ```
 
-Therefore
+### Next frontier
 
-```text
-DIRAC/SYMMETRIC AUGER SUPPRESSION = NOT A NOVELTY CLAIM.
-```
-
-Possible surviving line is the detector-specific combination of high-`v` matched-absorptance thermodynamics with an explicit symmetry-breaking reopening criterion.
-
-### Hard stop
-
-Do not calculate an Auger rate yet.
+Do not rank materials yet.
 
 Next question:
 
-> Add the smallest particle-hole asymmetry, preferably `E_±(k)=Dk^2 ± sqrt(Delta^2+(hbar v k)^2)`, and derive the exact boundary at which the closed Auger phase space first reopens over the thermally relevant finite-energy window.
+> With the exact threshold structure retained, what is the leading near-threshold thermal/phase-space scaling of the direct Auger rate, and can it be combined with `Sigma_e ~ v^-2` into a detector-level room-temperature admissibility inequality before model-dependent Coulomb prefactors dominate?
