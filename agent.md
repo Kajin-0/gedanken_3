@@ -19,13 +19,14 @@ No manuscript is justified yet.
 ## Read in this order
 
 1. `experiments/10-room-temperature-lwir-admissibility/CURRENT_STATE.md`
-2. `experiments/10-room-temperature-lwir-admissibility/RADIATIVE_BOUNDARY_ADMISSIBILITY_STEP_2026-08-14.md`
-3. `experiments/10-room-temperature-lwir-admissibility/AUGER_NEAR_THRESHOLD_RATE_STEP_2026-08-14.md`
-4. `experiments/10-room-temperature-lwir-admissibility/AUGER_ASYMMETRY_REOPENING_STEP_2026-08-14.md`
-5. `experiments/10-room-temperature-lwir-admissibility/AUGER_KINEMATIC_CLOSURE_STEP_2026-08-14.md`
-6. `experiments/10-room-temperature-lwir-admissibility/KANE_VELOCITY_RESOURCE_BOUND_STEP_2026-08-14.md`
-7. `experiments/10-room-temperature-lwir-admissibility/MATCHED_DIRAC_ABSORPTION_DOS_STEP_2026-08-14.md`
-8. `experiments/10-room-temperature-lwir-admissibility/PROGRESS_LOG.md`
+2. `experiments/10-room-temperature-lwir-admissibility/THIRD_BAND_HEAVY_HOLE_AUGER_ESCAPE_STEP_2026-08-14.md`
+3. `experiments/10-room-temperature-lwir-admissibility/RADIATIVE_BOUNDARY_ADMISSIBILITY_STEP_2026-08-14.md`
+4. `experiments/10-room-temperature-lwir-admissibility/AUGER_NEAR_THRESHOLD_RATE_STEP_2026-08-14.md`
+5. `experiments/10-room-temperature-lwir-admissibility/AUGER_ASYMMETRY_REOPENING_STEP_2026-08-14.md`
+6. `experiments/10-room-temperature-lwir-admissibility/AUGER_KINEMATIC_CLOSURE_STEP_2026-08-14.md`
+7. `experiments/10-room-temperature-lwir-admissibility/KANE_VELOCITY_RESOURCE_BOUND_STEP_2026-08-14.md`
+8. `experiments/10-room-temperature-lwir-admissibility/MATCHED_DIRAC_ABSORPTION_DOS_STEP_2026-08-14.md`
+9. `experiments/10-room-temperature-lwir-admissibility/PROGRESS_LOG.md`
 
 Fixed target:
 
@@ -41,31 +42,17 @@ E_g/(k_BT)\approx4.796.
 
 ---
 
-# CONTROLLING RESULTS
+# Controlling closed results
 
-## 1. Matched absorptance
-
-For the exact finite-gap massive-Dirac family,
-
-```math
-n_e\propto N_Dv^{-3},
-\qquad
-\alpha\propto N_Dv^{-1},
-\qquad
-d\propto v/N_D,
-```
-
-so
+## Matched absorptance
 
 ```math
 \boxed{\Sigma_e=n_ed\propto v^{-2}}
 ```
 
-with equivalent-species cancellation and ideal ballistic crossing time `v^0`.
+for the finite-gap massive-Dirac family at matched ideal absorptance, with equivalent-species cancellation and ideal ballistic crossing time `v^0`.
 
-## 2. Microscopic velocity resource
-
-For a lattice/Wannier Hamiltonian,
+## Microscopic velocity resource
 
 ```math
 \boxed{
@@ -75,133 +62,49 @@ For a lattice/Wannier Hamiltonian,
 }
 ```
 
-hence conditionally
+so conditionally `v<=V_hop` and `Sigma_e>=C/V_hop^2`.
 
-```math
-\boxed{v\le V_{hop}}
-```
+## Two-band direct-Auger protection
 
-and
-
-```math
-\boxed{\Sigma_e\ge C/V_{hop}^2.}
-```
-
-## 3. Symmetric two-band direct-Auger protection
-
-For exact particle-hole-symmetric finite-gap massive-Dirac dispersion, normal-momentum phononless `eeh` and `hhe` Auger channels are kinematically closed.
-
-The exact mismatch is
+Exact particle-hole-symmetric massive-Dirac dispersion closes normal-momentum phononless `eeh`/`hhe` channels. Exact mismatch:
 
 ```math
 \boxed{\Delta_A(E)=\sqrt{E^2+2E_g^2}-E.}
 ```
 
-At fixed `E/Eg`, `v` cancels. High `v` and electron-hole symmetry are distinct resources.
+## Scalar asymmetry reopening
 
-## 4. Scalar asymmetry reopening
-
-For
-
-```math
-E_\pm=Dk^2\pm\sqrt{\Delta^2+(\hbar vk)^2},
-```
-
-with
-
-```math
-\mathcal A_m=2|D\Delta/(\hbar^2v^2)|,
-```
-
-the weak-asymmetry law is
+For `E_±=Dk^2±sqrt(Delta^2+(hbar v k)^2)`, weak asymmetry gives
 
 ```math
 \boxed{K_{th}\sim E_g\mathcal A_m^{-1/3}.}
 ```
 
-At 10 um / 300 K, the scalar toy model requires approximately
+At 10 um / 300 K, `A_m <= ~0.0848` places the toy-model direct threshold above `10 kBT`.
+
+## Thresholded two-band rate
 
 ```math
-\boxed{\mathcal A_m\lesssim0.0848}
+\Phi_{3body}\propto(K-K_{th})^2
 ```
 
-to put the direct threshold above `10 kBT`.
-
-Do not interpret this as a universal edge-mass rule; finite-momentum dispersion symmetry is the actual requirement.
-
-## 5. Thresholded direct-Auger rate
-
-The interior-threshold kinematic phase space gives
+for pure interior-threshold phase space, while matrix-element zeros can add powers. Detailed balance gives
 
 ```math
-\boxed{\Phi_{3body}\propto(K-K_{th})^2.}
-```
-
-If `|V_eff|^2 ~ (K-K_th)^nu`, then
-
-```math
-\boxed{\Gamma_{II}\propto(K-K_{th})^{2+\nu}.}
-```
-
-Detailed balance gives
-
-```math
-\boxed{
 G_A^{vol}\propto T^{3+\nu}e^{-(E_g/2+K_{th})/(k_BT)}.
-}
 ```
 
-For the minimal statically screened Coulomb model at matched absorptance,
+Minimal screened Coulomb at matched absorptance tends toward `G_A^area ~ v^-4` in the weak-screening/intrinsic-Debye large-`v` limit.
+
+## External optical floor
+
+Match the complete external mode-resolved absorptance, not useful front-side absorptance alone. At equilibrium,
 
 ```math
-\boxed{
-G_A^{area}
-\propto
-\frac{|S_{cv}|^2}{\epsilon_r^2}
-\frac{v^{-4}}{(\mathcal Q_{th}^2+s_\kappa^2)^2}
-\left(\frac{k_BT}{\Delta}\right)^{3+\nu}
-\exp[-(\Delta+K_{th})/(k_BT)].
-}
+\Phi_{abs}^{ext}=\Phi_{em}^{ext}=\Phi_0.
 ```
 
-Weak-screening/intrinsic-Debye large-`v` behavior tends toward `v^-4`.
-
-## 6. Complete external optical boundary — CLOSED
-
-Matching useful scene absorptance alone is insufficient. The theorem-grade comparison must match the complete mode-resolved external optical boundary:
-
-```math
-\boxed{
-\mathcal A_\mu^{(A)}=\mathcal A_\mu^{(B)}
-}
-```
-
-for every external optical channel relevant to active-carrier exchange.
-
-Then modal Kirchhoff reciprocity fixes
-
-```math
-\Phi_{em}^{ext}(T_d)
-=\int d\mu\,\mathcal A_\mu n_B(\omega_\mu,T_d)\Gamma_\mu,
-```
-
-and the external background absorption is fixed by the same `A_mu` and environment.
-
-At thermal equilibrium,
-
-```math
-\boxed{\Phi_{abs}^{ext}=\Phi_{em}^{ext}=\Phi_0.}
-```
-
-Internal radiative recombination is **not** the invariant denominator because photon recycling allows
-
-```math
-\Phi_{em}^{ext}=p_{esc}R_{rad}^{int}.
-```
-
-Use external irreversible optical traffic in the low-frequency/coarse-grained carrier-number problem.
-
-## 7. Derived admissibility ratio
+Internal radiative recombination is not invariant under photon recycling.
 
 Define
 
@@ -213,84 +116,156 @@ Define
 }
 ```
 
-At equilibrium,
+At equilibrium, `Xi_A^ext=G_A/Phi_0`. The activation-parity line is
 
 ```math
-\boxed{\Xi_A^{ext}=G_A/\Phi_0.}
+\boxed{K_{th}=E_g/2.}
 ```
 
-The direct-channel admissibility criterion is
-
-```math
-\boxed{\Xi_A^{ext}\le1.}
-```
-
-For an ideal step absorber over one hemisphere at 10 um / 300 K,
+For the ideal 10-um / 300-K hemispherical step absorber,
 
 ```text
 Phi_0 = 4.89777e17 cm^-2 s^-1
 q Phi_0 = 0.0784710 A/cm^2
 ```
 
-## 8. Activation parity
+---
 
-The radiative boundary floor scales exponentially as `e^-Eg/kBT`; direct Auger scales as `e^{-(Eg/2+K_th)/kBT}`.
+# NEW closed result — heavy-hole third-band escape
+
+Model spectator hole branch
+
+```math
+E_{hh}(k)=\Delta+\delta_{hh}+\frac{\hbar^2k^2}{2M_{hh}}.
+```
+
+Define
+
+```math
+\boxed{
+\rho=\frac{M_{hh}v^2}{\Delta}=\frac{M_{hh}}{m_D},
+\qquad
+\eta=\frac{\delta_{hh}}{\Delta}.
+}
+```
+
+For inverse CCCH
+
+```text
+e_0 -> e_1 + e_2 + h_hh,
+```
+
+the exact fixed-total-momentum final-energy minimum is collinear with equal final-electron momenta. Parameterized by common dimensionless group velocity `u`,
+
+```math
+x=\frac{u}{\sqrt{1-u^2}},
+\qquad
+z=\rho u,
+```
+
+```math
+q=\frac{2u}{\sqrt{1-u^2}}+\rho u,
+```
+
+```math
+\mathcal F
+=\frac{2}{\sqrt{1-u^2}}+1+\eta+\frac{\rho u^2}{2}.
+```
+
+For mismatch `D(q)=F(q)-sqrt(1+q^2)`, derive
+
+```math
+\boxed{D'(q)<0}
+```
+
+and
+
+```math
+\boxed{D(\infty)=1+\eta-\rho/2.}
+```
 
 Therefore
 
 ```math
 \boxed{
-\Xi_A^{ext}\propto_{exp}
-\exp[-(K_{th}-E_g/2)/(k_BT)].
+M_{hh}v^2<2(\Delta+\delta_{hh})
+\Rightarrow\text{CCCH closed},
 }
 ```
 
-The activation-parity line is
+```math
+\boxed{
+M_{hh}v^2=2(\Delta+\delta_{hh})
+\Rightarrow\text{asymptotically marginal},
+}
+```
 
 ```math
-\boxed{K_{th}=E_g/2.}
+\boxed{
+M_{hh}v^2>2(\Delta+\delta_{hh})
+\Rightarrow\text{one unique finite threshold}.
+}
 ```
 
-At the previous `K_th=10 kBT` witness, the direct-Auger/radiative exponential factor is
+This is the first direct conflict with the high-`v` thermodynamic lever because `rho~v^2` while `Sigma_e~v^-2`.
+
+Exact closure requires
 
 ```math
-\boxed{4.99\times10^{-4}.}
+\boxed{
+v\le\sqrt{2(\Delta+\delta_{hh})/M_{hh}}.}
 ```
 
-Within the positive-curvature scalar-asymmetry family,
+For a touching spectator band at 10 um,
 
 ```math
-\boxed{K_{th}\ge\sqrt3\,E_g/2>E_g/2.}
+M_{hh}^{max}=E_g/v^2.
 ```
 
-so this controlled family lies on the favorable side of activation parity, although unresolved prefactors still determine whether `Xi_A^ext <= 1`.
+At `v=1e6 m/s`, `M_hh^max=0.02181 m0`; at `1.07e6 m/s`, `0.01905 m0`.
 
----
+Near the opening boundary `rho_c=2(1+eta)`,
 
-# Prior-art boundary
-
-Established territory includes radiative detailed balance, photovoltaic/luminescence reciprocity, modal Kirchhoff laws, radiative dark-current formulas, photon recycling, HgCdTe photon transport, direct-gap Auger activation, threshold powers, Kane overlap zeros, and quasi-relativistic HgCdTe-QW Auger suppression.
-
-No individual ingredient is a novelty claim.
-
-Current disposition:
-
-```text
-POSSIBLE DETECTOR-SPECIFIC JOINT ADMISSIBILITY SYNTHESIS / NOVELTY NOT ESTABLISHED.
+```math
+\boxed{
+K_{th}^{hh}/\Delta\sim3/(\rho-\rho_c).
+}
 ```
+
+For a very heavy band,
+
+```math
+\boxed{K_{th}^{hh}\to E_g+\delta_{hh}.}
+```
+
+For a flat touching band, `K_th^hh -> Eg`.
+
+Rigorous lower bound:
+
+```math
+\boxed{K_{th}^{hh}\ge E_g+\delta_{hh}.}
+```
+
+Thus for `delta_hh>=0` the open heavy-hole channel remains on the favorable side of radiative activation parity, but in the flat touching limit the exponent-only Auger/radiative advantage degrades to
+
+```math
+\boxed{e^{-E_g/(2k_BT)}=0.0909}
+```
+
+at 10 um / 300 K.
+
+Broad heavy-hole CCCH/Auger-1 physics is established prior art. Novelty of the compact closure theorem or joint framework is not established.
 
 ---
 
 # DO NOT DO
 
-Do not rank compounds. Do not replace multiband kinematics with an empirical Auger lifetime. Do not draft a paper yet.
+Do not claim two-band Auger closure for bulk HgCdTe. Do not rank compounds. Do not insert empirical Auger-1 lifetime coefficients. Do not draft a manuscript yet.
 
 # NEXT ACTION
 
-The two-band direct-Auger problem and external radiative-boundary floor are now closed at the controlled-model level.
+The third-band support problem is closed. Derive the **near-threshold open-heavy-hole CCCH phase-space and algebraic `v`/`M_hh` scaling**, keeping the heavy-hole spinor/Coulomb/exchange overlap explicit.
 
-Proceed to the minimal **third-band/heavy-hole escape channel**:
+Question:
 
-> Add a heavy-hole-like reservoir to the high-`v` symmetric active pair and derive exact three-band Auger kinematics. Determine whether an extra-band direct channel remains open and derive the minimum band offset/mass/velocity condition required to preserve a radiative-floor-limited regime.
-
-Start with kinematics only. Add matrix elements only after support/threshold is known.
+> Once `M_hh v^2 > 2(Delta+delta_hh)`, can the large spectator-band DOS still be made sub-radiative (`Xi_hh^ext <= 1`) by threshold, offset, velocity, and explicit overlap resources, or does the heavy-hole prefactor destroy the proposed room-temperature admissibility region?
