@@ -2,145 +2,37 @@
 
 ## 2026-08-14 — branch initialization
 
-**Scope:** analytical/theoretical only.
-
-### Founding question
-
-Can a first-principles electronic-structure analysis determine what class of LWIR absorber could operate near 300 K with HgCdTe-class or near-HgCdTe-class detector quality while retaining useful temporal response?
-
-### Branch created
-
-```text
-experiment-10-room-temperature-lwir-admissibility
-```
-
-Parent research branch:
-
-```text
-experiment-09-coherence-selective-photodetection
-```
-
-The parent was chosen to preserve the latest research-recovery lineage and theoretical-only protocol. Experiment 09 remains a separate paper line and is not modified conceptually by this branch.
-
-### Initial numerical scales
-
-For
+Established the fixed target
 
 ```math
 T=300\ \mathrm K,
 \qquad
 \lambda_c=10\ \mu\mathrm m,
-```
-
-record
-
-```math
+\qquad
 E_g\approx0.12398\ \mathrm{eV},
-```
-
-```math
-k_BT\approx25.85\ \mathrm{meV},
-```
-
-```math
+\qquad
 E_g/(k_BT)\approx4.80.
 ```
 
-### First modeling decision
-
-Do not begin by ranking real materials.
-
-Use a constrained two-detector Gedanken comparison:
+Created branch
 
 ```text
-H = HgCdTe reference;
-X = unknown semiconductor with tunable electronic dispersion.
+experiment-10-room-temperature-lwir-admissibility
 ```
 
-Initially match:
+with the objective of deriving a finite-gap band-structure admissibility theorem or no-go result rather than ranking known materials.
 
-```text
-cutoff;
-temperature;
-area;
-optical etendue;
-external absorptance spectrum;
-optical environment;
-response-time/bandwidth target.
-```
-
-### First candidate comparison
-
-Compare a conventional parabolic two-band absorber with a finite-gap massive-Dirac/Kane absorber,
-
-```math
-E_\pm(k)=\pm\sqrt{(E_g/2)^2+(\hbar vk)^2}.
-```
-
-Near the edge,
-
-```math
-m_D=E_g/(2v^2).
-```
-
-This motivates, but does not establish, a possible low-DOS/high-optical-coupling direction.
-
-### Novelty hazards recorded immediately
-
-The branch explicitly excludes as novelty:
-
-```text
-alpha/G_th material figures of merit;
-alpha sqrt(tau) material metrics;
-generic low-ni arguments;
-generic detailed-balance radiative limits;
-generic band-engineered Auger suppression;
-Experiment-08 zero-gap Kane carrier statistics.
-```
-
-Verified early bibliography hazards include:
-
-```text
-Kopytko & Rogalski, Infrared Phys. Technol. 122, 104063 (2022)
-DOI 10.1016/j.infrared.2022.104063
-
-Rogalski, J. Appl. Phys. 137, 170701 (2025)
-DOI 10.1063/5.0260949
-```
-
-### Internal branch boundary
-
-Experiment 08 already closed the zero-gap Kane-statistics novelty path. Its retained mathematical results must be respected, especially the noncommuting-limit failure of inserting `m*=E_g/(2v^2)` into a nondegenerate parabolic formula and then taking `E_g -> 0`.
-
-Experiment 10 is finite-gap and detector-performance constrained.
-
-### Immediate next research step
-
-Before Auger and before material-specific complexity, derive the matched optical/statistical comparison:
-
-> At fixed finite `E_g`, `T`, external absorptance, optical environment, and response-time target, can a massive-Dirac absorber have a smaller equilibrium carrier population than a parabolic absorber without paying an exact compensating optical cost?
-
-Possible outcomes:
-
-```text
-YES -> identify the surviving free parameter and quantify its leverage;
-NO  -> derive the invariant/no-go theorem;
-CONDITIONAL -> state the exact missing microscopic assumption.
-```
-
-Stop after that first nontrivial consequence and audit it before expanding the model.
+Novelty hazards excluded at founding: generic `alpha/G_th`, `alpha sqrt(tau)`, low-`n_i` arguments, radiative detailed balance, generic Auger suppression, and Experiment-08 zero-gap Kane statistics.
 
 ---
 
-## 2026-08-14 — first hard derivation: matched massive-Dirac absorptance
+## 2026-08-14 — matched massive-Dirac absorptance
 
-Controlling derivation:
+Controlling file:
 
 `MATCHED_DIRAC_ABSORPTION_DOS_STEP_2026-08-14.md`
 
-### Exact finite-gap carrier statistics
-
-For
+For the intrinsic isotropic massive-Dirac model
 
 ```math
 H=\hbar v\tau_x\boldsymbol\sigma\cdot\mathbf k+\Delta\tau_z,
@@ -148,180 +40,176 @@ H=\hbar v\tau_x\boldsymbol\sigma\cdot\mathbf k+\Delta\tau_z,
 \Delta=E_g/2,
 ```
 
-with `N_D` equivalent four-component Dirac species and intrinsic `mu=0`, derived
-
-```math
-n_e
-=\frac{N_D}{\pi^2}
-\left(\frac{k_BT}{\hbar v}\right)^3
-F_2(\Delta/k_BT).
-```
-
-Therefore
+with `N_D` equivalent species, exact finite-gap statistics give
 
 ```math
 n_e\propto N_Dv^{-3}.
 ```
 
-At the target `10 um / 300 K`,
-
-```text
-delta = 2.39796146
-F_2 = 0.7887622040
-```
-
-and for `N_D=1`, `v=1e6 m/s`,
-
-```math
-n_e=4.8421\times10^{15}\ \mathrm{cm^{-3}}.
-```
-
-### Parabolic approximation stress
-
-Using the edge mass
-
-```math
-m_D=\Delta/v^2
-```
-
-in the nondegenerate parabolic density gives
-
-```math
-n_e^{Dirac}/n_e^{par}=1.8644.
-```
-
-The exact finite-gap nonparabolicity is therefore already important at the nominal LWIR/room-temperature target. The error is not mainly due to Fermi versus Maxwell-Boltzmann occupancy: retaining the exact Dirac dispersion but using MB occupation changes the integral by only about `2.35%`.
-
-### Exact clean-limit interband optical scaling
-
-Derived
-
-```math
-\sigma_1(\omega)
-=
-\frac{N_De^2\omega}{12\pi\hbar v}
-\left(1+\frac{2\Delta^2}{\hbar^2\omega^2}\right)
-\sqrt{1-\frac{4\Delta^2}{\hbar^2\omega^2}}
-\tanh\left(\frac{\hbar\omega}{4k_BT}\right),
-```
-
-so in the weak-loss bulk propagation limit
+The clean interband optical conductivity gives
 
 ```math
 \alpha\propto N_Dv^{-1}.
 ```
 
-The underlying inverse-velocity 3-D Dirac optical-conductivity scaling is established prior art.
-
-### New combined model result
-
-For matched single-pass absorptance,
-
-```math
-A=1-e^{-\alpha d},
-```
-
-fixed optical depth requires
+Matching ideal single-pass absorptance requires
 
 ```math
 d\propto v/N_D.
 ```
 
-Therefore the equilibrium carrier column
-
-```math
-\Sigma_e=n_ed
-```
-
-obeys
+Therefore
 
 ```math
 \boxed{
-\Sigma_e\propto v^{-2},
+\Sigma_e=n_ed\propto v^{-2},
 \qquad
 \Sigma_e\text{ independent of }N_D.
 }
 ```
 
-This answers the founding question **YES within the ideal massive-Dirac family**: the low-DOS advantage is not exactly canceled by the weaker absorption.
-
-Equivalent species/valley degeneracy is not a thermal-column lever in this restricted model because its effects on density and absorption cancel after thickness matching.
-
-### Temporal stress
-
-At normalized photon energy `r=hbar omega/Eg`,
+The ideal ballistic crossing time satisfies
 
 ```math
-u_\omega=v\sqrt{1-r^{-2}}.
+\tau_{ball}\propto v^0.
 ```
 
-Since `d~v`, the ideal ballistic crossing time satisfies
+The generic parabolic comparator was rejected as underconstrained unless its masses and optical matrix elements are derived from a common microscopic Hamiltonian.
+
+At 10 um / 300 K, the exact Dirac carrier density is `1.8644x` the edge-parabolic estimate, so exact finite-gap nonparabolicity must be retained.
+
+Disposition:
+
+```text
+MATCHED-ABSORPTANCE HIGH-v LEVER SURVIVES.
+NOVELTY NOT ESTABLISHED.
+```
+
+---
+
+## 2026-08-14 — Kane velocity freedom and microscopic resource bound
+
+Controlling file:
+
+`KANE_VELOCITY_RESOURCE_BOUND_STEP_2026-08-14.md`
+
+### Kane-energy interpretation
+
+Using
 
 ```math
-\tau_{ball}=d/u_\omega\propto v^0.
+E_P=2m_0P^2/\hbar^2,
+\qquad
+v^2=E_P/(3m_0),
 ```
 
-Thus the simplest absorption-versus-transit-speed tradeoff does not cancel the `v^-2` column benefit.
+the matched column law becomes
 
-### Numerical witness
+```math
+\boxed{\Sigma_e\propto E_P^{-1}.}
+```
+
+An improvement factor `Q` requires
+
+```math
+E_P=Q E_{P,ref},
+\qquad
+v=\sqrt Q\,v_{ref}.
+```
+
+### Generic upper-bound attempts that failed
+
+1. **Multiband effective-mass identity:** remote bands above and below the target band enter with opposite denominator signs, so the identity does not isolate a positive upper bound on the fundamental interband momentum matrix element.
+
+2. **Global optical f-sum:** over a fixed detector-relevant photon-energy interval,
+
+```math
+\int\sigma_1d\omega\propto v^{-1}.
+```
+
+Increasing `v` therefore uses less low-energy optical spectral weight. The global sum does not upper-bound large `v`.
+
+3. **Remote-band energy separation:** at fixed required quasiparticle energy,
+
+```math
+k_req\propto v^{-1}.
+```
+
+A fixed remote-band energy limits the valid energy interval but does not by itself upper-bound `v`.
+
+Disposition:
+
+```text
+NO MATERIAL-INDEPENDENT UPPER-v BOUND FROM THESE LOW-ENERGY CONSTRAINTS.
+```
+
+### Conditional microscopic lattice bound
 
 For
 
-```text
-r = 1.2
-n_b = 3.5
-N_D = 1
-A = 0.90
+```math
+H(\mathbf k)=\sum_{\mathbf R}H_{\mathbf R}e^{i\mathbf k\cdot\mathbf R},
 ```
-
-```text
-v (m/s)       n_e (cm^-3)      alpha (cm^-1)    d_90 (um)    Sigma_e (cm^-2)    tau_ball (ps)
-5.0e5         3.874e16          2090.5            11.015       4.267e13            39.85
-1.0e6         4.842e15          1045.2            22.029       1.067e13            39.85
-2.0e6         6.053e14           522.6            44.059       2.667e12            39.85
-```
-
-Factor-of-two increase in `v` gives
-
-```text
-8x lower bulk carrier density;
-2x thicker absorber;
-4x lower carrier column;
-no ideal ballistic-time penalty.
-```
-
-### Important correction to the planned comparator
-
-A generic parabolic model with independently adjustable masses and optical matrix elements is underconstrained. If it is made microscopically self-consistent through the same two-band `k.p` coupling, its band-edge parabolic form is simply the low-`k` limit of the massive-Dirac model.
-
-Therefore the cross-class comparison is now labeled
-
-```text
-CONDITIONAL:
-    full multiband k.p / oscillator-strength / sum-rule constraints are required
-    before a parabolic-vs-Dirac material theorem is meaningful.
-```
-
-### Focused prior-art screen
-
-Checked primary literature on 3-D Dirac/Kane optical conductivity and detector-material figures of merit. The optical pieces are clearly established. No direct match was found in the focused screen for the combined matched-absorptance statement
 
 ```math
-\Sigma_e\propto v^{-2}
+\hat v_i
+=\hbar^{-1}\partial_{k_i}H
+=\frac{i}{\hbar}\sum_{\mathbf R}R_iH_{\mathbf R}e^{i\mathbf k\cdot\mathbf R}.
 ```
 
-plus equivalent-species cancellation and ballistic-transit invariance.
+The operator norm gives
 
-Disposition remains
+```math
+\boxed{
+\|\hat v_i\|
+\le
+\frac1\hbar\sum_{\mathbf R}|R_i|\|H_{\mathbf R}\|
+\equiv V_i^{hop}.
+}
+```
+
+Therefore the Dirac/Kane velocity is conditionally bounded by the microscopic hopping-range resource:
+
+```math
+\boxed{v\le V_{hop}.}
+```
+
+Combining with the matched-absorptance result yields
+
+```math
+\boxed{
+\Sigma_e\ge C(T,E_g,A,r,n_b)/V_{hop}^2.
+}
+```
+
+This is the first explicit microscopic-resource-conditioned admissibility inequality in Experiment 10.
+
+For the prior witness (`T=300 K`, `lambda_c=10 um`, `r=1.2`, `A=0.90`, `n_b=3.5`),
+
+```math
+C=1.06668\times10^{29}\ \mathrm{m^{-2}(m/s)^2}.
+```
+
+So
 
 ```text
-POSSIBLE USEFUL SYNTHESIS / NOVELTY NOT ESTABLISHED.
+V_hop = 1e6 m/s -> Sigma_e >= 1.067e13 cm^-2
+V_hop = 2e6 m/s -> Sigma_e >= 2.667e12 cm^-2
+V_hop = 3e6 m/s -> Sigma_e >= 1.185e12 cm^-2
 ```
 
-### Hard stop after first consequence
+### Literature status
 
-Per protocol, Auger is **not** added yet.
+Checked primary literature on HgCdTe Kane velocity, `k.p` effective masses, optical sum rules, and Bloch/Wannier Hamiltonians. All ingredients are established. The detector-specific combination remains a possible synthesis only.
 
-Single next question:
+```text
+NOVELTY NOT ESTABLISHED.
+```
 
-> Once multiband `k.p` and oscillator-strength constraints are imposed at fixed finite `E_g`, is `v` genuinely a free design lever, or is there a microscopic upper bound/tradeoff that limits the `Sigma_e ~ v^-2` gain?
+### Next frontier
+
+The high-`v` lever has survived the obvious optical/DOS, ballistic-time, effective-mass, global-sum-rule, and remote-band-energy cancellation attempts.
+
+Next step:
+
+> Derive the kinematically allowed intrinsic Auger phase space for the same finite-gap family from energy and crystal-momentum conservation, without inserting an empirical Auger coefficient as an independent parameter.
