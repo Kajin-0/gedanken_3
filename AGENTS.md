@@ -3,11 +3,11 @@
 **Repository:** `Kajin-0/gedanken_3`  
 **Active branch:** `experiment-10-room-temperature-lwir-admissibility`
 
-Before material writes, fetch the live target and exact blob SHA. Preserve failed, corrected, conditional, and negative paths. Do not use novelty or priority language without a dedicated prior-art audit.
+Before material writes, fetch live targets and exact blob SHAs. Preserve failed, corrected, conditional, and negative paths. Do not use novelty or priority language without a dedicated audit.
 
 ## Primary objective
 
-Generate analytical/theoretical photodetector research from simple Gedanken experiments. The target is a defensible theorem, bound, invariant, counterexample, scaling law, or escape condition.
+Generate analytical/theoretical photodetector research from simple Gedanken experiments. The target is a defensible theorem, bound, invariant, counterexample, scaling law, or escape condition—not a materials list or a new scalar FOM.
 
 ## Hard global scope — ANALYTICAL / THEORETICAL ONLY
 
@@ -20,11 +20,11 @@ Do not make fabrication, measurement, instrumentation, sample procurement, or la
 1. `AGENTS.md`
 2. `agent.md`
 3. `experiments/10-room-temperature-lwir-admissibility/CURRENT_STATE.md`
-4. `experiments/10-room-temperature-lwir-admissibility/AUGER_KINEMATIC_CLOSURE_STEP_2026-08-14.md`
-5. `experiments/10-room-temperature-lwir-admissibility/KANE_VELOCITY_RESOURCE_BOUND_STEP_2026-08-14.md`
-6. `experiments/10-room-temperature-lwir-admissibility/MATCHED_DIRAC_ABSORPTION_DOS_STEP_2026-08-14.md`
-7. `experiments/10-room-temperature-lwir-admissibility/PROGRESS_LOG.md`
-8. founding/history files as needed.
+4. `experiments/10-room-temperature-lwir-admissibility/AUGER_ASYMMETRY_REOPENING_STEP_2026-08-14.md`
+5. `experiments/10-room-temperature-lwir-admissibility/AUGER_KINEMATIC_CLOSURE_STEP_2026-08-14.md`
+6. `experiments/10-room-temperature-lwir-admissibility/KANE_VELOCITY_RESOURCE_BOUND_STEP_2026-08-14.md`
+7. `experiments/10-room-temperature-lwir-admissibility/MATCHED_DIRAC_ABSORPTION_DOS_STEP_2026-08-14.md`
+8. `experiments/10-room-temperature-lwir-admissibility/PROGRESS_LOG.md`
 
 Do not infer chronology from `main`; later experiments live on divergent branches.
 
@@ -72,7 +72,7 @@ Ideal ballistic crossing time is `v^0`.
 
 # Closed result B — microscopic velocity resource
 
-The continuum low-energy constraints tested do not give a universal upper `v`. A lattice/Wannier Hamiltonian gives conditionally
+A lattice/Wannier Hamiltonian gives conditionally
 
 ```math
 \boxed{
@@ -94,7 +94,9 @@ and
 \boxed{\Sigma_e\ge C/V_{hop}^2.}
 ```
 
-# Closed result C — exact ideal Auger kinematic no-go
+No chemistry-independent numerical upper `v` has been established.
+
+# Closed result C — exact symmetric-Dirac Auger closure
 
 For
 
@@ -103,16 +105,9 @@ For
 \qquad\Delta=E_g/2>0,
 ```
 
-strict subadditivity implies
+normal-momentum phononless `eeh` and `hhe` Auger channels have empty exact kinematic support in the symmetric two-band model.
 
-```math
-\varepsilon(\mathbf p+\mathbf q)
-<\varepsilon(\mathbf p)+\varepsilon(\mathbf q).
-```
-
-Therefore the normal-momentum phononless `eeh` impact-ionization/Auger channel and its `hhe` mirror cannot satisfy exact energy and momentum conservation in the particle-hole-symmetric two-band model.
-
-The exact minimum mismatch at hot quasiparticle energy `E` is
+The exact mismatch is
 
 ```math
 \boxed{
@@ -120,24 +115,85 @@ The exact minimum mismatch at hot quasiparticle energy `E` is
 }
 ```
 
-At fixed `E/E_g`, `v` cancels.
+At fixed `E/Eg`, `v` cancels. High `v` and particle-hole symmetry are distinct favorable resources.
 
-Interpretation:
+# Closed result D — scalar particle-hole-asymmetry reopening
 
-```text
-large v -> lower matched-absorptance thermal population;
-particle-hole-symmetric relativistic dispersion -> ideal Auger closure.
+For
+
+```math
+E_\pm(k)=Dk^2\pm\sqrt{\Delta^2+(\hbar vk)^2},
 ```
 
-These are distinct design resources.
+define
 
-The massless limit is only marginal/collinear rather than strictly closed.
+```math
+\beta=D\Delta/(\hbar^2v^2)
+```
+
+and
+
+```math
+\boxed{
+\mathcal A_m
+=\frac{|m_e^{-1}-m_h^{-1}|}
+{m_e^{-1}+m_h^{-1}}
+=2|\beta|.
+}
+```
+
+The exact reduced-model reopening boundary is
+
+```math
+\boxed{
+\beta_c(q_0)
+=
+\min_{0\le x\le q_0/2}
+\frac{2s(x)+s(q_0-2x)-s(q_0)}
+{2(q_0-x)^2},
+\qquad s(q)=\sqrt{1+q^2}.
+}
+```
+
+For weak asymmetry,
+
+```math
+\boxed{
+\beta_c\sim4/q_{th}^3,
+\qquad
+q_{th}\sim(4/|\beta|)^{1/3},
+}
+```
+
+and
+
+```math
+\boxed{
+K_{th}\sim E_g\mathcal A_m^{-1/3}.
+}
+```
+
+At the fixed 10-um / 300-K target, exact inversion gives approximately
+
+```math
+\boxed{\mathcal A_m\lesssim0.0848}
+```
+
+to place the direct-channel threshold above `10 k_BT` in this scalar-asymmetry toy model.
+
+Do not treat that as a universal edge-mass criterion. The actual physical requirement is small finite-momentum electron-hole dispersion asymmetry across the Auger-active window.
+
+Reproducible calculation:
+
+`experiments/10-room-temperature-lwir-admissibility/numerics/auger_asymmetry_threshold.py`
 
 ## Novelty discipline
 
-Broad Dirac/symmetric-dispersion Auger suppression is established prior art. Mandatory comparators include Alymov et al. PRB 97, 205411 (2018), Alymov et al. ACS Photonics 7, 98–104 (2020), But et al. Nature Photonics 13, 783–787 (2019), and Combescot & Combescot PRB 37, 8781 (1988).
+Broad Dirac/symmetric-dispersion Auger suppression and enhanced Auger thresholds near quasi-relativistic HgCdTe-QW regimes are established prior art. Mandatory adjacent work includes Alymov et al. PRB 2018 and ACS Photonics 2020, Aleshkin et al. JPCM 2019, Morozov et al. ACS Photonics 2021, and classical threshold/anisotropy literature.
 
-Real bulk HgCdTe is not the exact symmetric two-band model. Do not claim zero bulk-HgCdTe Auger recombination.
+The cube-root asymmetry law is retained as a reduced-model derivation only; novelty is not established.
+
+Real bulk HgCdTe is not the exact two-band model. Heavy-hole/remote bands, phonons, disorder, linewidth, and many-body effects can reopen channels.
 
 Current disposition:
 
@@ -145,18 +201,14 @@ Current disposition:
 POSSIBLE DETECTOR-SPECIFIC SYNTHESIS / NOVELTY NOT ESTABLISHED.
 ```
 
-## Active frontier — symmetry-breaking reopening
+## Active frontier — thresholded Auger phase-space scaling
 
-Do not calculate an empirical Auger rate yet.
+Do not rank materials and do not jump to a phenomenological Auger coefficient.
 
-Add the smallest controlled particle-hole asymmetry, preferably
+Retain the exact reopening threshold and introduce only the minimum screened-Coulomb structure necessary to determine the leading near-threshold rate/phase-space scaling.
 
-```math
-E_\pm(k)=Dk^2\pm\sqrt{\Delta^2+(\hbar vk)^2},
-```
+Question:
 
-and derive the exact boundary at which Auger kinematic support first reopens over the finite thermally relevant energy window.
+> Can the thresholded Auger scaling be combined with `Sigma_e ~ v^-2` into a detector-level room-temperature admissibility inequality whose dominant dependence is fixed by electronic structure before model-dependent interaction prefactors enter?
 
-The objective is a dimensionless admissibility condition on asymmetry relative to `E_g`, `v`, and the hot-carrier energy window.
-
-Only after that boundary is known should Coulomb matrix elements and finite rates be introduced.
+Separate universal threshold exponents from model-dependent Coulomb magnitude and screening.
