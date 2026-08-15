@@ -2,48 +2,46 @@
 
 **Date:** 2026-08-15  
 **Active branch:** `experiment-13-observable-resource-unification`  
-**Repository frontier:** **Experiment 13 Rev. 5 — Physical Review Applied production/rendered-hostile-review pass; human submission inputs remain**
+**Repository frontier:** **Experiment 13 Rev. 6 — Physical Review Applied flagship; final hostile technical review + 8-page production QA pass; human submission inputs remain**
 
 ## Read first
 
-1. `experiments/13-observable-resource-unification/00_ACTIVE_FRONTIER_REV5_FLAGSHIP_2026-08-15.md`
-2. `experiments/13-observable-resource-unification/PAPER_REV5_RENDERED_HOSTILE_REVIEW_2026-08-15.md`
-3. `experiments/13-observable-resource-unification/REV5_PRAPPLIED_PRODUCTION_QA_2026-08-15.md`
-4. `experiments/13-observable-resource-unification/PAPER_REV5_ADVERSARIAL_RESPONSE_2026-08-15.md`
-5. `experiments/13-observable-resource-unification/PRAPPLIED_SUBMISSION_PREFLIGHT_2026-08-15.md`
-6. `experiments/13-observable-resource-unification/CURRENT_STATE.md`
+1. `experiments/13-observable-resource-unification/00_ACTIVE_FRONTIER_REV6_FLAGSHIP_2026-08-15.md`
+2. `experiments/13-observable-resource-unification/PAPER_REV6_FINAL_HOSTILE_REVIEW_2026-08-15.md`
+3. `experiments/13-observable-resource-unification/REV6_PRAPPLIED_PRODUCTION_QA_2026-08-15.md`
+4. `experiments/13-observable-resource-unification/PAPER_REV6_RESPONSE_TO_REREVIEW_2026-08-15.md`
+5. `experiments/13-observable-resource-unification/CURRENT_STATE.md`
+6. `experiments/13-observable-resource-unification/PRAPPLIED_SUBMISSION_PREFLIGHT_2026-08-15.md` — submission guidance; Rev. 4 identifiers inside are historical
 
-Rev. 4 is historical. Do not revert to it unless specifically comparing pre/post hostile-review states.
+Rev. 4 and Rev. 5 are historical checkpoints. Rev. 6 controls.
 
 ## Controlling production identity
 
 ```text
-Actions run:          31903046137
-head commit:          8ac77c06accd02e56c43910b903ff53bb07a72dd
-artifact ID:          9251615353
-artifact digest:      64046cfd6972a9fbc810ab4a67ef61b27b9cd16249b7c666ecd75fabd5c5f843
-PDF SHA-256:          ce0fd199bb43652edf598ce7fa516e093e41fdc7a664d336092b8161ea7fa1c9
-TeX SHA-256:          9f45c235d3e2852fe04bf77a2adf519213e7af76ef8c9a7e26194a2cb10c72e7
+Actions run:          31905440563
+head commit:          1fcd627f194223dbf277cbf9d51b87501b1fcdb6
+artifact ID:          9252213152
+artifact digest:      38709b3e6f5e6b236812a70b78880c195a4e86d718a62e9b5d1e2bb63e6f7a7b
+PDF SHA-256:          fa3c40b73ae8c75b8317e5522ebf50fb5fbf77c099aeeef52cf378a4febcf2e6
+TeX SHA-256:          2a4bed7a70098e1e641a59d64d16adfe549fc35d775868e2a6b4ec7b03fa3d74
 pages:                8
 undefined refs/cites: none
-overfull boxes:       none
+overfull/underfull:   none
 visual QA:            PASS
 hostile review:       PASS
 ```
 
-## What changed from Rev. 4
+## Rev. 6 corrections
 
-An external extreme adversarial review found the central optical theorem sound but identified real weaknesses. Rev. 5 fixes them:
+The Rev. 5 re-review found no theorem-breaking error but identified formal/reproducibility issues. Rev. 6 fixes them:
 
 ```text
-Tr(G)/lambda_max(G) -> r_eff(G)=srank(sqrt(G));
-S tau = 1 explicitly demoted to definitional bookkeeping;
-stage-specific non-transferability promoted as the conceptual thesis;
-full bound/reference tightness factorization added;
-PT isotropy restricted to single-parent-doublet validation sectors;
-immigration-death-exchange Markov model and PSD convention specified;
-channel-null and final-sink Poisson proofs made explicit;
-d>1 and conditional-certification qualifications added.
+restores the thermodynamic uniform-capacity condition;
+explicitly connects the bounded-domain HgCdTe model to that condition;
+restores key HgCdTe parameters, k cutoff, quadrature, support grid, clustering tolerance, and continuous capacity-search details;
+states support-rank threshold s > 1e-6 m/s and its 1e-9 to 1e4 m/s stability sweep;
+renames optical tau_obs^act -> tau_bound^act so observability is terminal/readout terminology only;
+renames the 0.3068 loss the Fermi-statistical factor and states Kubo-Greenwood adds no inequality/slack.
 ```
 
 ## Central theorem
@@ -60,9 +58,13 @@ d>1 and conditional-certification qualifications added.
 }
 ```
 
-Unchanged from the previous audited theorem.
+Finite-system exact statement. Macroscopic density floor requires
 
-## New controlling hierarchy
+```math
+\bar v_{\mathcal B}^{cap}=\limsup_{j\to\infty}v_{\mathcal B,V_j}^{cap}<\infty.
+```
+
+## Full tightness hierarchy
 
 ```math
 \boxed{
@@ -74,59 +76,39 @@ Unchanged from the previous audited theorem.
 }
 ```
 
-This is the physically informative organization:
-
-```text
-support coverage;
-Fermi/Kubo asymmetry;
-shell/global capacity mismatch;
-within-shell selectivity.
-```
-
 HgCdTe broad-window closure:
 
 ```text
-support fraction  = 0.66897
-eta_F             = 0.30684
-tau_cap^act       = 0.57262
-active tightness  = 0.17570
-full ratio        ~= 0.1175
+support fraction   = 0.66897
+eta_F              = 0.30684
+tau_cap^act        = 0.57262
+tau_bound^act      = 0.17570
+full ratio         ~= 0.1175
+v_B^cap            = 1.01764e6 m/s
 ```
 
-## Stage-specific thesis
+## Publication architecture — mandatory
+
+The unified flagship substantially inherits Experiment 12's theorem and HgCdTe validation. Therefore:
 
 ```text
-H_task -> H_exc -> H_int -> H_term
+Experiment 13 Rev. 6:     SOLE PRIMARY ACTIVE SUBMISSION MANUSCRIPT
+Experiment 12 manuscript: FROZEN FALLBACK / DEVELOPMENT PROVENANCE
+Experiment 01 manuscript: FROZEN FALLBACK
+Experiment 09 manuscript: FROZEN FALLBACK
+concurrent overlapping submission: DO NOT DO
 ```
 
-Capacity, selectivity, internal correlation, and terminal observability belong to different physical maps. None may be transferred between stages without the intervening dynamics.
+Experiment-12 hold:
+`experiments/12-oscillator-strength-state-count-bound/00_SUBMISSION_HOLD_EXPERIMENT13_SUPERSESSION_2026-08-15.md`
 
-## PT boundary
-
-Complete nonzero singular-value isotropy is claimed only for the thermally relevant selected parent shells that are single fixed-k `PT` Kramers doublets in the BIA-neglecting validation. Generic multidoublet `PT` blocks have paired singular values, not necessarily equal singular values. Real zincblende HgCdTe contains BIA.
-
-## Recycling boundary
-
-The occupancy spectrum now refers to an explicit immigration-death-exchange Markov model with two-sided angular-frequency PSD.
-
-Ideal final-sink zero cross-spectrum requires Poisson primaries, independent lineages, one exclusive final sink, no branching/gain, and no shared electronics. Finite-transit Shockley-Ramo motion can lift the single-lineage source-channel null at finite frequency despite zero integrated induced charge. Ensemble cross-spectrum is allowed, not guaranteed.
-
-## Strategy
-
-```text
-Experiment 13 Rev. 5:     PRIMARY submission path
-Experiment 13 Rev. 4:     historical checkpoint
-Experiment 01 manuscript: frozen fallback
-Experiment 09 manuscript: frozen fallback
-Experiment 12 manuscript: frozen fallback
-new theory by default:    STOP
-```
+If this supersession policy is changed, publication overlap must be re-audited before any submission.
 
 ## Remaining work
 
-No new scientific revision is currently authorized.
+Do not create Rev. 7 or reopen theory by default.
 
-Required human/submission inputs:
+Human/submission inputs:
 
 ```text
 author name;
@@ -138,4 +120,4 @@ final Data Availability / archive decision;
 optional ORCID/referee recommendations/exclusions.
 ```
 
-When supplied, make metadata-only changes, rebuild through CI, record new hashes, inspect all pages, and submit if clean.
+Before submission, update the old Rev. 4 preflight/cover-letter wording to the Rev. 6 title and terminology, insert human-owned declarations, rebuild through CI, record hashes, and visually inspect all pages.
