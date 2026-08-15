@@ -3,32 +3,36 @@
 **Date:** 2026-08-15  
 **Branch:** `experiment-13-observable-resource-unification`  
 **Target:** Physical Review Applied — Regular Article  
-**Status:** **SCIENTIFICALLY FROZEN / PRODUCTION PDF QA-PASSED / FLAGSHIP-FIRST / HUMAN METADATA REQUIRED**
+**Status:** **SCIENTIFICALLY FROZEN / TITLE-COMPLETE PRODUCTION PDF QA-PASSED / FLAGSHIP-FIRST / HUMAN SUBMISSION METADATA REQUIRED**
 
 This file supersedes earlier Experiment-13 recovery notes whenever they disagree with it.
 
 ## Read first
 
-1. `REV4_PRAPPLIED_PRODUCTION_QA_2026-08-15.md`
+1. `REV4_PRAPPLIED_TITLE_COMPLETE_PRODUCTION_QA_2026-08-15.md`
 2. `PAPER_REV4_RENDERED_HOSTILE_REVIEW_2026-08-15.md`
-3. `PAPER_DRAFT_REV4_CLAIM_REFERENCE_CLEAN_2026-08-15.md`
-4. `PAPER_REV4_REFERENCE_QA_2026-08-15.md`
-5. `PAPER_REV4_FINAL_HOSTILE_CLAIM_REFERENCE_REVIEW_2026-08-15.md`
-6. `HGCDTE_STABLE_RANK_PRODUCTION_QA_2026-08-15.md`
-7. `HGCDTE_PT_SYMMETRY_STABLE_RANK_EXPLANATION_2026-08-15.md`
-8. `CHANNEL_SPECIFIC_OBSERVABILITY_GEOMETRY_2026-08-15.md`
+3. `PRAPPLIED_SUBMISSION_PREFLIGHT_2026-08-15.md`
+4. `REV4_PRAPPLIED_PRODUCTION_QA_2026-08-15.md`
+5. `PAPER_DRAFT_REV4_CLAIM_REFERENCE_CLEAN_2026-08-15.md`
+6. `PAPER_REV4_REFERENCE_QA_2026-08-15.md`
+7. `PAPER_REV4_FINAL_HOSTILE_CLAIM_REFERENCE_REVIEW_2026-08-15.md`
+8. `HGCDTE_STABLE_RANK_PRODUCTION_QA_2026-08-15.md`
+9. `HGCDTE_PT_SYMMETRY_STABLE_RANK_EXPLANATION_2026-08-15.md`
+10. `CHANNEL_SPECIFIC_OBSERVABILITY_GEOMETRY_2026-08-15.md`
 
-## Controlling production identity
+## Controlling title-complete production identity
 
-The controlling rendered manuscript is the seven-page Physical Review Applied REVTeX build from:
+The controlling rendered manuscript is now the bibliography-title-complete seven-page Physical Review Applied REVTeX build:
 
 ```text
-GitHub Actions run ID: 31900965632
-head commit:           f41bdc6a4e580bfadd8155903f4127b2b63655ca
-artifact ID:           9251078733
-artifact SHA-256:      1b4375f9953707ddf1e6b35bf55f91377370274d230298429398096f1b42e01a
-PDF SHA-256:           84c86c30019a0517246493ad4b9aacd60ac54051164b27ca7dfedac2fdba800f
+GitHub Actions run ID: 31901326001
+head commit:           7b2f8fe1a9e92ba8ea778828c2682c5a374a1abb
+artifact ID:           9251170031
+artifact SHA-256:      11d4bf5bd6262d6a19c6b1f0bdbdb7a7d16644981b9bd597c199e7a23ddbf32e
+PDF SHA-256:           d2e65ab9b0953e1f987c8c2c2b47e4d8558ac72989b84325590b3a0a67086ee8
 built TeX SHA-256:     c1459c18e4bf5d20f09a9a956c23b565c76bd0a913fe9636adc2ca7fe1e2b8f9
+BibTeX SHA-256:        029d1029c487c99e277a24dc95ad536d10a41742992c89916a1991d423f39d3d
+figure SHA-256:        c577b1b09eaad28367b0a1318783feb95397b6d85b9ecf885200ed1d817c4f54
 ```
 
 Production characteristics:
@@ -36,14 +40,16 @@ Production characteristics:
 ```text
 7 pages / US Letter / two-column REVTeX prapplied
 5 native vector TikZ figures
+reference titles complete for current bibliography
 undefined references: none
 undefined citations:  none
 overfull boxes:        none
-all-page visual QA:    PASS
+all scientific pages:  visual QA preserved exactly
+changed bibliography page 7: visual QA PASS
 rendered hostile review: PASS
 ```
 
-One underfull paragraph warning and REVTeX float-placement warnings remain nonblocking; direct page inspection confirms all floats are present, legible, and inside their intended geometry.
+The bibliography-title rebuild left the built TeX and figures unchanged. Rendered pages 1–6 are byte-for-byte identical to the already hostile-reviewed production PDF; only page 7 changed and it separately passed visual inspection.
 
 ## Central physical theorem
 
@@ -52,8 +58,7 @@ For selected direct cross-chemical-potential transitions in an equilibrium indep
 ```math
 \boxed{
  n_e+n_h
- \ge
- n_{e,\mathcal B}^{act}+n_{h,\mathcal B}^{act}
+ \ge n_{e,\mathcal B}^{act}+n_{h,\mathcal B}^{act}
  \ge
  \frac{2}{\pi e^2(v_{\mathcal B}^{cap})^2}
  \int_{\mathcal B}
@@ -120,17 +125,9 @@ and
 }
 ```
 
-This separates theorem slack into:
-
-```text
-Fermi/Kubo asymmetry;
-shell-to-global capacity mismatch;
-within-shell singular-spectrum concentration.
-```
+This separates theorem slack into Fermi/Kubo asymmetry, shell-to-global capacity mismatch, and within-shell singular-spectrum concentration.
 
 ## Production HgCdTe closure
-
-Broad 300-K `Eg..0.5 eV` production result:
 
 ```text
 mu                            = 0.1354615106 eV
@@ -147,19 +144,11 @@ bound/reference               ~= 0.118
 bound/active                  ~= 0.176
 ```
 
-Thus
-
 ```math
 0.306836598\times0.572622972=0.175701685.
 ```
 
-The selected active exact-shell blocks have
-
-```math
-\mathcal S_a^{act}=1
-```
-
-to about `4e-14` **within the BIA-neglecting second-order Kane validation model**. The fixed-k `PT` doublet/quaternionic explanation is model-specific. Real zincblende HgCdTe has BIA; do not generalize the exact isotropy without a BIA-inclusive calculation.
+The selected active exact-shell blocks have `S_a^act=1` to about `4e-14` **within the BIA-neglecting second-order Kane validation model**. The fixed-k `PT` doublet/quaternionic explanation is model-specific. Real zincblende HgCdTe has BIA; do not generalize the exact isotropy without a BIA-inclusive calculation.
 
 ## Recycling / terminal-observability result
 
@@ -205,17 +194,20 @@ Candidate-new detector content remains narrowly:
 
 No direct prior-art collision was found in the completed targeted audits. Use narrow “we derive” language rather than unsupported priority claims.
 
-## Production files
+## Production / submission infrastructure
 
 ```text
-typeset/rev4_unified_prapplied.tex    authoritative scientific typeset source
-typeset/rev4_unified.bib              working verified bibliography
-typeset/rev4_figures.tex              native vector figures
-typeset/build_rev4.py                 deterministic production transform
-.github/workflows/rev4-flagship-pdf.yml reproducible CI build/QA
+typeset/rev4_unified_prapplied.tex
+typeset/rev4_unified.bib
+typeset/rev4_figures.tex
+typeset/build_rev4.py
+.github/workflows/rev4-flagship-pdf.yml
+PRAPPLIED_SUBMISSION_PREFLIGHT_2026-08-15.md
 ```
 
-Production regressions and their repairs are documented in `REV4_PRAPPLIED_PRODUCTION_QA_2026-08-15.md`. Do not replace the safe theorem-label slicing in `build_rev4.py` with a broad multiline regex.
+Physical Review Applied preflight is complete for all non-human requirements currently actionable. The manuscript is a Regular Article; a 100-word suitability justification and cover-letter draft are recorded in the preflight note. A final Data Availability Statement/archive citation still requires a human archive decision.
+
+Do not replace the safe theorem-label/environment slicing in `build_rev4.py` with a broad multiline regex.
 
 ## Publication strategy
 
@@ -226,29 +218,33 @@ Experiment 09 manuscript:        FROZEN fallback
 Experiment 12 manuscript:        FROZEN fallback PRB package
 ```
 
-Do not simultaneously submit materially overlapping flagship and standalone versions. Preserve all standalone packages.
+Do not simultaneously submit materially overlapping flagship and standalone versions.
 
 ## Remaining blockers / next action
 
 No scientific work is required by default.
 
-The only known submission blockers are human metadata:
+Remaining human/submission inputs:
 
 ```text
 author name
 institutional affiliation
 corresponding email
 acknowledgments / funding statement
+submission-history / joint-submission declaration
+final Data Availability Statement / archival citation decision
+optional ORCID and referee recommendations/exclusions
 ```
 
 Once those are supplied:
 
 ```text
 1. insert metadata only;
-2. rebuild through the deterministic CI path;
-3. record new TeX/PDF hashes;
-4. inspect all seven pages again;
-5. submit if no metadata-induced production defect appears.
+2. resolve final DAS/archive citation;
+3. rebuild through CI;
+4. record new TeX/PDF hashes;
+5. inspect all pages again;
+6. submit if no metadata-induced production defect appears.
 ```
 
 Do not reopen theory absent a concrete mathematical defect, numerical inconsistency, direct prior-art collision, referee/editor request, or specific journal requirement.
