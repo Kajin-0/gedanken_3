@@ -3,7 +3,7 @@
 **Date:** 2026-08-15  
 **Scope:** analytical/theoretical only  
 **Target:** Physical Review Applied — Regular Article  
-**Status:** **REV. 6 CONTROLS / FINAL HOSTILE TECHNICAL REVIEW PASS / 8-PAGE PRODUCTION QA PASS / HUMAN SUBMISSION INPUTS REMAIN**
+**Status:** **REV. 6 CONTROLS / FINAL HOSTILE TECHNICAL REVIEW PASS / 8-PAGE PRODUCTION QA PASS / REV6 SUBMISSION PREFLIGHT COMPLETE / HUMAN INPUTS REMAIN**
 
 ## Read first
 
@@ -11,7 +11,7 @@
 2. `PAPER_REV6_FINAL_HOSTILE_REVIEW_2026-08-15.md`
 3. `REV6_PRAPPLIED_PRODUCTION_QA_2026-08-15.md`
 4. `PAPER_REV6_RESPONSE_TO_REREVIEW_2026-08-15.md`
-5. `PRAPPLIED_SUBMISSION_PREFLIGHT_2026-08-15.md` — submission guidance only; Rev. 4 identifiers inside it are historical
+5. `PRAPPLIED_SUBMISSION_PREFLIGHT_REV6_2026-08-15.md`
 
 Rev. 6 supersedes Rev. 5 for submission. Rev. 4 and Rev. 5 are preserved as reproducible history.
 
@@ -24,11 +24,9 @@ artifact ID:          9252213152
 artifact digest:      38709b3e6f5e6b236812a70b78880c195a4e86d718a62e9b5d1e2bb63e6f7a7b
 PDF SHA-256:          fa3c40b73ae8c75b8317e5522ebf50fb5fbf77c099aeeef52cf378a4febcf2e6
 TeX SHA-256:          2a4bed7a70098e1e641a59d64d16adfe549fc35d775868e2a6b4ec7b03fa3d74
-figure SHA-256:       07ee725da6522c7060c27644852a78977468ba02dd85ba0497e66f820f67b816
 pages:                8
 undefined refs/cites: none
-overfull boxes:       none
-underfull boxes:      none
+overfull/underfull:   none
 visual QA:            PASS
 hostile review:       PASS
 ```
@@ -47,13 +45,13 @@ hostile review:       PASS
 }
 ```
 
-At finite normalization volume this is exact. A macroscopic density floor additionally requires
+Finite-system exact statement. Macroscopic density floor requires
 
 ```math
 \bar v_{\mathcal B}^{cap}=\limsup_{j\to\infty}v_{\mathcal B,V_j}^{cap}<\infty.
 ```
 
-The production bounded-domain HgCdTe model explicitly satisfies this condition within the stated model because its finite-dimensional velocity matrix has a volume-independent operator bound on the compact momentum domain.
+The bounded-domain HgCdTe model satisfies this within the model because the finite-dimensional velocity matrix is bounded on the compact momentum domain by a volume-independent microscopic operator norm.
 
 ## Full tightness hierarchy
 
@@ -67,9 +65,7 @@ The production bounded-domain HgCdTe model explicitly satisfies this condition w
 }
 ```
 
-`eta_F` is the **Fermi-statistical factor**; Kubo-Greenwood is exact spectral bookkeeping and is not an independent source of slack.
-
-The optical tightness variable is `tau_bound^act`; reserve `observability` for terminal/readout null spaces.
+`eta_F` is the **Fermi-statistical factor**; Kubo-Greenwood is exact spectral bookkeeping. The optical tightness quantity is `tau_bound^act`; reserve `observability` for the terminal/readout stage.
 
 ## HgCdTe production state
 
@@ -94,11 +90,9 @@ Experiment 12 PRB paper:  FROZEN FALLBACK / DEVELOPMENT PROVENANCE
 Experiment 01 manuscript: FROZEN FALLBACK
 Experiment 09 manuscript: FROZEN FALLBACK
 concurrent overlapping submission: DO NOT DO
-new theory by default:    STOP
 ```
 
-Experiment-12 hold notice:
-
+Experiment-12 hold:
 `../12-oscillator-strength-state-count-bound/00_SUBMISSION_HOLD_EXPERIMENT13_SUPERSESSION_2026-08-15.md`
 
 ## Final review disposition
@@ -117,6 +111,20 @@ production PDF:                     PASS
 new scientific revision required:   NO
 ```
 
+## Submission layer
+
+`PRAPPLIED_SUBMISSION_PREFLIGHT_REV6_2026-08-15.md` now contains:
+
+```text
+current Rev. 6 title and production identity;
+100-word suitability justification;
+updated Rev. 6 cover-letter draft;
+publication-overlap/supersession guidance;
+Data Availability/archive guidance;
+current APS source-package instructions;
+human completion checklist.
+```
+
 ## Remaining work
 
 Do not create Rev. 7 by default.
@@ -128,9 +136,10 @@ author name;
 affiliation;
 corresponding email;
 acknowledgments/funding;
-submission-history declaration;
-final Data Availability / archival citation decision;
+conflicts/disclosures as applicable;
+truthful submission-history declaration;
+final Data Availability / persistent-archive decision;
 optional ORCID and referee recommendations/exclusions.
 ```
 
-Before actual submission, update the submission preflight/cover-letter layer from its Rev. 4 language to Rev. 6, then rebuild and visually inspect the metadata-complete artifact.
+After those are supplied, make metadata-only edits, rebuild through CI, record final hashes, visually inspect every page, and verify that the submitted source compiles to the submitted PDF.
