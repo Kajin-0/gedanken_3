@@ -6,136 +6,164 @@ Read `AGENTS.md` first, then this file. Do not infer chronology from `main` alon
 
 All active research is analytical/theoretical only. Preserve failed/corrected/conditional paths. Do not use novelty or priority language without dedicated prior-art audit.
 
-# Experiment 10 — CLOSED BY DEFAULT
+# ACTIVE — Experiment 12
 
 Branch:
 
 ```text
-experiment-10-room-temperature-lwir-admissibility
+experiment-12-oscillator-strength-state-count-bound
 ```
 
-Final disposition:
+## Read in this order
 
-```text
-CLOSED BY DEFAULT AS A NOVELTY / MANUSCRIPT PATH.
-```
+1. `experiments/12-oscillator-strength-state-count-bound/CURRENT_STATE.md`
+2. `experiments/12-oscillator-strength-state-count-bound/THERMAL_OPTICAL_SUM_INEQUALITY_STEP_2026-08-14.md`
+3. `experiments/12-oscillator-strength-state-count-bound/DISPERSIVE_MULTIBAND_GENERALIZATION_STEP_2026-08-14.md`
+4. `experiments/12-oscillator-strength-state-count-bound/OSCILLATOR_STRENGTH_STATE_COUNT_THEOREM_STEP_2026-08-14.md`
+5. `experiments/12-oscillator-strength-state-count-bound/FOUNDING_GEDANKEN_2026-08-14.md`
+6. `experiments/12-oscillator-strength-state-count-bound/PROGRESS_LOG.md`
 
-Recovery files:
+## Controlling theorem
 
-1. `experiments/10-room-temperature-lwir-admissibility/CURRENT_STATE.md`
-2. `experiments/10-room-temperature-lwir-admissibility/FINAL_PHOTONIC_AUDIT_AND_DISPOSITION_2026-08-14.md`
-3. `experiments/10-room-temperature-lwir-admissibility/THEOREM_CORE_2026-08-14.md`
-
-Retained conditional result:
+For independent single-particle eigenstates below and above `mu`, define
 
 ```math
-\Sigma_c\ge C/[\min(V_{hop},v_{spec})]^2.
+n_e=V^{-1}\sum_cp_c,
+\qquad
+n_h=V^{-1}\sum_vh_v.
 ```
 
-Technically useful; novelty/manuscript path closed.
+For direct interband optical conductivity and a finite crossing-transition velocity-strength resource `v_*`, exact Fermi algebra + Kubo give
 
----
+```math
+\boxed{
+n_e+n_h
+\ge
+\frac{2}{\pi e^2v_*^2}
+\int_0^\infty
+\frac{\hbar\omega\,\sigma_1^{inter}(\omega)}
+{e^{\hbar\omega/(2k_BT)}-1}
+d\omega.
+}
+```
 
-# Post-Experiment-10 premise screen
+Intrinsic neutral form:
 
-Read:
+```math
+\boxed{
+n_{th}
+\ge
+\frac{1}{\pi e^2v_*^2}
+\int_0^\infty
+\frac{\hbar\omega\,\sigma_1^{inter}(\omega)}
+{e^{\hbar\omega/(2k_BT)}-1}
+d\omega.
+}
+```
 
-`candidate-audits/POST_EXP10_THEORETICAL_SCREEN_2026-08-14.md`
+Pointwise Fermi inequality underlying the result:
 
-Five rejected premises:
+```math
+\boxed{
+\frac{2[f(E_v)-f(E_c)]}
+{e^{(E_c-E_v)/(2k_BT)}-1}
+\le
+f(E_c)+[1-f(E_v)].
+}
+```
+
+Velocity resource may be stated as
+
+```math
+\sum_v|v_{cv}|^2\le v_*^2
+\quad\forall c,
+```
+
+and
+
+```math
+\sum_c|v_{cv}|^2\le v_*^2
+\quad\forall v.
+```
+
+A finite relevant velocity-operator norm is sufficient.
+
+## Validation
 
 ```text
-causal/nonminimum-phase detectivity;
-spatial covariance correction to D* area scaling;
-non-normal transient detector dynamics;
-wide-gap intersubband LWIR escape;
-non-Gaussian false-alarm detectivity.
+2-D neutral massless Dirac / graphene: bound/exact = 1/2
+3-D massless Dirac:                    bound/exact = 2/3
+3-D finite-gap massive Dirac,
+10 um / 300 K:                         bound/exact = 0.794684
+```
+
+The 3-D massive-Dirac bound approaches unity as `Delta/kBT` becomes large.
+
+Reproduce with:
+
+`experiments/12-oscillator-strength-state-count-bound/numerics/thermal_optical_sum_dirac_validation.py`
+
+## Current theorem class
+
+```text
+independent-quasiparticle direct interband charge absorbers.
+```
+
+The theorem survives:
+
+```text
+arbitrary dispersive multiband state reuse;
+unequal electron/hole degeneracies;
+static single-particle disorder when exact eigenstates are used.
+```
+
+It does not automatically cover:
+
+```text
+bound excitons / neutral collective optical states;
+phonon-assisted transitions;
+interaction-generated lifetime broadening;
+external absorptance enhanced by arbitrary passive photonics.
+```
+
+Do not infer dark current directly from the thermal population without an explicit electrical-activity/collection assumption. Localized-state detector architectures are the key counterexample to an unconditional current claim.
+
+## Novelty status
+
+Focused audits have not found the exact thermal kernel/carrier-population inequality in Kubo/f-sum, quantum-geometric, QFI, graphene, or IR-detector figure-of-merit literature.
+
+```text
+NOVELTY NOT ESTABLISHED.
+NO MANUSCRIPT YET.
+```
+
+## ACTIVE NEXT ACTION
+
+Hostile-test the detector significance:
+
+```text
+1. localized/electrical-activity loophole;
+2. thermal occupation-fluctuation corollary and what it does/not imply for finite-bandwidth noise;
+3. dedicated novelty audit around the exact kernel;
+4. manuscript viability only after those survive.
 ```
 
 ---
+
+# Experiment 10 — CLOSED BY DEFAULT
+
+Branch:
+
+`experiment-10-room-temperature-lwir-admissibility`
+
+Retained conditional theorem and derivations remain useful but manuscript/novelty path closed.
 
 # Experiment 11 — CLOSED BY DEFAULT
 
 Branch:
 
-```text
-experiment-11-weighting-capacitance-duality
-```
+`experiment-11-weighting-capacitance-duality`
 
-Read:
+Prompt-slew/capacitance identity retained as established Maxwell-relaxation / reciprocal-sensitivity consequence.
 
-1. `experiments/11-weighting-capacitance-duality/CURRENT_STATE.md`
-2. `experiments/11-weighting-capacitance-duality/WEIGHTING_CAPACITANCE_DUALITY_STEP_2026-08-14.md`
-3. `experiments/11-weighting-capacitance-duality/PROGRESS_LOG.md`
-
-Question: can electrode geometry increase prompt Shockley-Ramo signal independently of detector capacitance?
-
-For homogeneous two-terminal drift,
-
-```math
-\mathbf E_b=V_b\mathbf E_w
-```
-
-and a newly generated pair gives
-
-```math
-\boxed{
-i_{pair}(\mathbf r,0^+)
-=e(\mu_e+\mu_h)V_b|\mathbf E_w(\mathbf r)|^2.
-}
-```
-
-The same weighting field defines capacitance,
-
-```math
-C_{tot}=\int\epsilon|\mathbf E_w|^2dV.
-```
-
-Therefore for `p(r)<=p_max`,
-
-```math
-\boxed{
-\frac{\langle i_{pair}(0^+)\rangle}{C_{tot}}
-\le
-\frac{e(\mu_e+\mu_h)V_b}{\epsilon}p_{max}.
-}
-```
-
-For uniform generation in active volume `V`,
-
-```math
-\boxed{
-\frac{\langle i_{pair}(0^+)\rangle}{C_{tot}}
-\le
-\frac{e(\mu_e+\mu_h)V_b}{\epsilon V}.
-}
-```
-
-Disposition:
-
-```text
-CLOSED BY DEFAULT AS A NOVELTY / MANUSCRIPT PATH.
-```
-
-Reason: uniform result reduces to established Maxwell `RC=epsilon/sigma`; nonuniform extension reduces to reciprocal lead-field / impedance sensitivity theory. Do not rescue with generic readout-noise or timing models.
-
-# ACTIVE NEXT ACTION
-
-Resume theoretical premise screening.
-
-Avoid immediate rediscoveries of:
-
-```text
-Maxwell dielectric relaxation / geometry-independent RC;
-lead-field / impedance-sensitivity reciprocity;
-Shockley-Ramo itself;
-detailed balance / FDT;
-generic LTI/matched-filter/minimum-phase theory;
-generic covariance / non-normal dynamics;
-standard likelihood or point-process detection theory;
-QWIP/QCD intersubband detection;
-known Auger engineering;
-standard cavity/delay-bandwidth/passivity bounds.
-```
-
-Open a new experiment only when the first nontrivial consequence is specifically photodetector physics and survives a primary-literature collision test.
+Post-Experiment-10/11 candidate-audit files document the large set of rejected premises. Consult them before reopening old directions.
