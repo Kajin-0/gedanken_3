@@ -50,134 +50,63 @@ Read for recovery:
 
 1. `experiments/10-room-temperature-lwir-admissibility/CURRENT_STATE.md`
 2. `experiments/10-room-temperature-lwir-admissibility/FINAL_PHOTONIC_AUDIT_AND_DISPOSITION_2026-08-14.md`
-3. `experiments/10-room-temperature-lwir-admissibility/RESONANT_PATH_ENHANCEMENT_RESPONSE_BOUND_STEP_2026-08-14.md`
-4. `experiments/10-room-temperature-lwir-admissibility/THEOREM_CORE_2026-08-14.md`
-5. detailed files only as needed.
+3. `experiments/10-room-temperature-lwir-admissibility/THEOREM_CORE_2026-08-14.md`
 
-## Retained conditional electronic theorem
-
-For a finite-gap massive-Dirac active pair, spectator-hole neutrality makes the matched active-pair single-pass sheet relation a lower bound:
+Retained conditional single-pass theorem:
 
 ```math
-\boxed{\Sigma_c\ge C/v^2.}
+\Sigma_c\ge C/[\min(V_{hop},v_{spec})]^2
 ```
 
-Microscopic lattice resource:
+under active-pair optical dominance and exact normal-momentum spectator-assisted Auger closure. This is technically useful but not established as novel.
 
-```math
-v\le V_{hop}.
-```
+Experiment 10 was closed because arbitrary photonic engineering introduces independent established resources (matching, delay, thickness-bandwidth, light trapping, susceptibility/volume, cavity participation), and composing those known optical bounds with the electronic inequality did not provide a strong novelty case.
 
-For positive isotropic convex spectator-hole excitation `E_s(p)`, define
+Do not draft an Experiment-10 manuscript or mechanically extend the branch.
 
-```math
-v_s^{crit}=\inf_{p>0}E_s(p)/p.
-```
+---
 
-Exact finite-energy normal-momentum spectator-assisted CCCH closure requires
+# Post-Experiment-10 screening status
 
-```math
-v\le v_s^{crit}.
-```
+Read:
 
-For multiple spectators,
+`candidate-audits/POST_EXP10_THEORETICAL_SCREEN_2026-08-14.md`
 
-```math
-v_{spec}=\min_s v_s^{crit},
-\qquad
-v_{adm}=\min(V_{hop},v_{spec}).
-```
-
-Under the **single-pass, active-pair-optically-dominant, exact-closure** hypotheses,
-
-```math
-\boxed{\Sigma_c\ge C/v_{adm}^2.}
-```
-
-For a parabolic heavy-hole spectator,
-
-```math
-M_{hh}v^2\le2(\Delta+\delta_{hh}),
-```
-
-and when this ceiling dominates,
-
-```math
-\Sigma_c\ge C M_{hh}/[2(\Delta+\delta_{hh})].
-```
-
-The `min E/p` kinematic structure is Landau-like and equal-group-velocity threshold theory is classical. Do not claim it as a new general principle.
-
-## Retained resonant-response extension
-
-For one-port TCMT, finite target absorptance and field-envelope response give
-
-```math
-\boxed{
-\Sigma_c\ge
-\frac{B}{v_{adm}^2}
-\frac{1-\sqrt{1-A_0}}
-{\Lambda_a\tau_{max}},
-}
-```
-
-where
-
-```math
-\Lambda_a=2\gamma_i/(\alpha_Dd)
-```
-
-is an electromagnetic absorber sampling-rate / participation resource.
-
-TCMT does not upper-bound `Lambda_a`. Therefore finite response alone does not restore a universal physical carrier-column floor.
-
-## Why closed
-
-The final novelty audit showed that the remaining photonic-resource space is already covered by mature theories under complementary hypotheses:
+Five candidate premises have been screened and rejected **before** opening Experiment 11:
 
 ```text
-Fano/Bode-Fano broadband matching;
-Rozanov absorber thickness-bandwidth limits;
-slow-light delay bounds;
-nanophotonic light-trapping resonance/channel bounds;
-susceptibility-based absorption-per-volume bounds;
-resonant-cavity-enhanced photodetectors.
+1. causal / nonminimum-phase detectivity — standard minimum-phase and finite-window detection theory;
+2. spatially correlated noise / D* area scaling — standard covariance/FPA noise theory;
+3. non-normal detector transient amplification — generic non-normal photonic/system dynamics;
+4. wide-gap LWIR detection via intersubband transition — established QWIP/QCD architecture;
+5. equal D* but different non-Gaussian false-alarm tails — standard likelihood/point-process detection theory.
 ```
 
-Electronic constituents are likewise established: `alpha/G_th`, heavy-hole CCCH, impact-ionization threshold conditions, Landau-like critical velocity, Dirac Auger suppression, multiband Auger engineering, detailed balance, and photon recycling.
-
-The exact composed sheet-density inequality was not located verbatim, but the novelty case is not strong enough to justify manuscript development under the research protocol.
-
-## Reopen Experiment 10 only for
-
-```text
-architecture-independent electronic-photonic invariant;
-detector-specific no-go not reducible to known passivity bounds;
-non-factorizable performance bound;
-new inverse theorem from detector observables to electronic structure.
-```
+Experiment 11 remains unopened.
 
 ---
 
 # ACTIVE NEXT ACTION
 
-Screen **new** purely theoretical photodetector Gedanken premises.
+Continue screening **new** purely theoretical photodetector Gedanken premises.
 
-Do not open Experiment 11 merely because Experiment 10 closed. First require a premise to survive a focused primary-literature screen.
+Do not create Experiment 11 until a premise survives an aggressive primary-literature screen.
 
-Prefer premises that are not obvious restatements of:
+Reject immediately if the first nontrivial result is merely an application of:
 
 ```text
-detailed balance / reciprocity;
-FDT;
-Landauer / reset thermodynamics;
-standard information theory;
+detailed balance / reciprocity / FDT;
+Landauer/reset thermodynamics;
+standard information or detection theory;
+minimum-phase / matched-filter / generic LTI theory;
 standard quantum measurement limits;
-known critical-coupling / delay-bandwidth / Bode-Fano / Rozanov bounds;
+critical coupling / delay-bandwidth / Bode-Fano / Rozanov;
+generic non-normal dynamics;
 known Auger suppression / band engineering;
-ordinary shot-noise/Fano-factor arguments;
+ordinary shot-noise / Fano-factor arguments;
+QWIP/QCD intersubband detection;
 Experiment-08 zero-gap Kane statistics;
 Experiment-09 collective/coherence line unless a genuinely new invariant appears.
 ```
 
-If a candidate is established, document why and reject it before opening a new experiment.
+Prefer premises whose first consequence arises from specifically photodetector physics and cannot be factored into a generic systems theorem plus a detector example.
