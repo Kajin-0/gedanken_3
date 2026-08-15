@@ -27,16 +27,18 @@ premise
 -> theorem/bound/invariant/counterexample
 -> quantitative witness
 -> adversarial audit
--> manuscript only if novelty survives sufficiently to justify a draft
+-> manuscript
 -> hostile manuscript review
--> typeset only after claim scope remains stable.
+-> revise only against concrete scientific defects
+-> typeset and render QA
+-> repeat hostile review before submission.
 ```
 
 Do not add phenomenology merely to rescue a weak novelty case.
 
 ---
 
-# Experiment 12 — REV6 SCIENCE FROZEN / PRB RENDER PASS / SUBMISSION PRODUCTION
+# Experiment 12 — PRB REV7 / POST-MAJOR-REVIEW STATE
 
 Branch:
 
@@ -47,56 +49,19 @@ experiment-12-oscillator-strength-state-count-bound
 Recovery order:
 
 1. `experiments/12-oscillator-strength-state-count-bound/CURRENT_STATE.md`
-2. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV6_2026-08-14.md`
-3. `experiments/12-oscillator-strength-state-count-bound/PRB_RENDER_QA_2026-08-14.md`
-4. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV6_FINAL_QA_2026-08-14.md`
-5. `experiments/12-oscillator-strength-state-count-bound/PRB_COVER_LETTER_DRAFT_2026-08-14.md`
-6. `experiments/12-oscillator-strength-state-count-bound/PRB_SUBMISSION_METADATA_2026-08-14.md`
-7. `experiments/12-oscillator-strength-state-count-bound/JOURNAL_FIT_AND_SUBMISSION_PLAN_2026-08-14.md`
+2. `experiments/12-oscillator-strength-state-count-bound/REV6_EXTERNAL_REVIEW_RESPONSE_2026-08-15.md`
+3. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV7_CHANGESET_2026-08-15.md`
+4. `experiments/12-oscillator-strength-state-count-bound/PRB_REV7_RENDER_QA_2026-08-15.md`
+5. `experiments/12-oscillator-strength-state-count-bound/numerics/kane_8band_capacity.py`
+6. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV6_2026-08-14.md`
+7. `experiments/12-oscillator-strength-state-count-bound/NOVELTY_AUDIT_2026-08-14.md`
 8. `experiments/12-oscillator-strength-state-count-bound/PROGRESS_LOG.md`
 
-Older manuscript revisions preserve the development/correction history. Rev6 is controlling.
+Older revisions preserve development history. The QA-passed Rev7 PRB source/PDF are the active manuscript state; exact source/PDF hashes and the full deterministic changeset are recorded in items 3–4.
 
 ## Controlling theorem
 
-For exact independent-quasiparticle states below and above `mu`, the pointwise Fermi inequality is
-
-```math
-\boxed{
-\frac{2[f(E_v)-f(E_c)]}
-{e^{(E_c-E_v)/(2k_BT)}-1}
-\le
-f(E_c)+1-f(E_v).
-}
-```
-
-For any useful positive-frequency window `B`, use exact energy-shell projectors to define selected velocity blocks and
-
-```math
-\boxed{
-(v_B^{cap})^2
-=\max\left[
-\sup_{\epsilon_c>\mu}\|A_{\epsilon_c,B}\|_{op}^2,
-\sup_{\epsilon_v<\mu}\|B_{\epsilon_v,B}\|_{op}^2
-\right].
-}
-```
-
-Define the thermally occupied optical-support populations
-
-```math
-n_{e,B}^{act}
-=V^{-1}\sum_{\epsilon_c>\mu}f(\epsilon_c)
-\operatorname{rank}A_{\epsilon_c,B},
-```
-
-```math
-n_{h,B}^{act}
-=V^{-1}\sum_{\epsilon_v<\mu}[1-f(\epsilon_v)]
-\operatorname{rank}B_{\epsilon_v,B}.
-```
-
-Then
+For direct transitions crossing `mu` in selected positive-frequency window `B`, exact Fermi statistics plus Kubo-Greenwood and the per-shell singular-value/rank resource give
 
 ```math
 \boxed{
@@ -106,7 +71,7 @@ n_{e,B}^{act}+n_{h,B}^{act}
 \ge
 \frac{2}{\pi e^2(v_B^{cap})^2}
 \int_B
-\frac{\hbar\omega\,\sigma_1^{cross}(\omega)}
+\frac{\hbar\omega\sigma_1^{cross}(\omega)}
 {e^{\hbar\omega/(2k_BT)}-1}\,d\omega.
 }
 ```
@@ -119,33 +84,83 @@ n_{th}
 \ge
 \frac{1}{\pi e^2(v_B^{cap})^2}
 \int_B
-\frac{\hbar\omega\,\sigma_1^{cross}(\omega)}
+\frac{\hbar\omega\sigma_1^{cross}(\omega)}
 {e^{\hbar\omega/(2k_BT)}-1}\,d\omega.
 }
 ```
 
-The thermal kernel tends to `2 kBT`, so finite **integrated** low-energy direct spectral weight carries a finite equilibrium thermal quasiparticle support-population cost at fixed `v_B^{cap}`.
+## Thermodynamic-limit condition — now explicit
 
-`n_B^act` is a support-dimension count. In 2-D, use sample area and sheet conductivity.
-
-## Equality / validation
-
-```text
-equal-mass mirror-symmetric parabolic model:
-    active theorem exact for any selected direct window;
-    total theorem exact for the full relevant direct spectrum.
-
-2-D neutral massless Dirac: 0.5000
-3-D massless Dirac:         0.6667
-3-D massive Dirac,
-10 um / 300 K:              0.794684
-```
-
-For unequal parabolic masses in the nondegenerate global limit,
+The finite-system theorem is exact as stated. A nonzero thermodynamic density floor requires
 
 ```math
-n_bound/n_exact
-=[4m_em_h/(m_e+m_h)^2]^{3/4}.
+\boxed{
+\bar v_B^{cap}
+=\limsup_{V\to\infty}v_{B,V}^{cap}<\infty.
+}
+```
+
+Do not state a macroscopic low-energy population floor without this uniform-capacity hypothesis.
+
+## Realistic multiband resource validation — added in Rev7
+
+For the standard first-order HgCdTe 8x8 Kane Hamiltonian,
+
+```math
+\boxed{
+\|\hat v_x\|_{op}=\sqrt{3/2}\,v_K
+}
+```
+
+so, for every selected window,
+
+```math
+\boxed{
+v_B^{cap}\le\sqrt{3/2}\,v_K.}
+```
+
+This is independent of system size in that Hamiltonian and directly satisfies the thermodynamic uniform-boundedness condition.
+
+Equivalent form:
+
+```math
+v_B^{cap}\le P/\hbar=\sqrt{E_P/(2m_0)}.
+```
+
+HgCdTe scale:
+
+```text
+v_K=(1.07 +/- 0.05)e6 m/s -> central capacity <= 1.31e6 m/s
+E_P ~=18.8 eV -> capacity <=1.286e6 m/s
+```
+
+The exact `sqrt(3/2)` coefficient is restricted to the first-order 8x8 Kane model. Second-order k.p corrections are a stated model boundary.
+
+## Rev7 corrections beyond the Kane model
+
+```text
+van Roosbroeck-Shockley detailed-balance context added;
+Callen-Welton fluctuation-dissipation context added;
+E=mu transition-endpoint limiting prescription added;
+rank-discontinuity / support-population interpretation clarified;
+measured sigma_1 versus isolated sigma_1^cross limitation added;
+full-spectrum parabolic saturation explicitly labeled an ideal effective-model result;
+low-energy statement made conditional on integrated weight + uniform capacity;
+10-um example clarified as internal admitted-power absorptance / ideal AR or index matching.
+```
+
+## Independent validations retained
+
+```text
+2-D neutral massless Dirac: 0.5000
+3-D massless Dirac:         0.6667
+3-D massive Dirac, 10 um / 300 K: 0.794684
+```
+
+Unequal parabolic nondegenerate global ratio:
+
+```math
+[4m_em_h/(m_e+m_h)^2]^{3/4}.
 ```
 
 ## Scope boundary
@@ -156,15 +171,15 @@ Valid class:
 independent-quasiparticle direct cross-mu charge absorbers.
 ```
 
-Do not automatically extend to bound excitons/neutral collective states, phonon-assisted indirect absorption, interaction-generated many-body spectral functions, or unconstrained passive photonic path enhancement.
+Do not automatically extend to bound excitons/collective states, indirect phonon-assisted absorption, interacting many-body spectral functions, or arbitrary passive photonic path enhancement.
 
-Localized states do not invalidate the state-count theorem but block automatic conversion to DC dark current.
+Do not infer universal dark current, thermal generation rate, `D*`, or finite-bandwidth noise.
 
-Do not claim universal dark-current, thermal-generation-rate, `D*`, or finite-bandwidth-noise limits. The attempted `G_th >= n_th/tau_response` theorem was rejected by a depleted-photodiode counterexample.
+Applying the theorem to measured optical conductivity requires isolating `sigma_1^cross` or a window in which it dominates.
+
+`n_B^act` is an exact support-dimension construct and should not be described as a noise-robust experimental participation count.
 
 ## Novelty status
-
-Audited adjacency includes phase-space filling, Kubo-Greenwood, ordinary/generalized `f` and TRK sums, restricted and quantum-geometric optical sums, graphene optical sum rules, classic IR `alpha/G_th`, Yablonovitch-Kane low-carrier laser engineering, and Bethkenhagen et al. conductivity-to-ionization particle counting.
 
 ```text
 DIRECT PRIOR-ART COLLISION: NOT FOUND
@@ -175,76 +190,36 @@ NOVELTY RISK: HIGH
 
 No `first`, `novel`, or priority wording is authorized.
 
-## Manuscript / journal / render state
+## Rev7 production state
 
 ```text
-CURRENT SCIENTIFIC TEXT: MANUSCRIPT_REV6_2026-08-14.md
-FINAL INTERNAL HOSTILE QA: PASS
-FIRST TARGET: Physical Review B — Regular Article
-FALLBACK: Journal of Applied Physics — Article
+experiment12_prb_rev7.tex
+SHA-256 ec5f46f0256b320861fabdd3ad5e61832c1f20c03ea95216979207fe92dc488d
+
+experiment12_prb_rev7.pdf
+SHA-256 e481354dc25a0526dbe0b4eb636a0ca733aae8678f3a12b7a2d0a349d25c0740
+
+7 pages / US letter / compile clean / all pages visually inspected / no clipping or float regression.
 ```
 
-PRB REVTeX 4.2 production render has passed:
+## ACTIVE NEXT ACTION
+
+Perform a new extreme hostile review of **Rev7 itself**.
+
+Priority attacks:
 
 ```text
-6 pages
-US letter
-no overfull boxes
-no undefined references/citations
-no stuck floats
-PDF preflight pass
-all six pages visually inspected
-no clipping, overlap, broken glyphs, or missing tables/equations
+1. Is the Kane capacity derivation/interpretation correct and sufficiently realistic?
+2. Does the new uniform thermodynamic hypothesis fully close the finite-size loophole?
+3. Does VRS/FDT or another equilibrium theorem imply the result more directly than claimed?
+4. Does second-order/multiband k.p expose a capacity-growth loophole in a finite useful window?
+5. Does a stronger prior-art collision emerge now that the theorem is framed as response + capacity -> state count?
 ```
 
-The local QA-passed `.tex` and `.pdf` SHA-256 hashes are recorded in `PRB_RENDER_QA_2026-08-14.md`.
-
-A conservative PRB cover-letter draft and submission-metadata/Data Availability checklist are committed.
-
-# ACTIVE NEXT ACTION — AUTHOR METADATA / FINAL SUBMISSION PACKAGE
-
-```text
-NO MORE THEORY BY DEFAULT.
-```
-
-The current blockers are author-owned:
-
-```text
-author names/order;
-affiliations;
-corresponding email;
-funding;
-conflicts/disclosures;
-authorship approval;
-simultaneous-submission confirmation;
-prior Physical Review submission history;
-joint-submission status;
-final Data Availability/archive decision;
-optional referee recommendations/exclusions.
-```
-
-Once those are supplied, insert them into the PRB REVTeX source, recompile, rerender, inspect the exact final PDF, and prepare the submission package.
-
-Add new theory only if an external/referee-style review identifies a blocking scientific gap.
+Do not add new theory unless that review finds a real blocker.
 
 ---
 
 # Closed previous branches
 
-## Experiment 10
-
-`experiment-10-room-temperature-lwir-admissibility`
-
-```text
-CLOSED BY DEFAULT AS NOVELTY / MANUSCRIPT PATH.
-```
-
-## Experiment 11
-
-`experiment-11-weighting-capacitance-duality`
-
-```text
-CLOSED BY DEFAULT AS NOVELTY / MANUSCRIPT PATH.
-```
-
-Candidate-audit files from the Experiment-10/11 lineage document rejected premises; consult them before reopening old ideas.
+Experiment 10 and Experiment 11 remain closed by default as novelty/manuscript paths. Consult their retained results and candidate-audit files before reopening old directions.
