@@ -1,0 +1,17 @@
+--- experiment12_prb_rev11_minor_revision.tex
++++ experiment12_prb_rev11_literature_amended.tex
+@@
+ Recent optical-bound work by Onishi and Fu relates generalized optical weight to topology, quantum geometry, and an upper bound on the topological energy gap, with applications including infrared absorption near band inversion.\cite{OnishiFu2024} That construction targets a different response moment and a topology/geometry-conditioned gap bound. Equation (29) instead uses the finite-temperature kernel in Eq. (15) to bound equilibrium thermal occupation of cross-$\mu$ one-body optical-support subspaces, conditioned on a per-shell optical-velocity capacity. The results are therefore neighboring but not interchangeable. More broadly, the idea ``conductivity spectral weight $\rightarrow$ microscopic constraint'' is not a novelty claim here.
++
++Projected low-energy optical sum rules have also been developed for correlated insulators. Mao, Mendez-Valderrama, and Chowdhury restrict an inverse-frequency-weighted optical sum to a projected low-energy Hilbert space and discuss a finite-temperature weighted form connected to projected many-body quantum geometry and quantum Fisher information.\cite{Mao2025} That construction permits interacting many-body current contributions and targets geometric/fluctuation information. Equation (29) instead isolates direct cross-$\mu$ one-body transitions and combines its distinct Fermi thermal kernel with a per-shell velocity-capacity bound to constrain equilibrium quasiparticle population. The shared use of a restricted low-energy optical window therefore does not make the two sum rules equivalent.
+@@
+-\begin{thebibliography}{19}
++\begin{thebibliography}{20}
+@@
+ \bibitem{OnishiFu2024}
+ Y. Onishi and L. Fu, Phys. Rev. X \textbf{14}, 011052 (2024), doi:10.1103/PhysRevX.14.011052.
++
++\bibitem{Mao2025}
++D. Mao, J. F. Mendez-Valderrama, and D. Chowdhury, Phys. Rev. B \textbf{112}, 075116 (2025), doi:10.1103/xmz7-jgl6.
+ 
+ \end{thebibliography}
