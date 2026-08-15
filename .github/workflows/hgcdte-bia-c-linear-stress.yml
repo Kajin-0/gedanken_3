@@ -1,0 +1,58 @@
+name: HgCdTe C-linear BIA stress
+
+on:
+  push:
+    branches:
+      - experiment-13-observable-resource-unification
+    paths:
+      - 'experiments/13-observable-resource-unification/numerics/hgcdte_bia_c_linear_stress.py'
+      - 'experiments/12-oscillator-strength-state-count-bound/numerics/kane_8band_tightness.py'
+      - '.github/workflows/hgcdte-bia-c-linear-stress.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  stress:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install numerical dependencies
+        run: python -m pip install --upgrade numpy scipy
+
+      - name: Run moderate C-linear BIA audit
+        run: |
+          python experiments/13-observable-resource-unification/numerics/hgcdte_bia_c_linear_stress.py \
+            --carrier-nr 80 --carrier-nmu 8 --carrier-nphi 12 \
+            --optical-nr 80 --optical-nmu 8 --optical-nphi 12 \
+            --optical-kmax 0.8 \
+            | tee bia_c_linear_80x8x12.txt
+
+      - name: Run coarse convergence comparison
+        run: |
+          python experiments/13-observable-resource-unification/numerics/hgcdte_bia_c_linear_stress.py \
+            --carrier-nr 50 --carrier-nmu 6 --carrier-nphi 8 \
+            --optical-nr 50 --optical-nmu 6 --optical-nphi 8 \
+            --optical-kmax 0.8 \
+            | tee bia_c_linear_50x6x8.txt
+
+      - name: Structural assertions
+        shell: bash
+        run: |
+          grep -q 'WARNING: quadratic B+/B- BIA terms are omitted' bia_c_linear_80x8x12.txt
+          grep -q '\[BIA_OFF\]' bia_c_linear_80x8x12.txt
+          grep -q '\[C_LINEAR_BIA_ON\]' bia_c_linear_80x8x12.txt
+          grep -q 'selectivity_max=' bia_c_linear_80x8x12.txt
+          grep -q 'block_count_by_dim=' bia_c_linear_80x8x12.txt
+
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        with:
+          name: hgcdte-bia-c-linear-stress
+          retention-days: 30
+          path: |
+            bia_c_linear_80x8x12.txt
+            bia_c_linear_50x6x8.txt
