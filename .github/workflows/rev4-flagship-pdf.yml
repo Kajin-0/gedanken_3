@@ -26,7 +26,7 @@ jobs:
           sudo apt-get install -y --no-install-recommends \
             latexmk texlive-latex-base texlive-latex-recommended \
             texlive-latex-extra texlive-publishers texlive-pictures \
-            texlive-fonts-recommended poppler-utils
+            texlive-fonts-recommended lmodern poppler-utils
 
       - name: Build production source
         working-directory: experiments/13-observable-resource-unification/typeset
