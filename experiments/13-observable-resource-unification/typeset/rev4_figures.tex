@@ -3,7 +3,7 @@
 % Design target: two-column APS article, grayscale/print-safe, theorem-bearing content only.
 
 \newcommand{\RevFigStages}{%
-\begin{figure}[t]
+\begin{figure}[tbp]
 \centering
 \resizebox{\columnwidth}{!}{%
 \begin{tikzpicture}[>=Latex, every node/.style={font=\sffamily\small}]
@@ -29,7 +29,7 @@
 }
 
 \newcommand{\RevFigTheorem}{%
-\begin{figure}[t]
+\begin{figure}[tbp]
 \centering
 \begin{tikzpicture}[>=Latex, every node/.style={font=\sffamily\scriptsize}]
   \tikzset{box/.style={draw, rounded corners=1.5pt, minimum width=2.25cm, minimum height=1.00cm, align=center, inner sep=3pt}}
@@ -47,7 +47,7 @@
 }
 
 \newcommand{\RevFigGeometry}{%
-\begin{figure}[t]
+\begin{figure}[tbp]
 \centering
 \begin{tikzpicture}[>=Latex, every node/.style={font=\sffamily\scriptsize}]
   \node[anchor=east] at (1.70,2.55) {peak capacity};
@@ -69,7 +69,7 @@
 }
 
 \newcommand{\RevFigHgCdTe}{%
-\begin{figure}[t]
+\begin{figure}[tbp]
 \centering
 \resizebox{0.94\columnwidth}{!}{%
 \begin{tikzpicture}[every node/.style={font=\sffamily\scriptsize}]
@@ -93,7 +93,7 @@
 }
 
 \newcommand{\RevFigRecycling}{%
-\begin{figure}[t]
+\begin{figure}[tbp]
 \centering
 \begin{tikzpicture}[>=Latex, every node/.style={font=\sffamily\scriptsize}]
   \node[font=\bfseries\scriptsize] at (1.75,3.05) {(a) final-sink counting};
