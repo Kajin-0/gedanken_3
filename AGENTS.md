@@ -1,7 +1,7 @@
 # AGENTS.md — Research Objective, Recovery, and Scientific Integrity Protocol
 
 **Repository:** `Kajin-0/gedanken_3`  
-**Most recently active branch:** `experiment-10-room-temperature-lwir-admissibility`
+**Most recently active branch:** `experiment-11-weighting-capacitance-duality`
 
 Before material writes, fetch live targets and exact blob SHAs. Preserve failed, corrected, conditional, and negative paths. Do not use novelty or priority language without a dedicated prior-art audit.
 
@@ -60,37 +60,94 @@ Retained conditional single-pass theorem:
 
 under active-pair optical dominance and exact normal-momentum spectator-assisted Auger closure. This is technically useful but not established as novel.
 
-Experiment 10 was closed because arbitrary photonic engineering introduces independent established resources (matching, delay, thickness-bandwidth, light trapping, susceptibility/volume, cavity participation), and composing those known optical bounds with the electronic inequality did not provide a strong novelty case.
-
-Do not draft an Experiment-10 manuscript or mechanically extend the branch.
-
 ---
 
-# Post-Experiment-10 screening status
+# Post-Experiment-10 premise screen — five rejections
 
 Read:
 
 `candidate-audits/POST_EXP10_THEORETICAL_SCREEN_2026-08-14.md`
 
-Five candidate premises have been screened and rejected **before** opening Experiment 11:
+Rejected before Experiment 11:
 
 ```text
-1. causal / nonminimum-phase detectivity — standard minimum-phase and finite-window detection theory;
-2. spatially correlated noise / D* area scaling — standard covariance/FPA noise theory;
-3. non-normal detector transient amplification — generic non-normal photonic/system dynamics;
-4. wide-gap LWIR detection via intersubband transition — established QWIP/QCD architecture;
-5. equal D* but different non-Gaussian false-alarm tails — standard likelihood/point-process detection theory.
+1. causal / nonminimum-phase detectivity;
+2. spatially correlated noise / D* area scaling;
+3. non-normal detector transient amplification;
+4. wide-gap LWIR detection via intersubband transition;
+5. equal D* but different non-Gaussian false-alarm tails.
 ```
 
-Experiment 11 remains unopened.
+Each reduced to established generic theory or a known detector architecture.
+
+---
+
+# Experiment 11 — FINAL DISPOSITION
+
+Branch:
+
+```text
+experiment-11-weighting-capacitance-duality
+```
+
+Read:
+
+1. `experiments/11-weighting-capacitance-duality/CURRENT_STATE.md`
+2. `experiments/11-weighting-capacitance-duality/WEIGHTING_CAPACITANCE_DUALITY_STEP_2026-08-14.md`
+3. `experiments/11-weighting-capacitance-duality/PROGRESS_LOG.md`
+
+Premise: can electrode geometry increase prompt Shockley-Ramo signal independently of detector capacitance?
+
+Exact retained result for homogeneous two-terminal drift:
+
+```math
+\boxed{
+i_{pair}(\mathbf r,0^+)
+=e(\mu_e+\mu_h)V_b|\mathbf E_w(\mathbf r)|^2.
+}
+```
+
+Since
+
+```math
+C_{tot}=\int\epsilon|\mathbf E_w|^2dV,
+```
+
+for generation density `p(r)<=p_max`,
+
+```math
+\boxed{
+\frac{\langle i_{pair}(0^+)\rangle}{C_{tot}}
+\le
+\frac{e(\mu_e+\mu_h)V_b}{\epsilon}p_{max}.
+}
+```
+
+Uniform generation in active volume `V` gives
+
+```math
+\boxed{
+\frac{\langle i_{pair}(0^+)\rangle}{C_{tot}}
+\le
+\frac{e(\mu_e+\mu_h)V_b}{\epsilon V}.
+}
+```
+
+Disposition:
+
+```text
+CLOSED BY DEFAULT AS A NOVELTY / MANUSCRIPT PATH.
+```
+
+Reason: the uniform result is the photocarrier form of established homogeneous `RC=epsilon/sigma` Maxwell relaxation; the nonuniform extension is established reciprocal/lead-field conductivity-sensitivity theory. Fast-detector literature already treats weighting-field shape and capacitance as coupled geometry resources.
+
+Do not add generic amplifier noise or timing models to rescue Experiment 11.
 
 ---
 
 # ACTIVE NEXT ACTION
 
-Continue screening **new** purely theoretical photodetector Gedanken premises.
-
-Do not create Experiment 11 until a premise survives an aggressive primary-literature screen.
+Resume screening new purely theoretical photodetector Gedanken premises.
 
 Reject immediately if the first nontrivial result is merely an application of:
 
@@ -105,8 +162,10 @@ generic non-normal dynamics;
 known Auger suppression / band engineering;
 ordinary shot-noise / Fano-factor arguments;
 QWIP/QCD intersubband detection;
+Maxwell dielectric relaxation / ordinary RC geometry cancellation;
+lead-field / impedance-sensitivity reciprocity;
 Experiment-08 zero-gap Kane statistics;
 Experiment-09 collective/coherence line unless a genuinely new invariant appears.
 ```
 
-Prefer premises whose first consequence arises from specifically photodetector physics and cannot be factored into a generic systems theorem plus a detector example.
+Prefer premises whose first consequence arises from specifically photodetector physics and cannot be factored into a generic theorem plus a detector example.
