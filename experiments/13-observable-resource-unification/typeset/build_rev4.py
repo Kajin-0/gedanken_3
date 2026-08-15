@@ -9,11 +9,12 @@ only production transformations:
   * replace the five explicit figure placeholders by figure macros;
   * format only the equation containing the central theorem label as an
     equivalent two-line column display;
+  * make one float-safe prose transition into the HgCdTe production table;
   * emit rev4_unified_prapplied_built.tex for compilation.
 
 It intentionally does not change scientific claims, algebra, numerical values,
-reference content, or prose. The theorem replacement is performed by locating
-its unique label and then the nearest surrounding equation environment; this
+or reference content. The theorem replacement is performed by locating its
+unique label and then the nearest surrounding equation environment; this
 prevents a multiline regex from consuming preceding equations or prose.
 """
 
@@ -102,7 +103,28 @@ n_e+n_h
 \end{equation}"""
 text = text[:eq_start] + main_replacement + text[eq_end:]
 
-# Production invariants: all five figure macros and the staged-map equation must
+# A bottom-floated table can visually join the words "gives" and "Thus" even
+# though the source is grammatically valid. Make the table reference explicit so
+# the prose remains grammatical independent of float placement.
+old_transition = (
+    "For the broad selected transition-energy window $E_g\\le\\Delta E\\le0.5$ eV, "
+    "the production quadrature gives\n\\begin{table}[b]"
+)
+new_transition = (
+    "For the broad selected transition-energy window $E_g\\le\\Delta E\\le0.5$ eV, "
+    "the production quadrature gives the quantities summarized in Table~\\ref{tab:hgcdte}.\n"
+    "\\begin{table}[b]"
+)
+if text.count(old_transition) != 1:
+    raise RuntimeError(f"expected one HgCdTe table transition, found {text.count(old_transition)}")
+text = text.replace(old_transition, new_transition, 1)
+old_after_table = "\\end{table}\nThus\n\\begin{equation}\n0.30684\\times0.57262=0.17570,"
+new_after_table = "\\end{table}\nTheir product satisfies\n\\begin{equation}\n0.30684\\times0.57262=0.17570,"
+if text.count(old_after_table) != 1:
+    raise RuntimeError(f"expected one post-table transition, found {text.count(old_after_table)}")
+text = text.replace(old_after_table, new_after_table, 1)
+
+# Production invariants: all five figure macros and the central derivation must
 # survive, and no placeholder boxes may remain.
 if "placeholder:" in text:
     raise RuntimeError("one or more figure placeholders remain in built source")
@@ -122,6 +144,7 @@ print(f"bytes: {OUT.stat().st_size}")
 print("journal style: prapplied")
 print("font encoding: T1 + Latin Modern")
 print("main theorem: two-line single-column display")
+print("HgCdTe table transition: float-safe prose")
 print(f"preserved theorem source span: {len(original_theorem)} bytes")
 for label in replacements:
     print(f"replaced {label}")
