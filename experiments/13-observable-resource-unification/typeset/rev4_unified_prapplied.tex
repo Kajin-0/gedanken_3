@@ -1,0 +1,478 @@
+\documentclass[aps,twocolumn,superscriptaddress,longbibliography]{revtex4-2}
+
+\usepackage{amsmath,amssymb,mathtools,bm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\op}{\operatorname{op}}
+\newcommand{\cB}{\mathcal B}
+\newcommand{\cD}{\mathcal D}
+\newcommand{\cR}{\mathcal R}
+\newcommand{\cL}{\mathcal L}
+\newcommand{\cS}{\mathcal S}
+
+\begin{document}
+
+\title{Spectral geometry of photodetection: optical state-count bounds, selectivity, and internal observability}
+
+\author{Author}
+\affiliation{Affiliation to be supplied at submission}
+\email{corresponding-email@example.com}
+
+\date{\today}
+
+\begin{abstract}
+Direct optical response constrains more than absorption alone: under a finite microscopic coupling capacity it can certify a minimum population of the one-body states that carry that response. We derive an equilibrium bound in which the selected direct cross-chemical-potential conductivity over an arbitrary frequency window lower-bounds the thermally occupied electron-plus-hole endpoint population through a basis-invariant exact-shell velocity capacity. We then show that this inverse bound is one realization of a broader detector relation. On a physically declared admissible domain, the strongest allowed response relative to the actual activity-ensemble average is exactly the reciprocal of the fraction of total activity certified by a maximum-capacity inversion. The maximally mixed limit gives a stable-rank task-selectivity relation, while a rank-one coherent detector gives the nonuniform coherence dimension $N_{\rm eff}=1/\sum_j w_j^2$. For dispersive bands, the optical population-bound tightness decomposes into Fermi asymmetry, shell-to-global capacity utilization, and inverse shell response selectivity. A production-resolution second-order eight-band HgCdTe calculation gives factors $0.3068$ and $0.5726$, whose product $0.1757$ reproduces the broad-window active-population tightness. Within the bulk-inversion-asymmetry-neglecting validation model, the active exact-shell velocity blocks are singular-value isotropic by fixed-$\mathbf k$ $PT$ symmetry; that exact isotropy is not asserted for full zincblende HgCdTe. Finally, terminal observability is formulated with channel-specific positive effects. Under independent conservative one-final-sink lineages, ideal endpoint counting can force zero interpixel cross-noise even with internal photon recycling, whereas finite-transit Shockley--Ramo motion can lift the source-channel null at finite frequency while preserving zero integrated charge for an internally created and recombined pair. The results connect inverse material inference, task/coherence selectivity, and terminal observability without proposing a replacement scalar figure of merit.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Photodetectors are commonly compared using scalar figures such as responsivity, quantum efficiency, noise-equivalent power, specific detectivity, bandwidth, dark current, and timing jitter. These quantities are indispensable when the measurement protocol is specified, but they do not preserve the complete geometry of arbitrary signal tasks, microscopic excitation channels, or internal dynamics at the terminals. Task-based imaging theory has long used information matrices and kernels rather than one scalar~\cite{Barrett1995,Clarkson2010}; quantum photodetector theory represents outcomes by positive effects and explicitly treats architecture-dependent tradeoffs~\cite{Young2018,Xu2020}; semiconductor detector theory likewise distinguishes internal carrier fluctuations from induced terminal current~\cite{Dabrowski1987,Dabrowski1989}.
+
+We therefore do not propose a new generic measurement formalism. The physical center of the present work is an inverse semiconductor theorem: for equilibrium independent quasiparticles, selected direct transitions whose endpoints straddle the chemical potential cannot carry finite optical spectral weight with arbitrarily few thermally occupied endpoint states if the selected exact-shell velocity blocks have finite operator capacity. The result is upstream of recombination kinetics and is distinct from generation-based infrared material criteria~\cite{Piotrowski1997}, absorption--recombination detailed balance~\cite{VanRoosbroeck1954}, fluctuation--dissipation identities~\cite{Callen1951}, conventional optical sum rules~\cite{Watanabe2020,Gusynin2006,Gusynin2007}, and recent optical-response bounds associated with topology or quantum geometry~\cite{Onishi2024,Mao2025}.
+
+Once the material theorem is expressed on an endpoint-lifted positive operator space, a broader structure appears. A detector stage has a physically allowed maximum response per direction and an actual ensemble-average response. Their ratio is a forward selectivity; its reciprocal is the fraction of total activity certified when the measured response is inverted using only the maximum per-direction capacity. The rank-one coherent limit recovers the effective coherence dimension $N_{\rm eff}$. A shell-resolved form identifies whether looseness in the thermal population bound arises from within-shell singular-value concentration or from shell-to-shell variation in absolute coupling strength.
+
+A second information loss occurs downstream. Photon recycling and mean optical crosstalk in HgCdTe photodiodes are established~\cite{Jozwikowski2011,Jozwikowski2012,Jozwikowska2019,Kopytko2019}, as is the need for a proper Shockley--Ramo treatment of generation--recombination noise~\cite{Dabrowski1987,Dabrowski1989}. We show that, under a conservative independent-lineage final-sink model, the source terminal can be exactly null to a recycled lineage even while mean crosstalk and internal population correlations are nonzero. Finite-transit Shockley--Ramo current changes the terminal map and can lift that null at finite frequency.
+
+The staged detector chain is schematically
+\begin{equation}
+\mathcal H_{\rm task}\xrightarrow{M_{\rm opt}}\mathcal H_{\rm exc}
+\xrightarrow{M_{\rm dyn}}\mathcal H_{\rm int}
+\xrightarrow{M_{\rm ro}(\omega)}\mathcal H_{\rm term}.
+\label{eq:stages}
+\end{equation}
+The maps in these spaces are physically different. The unity developed below is the spectral geometry of the physical map at the stage being interrogated: its spectral edge controls a capacity, its distribution of singular values controls directional selectivity, and its null space controls observability.
+
+\begin{figure}[t]
+\centering
+\fbox{\parbox[c][1.15in][c]{0.91\columnwidth}{\centering Figure 1 placeholder: staged detector map and the relevant positive effect at each stage.}}
+\caption{Staged detector description. The optical, internal-dynamics, and terminal-readout maps act on different physical spaces; the common structure is the spectral geometry of the relevant map, not one universal matrix.}
+\label{fig:stages}
+\end{figure}
+
+\section{Direct optical response bounds thermal endpoint population}
+
+\subsection{Fermi endpoint inequality}
+
+Let exact one-particle states $|v\rangle$ and $|c\rangle$ satisfy $E_v<\mu<E_c$, with
+\begin{equation}
+E_{cv}=E_c-E_v>0,
+\qquad p_c=f(E_c),\qquad h_v=1-f(E_v),
+\end{equation}
+and $D_{cv}=f(E_v)-f(E_c)$. The equilibrium Fermi occupations satisfy
+\begin{equation}
+\boxed{
+\frac{2D_{cv}}{e^{E_{cv}/(2k_BT)}-1}\le p_c+h_v .}
+\label{eq:fermi}
+\end{equation}
+Equality occurs exactly when
+\begin{equation}
+E_c-\mu=\mu-E_v=E_{cv}/2.
+\label{eq:fermi-equality}
+\end{equation}
+The Bose-like denominator in Eq.~\eqref{eq:fermi} is not an assumed bosonic occupation; it follows from optimizing two fermionic endpoint occupations at fixed transition energy.
+
+\subsection{Selected cross-chemical-potential conductivity}
+
+For physical velocity polarization $i$, let $v_{cv}=\langle c|\hat v_i|v\rangle$. Restrict the conductivity to selected direct transitions whose endpoints straddle $\mu$:
+\begin{equation}
+\boxed{
+\sigma_1^{\rm cross}(\omega)=\frac{\pi e^2}{V}
+\sum_{cv}^{\rm cross}
+\frac{D_{cv}|v_{cv}|^2}{E_{cv}}
+\delta\!\left(\omega-\frac{E_{cv}}{\hbar}\right).}
+\label{eq:kubo}
+\end{equation}
+For a measurable positive-frequency window $\cB$, define
+\begin{equation}
+K_T(E)=\frac{E}{e^{E/(2k_BT)}-1}.
+\label{eq:kernel}
+\end{equation}
+Equation~\eqref{eq:fermi} and Eq.~\eqref{eq:kubo} give
+\begin{equation}
+\boxed{
+\cR_{\cB}(T)\ge \cL_{\cB}(T)
+\equiv \frac{2}{\pi e^2}\int_{\cB}
+K_T(\hbar\omega)\sigma_1^{\rm cross}(\omega)\,d\omega .}
+\label{eq:kubo-lower}
+\end{equation}
+Here $\cR_{\cB}$ is the exact thermally weighted selected squared-velocity strength. The conductivity in Eq.~\eqref{eq:kubo} is a selected microscopic contribution; a total measured spectrum can contain same-side-of-$\mu$ transitions, intraband response, phonon-assisted processes, excitons, and other channels.
+
+\subsection{Basis-invariant exact-shell capacity}
+
+Let $P_\epsilon$ project onto the complete exact eigenspace at energy $\epsilon$. For an upper endpoint shell define
+\begin{align}
+Q^-_{\epsilon_c,\cB}&=\sum_{\substack{\epsilon_v<\mu\\(\epsilon_c-\epsilon_v)/\hbar\in\cB}}P_{\epsilon_v},\\
+A_{\epsilon_c,\cB}&=P_{\epsilon_c}\hat v_iQ^-_{\epsilon_c,\cB},
+\end{align}
+and for a lower shell
+\begin{align}
+Q^+_{\epsilon_v,\cB}&=\sum_{\substack{\epsilon_c>\mu\\(\epsilon_c-\epsilon_v)/\hbar\in\cB}}P_{\epsilon_c},\\
+B_{\epsilon_v,\cB}&=Q^+_{\epsilon_v,\cB}\hat v_iP_{\epsilon_v}.
+\end{align}
+The physically declared capacity domain is fixed by the cross-$\mu$ endpoint condition, the selected window $\cB$, the chosen velocity polarization, and exact-energy-shell basis freedom. Define
+\begin{equation}
+\boxed{
+(v_{\cB}^{\rm cap})^2=
+\max\!\left[
+\sup_{\epsilon_c>\mu}\|A_{\epsilon_c,\cB}\|_{\op}^2,
+\sup_{\epsilon_v<\mu}\|B_{\epsilon_v,\cB}\|_{\op}^2
+\right].}
+\label{eq:capacity}
+\end{equation}
+The domain in Eq.~\eqref{eq:capacity} is part of the theorem and cannot be enlarged after the response is known by adding unrelated high-coupling states.
+
+For any selected finite-rank block $M$,
+\begin{equation}
+\Tr(MM^\dagger)\le \|M\|_{\op}^2\rank(M).
+\label{eq:trace-rank}
+\end{equation}
+Define
+\begin{align}
+n_{e,\cB}^{\rm act}&=\frac{1}{V}\sum_{\epsilon_c>\mu}f(\epsilon_c)\rank(A_{\epsilon_c,\cB}),\\
+n_{h,\cB}^{\rm act}&=\frac{1}{V}\sum_{\epsilon_v<\mu}[1-f(\epsilon_v)]\rank(B_{\epsilon_v,\cB}).
+\end{align}
+Combining Eqs.~\eqref{eq:kubo-lower}, \eqref{eq:capacity}, and \eqref{eq:trace-rank} yields
+\begin{equation}
+\boxed{
+ n_e+n_h\ge n_{e,\cB}^{\rm act}+n_{h,\cB}^{\rm act}
+ \ge
+ \frac{2}{\pi e^2(v_{\cB}^{\rm cap})^2}
+ \int_{\cB}\frac{\hbar\omega\sigma_1^{\rm cross}(\omega)}
+ {e^{\hbar\omega/(2k_BT)}-1}\,d\omega .}
+\label{eq:main-theorem}
+\end{equation}
+Equation~\eqref{eq:main-theorem} is the principal physical theorem. It bounds equilibrium one-body endpoint population, not a recombination rate, dark current, or specific detectivity.
+
+\begin{figure}[t]
+\centering
+\fbox{\parbox[c][1.2in][c]{0.91\columnwidth}{\centering Figure 2 placeholder: selected $\sigma_1^{\rm cross}$ $\rightarrow$ Fermi/Kubo functional $\rightarrow$ exact-shell velocity capacity $\rightarrow$ active thermal population lower bound.}}
+\caption{Logical structure of the thermal optical population theorem. The selected conductivity and the independently defined exact-shell capacity enter different steps of the bound.}
+\label{fig:theorem-flow}
+\end{figure}
+
+\section{Endpoint-lifted spectral geometry and inverse certification}
+
+\subsection{Admissible-domain reciprocity}
+
+Let $\cD$ be a physically declared admissible domain with projector $P_{\cD}$. For a positive coupling/effect $G$, define
+\begin{equation}
+G_{\cD}=P_{\cD}GP_{\cD}\succeq0,
+\qquad
+\lambda_{\cD}=\lambda_{\max}(G_{\cD})>0.
+\end{equation}
+Let $X\succeq0$, $\supp(X)\subseteq\cD$, and $\Tr X>0$. The actual ensemble-average response per unit activity is
+\begin{equation}
+\bar q_X=\frac{\Tr(G_{\cD}X)}{\Tr X}.
+\end{equation}
+Define the strongest admissible response relative to that average,
+\begin{equation}
+\boxed{
+\cS_{X|\cD}=\frac{\lambda_{\cD}\Tr X}{\Tr(G_{\cD}X)},}
+\label{eq:selectivity}
+\end{equation}
+and the fraction of true activity certified by a maximum-capacity inversion,
+\begin{equation}
+\boxed{
+\tau_{X|\cD}=\frac{\Tr(G_{\cD}X)}{\lambda_{\cD}\Tr X}.}
+\label{eq:tightness}
+\end{equation}
+Then
+\begin{equation}
+\boxed{\cS_{X|\cD}\tau_{X|\cD}=1.}
+\label{eq:reciprocity}
+\end{equation}
+Equation~\eqref{eq:reciprocity} is a normalized spectral-capacity identity, not a claim of new matrix theory. Its detector content is that Eqs.~\eqref{eq:selectivity} and \eqref{eq:tightness} answer independent forward-selectivity and inverse-certification questions for the same physical map and declared capacity domain. The direction attaining $\lambda_{\cD}$ need not be appreciably populated in $X$.
+
+\subsection{Thermal endpoint specialization}
+
+Construct the endpoint-lifted operator
+\begin{equation}
+G_{\cB}=\bigoplus_{\epsilon_c>\mu}A_{\epsilon_c,\cB}A_{\epsilon_c,\cB}^\dagger
+\oplus
+\bigoplus_{\epsilon_v<\mu}B_{\epsilon_v,\cB}^\dagger B_{\epsilon_v,\cB}.
+\label{eq:Gthermal}
+\end{equation}
+The two sectors are both retained because Eq.~\eqref{eq:main-theorem} bounds electron-plus-hole endpoint population. Let $P_a^{\rm act}$ project onto each endpoint block support and define
+\begin{equation}
+X_{\cB}^{\rm act}=\bigoplus_{\epsilon_c>\mu} f(\epsilon_c)P_{\epsilon_c}^{\rm act}
+\oplus
+\bigoplus_{\epsilon_v<\mu}[1-f(\epsilon_v)]P_{\epsilon_v}^{\rm act}.
+\end{equation}
+Then
+\begin{equation}
+\frac{\Tr X_{\cB}^{\rm act}}{V}=n_{\cB}^{\rm act},
+\qquad
+\frac{\Tr(G_{\cB}X_{\cB}^{\rm act})}{V}=\cR_{\cB},
+\end{equation}
+and $\lambda_{\max}(G_{\cB})=(v_{\cB}^{\rm cap})^2$. Hence
+\begin{align}
+\cS_{\rm th,\cB}^{\rm act}&=\frac{(v_{\cB}^{\rm cap})^2n_{\cB}^{\rm act}}{\cR_{\cB}},\\
+\tau_{\rm cap}^{\rm act}&=\frac{\cR_{\cB}}{(v_{\cB}^{\rm cap})^2n_{\cB}^{\rm act}},
+\end{align}
+with
+\begin{equation}
+\boxed{\cS_{\rm th,\cB}^{\rm act}\tau_{\rm cap}^{\rm act}=1.}
+\end{equation}
+Define
+\begin{equation}
+\eta_F=\cL_{\cB}/\cR_{\cB}\le1.
+\end{equation}
+Then
+\begin{equation}
+\boxed{\tau_{\rm obs}^{\rm act}=\eta_F\tau_{\rm cap}^{\rm act},
+\qquad
+\cS_{\rm th,\cB}^{\rm act}\tau_{\rm obs}^{\rm act}=\eta_F.}
+\label{eq:thermal-reciprocity}
+\end{equation}
+
+\section{Forward selectivity: task and coherence limits}
+
+\subsection{Uniform task ensemble}
+
+On a $d$-dimensional task domain choose $X=I_{\cD}$ and define
+\begin{equation}
+T=\Tr G_{\cD},
+\qquad
+r_{\rm st}=T/\lambda_{\cD}.
+\end{equation}
+Then
+\begin{equation}
+\cS_{\rm mix}=d/r_{\rm st},
+\qquad
+\tau_{\rm mix}=r_{\rm st}/d.
+\end{equation}
+For the equal-trace isotropic comparator $G_{\rm iso}=(T/d)I_{\cD}$, the maximum task advantage is
+\begin{equation}
+\mathcal A_{\max}=\frac{\lambda_{\cD}}{T/d}=d/r_{\rm st}.
+\end{equation}
+At least one orthogonal task obeys the tight bound
+\begin{equation}
+\boxed{
+\frac{q_{\rm worst}}{q_{\rm iso}}\le
+\frac{d-\cS_{\rm mix}}{d-1}.}
+\label{eq:task-penalty}
+\end{equation}
+This relation supplies the spectral interpretation of task concentration. It does not replace the separate unknown-arrival transient construction, which equalizes eventual event-specific matched-filter SNR for one waveform and includes a correlated timing search.
+
+\subsection{Coherent bright-state detector}
+
+Let
+\begin{equation}
+|B\rangle=\sum_j\sqrt{w_j}e^{i\phi_j}|j\rangle,
+\qquad \sum_jw_j=1,
+\end{equation}
+with photon-created state $\rho_\gamma=|B\rangle\langle B|$ and population-matched incoherent state
+\begin{equation}
+\rho_D=\sum_jw_j|j\rangle\langle j|.
+\end{equation}
+For the bright projector $G_{\cD}=\Pi_B=|B\rangle\langle B|$,
+\begin{equation}
+\Tr(\Pi_B\rho_\gamma)=1,
+\qquad
+\Tr(\Pi_B\rho_D)=\sum_jw_j^2.
+\end{equation}
+Equation~\eqref{eq:reciprocity} with $X=\rho_D$ gives
+\begin{equation}
+\boxed{
+\cS_{\rho_D|\cD}=\frac{1}{\sum_jw_j^2}\equiv N_{\rm eff},
+\qquad
+\tau_{\rho_D|\cD}=1/N_{\rm eff}.}
+\label{eq:neff}
+\end{equation}
+For this rank-one effect, the bright projector also minimizes accepted dark probability among yes/no effects constrained to unit signal acceptance. The inverse-participation form itself belongs to established coherence and collective-state physics~\cite{Helstrom1976,Dicke1954,Scully2009}; the connection to the thermal capacity quantity is the present cross-identification.
+
+\begin{figure}[t]
+\centering
+\fbox{\parbox[c][1.25in][c]{0.91\columnwidth}{\centering Figure 3 placeholder: admissible peak response versus actual ensemble-average response; stable-rank uniform limit and rank-one $N_{\rm eff}$ endpoint; task-penalty inset.}}
+\caption{Forward selectivity and inverse certification use the same declared maximum capacity but ask reciprocal questions. The stable-rank and $N_{\rm eff}$ expressions are specializations for different activity ensembles.}
+\label{fig:geometry}
+\end{figure}
+
+\section{Dispersive decomposition of the population-bound tightness}
+
+Index selected endpoint shells by $a$. Define
+\begin{align}
+\lambda_a&=\|M_a\|_{\op}^2,\\
+r_a&=\rank(M_a),\\
+r_{{\rm st},a}&=\frac{\Tr(M_aM_a^\dagger)}{\lambda_a},\\
+\cS_a^{\rm act}&=r_a/r_{{\rm st},a},\\
+c_a&=\lambda_a/(v_{\cB}^{\rm cap})^2,\\
+w_a^{\rm act}&=\frac{p_ar_a}{\sum_bp_br_b}.
+\end{align}
+Then
+\begin{equation}
+\boxed{
+\tau_{\rm cap}^{\rm act}=\sum_aw_a^{\rm act}\frac{c_a}{\cS_a^{\rm act}},}
+\label{eq:shell-decomp}
+\end{equation}
+and
+\begin{equation}
+\boxed{
+\tau_{\rm obs}^{\rm act}=\eta_F\sum_aw_a^{\rm act}\frac{c_a}{\cS_a^{\rm act}}.}
+\label{eq:shell-observable}
+\end{equation}
+Thus the full observable tightness separates thermal/Fermi asymmetry, shell-to-global capacity mismatch, and within-shell singular-spectrum concentration.
+
+\section{Production eight-band HgCdTe validation}
+
+We evaluate Eqs.~\eqref{eq:shell-decomp}--\eqref{eq:shell-observable} in the second-order bulk eight-band Kane validation used for a 300-K, $10\,\mu$m-class HgCdTe absorber. The model follows the bulk constant-parameter limit of Novik \textit{et al.}~\cite{Novik2005}, uses the empirical gap relation of Laurenti \textit{et al.}~\cite{Laurenti1990}, and evaluates the physical velocity from the analytic Hamiltonian derivative. For the broad selected transition-energy window $E_g\le\Delta E\le0.5$ eV, the production quadrature gives
+\begin{table}[b]
+\caption{Production broad-window HgCdTe quantities.}
+\label{tab:hgcdte}
+\begin{ruledtabular}
+\begin{tabular}{lc}
+Quantity & Value\\
+\hline
+$\mu$ & $0.1354615$ eV\\
+$n_{\rm ref}$ & $1.0051405\times10^{17}\,{\rm cm}^{-3}$\\
+$\cR_{\cB}$ & $3.9874202\times10^{28}\,{\rm cm}^{-3}({\rm m/s})^2$\\
+$\cL_{\cB}$ & $1.2234865\times10^{28}\,{\rm cm}^{-3}({\rm m/s})^2$\\
+$n_{\cB}^{\rm act}$ & $6.7241114\times10^{16}\,{\rm cm}^{-3}$\\
+$v_{\cB}^{\rm cap}$ & $1.01764\times10^6\,{\rm m/s}$\\
+$\eta_F$ & $0.30684$\\
+$\tau_{\rm cap}^{\rm act}$ & $0.57262$\\
+$\tau_{\rm obs}^{\rm act}$ & $0.17570$\\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+Thus
+\begin{equation}
+0.30684\times0.57262=0.17570,
+\end{equation}
+and the global thermal capacity selectivity is
+\begin{equation}
+\cS_{\rm th,\cB}^{\rm act}=1/0.57262\simeq1.746.
+\end{equation}
+The lower bound remains approximately $11.8\%$ of the full cross-$\mu$ reference population and $17.6\%$ of the selected active population.
+
+Every thermally important selected active shell satisfies $\cS_a^{\rm act}=1$ to machine precision in the present validation. This equality is symmetry enforced in the model rather than a numerical accident. The second-order Kane Hamiltonian used here omits explicit bulk-inversion-asymmetry (BIA) terms. In that approximation, inversion $P$ and spinful time reversal $T$ produce a fixed-$\mathbf k$ antiunitary $PT$ doublet. Because velocity is odd under both $P$ and $T$, it is $PT$ even. In $PT$-adapted doublet bases the selected velocity block has quaternionic form
+\begin{equation}
+M=\begin{pmatrix}a&b\\-b^*&a^*\end{pmatrix},
+\qquad
+MM^\dagger=(|a|^2+|b|^2)I_2,
+\label{eq:quaternion}
+\end{equation}
+which forces equal nonzero singular values. Concatenating partner doublets preserves Eq.~\eqref{eq:quaternion}.
+
+Real HgCdTe has zincblende BIA. More complete multiband models can include BIA terms~\cite{Cartoixa2003}, which can lift the exact fixed-$\mathbf k$ doublet/quaternionic relation. We therefore do not claim universal shell isotropy for real HgCdTe; the general population theorem itself does not rely on inversion symmetry.
+
+\begin{figure}[t]
+\centering
+\fbox{\parbox[c][1.25in][c]{0.91\columnwidth}{\centering Figure 4 placeholder: $0.5726\times0.3068=0.1757$ decomposition plus shell capacity-utilization distribution; annotate $\cS_a^{\rm act}=1$ only for the BIA-neglecting validation.}}
+\caption{Production decomposition of the broad-window active-population tightness in the BIA-neglecting second-order eight-band HgCdTe validation.}
+\label{fig:hgcdte}
+\end{figure}
+
+\section{Internal photon recycling and channel-specific observability}
+
+At fixed frequency let the internal innovation covariance be $\Sigma(\omega)\succeq0$ and the terminal map be $\bm y=M(\omega)\bm\xi$. Then
+\begin{equation}
+S_y=M\Sigma M^\dagger.
+\end{equation}
+For terminal $i$, define the positive channel effect
+\begin{equation}
+\boxed{G_i(\omega)=M^\dagger|i\rangle\langle i|M\succeq0,}
+\label{eq:channel-effect}
+\end{equation}
+so $S_{ii}=\Tr[G_i(\omega)\Sigma]$. For channels $i$ and $j$ define
+\begin{equation}
+C_{ij}(\omega)=M^\dagger|j\rangle\langle i|M,
+\end{equation}
+so $S_{ij}=\Tr(C_{ij}\Sigma)$ and
+\begin{equation}
+|S_{ij}|^2\le S_{ii}S_{jj}.
+\end{equation}
+If a positive internal sector $X$ is null to channel $i$, $\Tr(G_iX)=0$, its cross contribution with every other channel is forced to vanish.
+
+For a symmetric two-pixel occupancy model with local non-transfer relaxation $\gamma$, conservative exchange rate $k$, and stationary mean $m$, the internal population cross-spectrum is
+\begin{equation}
+\boxed{
+S_{x,12}(\omega)=m\left[
+\frac{\gamma}{\gamma^2+\omega^2}
+-\frac{\gamma+2k}{(\gamma+2k)^2+\omega^2}
+\right],}
+\end{equation}
+with zero crossing $\omega_x=\sqrt{\gamma(\gamma+2k)}$. Internal conservative exchange is therefore visible to an occupancy-sensitive observable.
+
+Now impose Poisson primary generation, independent noninteracting lineages, one final sink per lineage, final-sink-only measurement, no branching/gain, and no shared electronic coupling. A conservative lineage that begins in pixel A and ultimately exits through B has endpoint waveform
+\begin{equation}
+\bm H_{A\to B}^{\rm end}(\omega)=g_B(\omega)\bm e_B.
+\end{equation}
+It lies in the A-channel null. Independent final-sink marking, thinning, and displacement therefore give independent output streams~\cite{Mirasol1963,Harrison1981}, so
+\begin{equation}
+\boxed{S_{AB}^{\rm end}(\omega)=0}
+\label{eq:endpoint-zero}
+\end{equation}
+for every frequency under the stated ideal endpoint model, despite nonzero mean recycling/crosstalk and nonzero internal occupancy correlations.
+
+A finite-transit junction responds before final collection. Let $\phi_i(\bm r)$ be the weighting potential of terminal $i$. An electron-hole pair induces
+\begin{equation}
+\boxed{
+i_i(t)=e\frac{d}{dt}\left[\phi_i(\bm r_e(t))-\phi_i(\bm r_h(t))\right].}
+\label{eq:ramo}
+\end{equation}
+If the pair is created internally at one point and later recombines internally at a common point,
+\begin{equation}
+\boxed{Q_i^{\rm rec}=\int i_i(t)dt=0.}
+\label{eq:zerocharge}
+\end{equation}
+For $H_i(\omega)=\int i_i(t)e^{-i\omega t}dt$,
+\begin{equation}
+\boxed{
+H_i^{\rm rec}(\omega)=i\omega e\int\Delta\phi_i(t)e^{-i\omega t}dt,}
+\label{eq:ramo-fourier}
+\end{equation}
+so $H_i^{\rm rec}(0)=0$ while an individual finite-transit trajectory can have finite-frequency support. The same A-to-B recycling lineage can therefore lift the A-channel endpoint null for $\omega\neq0$. A nonzero ensemble cross-spectrum becomes allowed, not guaranteed; symmetry, opposing lineages, weighting-field cancellation, and electronics can still suppress the overlap.
+
+\begin{figure}[t]
+\centering
+\fbox{\parbox[c][1.25in][c]{0.91\columnwidth}{\centering Figure 5 placeholder: same A$\to$B recycling lineage under final-sink counting and finite-transit Shockley--Ramo readout; show source-channel null at endpoint/DC and finite-frequency support.}}
+\caption{Readout-dependent observability of one conservative recycling lineage. Final-sink counting can erase the source channel exactly; finite-transit induced current can lift that null at finite frequency while the internally recombined source segment has zero integrated charge.}
+\label{fig:recycling}
+\end{figure}
+
+\section{Discussion}
+
+The common structure can be stated without introducing a new detector metric. For a physically declared domain, the spectral edge is the maximum admissible response per direction and $\Tr(G_{\cD}X)/\Tr X$ is the actual ensemble-average response. Their ratio is a forward selectivity; its inverse is the fraction of total activity certified by a maximum-capacity inversion. Stable rank appears for a maximally mixed ensemble, $N_{\rm eff}$ for a rank-one bright projector acting on a population-matched incoherent state, and the thermal optical capacity tightness for the equilibrium endpoint population.
+
+The principal semiconductor theorem has an additional independent statistical step: $\cL_{\cB}\le\cR_{\cB}$. The observable tightness therefore factorizes into statistical and spectral contributions, and Eq.~\eqref{eq:shell-observable} resolves the latter shell by shell. This is complementary to established optical sum rules, which constrain other conductivity moments through charge density, kinetic energy, Hamiltonian derivatives, topology, or quantum geometry~\cite{Watanabe2020,Gusynin2006,Gusynin2007,Onishi2024,Mao2025}.
+
+The downstream result illustrates a different information loss. Internal recycling can be present yet null to one terminal under a final-sink map. The readout operator, not the existence of internal coupling itself, determines observability. This is consistent with classical GR-noise/Ramo theory~\cite{Dabrowski1987,Dabrowski1989} but produces a specific conditional boundary for conservative photon-recycling lineages.
+
+Important limitations are explicit. Equation~\eqref{eq:main-theorem} requires a selected direct cross-$\mu$ conductivity contribution and an independently justified finite capacity. It is an equilibrium independent-quasiparticle population theorem, not a dark-current or $D^*$ bound. Coherent rejection requires preserved and extractable coherence. The exact HgCdTe shell isotropy is a property of the BIA-neglecting validation model. Endpoint Poisson cancellation fails for branching, correlated generation, interacting lineages, or shared electronics. Finite-frequency Ramo support permits but does not guarantee a measurable ensemble cross-spectrum.
+
+\section{Conclusion}
+
+A selected direct optical response cannot be carried by arbitrarily few thermally populated one-body endpoint states when the exact-shell optical velocity blocks have finite capacity. Equation~\eqref{eq:main-theorem} is the central physical result.
+
+Expressing the theorem on an endpoint-lifted positive activity space reveals a broader reciprocity:
+\begin{equation}
+\boxed{
+\frac{\lambda_{\cD}}{\Tr(G_{\cD}X)/\Tr X}
+\times
+\frac{\Tr(G_{\cD}X)}{\lambda_{\cD}\Tr X}=1.}
+\end{equation}
+The maximally mixed limit gives stable-rank task selectivity, while the rank-one coherent specialization gives the nonuniform $N_{\rm eff}$ rejection factor. For dispersive semiconductor bands, the capacity tightness separates into within-shell selectivity and shell-to-global capacity utilization, with the independent Fermi/Kubo factor multiplying afterward.
+
+In the production BIA-neglecting eight-band HgCdTe validation, the active-population tightness $0.1757$ factors into $0.5726$ from shell-capacity utilization and $0.3068$ from the Fermi/Kubo step. The absence of a further within-shell selectivity penalty is enforced by the model's fixed-$\bm k$ $PT$ doublet structure and is not generalized to full zincblende HgCdTe.
+
+Downstream, terminal-specific observability effects determine whether internal activity reaches the readout. Conservative photon recycling can be exactly null to a source terminal under ideal final-sink counting, whereas finite-transit Shockley--Ramo motion can lift that null at finite frequency despite zero integrated charge for an internally created and recombined pair segment.
+
+The common result is not a replacement scalar for specific detectivity, responsivity, or noise. It is a spectral accounting principle for determining what a detector preferentially measures, what microscopic activity its response can certify, and what internal dynamics its readout can hide.
+
+\begin{acknowledgments}
+Acknowledgments and funding statements to be supplied at submission.
+\end{acknowledgments}
+
+\bibliography{rev4_unified}
+
+\end{document}
