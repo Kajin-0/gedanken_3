@@ -2,7 +2,7 @@
 
 **Date:** 2026-08-15  
 **Target:** Physical Review Applied — Regular Article  
-**Status:** **SUBMISSION MATERIALS PREPARED / HUMAN METADATA + DATA-ARCHIVE DECISION REQUIRED / FINAL BIBLIOGRAPHY-TITLE REBUILD PENDING AT CREATION**
+**Status:** **NON-HUMAN PREFLIGHT COMPLETE / TITLE-COMPLETE PRODUCTION REBUILD PASSED / HUMAN METADATA + DATA-ARCHIVE DECISION REQUIRED**
 
 ## 1. Current journal requirements checked
 
@@ -111,11 +111,11 @@ If no DOI has been minted by submission time, enter a truthful statement that th
 
 Do not invent a DOI or claim a permanent archive that does not exist.
 
-## 6. Reference-title requirement
+## 6. Reference-title requirement — CLOSED
 
 Physical Review Applied requires titles in published references and strongly encourages complete titled references at submission.
 
-The production BibTeX database initially omitted titles for several legacy references. A dedicated bibliography-completeness patch now adds titles for:
+The production BibTeX database initially omitted titles for several legacy references. A dedicated bibliography-completeness pass added titles for:
 
 ```text
 Piotrowski and Gawron (1997)
@@ -129,9 +129,25 @@ Mirasol (1963)
 Harrison and Lemoine (1981)
 ```
 
-It also adds the Mao–Mendez-Valderrama–Chowdhury DOI and the Harrison–Lemoine page range.
+It also added the Mao–Mendez-Valderrama–Chowdhury DOI and the Harrison–Lemoine page range.
 
-This patch requires a fresh compile/hash/all-page QA because added reference titles can change bibliography pagination. The pre-title-completion PDF must not be treated as the final submission identity after this patch.
+The title-complete production rebuild is complete and controls the current package:
+
+```text
+GitHub Actions run:   31901326001
+head commit:          7b2f8fe1a9e92ba8ea778828c2682c5a374a1abb
+artifact ID:          9251170031
+artifact digest:      11d4bf5bd6262d6a19c6b1f0bdbdb7a7d16644981b9bd597c199e7a23ddbf32e
+PDF SHA-256:          d2e65ab9b0953e1f987c8c2c2b47e4d8558ac72989b84325590b3a0a67086ee8
+BibTeX SHA-256:       029d1029c487c99e277a24dc95ad536d10a41742992c89916a1991d423f39d3d
+pages:                7
+undefined refs/cites: none
+overfull boxes:       none
+```
+
+Rendered pages 1–6 are byte-for-byte identical to the previously hostile-reviewed production PDF. Only bibliography page 7 changed, and the new page 7 separately passed visual QA. See `REV4_PRAPPLIED_TITLE_COMPLETE_PRODUCTION_QA_2026-08-15.md`.
+
+The pre-title-completion PDF is retained only as production history and is no longer the controlling submission artifact.
 
 ## 7. Source package expected for APS
 
@@ -192,7 +208,7 @@ These must not be guessed by an agent.
 Once the human metadata and DAS are resolved:
 
 ```text
-1. edit metadata only;
+1. edit metadata/submission fields only;
 2. compile through the reproducible CI path;
 3. require zero undefined citations/references and zero overfull boxes;
 4. record new TeX/PDF/bibliography/figure hashes;
