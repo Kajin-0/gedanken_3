@@ -3,7 +3,7 @@
 **Date:** 2026-08-15  
 **Scope:** analytical/theoretical only  
 **Target:** Physical Review Applied — Regular Article  
-**Status:** **REV. 7 CONTROLS / FINAL ADVERSARIAL TECHNICAL LOOP CLOSED / 8-PAGE PRODUCTION QA PASS / HUMAN SUBMISSION INPUTS REMAIN**
+**Status:** **REV. 7 CONTROLS / FINAL ADVERSARIAL TECHNICAL LOOP CLOSED / 8-PAGE PRODUCTION QA PASS / REV7 SUBMISSION PREFLIGHT COMPLETE / HUMAN INPUTS REMAIN**
 
 ## Read first
 
@@ -11,9 +11,9 @@
 2. `PAPER_REV7_RESPONSE_TO_REREVIEW_2026-08-15.md`
 3. `REV7_PRAPPLIED_PRODUCTION_QA_2026-08-15.md`
 4. `PAPER_REV6_FINAL_HOSTILE_REVIEW_2026-08-15.md` — review that motivated the bounded Rev. 7 polish
-5. `PRAPPLIED_SUBMISSION_PREFLIGHT_REV6_2026-08-15.md` — submission guidance; production identifiers must be advanced to Rev. 7 when human metadata is inserted
+5. `PRAPPLIED_SUBMISSION_PREFLIGHT_REV7_2026-08-15.md`
 
-Rev. 7 supersedes Rev. 6 for submission. Earlier revisions are preserved as reproducible history.
+Rev. 7 supersedes Rev. 6 for submission. Earlier revisions are reproducible history.
 
 ## Controlling production identity
 
@@ -45,16 +45,13 @@ all-page visual QA:   PASS
 }
 ```
 
-This is the exact finite-system statement.
-
-Macroscopic density interpretation requires
+Exact finite-system statement. Macroscopic density interpretation requires
 
 ```math
-\bar v_{\mathcal B}^{cap}
-=\limsup_{j\to\infty}v_{\mathcal B,V_j}^{cap}<\infty.
+\bar v_{\mathcal B}^{cap}=\limsup_{j\to\infty}v_{\mathcal B,V_j}^{cap}<\infty.
 ```
 
-Rev. 7 adds the formal thermodynamic qualification that, if the relevant intensive population and response have ordinary thermodynamic limits, the same density inequality follows with `bar v_B^cap`. Otherwise
+Rev. 7 adds the fully explicit nonconvergent fallback
 
 ```math
 \boxed{
@@ -65,7 +62,9 @@ Rev. 7 adds the formal thermodynamic qualification that, if the relevant intensi
 }
 ```
 
-The bounded-domain HgCdTe model satisfies the uniform-capacity condition within the model because its finite-dimensional velocity matrix is bounded on the compact momentum domain by a volume-independent microscopic operator norm.
+If the relevant intensive population and response have ordinary thermodynamic limits, the simpler density inequality follows.
+
+The bounded-domain HgCdTe model satisfies the uniform-capacity hypothesis within the model because the finite-dimensional velocity matrix is bounded on the compact momentum domain by a volume-independent microscopic operator norm.
 
 ## Full tightness hierarchy — unchanged
 
@@ -79,7 +78,7 @@ The bounded-domain HgCdTe model satisfies the uniform-capacity condition within 
 }
 ```
 
-Important Rev. 7 clarification:
+Rev. 7 clarification:
 
 ```text
 n_B^act / n_ref is reference-domain dependent.
@@ -87,7 +86,7 @@ n_B^act / n_ref is reference-domain dependent.
 
 It changes if the declared reference population changes; unlike `eta_F`, `c_a`, and `S_a^act`, it is not determined by the selected optical map alone.
 
-`eta_F` remains the Fermi-statistical factor. Kubo-Greenwood is exact spectral bookkeeping. Optical bound tightness remains `tau_bound^act`; reserve `observability` for terminal/readout null spaces.
+`eta_F` is the Fermi-statistical factor. Kubo-Greenwood is exact spectral bookkeeping. Optical bound tightness is `tau_bound^act`; reserve `observability` for terminal/readout null spaces.
 
 ## HgCdTe production state — numerical values unchanged
 
@@ -101,11 +100,11 @@ v_B^cap                = 1.01764e6 m/s
 production quadrature  = 160 x 10 x 16
 support check          = 200 x 12 x 20
 rank threshold         = 1e-6 m/s
-rank audit             = 1e-9 through 1e4 m/s, support fraction stable to printed precision
-carrier cutoff         = production 2.0 nm^-1; 1.5 -> 2.0 nm^-1 changes n_ref by <1%
+rank audit             = 1e-9 through 1e4 m/s, stable to printed precision
+carrier-cutoff check   = 1.5 -> 2.0 nm^-1 changes n_ref by <1%
 ```
 
-Abstract wording is now `numerically converged second-order eight-band HgCdTe calculation`, not `production-resolution`, to separate numerical convergence from complete physical realism. Explicit BIA remains omitted and the exact shell-isotropy claim remains limited accordingly.
+The abstract now says `numerically converged second-order eight-band HgCdTe calculation`, not `production-resolution`, to distinguish numerical convergence from full physical realism. Explicit BIA remains omitted; the exact shell-isotropy claim remains limited accordingly.
 
 ## Publication architecture — mandatory
 
@@ -149,6 +148,10 @@ Do not create Rev. 8 or reopen theory for defensive polish by default.
 A BIA-inclusive stress test is scientifically interesting but explicitly nonblocking under the present claim set.
 
 Reopen science only for a concrete mathematical counterexample, numerical inconsistency, direct prior-art collision, or explicit editor/referee request.
+
+## Submission layer
+
+`PRAPPLIED_SUBMISSION_PREFLIGHT_REV7_2026-08-15.md` contains the current title, production identity, approximately 100-word suitability statement, Rev. 7 cover-letter draft, supersession guidance, Data Availability/archive guidance, source package, closed-science list, and human completion checklist.
 
 ## Remaining work
 
