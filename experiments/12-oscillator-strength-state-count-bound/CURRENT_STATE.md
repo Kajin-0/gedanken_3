@@ -4,20 +4,21 @@
 **Branch:** `experiment-12-oscillator-strength-state-count-bound`  
 **Scope:** analytical/theoretical only
 
-**Status:** **THEOREM-LEVEL INTERNAL QA PASS / ACTIVE-SUBSPACE REFINEMENT COMPLETE / REV6 SCIENTIFIC TEXT FROZEN / PRB SELECTED AS FIRST TARGET / JAP FALLBACK / NO DIRECT PRIOR-ART COLLISION FOUND / NOVELTY NOT ESTABLISHED / NO MORE THEORY BY DEFAULT**
+**Status:** **THEOREM-LEVEL INTERNAL QA PASS / REV6 SCIENCE FROZEN / PRB REVTeX RENDER PASS / COVER LETTER + SUBMISSION METADATA DRAFTED / PRB FIRST TARGET / JAP FALLBACK / NOVELTY NOT ESTABLISHED / NO MORE THEORY BY DEFAULT**
 
 ## Read first
 
 1. `MANUSCRIPT_REV6_2026-08-14.md`
 2. `MANUSCRIPT_REV6_FINAL_QA_2026-08-14.md`
-3. `JOURNAL_FIT_AND_SUBMISSION_PLAN_2026-08-14.md`
-4. `ACTIVE_SUBSPACE_REFINEMENT_2026-08-14.md`
-5. `MANUSCRIPT_REV4_EXTERNAL_STYLE_REVIEW_2026-08-14.md`
-6. `NOVELTY_AUDIT_ADDENDUM_TRK_CONDUCTIVITY_PARTICLE_COUNT_2026-08-14.md`
-7. `NOVELTY_AUDIT_2026-08-14.md`
-8. `PROGRESS_LOG.md`
+3. `PRB_RENDER_QA_2026-08-14.md`
+4. `PRB_COVER_LETTER_DRAFT_2026-08-14.md`
+5. `PRB_SUBMISSION_METADATA_2026-08-14.md`
+6. `JOURNAL_FIT_AND_SUBMISSION_PLAN_2026-08-14.md`
+7. `ACTIVE_SUBSPACE_REFINEMENT_2026-08-14.md`
+8. `NOVELTY_AUDIT_ADDENDUM_TRK_CONDUCTIVITY_PARTICLE_COUNT_2026-08-14.md`
+9. `PROGRESS_LOG.md`
 
-Older manuscript revisions preserve the derivation/correction history. Rev6 is scientifically controlling.
+Older Rev0–Rev5 manuscripts preserve the derivation/correction history. Rev6 is scientifically controlling.
 
 ---
 
@@ -44,7 +45,7 @@ f(E_c)+1-f(E_v).
 }
 ```
 
-For an arbitrary positive-frequency window `B`, use exact energy-shell projectors to define selected optical blocks `A_{epsilon_c,B}`, `B_{epsilon_v,B}` and
+For any positive-frequency window `B`, use exact energy-shell projectors to define selected optical blocks `A_{epsilon_c,B}`, `B_{epsilon_v,B}` and the basis-invariant capacity
 
 ```math
 \boxed{
@@ -56,7 +57,7 @@ For an arbitrary positive-frequency window `B`, use exact energy-shell projector
 }
 ```
 
-Define the basis-invariant thermal optical-support populations
+Define thermal optical-support populations
 
 ```math
 n_{e,B}^{act}
@@ -102,25 +103,20 @@ n_{th}
 
 ---
 
-# Main physical consequence
+# Main consequence / validation
 
 ```math
-K_T(E)=\frac{E}{e^{E/(2k_BT)}-1}
-\to2k_BT
+K_T(E)=E/[e^{E/(2k_BT)}-1]\to2k_BT
 ```
 
-as `E -> 0`.
+as `E -> 0`. Finite **integrated** low-energy direct spectral weight therefore carries a finite thermal population cost at fixed `v_B^{cap}`. A vanishing-bandwidth peak can evade this because its integrated spectral weight can vanish.
 
-Thus finite **integrated** low-energy direct cross-`mu` optical spectral weight carries a finite thermal population cost at fixed `v_B^{cap}`. A peak-only line whose useful bandwidth vanishes can have vanishing integrated spectral weight and is not forced to a finite population floor.
-
----
-
-# Equality / validation
+Validation summary:
 
 ```text
-Ideal equal-mass mirror-symmetric parabolic model:
-    active-subspace theorem saturates for any selected direct window;
-    total-population theorem saturates for the full relevant direct spectrum.
+Equal-mass mirror-symmetric parabolic model:
+    active-subspace theorem exact for any selected direct window;
+    total-population theorem exact for full relevant direct spectrum.
 
 2-D neutral massless Dirac: 0.5000
 3-D massless Dirac:         0.6667
@@ -128,13 +124,11 @@ Ideal equal-mass mirror-symmetric parabolic model:
 10 um / 300 K:              0.794684
 ```
 
-For unequal parabolic masses in the nondegenerate global limit,
+Unequal parabolic masses, nondegenerate global limit:
 
 ```math
-\boxed{
 n_{bound}/n_{exact}
 =[4m_em_h/(m_e+m_h)^2]^{3/4}\le1.
-}
 ```
 
 ---
@@ -159,16 +153,6 @@ Do not claim universal dark-current, thermal-generation-rate, `D*`, or finite-ba
 
 Adjacent audited theory includes phase-space filling, Kubo-Greenwood, ordinary/generalized `f`/TRK sums, restricted and quantum-geometric optical sums, graphene optical sum rules, classic IR `alpha/G_th`, Yablonovitch-Kane low-carrier laser engineering, and Bethkenhagen et al. conductivity-to-ionization TRK particle counting.
 
-No direct source was identified with the exact combination
-
-```text
-cross-mu direct conductivity
-+ E/[exp(E/2kBT)-1] thermal kernel
-+ per-shell optical-velocity capacity
--> minimum thermal optical-support population
--> minimum total thermal electron-hole population.
-```
-
 ```text
 DIRECT PRIOR-ART COLLISION: NOT FOUND
 PRIORITY: NOT ESTABLISHED
@@ -180,40 +164,81 @@ No `first`, `novel`, or priority wording is authorized.
 
 ---
 
-# Manuscript and journal state
+# PRB production state
 
-Current scientific submission-candidate text:
-
-`MANUSCRIPT_REV6_2026-08-14.md`
-
-Final internal hostile QA:
-
-`MANUSCRIPT_REV6_FINAL_QA_2026-08-14.md`
-
-Journal plan:
+First target:
 
 ```text
-FIRST TARGET: Physical Review B — Regular Article
-FALLBACK: Journal of Applied Physics — Article
-LESS CLEAN FIT: Physical Review Applied
+Physical Review B — Regular Article
 ```
 
-Rationale is recorded in:
+Fallback:
 
-`JOURNAL_FIT_AND_SUBMISSION_PLAN_2026-08-14.md`
+```text
+Journal of Applied Physics — Article
+```
 
-PRB is the preferred first target because the manuscript is fundamentally a general semiconductor/condensed-matter optical-response theorem. The photodetector motivation should remain, but the manuscript should not be weakened into an HgCdTe-only or device-performance claim.
+A PRB-oriented REVTeX 4.2 rendering of frozen Rev6 has passed production QA.
+
+Final local artifact hashes:
+
+```text
+experiment12_prb_rev6.tex
+ecd9e09621c6fc3e87e9e6293f51ae4499b68a9e9ca878662a076e5d21700ced
+
+experiment12_prb_rev6.pdf
+b705d0868c3f2349a1821b5856f09792e8b2e0599d98efe38745c4e353229896
+```
+
+Render disposition:
+
+```text
+REVTeX 4.2 COMPILE: PASS
+US-LETTER MEDIA BOX: PASS
+PAGES: 6
+OVERFULL BOXES: NONE
+UNDEFINED REFERENCES/CITATIONS: NONE
+STUCK FLOATS: NONE
+PDF PREFLIGHT: PASS
+PAGE-LEVEL VISUAL QA: PASS
+CLIPPING/OVERLAP/BROKEN GLYPHS: NONE
+```
+
+Details: `PRB_RENDER_QA_2026-08-14.md`.
+
+Current cover-letter template: `PRB_COVER_LETTER_DRAFT_2026-08-14.md`.
+
+Current submission checklist / Data Availability options: `PRB_SUBMISSION_METADATA_2026-08-14.md`.
 
 ---
 
-# ACTIVE NEXT ACTION — PRB PRODUCTION, NOT MORE THEORY
+# Remaining blockers are author-owned / production-only
+
+Before actual submission, complete:
 
 ```text
-1. convert Rev6 into PRB-compatible LaTeX;
-2. perform PRB-specific reference/style audit;
-3. compile and visually inspect the PDF;
-4. run an independent review of the rendered manuscript;
-5. prepare cover-letter/submission metadata only after rendered QA passes.
+[ ] exact author name(s) and order
+[ ] affiliation(s)
+[ ] corresponding-author email
+[ ] funding statement
+[ ] conflict/disclosure statement
+[ ] authorship approval
+[ ] simultaneous-submission confirmation
+[ ] prior Physical Review submission history
+[ ] joint-submission status
+[ ] referee suggestions/exclusions if desired
+[ ] final Data Availability Statement
+[ ] decision whether to archive validation scripts with persistent DOI
 ```
 
-Add new physics only if a referee identifies a blocking scientific gap.
+After these are supplied, insert them into the REVTeX source, recompile, and repeat rendered-PDF QA.
+
+---
+
+# ACTIVE NEXT ACTION — SUBMISSION PRODUCTION ONLY
+
+```text
+NO MORE THEORY BY DEFAULT.
+```
+
+Next work is to finalize author-owned metadata and Data Availability, then produce the exact submission PDF/source and cover letter. Add new science only if an external referee identifies a blocking scientific defect.
