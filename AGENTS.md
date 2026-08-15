@@ -2,40 +2,39 @@
 
 **Date:** 2026-08-15  
 **Active branch:** `experiment-13-observable-resource-unification`  
-**Repository frontier:** **Experiment 13 Rev. 6 — Physical Review Applied flagship; final hostile technical review and 8-page production QA passed**
+**Repository frontier:** **Experiment 13 Rev. 7 — Physical Review Applied flagship; final adversarial technical loop closed and 8-page production QA passed**
 
 ## Recovery order
 
 1. `agent.md`
-2. `experiments/13-observable-resource-unification/00_ACTIVE_FRONTIER_REV6_FLAGSHIP_2026-08-15.md`
-3. `experiments/13-observable-resource-unification/PAPER_REV6_FINAL_HOSTILE_REVIEW_2026-08-15.md`
-4. `experiments/13-observable-resource-unification/REV6_PRAPPLIED_PRODUCTION_QA_2026-08-15.md`
-5. `experiments/13-observable-resource-unification/PAPER_REV6_RESPONSE_TO_REREVIEW_2026-08-15.md`
-6. `experiments/13-observable-resource-unification/PRAPPLIED_SUBMISSION_PREFLIGHT_REV6_2026-08-15.md`
-7. `experiments/13-observable-resource-unification/CURRENT_STATE.md`
+2. `experiments/13-observable-resource-unification/00_ACTIVE_FRONTIER_REV7_FLAGSHIP_2026-08-15.md`
+3. `experiments/13-observable-resource-unification/PAPER_REV7_RESPONSE_TO_REREVIEW_2026-08-15.md`
+4. `experiments/13-observable-resource-unification/REV7_PRAPPLIED_PRODUCTION_QA_2026-08-15.md`
+5. `experiments/13-observable-resource-unification/PAPER_REV6_FINAL_HOSTILE_REVIEW_2026-08-15.md`
+6. `experiments/13-observable-resource-unification/CURRENT_STATE.md`
+7. `experiments/13-observable-resource-unification/PRAPPLIED_SUBMISSION_PREFLIGHT_REV6_2026-08-15.md` — submission guidance; production identifiers must be advanced to Rev. 7 during final metadata insertion
 
-Rev. 4 and Rev. 5 are historical development checkpoints. Rev. 6 controls whenever states conflict.
+Rev. 6 and earlier are historical development checkpoints. Rev. 7 controls whenever states conflict.
 
 ## Controlling production identity
 
 ```text
-Actions run:          31905440563
-head commit:          1fcd627f194223dbf277cbf9d51b87501b1fcdb6
-artifact ID:          9252213152
-artifact digest:      38709b3e6f5e6b236812a70b78880c195a4e86d718a62e9b5d1e2bb63e6f7a7b
-PDF SHA-256:          fa3c40b73ae8c75b8317e5522ebf50fb5fbf77c099aeeef52cf378a4febcf2e6
-TeX SHA-256:          2a4bed7a70098e1e641a59d64d16adfe549fc35d775868e2a6b4ec7b03fa3d74
-figure SHA-256:       07ee725da6522c7060c27644852a78977468ba02dd85ba0497e66f820f67b816
+Actions run:          31912951827
+head commit:          f464dc966e0223f6b8c3ff1e51f82f948c8e950c
+artifact ID:          9254179157
+artifact digest:      29072be047b7a8174404ba02f32de1615c45c06daebcd5627b9f5cda54339d56
+PDF SHA-256:          e40627dfb12f122cafb013415a475efffabda02befbff757ebd80b2da993da50
+TeX SHA-256:          806ebffeb398a892550c62b9bcb7bcfa0c85c75a9c349add6f0ad628103ac5d6
+figure SHA-256:       e60d35acc894ca5317d4ca5b8dce1b7b8869cfa62ca0cb6475181cfb5728d0c6
 pages:                8
 undefined refs/cites: none
 overfull/underfull:   none
 all-page visual QA:   PASS
-hostile review:       PASS
 ```
 
 ## Scientific state
 
-Central theorem:
+Central finite-system theorem:
 
 ```math
 \boxed{
@@ -55,6 +54,15 @@ Macroscopic density interpretation requires
 \bar v_{\mathcal B}^{cap}=\limsup_{j\to\infty}v_{\mathcal B,V_j}^{cap}<\infty.
 ```
 
+Rev. 7 formal fallback when ordinary intensive thermodynamic limits are not assumed:
+
+```math
+\liminf_{j\to\infty}n_{\mathcal B,V_j}^{act}
+\ge
+\frac{\liminf_{j\to\infty}\mathcal L_{\mathcal B,V_j}}
+{(\bar v_{\mathcal B}^{cap})^2}.
+```
+
 Full tightness hierarchy:
 
 ```math
@@ -67,7 +75,7 @@ Full tightness hierarchy:
 }
 ```
 
-`eta_F` is the Fermi-statistical factor. Kubo-Greenwood is exact spectral bookkeeping. Optical bound tightness is `tau_bound^act`; `observability` is reserved for terminal/readout null spaces.
+Rev. 7 explicitly states that `n_B^act/n_ref` is reference-domain dependent. `eta_F` is the Fermi-statistical factor; Kubo-Greenwood is exact spectral bookkeeping. Optical bound tightness is `tau_bound^act`; `observability` is reserved for terminal/readout null spaces.
 
 HgCdTe broad-window closure:
 
@@ -81,12 +89,15 @@ v_B^cap                = 1.01764e6 m/s
 production quadrature  = 160 x 10 x 16
 support check          = 200 x 12 x 20
 rank threshold         = 1e-6 m/s
+carrier-cutoff check   = 1.5 -> 2.0 nm^-1 changes n_ref by <1%
 ```
+
+The abstract uses `numerically converged` for the HgCdTe calculation. Explicit BIA remains omitted, so do not generalize the exact shell-isotropy result beyond the stated BIA-neglecting single-parent-doublet validation.
 
 ## Publication architecture — mandatory
 
 ```text
-Experiment 13 Rev. 6:     SOLE PRIMARY ACTIVE SUBMISSION MANUSCRIPT
+Experiment 13 Rev. 7:     SOLE PRIMARY ACTIVE SUBMISSION MANUSCRIPT
 Experiment 12 manuscript: FROZEN FALLBACK / DEVELOPMENT PROVENANCE
 Experiment 01 manuscript: FROZEN FALLBACK
 Experiment 09 manuscript: FROZEN FALLBACK
@@ -104,20 +115,38 @@ Any change to the supersession policy requires a fresh overlap audit before subm
 build_rev4.py
 -> recorded Rev4-to-Rev5 patches
 -> build_rev6.py
--> rev6_prapplied.tex + rev6_figures.tex
+-> build_rev7.py
+-> rev7_prapplied.tex + rev7_figures.tex
 -> REVTeX/BibTeX
 -> automated QA + 180-dpi page renders
 ```
 
 Workflow:
-`.github/workflows/rev6-flagship-pdf.yml`
+`.github/workflows/rev7-flagship-pdf.yml`
+
+## Why Rev. 7 exists
+
+The final Rev. 6 hostile re-review found the central manuscript technically sound and requested only:
+
+```text
+thermodynamic convergence/liminf precision;
+reference-domain qualification of support coverage;
+carrier-cutoff convergence statement for n_ref.
+```
+
+Rev. 7 closes those points, removes the dangling unknown-arrival sentence, changes `production-resolution` to `numerically converged`, and enlarges only the smallest figure annotations.
+
+No production numerical value or central theorem changed.
+
+## Stop rule
+
+Do not create Rev. 8 or new theory by default.
+
+A BIA-inclusive stress test is optional scientific follow-up, not a submission prerequisite under the current claim set.
+
+Reopen science only for a concrete mathematical counterexample, numerical inconsistency, direct prior-art collision, or explicit editor/referee request.
 
 ## Remaining work
-
-Do not create Rev. 7 or new theory by default.
-
-The manuscript-specific APS submission layer is now current in:
-`experiments/13-observable-resource-unification/PRAPPLIED_SUBMISSION_PREFLIGHT_REV6_2026-08-15.md`.
 
 Human-owned fields still required:
 
@@ -132,4 +161,4 @@ final Data Availability / persistent archive decision;
 optional ORCID/referee recommendations/exclusions.
 ```
 
-After metadata insertion, rebuild through CI, record final hashes, inspect every page, and verify that the submitted source compiles to the submitted PDF.
+After metadata insertion, update the submission preflight identifiers to Rev. 7, rebuild through Rev. 7 CI, record final hashes, inspect every page, and verify that the submitted source compiles to the submitted PDF.
