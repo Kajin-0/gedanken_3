@@ -1,8 +1,10 @@
-# Current State — Experiment 12: Thermal Population Cost of Direct Interband Optical Spectral Weight
+# Current State — Experiment 12
 
 **Date:** 2026-08-14  
-**Scope:** analytical/theoretical only  
-**Status:** **WINDOWED THERMAL–OPTICAL POPULATION INEQUALITY SURVIVES HOSTILE REVIEW / BASIS-INVARIANT RESOURCE FIXED / PARABOLIC EQUALITY FAMILY + DIRAC VALIDATIONS COMPLETE / REV3 MANUSCRIPT EXISTS / REV3 NOTATION ERRATUM REQUIRED / NOVELTY NOT ESTABLISHED**
+**Branch:** `experiment-12-oscillator-strength-state-count-bound`  
+**Scope:** analytical/theoretical only
+
+**Status:** **WINDOWED THERMAL–OPTICAL POPULATION INEQUALITY SURVIVES HOSTILE REVIEW / BASIS-INVARIANT RESOURCE FIXED / PARABOLIC AND DIRAC VALIDATIONS COMPLETE / REV3 MANUSCRIPT EXISTS / REV3 NOTATION ERRATUM REQUIRED / NOVELTY NOT ESTABLISHED**
 
 ## Read first
 
@@ -15,83 +17,38 @@
 7. `NOVELTY_AUDIT_ADDENDUM_LOW_CARRIER_OPTICS_2026-08-14.md`
 8. `PROGRESS_LOG.md`
 
-Branch:
+## Controlling theorem
 
-```text
-experiment-12-oscillator-strength-state-count-bound
-```
-
----
-
-# Controlling theorem
-
-Consider equilibrium independent-quasiparticle one-body eigenstates with
-
-```math
-E_v<\mu<E_c,
-\qquad
-E_{cv}=E_c-E_v>0.
-```
-
-Define
-
-```math
-p_c=f(E_c),
-\qquad
-h_v=1-f(E_v),
-\qquad
-D_{cv}=f(E_v)-f(E_c).
-```
-
-The direct positive-frequency conductivity used by the theorem is the **cross-chemical-potential** contribution only:
+For exact independent-quasiparticle states with `E_v < mu < E_c`, define the direct cross-chemical-potential conductivity
 
 ```math
 \sigma_1^{cross}(\omega)
 =\frac{\pi e^2}{V}
 \sum_{cv}
-\frac{D_{cv}|v_{cv}|^2}{E_{cv}}
+\frac{[f(E_v)-f(E_c)]|v_{cv}|^2}{E_{cv}}
 \delta\!\left(\omega-\frac{E_{cv}}{\hbar}\right).
 ```
 
-The exact pointwise Fermi lemma is
+The pointwise Fermi lemma is
 
 ```math
 \boxed{
-\frac{2D_{cv}}
+\frac{2[f(E_v)-f(E_c)]}
 {e^{E_{cv}/(2k_BT)}-1}
-\le p_c+h_v.
+\le
+f(E_c)+[1-f(E_v)].
 }
 ```
 
-Equality holds iff the transition endpoints are mirror symmetric about `mu`.
-
-For any measurable positive-frequency window `B`, define the thermally weighted optical-velocity strength `R_B(T)` and the basis-invariant shell resource `u_B` by projecting the physical velocity operator only between exact degenerate energy eigenspaces whose transition energies lie in `B`.
+For any measurable positive-frequency window `B`, let `u_B` denote the **Latin-u**, basis-invariant optical-velocity resource defined by the appropriate projected operator norm inside each exact degenerate energy eigenspace.
 
 Then
 
 ```math
 \boxed{
-\frac{2}{\pi e^2}
-\int_B
-\frac{\hbar\omega\,\sigma_1^{cross}(\omega)}
-{e^{\hbar\omega/(2k_BT)}-1}
-\,d\omega
-\le
-\mathcal R_B(T)
-\le
-u_B^2(n_e+n_h),
-}
-```
-
-where the resource symbol is **Latin** `u_B`.
-
-Therefore
-
-```math
-\boxed{
 n_e+n_h
 \ge
-\frac{2}{\pi e^2u_B^2}
+\frac{2}{\pi e^2 u_B^2}
 \int_B
 \frac{\hbar\omega\,\sigma_1^{cross}(\omega)}
 {e^{\hbar\omega/(2k_BT)}-1}
@@ -105,7 +62,7 @@ For an intrinsic neutral absorber, `n_e=n_h=n_th`,
 \boxed{
 n_{th}
 \ge
-\frac{1}{\pi e^2u_B^2}
+\frac{1}{\pi e^2 u_B^2}
 \int_B
 \frac{\hbar\omega\,\sigma_1^{cross}(\omega)}
 {e^{\hbar\omega/(2k_BT)}-1}
@@ -113,53 +70,25 @@ n_{th}
 }
 ```
 
-A global all-frequency statement is used only if a finite global velocity resource exists. The windowed theorem is controlling.
+The windowed theorem is controlling. A global all-frequency version is used only when the corresponding global velocity resource is finite.
 
----
+## Main consequence
 
-# Low-energy consequence
-
-The thermal kernel
+With
 
 ```math
-K_T(E)=\frac{E}{e^{E/(2k_BT)}-1}
+K_T(E)=\frac{E}{e^{E/(2k_BT)}-1},
 ```
 
-satisfies
+one has `K_T(E) -> 2 k_B T` as `E -> 0`. Therefore fixed **integrated** low-energy cross-`mu` optical spectral weight cannot coexist with vanishing equilibrium thermal quasiparticle population at fixed `u_B`.
 
-```math
-K_T(E)=2k_BT-E/2+O(E^2/k_BT).
-```
+A peak-only line whose useful bandwidth shrinks to zero is not forced to a finite population floor because its integrated spectral weight can vanish.
 
-Thus fixed **integrated** low-energy cross-`mu` optical spectral weight cannot coexist with vanishing equilibrium thermal quasiparticle population at fixed `u_B`.
+## Tightness / validation
 
-A peak-only response in a bandwidth that shrinks to zero is not constrained to a finite population floor because its integrated spectral weight can vanish.
+For ideal 3-D parabolic direct bands with constant one-to-one optical matrix element, the theorem is exactly saturated at all temperatures when `m_e=m_h` and the intrinsic chemical potential is at midgap.
 
----
-
-# Equality and validation
-
-## Parabolic equality family
-
-For three-dimensional direct parabolic bands with constant one-to-one optical matrix element,
-
-```math
-E_c(k)=E_g/2+\hbar^2k^2/(2m_e),
-```
-
-```math
-E_v(k)=-E_g/2-\hbar^2k^2/(2m_h),
-```
-
-the theorem is **exactly saturated at all temperatures** when
-
-```math
-m_e=m_h
-```
-
-and the intrinsic chemical potential is at midgap.
-
-For unequal masses in the nondegenerate limit,
+In the nondegenerate unequal-mass limit,
 
 ```math
 \boxed{
@@ -171,62 +100,41 @@ For unequal masses in the nondegenerate limit,
 }
 ```
 
-## Dirac validations
+Independent Dirac checks:
 
 ```text
-2-D neutral massless Dirac / graphene: bound/exact = 1/2
-3-D massless Dirac:                    bound/exact = 2/3
+2-D neutral massless Dirac / graphene: bound/exact = 0.5000
+3-D massless Dirac:                    bound/exact = 0.6667
 3-D massive Dirac, 10 um / 300 K:      bound/exact = 0.794684
 ```
 
-These validations are reproduced by the branch numerical scripts.
+## Scope boundary
 
----
-
-# Scope boundary
-
-Current valid class:
+Valid class:
 
 ```text
 independent-quasiparticle direct cross-mu charge absorbers.
 ```
 
-The theorem survives dispersive multiband state reuse, unequal degeneracy, and static single-particle disorder when exact eigenstates are used.
+The theorem survives dispersive multiband state reuse, unequal degeneracy, and static one-particle disorder when exact eigenstates are used.
 
-It does **not** automatically cover:
+It does not automatically cover bound excitons / neutral collective states, phonon-assisted transitions, interaction-generated many-body spectral functions, or unconstrained photonic path enhancement.
 
-```text
-bound excitons / neutral collective optical states;
-phonon-assisted or indirect absorption;
-interaction-generated many-body spectral functions;
-unconstrained passive photonic path enhancement.
-```
+Localized states do not invalidate the population theorem but prevent automatic inference from population to DC dark current.
 
-Localized one-particle states do not break the population theorem but prevent automatic inference from population to DC dark current.
+Do not claim a universal dark-current, thermal-generation-rate, D*, or finite-bandwidth-noise lower bound. The attempted universal `G_th >= n_th/tau_response` conversion was explicitly rejected by the depleted-photodiode counterexample.
 
-Do **not** claim a universal dark-current, generation-rate, `D*`, or finite-bandwidth-noise bound. The attempted universal `G_th >= n_th/tau_response` conversion was explicitly rejected by the depleted-photodiode counterexample.
-
----
-
-# Manuscript state
+## Manuscript state
 
 Current manuscript:
 
 `MANUSCRIPT_REV3_2026-08-14.md`
 
-Rev0 received major revision. Rev1 reached pass-with-minor-revision after the basis-invariance correction and bandwidth clarification. Rev3 is the current compressed archival manuscript.
+Rev3 contains four stale **Greek-nu** tokens generated by an escape/notation regression: abstract hierarchy, Eq. (21), Eq. (22), and concluding Eq. (35).
 
-### Mandatory Rev3 erratum
+The only valid resource symbol is plain Latin `u_B` / `u_{\mathcal B}`.
 
-Rev3 still contains four stale rendered `\nu_B` / `\nu_{\mathcal B}` tokens caused by a LaTeX escape regression. They occur in the abstract hierarchy, Eq. (21), Eq. (22), and concluding Eq. (35).
-
-The only valid resource symbol is Latin
-
-```math
-u_{\mathcal B}.
-```
-
-No physics changes. Treat
+Treat
 
 ```text
 MANUSCRIPT_REV3_2026-08-14.md
@@ -234,44 +142,28 @@ MANUSCRIPT_REV3_2026-08-14.md
 MANUSCRIPT_REV3_NOTATION_ERRATUM_2026-08-14.md
 ```
 
-as the controlling archival manuscript state until the next typeset/journal-facing revision mechanically incorporates the substitution.
+as the controlling archival manuscript state. The next rendered or journal-facing revision must mechanically fold in those four substitutions before typesetting.
 
----
+No coefficient, inequality, numerical value, reference, or scientific claim changes in the erratum.
 
-# Prior-art / novelty disposition
+## Prior-art status
 
-Focused audits include:
+Focused audits include Kubo-Greenwood, phase-space filling, ordinary/generalized f-sums, restricted optical sums, quantum-geometric sums, finite-T QFI response kernels, graphene finite-T optical sums, classic IR `alpha/G_th`, and Yablonovitch–Kane low-carrier laser band engineering.
 
-```text
-Kubo-Greenwood conductivity;
-semiconductor phase-space filling;
-ordinary/generalized f-sum rules;
-restricted optical sums;
-quantum-geometric optical sums;
-finite-T QFI response kernels;
-graphene finite-T optical sums;
-classic IR alpha/G_th criteria;
-Yablonovitch-Kane low-carrier laser band engineering.
-```
-
-No direct source has yet been identified stating the same inverse windowed inequality from surviving cross-`mu` spectral weight plus finite per-shell optical velocity resource to minimum equilibrium thermal electron-hole population.
+No direct source has yet been identified stating the same inverse windowed inequality from surviving cross-`mu` optical spectral weight plus finite per-shell optical velocity resource to a minimum equilibrium thermal electron-hole population.
 
 ```text
 NOVELTY NOT ESTABLISHED.
-MANUSCRIPT DRAFT IS SCIENTIFICALLY DEFENSIBLE ENOUGH FOR FURTHER EXTERNAL-STYLE REVIEW.
+MANUSCRIPT DRAFT IS READY FOR ANOTHER INDEPENDENT EXTERNAL-STYLE REVIEW.
 ```
 
----
+## Next action
 
-# Next action
-
-Do not add new physics to rescue or inflate the paper.
-
-Next work should be one of:
+Do not add new physics by default. Next work should be one of:
 
 ```text
-1. mechanically fold the Rev3 notation erratum into the next rendered revision;
-2. run another independent hostile manuscript review;
-3. verify every bibliography entry and journal-fit claim;
-4. prepare LaTeX/PDF only after the claim scope remains unchanged.
+1. fold the four-symbol Rev3 erratum into the next rendered revision;
+2. perform another independent hostile manuscript review;
+3. audit every bibliography entry and journal-fit statement;
+4. typeset only after claim scope remains unchanged.
 ```
