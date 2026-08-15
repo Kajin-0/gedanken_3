@@ -1,0 +1,42 @@
+name: HgCdTe C-linear BIA symmetry QA
+
+on:
+  push:
+    branches:
+      - experiment-13-observable-resource-unification
+    paths:
+      - 'experiments/13-observable-resource-unification/numerics/hgcdte_bia_c_linear_symmetry_qa.py'
+      - 'experiments/13-observable-resource-unification/numerics/hgcdte_bia_c_linear_stress.py'
+      - 'experiments/12-oscillator-strength-state-count-bound/numerics/kane_8band_tightness.py'
+      - '.github/workflows/hgcdte-bia-c-linear-symmetry-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  symmetry-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install numerical dependencies
+        run: python -m pip install --upgrade numpy scipy
+      - name: Run C-linear BIA symmetry and basis-convention QA
+        run: |
+          python experiments/13-observable-resource-unification/numerics/hgcdte_bia_c_linear_symmetry_qa.py \
+            | tee hgcdte_bia_c_linear_symmetry_qa.txt
+      - name: Require clean symmetry result
+        shell: bash
+        run: |
+          grep -q '^RESULT=PASS$' hgcdte_bia_c_linear_symmetry_qa.txt
+          grep -q '^Gamma_C_BIA_norm_eV=0' hgcdte_bia_c_linear_symmetry_qa.txt
+          grep -q '^invariant_vs_C1C2_matrix_error_eV=' hgcdte_bia_c_linear_symmetry_qa.txt
+          grep -q '^C_BIA_TR_error_eV=' hgcdte_bia_c_linear_symmetry_qa.txt
+          grep -q '^C_BIA_velocity_TRodd_error_mps=' hgcdte_bia_c_linear_symmetry_qa.txt
+      - name: Upload QA result
+        uses: actions/upload-artifact@v4
+        with:
+          name: hgcdte-bia-c-linear-symmetry-qa
+          retention-days: 30
+          path: hgcdte_bia_c_linear_symmetry_qa.txt
