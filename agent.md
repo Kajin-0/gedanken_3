@@ -18,18 +18,24 @@ Branch:
 experiment-12-oscillator-strength-state-count-bound
 ```
 
+Rev11 remains the last fully typeset and QA-passed manuscript. A final independent regression audit has now been completed and found no central theorem defect or HgCdTe numerical inconsistency. It identified one concrete pre-submission literature-completeness amendment: cite and distinguish Mao, Mendez-Valderrama, and Chowdhury, Phys. Rev. B 112, 075116 (2025), on projected low-energy optical sum rules.
+
+A candidate literature patch is committed, but it is **not yet a new QA-passed revision**. Do not call it Rev12 or submission-ready until the exact Rev11 source is reconstructed, the patch is applied, and compile/hash/all-page QA is complete.
+
 ## Recovery order
 
 1. `experiments/12-oscillator-strength-state-count-bound/CURRENT_STATE.md`
-2. `experiments/12-oscillator-strength-state-count-bound/PRB_REV11_MINOR_REVISION_QA_2026-08-15.md`
-3. `experiments/12-oscillator-strength-state-count-bound/REV10_MINOR_REREVIEW_RESPONSE_2026-08-15.md`
-4. `experiments/12-oscillator-strength-state-count-bound/typeset/rev10_to_rev11_minor_revision.patch`
-5. `experiments/12-oscillator-strength-state-count-bound/numerics/parameter_sensitivity_audit.py`
-6. `experiments/12-oscillator-strength-state-count-bound/PRB_REV10_REFEREE_REPAIR_QA_2026-08-15.md`
-7. `experiments/12-oscillator-strength-state-count-bound/REV9_SUPREMUM_REREVIEW_RESOLUTION_2026-08-15.md`
-8. `experiments/12-oscillator-strength-state-count-bound/numerics/supremum_active_support_audit.py`
-9. `experiments/12-oscillator-strength-state-count-bound/typeset/rev9_exposition_to_rev10_referee_repaired.patch`
-10. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV9_EXPOSITION_REVISED_2026-08-15.md`
+2. `experiments/12-oscillator-strength-state-count-bound/REV11_FINAL_ADVERSARIAL_REGRESSION_AUDIT_2026-08-15.md`
+3. `experiments/12-oscillator-strength-state-count-bound/typeset/rev11_literature_completeness_candidate.patch`
+4. `experiments/12-oscillator-strength-state-count-bound/PRB_REV11_MINOR_REVISION_QA_2026-08-15.md`
+5. `experiments/12-oscillator-strength-state-count-bound/REV10_MINOR_REREVIEW_RESPONSE_2026-08-15.md`
+6. `experiments/12-oscillator-strength-state-count-bound/typeset/rev10_to_rev11_minor_revision.patch`
+7. `experiments/12-oscillator-strength-state-count-bound/numerics/parameter_sensitivity_audit.py`
+8. `experiments/12-oscillator-strength-state-count-bound/PRB_REV10_REFEREE_REPAIR_QA_2026-08-15.md`
+9. `experiments/12-oscillator-strength-state-count-bound/REV9_SUPREMUM_REREVIEW_RESOLUTION_2026-08-15.md`
+10. `experiments/12-oscillator-strength-state-count-bound/numerics/supremum_active_support_audit.py`
+11. `experiments/12-oscillator-strength-state-count-bound/typeset/rev9_exposition_to_rev10_referee_repaired.patch`
+12. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV9_EXPOSITION_REVISED_2026-08-15.md`
 
 ## Controlling theorem
 
@@ -43,25 +49,22 @@ n_e+n_h
 {e^{\hbar\omega/(2k_BT)}-1}\,d\omega.
 ```
 
-Eq. (29) and its proof remain unchanged through Rev11.
+Eq. (29) and its proof remain unchanged through Rev11 and survived the final regression audit.
 
-## Rev10 repair that must not be lost
+## Repairs that must not be lost
 
-Eqs. (21)–(22) use an ordinary finite-system shell supremum. Rev10 repaired the HgCdTe Eq. (49) from `ess sup` to the ordinary supremum. Do **not** revert to `ess sup` unless a separate density theorem is actually proved.
-
-The isolated-Gamma 11.0% correction is not applicable: `mu` lies 11.477 meV above the nominal Gamma6 edge, so Gamma6 and Gamma8 are all below `mu` at `k=0`; there is no selected cross-mu Gamma8-to-Gamma6 block at Gamma.
-
-## Rev11 clarification that must not be lost
-
-For the translationally invariant bulk model, the complete exact-energy shell decomposes into independent momentum blocks because `v_x` conserves crystal momentum:
+- Eq. (49) is an ordinary supremum, not an essential supremum.
+- The isolated-Gamma correction is inapplicable because `mu` is 11.477 meV above the nominal Gamma6 edge and the selected cross-mu set begins only at finite `k`.
+- For the translationally invariant bulk model,
 
 ```math
 P_\epsilon v_xQ_{\epsilon,B}
 =\bigoplus_{\mathbf k}
-P_{\epsilon,\mathbf k}v_x(\mathbf k)Q_{\epsilon,\mathbf k,B}.
+P_{\epsilon,\mathbf k}v_x(\mathbf k)Q_{\epsilon,\mathbf k,B},
 ```
 
-Hence the complete-shell operator norm is the maximum of the finite-k block norms and becomes the ordinary k supremum in the bulk limit. This directly justifies Eq. (49) as the bulk specialization of Eq. (21).
+so the complete-shell operator norm is the maximum finite-k block norm and becomes the ordinary bulk `k` supremum.
+- The exact theorem uses exact support rank. `1e-6 m/s` is only the numerical Table-II diagnostic threshold.
 
 ## Controlling HgCdTe result
 
@@ -79,21 +82,41 @@ selected k onset           ~= 0.05535 nm^-1
 selected k max             ~= 0.583 nm^-1
 ```
 
-Production quadrature: `160 x 10 x 16`; `200 x 12 x 20` is an additional support check.
+Production quadrature is `160 x 10 x 16`; `200 x 12 x 20` is a support check. The reduced one-at-a-time `+/-5%` parameter diagnostic spans `0.1098 ... 0.1293` and is not an uncertainty interval.
 
-Active-support diagnostic rank threshold:
+## Final regression-audit result
+
+The following all passed independent re-derivation/regression checking:
 
 ```text
-1e-6 m/s
+pointwise Fermi lemma;
+Kubo-Greenwood prefactor and thermal-kernel conversion;
+projected-shell singular-value/rank step;
+active-population <= total-population step;
+fixed-window thermodynamic hypothesis;
+moving-window low-energy quantifiers;
+Rev11 complete-shell -> k-block ordinary-supremum specialization;
+HgCdTe cross-mu versus conventional population interpretation;
+forbidden downstream dark-current/D*/noise inferences.
 ```
 
-A reduced-grid sweep from `1e-9` to `1e4 m/s` leaves `n_B^act/n_ref` unchanged to printed precision. This threshold is numerical bookkeeping for Table II only; the central lower bound does not depend on it.
+The HgCdTe ordinary supremum is a numerical global-optimization result, not an interval-certified mathematical maximum. This is acceptable at the manuscript's stated numerical-validation claim level. If a referee demands stronger certification, multi-seed replication or deterministic/interval bracketing is the next numerical check.
 
-Lightweight one-at-a-time `+/-5%` sensitivity of `EP, Delta, F, gamma1, gamma2, gamma3` on a reduced common grid gives a broad diagnostic ratio range `0.1098 ... 0.1293`, confirming only the order-`10^-1` robustness of the representative model result. Do not present this as experimental uncertainty.
+## Literature amendment
 
-## Literature positioning added in Rev11
+Rev11 already cites Onishi-Fu (PRX 14, 011052 (2024)). The final audit additionally identified:
 
-Onishi and Fu, Phys. Rev. X 14, 011052 (2024), is now cited and distinguished. Their work relates generalized optical weight, topology/quantum geometry, and topological-gap bounds, including infrared applications. Experiment 12 instead uses a finite-temperature cross-mu thermal kernel and per-shell velocity capacity to bound equilibrium thermal quasiparticle population. Neighboring literature, no identified collision.
+```text
+D. Mao, J. F. Mendez-Valderrama, D. Chowdhury,
+Phys. Rev. B 112, 075116 (2025),
+DOI 10.1103/xmz7-jgl6.
+```
+
+Their projected low-energy/inverse-frequency optical sum and finite-temperature geometry/QFI discussion are methodologically close enough that omission is avoidable referee risk. They do not state Eq. (29): the target quantity, kernel, many-body scope, and per-shell state-count construction differ.
+
+Candidate patch:
+
+`typeset/rev11_literature_completeness_candidate.patch`
 
 ## Rev11 production identity
 
@@ -123,4 +146,4 @@ HISTORICAL PRIORITY: NOT ESTABLISHED
 
 ## Current action
 
-Treat Rev11 as the controlling submission candidate. A final adversarial regression check is reasonable, but stop defensive rewriting unless it exposes a concrete mathematical defect, numerical inconsistency, direct prior-art collision, or a specific journal-facing requirement. The latest rereview's remaining risk is ordinary publication significance/editorial judgment rather than an elementary theorem defect.
+Reconstruct exact Rev11 TeX, apply the literature-completeness candidate patch, compile and run the same QA, then record the amended TeX/PDF hashes and bibliography count. If that passes, stop defensive rewriting absent a new concrete mathematical defect, numerical inconsistency, direct prior-art collision, or specific journal requirement.
