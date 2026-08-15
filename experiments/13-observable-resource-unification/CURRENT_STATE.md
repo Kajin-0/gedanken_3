@@ -1,43 +1,42 @@
-# Current State — Experiment 13: Spectral Geometry / Observable-Resource Unification
+# Current State — Experiment 13: Stage-Specific Spectral Geometry of Photodetection
 
 **Date:** 2026-08-15  
 **Scope:** analytical/theoretical only  
 **Target:** Physical Review Applied — Regular Article  
-**Status:** **FLAGSHIP REV. 4 SCIENTIFICALLY FROZEN / TITLE-COMPLETE PRODUCTION PDF QA-PASSED / HUMAN SUBMISSION INPUTS REQUIRED**
+**Status:** **REV. 5 CONTROLS / PRODUCTION QA PASS / RENDERED HOSTILE REVIEW PASS / HUMAN SUBMISSION INPUTS REMAIN**
 
 ## Read first
 
-1. `00_ACTIVE_FRONTIER_REV4_FLAGSHIP_2026-08-15.md`
-2. `REV4_PRAPPLIED_TITLE_COMPLETE_PRODUCTION_QA_2026-08-15.md`
-3. `PAPER_REV4_RENDERED_HOSTILE_REVIEW_2026-08-15.md`
-4. `PRAPPLIED_SUBMISSION_PREFLIGHT_2026-08-15.md`
-5. `PAPER_DRAFT_REV4_CLAIM_REFERENCE_CLEAN_2026-08-15.md`
-6. `PAPER_REV4_REFERENCE_QA_2026-08-15.md`
-7. `PAPER_REV4_FINAL_HOSTILE_CLAIM_REFERENCE_REVIEW_2026-08-15.md`
-8. `HGCDTE_STABLE_RANK_PRODUCTION_QA_2026-08-15.md`
-9. `HGCDTE_PT_SYMMETRY_STABLE_RANK_EXPLANATION_2026-08-15.md`
-10. `CHANNEL_SPECIFIC_OBSERVABILITY_GEOMETRY_2026-08-15.md`
+1. `00_ACTIVE_FRONTIER_REV5_FLAGSHIP_2026-08-15.md`
+2. `PAPER_REV5_RENDERED_HOSTILE_REVIEW_2026-08-15.md`
+3. `REV5_PRAPPLIED_PRODUCTION_QA_2026-08-15.md`
+4. `PAPER_REV5_ADVERSARIAL_RESPONSE_2026-08-15.md`
+5. `PRAPPLIED_SUBMISSION_PREFLIGHT_2026-08-15.md`
+6. `PAPER_DRAFT_REV4_CLAIM_REFERENCE_CLEAN_2026-08-15.md` — historical scientific baseline
+7. `HGCDTE_STABLE_RANK_PRODUCTION_QA_2026-08-15.md`
+8. `HGCDTE_PT_SYMMETRY_STABLE_RANK_EXPLANATION_2026-08-15.md`
+9. `CHANNEL_SPECIFIC_OBSERVABILITY_GEOMETRY_2026-08-15.md`
 
-## Controlling title-complete PDF
+Rev. 4 remains preserved as the reproducible pre-adversarial-review checkpoint. Rev. 5 supersedes it for submission.
+
+## Controlling Rev. 5 production identity
 
 ```text
-Actions run:            31901326001
-head commit:            7b2f8fe1a9e92ba8ea778828c2682c5a374a1abb
-artifact ID:            9251170031
-artifact digest:        11d4bf5bd6262d6a19c6b1f0bdbdb7a7d16644981b9bd597c199e7a23ddbf32e
-PDF SHA-256:            d2e65ab9b0953e1f987c8c2c2b47e4d8558ac72989b84325590b3a0a67086ee8
-built TeX SHA-256:      c1459c18e4bf5d20f09a9a956c23b565c76bd0a913fe9636adc2ca7fe1e2b8f9
-BibTeX SHA-256:         029d1029c487c99e277a24dc95ad536d10a41742992c89916a1991d423f39d3d
-pages:                  7
-undefined refs/cites:   none
-overfull boxes:         none
-reference titles:       complete for current bibliography
-visual QA:              PASS
+GitHub Actions run:   31903046137
+head commit:          8ac77c06accd02e56c43910b903ff53bb07a72dd
+artifact ID:          9251615353
+artifact digest:      64046cfd6972a9fbc810ab4a67ef61b27b9cd16249b7c666ecd75fabd5c5f843
+PDF SHA-256:          ce0fd199bb43652edf598ce7fa516e093e41fdc7a664d336092b8161ea7fa1c9
+TeX SHA-256:          9f45c235d3e2852fe04bf77a2adf519213e7af76ef8c9a7e26194a2cb10c72e7
+figure SHA-256:       19c7b0f83ddadc9ff7000144ea09e257bb9d130fd898a519f88707bf54cbcf6d
+pages:                8
+undefined refs/cites: none
+overfull boxes:       none
+all-page visual QA:   PASS
+rendered hostile review: PASS
 ```
 
-Pages 1–6 are rendered byte-for-byte identically to the hostile-reviewed pre-title-completion package. Only bibliography page 7 changed; it separately passed visual QA.
-
-## Scientific center
+## Central theorem
 
 ```math
 \boxed{
@@ -51,87 +50,120 @@ Pages 1–6 are rendered byte-for-byte identically to the hostile-reviewed pre-t
 }
 ```
 
-The theorem uses selected direct cross-`mu` conductivity and the basis-invariant exact-shell capacity. It bounds equilibrium one-body endpoint population, not universal dark current, generation rate, finite-bandwidth noise, or `D*`.
+This theorem is unchanged by Rev. 5. It requires selected direct cross-chemical-potential conductivity and an independently justified exact-shell velocity capacity.
 
-Unified connector:
+## Rev. 5 conceptual thesis
 
-```math
-\boxed{\mathcal S_{X|D}\tau_{X|D}=1.}
-```
+The paper no longer treats a reciprocal definition as the unifying theorem.
 
-Shell-resolved thermal decomposition:
-
-```math
-\tau_{cap}^{act}=\sum_aw_a^{act}\frac{c_a}{\mathcal S_a^{act}},
-```
-
-```math
-\tau_{obs}^{act}=\eta_F\sum_aw_a^{act}\frac{c_a}{\mathcal S_a^{act}}.
-```
-
-## Production HgCdTe result
+The controlling principle is stage-specific inference:
 
 ```text
-mu                            = 0.1354615106 eV
-n_ref                         = 1.005140525e17 cm^-3
-R_B                           = 3.987420232e28 cm^-3 (m/s)^2
-L_B                           = 1.223486457e28 cm^-3 (m/s)^2
-n_B^act                       = 6.724111444e16 cm^-3
-v_B^cap                       = 1.01764e6 m/s
-eta_F                         = 0.306836598
-tau_cap^act                   = 0.572622972
-tau_obs^act                   = 0.175701685
-S_th,B^act                    ~= 1.746
-bound/reference               ~= 0.118
-bound/active                  ~= 0.176
+H_task -> H_exc -> H_int -> H_term
+```
+
+Capacity, selectivity, internal correlation, and terminal observability are properties of the relevant physical stage map. They cannot be transferred between stages without including the intervening dynamics.
+
+The fixed-map identity
+
+```math
+\mathcal S_{X|D}\tau_{X|D}=1
+```
+
+is explicitly described as definitional bookkeeping.
+
+## Full population-tightness hierarchy
+
+Rev. 5 promotes
+
+```math
+\boxed{
+\frac{n_{bound}}{n_{ref}}
+=
+\frac{n_{\mathcal B}^{act}}{n_{ref}}
+\eta_F
+\sum_a w_a^{act}\frac{c_a}{\mathcal S_a^{act}}.
+}
+```
+
+The hierarchy identifies:
+
+```text
+selected-support coverage;
+Fermi/Kubo asymmetry;
+shell-to-global capacity mismatch;
+within-shell response selectivity.
+```
+
+## Production HgCdTe closure
+
+```text
+n_ref                    = 1.0051405e17 cm^-3
+n_B^act                  = 6.7241114e16 cm^-3
+n_B^act / n_ref          = 0.66897
+eta_F                    = 0.30684
+tau_cap^act              = 0.57262
+tau_obs^act              = 0.17570
+v_B^cap                  = 1.01764e6 m/s
+bound/reference          ~= 0.1175
 ```
 
 ```math
-0.306836598\times0.572622972=0.175701685.
+0.66897\times0.30684\times0.57262=0.1175398\ldots
 ```
 
-`S_a^act=1` to about `4e-14` only within the BIA-neglecting second-order Kane validation model. Do not universalize the exact shell isotropy to real zincblende HgCdTe without a BIA-inclusive calculation.
+The exact within-shell isotropy in this validation is restricted to thermally relevant selected parent shells that are single fixed-k `PT` Kramers doublets in the BIA-neglecting second-order Kane model. Generic multidoublet `PT` blocks need only have paired singular values. Real zincblende HgCdTe contains BIA.
 
-## Recycling / observability result
+## Internal occupancy / recycling
 
-Under independent conservative one-final-sink Poisson lineages, ideal final-sink counting can have exactly zero interterminal cross-spectrum despite internal recycling and mean crosstalk. Finite-transit Shockley-Ramo current can lift the endpoint source-channel null at finite frequency even though an internally created/recombined pair has zero integrated induced charge. A nonzero ensemble cross-spectrum is allowed, not guaranteed.
+The two-pixel cross-spectrum is now explicitly tied to an immigration-death-exchange Markov process with two-sided angular-frequency PSD convention.
+
+Under independent Poisson primaries, independent noninteracting lineages, one final sink per lineage, final-sink-only readout, no branching/gain, and no shared electronics, exclusive marking gives independent final-sink streams and zero ideal endpoint cross-spectrum.
+
+Finite-transit Shockley-Ramo motion can restore finite-frequency source-channel support even when the internally created/recombined segment has zero integrated induced charge. A nonzero ensemble cross-spectrum is allowed, not guaranteed.
+
+## Hostile-review disposition
+
+```text
+central optical theorem:             PASS
+stable-rank terminology:             FIXED
+full tightness hierarchy:            PASS
+HgCdTe numerical closure:            PASS
+PT single-parent qualification:      FIXED
+Markov noise model:                  FIXED
+channel-null proof:                  PASS
+final-sink Poisson proof:            PASS
+Shockley-Ramo result:                PASS
+stage-specific unification:          PASS WITH MODERATE EDITORIAL RISK
+rendered PDF:                        PASS
+new scientific revision required:    NO
+```
 
 ## Strategy
 
 ```text
-Experiment 13 flagship:       primary submission path
-Experiment 01 manuscript:     frozen fallback
-Experiment 09 manuscript:     frozen fallback
-Experiment 12 manuscript:     frozen fallback
-new theory by default:        stop
+Experiment 13 Rev. 5:     primary flagship submission path
+Experiment 13 Rev. 4:     preserved historical checkpoint
+Experiment 01 manuscript: frozen fallback
+Experiment 09 manuscript: frozen fallback
+Experiment 12 manuscript: frozen fallback
+new theory by default:    stop
 ```
 
-No direct prior-art collision was found in completed targeted audits. Historical priority remains unproven; avoid priority language.
+## Remaining inputs
 
-## APS submission preflight
+No scientific revision is currently required.
 
-Current Physical Review Applied requirements were checked. The repository now contains:
+Before submission, supply/resolve:
 
 ```text
-100-word suitability justification
-cover-letter draft
-data-availability/archive decision guidance
-source-package checklist
-reference-title completion
+author name;
+affiliation;
+corresponding email;
+acknowledgments/funding;
+submission-history declaration;
+final Data Availability / archival citation decision;
+optional ORCID and referee recommendations/exclusions.
 ```
 
-No standalone Supplemental Material is required by default.
-
-## Remaining human/submission inputs
-
-```text
-author name
-institutional affiliation
-corresponding email
-acknowledgments / funding statement
-submission-history / joint-submission declaration
-final Data Availability Statement / archival citation decision
-optional ORCID and referee recommendations/exclusions
-```
-
-When these are supplied, make metadata/submission-only changes, rebuild, rehash, and visually inspect every page. Reopen science only for a concrete scientific defect, direct prior-art collision, or explicit editor/referee requirement.
+After metadata insertion, rebuild through CI, record new hashes, and inspect all pages again. Reopen science only for a concrete defect, direct prior-art collision, or explicit editor/referee request.
