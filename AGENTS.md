@@ -1,7 +1,7 @@
 # AGENTS.md — Research Objective, Recovery, and Scientific Integrity Protocol
 
 **Repository:** `Kajin-0/gedanken_3`  
-**Most recently active branch:** `experiment-11-weighting-capacitance-duality`
+**Active branch:** `experiment-12-oscillator-strength-state-count-bound`
 
 Before material writes, fetch live targets and exact blob SHAs. Preserve failed, corrected, conditional, and negative paths. Do not use novelty or priority language without a dedicated prior-art audit.
 
@@ -34,138 +34,178 @@ Do not keep adding phenomenology to rescue a weak novelty case.
 
 ---
 
-# Experiment 10 — FINAL DISPOSITION
+# Recovery order — Experiment 12
 
-Branch:
+Read in this order:
 
-```text
-experiment-10-room-temperature-lwir-admissibility
+1. `experiments/12-oscillator-strength-state-count-bound/CURRENT_STATE.md`
+2. `experiments/12-oscillator-strength-state-count-bound/THERMAL_OPTICAL_SUM_INEQUALITY_STEP_2026-08-14.md`
+3. `experiments/12-oscillator-strength-state-count-bound/DISPERSIVE_MULTIBAND_GENERALIZATION_STEP_2026-08-14.md`
+4. `experiments/12-oscillator-strength-state-count-bound/OSCILLATOR_STRENGTH_STATE_COUNT_THEOREM_STEP_2026-08-14.md`
+5. `experiments/12-oscillator-strength-state-count-bound/FOUNDING_GEDANKEN_2026-08-14.md`
+6. `experiments/12-oscillator-strength-state-count-bound/PROGRESS_LOG.md`
+7. candidate-audit files only as needed.
+
+---
+
+# Experiment 12 — controlling result
+
+For exact independent-particle eigenstates below and above a chemical potential, define thermal upper-state electron density `n_e`, lower-state hole density `n_h`, and direct interband optical conductivity `sigma_1^inter`.
+
+Assume a finite crossing-transition velocity-strength resource `v_*`:
+
+```math
+\sum_v|v_{cv}|^2\le v_*^2
+\quad\forall c,
 ```
 
-```text
-CLOSED BY DEFAULT AS A NOVELTY / MANUSCRIPT PATH.
+```math
+\sum_c|v_{cv}|^2\le v_*^2
+\quad\forall v.
 ```
 
-Read for recovery:
+Exact Fermi algebra gives the global thermal-optical spectral-weight inequality
 
-1. `experiments/10-room-temperature-lwir-admissibility/CURRENT_STATE.md`
-2. `experiments/10-room-temperature-lwir-admissibility/FINAL_PHOTONIC_AUDIT_AND_DISPOSITION_2026-08-14.md`
-3. `experiments/10-room-temperature-lwir-admissibility/THEOREM_CORE_2026-08-14.md`
+```math
+\boxed{
+n_e+n_h
+\ge
+\frac{2}{\pi e^2v_*^2}
+\int_0^\infty
+\frac{\hbar\omega\,\sigma_1^{inter}(\omega)}
+{e^{\hbar\omega/(2k_BT)}-1}
+d\omega.
+}
+```
+
+For an intrinsic neutral absorber,
+
+```math
+\boxed{
+n_{th}
+\ge
+\frac{1}{\pi e^2v_*^2}
+\int_0^\infty
+\frac{\hbar\omega\,\sigma_1^{inter}(\omega)}
+{e^{\hbar\omega/(2k_BT)}-1}
+d\omega.
+}
+```
+
+This is currently the strongest surviving theorem in the branch.
+
+The thermal kernel tends to `2 kBT` at low transition energy, so fixed low-energy intrinsic interband spectral weight cannot coexist with vanishing thermal quasiparticle population unless the velocity-strength resource also changes.
+
+## Nontrivial validations
+
+```text
+2-D neutral massless Dirac / graphene: bound/exact = 1/2
+3-D massless Dirac:                    bound/exact = 2/3
+3-D massive Dirac at 10 um / 300 K:    bound/exact = 0.794684
+```
+
+The finite-gap Dirac validation is important: the generalized theorem recovers about 79.5% of the exact thermal population without assuming the Dirac DOS in the derivation.
+
+Reproduce with:
+
+`experiments/12-oscillator-strength-state-count-bound/numerics/thermal_optical_sum_dirac_validation.py`
+
+## Corollaries
+
+Partial spectral weight below `E_Omega`:
+
+```math
+\boxed{
+n_e+n_h
+\ge
+\frac{2E_\Omega}{\pi e^2v_*^2}
+\frac{W(E_\Omega)}
+{e^{E_\Omega/(2k_BT)}-1}.
+}
+```
+
+The original two-flat-manifold theorem is the tight equality structure of this more general result.
+
+---
+
+# Scope boundary
+
+Current valid class:
+
+```text
+independent-quasiparticle direct interband charge absorbers.
+```
+
+The theorem survives arbitrary dispersive multiband state reuse and static single-particle disorder when exact eigenstates are used.
+
+It does **not** automatically cover:
+
+```text
+bound excitons;
+collective/superradiant many-body optical states;
+phonon-assisted transitions;
+interaction-generated lifetime broadening;
+arbitrary passive photonic path enhancement when translating intrinsic conductivity to external absorptance.
+```
+
+Bound excitons are a genuine free-carrier counterexample: strong neutral low-energy oscillator strength can lie below the free pair continuum and photocurrent then requires a separate dissociation process.
+
+Also do not infer dark current directly from thermal population without an explicit electrical-activity/collection assumption. Localized-state detectors show why that distinction matters.
+
+---
+
+# Novelty status
+
+Focused audits have checked Kubo-Greenwood, ordinary/generalized `f`-sums, restricted optical sums, quantum-geometric conductivity bounds, finite-temperature QFI response integrals, graphene finite-T optical sum rules, and the classic IR `alpha/G_th` material criterion.
+
+No direct collision with the exact Experiment-12 thermal kernel and carrier-population inequality has yet been found.
+
+```text
+NOVELTY NOT ESTABLISHED.
+NO MANUSCRIPT YET.
+```
+
+---
+
+# Closed previous branches
+
+## Experiment 10
+
+`experiment-10-room-temperature-lwir-admissibility`
+
+```text
+CLOSED BY DEFAULT AS NOVELTY / MANUSCRIPT PATH.
+```
 
 Retained conditional single-pass theorem:
 
 ```math
-\Sigma_c\ge C/[\min(V_{hop},v_{spec})]^2
+\Sigma_c\ge C/[\min(V_{hop},v_{spec})]^2.
 ```
 
-under active-pair optical dominance and exact normal-momentum spectator-assisted Auger closure. This is technically useful but not established as novel.
+## Experiment 11
 
----
-
-# Post-Experiment-10 premise screen — five rejections
-
-Read:
-
-`candidate-audits/POST_EXP10_THEORETICAL_SCREEN_2026-08-14.md`
-
-Rejected before Experiment 11:
+`experiment-11-weighting-capacitance-duality`
 
 ```text
-1. causal / nonminimum-phase detectivity;
-2. spatially correlated noise / D* area scaling;
-3. non-normal detector transient amplification;
-4. wide-gap LWIR detection via intersubband transition;
-5. equal D* but different non-Gaussian false-alarm tails.
+CLOSED BY DEFAULT AS NOVELTY / MANUSCRIPT PATH.
 ```
 
-Each reduced to established generic theory or a known detector architecture.
+Retained prompt-slew identity/bound reduces to Maxwell relaxation / reciprocal sensitivity theory.
 
----
-
-# Experiment 11 — FINAL DISPOSITION
-
-Branch:
-
-```text
-experiment-11-weighting-capacitance-duality
-```
-
-Read:
-
-1. `experiments/11-weighting-capacitance-duality/CURRENT_STATE.md`
-2. `experiments/11-weighting-capacitance-duality/WEIGHTING_CAPACITANCE_DUALITY_STEP_2026-08-14.md`
-3. `experiments/11-weighting-capacitance-duality/PROGRESS_LOG.md`
-
-Premise: can electrode geometry increase prompt Shockley-Ramo signal independently of detector capacitance?
-
-Exact retained result for homogeneous two-terminal drift:
-
-```math
-\boxed{
-i_{pair}(\mathbf r,0^+)
-=e(\mu_e+\mu_h)V_b|\mathbf E_w(\mathbf r)|^2.
-}
-```
-
-Since
-
-```math
-C_{tot}=\int\epsilon|\mathbf E_w|^2dV,
-```
-
-for generation density `p(r)<=p_max`,
-
-```math
-\boxed{
-\frac{\langle i_{pair}(0^+)\rangle}{C_{tot}}
-\le
-\frac{e(\mu_e+\mu_h)V_b}{\epsilon}p_{max}.
-}
-```
-
-Uniform generation in active volume `V` gives
-
-```math
-\boxed{
-\frac{\langle i_{pair}(0^+)\rangle}{C_{tot}}
-\le
-\frac{e(\mu_e+\mu_h)V_b}{\epsilon V}.
-}
-```
-
-Disposition:
-
-```text
-CLOSED BY DEFAULT AS A NOVELTY / MANUSCRIPT PATH.
-```
-
-Reason: the uniform result is the photocarrier form of established homogeneous `RC=epsilon/sigma` Maxwell relaxation; the nonuniform extension is established reciprocal/lead-field conductivity-sensitivity theory. Fast-detector literature already treats weighting-field shape and capacitance as coupled geometry resources.
-
-Do not add generic amplifier noise or timing models to rescue Experiment 11.
+Candidate-audit files on the Experiment-11 lineage record rejected premises and should be consulted before reopening old ideas.
 
 ---
 
 # ACTIVE NEXT ACTION
 
-Resume screening new purely theoretical photodetector Gedanken premises.
+Attack Experiment 12 rather than drafting it.
 
-Reject immediately if the first nontrivial result is merely an application of:
+Priority order:
 
 ```text
-detailed balance / reciprocity / FDT;
-Landauer/reset thermodynamics;
-standard information or detection theory;
-minimum-phase / matched-filter / generic LTI theory;
-standard quantum measurement limits;
-critical coupling / delay-bandwidth / Bode-Fano / Rozanov;
-generic non-normal dynamics;
-known Auger suppression / band engineering;
-ordinary shot-noise / Fano-factor arguments;
-QWIP/QCD intersubband detection;
-Maxwell dielectric relaxation / ordinary RC geometry cancellation;
-lead-field / impedance-sensitivity reciprocity;
-Experiment-08 zero-gap Kane statistics;
-Experiment-09 collective/coherence line unless a genuinely new invariant appears.
+1. localized-state / electrical-activity loophole;
+2. carrier-number fluctuation/noise corollary without arbitrary lifetime assumptions;
+3. dedicated novelty audit centered on the exact thermal kernel;
+4. only if those survive, theorem compression and manuscript viability review.
 ```
-
-Prefer premises whose first consequence arises from specifically photodetector physics and cannot be factored into a generic theorem plus a detector example.
