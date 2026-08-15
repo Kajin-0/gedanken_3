@@ -8,9 +8,9 @@ All research is analytical/theoretical only. Preserve failed, corrected, conditi
 
 ## Continuity discipline
 
-Important work must not exist only in chat or in untracked local artifacts. As soon as a reasoning milestone, manuscript revision, QA result, numerical result, or change of scientific disposition becomes important enough to affect later work, record it on the active repository branch and commit it. Keep recovery documentation synchronized with the controlling manuscript state. Preserve prior revisions and audit files rather than silently replacing the historical record.
+Important work must not exist only in chat or untracked local artifacts. Commit significant reasoning milestones, manuscript revisions, numerical audits, QA results, and changes of scientific disposition on the active branch. Keep this file and the experiment `CURRENT_STATE.md` synchronized with the controlling manuscript state. Preserve prior revisions and audits rather than silently replacing them.
 
-# ACTIVE — Experiment 12 / Rev9 exposition-revised manuscript
+# ACTIVE — Experiment 12 / Rev10 referee-repaired PRB manuscript
 
 Branch:
 
@@ -21,17 +21,17 @@ experiment-12-oscillator-strength-state-count-bound
 ## Recovery order
 
 1. `experiments/12-oscillator-strength-state-count-bound/CURRENT_STATE.md`
-2. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV9_EXPOSITION_REVISED_2026-08-15.md`
-3. `experiments/12-oscillator-strength-state-count-bound/REV9_EXPOSITION_REVISION_QA_2026-08-15.md`
-4. `experiments/12-oscillator-strength-state-count-bound/REV9_EXPOSITION_REVISION_SCOPE_2026-08-15.md`
-5. `experiments/12-oscillator-strength-state-count-bound/INDEPENDENT_NOVELTY_SIGNIFICANCE_ASSESSMENT_2026-08-15.md`
-6. `experiments/12-oscillator-strength-state-count-bound/REV8_EXTERNAL_REREVIEW_RESPONSE_2026-08-15.md`
-7. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV9_CHANGESET_2026-08-15.md`
-8. `experiments/12-oscillator-strength-state-count-bound/PRB_REV9_RENDER_QA_2026-08-15.md`
+2. `experiments/12-oscillator-strength-state-count-bound/PRB_REV10_REFEREE_REPAIR_QA_2026-08-15.md`
+3. `experiments/12-oscillator-strength-state-count-bound/REV9_SUPREMUM_REREVIEW_RESOLUTION_2026-08-15.md`
+4. `experiments/12-oscillator-strength-state-count-bound/numerics/supremum_active_support_audit.py`
+5. `experiments/12-oscillator-strength-state-count-bound/typeset/rev9_exposition_to_rev10_referee_repaired.patch`
+6. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV9_EXPOSITION_REVISED_2026-08-15.md`
+7. `experiments/12-oscillator-strength-state-count-bound/REV9_EXPOSITION_REVISION_QA_2026-08-15.md`
+8. `experiments/12-oscillator-strength-state-count-bound/INDEPENDENT_NOVELTY_SIGNIFICANCE_ASSESSMENT_2026-08-15.md`
 9. `experiments/12-oscillator-strength-state-count-bound/numerics/kane_8band_tightness.py`
 10. `experiments/12-oscillator-strength-state-count-bound/HGCDTE_SECOND_ORDER_8BAND_TIGHTNESS_2026-08-15.md`
 
-## Controlling result
+## Controlling theorem
 
 ```math
 n_e+n_h
@@ -43,51 +43,60 @@ n_e+n_h
 {e^{\hbar\omega/(2k_BT)}-1}\,d\omega.
 ```
 
-The theorem is unchanged.
+Eq. (29) and its proof are unchanged in Rev10.
 
-The one-species intrinsic corollary `n_e=n_h=n_th` is valid only when `mu` lies in a gap and the cross-mu partition coincides with valence/conduction manifolds. The realistic HgCdTe test has `mu` 11.477 meV above the nominal Gamma6 edge, so it uses the general hierarchy.
+## Rev10 repair that must not be lost
 
-## Realistic HgCdTe result
+A Rev9 adversarial rereview correctly found a formal mismatch: Eqs. (21)–(22) use an ordinary finite-system shell supremum, while the HgCdTe Eq. (49) had been written with `ess sup` in k.
 
-Second-order eight-band bounded-domain model at 300 K / 10 um:
+Rev10 repairs Eq. (49) to the ordinary supremum over the bounded k domain. Do **not** revert to `ess sup` unless a separate density theorem is actually proved.
 
-```text
-cross-mu reference population = 1.005141e17 cm^-3
-broad-window v_B^cap          = 1.015611e6 m/s
-population lower bound        = 1.186163e16 cm^-3
-bound/reference               = 0.118010
-selected k max                = 0.583 nm^-1
-```
+The rereview's proposed isolated-Gamma correction to about 11.0% is rejected for the actual numerical state: `mu` lies 11.477 meV above the nominal Gamma6 edge, so Gamma6 and Gamma8 are all below `mu` at k=0. There is no selected cross-mu Gamma8-to-Gamma6 block at Gamma.
 
-The numerical capacity is the full projected-block SVD norm required by the theorem. Largest pairwise matrix element is only `0.868123e6 m/s`; using it would overstate the bound by 36.9%.
-
-## Original Rev9 production
+Continuous ordinary-supremum audit:
 
 ```text
-Rev9 TeX SHA-256 da4d929d77d817e48c6661d61ffcdcaac82a8503b9594a8dafcca27e838c0f7b
-Rev9 PDF SHA-256 849e0653b6007c35a92967e812ab584ede70914714c2315bf849839701232e0b
-9 pages / US letter / compile clean / visual QA pass.
+v_B^cap ~= 1.01764e6 m/s
+maximum begins near |k| ~= 0.05535 nm^-1
 ```
 
-The exact Rev9 PDF was recovered from the user Library during the exposition pass. The original Rev9 TeX is still not tracked in the repository.
+Broad HgCdTe result:
 
-## Exposition revision
+```text
+n_ref                      = 1.005141e17 cm^-3
+precise bound/reference    ~= 0.1175
+headline rounded value     = 0.118 / 11.8%
+lower bound                ~= 1.18e16 cm^-3
+n_B^act/n_ref              ~= 0.669
+n_bound/n_B^act            ~= 0.176
+pairwise ordinary sup      ~= 0.87165e6 m/s
+pairwise substitution bias ~= +36.3%
+```
 
-`MANUSCRIPT_REV9_EXPOSITION_REVISED_2026-08-15.md` is now the controlling prose draft. It was revised directly against the exact Rev9 PDF and preserves equations `(1)-(50)`, `(A1)`, `(B1)`, Tables I-III, all 18 references, all scope limitations, and all Rev9-specific mathematical qualifications.
+Eq. (48) now uses the energy image `E_B={hbar omega: omega in B}`. Production quadrature is explicitly `160 x 10 x 16`; `200 x 12 x 20` is an additional support check.
 
-`REV9_EXPOSITION_REVISION_QA_2026-08-15.md` records the scientific-invariance pass.
+## Rev10 production identity
 
-The exposition revision adds physical glosses before new formal objects, explicit logical-purpose transitions, plain-language restatements after major results, sentence decongestion, and an early/running equal-mass parabolic equality intuition anchor. It introduces no new science.
+Exact Rev10 TeX is reconstructed from the archived Rev9 exposition source plus
+
+`typeset/rev9_exposition_to_rev10_referee_repaired.patch`.
+
+```text
+Rev10 TeX SHA-256 454a2ff8aba637d2e4c66ef5747899e85894996a020c633296cf950044c79b3d
+Rev10 PDF SHA-256 31ec4dd408552318f21de3e6bc7366e1b87badd7721a21575250c73adbb59a54
+13 pages / US letter / REVTeX PRB / compile clean / all-page visual QA pass
+```
 
 ## Scope / novelty
 
-No universal dark-current, D*, generation-rate, or finite-bandwidth-noise claim. Excitons, indirect transitions, interacting many-body spectral functions, and unconstrained photonic enhancement remain outside scope.
+No universal dark-current, `D*`, generation-rate, or finite-bandwidth-noise theorem. Excitons, indirect transitions, interacting many-body spectral functions, and unconstrained photonic enhancement remain outside scope.
 
 ```text
 DIRECT PRIOR-ART COLLISION: NOT FOUND IN TARGETED SEARCH
-NOVELTY: PLAUSIBLE / HISTORICAL PRIORITY NOT ESTABLISHED
+NOVELTY: PLAUSIBLE
+HISTORICAL PRIORITY: NOT ESTABLISHED
 ```
 
 ## Current action
 
-Perform a reader/referee-style clarity reread of the exposition-revised manuscript. Check for redundancy, over-explanation, accidental ambiguity, or any sentence that could be read as scientifically stronger than Rev9. Do not add theory by default. If the clarity pass succeeds, typeset the revised prose into a new PRB production source and run a fresh render/QA cycle.
+Treat Rev10 as the controlling submission candidate. Next perform a focused adversarial rereview of the repaired ordinary-supremum implementation, active-support decomposition, Eq. (48) unit-domain correction, and possible regression introduced by the surgical edits. Do not reopen unrelated theory by default.
