@@ -3,25 +3,25 @@
 **Date:** 2026-08-15  
 **Branch:** `experiment-13-observable-resource-unification`  
 **Target:** Physical Review Applied — Regular Article  
-**Disposition:** **REPRODUCIBLE BUILD PASS / AUTOMATED QA PASS / ALL 8 PAGES VISUALLY INSPECTED / NO PRODUCTION BLOCKER IDENTIFIED**
+**Disposition:** **FINAL REV6 REPRODUCIBLE BUILD PASS / AUTOMATED QA PASS / ALL 8 PAGES VISUALLY INSPECTED / NO PRODUCTION BLOCKER IDENTIFIED**
 
 ## 1. Controlling production identity
 
 ```text
-GitHub Actions run ID: 31905264642
-head commit:           18920f64b49212f98173276ddad4e8be681fd667
-artifact ID:           9252170376
-artifact digest:       sha256:8b5645325d82d9ea6a302dd9ed33954f92f8f6f59281b53744db4843708c38f6
+GitHub Actions run ID: 31905440563
+head commit:           1fcd627f194223dbf277cbf9d51b87501b1fcdb6
+artifact ID:           9252213152
+artifact digest:       sha256:38709b3e6f5e6b236812a70b78880c195a4e86d718a62e9b5d1e2bb63e6f7a7b
 ```
 
 Production hashes:
 
 ```text
 rev6_prapplied.tex
-f80bcd5204d8fd014b06e85a3c76f5c3227eff46e002291942bd690e01b8d71a
+2a4bed7a70098e1e641a59d64d16adfe549fc35d775868e2a6b4ec7b03fa3d74
 
 rev6_prapplied.pdf
-d9387b64d2ce4ba2b1a7383fa2092a5afe4e34af651df1e2450f9bdee1450fd7
+fa3c40b73ae8c75b8317e5522ebf50fb5fbf77c099aeeef52cf378a4febcf2e6
 
 rev4_unified.bib
 029d1029c487c99e277a24dc95ad536d10a41742992c89916a1991d423f39d3d
@@ -30,7 +30,7 @@ rev6_figures.tex
 07ee725da6522c7060c27644852a78977468ba02dd85ba0497e66f820f67b816
 
 build_rev6.py
-2caa9b9b4c76567af08ef161fd25699908b2709637a65efa715a5a419d22edd5
+fafa390867f6cfe665f2b79647d58837c525c155f6c6f65d277b27d2d9243859
 ```
 
 ## 2. Reproducible build chain
@@ -53,6 +53,7 @@ CI performs:
 thermodynamic uniform-capacity condition;
 tau_bound^act terminology;
 Fermi-statistical factor wording;
+explicit volume-independent HgCdTe capacity justification;
 rank threshold 1e-6 m/s;
 160-node production radial quadrature;
 200 x 12 x 20 support check;
@@ -78,14 +79,14 @@ Remaining nonblocking REVTeX warnings:
 
 ```text
 one nameref package warning;
-class-level stuck-float warnings near the HgCdTe/table/readout regions.
+class-level stuck-float warnings near the HgCdTe/table and discussion transition.
 ```
 
 Every expected float is visibly present and correctly placed in the controlling artifact.
 
 ## 4. All-page visual QA
 
-All eight 180-dpi CI renders were inspected directly.
+All eight 180-dpi CI renders from the controlling run were inspected directly.
 
 Checks passed:
 
@@ -109,6 +110,8 @@ The revised Fig. 2 visibly uses `Kubo map + Fermi bound` and labels the lower st
 The full hierarchy uses `Fermi factor` rather than `Fermi/Kubo`.
 
 The HgCdTe table and expanded reproducibility paragraph fit on page 5 without column overflow or increasing the manuscript beyond eight pages.
+
+The final HgCdTe methods paragraph also states why the bounded-domain second-order model satisfies the uniform thermodynamic-capacity condition: the finite-dimensional velocity matrix is bounded on the compact momentum domain, so every selected projected-block norm is bounded by a volume-independent microscopic operator norm.
 
 The recycling/Ramo section remains intact and legible.
 
@@ -155,7 +158,8 @@ OVERFULL/UNDERFULL BOXES:    NONE
 PAGE COUNT:                  8
 ALL-PAGE VISUAL QA:          PASS
 REV6 FIGURE SOURCE:          CONFIRMED
+HgCdTe THERMODYNAMIC LINK:   EXPLICIT
 PRODUCTION BLOCKER:          NONE IDENTIFIED
 ```
 
-Proceed to a focused scientific/editorial hostile review of Rev. 6 before promoting it to the repository-wide active frontier.
+This is the controlling Rev. 6 production identity. Earlier Rev. 6 runs are diagnostics only.
