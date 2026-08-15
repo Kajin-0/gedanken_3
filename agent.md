@@ -2,7 +2,7 @@
 
 **Date:** 2026-08-15  
 **Active branch:** `experiment-13-observable-resource-unification`  
-**Repository frontier:** **Experiment 13 Rev. 7 — Physical Review Applied flagship; final adversarial technical loop closed; 8-page production QA pass; human submission inputs remain**
+**Repository frontier:** **Experiment 13 Rev. 7 — Physical Review Applied flagship; final adversarial technical loop closed; 8-page production QA pass; Rev. 7 submission preflight complete; human inputs remain**
 
 ## Read first
 
@@ -10,8 +10,8 @@
 2. `experiments/13-observable-resource-unification/PAPER_REV7_RESPONSE_TO_REREVIEW_2026-08-15.md`
 3. `experiments/13-observable-resource-unification/REV7_PRAPPLIED_PRODUCTION_QA_2026-08-15.md`
 4. `experiments/13-observable-resource-unification/PAPER_REV6_FINAL_HOSTILE_REVIEW_2026-08-15.md`
-5. `experiments/13-observable-resource-unification/CURRENT_STATE.md`
-6. `experiments/13-observable-resource-unification/PRAPPLIED_SUBMISSION_PREFLIGHT_REV6_2026-08-15.md` — submission-layer guidance; update identifiers to Rev. 7 during metadata insertion
+5. `experiments/13-observable-resource-unification/PRAPPLIED_SUBMISSION_PREFLIGHT_REV7_2026-08-15.md`
+6. `experiments/13-observable-resource-unification/CURRENT_STATE.md`
 
 Rev. 6 and earlier are historical checkpoints. Rev. 7 controls.
 
@@ -31,7 +31,9 @@ overfull/underfull:   none
 all-page visual QA:   PASS
 ```
 
-## Central theorem
+## Scientific core
+
+Finite-system population theorem:
 
 ```math
 \boxed{
@@ -45,15 +47,13 @@ all-page visual QA:   PASS
 }
 ```
 
-This is exact at finite normalization volume.
-
-Macroscopic density interpretation requires
+Macroscopic condition:
 
 ```math
 \bar v_{\mathcal B}^{cap}=\limsup_{j\to\infty}v_{\mathcal B,V_j}^{cap}<\infty.
 ```
 
-Rev. 7 adds the precise nonconvergent fallback
+Rev. 7 nonconvergent fallback:
 
 ```math
 \liminf_{j\to\infty}n_{\mathcal B,V_j}^{act}
@@ -62,29 +62,19 @@ Rev. 7 adds the precise nonconvergent fallback
 {(\bar v_{\mathcal B}^{cap})^2}.
 ```
 
-If ordinary thermodynamic limits of the relevant intensive quantities exist, the simpler density theorem follows.
-
-## Full tightness hierarchy
+Full hierarchy:
 
 ```math
-\boxed{
 \frac{n_{bound}}{n_{ref}}
 =
 \frac{n_{\mathcal B}^{act}}{n_{ref}}
 \eta_F
 \sum_a w_a^{act}\frac{c_a}{\mathcal S_a^{act}}.
-}
 ```
 
-Important Rev. 7 qualification:
+Rev. 7 explicitly states that `n_B^act/n_ref` is reference-domain dependent. `eta_F` is Fermi-statistical; Kubo-Greenwood is exact bookkeeping. Optical bound tightness is `tau_bound^act`; `observability` is terminal/readout terminology.
 
-```text
-support coverage = n_B^act / n_ref is reference-domain dependent.
-```
-
-`eta_F` is the Fermi-statistical factor. Kubo-Greenwood is exact bookkeeping. `tau_bound^act` is optical bound tightness; reserve `observability` for the terminal map.
-
-## HgCdTe broad-window closure
+## HgCdTe closure
 
 ```text
 support fraction       = 0.66897
@@ -96,11 +86,10 @@ v_B^cap                = 1.01764e6 m/s
 production quadrature  = 160 x 10 x 16
 support check          = 200 x 12 x 20
 rank threshold         = 1e-6 m/s
-rank audit             = 1e-9 through 1e4 m/s, stable to printed precision
 carrier-cutoff check   = 1.5 -> 2.0 nm^-1 changes n_ref by <1%
 ```
 
-Abstract now says `numerically converged second-order eight-band HgCdTe calculation`; do not revert to `production-resolution`.
+Use `numerically converged second-order eight-band HgCdTe calculation`, not `production-resolution`. Explicit BIA remains omitted; do not generalize the exact single-parent-doublet isotropy beyond the stated validation.
 
 ## Publication architecture — mandatory
 
@@ -115,19 +104,19 @@ concurrent overlapping submission: DO NOT DO
 Experiment-12 hold:
 `experiments/12-oscillator-strength-state-count-bound/00_SUBMISSION_HOLD_EXPERIMENT13_SUPERSESSION_2026-08-15.md`
 
-If this supersession policy changes, publication overlap must be re-audited before any submission.
+If this supersession policy changes, re-audit publication overlap before submission.
 
 ## Stop rule
 
 Do not create Rev. 8 or reopen theory by default.
 
-The final Rev. 6 re-review found no new theorem, normalization, degeneracy, HgCdTe, recycling, Poisson, or Shockley-Ramo defect. Rev. 7 closed its three remaining bounded technical suggestions.
+The final adversarial re-review found no theorem, normalization, degeneracy, HgCdTe, recycling, Poisson, or Shockley-Ramo defect. Rev. 7 closed its remaining bounded technical suggestions.
 
-A BIA-inclusive HgCdTe stress test is optional scientific follow-up, not a pre-submission requirement under the current claim set.
+A BIA-inclusive HgCdTe stress test is optional follow-up, not a pre-submission requirement.
 
 ## Remaining work
 
-Human/submission inputs:
+Human-owned submission fields only:
 
 ```text
 author name;
@@ -140,4 +129,4 @@ final Data Availability / persistent-archive decision;
 optional ORCID/referee recommendations/exclusions.
 ```
 
-After inserting those human-owned fields, update the submission preflight production identity to Rev. 7, rebuild through Rev. 7 CI, record final hashes, and visually inspect every page before submission.
+After insertion, rebuild through Rev. 7 CI, record final hashes, visually inspect every page, and verify that submitted source reproduces the submitted PDF.
