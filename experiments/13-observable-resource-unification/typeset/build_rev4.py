@@ -69,10 +69,9 @@ for label, macro in replacements.items():
     if count != 1:
         raise RuntimeError(f"expected one placeholder for {label}, replaced {count}")
 
-# Preserve the exact theorem while breaking the long inequality at its natural
-# logical boundary so it fits a standard APS column without widetext grid rules.
+# Anchor on the unique theorem label rather than equation whitespace/content.
 main_eq = re.compile(
-    r"\\begin\{equation\}\s*\\boxed\{\s*n_e\+n_h\s*\\ge\s*n_\{e,\\cB\}\^\{\\rm act\}\+n_\{h,\\cB\}\^\{\\rm act\}\s*\\ge\s*\\frac\{2\}\{\\pi e\^2\(v_\{\\cB\}\^\{\\rm cap\}\)\^2\}\s*\\int_\{\\cB\}\s*\\frac\{\\hbar\\omega\\,\\sigma_1\^\{\\rm cross\}\(\\omega\)\}\s*\{e\^\{\\hbar\\omega/\(2k_BT\)\}-1\}\s*d\\omega\.\s*\}\s*\\label\{eq:main-theorem\}\s*\\end\{equation\}",
+    r"\\begin\{equation\}.*?\\label\{eq:main-theorem\}.*?\\end\{equation\}",
     re.DOTALL,
 )
 main_replacement = r"""\begin{equation}
