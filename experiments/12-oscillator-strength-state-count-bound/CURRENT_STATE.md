@@ -4,19 +4,21 @@
 **Branch:** `experiment-12-oscillator-strength-state-count-bound`  
 **Scope:** analytical/theoretical only
 
-**Status:** **REV8 EXTREME REVIEW ADDRESSED / CENTRAL THEOREM SURVIVES / INTRINSIC-COROLLARY DOMAIN FIXED / PROJECTED-BLOCK SVD CAPACITY REPRODUCIBLE / HgCdTe MODEL BOUND-REFERENCE TEST RETAINED / PRB REV9 9-PAGE QA PASS / NOVELTY NOT ESTABLISHED**
+**Status:** **REV9 SCIENCE FROZEN / EXACT REV9 PDF RECOVERED / EXPOSITION-ONLY REVISION COMMITTED / SCIENTIFIC-INVARIANCE QA PASS / CENTRAL THEOREM UNCHANGED / NOVELTY PLAUSIBLE BUT PRIORITY NOT ESTABLISHED**
 
 ## Read first
 
-1. `REV8_EXTERNAL_REREVIEW_RESPONSE_2026-08-15.md`
-2. `MANUSCRIPT_REV9_CHANGESET_2026-08-15.md`
-3. `PRB_REV9_RENDER_QA_2026-08-15.md`
-4. `numerics/kane_8band_tightness.py`
-5. `HGCDTE_SECOND_ORDER_8BAND_TIGHTNESS_2026-08-15.md`
-6. `REV7_EXTERNAL_REREVIEW_RESPONSE_2026-08-15.md`
-7. `NOVELTY_AUDIT_2026-08-14.md`
+1. `MANUSCRIPT_REV9_EXPOSITION_REVISED_2026-08-15.md`
+2. `REV9_EXPOSITION_REVISION_QA_2026-08-15.md`
+3. `REV9_EXPOSITION_REVISION_SCOPE_2026-08-15.md`
+4. `INDEPENDENT_NOVELTY_SIGNIFICANCE_ASSESSMENT_2026-08-15.md`
+5. `REV8_EXTERNAL_REREVIEW_RESPONSE_2026-08-15.md`
+6. `MANUSCRIPT_REV9_CHANGESET_2026-08-15.md`
+7. `PRB_REV9_RENDER_QA_2026-08-15.md`
+8. `numerics/kane_8band_tightness.py`
+9. `HGCDTE_SECOND_ORDER_8BAND_TIGHTNESS_2026-08-15.md`
 
-Rev9 is the controlling local PRB manuscript/source state. Exact artifact hashes are in items 2–3.
+The exact QA-passed Rev9 PDF was recovered from the user Library during the exposition pass and used as the direct textual source. The original Rev9 TeX/PDF remain identified by their production hashes; the new tracked Markdown manuscript preserves the Rev9 equation sequence and scientific content while adding exposition scaffolding.
 
 ---
 
@@ -27,8 +29,7 @@ For direct transitions crossing the chemical potential in selected positive-freq
 ```math
 \boxed{
 n_e+n_h
-\ge
-n_{e,B}^{act}+n_{h,B}^{act}
+\ge n_{e,B}^{act}+n_{h,B}^{act}
 \ge
 \frac{2}{\pi e^2(v_B^{cap})^2}
 \int_B
@@ -75,6 +76,49 @@ n_th
 When `mu` lies inside a nominal band, use the general two-sided hierarchy instead.
 
 The realistic HgCdTe model is such a case: `mu-E_Gamma6 = +11.477 meV`.
+
+---
+
+# Exposition revision — 2026-08-15
+
+The requested pass changes presentation, not science. It was performed against the exact nine-page Rev9 PDF, not reconstructed from Rev6 alone.
+
+Added:
+
+```text
+plain-language physical gloss before important new formal objects;
+explicit logical-purpose sentences before derivation stages;
+plain-language restatements after major numbered results;
+shorter sentences where multiple conditions were previously stacked;
+early introduced equal-mass mirror-symmetric parabolic equality case as a running intuition anchor;
+additional boundary sentences stating what results do and do not imply.
+```
+
+Preserved and QA-checked:
+
+```text
+all main equations (1)-(50);
+Appendix equations (A1), (B1);
+Tables I-III;
+all 18 references;
+all thermodynamic and moving-window uniformity requirements;
+exact-mu endpoint caveat;
+rank-discontinuity caveat;
+intrinsic-gap restriction;
+projected-block SVD capacity;
+all HgCdTe convergence/branch diagnostics;
+all scope exclusions and nonclaims.
+```
+
+Controlling new files:
+
+```text
+MANUSCRIPT_REV9_EXPOSITION_REVISED_2026-08-15.md
+REV9_EXPOSITION_REVISION_QA_2026-08-15.md
+REV9_EXPOSITION_REVISION_SCOPE_2026-08-15.md
+```
+
+No new theorem, mechanism, detector-performance claim, or priority claim was introduced.
 
 ---
 
@@ -128,7 +172,7 @@ The capacity is nearly window-independent; tightening is driven mainly by accumu
 
 ---
 
-# Capacity implementation — now explicit and reproducible
+# Capacity implementation — explicit and reproducible
 
 The numerical calculation implements the theorem's **projected-block operator norm**, not a pairwise matrix-element maximum.
 
@@ -177,7 +221,7 @@ This is a microscopic upper bound, not an assertion that each selected window at
 
 ---
 
-# PRB Rev9 production
+# PRB Rev9 production record
 
 ```text
 experiment12_prb_rev9.tex
@@ -187,7 +231,7 @@ experiment12_prb_rev9.pdf
 SHA-256 849e0653b6007c35a92967e812ab584ede70914714c2315bf849839701232e0b
 ```
 
-QA:
+Original Rev9 QA:
 
 ```text
 9 pages / US letter
@@ -200,6 +244,8 @@ all 9 pages visually inspected
 no clipping / overlap / broken glyphs / float regression
 ```
 
+The exposition-revised manuscript has not yet been re-typeset into a new PRB PDF. Do not confuse the original Rev9 PDF hashes above with a rendered version of the new prose.
+
 ---
 
 # Scope / novelty
@@ -208,13 +254,14 @@ Valid class: independent-quasiparticle direct cross-mu charge absorbers.
 
 Do not infer universal dark current, thermal generation, D*, or finite-bandwidth noise. Excitons/collective states, indirect transitions, interacting many-body spectral functions, and unconstrained photonic enhancement remain outside scope.
 
+The latest independent novelty/significance assessment found no direct prior-art collision in a targeted search and judged the specific inverse inequality plausibly distinct, while explicitly withholding historical priority. The science should therefore remain frozen unless a genuinely new collision or defect appears.
+
 ```text
-DIRECT PRIOR-ART COLLISION: NOT FOUND
+DIRECT PRIOR-ART COLLISION: NOT FOUND IN TARGETED SEARCH
+NOVELTY: PLAUSIBLE / NOT ESTABLISHED AS HISTORICAL PRIORITY
 PRIORITY: NOT ESTABLISHED
-NOVELTY: NOT ESTABLISHED
-NOVELTY RISK: HIGH
 ```
 
 # ACTIVE NEXT ACTION
 
-Perform another extreme hostile review of **Rev9**. Do not add more theory by default. The theorem itself has survived repeated independent attacks; further revision should be driven only by a concrete referee-level defect or by submission metadata/production needs.
+Perform a reader/referee-style **clarity reread of the exposition-revised manuscript**, not another theory expansion. Check whether the added scaffolding improves comprehension without introducing redundancy, overstatement, or new ambiguity. If it passes, the next production step is to typeset the revised prose into the PRB source and run a fresh render/QA pass. No Rev10-level scientific revision is authorized absent a concrete mathematical defect, numerical failure, or direct prior-art collision.
