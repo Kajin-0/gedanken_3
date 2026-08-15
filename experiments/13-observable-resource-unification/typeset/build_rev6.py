@@ -14,6 +14,7 @@ out = Path("rev6_prapplied.tex")
 figout = Path("rev6_figures.tex")
 
 s = src.read_text()
+s = s.replace(r"\input{rev5_figures.tex}", r"\input{rev6_figures.tex}")
 
 # Stage-specific terminology: reserve observability for terminal-map null spaces.
 s = s.replace(r"\tau_{\rm obs}^{\rm act}", r"\tau_{\rm bound}^{\rm act}")
@@ -85,6 +86,7 @@ out.write_text(s)
 
 f = figsrc.read_text()
 f = f.replace("Fermi/Kubo strength step", "Fermi inequality strength step")
+f = f.replace("{Fermi + Kubo}", "{Kubo map + Fermi bound}")
 f = f.replace(r"{Fermi/Kubo\\$\eta_F$}", r"{Fermi factor\\$\eta_F$}")
 f = f.replace("Fermi/Kubo asymmetry", "Fermi-statistical asymmetry")
 f = f.replace("at (0,2.45) {Fermi/Kubo};", "at (0,2.45) {Fermi factor};")
@@ -98,6 +100,7 @@ for token in checks_absent:
     if token in s or token in f:
         raise RuntimeError(f"obsolete Rev5 token remains: {token}")
 checks_present = [
+    r"\input{rev6_figures.tex}",
     "eq:thermo-cap",
     r"\tau_{\rm bound}^{\rm act}",
     "Fermi-statistical factor",
@@ -109,5 +112,7 @@ checks_present = [
 for token in checks_present:
     if token not in s:
         raise RuntimeError(f"required Rev6 token missing: {token}")
+if "Kubo map + Fermi bound" not in f:
+    raise RuntimeError("Rev6 figure semantics were not applied")
 
 print(f"wrote {out} and {figout}")
