@@ -4,7 +4,7 @@ Read `AGENTS.md` first, then this file. Do not infer chronology from `main` alon
 
 ## Hard scope
 
-All active research is analytical/theoretical only. Preserve failed/corrected/conditional paths. Do not use novelty or priority language without dedicated prior-art audit.
+All active research is analytical/theoretical only. Preserve failed, corrected, conditional, and negative paths. Do not use novelty or priority language without a dedicated audit.
 
 # ACTIVE — Experiment 12
 
@@ -14,36 +14,41 @@ Branch:
 experiment-12-oscillator-strength-state-count-bound
 ```
 
-## Read in this order
+## Recovery order
 
 1. `experiments/12-oscillator-strength-state-count-bound/CURRENT_STATE.md`
-2. `experiments/12-oscillator-strength-state-count-bound/THERMAL_OPTICAL_SUM_INEQUALITY_STEP_2026-08-14.md`
-3. `experiments/12-oscillator-strength-state-count-bound/DISPERSIVE_MULTIBAND_GENERALIZATION_STEP_2026-08-14.md`
-4. `experiments/12-oscillator-strength-state-count-bound/OSCILLATOR_STRENGTH_STATE_COUNT_THEOREM_STEP_2026-08-14.md`
-5. `experiments/12-oscillator-strength-state-count-bound/FOUNDING_GEDANKEN_2026-08-14.md`
-6. `experiments/12-oscillator-strength-state-count-bound/PROGRESS_LOG.md`
+2. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV3_2026-08-14.md`
+3. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV3_NOTATION_ERRATUM_2026-08-14.md`
+4. `experiments/12-oscillator-strength-state-count-bound/THEOREM_CORE_2026-08-14.md`
+5. `experiments/12-oscillator-strength-state-count-bound/BASIS_INVARIANT_VELOCITY_RESOURCE_CORRECTION_2026-08-14.md`
+6. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV1_ADVERSARIAL_REVIEW_2026-08-14.md`
+7. `experiments/12-oscillator-strength-state-count-bound/NOVELTY_AUDIT_2026-08-14.md`
+8. `experiments/12-oscillator-strength-state-count-bound/NOVELTY_AUDIT_ADDENDUM_LOW_CARRIER_OPTICS_2026-08-14.md`
+9. `experiments/12-oscillator-strength-state-count-bound/PROGRESS_LOG.md`
 
 ## Controlling theorem
 
-For independent single-particle eigenstates below and above `mu`, define
+For independent quasiparticles and direct transitions crossing the chemical potential, the exact Fermi lemma is
 
 ```math
-n_e=V^{-1}\sum_cp_c,
-\qquad
-n_h=V^{-1}\sum_vh_v.
+\frac{2[f(E_v)-f(E_c)]}{e^{(E_c-E_v)/(2k_BT)}-1}
+\le
+f(E_c)+1-f(E_v).
 ```
 
-For direct interband optical conductivity and a finite crossing-transition velocity-strength resource `v_*`, exact Fermi algebra + Kubo give
+For any useful positive-frequency window `B`, let `u_B` be the **Latin-u** basis-invariant optical-velocity resource defined within exact degenerate energy eigenspaces.
+
+Then
 
 ```math
 \boxed{
 n_e+n_h
 \ge
-\frac{2}{\pi e^2v_*^2}
-\int_0^\infty
-\frac{\hbar\omega\,\sigma_1^{inter}(\omega)}
+\frac{2}{\pi e^2 u_B^2}
+\int_B
+\frac{\hbar\omega\,\sigma_1^{cross}(\omega)}
 {e^{\hbar\omega/(2k_BT)}-1}
-d\omega.
+\,d\omega.
 }
 ```
 
@@ -53,117 +58,61 @@ Intrinsic neutral form:
 \boxed{
 n_{th}
 \ge
-\frac{1}{\pi e^2v_*^2}
-\int_0^\infty
-\frac{\hbar\omega\,\sigma_1^{inter}(\omega)}
+\frac{1}{\pi e^2 u_B^2}
+\int_B
+\frac{\hbar\omega\,\sigma_1^{cross}(\omega)}
 {e^{\hbar\omega/(2k_BT)}-1}
-d\omega.
+\,d\omega.
 }
 ```
 
-Pointwise Fermi inequality underlying the result:
+The low-energy kernel tends to `2 kBT`, so finite integrated low-energy direct spectral weight has a finite thermal quasiparticle population cost at fixed `u_B`.
+
+## Tightness checks
+
+```text
+3-D equal-mass parabolic direct bands: exact saturation at all T
+2-D neutral massless Dirac:            bound/exact = 0.5000
+3-D massless Dirac:                    bound/exact = 0.6667
+3-D massive Dirac, 10 um / 300 K:      bound/exact = 0.794684
+```
+
+For unequal parabolic masses in the nondegenerate limit,
 
 ```math
-\boxed{
-\frac{2[f(E_v)-f(E_c)]}
-{e^{(E_c-E_v)/(2k_BT)}-1}
-\le
-f(E_c)+[1-f(E_v)].
-}
+n_bound/n_exact
+=
+[4m_em_h/(m_e+m_h)^2]^{3/4}.
 ```
 
-Velocity resource may be stated as
+## Scope
 
-```math
-\sum_v|v_{cv}|^2\le v_*^2
-\quad\forall c,
-```
+Valid class: independent-quasiparticle direct cross-`mu` charge absorbers.
 
-and
+Do not extend the theorem automatically to bound excitons, indirect/phonon-assisted transitions, interacting many-body spectral functions, or arbitrary photonic path enhancement.
 
-```math
-\sum_c|v_{cv}|^2\le v_*^2
-\quad\forall v.
-```
+Do not infer a universal dark-current, generation-rate, D*, or finite-bandwidth-noise floor from the population inequality.
 
-A finite relevant velocity-operator norm is sufficient.
+## Manuscript status
 
-## Validation
+`MANUSCRIPT_REV3_2026-08-14.md` is the current manuscript.
 
-```text
-2-D neutral massless Dirac / graphene: bound/exact = 1/2
-3-D massless Dirac:                    bound/exact = 2/3
-3-D finite-gap massive Dirac,
-10 um / 300 K:                         bound/exact = 0.794684
-```
+It has one mechanical notation regression only: four occurrences render Greek `nu_B` where the intended and defined resource is Latin `u_B`. The exact locations and correction are recorded in:
 
-The 3-D massive-Dirac bound approaches unity as `Delta/kBT` becomes large.
+`MANUSCRIPT_REV3_NOTATION_ERRATUM_2026-08-14.md`
 
-Reproduce with:
-
-`experiments/12-oscillator-strength-state-count-bound/numerics/thermal_optical_sum_dirac_validation.py`
-
-## Current theorem class
-
-```text
-independent-quasiparticle direct interband charge absorbers.
-```
-
-The theorem survives:
-
-```text
-arbitrary dispersive multiband state reuse;
-unequal electron/hole degeneracies;
-static single-particle disorder when exact eigenstates are used.
-```
-
-It does not automatically cover:
-
-```text
-bound excitons / neutral collective optical states;
-phonon-assisted transitions;
-interaction-generated lifetime broadening;
-external absorptance enhanced by arbitrary passive photonics.
-```
-
-Do not infer dark current directly from the thermal population without an explicit electrical-activity/collection assumption. Localized-state detector architectures are the key counterexample to an unconditional current claim.
-
-## Novelty status
-
-Focused audits have not found the exact thermal kernel/carrier-population inequality in Kubo/f-sum, quantum-geometric, QFI, graphene, or IR-detector figure-of-merit literature.
+Treat Rev3 + that erratum as the archival manuscript state until the next rendered revision folds in the four substitutions.
 
 ```text
 NOVELTY NOT ESTABLISHED.
-NO MANUSCRIPT YET.
+REV3 IS READY FOR ANOTHER INDEPENDENT EXTERNAL-STYLE REVIEW.
 ```
 
-## ACTIVE NEXT ACTION
+## Next action
 
-Hostile-test the detector significance:
+Do not add new physics by default. Fold the notation erratum into the next typeset/journal-facing version, verify bibliography/journal fit, and run another hostile manuscript review.
 
-```text
-1. localized/electrical-activity loophole;
-2. thermal occupation-fluctuation corollary and what it does/not imply for finite-bandwidth noise;
-3. dedicated novelty audit around the exact kernel;
-4. manuscript viability only after those survive.
-```
+## Closed previous branches
 
----
-
-# Experiment 10 — CLOSED BY DEFAULT
-
-Branch:
-
-`experiment-10-room-temperature-lwir-admissibility`
-
-Retained conditional theorem and derivations remain useful but manuscript/novelty path closed.
-
-# Experiment 11 — CLOSED BY DEFAULT
-
-Branch:
-
-`experiment-11-weighting-capacitance-duality`
-
-Prompt-slew/capacitance identity retained as established Maxwell-relaxation / reciprocal-sensitivity consequence.
-
-Post-Experiment-10/11 candidate-audit files document the large set of rejected premises. Consult them before reopening old directions.
+- Experiment 10: `experiment-10-room-temperature-lwir-admissibility` — closed by default as novelty/manuscript path.
+- Experiment 11: `experiment-11-weighting-capacitance-duality` — closed by default; retained result reduces to Maxwell-relaxation / reciprocal-sensitivity theory.
