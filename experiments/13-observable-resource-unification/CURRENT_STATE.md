@@ -3,37 +3,34 @@
 **Date:** 2026-08-15  
 **Scope:** analytical/theoretical only  
 **Target:** Physical Review Applied — Regular Article  
-**Status:** **REV. 5 CONTROLS / PRODUCTION QA PASS / RENDERED HOSTILE REVIEW PASS / HUMAN SUBMISSION INPUTS REMAIN**
+**Status:** **REV. 6 CONTROLS / FINAL HOSTILE TECHNICAL REVIEW PASS / 8-PAGE PRODUCTION QA PASS / HUMAN SUBMISSION INPUTS REMAIN**
 
 ## Read first
 
-1. `00_ACTIVE_FRONTIER_REV5_FLAGSHIP_2026-08-15.md`
-2. `PAPER_REV5_RENDERED_HOSTILE_REVIEW_2026-08-15.md`
-3. `REV5_PRAPPLIED_PRODUCTION_QA_2026-08-15.md`
-4. `PAPER_REV5_ADVERSARIAL_RESPONSE_2026-08-15.md`
-5. `PRAPPLIED_SUBMISSION_PREFLIGHT_2026-08-15.md`
-6. `PAPER_DRAFT_REV4_CLAIM_REFERENCE_CLEAN_2026-08-15.md` — historical scientific baseline
-7. `HGCDTE_STABLE_RANK_PRODUCTION_QA_2026-08-15.md`
-8. `HGCDTE_PT_SYMMETRY_STABLE_RANK_EXPLANATION_2026-08-15.md`
-9. `CHANNEL_SPECIFIC_OBSERVABILITY_GEOMETRY_2026-08-15.md`
+1. `00_ACTIVE_FRONTIER_REV6_FLAGSHIP_2026-08-15.md`
+2. `PAPER_REV6_FINAL_HOSTILE_REVIEW_2026-08-15.md`
+3. `REV6_PRAPPLIED_PRODUCTION_QA_2026-08-15.md`
+4. `PAPER_REV6_RESPONSE_TO_REREVIEW_2026-08-15.md`
+5. `PRAPPLIED_SUBMISSION_PREFLIGHT_2026-08-15.md` — submission guidance only; Rev. 4 identifiers inside it are historical
 
-Rev. 4 remains preserved as the reproducible pre-adversarial-review checkpoint. Rev. 5 supersedes it for submission.
+Rev. 6 supersedes Rev. 5 for submission. Rev. 4 and Rev. 5 are preserved as reproducible history.
 
-## Controlling Rev. 5 production identity
+## Controlling production identity
 
 ```text
-GitHub Actions run:   31903046137
-head commit:          8ac77c06accd02e56c43910b903ff53bb07a72dd
-artifact ID:          9251615353
-artifact digest:      64046cfd6972a9fbc810ab4a67ef61b27b9cd16249b7c666ecd75fabd5c5f843
-PDF SHA-256:          ce0fd199bb43652edf598ce7fa516e093e41fdc7a664d336092b8161ea7fa1c9
-TeX SHA-256:          9f45c235d3e2852fe04bf77a2adf519213e7af76ef8c9a7e26194a2cb10c72e7
-figure SHA-256:       19c7b0f83ddadc9ff7000144ea09e257bb9d130fd898a519f88707bf54cbcf6d
+Actions run:          31905440563
+head commit:          1fcd627f194223dbf277cbf9d51b87501b1fcdb6
+artifact ID:          9252213152
+artifact digest:      38709b3e6f5e6b236812a70b78880c195a4e86d718a62e9b5d1e2bb63e6f7a7b
+PDF SHA-256:          fa3c40b73ae8c75b8317e5522ebf50fb5fbf77c099aeeef52cf378a4febcf2e6
+TeX SHA-256:          2a4bed7a70098e1e641a59d64d16adfe549fc35d775868e2a6b4ec7b03fa3d74
+figure SHA-256:       07ee725da6522c7060c27644852a78977468ba02dd85ba0497e66f820f67b816
 pages:                8
 undefined refs/cites: none
 overfull boxes:       none
-all-page visual QA:   PASS
-rendered hostile review: PASS
+underfull boxes:      none
+visual QA:            PASS
+hostile review:       PASS
 ```
 
 ## Central theorem
@@ -50,31 +47,15 @@ rendered hostile review: PASS
 }
 ```
 
-This theorem is unchanged by Rev. 5. It requires selected direct cross-chemical-potential conductivity and an independently justified exact-shell velocity capacity.
-
-## Rev. 5 conceptual thesis
-
-The paper no longer treats a reciprocal definition as the unifying theorem.
-
-The controlling principle is stage-specific inference:
-
-```text
-H_task -> H_exc -> H_int -> H_term
-```
-
-Capacity, selectivity, internal correlation, and terminal observability are properties of the relevant physical stage map. They cannot be transferred between stages without including the intervening dynamics.
-
-The fixed-map identity
+At finite normalization volume this is exact. A macroscopic density floor additionally requires
 
 ```math
-\mathcal S_{X|D}\tau_{X|D}=1
+\bar v_{\mathcal B}^{cap}=\limsup_{j\to\infty}v_{\mathcal B,V_j}^{cap}<\infty.
 ```
 
-is explicitly described as definitional bookkeeping.
+The production bounded-domain HgCdTe model explicitly satisfies this condition within the stated model because its finite-dimensional velocity matrix has a volume-independent operator bound on the compact momentum domain.
 
-## Full population-tightness hierarchy
-
-Rev. 5 promotes
+## Full tightness hierarchy
 
 ```math
 \boxed{
@@ -86,75 +67,61 @@ Rev. 5 promotes
 }
 ```
 
-The hierarchy identifies:
+`eta_F` is the **Fermi-statistical factor**; Kubo-Greenwood is exact spectral bookkeeping and is not an independent source of slack.
+
+The optical tightness variable is `tau_bound^act`; reserve `observability` for terminal/readout null spaces.
+
+## HgCdTe production state
 
 ```text
-selected-support coverage;
-Fermi/Kubo asymmetry;
-shell-to-global capacity mismatch;
-within-shell response selectivity.
+support fraction       = 0.66897
+eta_F                  = 0.30684
+tau_cap^act            = 0.57262
+tau_bound^act          = 0.17570
+full bound/reference   ~= 0.1175
+v_B^cap                = 1.01764e6 m/s
+production quadrature  = 160 x 10 x 16
+support check          = 200 x 12 x 20
+rank threshold         = 1e-6 m/s
+rank audit             = 1e-9 through 1e4 m/s, support fraction stable to printed precision
 ```
 
-## Production HgCdTe closure
+## Publication architecture
 
 ```text
-n_ref                    = 1.0051405e17 cm^-3
-n_B^act                  = 6.7241114e16 cm^-3
-n_B^act / n_ref          = 0.66897
-eta_F                    = 0.30684
-tau_cap^act              = 0.57262
-tau_obs^act              = 0.17570
-v_B^cap                  = 1.01764e6 m/s
-bound/reference          ~= 0.1175
+Experiment 13 Rev. 6:     SOLE PRIMARY ACTIVE SUBMISSION MANUSCRIPT
+Experiment 12 PRB paper:  FROZEN FALLBACK / DEVELOPMENT PROVENANCE
+Experiment 01 manuscript: FROZEN FALLBACK
+Experiment 09 manuscript: FROZEN FALLBACK
+concurrent overlapping submission: DO NOT DO
+new theory by default:    STOP
 ```
 
-```math
-0.66897\times0.30684\times0.57262=0.1175398\ldots
-```
+Experiment-12 hold notice:
 
-The exact within-shell isotropy in this validation is restricted to thermally relevant selected parent shells that are single fixed-k `PT` Kramers doublets in the BIA-neglecting second-order Kane model. Generic multidoublet `PT` blocks need only have paired singular values. Real zincblende HgCdTe contains BIA.
+`../12-oscillator-strength-state-count-bound/00_SUBMISSION_HOLD_EXPERIMENT13_SUPERSESSION_2026-08-15.md`
 
-## Internal occupancy / recycling
-
-The two-pixel cross-spectrum is now explicitly tied to an immigration-death-exchange Markov process with two-sided angular-frequency PSD convention.
-
-Under independent Poisson primaries, independent noninteracting lineages, one final sink per lineage, final-sink-only readout, no branching/gain, and no shared electronics, exclusive marking gives independent final-sink streams and zero ideal endpoint cross-spectrum.
-
-Finite-transit Shockley-Ramo motion can restore finite-frequency source-channel support even when the internally created/recombined segment has zero integrated induced charge. A nonzero ensemble cross-spectrum is allowed, not guaranteed.
-
-## Hostile-review disposition
+## Final review disposition
 
 ```text
-central optical theorem:             PASS
-stable-rank terminology:             FIXED
-full tightness hierarchy:            PASS
-HgCdTe numerical closure:            PASS
-PT single-parent qualification:      FIXED
-Markov noise model:                  FIXED
-channel-null proof:                  PASS
-final-sink Poisson proof:            PASS
-Shockley-Ramo result:                PASS
-stage-specific unification:          PASS WITH MODERATE EDITORIAL RISK
-rendered PDF:                        PASS
-new scientific revision required:    NO
+central theorem:                    PASS
+thermodynamic condition:            RESTORED / PASS
+HgCdTe uniform-capacity link:       PASS
+numerical method disclosure:        PASS
+support-rank threshold/stability:   PASS
+observability terminology:          FIXED
+Fermi/Kubo attribution:             FIXED
+publication overlap:                RESOLVED IF SUPERSESSION POLICY MAINTAINED
+task/coherence breadth:             MODERATE EDITORIAL RISK ONLY
+production PDF:                     PASS
+new scientific revision required:   NO
 ```
 
-## Strategy
+## Remaining work
 
-```text
-Experiment 13 Rev. 5:     primary flagship submission path
-Experiment 13 Rev. 4:     preserved historical checkpoint
-Experiment 01 manuscript: frozen fallback
-Experiment 09 manuscript: frozen fallback
-Experiment 12 manuscript: frozen fallback
-new theory by default:    stop
-```
+Do not create Rev. 7 by default.
 
-## Remaining inputs
-
-No scientific revision is currently required.
-
-Before submission, supply/resolve:
+Human/submission inputs still required:
 
 ```text
 author name;
@@ -166,4 +133,4 @@ final Data Availability / archival citation decision;
 optional ORCID and referee recommendations/exclusions.
 ```
 
-After metadata insertion, rebuild through CI, record new hashes, and inspect all pages again. Reopen science only for a concrete defect, direct prior-art collision, or explicit editor/referee request.
+Before actual submission, update the submission preflight/cover-letter layer from its Rev. 4 language to Rev. 6, then rebuild and visually inspect the metadata-complete artifact.
