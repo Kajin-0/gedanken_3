@@ -30,6 +30,7 @@ premise
 -> manuscript
 -> hostile manuscript review
 -> revise only against concrete scientific defects
+-> realistic model stress test where significance depends on a resource parameter
 -> typeset and render QA
 -> repeat hostile review before submission.
 ```
@@ -38,7 +39,7 @@ Do not add phenomenology merely to rescue a weak novelty case.
 
 ---
 
-# Experiment 12 — PRB REV7 / POST-MAJOR-REVIEW STATE
+# Experiment 12 — PRB REV8 / POST-REV7-RE-REVIEW STATE
 
 Branch:
 
@@ -49,17 +50,16 @@ experiment-12-oscillator-strength-state-count-bound
 Recovery order:
 
 1. `experiments/12-oscillator-strength-state-count-bound/CURRENT_STATE.md`
-2. `experiments/12-oscillator-strength-state-count-bound/REV6_EXTERNAL_REVIEW_RESPONSE_2026-08-15.md`
-3. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV7_CHANGESET_2026-08-15.md`
-4. `experiments/12-oscillator-strength-state-count-bound/PRB_REV7_RENDER_QA_2026-08-15.md`
-5. `experiments/12-oscillator-strength-state-count-bound/numerics/kane_8band_capacity.py`
-6. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV6_2026-08-14.md`
+2. `experiments/12-oscillator-strength-state-count-bound/REV7_EXTERNAL_REREVIEW_RESPONSE_2026-08-15.md`
+3. `experiments/12-oscillator-strength-state-count-bound/HGCDTE_SECOND_ORDER_8BAND_TIGHTNESS_2026-08-15.md`
+4. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV8_CHANGESET_2026-08-15.md`
+5. `experiments/12-oscillator-strength-state-count-bound/PRB_REV8_RENDER_QA_2026-08-15.md`
+6. `experiments/12-oscillator-strength-state-count-bound/numerics/kane_8band_tightness.py`
 7. `experiments/12-oscillator-strength-state-count-bound/NOVELTY_AUDIT_2026-08-14.md`
-8. `experiments/12-oscillator-strength-state-count-bound/PROGRESS_LOG.md`
 
-Older revisions preserve development history. The QA-passed Rev7 PRB source/PDF are the active manuscript state; exact source/PDF hashes and the full deterministic changeset are recorded in items 3–4.
+Older revisions and review responses preserve the development/correction history. Rev8 is the current QA-passed manuscript state; exact source/PDF hashes are recorded in the changeset and render-QA files.
 
-## Controlling theorem
+## Controlling theorem — unchanged
 
 For direct transitions crossing `mu` in selected positive-frequency window `B`, exact Fermi statistics plus Kubo-Greenwood and the per-shell singular-value/rank resource give
 
@@ -76,91 +76,110 @@ n_{e,B}^{act}+n_{h,B}^{act}
 }
 ```
 
-For intrinsic neutrality,
+Do not modify the central theorem without a new mathematical counterexample.
+
+## Thermodynamic and low-energy quantifiers — Rev8
+
+For fixed `B`, macroscopic density statements require
+
+```math
+\limsup_{V\to\infty}v_{B,V}^{cap}<\infty.
+```
+
+For moving low-energy windows `B_m`, Rev8 requires the stronger joint condition
 
 ```math
 \boxed{
-n_{th}
-\ge
-\frac{1}{\pi e^2(v_B^{cap})^2}
-\int_B
-\frac{\hbar\omega\sigma_1^{cross}(\omega)}
-{e^{\hbar\omega/(2k_BT)}-1}\,d\omega.
+\sup_m\left[\limsup_{V\to\infty}v_{B_m,V}^{cap}\right]<\infty.
 }
 ```
 
-## Thermodynamic-limit condition — now explicit
+With shrinking transition energies and nonzero limiting integrated spectral weight, this gives a strictly positive liminf active-population floor.
 
-The finite-system theorem is exact as stated. A nonzero thermodynamic density floor requires
+## First-order HgCdTe Kane resource
 
-```math
-\boxed{
-\bar v_B^{cap}
-=\limsup_{V\to\infty}v_{B,V}^{cap}<\infty.
-}
-```
-
-Do not state a macroscopic low-energy population floor without this uniform-capacity hypothesis.
-
-## Realistic multiband resource validation — added in Rev7
-
-For the standard first-order HgCdTe 8x8 Kane Hamiltonian,
+For the standard first-order 8x8 Kane Hamiltonian,
 
 ```math
-\boxed{
-\|\hat v_x\|_{op}=\sqrt{3/2}\,v_K
-}
+\|\hat v_x\|_{op}=\sqrt{3/2}\,v_K,
 ```
 
-so, for every selected window,
+so
 
 ```math
-\boxed{
-v_B^{cap}\le\sqrt{3/2}\,v_K.}
+v_B^{cap}\le\sqrt{3/2}\,v_K=P/\hbar.
 ```
 
-This is independent of system size in that Hamiltonian and directly satisfies the thermodynamic uniform-boundedness condition.
-
-Equivalent form:
-
-```math
-v_B^{cap}\le P/\hbar=\sqrt{E_P/(2m_0)}.
-```
+This is a global first-order **upper bound**, not the actual selected-window capacity.
 
 HgCdTe scale:
 
 ```text
-v_K=(1.07 +/- 0.05)e6 m/s -> central capacity <= 1.31e6 m/s
-E_P ~=18.8 eV -> capacity <=1.286e6 m/s
+v_K=(1.07 +/- 0.05)e6 m/s -> upper bound ~=1.31e6 m/s.
 ```
 
-The exact `sqrt(3/2)` coefficient is restricted to the first-order 8x8 Kane model. Second-order k.p corrections are a stated model boundary.
+For higher-order k.p Hamiltonians, make capacity statements only on finite spectral windows inside bounded momentum domains where the model is used.
 
-## Rev7 corrections beyond the Kane model
+## Full second-order realistic multiband test — Rev8
+
+Using the bulk constant-parameter second-order 8-band Hamiltonian of Novik et al. with a representative 300-K, 10-um HgCdTe-like parameter interpolation:
 
 ```text
-van Roosbroeck-Shockley detailed-balance context added;
-Callen-Welton fluctuation-dissipation context added;
-E=mu transition-endpoint limiting prescription added;
-rank-discontinuity / support-population interpretation clarified;
-measured sigma_1 versus isolated sigma_1^cross limitation added;
-full-spectrum parabolic saturation explicitly labeled an ideal effective-model result;
-low-energy statement made conditional on integrated weight + uniform capacity;
-10-um example clarified as internal admitted-power absorptance / ideal AR or index matching.
+cross-mu exact theorem population = 1.005141e17 cm^-3
 ```
 
-## Independent validations retained
+and
 
 ```text
-2-D neutral massless Dirac: 0.5000
-3-D massless Dirac:         0.6667
-3-D massive Dirac, 10 um / 300 K: 0.794684
+window          v_B^cap (m/s)    bound/exact
+Eg..1.5Eg       1.016823e6        0.032046
+Eg..2Eg         1.017273e6        0.074922
+Eg..3Eg         1.015473e6        0.110977
+Eg..0.5eV       1.015611e6        0.118010
 ```
 
-Unequal parabolic nondegenerate global ratio:
+Headline broad-window result:
 
 ```math
-[4m_em_h/(m_e+m_h)^2]^{3/4}.
+\boxed{
+(n_e+n_h)_{bound}/(n_e+n_h)_{exact}\simeq0.118.
+}
+```
+
+This shows the bound remains quantitatively nontrivial in a heavy-hole/multiband narrow-gap model, although substantially looser than the ideal Dirac/parabolic examples.
+
+The 0.5-eV upper limit is a model-validation window, not a detector bandwidth.
+
+Reproducibility and convergence:
+
+`HGCDTE_SECOND_ORDER_8BAND_TIGHTNESS_2026-08-15.md`
+
+`numerics/kane_8band_tightness.py`
+
+## Appendix-A correction
+
+The illustrative internal-absorptance window is now
+
+```text
+[1.02 omega_g, 1.10 omega_g]
+```
+
+and the first-order Kane upper bound gives only a **conservative** lower column
+
+```text
+Sigma_e >= 4.19e11 cm^-2.
+```
+
+## Rev8 production state
+
+```text
+experiment12_prb_rev8.tex
+SHA-256 18424af7052262b2974a94a5ed6f85495951674fdcc0333624f3426f635df3a9
+
+experiment12_prb_rev8.pdf
+SHA-256 36e3fa7c01053bd5ec20f235cbb3f4f99c5297c3d44f11845440f77dff1da402
+
+8 pages / US letter / warning-free compile / PDF preflight pass / all 8 pages visually inspected.
 ```
 
 ## Scope boundary
@@ -177,8 +196,6 @@ Do not infer universal dark current, thermal generation rate, `D*`, or finite-ba
 
 Applying the theorem to measured optical conductivity requires isolating `sigma_1^cross` or a window in which it dominates.
 
-`n_B^act` is an exact support-dimension construct and should not be described as a noise-robust experimental participation count.
-
 ## Novelty status
 
 ```text
@@ -190,33 +207,21 @@ NOVELTY RISK: HIGH
 
 No `first`, `novel`, or priority wording is authorized.
 
-## Rev7 production state
-
-```text
-experiment12_prb_rev7.tex
-SHA-256 ec5f46f0256b320861fabdd3ad5e61832c1f20c03ea95216979207fe92dc488d
-
-experiment12_prb_rev7.pdf
-SHA-256 e481354dc25a0526dbe0b4eb636a0ca733aae8678f3a12b7a2d0a349d25c0740
-
-7 pages / US letter / compile clean / all pages visually inspected / no clipping or float regression.
-```
-
 ## ACTIVE NEXT ACTION
 
-Perform a new extreme hostile review of **Rev7 itself**.
+Perform a new **extreme adversarial review of Rev8**.
 
 Priority attacks:
 
 ```text
-1. Is the Kane capacity derivation/interpretation correct and sufficiently realistic?
-2. Does the new uniform thermodynamic hypothesis fully close the finite-size loophole?
-3. Does VRS/FDT or another equilibrium theorem imply the result more directly than claimed?
-4. Does second-order/multiband k.p expose a capacity-growth loophole in a finite useful window?
-5. Does a stronger prior-art collision emerge now that the theorem is framed as response + capacity -> state count?
+1. verify the second-order 8-band Hamiltonian implementation and theorem normalization independently;
+2. test whether the 0.118 ratio is robust to reasonable parameter/interpolation choices and bounded-k-domain choices;
+3. ask whether a semiconductor-optics prior result already implies this bound more directly;
+4. attack the meaning of cross-mu population when the charge-neutral mu lies weakly inside the nominal conduction sector;
+5. verify that the new realistic-material section materially strengthens significance rather than overfitting one model.
 ```
 
-Do not add new theory unless that review finds a real blocker.
+Do not add further theory unless that review identifies a genuine blocker.
 
 ---
 
