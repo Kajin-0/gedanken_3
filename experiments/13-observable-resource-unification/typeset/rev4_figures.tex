@@ -71,6 +71,7 @@
 \newcommand{\RevFigHgCdTe}{%
 \begin{figure}[t]
 \centering
+\resizebox{0.94\columnwidth}{!}{%
 \begin{tikzpicture}[every node/.style={font=\sffamily\scriptsize}]
   \def\W{5.6}
   \node[anchor=east] at (0,2.45) {capacity utilization};
@@ -85,7 +86,7 @@
   \node[draw,rounded corners=1.5pt,align=center,minimum width=2.65cm,minimum height=1.05cm] at (6.55,1.65)
     {$0.5726\times0.3068$\\$=0.1757$};
   \node[align=center] at (6.55,0.45) {$\mathcal S_a^{\rm act}=1$\\in the BIA-neglecting model};
-\end{tikzpicture}
+\end{tikzpicture}}
 \caption{Production decomposition of the broad-window active-population tightness in the BIA-neglecting second-order eight-band HgCdTe validation. The observed $0.1757$ tightness is explained by shell-to-global capacity utilization and the independent Fermi/Kubo factor; the contributing exact-shell blocks have no additional singular-concentration penalty in this model.}
 \label{fig:hgcdte}
 \end{figure}%
