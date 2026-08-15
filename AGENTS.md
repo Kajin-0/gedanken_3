@@ -36,7 +36,7 @@ Do not add phenomenology merely to rescue a weak novelty case.
 
 ---
 
-# Experiment 12 — ACTIVE MANUSCRIPT STAGE
+# Experiment 12 — SCIENTIFIC TEXT FROZEN AT REV6
 
 Branch:
 
@@ -47,20 +47,19 @@ experiment-12-oscillator-strength-state-count-bound
 Recovery order:
 
 1. `experiments/12-oscillator-strength-state-count-bound/CURRENT_STATE.md`
-2. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV3_2026-08-14.md`
-3. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV3_NOTATION_ERRATUM_2026-08-14.md`
-4. `experiments/12-oscillator-strength-state-count-bound/THEOREM_CORE_2026-08-14.md`
-5. `experiments/12-oscillator-strength-state-count-bound/BASIS_INVARIANT_VELOCITY_RESOURCE_CORRECTION_2026-08-14.md`
-6. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV1_ADVERSARIAL_REVIEW_2026-08-14.md`
+2. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV6_2026-08-14.md`
+3. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV6_FINAL_QA_2026-08-14.md`
+4. `experiments/12-oscillator-strength-state-count-bound/ACTIVE_SUBSPACE_REFINEMENT_2026-08-14.md`
+5. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV4_EXTERNAL_STYLE_REVIEW_2026-08-14.md`
+6. `experiments/12-oscillator-strength-state-count-bound/NOVELTY_AUDIT_ADDENDUM_TRK_CONDUCTIVITY_PARTICLE_COUNT_2026-08-14.md`
 7. `experiments/12-oscillator-strength-state-count-bound/NOVELTY_AUDIT_2026-08-14.md`
-8. `experiments/12-oscillator-strength-state-count-bound/NOVELTY_AUDIT_ADDENDUM_LOW_CARRIER_OPTICS_2026-08-14.md`
-9. `experiments/12-oscillator-strength-state-count-bound/PROGRESS_LOG.md`
+8. `experiments/12-oscillator-strength-state-count-bound/PROGRESS_LOG.md`
+
+Older Rev0–Rev5 manuscripts and corrections are development history. Rev6 is controlling.
 
 ## Controlling theorem
 
-For exact independent-quasiparticle states below and above a chemical potential, use only the direct cross-chemical-potential optical conductivity `sigma_1^cross`.
-
-For every crossing transition,
+For exact independent-quasiparticle states with `E_v < mu < E_c`, the pointwise Fermi inequality is
 
 ```math
 \boxed{
@@ -71,7 +70,33 @@ f(E_c)+1-f(E_v).
 }
 ```
 
-For any measurable useful positive-frequency window `B`, define the basis-invariant optical-velocity shell resource `u_B` using projected physical velocity operators within exact degenerate energy eigenspaces.
+For any measurable useful positive-frequency window `B`, use exact energy-shell projectors to define selected velocity blocks `A_{epsilon_c,B}` and `B_{epsilon_v,B}`.
+
+The basis-invariant optical-velocity capacity is
+
+```math
+\boxed{
+(v_B^{cap})^2
+=\max\left[
+\sup_{\epsilon_c>\mu}\|A_{\epsilon_c,B}\|_{op}^2,
+\sup_{\epsilon_v<\mu}\|B_{\epsilon_v,B}\|_{op}^2
+\right].
+}
+```
+
+Define basis-invariant thermal optical-support populations
+
+```math
+n_{e,B}^{act}
+=V^{-1}\sum_{\epsilon_c>\mu}f(\epsilon_c)
+\operatorname{rank}A_{\epsilon_c,B},
+```
+
+```math
+n_{h,B}^{act}
+=V^{-1}\sum_{\epsilon_v<\mu}[1-f(\epsilon_v)]
+\operatorname{rank}B_{\epsilon_v,B}.
+```
 
 Then
 
@@ -79,52 +104,52 @@ Then
 \boxed{
 n_e+n_h
 \ge
-\frac{2}{\pi e^2u_B^2}
+n_{e,B}^{act}+n_{h,B}^{act}
+\ge
+\frac{2}{\pi e^2(v_B^{cap})^2}
 \int_B
 \frac{\hbar\omega\,\sigma_1^{cross}(\omega)}
-{e^{\hbar\omega/(2k_BT)}-1}
-\,d\omega.
+{e^{\hbar\omega/(2k_BT)}-1}\,d\omega.
 }
 ```
 
-For an intrinsic neutral absorber,
+For intrinsic neutrality,
 
 ```math
 \boxed{
 n_{th}
 \ge
-\frac{1}{\pi e^2u_B^2}
+\frac{1}{\pi e^2(v_B^{cap})^2}
 \int_B
 \frac{\hbar\omega\,\sigma_1^{cross}(\omega)}
-{e^{\hbar\omega/(2k_BT)}-1}
-\,d\omega.
+{e^{\hbar\omega/(2k_BT)}-1}\,d\omega.
 }
 ```
 
-The low-energy kernel tends to `2 kBT`, so a finite amount of **integrated** low-energy direct spectral weight has a finite thermal quasiparticle population cost at fixed optical-velocity resource.
+The low-energy kernel tends to `2 kBT`, so finite **integrated** low-energy direct spectral weight has a finite equilibrium thermal quasiparticle support-population cost at fixed `v_B^{cap}`.
 
-## Tightness / validation
+`n_B^act` is a support-dimension count, not a continuously weighted optical participation ratio.
+
+In 2-D, use sample area and sheet conductivity.
+
+## Equality / validation
 
 ```text
-3-D equal-mass parabolic direct bands:
-    exact saturation at all temperatures in the ideal model
+equal-mass mirror-symmetric parabolic model:
+    active theorem saturates for any selected direct window;
+    total theorem saturates for full relevant direct spectrum.
 
-2-D neutral massless Dirac:
-    bound/exact = 0.5000
-
-3-D massless Dirac:
-    bound/exact = 0.6667
-
-3-D massive Dirac, 10 um / 300 K:
-    bound/exact = 0.794684
+2-D neutral massless Dirac: 0.5000
+3-D massless Dirac:         0.6667
+3-D massive Dirac,
+10 um / 300 K:              0.794684
 ```
 
-For unequal parabolic masses in the nondegenerate limit,
+For unequal parabolic masses in the nondegenerate global limit,
 
 ```math
 n_bound/n_exact
-=
-[4m_em_h/(m_e+m_h)^2]^{3/4}.
+=[4m_em_h/(m_e+m_h)^2]^{3/4}.
 ```
 
 ## Scope boundary
@@ -138,44 +163,90 @@ independent-quasiparticle direct cross-mu charge absorbers.
 Do not automatically extend to:
 
 ```text
-bound excitons / neutral collective states;
+bound excitons / neutral collective optical states;
 phonon-assisted / indirect absorption;
 interaction-generated many-body spectral functions;
 unconstrained passive photonic path enhancement.
 ```
 
-Localized states do not invalidate the population theorem but block any automatic conversion to DC dark current.
+Localized states do not invalidate the state-count theorem but block any automatic conversion to DC dark current.
 
-Do not claim a universal dark-current, thermal-generation-rate, D*, or finite-bandwidth-noise lower bound. The attempted `G_th >= n_th/tau_response` theorem was rejected by a depleted-photodiode counterexample.
+Do not claim universal:
+
+```text
+dark-current lower bound;
+thermal-generation-rate lower bound;
+D* lower/upper limit;
+finite-bandwidth-noise floor.
+```
+
+The attempted `G_th >= n_th/tau_response` theorem was rejected by a depleted-photodiode counterexample.
+
+## Novelty status
+
+Audited adjacency now includes:
+
+```text
+phase-space filling;
+Kubo-Greenwood;
+ordinary/generalized f-sums and TRK particle counts;
+restricted optical sums;
+quantum-geometric optical sums;
+graphene optical sum rules;
+classic IR alpha/G_th material criteria;
+Yablonovitch-Kane low-carrier laser engineering;
+Bethkenhagen et al. conductivity-to-ionization TRK counting.
+```
+
+No direct source was identified with the exact Experiment-12 thermal kernel plus per-shell optical-capacity/support-population inequality.
+
+```text
+DIRECT PRIOR-ART COLLISION: NOT FOUND
+PRIORITY: NOT ESTABLISHED
+NOVELTY: NOT ESTABLISHED
+NOVELTY RISK: HIGH
+```
+
+No `first`, `novel`, or priority claim is authorized.
 
 ## Manuscript state
 
-Current manuscript:
-
-`MANUSCRIPT_REV3_2026-08-14.md`
-
-Rev3 is scientifically controlling but contains four stale **Greek-nu** renderings where the intended basis-invariant resource is Latin `u_B` / `u_{\mathcal B}`. Exact locations and correction are recorded in:
-
-`MANUSCRIPT_REV3_NOTATION_ERRATUM_2026-08-14.md`
-
-Treat Rev3 + erratum as the archival manuscript state. No scientific quantity changes.
+Current scientific submission candidate:
 
 ```text
-NOVELTY NOT ESTABLISHED.
-REV3 IS READY FOR ANOTHER INDEPENDENT EXTERNAL-STYLE REVIEW.
+experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV6_2026-08-14.md
 ```
 
-## Next action
-
-Do not add new physics by default.
-
-Proceed with:
+Final internal hostile QA:
 
 ```text
-1. fold the four-symbol erratum into the next rendered/journal-facing revision;
-2. perform another independent hostile manuscript review;
-3. verify every bibliography entry and journal-fit statement;
-4. typeset only after claim scope remains unchanged.
+FERMI ALGEBRA: PASS
+KUBO NORMALIZATION: PASS
+BASIS INVARIANCE: PASS
+TRACE-RANK ACTIVE-SUBSPACE REFINEMENT: PASS
+FINITE-WINDOW EQUALITY: PASS
+2-D NORMALIZATION: PASS
+PARABOLIC VALIDATION: PASS
+DIRAC VALIDATION: PASS
+LOW-ENERGY INTERPRETATION: PASS
+CLAIM SCOPE: PASS
+BIBLIOGRAPHY CORE: PASS
+DIRECT PRIOR-ART COLLISION: NOT FOUND
+NOVELTY: NOT ESTABLISHED
+```
+
+# ACTIVE NEXT ACTION — NO MORE THEORY BY DEFAULT
+
+Do not extend Experiment 12 unless an external/referee-style review finds a blocking scientific gap.
+
+Next phase:
+
+```text
+1. select journal;
+2. perform journal-specific scope and bibliography/style audit;
+3. typeset Rev6;
+4. review rendered manuscript independently;
+5. prepare submission materials if rendered QA passes.
 ```
 
 ---
@@ -200,6 +271,6 @@ Retained conditional results remain useful but should not be mechanically extend
 CLOSED BY DEFAULT AS NOVELTY / MANUSCRIPT PATH.
 ```
 
-The prompt-slew/capacitance identity was retained as an established Maxwell-relaxation / reciprocal-sensitivity consequence.
+The retained prompt-slew/capacitance identity reduces to established Maxwell-relaxation / reciprocal-sensitivity physics.
 
 Candidate-audit files from the Experiment-10/11 lineage document rejected premises; consult them before reopening old ideas.
