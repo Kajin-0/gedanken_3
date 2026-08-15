@@ -1,0 +1,43 @@
+name: HgCdTe full homogeneous BIA QA
+
+on:
+  push:
+    branches:
+      - experiment-13-observable-resource-unification
+    paths:
+      - 'experiments/13-observable-resource-unification/numerics/hgcdte_bia_full_bulk.py'
+      - 'experiments/13-observable-resource-unification/numerics/hgcdte_bia_full_bulk_qa.py'
+      - 'experiments/13-observable-resource-unification/numerics/hgcdte_bia_c_linear_stress.py'
+      - 'experiments/12-oscillator-strength-state-count-bound/numerics/kane_8band_tightness.py'
+      - '.github/workflows/hgcdte-bia-full-bulk-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install numerical dependencies
+        run: python -m pip install --upgrade numpy scipy
+      - name: Run hard BIA implementation gates
+        run: |
+          python experiments/13-observable-resource-unification/numerics/hgcdte_bia_full_bulk_qa.py \
+            | tee hgcdte_bia_full_bulk_qa.txt
+      - name: Require pass
+        shell: bash
+        run: |
+          grep -q '^RESULT=PASS$' hgcdte_bia_full_bulk_qa.txt
+          grep -q '^parent_P_Gamma6_Gamma8_error=' hgcdte_bia_full_bulk_qa.txt
+          grep -q '^parent_P_Gamma6_Gamma7_error=' hgcdte_bia_full_bulk_qa.txt
+          grep -q '^BIA_TR_error_eV=' hgcdte_bia_full_bulk_qa.txt
+          grep -q '^analytic_vs_finite_difference_dHdx_error_eVnm=' hgcdte_bia_full_bulk_qa.txt
+      - name: Upload QA
+        uses: actions/upload-artifact@v4
+        with:
+          name: hgcdte-bia-full-bulk-qa
+          retention-days: 30
+          path: hgcdte_bia_full_bulk_qa.txt
