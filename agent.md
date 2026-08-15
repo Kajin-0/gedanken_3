@@ -18,17 +18,18 @@ experiment-12-oscillator-strength-state-count-bound
 
 1. `experiments/12-oscillator-strength-state-count-bound/CURRENT_STATE.md`
 2. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV6_2026-08-14.md`
-3. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV6_FINAL_QA_2026-08-14.md`
-4. `experiments/12-oscillator-strength-state-count-bound/JOURNAL_FIT_AND_SUBMISSION_PLAN_2026-08-14.md`
-5. `experiments/12-oscillator-strength-state-count-bound/ACTIVE_SUBSPACE_REFINEMENT_2026-08-14.md`
-6. `experiments/12-oscillator-strength-state-count-bound/NOVELTY_AUDIT_ADDENDUM_TRK_CONDUCTIVITY_PARTICLE_COUNT_2026-08-14.md`
-7. `experiments/12-oscillator-strength-state-count-bound/PROGRESS_LOG.md`
+3. `experiments/12-oscillator-strength-state-count-bound/PRB_RENDER_QA_2026-08-14.md`
+4. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV6_FINAL_QA_2026-08-14.md`
+5. `experiments/12-oscillator-strength-state-count-bound/PRB_COVER_LETTER_DRAFT_2026-08-14.md`
+6. `experiments/12-oscillator-strength-state-count-bound/PRB_SUBMISSION_METADATA_2026-08-14.md`
+7. `experiments/12-oscillator-strength-state-count-bound/JOURNAL_FIT_AND_SUBMISSION_PLAN_2026-08-14.md`
+8. `experiments/12-oscillator-strength-state-count-bound/PROGRESS_LOG.md`
 
-Older revisions preserve the development history. Rev6 is controlling.
+Older revisions preserve the scientific development history. Rev6 is controlling.
 
 ## Controlling result
 
-For any useful direct cross-`mu` optical window `B`, define the basis-invariant shell optical-velocity capacity `v_B^cap` and optically active thermal support populations `n_{e,B}^act`, `n_{h,B}^act` from exact energy-shell coupling blocks.
+For any useful direct cross-`mu` optical window `B`, define exact energy-shell selected velocity blocks, the basis-invariant capacity `v_B^cap`, and optically active thermal support populations `n_{e,B}^act`, `n_{h,B}^act`.
 
 Then
 
@@ -87,7 +88,7 @@ NOVELTY RISK: HIGH
 
 No priority wording is authorized.
 
-## Manuscript / journal state
+## Manuscript / journal / render state
 
 ```text
 CURRENT SCIENTIFIC TEXT: MANUSCRIPT_REV6_2026-08-14.md
@@ -95,7 +96,24 @@ FIRST TARGET: Physical Review B — Regular Article
 FALLBACK: Journal of Applied Physics — Article
 ```
 
-Final internal hostile QA: PASS at theorem level.
+Final internal hostile scientific QA: PASS.
+
+PRB REVTeX production render: PASS.
+
+```text
+6 pages
+US letter
+no overfull boxes
+no undefined references/citations
+no stuck floats
+PDF preflight pass
+all six pages visually inspected
+no clipping/overlap/broken glyphs
+```
+
+Exact local production hashes are recorded in `PRB_RENDER_QA_2026-08-14.md`.
+
+Cover letter and submission metadata/Data Availability options are drafted.
 
 # ACTIVE NEXT ACTION
 
@@ -103,7 +121,9 @@ Final internal hostile QA: PASS at theorem level.
 NO MORE THEORY BY DEFAULT.
 ```
 
-Convert Rev6 to PRB-compatible LaTeX, perform PRB-specific reference/style QA, compile and visually inspect the PDF, then review the rendered manuscript independently.
+The remaining blockers are author-owned metadata: author/affiliation/corresponding email, funding/disclosures, authorship and simultaneous-submission confirmations, Physical Review submission history, joint-submission status, and final Data Availability/archive decision.
+
+Once those are supplied, insert them into the REVTeX source, compile again, visually inspect the final PDF, and prepare the exact submission package.
 
 ## Closed previous branches
 
