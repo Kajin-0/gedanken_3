@@ -20,11 +20,11 @@ Do not make fabrication, measurement, instrumentation, sample procurement, or la
 1. `AGENTS.md`
 2. `agent.md`
 3. `experiments/10-room-temperature-lwir-admissibility/CURRENT_STATE.md`
-4. `experiments/10-room-temperature-lwir-admissibility/THEOREM_CORE_2026-08-14.md`
-5. `experiments/10-room-temperature-lwir-admissibility/JOINT_ADMISSIBILITY_NOVELTY_AUDIT_2026-08-14.md`
-6. `experiments/10-room-temperature-lwir-admissibility/GENERAL_SPECTATOR_BAND_ADMISSIBILITY_THEOREM_STEP_2026-08-14.md`
-7. `experiments/10-room-temperature-lwir-admissibility/HEAVY_HOLE_AUGER_RATE_AND_JOINT_BOUND_STEP_2026-08-14.md`
-8. `experiments/10-room-temperature-lwir-admissibility/THIRD_BAND_HEAVY_HOLE_AUGER_ESCAPE_STEP_2026-08-14.md`
+4. `experiments/10-room-temperature-lwir-admissibility/RESONANT_PATH_ENHANCEMENT_RESPONSE_BOUND_STEP_2026-08-14.md`
+5. `experiments/10-room-temperature-lwir-admissibility/THEOREM_CORE_2026-08-14.md`
+6. `experiments/10-room-temperature-lwir-admissibility/JOINT_ADMISSIBILITY_NOVELTY_AUDIT_2026-08-14.md`
+7. `experiments/10-room-temperature-lwir-admissibility/GENERAL_SPECTATOR_BAND_ADMISSIBILITY_THEOREM_STEP_2026-08-14.md`
+8. `experiments/10-room-temperature-lwir-admissibility/HEAVY_HOLE_AUGER_RATE_AND_JOINT_BOUND_STEP_2026-08-14.md`
 9. `experiments/10-room-temperature-lwir-admissibility/RADIATIVE_BOUNDARY_ADMISSIBILITY_STEP_2026-08-14.md`
 10. earlier Experiment-10 derivations only as needed.
 
@@ -44,80 +44,27 @@ E_g/(k_BT)\approx4.796.
 
 Research question:
 
-> What electronic structure must a passive LWIR interband absorber possess to approach HgCdTe-class room-temperature intrinsic detector quality without sacrificing useful temporal response?
+> What electronic structure must a passive LWIR absorber possess to approach HgCdTe-class room-temperature intrinsic detector quality without sacrificing useful temporal response?
 
 ---
 
-# Closed / controlling results
+# Controlling electronic result
 
-## A. Active massive-Dirac matched absorptance
-
-For the controlled single-pass active pair,
+For the finite-gap massive-Dirac active pair and the same required active-pair single-pass optical depth,
 
 ```math
-n_c\propto v^{-3},
-\qquad
-\alpha_D\propto v^{-1},
-\qquad
-d\propto v,
+\boxed{\Sigma_c\ge C/v^2.}
 ```
 
-so in the two-band neutral model
+Spectator holes shift intrinsic `mu>0`, so they make this bound conservative rather than invalidating it.
 
-```math
-\Sigma_c=C/v^2.
-```
-
-When spectator hole bands are added, neutrality shifts `mu>0`, increasing active electron density and reducing active-pair absorption. Therefore the rigorous statement becomes
-
-```math
-\boxed{\Sigma_c\ge C/v^2}
-```
-
-for the same required active-pair single-pass optical depth.
-
-## B. Microscopic lattice velocity resource
+A microscopic lattice resource gives
 
 ```math
 \boxed{v\le V_{hop}.}
 ```
 
-## C. Symmetric two-band direct Auger
-
-Exact particle-hole-symmetric finite-gap massive-Dirac `eeh/hhe` direct Auger is kinematically closed.
-
-Scalar particle-hole asymmetry reopens the channel with weak-asymmetry threshold
-
-```math
-\boxed{K_{th}\sim E_g\mathcal A_m^{-1/3}.}
-```
-
-Near an interior threshold, pure kinematic phase space scales as `(K-K_th)^2`; microscopic overlap zeros can add powers.
-
-## D. External optical floor
-
-For radiative/background comparison, match the complete external mode-resolved optical boundary, not useful front-side absorptance alone.
-
-At equilibrium,
-
-```math
-\Phi_{abs}^{ext}=\Phi_{em}^{ext}=\Phi_0.
-```
-
-Internal radiative recombination is not invariant because photon recycling changes internal event count.
-
-At the ideal 10-um/300-K hemispherical step benchmark:
-
-```text
-Phi_0 = 4.89777e17 cm^-2 s^-1
-q Phi_0 = 0.0784710 A/cm^2
-```
-
-Direct-Auger/radiative activation parity occurs at `K_th=Eg/2`.
-
-## E. General spectator-band Auger ceiling
-
-For positive isotropic convex spectator excitation `E_s(p)`, define
+For each positive isotropic convex spectator-hole excitation `E_s(p)`, define
 
 ```math
 \boxed{
@@ -125,7 +72,7 @@ For positive isotropic convex spectator excitation `E_s(p)`, define
 }
 ```
 
-Exact finite-energy normal-momentum spectator-assisted CCCH closure in the continuum model is equivalent to
+Exact finite-energy normal-momentum spectator-assisted CCCH closure is equivalent to
 
 ```math
 \boxed{v\le v_s^{crit}.}
@@ -134,54 +81,139 @@ Exact finite-energy normal-momentum spectator-assisted CCCH closure in the conti
 For multiple spectators,
 
 ```math
-v_{spec}=\min_s v_s^{crit}.
+v_{spec}=\min_s v_s^{crit},
+\qquad
+v_{adm}=\min(V_{hop},v_{spec}).
 ```
 
-This is mathematically Landau-like; equal-group-velocity impact-ionization threshold theory is classical. Do not claim this kinematic construction as a new principle.
+Thus under the controlled **single-pass, active-pair-optically-dominant** hypotheses,
+
+```math
+\boxed{\Sigma_c\ge C/v_{adm}^2.}
+```
+
+The `min E/p` structure is Landau-like and the equal-group-velocity threshold condition is classical. Do not claim the kinematic ceiling as a new general principle.
 
 Parabolic heavy-hole corollary:
 
 ```math
-\boxed{M_{hh}v^2\le2(\Delta+\delta_{hh}).}
+\boxed{M_{hh}v^2\le2(\Delta+\delta_{hh})}
 ```
 
-## F. Strongest current conditional theorem
-
-Define
+and, when that spectator ceiling dominates,
 
 ```math
-v_{adm}=\min(V_{hop},v_{spec}).
+\boxed{\Sigma_c\ge C M_{hh}/[2(\Delta+\delta_{hh})].}
 ```
 
-Under the controlled single-pass, active-pair-optically-dominant hypotheses and exact normal-momentum spectator-assisted Auger closure,
+---
+
+# Optical / radiative supporting results
+
+Complete external mode-resolved optical boundary matching is required to fix irreversible radiative/background exchange. Internal radiative recombination is not invariant because of photon recycling.
+
+At the ideal 10-um/300-K hemispherical step benchmark:
+
+```text
+Phi_0 = 4.89777e17 cm^-2 s^-1
+q Phi_0 = 0.0784710 A/cm^2
+```
+
+Exact symmetric two-band direct Auger is closed; asymmetry and spectator bands reopen it. Threshold phase-space shells are quadratic in the controlled interior cases, with possible extra microscopic overlap powers.
+
+---
+
+# New resonant-response extension
+
+One-port TCMT:
+
+```math
+A(\omega)
+=\frac{4\gamma_e\gamma_i}
+{(\omega-\omega_0)^2+(\gamma_e+\gamma_i)^2}.
+```
+
+Define field-envelope response time
+
+```math
+\boxed{\tau_{opt}=1/(\gamma_e+\gamma_i).}
+```
+
+For target peak absorptance `A_0`, define
+
+```math
+\boxed{g(A_0)=1-\sqrt{1-A_0}.}
+```
+
+On the over-coupled branch, which minimizes required internal material loss at fixed response time,
+
+```math
+\boxed{2\gamma_i\ge g(A_0)/\tau_{max}.}
+```
+
+Define the electromagnetic absorber sampling-rate resource
+
+```math
+\boxed{
+\Lambda_a
+=\frac{2\gamma_i}{\alpha_Dd}
+=\frac{P_{abs}}{\alpha_Dd\,U}.
+}
+```
+
+Then
+
+```math
+\boxed{
+\alpha_Dd\ge g(A_0)/(\Lambda_a\tau_{max}).
+}
+```
+
+Writing
+
+```math
+n_c/\alpha_D\ge B/v^2
+```
+
+and combining with `v<=v_adm` gives
 
 ```math
 \boxed{
 \Sigma_c
 \ge
-\frac{C}{v_{adm}^2}
-=
-\max\!\left[
-C/V_{hop}^2,
-\max_s C/(v_s^{crit})^2
-\right].
+\frac{B}{v_{adm}^2}
+\frac{g(A_0)}{\Lambda_a\tau_{max}}.
 }
 ```
 
-For one parabolic heavy-hole spectator,
+## Decisive no-go
+
+TCMT itself does not upper-bound `Lambda_a`.
+
+Therefore
 
 ```math
 \boxed{
-\Sigma_c
-\ge
-\max\!\left[
-C/V_{hop}^2,
-C M_{hh}/(2(\Delta+\delta_{hh}))
-\right].
+\text{finite temporal response alone does not restore a universal physical carrier-column lower bound.}
 }
 ```
 
-This is the current theorem candidate; novelty is not established.
+The missing ingredient is now explicitly photonic: an upper bound on field concentration / absorber participation / optical sampling rate, or an equivalent passive bandwidth/thickness/material-response resource.
+
+For a simple ring/Fabry-type cavity, `Lambda_a~v_E/L`, so path enhancement is paid for by optical dwell time. But this is architecture-specific.
+
+At 10 um, a simple one-optical-wavelength circulation has `L/v_E=lambda/c=33.36 fs`; with `A_0=0.90`, a 1-ps optical-response requirement still permits roughly a 100x lower column bound than the original 90%-absorbing single-pass slab.
+
+---
+
+# Hard theorem boundaries
+
+```text
+unbounded spectator optical strength destroys the active-pair physical-thickness bound;
+finite response leaves an unbounded photonic participation resource Lambda_a;
+exact Auger closure is sufficient, not necessary, for radiative-limited operation;
+assisted/Umklapp/disorder channels are outside the exact normal-momentum theorem.
+```
 
 ---
 
@@ -190,57 +222,44 @@ This is the current theorem candidate; novelty is not established.
 Established and unavailable as novelty:
 
 ```text
-alpha/G_th detector-material optimization;
-band-structure Auger suppression in small-gap detectors;
-HgCdTe heavy-hole CCCH/Auger-1;
+alpha/G_th detector optimization;
+small-gap band-structure Auger suppression;
+HgCdTe heavy-hole CCCH;
 equal-group-velocity impact-ionization thresholds;
-Landau min[E(p)/p] critical-velocity construction;
+Landau min E/p critical velocity;
 Dirac/quasi-relativistic Auger suppression;
-multiband IR superlattice design balancing absorption and Auger;
+multiband IR detector design balancing absorption and Auger;
+critical coupling and resonator linewidth/lifetime;
+resonant-cavity-enhanced photodetectors;
+Rozanov-type passive absorber thickness-bandwidth bounds;
 radiative detailed balance and photon recycling.
 ```
-
-Focused search did not locate the exact composed carrier-column inequality, but a hostile reviewer could reasonably regard it as an elementary synthesis.
 
 Current disposition:
 
 ```text
-PROVISIONAL CONDITIONAL THEOREM PACKAGE.
-NO DIRECT COLLISION FOUND IN FOCUSED AUDIT.
+CONDITIONAL THEOREM PACKAGE.
 NOVELTY NOT ESTABLISHED.
 NO MANUSCRIPT YET.
 ```
 
----
-
-# Hard theorem boundaries
-
-## Optically active spectator bands
-
-If spectator useful absorption is unconstrained, `alpha_D ~ 1/v` no longer fixes physical thickness. The carrier-column theorem requires active-pair optical dominance or an explicit spectator optical-strength bound.
-
-Actual HgCdTe heavy-hole states are optically active; do not present the current theorem as a quantitative bulk-HgCdTe bound.
-
-## Arbitrary photonic path enhancement
-
-The relation `d=zeta/alpha` is single-pass. Resonators, gratings and slow-light structures can reduce physical thickness at fixed external absorptance.
-
-Without a photonic path/dwell-time resource, a universal physical carrier-column floor is not established.
-
-## Exact closure is sufficient, not necessary
-
-Radiative/background-limited performance requires sufficiently small nonradiative traffic, not exact closure of every channel.
-
----
-
 # DO NOT DO
 
-Do not rank compounds. Do not add another electronic recombination mechanism now. Do not insert phenomenological Auger lifetimes. Do not draft a manuscript before the optical loophole and theorem review are resolved.
+Do not rank compounds. Do not add another electronic recombination mechanism. Do not add another example cavity. Do not draft a manuscript before the missing photonic resource is resolved or shown to be fully covered by prior art.
 
 # NEXT ACTION
 
-Attack the photonic loophole from the simplest passive temporal coupled-mode model:
+Audit known passive-electromagnetic bounds on `Lambda_a`:
 
-> At fixed external absorptance and a specified detector temporal response/bandwidth, what maximum optical path enhancement / photon dwell time is possible? Can a resonator or slow-light structure make the physical active carrier column arbitrarily small, or does finite response restore a generalized lower bound?
+```text
+Rozanov-type absorption thickness-bandwidth sum rules;
+Bode-Fano matching limits;
+delay-bandwidth bounds;
+material-susceptibility / field-concentration bounds;
+resonance-density / sum-rule constraints;
+complete external optical boundary.
+```
 
-Separate elementary resonator algebra from any broad delay-bandwidth/passivity theorem and audit prior art aggressively.
+Question:
+
+> Do established passivity/causality/material-response bounds already supply the missing photonic ceiling strongly enough to close Experiment 10, or is there a detector-specific gap worth deriving?
