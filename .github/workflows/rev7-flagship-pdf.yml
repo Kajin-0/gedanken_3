@@ -1,0 +1,119 @@
+name: Rev7 flagship PDF
+
+on:
+  push:
+    branches:
+      - experiment-13-observable-resource-unification
+    paths:
+      - 'experiments/13-observable-resource-unification/typeset/**'
+      - '.github/workflows/rev7-flagship-pdf.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install TeX and PDF utilities
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            latexmk texlive-latex-base texlive-latex-recommended \
+            texlive-latex-extra texlive-publishers texlive-pictures \
+            texlive-fonts-recommended lmodern poppler-utils patch
+
+      - name: Reconstruct frozen Rev4 source
+        working-directory: experiments/13-observable-resource-unification/typeset
+        run: python3 build_rev4.py
+
+      - name: Reconstruct controlling Rev5 source
+        working-directory: experiments/13-observable-resource-unification/typeset
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat rev5_from_rev4.patch.part1 \
+              rev5_from_rev4.patch.part2 \
+              rev5_from_rev4.patch.part3 > rev5_from_rev4.patch
+          patch -o rev5_prapplied.tex rev4_unified_prapplied_built.tex < rev5_from_rev4.patch
+          grep -Fq 'Stage-specific spectral geometry of photodetection' rev5_prapplied.tex
+
+      - name: Reconstruct Rev6 source
+        working-directory: experiments/13-observable-resource-unification/typeset
+        run: python3 build_rev6.py
+
+      - name: Apply Rev7 final referee polish
+        working-directory: experiments/13-observable-resource-unification/typeset
+        run: |
+          python3 build_rev7.py
+          grep -Fq 'eq:thermo-liminf' rev7_prapplied.tex
+          grep -Fq 'reference-domain dependent' rev7_prapplied.tex
+          grep -Fq 'changes the cross-$\mu$ reference population by less than $1\%$' rev7_prapplied.tex
+          grep -Fq 'numerically converged second-order eight-band HgCdTe calculation' rev7_prapplied.tex
+          grep -Fq '\tau_{\rm bound}^{\rm act}' rev7_prapplied.tex
+          if grep -Fq 'unknown-arrival transient construction' rev7_prapplied.tex; then exit 1; fi
+          if grep -Fq 'production-resolution second-order eight-band HgCdTe calculation' rev7_prapplied.tex; then exit 1; fi
+          if grep -Fq '\tau_{\rm obs}^{\rm act}' rev7_prapplied.tex; then exit 1; fi
+          if grep -Fq 'Fermi/Kubo' rev7_prapplied.tex; then exit 1; fi
+
+      - name: Compile REVTeX manuscript
+        working-directory: experiments/13-observable-resource-unification/typeset
+        run: |
+          latexmk -pdf -interaction=nonstopmode -halt-on-error -file-line-error rev7_prapplied.tex
+
+      - name: Production QA summary
+        working-directory: experiments/13-observable-resource-unification/typeset
+        shell: bash
+        run: |
+          set -o pipefail
+          PDF=rev7_prapplied.pdf
+          LOG=rev7_prapplied.log
+          mkdir -p rev7_rendered_pages
+          pdftoppm -png -r 180 "$PDF" rev7_rendered_pages/page >/dev/null 2>&1
+          {
+            echo 'Experiment 13 Rev7 production QA'
+            echo "commit: $GITHUB_SHA"
+            echo
+            pdfinfo "$PDF" | grep -E '^(Pages|Page size|PDF version):' || true
+            echo
+            sha256sum rev7_prapplied.tex "$PDF" rev4_unified.bib rev7_figures.tex build_rev7.py
+            echo
+            echo 'Undefined-reference/citation warnings:'
+            grep -Ei 'undefined references|undefined citations|Citation .* undefined|Reference .* undefined' "$LOG" || echo 'none'
+            echo
+            echo 'Overfull/underfull boxes:'
+            grep -E 'Overfull|Underfull' "$LOG" || echo 'none'
+            echo
+            echo 'LaTeX warnings:'
+            grep -E 'LaTeX Warning|Package .* Warning' "$LOG" || echo 'none'
+          } | tee REV7_PRODUCTION_QA.txt
+
+          if grep -Eqi 'undefined references|undefined citations|Citation .* undefined|Reference .* undefined' "$LOG"; then
+            echo 'Fatal QA: undefined citation/reference detected.' >&2
+            exit 1
+          fi
+          if grep -Eq 'Overfull \\hbox|Overfull \\vbox' "$LOG"; then
+            echo 'Fatal QA: overfull box detected.' >&2
+            exit 1
+          fi
+
+      - name: Upload production package
+        uses: actions/upload-artifact@v4
+        with:
+          name: experiment13-rev7-production
+          if-no-files-found: error
+          retention-days: 30
+          path: |
+            experiments/13-observable-resource-unification/typeset/rev7_prapplied.pdf
+            experiments/13-observable-resource-unification/typeset/rev7_prapplied.tex
+            experiments/13-observable-resource-unification/typeset/rev7_prapplied.log
+            experiments/13-observable-resource-unification/typeset/rev7_prapplied.bbl
+            experiments/13-observable-resource-unification/typeset/rev7_figures.tex
+            experiments/13-observable-resource-unification/typeset/build_rev7.py
+            experiments/13-observable-resource-unification/typeset/REV7_PRODUCTION_QA.txt
+            experiments/13-observable-resource-unification/typeset/rev7_rendered_pages/*.png
