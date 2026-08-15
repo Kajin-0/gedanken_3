@@ -8,23 +8,15 @@ Branch:
 experiment-12-oscillator-strength-state-count-bound
 ```
 
-Opened only after the premise survived a focused search better than the preceding rejected candidates.
-
 Question: can fixed low-energy direct-interband optical spectral weight coexist with arbitrarily small equilibrium thermal quasiparticle population when the microscopic interband velocity resource remains finite?
+
+Opened only after many preceding candidate premises were rejected against established detector/statistical/optical theory.
 
 ---
 
 ## 2026-08-14 — exact two-manifold theorem
 
-For flat conduction/valence manifolds separated by `E_gamma`, intrinsic neutrality and exact Fermi occupations were combined with the singular-value bound
-
-```math
-\|P_c\hat v_iP_v\|_F^2
-\le
-v_{max}^2\min(N_c,N_v).
-```
-
-Including Pauli blocking gives the tight result
+For flat conduction/valence manifolds separated by `E_gamma`, exact Fermi occupations and the singular-value/rank optical-strength budget gave
 
 ```math
 \boxed{
@@ -35,7 +27,7 @@ N_{th}
 }
 ```
 
-Kubo-Greenwood converts this to
+Kubo-Greenwood converted this to
 
 ```math
 \boxed{
@@ -46,20 +38,18 @@ n_{th}
 }
 ```
 
-Low-energy limit at fixed integrated optical spectral weight:
+At fixed integrated spectral weight,
 
 ```math
-\boxed{
 n_{th,min}
 \to
-\frac{2k_BT}{\pi e^2v_{max}^2}W_\sigma.
-}
+\frac{2k_BT}{\pi e^2v_{max}^2}W_\sigma
 ```
 
-Disposition:
+as `E_gamma -> 0`.
 
 ```text
-FIRST EXACT RESULT SURVIVES.
+FIRST EXACT RESULT SURVIVED.
 NOVELTY NOT ESTABLISHED.
 ```
 
@@ -67,100 +57,38 @@ NOVELTY NOT ESTABLISHED.
 
 ## 2026-08-14 — arbitrary dispersive multiband generalization
 
-The expected state-reuse loophole did **not** break the theorem.
+State reuse across different transitions did not break the premise.
 
-For every transition from `E_v<mu` to `E_c>mu`, exact Fermi algebra gives
-
-```math
-\boxed{
-D_{cv}
-\le
-\frac{e^{E_{cv}/(2k_BT)}-1}{2}
-(p_c+h_v).
-}
-```
-
-If each row and column of the crossing-transition velocity matrix has squared norm at most `v_*^2`, then for partial interband spectral weight
-
-```math
-W(E_\Omega)
-=\int_0^{E_\Omega/\hbar}
-\sigma_1^{inter}(\omega)d\omega,
-```
+For every transition with `E_v < mu < E_c`,
 
 ```math
 \boxed{
-n_e+n_h
-\ge
-\frac{2E_\Omega}{\pi e^2v_*^2}
-\frac{W(E_\Omega)}
-{e^{E_\Omega/(2k_BT)}-1}.
+\frac{2D_{cv}}{e^{E_{cv}/(2k_BT)}-1}
+\le p_c+h_v.
 }
 ```
 
-No flat bands, equal degeneracies, momentum conservation, or frequency-bin additivity are required.
-
-Controlling file:
-
-`DISPERSIVE_MULTIBAND_GENERALIZATION_STEP_2026-08-14.md`
+This closed the main frequency-bin double-counting loophole when combined with finite row/column velocity strength.
 
 ---
 
-## 2026-08-14 — global cutoff-free thermal optical sum
+## 2026-08-14 — thermal optical spectral-weight inequality
 
-The pointwise Fermi inequality can be inverted before any frequency cutoff is introduced.
-
-Summing with the same row/column velocity-strength budget and using Kubo gives
+Kubo-Greenwood produced the thermal kernel
 
 ```math
-\boxed{
-n_e+n_h
-\ge
-\frac{2}{\pi e^2v_*^2}
-\int_0^\infty
-\frac{\hbar\omega\,\sigma_1^{inter}(\omega)}
-{e^{\hbar\omega/(2k_BT)}-1}
-d\omega.
-}
+K_T(E)=E/[e^{E/(2k_BT)}-1].
 ```
 
-For an intrinsic neutral absorber,
+For a finite velocity-strength resource the population is bounded by the thermally weighted cross-`mu` optical conductivity.
 
-```math
-\boxed{
-n_{th}
-\ge
-\frac{1}{\pi e^2v_*^2}
-\int_0^\infty
-\frac{\hbar\omega\,\sigma_1^{inter}(\omega)}
-{e^{\hbar\omega/(2k_BT)}-1}
-d\omega.
-}
-```
-
-The thermal kernel
-
-```math
-K_T(E)=E/[e^{E/(2k_BT)}-1]
-```
-
-approaches `2 kBT` for low-energy optical transitions. Thus fixed low-energy optical spectral weight implies a finite thermal-population floor even as the optical energy tends to zero.
-
-The two-manifold and cutoff theorems are corollaries.
-
-Controlling file:
-
-`THERMAL_OPTICAL_SUM_INEQUALITY_STEP_2026-08-14.md`
+The low-energy kernel tends to `2 kBT`, so the carrier-population floor does not vanish merely because the direct transition energy tends to zero at fixed optical spectral weight and fixed velocity resource.
 
 ---
 
 ## 2026-08-14 — independent validation
 
-Reproducible script:
-
-`numerics/thermal_optical_sum_dirac_validation.py`
-
-Results:
+Reproducible Dirac calculations were added.
 
 ```text
 2-D neutral massless Dirac / graphene: bound/exact = 1/2
@@ -180,63 +108,244 @@ Delta/kBT       bound/exact
 16.0             0.9459
 ```
 
-Thus at the 10-um / 300-K Experiment-10 point, the theorem recovers about `79.5%` of the exact thermal population without using the Dirac DOS in the derivation.
+At the 10-um / 300-K witness, the theorem recovers about `79.5%` of the exact thermal population without using the Dirac density of states in the proof.
 
 ---
 
 ## 2026-08-14 — many-body boundary
 
-Bound excitons provide a real escape from a theorem stated in terms of **free quasiparticle** population:
+Bound excitons were identified as a genuine free-quasiparticle escape:
 
 ```text
-low-energy neutral excitonic oscillator strength can exist below the free electron-hole continuum;
+neutral low-energy excitonic oscillator strength can lie below the free e-h continuum;
 photocurrent then requires a separate dissociation process.
 ```
 
-Therefore the theorem is not universal across all photodetector architectures.
-
-Current valid class:
+The theorem class was explicitly restricted to
 
 ```text
-independent-quasiparticle direct interband charge absorbers.
+independent-quasiparticle direct cross-mu charge absorbers.
 ```
 
-Static single-particle disorder does not automatically break the theorem if exact eigenstates are used. Interaction-generated lifetime broadening and collective optical states are outside scope.
+Static one-particle disorder does not automatically break the proof if exact eigenstates are used. Interaction-generated many-body spectral functions lie outside scope.
 
 ---
 
-## Focused novelty status
+## 2026-08-14 — detector-level overclaim rejected
 
-Audited adjacent primary literature includes:
+An attempted conversion
 
-```text
-Kubo-Greenwood;
-standard/generalized optical f-sums;
-partial/restricted optical sums;
-graphene finite-T optical sum rules;
-quantum-geometric optical sums;
-finite-temperature QFI response kernels;
-classic infrared alpha/G_th detector criteria.
+```math
+G_{th}\gtrsim n_{th}/\tau_{response}
 ```
 
-No direct collision with the exact thermal carrier-population inequality has yet been identified.
+was rejected. A depleted photodiode can have long recombination lifetime but fast field-driven collection/transit.
+
+Therefore the thermal-population theorem is not a universal dark-current, thermal-generation, `D*`, or bandwidth theorem.
+
+---
+
+## 2026-08-14 — basis-invariant shell resource
+
+A hostile review found that a raw row/column maximum could depend on basis choice inside an exact degenerate eigenspace.
+
+The resource was reformulated with exact energy-shell projectors and projected velocity-operator norms. This fixed the basis-invariance defect without mixing distinct-energy equilibrium states.
+
+---
+
+## 2026-08-14 — parabolic equality family
+
+For ideal 3-D parabolic direct bands with constant one-to-one optical matrix element, equal electron and hole masses produce mirror symmetry about the intrinsic chemical potential.
+
+For the global direct spectrum the population theorem is exactly saturated at all temperatures.
+
+For unequal masses in the nondegenerate global limit,
+
+```math
+\boxed{
+\frac{n_{bound}}{n_{exact}}
+=\left[
+\frac{4m_em_h}{(m_e+m_h)^2}
+\right]^{3/4}.
+}
+```
+
+This showed the theorem is not a Dirac-specific artifact.
+
+---
+
+## 2026-08-14 — manuscript Rev0–Rev3 and notation failure
+
+A short theory manuscript was drafted and subjected to hostile review.
+
+The major mathematical-presentation defect in Rev0 was the basis dependence of the optical resource. Rev1 fixed it. Rev2/Rev3 tightened scope around integrated spectral weight and moved the LWIR example to an appendix.
+
+A recurring LaTeX escape regression rendered Greek `nu_B` in several places where Latin `u_B` was intended. Rev3 was preserved with an explicit notation erratum rather than silently rewritten.
+
+No theorem coefficient changed in that erratum.
+
+---
+
+## 2026-08-14 — finite-window equality correction and active-subspace theorem
+
+An independent external-style reread found that the statement
 
 ```text
-NOVELTY NOT ESTABLISHED.
+equal-mass parabolic bands saturate the total-population bound for arbitrary B
+```
+
+was too broad. For a partial spectral window, thermally populated states outside the selected optical graph make the total-population inequality strict.
+
+This led to a stronger result rather than a mere wording patch.
+
+For each exact upper/lower energy shell define selected optical blocks `A` and `B`, their support ranks, and
+
+```math
+n_{e,B}^{act}
+=V^{-1}\sum_{\epsilon_c>\mu}f(\epsilon_c)\operatorname{rank}A_{\epsilon_c,B},
+```
+
+```math
+n_{h,B}^{act}
+=V^{-1}\sum_{\epsilon_v<\mu}[1-f(\epsilon_v)]\operatorname{rank}B_{\epsilon_v,B}.
+```
+
+Using
+
+```math
+Tr(XX^\dagger)\le\|X\|_{op}^2\operatorname{rank}X
+```
+
+gave the basis-invariant active-subspace hierarchy.
+
+For the ideal equal-mass one-to-one parabolic model:
+
+```text
+active-subspace theorem: exact saturation for any selected window;
+total-population theorem: exact saturation only for the full relevant direct spectrum.
+```
+
+Controlling derivation:
+
+`ACTIVE_SUBSPACE_REFINEMENT_2026-08-14.md`
+
+---
+
+## 2026-08-14 — Rev4 external-style review
+
+`MANUSCRIPT_REV4_EXTERNAL_STYLE_REVIEW_2026-08-14.md` found:
+
+```text
+POINTWISE FERMI ALGEBRA: PASS
+KUBO NORMALIZATION: PASS
+BASIS INVARIANCE: PASS
+ACTIVE-SUBSPACE TRACE-RANK THEOREM: PASS
+FINITE-WINDOW EQUALITY LOGIC: PASS
+PARABOLIC VALIDATION: PASS
+DIRAC VALIDATION: PASS
+DETECTOR CLAIM SCOPE: PASS
+```
+
+Minor issues:
+
+```text
+resource notation regression;
+2-D normalization needed to be explicit;
+active population needed to be described as a support-dimension count.
+```
+
+No new theory was required.
+
+---
+
+## 2026-08-14 — final novelty comparator
+
+Bethkenhagen et al., *Physical Review Research* **2**, 023260 (2020), was added as an important adjacent precedent: dynamic conductivity plus the Thomas-Reiche-Kuhn sum rule is used to infer plasma ionization/free-electron count.
+
+Thus the broad idea
+
+```text
+conductivity spectral weight -> particle count
+```
+
+is established and is not a novelty claim for Experiment 12.
+
+No direct source was identified with the Experiment-12 combination
+
+```text
+cross-mu direct conductivity
++ E/[exp(E/2kBT)-1] thermal kernel
++ per-shell optical-velocity capacity
+-> minimum thermal optical-support population.
+```
+
+```text
+DIRECT COLLISION: NOT FOUND
+PRIORITY: NOT ESTABLISHED
+NOVELTY: NOT ESTABLISHED
+NOVELTY RISK: HIGH
 ```
 
 ---
 
-## Active frontier
+## 2026-08-14 — Rev6 submission-candidate text
 
-The theorem itself has survived the first major mathematical generalizations.
+To eliminate the recurring `u/nu` transcription ambiguity permanently, Rev6 changed the resource notation to
 
-Next attacks:
-
-```text
-localized-state / electrical-activity loophole;
-carrier-number fluctuation/noise corollary;
-dedicated exact-kernel novelty audit beyond photodetector literature.
+```math
+v_B^{cap}.
 ```
 
-Do not move to a manuscript until these are resolved.
+The controlling hierarchy is
+
+```math
+\boxed{
+n_e+n_h
+\ge
+n_{e,B}^{act}+n_{h,B}^{act}
+\ge
+\frac{2}{\pi e^2(v_B^{cap})^2}
+\int_B
+\frac{\hbar\omega\,\sigma_1^{cross}(\omega)}
+{e^{\hbar\omega/(2k_BT)}-1}\,d\omega.
+}
+```
+
+Rev6 also states explicitly that 2-D uses area and sheet conductivity, and that `n_B^act` is a support-dimension population rather than an oscillator-strength-weighted participation ratio.
+
+File:
+
+`MANUSCRIPT_REV6_2026-08-14.md`
+
+---
+
+## 2026-08-14 — final hostile QA
+
+`MANUSCRIPT_REV6_FINAL_QA_2026-08-14.md` records:
+
+```text
+FERMI ALGEBRA: PASS
+KUBO NORMALIZATION: PASS
+BASIS INVARIANCE: PASS
+TRACE-RANK ACTIVE-SUBSPACE REFINEMENT: PASS
+FINITE-WINDOW EQUALITY: PASS
+2-D NORMALIZATION: PASS
+PARABOLIC VALIDATION: PASS
+DIRAC VALIDATION: PASS
+LOW-ENERGY INTERPRETATION: PASS
+CLAIM SCOPE: PASS
+BIBLIOGRAPHY CORE: PASS
+DIRECT PRIOR-ART COLLISION: NOT FOUND
+NOVELTY: NOT ESTABLISHED
+```
+
+## Final disposition
+
+```text
+THEOREM-LEVEL SCIENCE: PASS FROM INTERNAL ADVERSARIAL QA
+CURRENT MANUSCRIPT: REV6
+NOVELTY: NOT ESTABLISHED
+NO MORE THEORY BY DEFAULT
+```
+
+Next work is journal selection, journal-specific citation/style audit, typesetting, and independent review of the rendered manuscript. Do not add mechanisms merely to make the paper larger.
