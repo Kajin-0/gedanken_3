@@ -19,47 +19,16 @@ experiment-12-oscillator-strength-state-count-bound
 1. `experiments/12-oscillator-strength-state-count-bound/CURRENT_STATE.md`
 2. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV6_2026-08-14.md`
 3. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV6_FINAL_QA_2026-08-14.md`
-4. `experiments/12-oscillator-strength-state-count-bound/ACTIVE_SUBSPACE_REFINEMENT_2026-08-14.md`
-5. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV4_EXTERNAL_STYLE_REVIEW_2026-08-14.md`
+4. `experiments/12-oscillator-strength-state-count-bound/JOURNAL_FIT_AND_SUBMISSION_PLAN_2026-08-14.md`
+5. `experiments/12-oscillator-strength-state-count-bound/ACTIVE_SUBSPACE_REFINEMENT_2026-08-14.md`
 6. `experiments/12-oscillator-strength-state-count-bound/NOVELTY_AUDIT_ADDENDUM_TRK_CONDUCTIVITY_PARTICLE_COUNT_2026-08-14.md`
-7. `experiments/12-oscillator-strength-state-count-bound/NOVELTY_AUDIT_2026-08-14.md`
-8. `experiments/12-oscillator-strength-state-count-bound/PROGRESS_LOG.md`
+7. `experiments/12-oscillator-strength-state-count-bound/PROGRESS_LOG.md`
 
-Older manuscript revisions preserve the development path. Rev6 is controlling.
+Older revisions preserve the development history. Rev6 is controlling.
 
-## Controlling theorem
+## Controlling result
 
-For independent quasiparticles and direct transitions crossing `mu`,
-
-```math
-\frac{2[f(E_v)-f(E_c)]}
-{e^{(E_c-E_v)/(2k_BT)}-1}
-\le
-f(E_c)+1-f(E_v).
-```
-
-For any useful positive-frequency window `B`, define exact shell coupling blocks `A_{epsilon_c,B}`, `B_{epsilon_v,B}` and
-
-```math
-(v_B^{cap})^2
-=\max[
-\sup_{\epsilon_c>\mu}\|A_{\epsilon_c,B}\|_{op}^2,
-\sup_{\epsilon_v<\mu}\|B_{\epsilon_v,B}\|_{op}^2].
-```
-
-Define active thermal support populations
-
-```math
-n_{e,B}^{act}
-=V^{-1}\sum_{\epsilon_c>\mu}f(\epsilon_c)
-\operatorname{rank}A_{\epsilon_c,B},
-```
-
-```math
-n_{h,B}^{act}
-=V^{-1}\sum_{\epsilon_v<\mu}[1-f(\epsilon_v)]
-\operatorname{rank}B_{\epsilon_v,B}.
-```
+For any useful direct cross-`mu` optical window `B`, define the basis-invariant shell optical-velocity capacity `v_B^cap` and optically active thermal support populations `n_{e,B}^act`, `n_{h,B}^act` from exact energy-shell coupling blocks.
 
 Then
 
@@ -76,7 +45,7 @@ n_{e,B}^{act}+n_{h,B}^{act}
 }
 ```
 
-For intrinsic neutrality,
+Intrinsic neutral form:
 
 ```math
 \boxed{
@@ -89,52 +58,25 @@ n_{th}
 }
 ```
 
-The low-energy kernel tends to `2 kBT`, so finite integrated low-energy direct spectral weight carries a finite thermal quasiparticle state-count cost at fixed `v_B^{cap}`.
+The thermal kernel tends to `2 kBT` at low energy. The theorem constrains integrated spectral weight, not a vanishing-bandwidth peak.
 
-`n_B^act` is a support-dimension count, not an oscillator-strength-weighted participation ratio.
-
-## Equality / validation
+## Equality / checks
 
 ```text
 equal-mass parabolic model:
-  active theorem saturates for any selected direct window;
-  total theorem saturates for the full direct spectrum.
+  active theorem exact for any selected direct window;
+  total theorem exact for full direct spectrum.
 
-2-D neutral massless Dirac: 0.5000
-3-D massless Dirac:         0.6667
-3-D massive Dirac,
-10 um / 300 K:              0.794684
-```
-
-For unequal parabolic masses in the nondegenerate global limit,
-
-```math
-n_bound/n_exact
-=[4m_em_h/(m_e+m_h)^2]^{3/4}.
+2-D massless Dirac: 0.5000
+3-D massless Dirac: 0.6667
+3-D massive Dirac, 10 um / 300 K: 0.794684
 ```
 
 ## Scope
 
-Valid class:
-
-```text
-independent-quasiparticle direct cross-mu charge absorbers.
-```
-
-Do not extend automatically to:
-
-```text
-bound excitons / neutral collective states;
-phonon-assisted indirect transitions;
-interaction-generated many-body spectral functions;
-unconstrained photonic path enhancement.
-```
-
-Do not infer universal dark current, thermal generation, `D*`, or finite-bandwidth noise from the state-count theorem.
+Valid only as stated for independent-quasiparticle direct cross-`mu` charge absorbers. Do not convert automatically to dark current, generation rate, `D*`, finite-bandwidth noise, excitonic/collective absorption, indirect absorption, many-body spectral functions, or arbitrary photonic enhancement.
 
 ## Novelty
-
-The audit now includes phase-space filling, `f`/TRK sum rules, quantum-geometric optical sums, classic IR `alpha/G_th`, Yablonovitch-Kane low-carrier laser engineering, and Bethkenhagen et al. conductivity-to-ionization TRK counting.
 
 ```text
 DIRECT PRIOR-ART COLLISION: NOT FOUND
@@ -143,23 +85,25 @@ NOVELTY: NOT ESTABLISHED
 NOVELTY RISK: HIGH
 ```
 
-No `first` or priority wording is authorized.
+No priority wording is authorized.
 
-## Current manuscript state
+## Manuscript / journal state
 
 ```text
-MANUSCRIPT_REV6_2026-08-14.md
+CURRENT SCIENTIFIC TEXT: MANUSCRIPT_REV6_2026-08-14.md
+FIRST TARGET: Physical Review B — Regular Article
+FALLBACK: Journal of Applied Physics — Article
 ```
 
-Final internal hostile QA: theorem-level PASS.
+Final internal hostile QA: PASS at theorem level.
+
+# ACTIVE NEXT ACTION
 
 ```text
 NO MORE THEORY BY DEFAULT.
 ```
 
-## Next action
-
-Select journal, audit journal-specific scope/reference style, typeset Rev6, then independently review the rendered manuscript. Add new physics only if a referee identifies a blocking gap.
+Convert Rev6 to PRB-compatible LaTeX, perform PRB-specific reference/style QA, compile and visually inspect the PDF, then review the rendered manuscript independently.
 
 ## Closed previous branches
 
