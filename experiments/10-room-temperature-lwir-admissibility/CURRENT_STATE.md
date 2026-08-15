@@ -2,13 +2,9 @@
 
 **Date:** 2026-08-14  
 **Scope:** analytical/theoretical only  
-**Status:** **JOINT MATCHED-OPTICS / HIGH-v / MULTIBAND-AUGER ADMISSIBILITY STRUCTURE NOW DERIVED IN CONTROLLED MODELS / EXACT-CLOSURE CARRIER-COLUMN LOWER BOUND FOUND / DEDICATED NOVELTY AUDIT REQUIRED / NO MANUSCRIPT YET**
+**Status:** **PROVISIONAL CONDITIONAL THEOREM PACKAGE SURVIVES FOCUSED PRIOR-ART AUDIT / GENERAL SPECTATOR CEILING DERIVED / THREE-BAND NEUTRALITY REPAIRED / UNIVERSALITY FAILS FOR UNBOUNDED SPECTATOR OPTICAL STRENGTH OR PHOTONIC PATH ENHANCEMENT / NOVELTY NOT ESTABLISHED / NO MANUSCRIPT YET**
 
-## Objective
-
-Derive from first principles the electronic-structure conditions a passive LWIR interband absorber must satisfy to approach HgCdTe-class intrinsic detector quality near 300 K without sacrificing useful temporal response.
-
-Fixed target:
+## Fixed target
 
 ```math
 T=300\ \mathrm K,
@@ -22,47 +18,45 @@ E_g/(k_BT)\approx4.796.
 
 ## Read first
 
-1. `HEAVY_HOLE_AUGER_RATE_AND_JOINT_BOUND_STEP_2026-08-14.md`
-2. `THIRD_BAND_HEAVY_HOLE_AUGER_ESCAPE_STEP_2026-08-14.md`
-3. `RADIATIVE_BOUNDARY_ADMISSIBILITY_STEP_2026-08-14.md`
-4. `AUGER_NEAR_THRESHOLD_RATE_STEP_2026-08-14.md`
-5. `AUGER_ASYMMETRY_REOPENING_STEP_2026-08-14.md`
-6. `AUGER_KINEMATIC_CLOSURE_STEP_2026-08-14.md`
-7. `KANE_VELOCITY_RESOURCE_BOUND_STEP_2026-08-14.md`
-8. `MATCHED_DIRAC_ABSORPTION_DOS_STEP_2026-08-14.md`
-9. `PROGRESS_LOG.md`
+1. `THEOREM_CORE_2026-08-14.md`
+2. `JOINT_ADMISSIBILITY_NOVELTY_AUDIT_2026-08-14.md`
+3. `GENERAL_SPECTATOR_BAND_ADMISSIBILITY_THEOREM_STEP_2026-08-14.md`
+4. `HEAVY_HOLE_AUGER_RATE_AND_JOINT_BOUND_STEP_2026-08-14.md`
+5. `THIRD_BAND_HEAVY_HOLE_AUGER_ESCAPE_STEP_2026-08-14.md`
+6. `RADIATIVE_BOUNDARY_ADMISSIBILITY_STEP_2026-08-14.md`
+7. earlier Experiment-10 derivations as needed.
 
 ---
 
-# Result A — matched-absorptance high-v law
+# 1. Matched active-pair optical depth
 
-For the intrinsic finite-gap massive-Dirac family,
-
-```math
-n_e\propto N_Dv^{-3},
-\qquad
-\alpha\propto N_Dv^{-1},
-\qquad
-d\propto v/N_D,
-```
-
-therefore
+For the finite-gap 3-D massive-Dirac active pair,
 
 ```math
-\boxed{\Sigma_e=n_ed=C/v^2.}
+n_0\propto v^{-3},
+\qquad
+\alpha_D\propto v^{-1},
+\qquad
+d_0\propto v,
 ```
 
-Equivalent-species degeneracy cancels from `Sigma_e`; ideal ballistic crossing time is `v^0`.
+so under the controlled single-pass active-pair optical-depth requirement
 
-For the standard 10-um/300-K numerical witness (`A=0.90`, `r=1.2`, `n_b=3.5`),
+```math
+\boxed{\Sigma_0=C/v^2.}
+```
+
+For the standard numerical witness (`A=0.90`, `r=1.2`, `n_b=3.5`),
 
 ```math
 C=1.06668\times10^{29}\ \mathrm{m^{-2}(m/s)^2}.
 ```
 
+The ideal ballistic crossing time remains `v^0`.
+
 ---
 
-# Result B — microscopic lattice velocity resource
+# 2. Microscopic lattice velocity resource
 
 For a Wannier/tight-binding Hamiltonian,
 
@@ -74,58 +68,29 @@ For a Wannier/tight-binding Hamiltonian,
 }
 ```
 
-Hence conditionally
+Therefore conditionally
 
 ```math
-\boxed{v\le V_{hop},}
+\boxed{v\le V_{hop}.}
 ```
-
-and
-
-```math
-\boxed{\Sigma_e\ge C/V_{hop}^2.}
-```
-
-Generic effective-mass sums, fixed-window optical f-sums, and remote-band energy separation alone did not produce a chemistry-independent upper `v`.
 
 ---
 
-# Result C — two-band Auger structure
+# 3. Two-band Auger results
 
-For exact particle-hole-symmetric massive-Dirac dispersion,
+Exact particle-hole-symmetric massive-Dirac `eeh/hhe` direct Auger is kinematically closed.
 
-```math
-\varepsilon(k)=\sqrt{\Delta^2+(\hbar vk)^2},
-\qquad\Delta=E_g/2,
-```
-
-normal-momentum phononless `eeh` and `hhe` Auger channels are exactly closed.
-
-The minimum mismatch is
+The exact mismatch is
 
 ```math
 \boxed{\Delta_A(E)=\sqrt{E^2+2E_g^2}-E.}
 ```
 
-Adding scalar particle-hole asymmetry
+Scalar particle-hole asymmetry reopens the channel with weak-asymmetry threshold
 
 ```math
-E_\pm=Dk^2\pm\sqrt{\Delta^2+(\hbar vk)^2}
+\boxed{K_{th}\sim E_g\mathcal A_m^{-1/3}.}
 ```
-
-gives the weak-asymmetry reopening law
-
-```math
-\boxed{K_{th}\sim E_g\mathcal A_m^{-1/3},}
-```
-
-where
-
-```math
-\mathcal A_m=2|D\Delta/(\hbar^2v^2)|.
-```
-
-At 10 um / 300 K, this toy model needs approximately `A_m <= 0.0848` for `K_th >= 10 kBT`.
 
 The interior threshold phase-space shell obeys
 
@@ -133,43 +98,25 @@ The interior threshold phase-space shell obeys
 \boxed{\Phi_{3body}\propto(K-K_{th})^2,}
 ```
 
-while a microscopic matrix-element zero can add powers.
+with extra microscopic powers possible from overlap zeros.
+
+In the minimal weak-screening model at matched absorptance, direct-area Auger retains an approximate `v^-4` algebraic dependence times the threshold activation.
+
+Broad Dirac/symmetric Auger suppression and threshold physics are established prior art.
 
 ---
 
-# Result D — complete external optical boundary is the invariant radiative side
+# 4. Complete external optical boundary
 
-Matching useful front-side absorptance alone is insufficient. The theorem-grade comparison must match the complete external mode-resolved absorptance:
-
-```math
-\boxed{\mathcal A_\mu^{(A)}=\mathcal A_\mu^{(B)}}
-```
-
-for all external carrier-coupled optical channels.
-
-At thermal equilibrium,
-
-```math
-\boxed{\Phi_{abs}^{ext}=\Phi_{em}^{ext}=\Phi_0.}
-```
-
-Internal radiative recombination is not invariant because photon recycling can change the internal event count at fixed external emission.
-
-Define
-
-```math
-\boxed{
-\Xi_A^{ext}
-=\frac{G_A^{gen}+R_A^{rec}}
-{\Phi_{abs}^{ext}+\Phi_{em}^{ext}}.
-}
-```
+Matching useful front-side absorptance alone does not fix radiative exchange. Match the complete external mode-resolved optical boundary when comparing irreversible optical traffic.
 
 At equilibrium,
 
 ```math
-\boxed{\Xi_A^{ext}=G_A/\Phi_0.}
+\Phi_{abs}^{ext}=\Phi_{em}^{ext}=\Phi_0.
 ```
+
+Internal radiative recombination is not invariant because photon recycling changes internal event count.
 
 For the ideal hemispherical step absorber at 10 um / 300 K,
 
@@ -186,314 +133,240 @@ and the direct-Auger/radiative activation-parity line is
 
 ---
 
-# Result E — exact heavy-hole third-band opening theorem
+# 5. General spectator-band kinematic ceiling
 
-Add
-
-```math
-E_{hh}(k)
-=\Delta+\delta_{hh}
-+\frac{\hbar^2k^2}{2M_{hh}}.
-```
+Let a spectator hole branch have positive isotropic convex excitation energy `E_s(p)`.
 
 Define
 
 ```math
-\rho=\frac{M_{hh}v^2}{\Delta},
-\qquad
-\eta=\frac{\delta_{hh}}{\Delta}.
+\boxed{
+ v_s^{crit}=\inf_{p>0}\frac{E_s(p)}{p}.
+}
 ```
 
-For normal-momentum CCCH / Auger-1,
+For normal-momentum spectator-assisted CCCH with the active massive-Dirac conduction band,
 
 ```math
 \boxed{
-\rho\le2(1+\eta)
+ v\le v_s^{crit}
 \Longleftrightarrow
-\text{no finite-energy CCCH support}.
+\text{no finite-energy support}
 }
 ```
+
+within the continuum model.
 
 Equivalently,
 
 ```math
+\boxed{E_s(p)\ge vp\quad\forall p.}
+```
+
+For multiple spectators,
+
+```math
+\boxed{v_{spec}=\min_s v_s^{crit}.}
+```
+
+This has the mathematical structure of the Landau critical-velocity criterion and uses the classical equal-group-velocity impact-ionization threshold condition. It is not claimed as a new general kinematic principle.
+
+For a parabolic heavy-hole spectator,
+
+```math
+E_{hh}(p)=\Delta+\delta_{hh}+p^2/(2M_{hh}),
+```
+
+```math
 \boxed{
-M_{hh}v^2\le2(\Delta+\delta_{hh}).
+ v_{hh}^{crit}=\sqrt{2(\Delta+\delta_{hh})/M_{hh}}
 }
 ```
 
-If the inequality is violated, there is one unique finite threshold. Near the opening boundary
+and exact closure is
 
 ```math
-\rho_c=2(1+\eta),
+\boxed{M_{hh}v^2\le2(\Delta+\delta_{hh}).}
 ```
-
-```math
-\boxed{
-q_{th}\sim\frac{3}{\rho-\rho_c},
-\qquad
-K_{th}^{hh}/\Delta\sim\frac{3}{\rho-\rho_c}.
-}
-```
-
-For `M_hh -> infinity`,
-
-```math
-\boxed{K_{th}^{hh}\to E_g+\delta_{hh}.}
-```
-
-Thus a flat touching heavy-hole band collapses the threshold to `E_g`, reproducing the conventional low-threshold Auger-1 direction.
 
 ---
 
-# NEW Result F — heavy-hole threshold phase space does not diverge with spectator DOS
+# 6. Spectator-hole charge neutrality correction
 
-For a fixed hot electron, eliminate heavy-hole momentum and expand the six-dimensional final-state energy around the constrained threshold minimum.
+Adding spectator hole states shifts the intrinsic chemical potential positive. Therefore the old two-band relation is no longer an equality.
 
-With
-
-```math
-a_\parallel=(1-u^2)^{3/2},
-\qquad
-a_\perp=\sqrt{1-u^2},
-```
-
-the exact constrained Hessian determinant is
+However,
 
 ```math
-\boxed{
-\det H
-=
-a_\parallel\left(a_\parallel+\frac{2}{\rho}\right)
-\left[
-a_\perp\left(a_\perp+\frac{2}{\rho}\right)
-\right]^2.
-}
+n_c(\mu)\ge n_c(0)
 ```
 
-Define the threshold-envelope opening factor
+and the active symmetric interband occupation difference satisfies
 
 ```math
-\boxed{
-\gamma
-=1-\frac{u_{th}}
-{q_{th}/\sqrt{1+q_{th}^2}}.
-}
+\mathcal P(E,\mu)
+=\frac{\sinh(E/k_BT)}{\cosh(E/k_BT)+\cosh(\mu/k_BT)}
+\le\mathcal P(E,0).
 ```
 
-Then
+Thus active-pair absorption weakens and the required active-pair single-pass thickness increases.
+
+Therefore the two-band result survives as the rigorous lower bound
 
 ```math
-\boxed{
-\Phi_{hh}^{(q)}(K)
-\propto
-\frac{\gamma^2}{\sqrt{\det H}}
-(K-K_{th}^{hh})^2.
-}
+\boxed{\Sigma_c\ge C/v^2.}
 ```
 
-In the flat-heavy-hole limit,
+At the touching parabolic-spectator exact-closure boundary (`rho=2`), one spin-degenerate spectator gives, for the standard `r=1.2` witness,
 
-```math
-\boxed{
-\det H\to1,
-\qquad
-\gamma\to1.
-}
+```text
+mu/kBT = 0.46384
+active density = 1.5695 x two-band value
+active absorption Pauli factor = 0.98907 x two-band value
+matched active-electron column = 1.5869 x C/v^2
 ```
 
-Therefore the normalized local threshold phase-space coefficient remains finite. There is **no universal independent `M_hh^(3/2)` divergence** in the threshold event rate simply from the heavy-hole DOS.
-
-The heavy band's principal kinematic damage is threshold collapse, not a mandatory divergent local phase-space coefficient.
+so the basic bound is conservative in that case.
 
 ---
 
-# NEW Result G — near exact CCCH closure the rate is doubly suppressed
+# 7. Strongest current conditional theorem
 
-Let
-
-```math
-\delta\rho=\rho-\rho_c>0.
-```
-
-Then
+Define
 
 ```math
-\gamma\sim(\delta\rho)^2/6,
+\boxed{v_{adm}=\min(V_{hop},v_{spec}).}
 ```
 
-```math
-\det H
-\sim
-\frac{256}{243\rho_c^3}(\delta\rho)^5,
-```
-
-and hence
+Then any member of the controlled single-pass, active-pair-optically-dominant class satisfying exact normal-momentum spectator-assisted Auger closure obeys
 
 ```math
 \boxed{
-\frac{\gamma^2}{\sqrt{\det H}}
-\sim
-\frac{\sqrt3\,\rho_c^{3/2}}{64}
-(\delta\rho)^{3/2}.
-}
-```
-
-Together with
-
-```math
-K_{th}^{hh}\sim3\Delta/\delta\rho,
-```
-
-the smooth-matrix weak-screening thermal rate near closure has the schematic structure
-
-```math
-\boxed{
-G_{hh}^{area}
-\propto
-v^{-4}
-(\delta\rho)^{3/2}
-\exp[-(\Delta+3\Delta/\delta\rho)/(k_BT)].
-}
-```
-
-Exact closure is therefore approached through both an essential thermal suppression and a vanishing phase-space prefactor.
-
----
-
-# NEW Result H — open heavy-hole channel retains the high-v algebraic lever
-
-At fixed dimensionless `rho`, `eta`, and normalized geometry,
-
-```math
-G_{hh}^{area}\propto |V_{th}^{hh}|^2v^{-8}
-```
-
-before Coulomb momentum dependence.
-
-For a weakly screened Coulomb interaction with threshold transfer `Q_th ~ 1/v`,
-
-```math
-|V_{th}^{hh}|^2\propto v^4,
-```
-
-so
-
-```math
-\boxed{
-G_{hh}^{area}
-\propto
-\mathcal P_{hh}(\rho,\eta)
-v^{-4}
-\exp[-(\Delta+K_{th}^{hh})/(k_BT)]
-}
-```
-
-up to dielectric, spinor, exchange, screening, thermal-power, and optical-depth factors.
-
-For fixed physical `M_hh`, increasing `v` increases `rho`, but `P_hh` tends to a finite constant in the flat-heavy-hole limit. Thus heavy-hole DOS does not automatically cancel the `v^-4` algebraic benefit.
-
----
-
-# NEW Result I — exact CCCH closure imposes a matched-carrier-column floor
-
-This is now the strongest clean Experiment-10 theorem candidate.
-
-Matched absorptance gives
-
-```math
-\Sigma_e=C/v^2.
-```
-
-Exact CCCH closure gives
-
-```math
-v^2\le\frac{2(\Delta+\delta_{hh})}{M_{hh}}.
-```
-
-Therefore
-
-```math
-\boxed{
-\Sigma_e
+\Sigma_c
 \ge
-C\frac{M_{hh}}{2(\Delta+\delta_{hh})}
+\frac{C}{v_{adm}^2}
 =
-C\frac{M_{hh}}{E_g+2\delta_{hh}}.
-}
-```
-
-This is an explicit thermodynamic/kinematic conflict: lowering the matched thermal carrier population through large `v` is limited by the mass and offset of a nearby spectator band if exact Auger-1 closure is demanded.
-
-Including the lattice velocity resource gives
-
-```math
-\boxed{
-\Sigma_e
-\ge
 \max\!\left[
 \frac{C}{V_{hop}^2},
-C\frac{M_{hh}}{2(\Delta+\delta_{hh})}
+\max_s\frac{C}{(v_s^{crit})^2}
 \right].
 }
 ```
 
-For a touching spectator band at the standard witness:
+Parabolic heavy-hole corollary:
 
-```text
-M_hh/m0     v_c (m/s)      minimum Sigma_e for exact CCCH closure (cm^-2)
-0.50        2.088e5         2.446e14
-0.20        3.302e5         9.783e13
-0.10        4.670e5         4.892e13
-0.05        6.604e5         2.446e13
-0.02        1.044e6         9.783e12
+```math
+\boxed{
+\Sigma_c
+\ge
+\max\!\left[
+C/V_{hop}^2,
+C M_{hh}/(2(\Delta+\delta_{hh}))
+\right].
+}
 ```
 
-A touching `0.5 m0` spectator therefore forces a carrier-column floor about 23 times above the earlier `v=1e6 m/s` witness if exact CCCH closure is required.
-
-Reproducible calculation:
-
-`numerics/heavy_hole_rate_and_joint_bound.py`
+This is the strongest surviving Experiment-10 theorem candidate.
 
 ---
 
-# Prior-art boundary
+# 8. Heavy-hole open-channel rate result
 
-Established and unavailable as broad novelty:
+For the open parabolic CCCH channel, the constrained six-dimensional threshold Hessian gives a `(K-K_th)^2` kinematic shell.
+
+The flat-heavy-hole limit has finite normalized local threshold phase space:
+
+```math
+\det H\to1,
+\qquad
+\gamma\to1.
+```
+
+There is no universal independent `M_hh^(3/2)` divergence in the local threshold event rate.
+
+Near exact closure, with `delta rho=rho-rho_c`,
+
+```math
+K_{th}^{hh}/\Delta\sim3/(\delta\rho),
+```
+
+and
+
+```math
+\boxed{
+\gamma^2/\sqrt{\det H}
+\sim
+(\sqrt3\rho_c^{3/2}/64)(\delta\rho)^{3/2}.
+}
+```
+
+So the rate is suppressed both exponentially and algebraically near closure.
+
+---
+
+# 9. Adversarial prior-art disposition
+
+Established:
 
 ```text
-classical thresholded direct-gap Auger theory;
-CCCH/Auger-1 involving heavy holes in bulk HgCdTe;
-heavy-hole mass dependence of conventional Auger formulas;
-Kane overlap zeros and non-universal pre-exponential powers;
-band-structure engineering of Auger thresholds in HgCdTe quantum wells;
-alpha/G_th and alpha sqrt(tau) infrared-detector material figures of merit;
+alpha/G_th detector-material optimization;
+band-structure Auger suppression in small-gap detectors;
+HgCdTe heavy-hole CCCH/Auger-1;
+equal-group-velocity impact-ionization thresholds;
+Landau min[E(p)/p] critical-velocity structure;
+Dirac/quasi-relativistic Auger suppression;
+multiband superlattice design jointly balancing absorption and Auger;
 radiative detailed balance and photon recycling.
 ```
 
-A focused search did not establish prior art for the specific composed exact-closure inequality
+The focused audit did not locate the exact composed carrier-column inequality above, but a hostile reviewer can plausibly call it an elementary synthesis of known ingredients.
 
-```math
-\Sigma_e\ge C M_{hh}/[2(\Delta+\delta_{hh})],
+Current novelty status:
+
+```text
+PROVISIONAL THEOREM-LEVEL SYNTHESIS.
+NO DIRECT COLLISION FOUND IN FOCUSED AUDIT.
+NOVELTY NOT ESTABLISHED.
 ```
 
-but **novelty is not established** by that search.
+---
+
+# 10. Two hard universality failures
+
+## Optically active spectator bands
+
+If spectators also provide unconstrained useful absorption,
+
+```math
+\alpha_{tot}=\alpha_D+\alpha_s,
+```
+
+then the simple active-pair `C/v^2` physical-thickness bound is not universal.
+
+If `alpha_s <= chi_opt alpha_D`, only the weakened conditional result
+
+```math
+\Sigma_c\ge C/[(1+\chi_{opt})v_{adm}^2]
+```
+
+follows.
+
+Actual HgCdTe heavy-hole states are optically active, so the current theorem is **not** a quantitative bulk-HgCdTe bound.
+
+## Arbitrary photonic path enhancement
+
+The step `d=zeta/alpha` is single-pass. Resonators, gratings and slow-light structures can reduce physical absorber thickness at fixed external absorptance.
+
+Without an optical-path resource, arbitrary photonic enhancement escapes a universal physical carrier-column floor.
 
 ---
 
 # NEXT ACTION
 
-Do not add another physical mechanism yet.
+Do not add another electronic recombination mechanism.
 
-Perform a dedicated adversarial prior-art audit of the **joint theorem structure**:
+Attack the dominant remaining loophole:
 
-```text
-complete external optical boundary
-+ matched-absorptance finite-gap carrier scaling
-+ microscopic velocity resource
-+ finite-k electron-hole symmetry
-+ spectator-band CCCH closure
--> lower bound on matched thermal carrier column / admissible band-structure region.
-```
+> For a passive absorber with specified external absorptance and finite detector temporal response/bandwidth, what is the maximum optical path enhancement or photon dwell time, and does that restore a generalized carrier-column lower bound against resonant/slow-light escape?
 
-If that synthesis survives, compress Experiment 10 into theorem/corollary form and then test the minimum additional channels required to break it. If it does not survive, close the branch rather than accumulating more phenomenology.
+This reconnects the theorem to the founding finite-response requirement.
