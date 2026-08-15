@@ -2,481 +2,187 @@
 
 **Date:** 2026-08-15  
 **Scope:** analytical/theoretical only  
-**Status:** **ACTIVE / SCIENTIFIC UNITY TEST PASSED / TWO NEW CROSS-BRANCH THEOREMS + REALISTIC HgCdTe CLOSURE + RAMO RECYCLING RESULT / UNIFIED MANUSCRIPT REV1 EXISTS / STANDALONE PAPERS REMAIN ACTIVE**
+**Target:** Physical Review Applied — Regular Article  
+**Status:** **FLAGSHIP REV. 4 SCIENTIFICALLY FROZEN / PRODUCTION PDF QA-PASSED / RENDERED HOSTILE REVIEW PASSED / HUMAN METADATA REQUIRED**
 
 ## Read first
 
-1. `PAPER_DRAFT_REV1_2026-08-15.md`
-2. `PAPER_REV0_HOSTILE_REVIEW_2026-08-15.md`
-3. `UNIFIED_MANUSCRIPT_HOSTILE_REVIEW_2026-08-15.md`
-4. `COHERENCE_SELECTIVITY_STATE_COUNT_DUALITY_2026-08-15.md`
-5. `DISPERSIVE_SELECTIVITY_CAPACITY_DECOMPOSITION_2026-08-15.md`
-6. `HGCDTE_STABLE_RANK_CLOSURE_2026-08-15.md`
-7. `FINITE_TRANSIT_SHOCKLEY_RAMO_RECYCLING_2026-08-15.md`
-8. `PRIOR_ART_KILL_TEST_2026-08-15.md`
+1. `00_ACTIVE_FRONTIER_REV4_FLAGSHIP_2026-08-15.md`
+2. `REV4_PRAPPLIED_PRODUCTION_QA_2026-08-15.md`
+3. `PAPER_REV4_RENDERED_HOSTILE_REVIEW_2026-08-15.md`
+4. `PAPER_DRAFT_REV4_CLAIM_REFERENCE_CLEAN_2026-08-15.md`
+5. `PAPER_REV4_REFERENCE_QA_2026-08-15.md`
+6. `PAPER_REV4_FINAL_HOSTILE_CLAIM_REFERENCE_REVIEW_2026-08-15.md`
+7. `HGCDTE_STABLE_RANK_PRODUCTION_QA_2026-08-15.md`
+8. `HGCDTE_PT_SYMMETRY_STABLE_RANK_EXPLANATION_2026-08-15.md`
+9. `CHANNEL_SPECIFIC_OBSERVABILITY_GEOMETRY_2026-08-15.md`
 
-Do **not** withdraw or replace the existing Experiment-01 Applied Optics, Experiment-09 PRA, or Experiment-12 PRB manuscripts yet. The flagship Rev1 must first survive direct manuscript-level hostile review, complete reference auditing, and production numerical QA.
+If an older Experiment-13 note disagrees with the files above, this recovery order controls.
 
----
+## Production identity
 
-# 1. Correct abstraction
-
-There is no single universal matrix that is simultaneously the arrival-time information operator, the microscopic optical velocity block, and the terminal readout transfer matrix.
-
-The correct staged detector picture is
-
-```math
-\mathcal H_{task}
-\xrightarrow{M_{opt}}
-\mathcal H_{exc}
-\xrightarrow{M_{dyn}}
-\mathcal H_{int}
-\xrightarrow{M_{ro}(\omega)}
-\mathcal H_{term}.
+```text
+GitHub Actions run:   31900965632
+head commit:          f41bdc6a4e580bfadd8155903f4127b2b63655ca
+artifact ID:          9251078733
+artifact digest:      1b4375f9953707ddf1e6b35bf55f91377370274d230298429398096f1b42e01a
+PDF SHA-256:          84c86c30019a0517246493ad4b9aacd60ac54051164b27ca7dfedac2fdba800f
+built TeX SHA-256:    c1459c18e4bf5d20f09a9a956c23b565c76bd0a913fe9636adc2ca7fe1e2b8f9
+pages:                7
+undefined refs/cites: none
+overfull boxes:       none
+all-page visual QA:   PASS
+rendered hostile QA:  PASS
 ```
 
-For the stage/composite map relevant to a particular question,
+Five native vector figures are present and visually clean. The remaining underfull/float warnings are nonblocking in the inspected artifact.
 
-```math
-G_j=M_j^\dagger M_j\succeq0.
-```
+## Scientific center
 
-The unity is that **task preference, coherent response selectivity, inverse resource inference, and observability are controlled by different spectral/geometric features of the physically relevant map**.
-
-Generic positive-operator / singular-value mathematics is established and is not a novelty claim.
-
----
-
-# 2. New cross-branch theorem A — uniform-shell spectral concentration
-
-Let `G>=0` act on a `d`-dimensional comparison shell/subspace, with
-
-```math
-T=TrG,
-\qquad
-r_st=T/lambda_max.
-```
-
-Compare against the equal-trace isotropic operator
-
-```math
-G_iso=(T/d)I.
-```
-
-Then the maximum pure-task response advantage is
-
-```math
-\boxed{
-\mathcal A_{max}=d/r_{st}.
-}
-```
-
-For the brightest eigenstate versus the uniform incoherent state `I/d`, define the generic **response selectivity**
-
-```math
-\boxed{
-\mathcal S_{resp}=d/r_{st}.
-}
-```
-
-If the same exact shell is incoherently populated with a common occupation weight `p`, the spectral-capacity state-count tightness is
-
-```math
-\boxed{
-\tau_{count}=r_{st}/d.
-}
-```
-
-Therefore
-
-```math
-\boxed{
-\mathcal A_{max}
-=\mathcal S_{resp}
-=1/\tau_{count}.
-}
-```
-
-This simple reciprocal identity is **not** to be applied blindly to nonuniform dark populations or across different equilibrium energies. The dispersive theorem below is the general physical form.
-
-### Guaranteed task penalty
-
-If the selectivity factor is `S`, then fixed trace forces at least one orthogonal task to satisfy
-
-```math
-\boxed{
-\frac{q_{worst}}{q_{iso}}
-\le
-\frac{d-S}{d-1}.
-}
-```
-
-Equivalently,
-
-```math
-\boxed{
-\mathcal L_{task}
-\ge
-\frac{S-1}{d-1}.
-}
-```
-
-This is tight when the remaining `d-1` eigenvalues are equal.
-
-Two unequal equal-trace positive operators necessarily have opposite task orderings somewhere because their difference is nonzero Hermitian trace-zero and therefore indefinite.
-
-Experiment 01 remains a separate physical witness: it equalizes eventual event-specific matched-filter SNR for one transient and studies finite-time unknown-arrival search geometry. Do not claim its full task operators are equal-trace unless separately proved.
-
----
-
-# 3. Experiment-09 endpoint
-
-For the ideal bright projector
-
-```math
-G=|B><B|
-```
-
-with uniform `N`-state population-matched incoherent dark state,
-
-```math
-r_st=1,
-\qquad
-d=N.
-```
-
-Hence
-
-```math
-\mathcal S_{resp}=N,
-\qquad
-\tau_{count}=1/N.
-```
-
-In this rank-one construction the generic response ratio coincides with the **actual proven conditional quantum rejection factor**:
-
-```math
-eta_gamma=1,
-\qquad
-epsilon_D=1/N.
-```
-
-For nonuniform weights, retain the Experiment-09 result
-
-```math
-N_eff=1/\sum_jw_j^2,
-```
-
-rather than replacing it with `d/r_st`.
-
----
-
-# 4. Experiment-12 physical theorem remains the center of gravity
-
-Use the authoritative cross-chemical-potential conductivity convention
-
-```math
-\boxed{
-\sigma_1^{cross}(\omega)
-=
-\frac{\pi e^2}{V}
-\sum_{cv}^{cross}
-\frac{D_{cv}|v_{cv}|^2}{E_{cv}}
-\delta\!\left(\omega-\frac{E_{cv}}{\hbar}\right).
-}
-```
-
-The exact Fermi inequality is
-
-```math
-\boxed{
-\frac{2D_{cv}}
-{e^{E_{cv}/(2k_BT)}-1}
-\le p_c+h_v.
-}
-```
-
-With
-
-```math
-K_T(E)=E/[e^{E/(2k_BT)}-1],
-```
-
-```math
-\mathcal R_B
-\ge
-\frac{2}{\pi e^2}
-\int_B K_T(\hbar\omega)\sigma_1^{cross}(\omega)d\omega.
-```
-
-Using the basis-invariant exact-shell capacity `v_B^cap` gives
+The controlling theorem remains
 
 ```math
 \boxed{
  n_e+n_h
+ \ge n_{e,\mathcal B}^{act}+n_{h,\mathcal B}^{act}
  \ge
- n_{e,B}^{act}+n_{h,B}^{act}
- \ge
- \frac{2}{\pi e^2(v_B^{cap})^2}
- \int_B
+ \frac{2}{\pi e^2(v_{\mathcal B}^{cap})^2}
+ \int_{\mathcal B}
  \frac{\hbar\omega\sigma_1^{cross}(\omega)}
- {e^{\hbar\omega/(2k_BT)}-1}
- d\omega.
+ {e^{\hbar\omega/(2k_BT)}-1}d\omega.
 }
 ```
 
-This requires the selected/direct cross-`mu` conductivity contribution; raw total measured conductivity cannot in general be inserted without decomposition.
+It uses selected direct cross-`mu` conductivity and the basis-invariant exact-shell capacity. It is an equilibrium one-body population theorem, not a universal dark-current, generation-rate, finite-bandwidth-noise, or `D*` theorem.
 
----
+## Unified connector
 
-# 5. New cross-branch theorem B — dispersive selectivity/capacity decomposition
-
-For each selected exact electron/hole endpoint shell `a`, define
-
-```math
-lambda_a=||M_a||_op^2,
-r_a=rank(M_a),
-r_st,a=Tr(M_aM_a^dagger)/lambda_a,
-S_a^act=r_a/r_st,a,
-c_a=lambda_a/(v_B^cap)^2.
-```
-
-With thermal active-population weights
-
-```math
-w_a^act=p_ar_a/\sum_bp_br_b,
-```
-
-the capacity-step tightness is exactly
+For a physically declared admissible domain,
 
 ```math
 \boxed{
-\tau_{cap}^{act}
-=\sum_aw_a^{act}\frac{c_a}{S_a^{act}}.
+\mathcal S_{X|D}\tau_{X|D}=1.
 }
 ```
 
-Define
+This is organizing algebra, not a generic matrix novelty claim.
+
+Specializations:
+
+```text
+uniform task ensemble:       S=d/r_st
+coherent rank-one detector:  S=N_eff=1/sum_j w_j^2
+thermal endpoint ensemble:   S_th,B^act=1/tau_cap^act
+```
+
+The shell-resolved thermal decomposition is
 
 ```math
-eta_F=L_B/R_B<=1.
+\tau_{cap}^{act}=\sum_aw_a^{act}\frac{c_a}{\mathcal S_a^{act}},
 ```
-
-Then the full observable Experiment-12 active-population tightness is
 
 ```math
-\boxed{
-\tau_{obs}^{act}
-=eta_F
-\sum_aw_a^{act}\frac{c_a}{S_a^{act}}.
-}
+\tau_{obs}^{act}=\eta_F\sum_aw_a^{act}\frac{c_a}{\mathcal S_a^{act}}.
 ```
 
-Thus the theorem slack separates into
+## Production HgCdTe result
 
 ```text
-thermal/Fermi asymmetry;
-shell-to-global capacity mismatch;
-singular-spectrum response concentration.
-```
-
-This is the dispersive generalization of the one-shell reciprocal theorem and does not assume a common occupation across different energies.
-
----
-
-# 6. Realistic eight-band HgCdTe closure
-
-A companion audit script exists:
-
-```text
-numerics/hgcdte_selectivity_capacity_decomposition.py
-```
-
-It loads the authoritative Experiment-12 Kane implementation rather than duplicating the Hamiltonian.
-
-For the broad `Eg..0.5 eV` window, the current audit gives approximately
-
-```text
-eta_F                         ~= 0.31
-production-capacity factor    ~= 0.57
-observable active tightness   ~= 0.176
-```
-
-with the independently established Experiment-12 headline values remaining
-
-```text
-reference cross-mu population ~= 1.005e17 cm^-3
-v_B^cap                       ~= 1.018e6 m/s
-lower bound                   ~= 1.18e16 cm^-3
+mu                            = 0.1354615106 eV
+n_ref                         = 1.005140525e17 cm^-3
+R_B                           = 3.987420232e28 cm^-3 (m/s)^2
+L_B                           = 1.223486457e28 cm^-3 (m/s)^2
+n_B^act                       = 6.724111444e16 cm^-3
+v_B^cap                       = 1.01764e6 m/s
+eta_F                         = 0.306836598
+tau_cap^act                   = 0.572622972
+tau_obs^act                   = 0.175701685
+S_th,B^act                    ~= 1.746
 bound/reference               ~= 0.118
 bound/active                  ~= 0.176
 ```
 
-Important result:
+The factor closure is
 
 ```math
-\boxed{S_a^{act}=1}
+0.306836598\times0.572622972=0.175701685.
 ```
 
-to numerical precision for all thermally important contributing active exact-shell blocks in the present eight-band audit.
+Every contributing selected active shell has `S_a^act=1` to about `4e-14` in the BIA-neglecting second-order Kane model. This exact isotropy is model-specific and is not generalized to full zincblende HgCdTe with BIA.
 
-Therefore HgCdTe's ~17.6% active tightness is **not** weakened by local coherence concentration. It is explained primarily by shell-capacity variation (~0.57) and Fermi/Kubo asymmetry (~0.31).
+## Recycling / observability result
 
-These decomposition factors are audit-level until the stable-rank script is rerun with the complete production convergence protocol. Do not freeze extra significant figures yet.
-
----
-
-# 7. New Experiment-03/13 result — conservative recycling readout boundary
-
-For independent Poisson primary lineages with complete random multichannel waveform `H_a(omega)`,
+A terminal has positive observability effect
 
 ```math
-\boxed{
-S_y(\omega)
-=\sum_a\Lambda_aE[H_aH_a^\dagger].
-}
+G_i(\omega)=M^\dagger|i><i|M.
 ```
 
-Hence terminal cross-spectrum is complete-lineage waveform overlap.
+A positive internal sector null to one terminal cannot contribute cross-noise with another terminal.
 
-Under the ideal final-sink assumptions
+Under independent conservative one-final-sink Poisson lineages, ideal endpoint counting can therefore have exactly zero interterminal cross-spectrum despite internal recycling and mean crosstalk.
 
-```text
-Poisson primary generation;
-independent noninteracting lineages;
-one final sink per lineage;
-final-sink-only measurement;
-no branching/gain;
-no common electronics,
-```
-
-conservative recycling can coexist with exactly zero interterminal endpoint-counting cross-spectrum.
-
-For a finite-transit electron-hole pair, Shockley–Ramo gives
+For an internally created/recombined pair,
 
 ```math
-\boxed{
-i_k(t)
-=e\frac{d}{dt}
-[\phi_k(r_e)-\phi_k(r_h)].
-}
+Q_i^{rec}=0
 ```
 
-If the pair is created internally at one point and later recombines internally at a common point,
+while finite-transit Shockley-Ramo motion can give finite-frequency waveform support. The endpoint source-channel null can therefore be lifted at finite frequency; a nonzero ensemble cross-spectrum is allowed, not guaranteed.
 
-```math
-\boxed{Q_k^{rec}=0}
-```
+## Novelty / significance state
 
-for every electrode, while
+No direct prior-art collision was found in the completed targeted audits. Historical priority is not established and priority language is not authorized.
 
-```math
-\boxed{
-H_k^{rec}(\omega)
-=i\omega e\int\Delta\phi_k(t)e^{-i\omega t}dt
-}
-```
-
-has
-
-```math
-H_k^{rec}(0)=0
-```
-
-but can have finite-frequency support.
-
-Therefore finite-transit Ramo readout **permits** a conservative recycling lineage erased by endpoint counting to acquire multichannel AC support. A nonzero ensemble cross-spectrum is not guaranteed; symmetry, opposing lineage classes, weighting fields, or electronics can still cancel it.
-
-Focused prior-art searches have found established Ramo GR-noise theory and established HgCdTe photon-recycling/crosstalk modeling, but no direct collision yet with this conservative-lineage endpoint-versus-finite-transit boundary. Novelty remains plausible, not certified.
-
----
-
-# 8. Manuscript state
-
-### Rev0
-
-`PAPER_DRAFT_REV0_2026-08-15.md`
-
-Hostile review found:
+The strongest remaining referee vulnerabilities are:
 
 ```text
-one blocking Kubo convention regression;
-stable-rank scope compression;
-generic response selectivity over-described as quantum rejection;
-sigma_cross experimental interpretation too broad;
-Ramo finite-frequency visibility phrased too deterministically.
+breadth / significance of the unified paper;
+practical isolation of sigma_cross;
+need to establish v_B^cap for a target material;
+independent-quasiparticle scope;
+realistic bound tightness (~11.8% full / ~17.6% active);
+idealized endpoint-Poisson assumptions in the recycling result.
 ```
 
-No central theorem failed.
+These are applicability/editorial questions, not identified theorem defects.
 
-### Rev1
-
-`PAPER_DRAFT_REV1_2026-08-15.md`
-
-Rev1 fixes those issues:
+## Standalone manuscripts
 
 ```text
-authoritative Experiment-12 conductivity convention restored;
-staged maps introduced;
-uniform-shell hypotheses attached to the simple reciprocity;
-generic S_resp separated from Experiment-09 quantum rejection;
-Experiment-01 witness separated from equal-trace theorem;
-sigma_cross explicitly described as selected/decomposed response;
-HgCdTe factors marked audit-level;
-endpoint Poisson hypotheses explicit;
-finite-frequency Ramo result reduced from guaranteed visibility to permitted visibility.
+Experiment 01 Applied Optics: frozen fallback
+Experiment 09 PRA:            frozen fallback
+Experiment 12 PRB:            frozen fallback
+Experiment 13 flagship:       primary path
 ```
 
----
+Do not delete the standalones and do not simultaneously submit materially overlapping versions.
 
-# 9. Prior-art disposition
+## Remaining blockers
 
-Generic ingredients are established and must not be claimed as new:
+The production source intentionally still contains placeholders for:
 
 ```text
-Gram/positive operators;
-stable rank and singular-value inequalities;
-task/Fisher information operators;
-POVM coherence sensitivity;
-bright/dark optical states;
-Shockley-Ramo detector response;
-Poisson shot-noise / marking / thinning;
-HgCdTe photon recycling and mean crosstalk;
-optical sum-rule / geometric-bound neighborhoods.
+author name
+institutional affiliation
+corresponding email
+acknowledgments / funding
 ```
 
-Candidate new content is narrowly:
+Those are the only known submission blockers.
+
+## Next action
+
+Do not open a new theory branch by default.
+
+When human metadata is supplied:
 
 ```text
-1. detector-specific reciprocal relation between response selectivity and state-count capacity tightness;
-2. its dispersive thermal decomposition and realistic HgCdTe diagnosis;
-3. quantitative fixed-trace task penalty tied to the same selectivity;
-4. conservative photon-recycling endpoint-counting invisibility versus finite-transit Ramo AC reopening;
-5. the causal closure of these independently derived photodetector results into one staged spectral argument.
+insert metadata only;
+rebuild through CI;
+record the new hashes;
+inspect all pages again;
+submit if the metadata-only build remains clean.
 ```
 
-No direct prior-art collision has yet been found for the combined statements. Absence of a search hit is not proof of novelty.
-
----
-
-# 10. Strategic disposition
-
-```text
-SCIENTIFIC UNITY:                     PASS
-UNIFIED REV1:                         ACTIVE
-CENTRAL EXPERIMENT-12 THEOREM:        PASS
-NEW SELECTIVITY/COUNT DUALITY:        PASS
-DISPERSIVE DECOMPOSITION:             PASS
-HgCdTe AUDIT CLOSURE:                 PASS, production rerun pending
-FINITE-TRANSIT RAMO RESULT:           PASS mathematically, novelty still under audit
-STANDALONE PAPERS 01/09/12:           RETAIN
-SUPERSEDING FLAGSHIP DECISION:        NOT YET
-```
-
-## Immediate next actions
-
-1. Perform hostile referee review of **Rev1 itself**, not just the architecture or Rev0.
-2. Run the stable-rank HgCdTe companion at production convergence settings and compare against the controlling Experiment-12 continuous ordinary supremum.
-3. Deepen prior-art audit specifically around finite-transit GR/Ramo cross-noise and conservative photon-recycling lineages.
-4. Import and verify the complete reference networks from Experiments 01, 09, and 12.
-5. Only if Rev1 survives those gates should a journal target, typeset source, figures, or standalone-paper supersession be considered.
+Reopen science only for a concrete mathematical defect, numerical inconsistency, direct prior-art collision, explicit referee/editor request, or specific journal requirement.
