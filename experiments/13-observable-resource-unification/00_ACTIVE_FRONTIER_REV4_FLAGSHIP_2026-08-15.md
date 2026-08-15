@@ -2,40 +2,48 @@
 
 **Date:** 2026-08-15  
 **Branch:** `experiment-13-observable-resource-unification`  
-**Status:** **SCIENTIFIC CONTENT FROZEN / FLAGSHIP-FIRST STRATEGY AUTHORIZED / SUBMISSION PRODUCTION NEXT**
+**Target:** Physical Review Applied — Regular Article  
+**Status:** **SCIENTIFICALLY FROZEN / PRODUCTION PDF QA-PASSED / FLAGSHIP-FIRST / HUMAN METADATA REQUIRED**
 
 This file supersedes earlier Experiment-13 recovery notes whenever they disagree with it.
 
-## Controlling manuscript
+## Read first
 
-`PAPER_DRAFT_REV4_CLAIM_REFERENCE_CLEAN_2026-08-15.md`
+1. `REV4_PRAPPLIED_PRODUCTION_QA_2026-08-15.md`
+2. `PAPER_REV4_RENDERED_HOSTILE_REVIEW_2026-08-15.md`
+3. `PAPER_DRAFT_REV4_CLAIM_REFERENCE_CLEAN_2026-08-15.md`
+4. `PAPER_REV4_REFERENCE_QA_2026-08-15.md`
+5. `PAPER_REV4_FINAL_HOSTILE_CLAIM_REFERENCE_REVIEW_2026-08-15.md`
+6. `HGCDTE_STABLE_RANK_PRODUCTION_QA_2026-08-15.md`
+7. `HGCDTE_PT_SYMMETRY_STABLE_RANK_EXPLANATION_2026-08-15.md`
+8. `CHANNEL_SPECIFIC_OBSERVABILITY_GEOMETRY_2026-08-15.md`
 
-Apply the bibliography corrections in:
+## Controlling production identity
 
-`PAPER_REV4_REFERENCE_QA_2026-08-15.md`
-
-The final scientific-freeze review is:
-
-`PAPER_REV4_FINAL_HOSTILE_CLAIM_REFERENCE_REVIEW_2026-08-15.md`
-
-Disposition:
+The controlling rendered manuscript is the seven-page Physical Review Applied REVTeX build from:
 
 ```text
-CENTRAL MATHEMATICAL CORRECTNESS:          PASS
-EXPERIMENT-12 PHYSICAL THEOREM:            PASS
-ACTIVITY-WEIGHTED CONNECTOR:               PASS
-EXPERIMENT-09 SPECIALIZATION:              PASS
-TASK SPECIALIZATION:                       PASS
-SHELL DECOMPOSITION:                       PASS
-PRODUCTION HgCdTe VALIDATION:              PASS
-HgCdTe BIA/PT MODEL SCOPE:                 PASS
-ENDPOINT POISSON CANCELLATION:             PASS under explicit hypotheses
-CHANNEL/RAMO OBSERVABILITY:                PASS
-CLAIM SCOPE:                               PASS
-REFERENCE-NETWORK SCIENTIFIC ADEQUACY:      PASS
-DIRECT PRIOR-ART COLLISION FOUND:          NO
-SCIENTIFIC CONTENT FREEZE:                 AUTHORIZED
+GitHub Actions run ID: 31900965632
+head commit:           f41bdc6a4e580bfadd8155903f4127b2b63655ca
+artifact ID:           9251078733
+artifact SHA-256:      1b4375f9953707ddf1e6b35bf55f91377370274d230298429398096f1b42e01a
+PDF SHA-256:           84c86c30019a0517246493ad4b9aacd60ac54051164b27ca7dfedac2fdba800f
+built TeX SHA-256:     c1459c18e4bf5d20f09a9a956c23b565c76bd0a913fe9636adc2ca7fe1e2b8f9
 ```
+
+Production characteristics:
+
+```text
+7 pages / US Letter / two-column REVTeX prapplied
+5 native vector TikZ figures
+undefined references: none
+undefined citations:  none
+overfull boxes:        none
+all-page visual QA:    PASS
+rendered hostile review: PASS
+```
+
+One underfull paragraph warning and REVTeX float-placement warnings remain nonblocking; direct page inspection confirms all floats are present, legible, and inside their intended geometry.
 
 ## Central physical theorem
 
@@ -54,7 +62,7 @@ For selected direct cross-chemical-potential transitions in an equilibrium indep
 }
 ```
 
-Use the authoritative conductivity convention
+Authoritative conductivity convention:
 
 ```math
 \sigma_1^{cross}(\omega)
@@ -64,132 +72,55 @@ Use the authoritative conductivity convention
 \delta\!\left(\omega-\frac{E_{cv}}{\hbar}\right).
 ```
 
-The theorem requires the **selected direct cross-mu conductivity contribution**, not arbitrary raw total conductivity.
+The theorem requires the selected/direct cross-`mu` conductivity contribution, not arbitrary raw total conductivity. It bounds equilibrium one-body endpoint population, not universal dark current, generation rate, finite-bandwidth noise, or `D*`.
 
 ## Unified admissible-domain reciprocity
 
 For a physically declared admissible domain `D`,
 
 ```math
-G_D=P_DGP_D\succeq0,
-\qquad
-\lambda_D=\lambda_{max}(G_D),
-```
-
-and positive activity `X` with `supp(X) subset D`, define
-
-```math
 \mathcal S_{X|D}
 =\frac{\lambda_DTrX}{Tr(G_DX)},
-```
-
-```math
+\qquad
 \tau_{X|D}
-=\frac{Tr(G_DX)}{\lambda_DTrX}.
+=\frac{Tr(G_DX)}{\lambda_DTrX},
 ```
 
-Then
+so
 
 ```math
 \boxed{\mathcal S_{X|D}\tau_{X|D}=1.}
 ```
 
-This is organizing algebra, not a claim of new matrix theory. The novelty-bearing content lies in the detector-specific realizations and cross-relations.
+This is organizing algebra, not a claim of new matrix theory. Its detector significance is the cross-identification of forward selectivity and inverse resource certification for the same physically declared capacity.
 
-## Exact specializations
+Important specializations:
 
-### Coherent bright-state detector
-
-For `G=|B><B|` and population-matched incoherent
-
-```math
-\rho_D=\sum_jw_j|j><j|,
+```text
+uniform task ensemble:     S=d/r_st
+coherent bright projector: S=N_eff=1/sum_j w_j^2
+thermal endpoint space:    S_th,B^act=1/tau_cap^act
 ```
 
-```math
-\boxed{
-\mathcal S=\frac1{\sum_jw_j^2}=N_{eff}.
-}
-```
-
-Experiment 09 independently proves this projector minimizes dark acceptance subject to unit signal acceptance.
-
-### Uniform task ensemble
-
-```math
-r_{st}=TrG/\lambda_{max},
-```
-
-```math
-\mathcal S_{mix}=d/r_{st}.
-```
-
-At fixed trace, at least one orthogonal task satisfies
-
-```math
-\boxed{
-q_{worst}/q_{iso}
-\le(d-\mathcal S_{mix})/(d-1).
-}
-```
-
-Experiment 01 remains a separate physical unknown-arrival witness under its own eventual-SNR normalization; do not claim it is literally the equal-trace theorem.
-
-### Thermal endpoint space
-
-The endpoint-lifted operator `G_B` has
-
-```math
-\lambda_{max}(G_B)=(v_B^{cap})^2,
-```
-
-```math
-Tr(G_BX_B^{act})/V=\mathcal R_B,
-```
-
-```math
-TrX_B^{act}/V=n_B^{act}.
-```
-
-Therefore
-
-```math
-\boxed{
-\mathcal S_{th,B}^{act}\tau_{cap}^{act}=1,
-}
-```
-
-and with
-
-```math
-\eta_F=\mathcal L_B/\mathcal R_B,
-```
-
-```math
-\boxed{
-\mathcal S_{th,B}^{act}\tau_{obs}^{act}=\eta_F.
-}
-```
-
-## Shell-resolved decomposition
+## Shell-resolved population-bound decomposition
 
 For selected endpoint shells `a`,
 
 ```math
 \boxed{
-\tau_{cap}^{act}
-=\sum_aw_a^{act}\frac{c_a}{\mathcal S_a^{act}},
+\tau_{cap}^{act}=\sum_aw_a^{act}\frac{c_a}{\mathcal S_a^{act}},
 }
 ```
+
+and
 
 ```math
 \boxed{
-\tau_{obs}^{act}
-=\eta_F\sum_aw_a^{act}\frac{c_a}{\mathcal S_a^{act}}.
+\tau_{obs}^{act}=\eta_F\sum_aw_a^{act}\frac{c_a}{\mathcal S_a^{act}}.
 }
 ```
 
-This separates:
+This separates theorem slack into:
 
 ```text
 Fermi/Kubo asymmetry;
@@ -199,7 +130,7 @@ within-shell singular-spectrum concentration.
 
 ## Production HgCdTe closure
 
-Broad 300-K `Eg..0.5 eV` production audit:
+Broad 300-K `Eg..0.5 eV` production result:
 
 ```text
 mu                            = 0.1354615106 eV
@@ -212,6 +143,8 @@ eta_F                         = 0.306836598
 tau_cap^act                   = 0.572622972
 tau_obs^act                   = 0.175701685
 S_th,B^act                    ~= 1.746
+bound/reference               ~= 0.118
+bound/active                  ~= 0.176
 ```
 
 Thus
@@ -220,119 +153,102 @@ Thus
 0.306836598\times0.572622972=0.175701685.
 ```
 
-The selected active exact-shell blocks satisfy
+The selected active exact-shell blocks have
 
 ```math
 \mathcal S_a^{act}=1
 ```
 
-to about `4e-14` in this validation.
+to about `4e-14` **within the BIA-neglecting second-order Kane validation model**. The fixed-k `PT` doublet/quaternionic explanation is model-specific. Real zincblende HgCdTe has BIA; do not generalize the exact isotropy without a BIA-inclusive calculation.
 
-This is symmetry enforced **within the BIA-neglecting second-order Kane model** by fixed-k antiunitary `PT` doublets and quaternionic `PT`-even velocity blocks. Real zincblende HgCdTe has bulk inversion asymmetry; do not generalize the exact shell isotropy without a BIA-inclusive calculation.
+## Recycling / terminal-observability result
 
-## Channel-specific recycling observability
-
-At fixed frequency,
+At fixed frequency, terminal `i` has positive observability effect
 
 ```math
-G_i(\omega)=M^\dagger|i><i|M\succeq0
+G_i(\omega)=M^\dagger|i><i|M.
 ```
-
-is the positive observability effect of terminal `i`, while
-
-```math
-C_{ij}(\omega)=M^\dagger|j><i|M
-```
-
-gives the cross-channel overlap.
 
 A positive internal sector null to one terminal has zero cross contribution with every other terminal.
 
-Under independent conservative one-final-sink Poisson lineages, ideal endpoint counting can therefore yield exactly zero interterminal cross-noise even with nonzero internal recycling and mean crosstalk.
+Under independent conservative one-final-sink Poisson lineages, final-sink-only counting can therefore have exactly zero interterminal endpoint cross-spectrum despite internal recycling and mean crosstalk.
 
 For a pair created internally and later recombining internally at a common point,
 
 ```math
-\boxed{Q_i^{rec}=0}
+Q_i^{rec}=0,
 ```
 
-for every electrode, but
+but
 
 ```math
-\boxed{
 H_i^{rec}(\omega)
 =i\omega e\int\Delta\phi_i(t)e^{-i\omega t}dt
-}
 ```
 
-can have finite-frequency support. Finite-transit Shockley-Ramo readout can therefore lift a source-channel endpoint null at finite frequency; a nonzero ensemble cross-spectrum is allowed, not guaranteed.
+can have finite-frequency support. Finite-transit Shockley-Ramo readout can lift the endpoint source-channel null at finite frequency; a nonzero ensemble cross-spectrum is allowed, not guaranteed.
 
 ## Novelty boundary
 
-Do not claim novelty for:
+Do not claim novelty for positive/Gram operators, stable rank, task/Fisher matrices, generic bright/dark states, quantum discrimination, Shockley-Ramo theory, GR-noise coupling, Poisson output, HgCdTe photon recycling/mean crosstalk, or optical sum rules.
+
+Candidate-new detector content remains narrowly:
 
 ```text
-positive/Gram operators;
-stable rank or singular-value inequalities;
-task/Fisher-information matrices;
-bright/dark states or generic quantum discrimination;
-Shockley-Ramo theory;
-GR-noise coupling;
-Poisson thinning/output;
-HgCdTe photon recycling or mean crosstalk;
-optical sum rules or geometric response bounds.
-```
-
-Candidate-new detector content is narrowly:
-
-```text
-1. detector-specific forward-selectivity / inverse-certification cross-identification;
-2. exact mapping of nonuniform N_eff and thermal endpoint-capacity quantities;
+1. forward-selectivity / inverse-certification cross-identification;
+2. exact mapping of nonuniform N_eff and thermal endpoint capacity;
 3. shell-resolved decomposition of the optical population theorem;
-4. production HgCdTe factor diagnosis and model-symmetry explanation;
+4. production HgCdTe factor diagnosis and PT/BIA model interpretation;
 5. conservative recycling final-sink channel null versus finite-transit Ramo lifting;
 6. their causal organization into one staged detector argument.
 ```
 
-No direct prior-art collision was found in the completed targeted audits. Use “we derive,” not unsupported priority language such as “first.”
+No direct prior-art collision was found in the completed targeted audits. Use narrow “we derive” language rather than unsupported priority claims.
 
-## Bibliography correction controlling Rev. 4
-
-Rev. 4 Ref. 33 must be typeset as:
+## Production files
 
 ```text
-X. Cartoixà, D. Z.-Y. Ting, and T. C. McGill,
-“Description of bulk inversion asymmetry in the effective-bond-orbital model,”
-Phys. Rev. B 68, 235319 (2003),
-doi:10.1103/PhysRevB.68.235319.
+typeset/rev4_unified_prapplied.tex    authoritative scientific typeset source
+typeset/rev4_unified.bib              working verified bibliography
+typeset/rev4_figures.tex              native vector figures
+typeset/build_rev4.py                 deterministic production transform
+.github/workflows/rev4-flagship-pdf.yml reproducible CI build/QA
 ```
 
-See `PAPER_REV4_REFERENCE_QA_2026-08-15.md` for the complete reference-QA disposition.
+Production regressions and their repairs are documented in `REV4_PRAPPLIED_PRODUCTION_QA_2026-08-15.md`. Do not replace the safe theorem-label slicing in `build_rev4.py` with a broad multiline regex.
 
 ## Publication strategy
 
 ```text
-Experiment 13 unified flagship:  PRIMARY path
-Experiment 01 manuscript:        FREEZE as fallback / possible later distinct companion
-Experiment 09 manuscript:        FREEZE as fallback / possible later distinct kinetics companion
-Experiment 12 manuscript:        FREEZE as fallback PRB package
+Experiment 13 unified flagship:  PRIMARY submission path
+Experiment 01 manuscript:        FROZEN fallback
+Experiment 09 manuscript:        FROZEN fallback
+Experiment 12 manuscript:        FROZEN fallback PRB package
 ```
 
-Do **not** simultaneously submit substantially overlapping flagship and standalone versions.
+Do not simultaneously submit materially overlapping flagship and standalone versions. Preserve all standalone packages.
 
-Do **not** delete or rewrite the standalone packages. They preserve scientifically mature fallback routes if the flagship is rejected for breadth/significance.
+## Remaining blockers / next action
 
-## Next action
+No scientific work is required by default.
 
-Begin submission production from Rev. 4:
+The only known submission blockers are human metadata:
 
 ```text
-1. choose journal target/format based on manuscript scope;
-2. create lean article architecture and typeset source;
-3. build only theorem-bearing figures;
-4. normalize/verify final bibliography mechanically;
-5. compile and perform all-page rendered QA;
-6. subject the rendered manuscript to another extreme hostile review.
+author name
+institutional affiliation
+corresponding email
+acknowledgments / funding statement
 ```
 
-No new theory should be added by default unless production or external review reveals a concrete scientific defect.
+Once those are supplied:
+
+```text
+1. insert metadata only;
+2. rebuild through the deterministic CI path;
+3. record new TeX/PDF hashes;
+4. inspect all seven pages again;
+5. submit if no metadata-induced production defect appears.
+```
+
+Do not reopen theory absent a concrete mathematical defect, numerical inconsistency, direct prior-art collision, referee/editor request, or specific journal requirement.
