@@ -4,27 +4,27 @@
 **Branch:** `experiment-12-oscillator-strength-state-count-bound`  
 **Scope:** analytical/theoretical only
 
-**Status:** **REV9 SCIENCE FROZEN / EXACT REV9 PDF RECOVERED / EXPOSITION-ONLY REVISION COMMITTED / SCIENTIFIC-INVARIANCE QA PASS / CENTRAL THEOREM UNCHANGED / NOVELTY PLAUSIBLE BUT PRIORITY NOT ESTABLISHED**
+**Status:** **REV10 REFEREE REPAIR COMPLETE / CENTRAL EQ. (29) UNCHANGED / SUPREMUM FORMALISM REPAIRED / HGCDTE AUDIT UPDATED / PRB TYPESET QA PASS / NOVELTY PLAUSIBLE BUT PRIORITY NOT ESTABLISHED**
 
 ## Read first
 
-1. `MANUSCRIPT_REV9_EXPOSITION_REVISED_2026-08-15.md`
-2. `REV9_EXPOSITION_REVISION_QA_2026-08-15.md`
-3. `REV9_EXPOSITION_REVISION_SCOPE_2026-08-15.md`
-4. `INDEPENDENT_NOVELTY_SIGNIFICANCE_ASSESSMENT_2026-08-15.md`
-5. `REV8_EXTERNAL_REREVIEW_RESPONSE_2026-08-15.md`
-6. `MANUSCRIPT_REV9_CHANGESET_2026-08-15.md`
-7. `PRB_REV9_RENDER_QA_2026-08-15.md`
+1. `PRB_REV10_REFEREE_REPAIR_QA_2026-08-15.md`
+2. `REV9_SUPREMUM_REREVIEW_RESOLUTION_2026-08-15.md`
+3. `typeset/rev9_exposition_to_rev10_referee_repaired.patch`
+4. `numerics/supremum_active_support_audit.py`
+5. `MANUSCRIPT_REV9_EXPOSITION_REVISED_2026-08-15.md`
+6. `REV9_EXPOSITION_REVISION_QA_2026-08-15.md`
+7. `INDEPENDENT_NOVELTY_SIGNIFICANCE_ASSESSMENT_2026-08-15.md`
 8. `numerics/kane_8band_tightness.py`
 9. `HGCDTE_SECOND_ORDER_8BAND_TIGHTNESS_2026-08-15.md`
 
-The exact QA-passed Rev9 PDF was recovered from the user Library during the exposition pass and used as the direct textual source. The original Rev9 TeX/PDF remain identified by their production hashes; the new tracked Markdown manuscript preserves the Rev9 equation sequence and scientific content while adding exposition scaffolding.
+The Rev10 production source is the Rev9 exposition source plus the exact committed patch in item 3. The reconstruction was verified byte-for-byte against the final local TeX.
 
 ---
 
 # Controlling theorem — unchanged
 
-For direct transitions crossing the chemical potential in selected positive-frequency window `B`,
+For selected positive-frequency direct transitions crossing the chemical potential,
 
 ```math
 \boxed{
@@ -38,230 +38,196 @@ n_e+n_h
 }
 ```
 
-The finite-system theorem is exact under the stated independent-quasiparticle/direct-transition assumptions.
+The finite-system theorem and its proof are unchanged by Rev10.
 
-For a fixed window, a macroscopic density statement requires
+For fixed `B`, a macroscopic density statement requires
 
 ```math
 \limsup_{V\to\infty}v_{B,V}^{cap}<\infty.
 ```
 
-For a moving low-energy sequence `B_m`, the stronger double-uniformity condition is
+For a moving low-energy sequence `B_m`, retain
 
 ```math
-\boxed{
 v_* = \sup_m\left[\limsup_{V\to\infty}v_{B_m,V}^{cap}\right]<\infty.
-}
 ```
 
-Then finite nonvanishing integrated selected spectral weight gives a nonzero low-energy active-population floor.
+The intrinsic one-species corollary remains restricted to the case in which `mu` lies in a gap and the cross-`mu` partition coincides with the valence/conduction manifolds.
 
 ---
 
-# Intrinsic-gap corollary — Rev9 domain correction
+# Rev10 referee repair — controlling change
 
-Do **not** state `n_e=n_h=n_th` from intrinsic neutrality alone when `n_e,n_h` are defined by the lower/upper-`mu` partition.
+An adversarial rereview found that Eqs. (21)–(22) define the capacity with an **ordinary supremum**, while the Rev9 bulk HgCdTe specialization had been written with `ess sup` in Eq. (49).
 
-The one-species corollary is exact only when `mu` lies in a gap so the cross-`mu` partition coincides with valence/conduction manifolds:
+That formal mismatch was real and is now fixed conservatively. Rev10 uses
 
 ```math
-n_th
-\ge
-\frac{1}{\pi e^2(v_B^{cap})^2}
-\int_B
-\frac{\hbar\omega\sigma_1^{cross}(\omega)}
-{e^{\hbar\omega/(2k_BT)}-1}\,d\omega.
+v_B^{cap}
+=\sup_{\mathbf k\in\mathcal K,\lambda}
+ s_{\max}[P_{\lambda\mathbf k}v_x(\mathbf k)Q_{\lambda\mathbf k,B}],
 ```
 
-When `mu` lies inside a nominal band, use the general two-sided hierarchy instead.
+with the corresponding lower-shell blocks also included. No new density/essential-supremum theorem was introduced.
 
-The realistic HgCdTe model is such a case: `mu-E_Gamma6 = +11.477 meV`.
+## Why the proposed isolated-Gamma correction is rejected
 
----
+The rereview proposed that the exact Gamma8 degeneracy at Gamma forces a selected capacity of order `v_K`, lowering the broad HgCdTe ratio to about 0.110.
 
-# Exposition revision — 2026-08-15
-
-The requested pass changes presentation, not science. It was performed against the exact nine-page Rev9 PDF, not reconstructed from Rev6 alone.
-
-Added:
+That argument overlooks the theorem's cross-chemical-potential selection. In the numerical charge-neutral state,
 
 ```text
-plain-language physical gloss before important new formal objects;
-explicit logical-purpose sentences before derivation stages;
-plain-language restatements after major numbered results;
-shorter sentences where multiple conditions were previously stacked;
-early introduced equal-mass mirror-symmetric parabolic equality case as a running intuition anchor;
-additional boundary sentences stating what results do and do not imply.
-```
-
-Preserved and QA-checked:
-
-```text
-all main equations (1)-(50);
-Appendix equations (A1), (B1);
-Tables I-III;
-all 18 references;
-all thermodynamic and moving-window uniformity requirements;
-exact-mu endpoint caveat;
-rank-discontinuity caveat;
-intrinsic-gap restriction;
-projected-block SVD capacity;
-all HgCdTe convergence/branch diagnostics;
-all scope exclusions and nonclaims.
-```
-
-Controlling new files:
-
-```text
-MANUSCRIPT_REV9_EXPOSITION_REVISED_2026-08-15.md
-REV9_EXPOSITION_REVISION_QA_2026-08-15.md
-REV9_EXPOSITION_REVISION_SCOPE_2026-08-15.md
-```
-
-No new theorem, mechanism, detector-performance claim, or priority claim was introduced.
-
----
-
-# Realistic second-order HgCdTe test
-
-Model: bulk constant-parameter second-order eight-band k.p Hamiltonian based on Novik et al., PRB 72, 035321 (2005), with representative linear interpolation of endpoint remote-band parameters.
-
-Representative state:
-
-```text
-T = 300 K
 Eg = 0.123984198 eV
-x = 0.179727548
+mu - Eg = +11.477 meV
 ```
 
-Conventional charge-neutral solution:
+so at `k=0` the Gamma6 pair and Gamma8 manifold are all **below mu**. There is therefore no selected Gamma8-to-Gamma6 cross-`mu` block at Gamma.
+
+The selected set begins at finite momentum near
 
 ```text
-conduction electron density = 5.050214e16 cm^-3
-valence hole density        = 5.050214e16 cm^-3
+|k| ~= 0.05535 nm^-1.
 ```
 
-Cross-mu theorem reference population:
+A continuous ordinary-supremum search gives
 
 ```text
-upper-mu electron population = 4.722888e16 cm^-3
-lower-mu hole population     = 5.328518e16 cm^-3
-reference total              = 1.005141e17 cm^-3
+v_B^cap ~= 1.01764e6 m/s
 ```
 
-Conventional electron+hole total is `1.010043e17 cm^-3`; the difference is about 0.5%.
-
-Window results:
-
-```text
-window       v_B^cap (m/s)   bound/reference   k_sel,max (nm^-1)
-Eg..1.5Eg    1.016823e6      0.032046          0.149
-Eg..2Eg      1.017273e6      0.074922          0.240
-Eg..3Eg      1.015473e6      0.110977          0.415
-Eg..0.5eV    1.015611e6      0.118010          0.583
-```
-
-For the broad window:
-
-```text
-population lower bound = 1.186163e16 cm^-3
-bound/reference = 0.118010
-```
-
-The capacity is nearly window-independent; tightening is driven mainly by accumulated cross-mu spectral weight.
+for all four Table-II windows at the reported numerical resolution.
 
 ---
 
-# Capacity implementation — explicit and reproducible
+# Revised HgCdTe validation
 
-The numerical calculation implements the theorem's **projected-block operator norm**, not a pairwise matrix-element maximum.
-
-At each `k`:
+Reference cross-`mu` population remains
 
 ```text
-1. diagonalize H(k);
-2. group exact model-degenerate eigenspaces;
-3. assemble every opposite-side partner eigenspace satisfying the window;
-4. construct P_lambda,k v_x(k) Q_lambda,k,B;
-5. take its largest singular value;
-6. maximize over shells and k, including lower-shell counterpart.
+n_ref = 1.005141e17 cm^-3.
 ```
 
-Bulk translational invariance makes the operator block diagonal in k.
-
-Broad-window diagnostic:
+The ordinary-supremum audit gives approximately:
 
 ```text
-projected-block capacity = 1.015611e6 m/s
-largest pairwise |v_cv|  = 0.868123e6 m/s
-capacity/pairwise        = 1.169892
+window       v_B^cap (m/s)   bound/reference   n_B^act/n_ref   bound/n_B^act   k_sel,max
+Eg..1.5Eg    1.01764e6       0.0320            0.264           0.121           0.149
+Eg..2Eg      1.01764e6       0.0749            0.450           0.166           0.240
+Eg..3Eg      1.01764e6       0.1105            0.562           0.197           0.415
+Eg..0.5eV    1.01764e6       0.1175            0.669           0.176           0.583
 ```
 
-A pairwise-max substitute would overstate the population lower bound by `36.9%`.
+Broad-window lower bound:
 
-Degeneracy clustering from `1e-10` through `1e-5 eV` leaves the capacity unchanged to reported precision at fixed quadrature.
+```text
+~1.18e16 cm^-3.
+```
 
-Selected broad-window transitions involve Gamma8-derived -> Gamma6-derived branches; Gamma7-derived split-off branches do not enter the selected set. The selected optical window reaches only `|k|=0.583 nm^-1` even though the carrier reference integral is checked to `2.0 nm^-1`.
+The manuscript headline remains `0.118` / `11.8%` because `0.1175` rounds to that precision.
+
+The new active-support decomposition removes an overcompressed causal statement. In the broad window:
+
+```text
+selected-support fraction n_B^act/n_ref       ~= 0.669
+Fermi/capacity tightness n_bound/n_B^act      ~= 0.176
+product n_bound/n_ref                         ~= 0.1175
+```
+
+Thus incomplete selected support and Fermi/capacity slack are quantitatively distinct. Do not attribute the full loss solely to heavy-hole/multiband asymmetry.
+
+Continuous broad-window pairwise audit:
+
+```text
+projected-block ordinary sup = 1.01764e6 m/s
+pairwise ordinary sup        = 0.87165e6 m/s
+pairwise substitution error  ~= +36.3% in the lower bound
+```
 
 ---
 
-# First-order Kane resource retained
+# Numerical reproducibility — Rev10
 
-For the standard first-order 8x8 Kane Hamiltonian,
+Production integrals:
+
+```text
+Nk radial Gauss-Legendre       = 160
+Ncos Gauss-Legendre            = 10
+Nphi uniform azimuthal         = 16
+degeneracy clustering          = 1e-7 eV
+```
+
+Additional support check:
+
+```text
+200 x 12 x 20
+```
+
+The ordinary capacity supremum is searched continuously in `(k,theta,phi)` rather than identified with the largest quadrature node.
+
+Eq. (48) now distinguishes the angular-frequency window `B` from its energy image
 
 ```math
-\boxed{
-\|v_x\|_{op}=\sqrt{3/2}\,v_K,
-\qquad
-v_B^{cap}\le\sqrt{3/2}\,v_K=P/\hbar.
-}
+\mathcal E_B=\{\hbar\omega:\omega\in B\},
 ```
 
-This is a microscopic upper bound, not an assertion that each selected window attains the global operator norm.
+and applies the indicator to transition energy.
 
 ---
 
-# PRB Rev9 production record
+# Rev10 production / QA
+
+Production TeX SHA-256:
 
 ```text
-experiment12_prb_rev9.tex
-SHA-256 da4d929d77d817e48c6661d61ffcdcaac82a8503b9594a8dafcca27e838c0f7b
-
-experiment12_prb_rev9.pdf
-SHA-256 849e0653b6007c35a92967e812ab584ede70914714c2315bf849839701232e0b
+454a2ff8aba637d2e4c66ef5747899e85894996a020c633296cf950044c79b3d
 ```
 
-Original Rev9 QA:
+Production PDF SHA-256:
 
 ```text
-9 pages / US letter
+31ec4dd408552318f21de3e6bc7366e1b87badd7721a21575250c73adbb59a54
+```
+
+Format / QA:
+
+```text
+REVTeX 4-2 / APS PRB reprint / US letter
+13 pages
 3 pdflatex passes
 no overfull boxes
 no undefined refs/citations
-no LaTeX/package warnings
-PDF preflight pass
-all 9 pages visually inspected
-no clipping / overlap / broken glyphs / float regression
+no critical package/class warnings
+all 13 pages visually inspected
 ```
 
-The exposition-revised manuscript has not yet been re-typeset into a new PRB PDF. Do not confuse the original Rev9 PDF hashes above with a rendered version of the new prose.
+Structural retention:
+
+```text
+main equations (1)-(50)
+appendix equations (A1), (B1)
+Tables I-III
+18 references
+Sections I-VIII + Appendices A/B
+```
+
+Exact source reconstruction path:
+
+1. recover `typeset/experiment12_prb_rev9_exposition_revised.tex.gz.b64`;
+2. apply `typeset/rev9_exposition_to_rev10_referee_repaired.patch`;
+3. verify the TeX SHA above.
 
 ---
 
 # Scope / novelty
 
-Valid class: independent-quasiparticle direct cross-mu charge absorbers.
-
-Do not infer universal dark current, thermal generation, D*, or finite-bandwidth noise. Excitons/collective states, indirect transitions, interacting many-body spectral functions, and unconstrained photonic enhancement remain outside scope.
-
-The latest independent novelty/significance assessment found no direct prior-art collision in a targeted search and judged the specific inverse inequality plausibly distinct, while explicitly withholding historical priority. The science should therefore remain frozen unless a genuinely new collision or defect appears.
+No universal dark-current, generation-rate, `D*`, or finite-bandwidth-noise claim. Excitons/collective states, indirect transitions, interacting spectral functions, and unconstrained photonic enhancement remain outside scope.
 
 ```text
 DIRECT PRIOR-ART COLLISION: NOT FOUND IN TARGETED SEARCH
-NOVELTY: PLAUSIBLE / NOT ESTABLISHED AS HISTORICAL PRIORITY
+NOVELTY: PLAUSIBLE / HISTORICAL PRIORITY NOT ESTABLISHED
 PRIORITY: NOT ESTABLISHED
 ```
 
 # ACTIVE NEXT ACTION
 
-Perform a reader/referee-style **clarity reread of the exposition-revised manuscript**, not another theory expansion. Check whether the added scaffolding improves comprehension without introducing redundancy, overstatement, or new ambiguity. If it passes, the next production step is to typeset the revised prose into the PRB source and run a fresh render/QA pass. No Rev10-level scientific revision is authorized absent a concrete mathematical defect, numerical failure, or direct prior-art collision.
+Treat Rev10 as the controlling submission candidate. The next useful action is another adversarial rereview directed specifically at the repaired ordinary-supremum implementation, active-support decomposition, Eq. (48) energy-window notation, and any accidental regressions from the surgical edits. Do not reopen unrelated theory unless that review exposes a concrete defect.
