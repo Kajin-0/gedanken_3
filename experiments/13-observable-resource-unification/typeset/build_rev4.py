@@ -4,7 +4,7 @@
 The scientific source remains rev4_unified_prapplied.tex. This script performs
 only production transformations:
   * select the Physical Review Applied REVTeX journal style and float handling;
-  * enable T1 font encoding for bibliography diacritics;
+  * enable T1 font encoding and scalable Latin Modern for bibliography diacritics;
   * load native TikZ figure definitions;
   * replace the five explicit figure placeholders by figure macros;
   * give the central population theorem full-width treatment without changing it;
@@ -34,6 +34,7 @@ text = text.replace(old_class, new_class, 1)
 needle = "\\usepackage{graphicx}\n"
 insert = (
     "\\usepackage[T1]{fontenc}\n"
+    "\\usepackage{lmodern}\n"
     "\\usepackage{graphicx}\n"
     "\\usepackage{tikz}\n"
     "\\usetikzlibrary{arrows.meta,decorations.pathreplacing}\n"
@@ -90,7 +91,7 @@ OUT.write_text(text, encoding="utf-8")
 print(f"wrote {OUT.name}")
 print(f"bytes: {OUT.stat().st_size}")
 print("journal style: prapplied")
-print("font encoding: T1")
+print("font encoding: T1 + Latin Modern")
 print("main theorem: widetext")
 for label in replacements:
     print(f"replaced {label}")
