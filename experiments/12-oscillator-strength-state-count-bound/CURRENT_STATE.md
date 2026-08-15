@@ -4,26 +4,26 @@
 **Branch:** `experiment-12-oscillator-strength-state-count-bound`  
 **Scope:** analytical/theoretical only
 
-**Status:** **THEOREM SURVIVES / ACTIVE-SUBSPACE REFINEMENT COMPLETE / REV6 SUBMISSION-CANDIDATE SCIENTIFIC TEXT / FINAL HOSTILE QA PASS / NO DIRECT PRIOR-ART COLLISION FOUND / NOVELTY NOT ESTABLISHED / NO MORE THEORY BY DEFAULT**
+**Status:** **THEOREM-LEVEL INTERNAL QA PASS / ACTIVE-SUBSPACE REFINEMENT COMPLETE / REV6 SCIENTIFIC TEXT FROZEN / PRB SELECTED AS FIRST TARGET / JAP FALLBACK / NO DIRECT PRIOR-ART COLLISION FOUND / NOVELTY NOT ESTABLISHED / NO MORE THEORY BY DEFAULT**
 
 ## Read first
 
 1. `MANUSCRIPT_REV6_2026-08-14.md`
 2. `MANUSCRIPT_REV6_FINAL_QA_2026-08-14.md`
-3. `ACTIVE_SUBSPACE_REFINEMENT_2026-08-14.md`
-4. `MANUSCRIPT_REV4_EXTERNAL_STYLE_REVIEW_2026-08-14.md`
-5. `NOVELTY_AUDIT_ADDENDUM_TRK_CONDUCTIVITY_PARTICLE_COUNT_2026-08-14.md`
-6. `NOVELTY_AUDIT_2026-08-14.md`
-7. `NOVELTY_AUDIT_ADDENDUM_LOW_CARRIER_OPTICS_2026-08-14.md`
+3. `JOURNAL_FIT_AND_SUBMISSION_PLAN_2026-08-14.md`
+4. `ACTIVE_SUBSPACE_REFINEMENT_2026-08-14.md`
+5. `MANUSCRIPT_REV4_EXTERNAL_STYLE_REVIEW_2026-08-14.md`
+6. `NOVELTY_AUDIT_ADDENDUM_TRK_CONDUCTIVITY_PARTICLE_COUNT_2026-08-14.md`
+7. `NOVELTY_AUDIT_2026-08-14.md`
 8. `PROGRESS_LOG.md`
 
-Older Rev0–Rev5 files preserve the development and correction history. Rev3's notation erratum is historical only; Rev6 eliminates that ambiguity by using a new resource symbol.
+Older manuscript revisions preserve the derivation/correction history. Rev6 is scientifically controlling.
 
 ---
 
 # Controlling theorem
 
-Consider equilibrium independent quasiparticles with exact states `E_v < mu < E_c`. Define the direct cross-chemical-potential conductivity
+For exact independent-quasiparticle states with `E_v < mu < E_c`, define the direct cross-chemical-potential conductivity
 
 ```math
 \sigma_1^{cross}(\omega)
@@ -44,7 +44,7 @@ f(E_c)+1-f(E_v).
 }
 ```
 
-For an arbitrary positive-frequency window `B`, define the basis-invariant selected shell coupling blocks and the optical-velocity capacity
+For an arbitrary positive-frequency window `B`, use exact energy-shell projectors to define selected optical blocks `A_{epsilon_c,B}`, `B_{epsilon_v,B}` and
 
 ```math
 \boxed{
@@ -56,7 +56,7 @@ For an arbitrary positive-frequency window `B`, define the basis-invariant selec
 }
 ```
 
-Define the basis-invariant optically active thermal populations from the support ranks of those blocks:
+Define the basis-invariant thermal optical-support populations
 
 ```math
 n_{e,B}^{act}
@@ -70,7 +70,7 @@ n_{h,B}^{act}
 \operatorname{rank}B_{\epsilon_v,B}.
 ```
 
-Then the strongest surviving theorem is
+Then
 
 ```math
 \boxed{
@@ -85,7 +85,7 @@ n_{e,B}^{act}+n_{h,B}^{act}
 }
 ```
 
-For an intrinsic neutral absorber, `n_e=n_h=n_th`,
+For intrinsic neutrality,
 
 ```math
 \boxed{
@@ -98,78 +98,43 @@ n_{th}
 }
 ```
 
-`n_B^act` is a **support-dimension population**, not an oscillator-strength-weighted participation ratio.
-
-In 2-D, replace volume by sample area and bulk conductivity by sheet conductivity.
+`n_B^act` is a support-dimension population, not an oscillator-strength-weighted participation ratio. In 2-D, replace volume by sample area and bulk conductivity by sheet conductivity.
 
 ---
 
-# Low-energy consequence
-
-With
+# Main physical consequence
 
 ```math
-K_T(E)=\frac{E}{e^{E/(2k_BT)}-1},
-```
-
-```math
-K_T(E)\to2k_BT
+K_T(E)=\frac{E}{e^{E/(2k_BT)}-1}
+\to2k_BT
 ```
 
 as `E -> 0`.
 
-Therefore finite **integrated** low-energy direct cross-`mu` spectral weight has a finite equilibrium thermal population cost at fixed `v_B^{cap}`:
-
-```math
-n_{e,B}^{act}+n_{h,B}^{act}
-\gtrsim
-\frac{4k_BT}{\pi e^2(v_B^{cap})^2}
-\int_B\sigma_1^{cross}(\omega)d\omega.
-```
-
-A peak-only line with useful bandwidth tending to zero is not forced to a finite population floor because its integrated spectral weight can vanish.
+Thus finite **integrated** low-energy direct cross-`mu` optical spectral weight carries a finite thermal population cost at fixed `v_B^{cap}`. A peak-only line whose useful bandwidth vanishes can have vanishing integrated spectral weight and is not forced to a finite population floor.
 
 ---
 
 # Equality / validation
 
-## Equal-mass parabolic model
-
-For ideal mirror-symmetric 3-D parabolic direct bands with constant one-to-one optical matrix element:
-
 ```text
-active-subspace theorem: exact saturation for any selected direct-transition window and all T;
+Ideal equal-mass mirror-symmetric parabolic model:
+    active-subspace theorem saturates for any selected direct window;
+    total-population theorem saturates for the full relevant direct spectrum.
 
-total-population theorem: exact saturation only when the full relevant direct spectrum is selected.
+2-D neutral massless Dirac: 0.5000
+3-D massless Dirac:         0.6667
+3-D massive Dirac,
+10 um / 300 K:              0.794684
 ```
 
-For unequal masses in the nondegenerate global limit,
+For unequal parabolic masses in the nondegenerate global limit,
 
 ```math
 \boxed{
-\frac{n_{bound}}{n_{exact}}
-=\left[
-\frac{4m_em_h}{(m_e+m_h)^2}
-\right]^{3/4}
-\le1.
+n_{bound}/n_{exact}
+=[4m_em_h/(m_e+m_h)^2]^{3/4}\le1.
 }
-```
-
-At `E_g/kBT = 4.7959`, total-population ratios are approximately:
-
-```text
-m_h/m_e = 2   -> 0.9161
-m_h/m_e = 5   -> 0.6455
-m_h/m_e = 10  -> 0.4379
-m_h/m_e = 1   -> 1 exactly
-```
-
-## Dirac checks
-
-```text
-2-D neutral massless Dirac / graphene: 0.5000
-3-D massless Dirac:                    0.6667
-3-D massive Dirac, 10 um / 300 K:      0.794684
 ```
 
 ---
@@ -182,55 +147,23 @@ Valid class:
 independent-quasiparticle direct cross-mu charge absorbers.
 ```
 
-The theorem survives arbitrary dispersive multiband state reuse, unequal degeneracy, and static one-particle disorder when exact eigenstates are used.
+Do not automatically extend to bound excitons, neutral collective states, phonon-assisted transitions, interacting many-body spectral functions, or arbitrary passive photonic path enhancement.
 
-It does not automatically cover:
+Localized states do not break the state-count theorem but block automatic inference to DC dark current.
 
-```text
-bound excitons / neutral collective optical states;
-phonon-assisted / indirect transitions;
-interaction-generated many-body spectral functions;
-unconstrained external photonic path enhancement.
-```
-
-Localized states do not invalidate the population theorem but block automatic inference to DC dark current.
-
-Do not claim a universal lower bound on:
-
-```text
-dark current;
-thermal generation rate;
-D*;
-finite-bandwidth noise.
-```
-
-The attempted universal conversion `G_th >= n_th/tau_response` was rejected by the depleted-photodiode counterexample.
+Do not claim universal dark-current, thermal-generation-rate, `D*`, or finite-bandwidth-noise bounds. The proposed `G_th >= n_th/tau_response` theorem was explicitly rejected by a depleted-photodiode counterexample.
 
 ---
 
-# Novelty / prior-art disposition
+# Novelty status
 
-Audited adjacency includes:
+Adjacent audited theory includes phase-space filling, Kubo-Greenwood, ordinary/generalized `f`/TRK sums, restricted and quantum-geometric optical sums, graphene optical sum rules, classic IR `alpha/G_th`, Yablonovitch-Kane low-carrier laser engineering, and Bethkenhagen et al. conductivity-to-ionization TRK particle counting.
 
-```text
-Kubo-Greenwood;
-semiconductor phase-space filling;
-ordinary/generalized f-sums;
-restricted optical sums;
-quantum-geometric optical sums;
-graphene optical sum rules;
-classic IR alpha/G_th detector criteria;
-Yablonovitch-Kane low-carrier laser band engineering;
-TRK conductivity-to-ionization particle counting in warm dense matter.
-```
-
-Bethkenhagen et al., *Phys. Rev. Research* 2, 023260 (2020), confirms that the broad concept `conductivity spectral weight -> particle count` is established through the TRK sum rule. It does not state the Experiment-12 cross-`mu` thermally weighted state-count inequality.
-
-Focused searches did not identify a source with the combination
+No direct source was identified with the exact combination
 
 ```text
-cross-mu direct optical conductivity
-+ thermal kernel E/[exp(E/2kBT)-1]
+cross-mu direct conductivity
++ E/[exp(E/2kBT)-1] thermal kernel
 + per-shell optical-velocity capacity
 -> minimum thermal optical-support population
 -> minimum total thermal electron-hole population.
@@ -240,55 +173,47 @@ cross-mu direct optical conductivity
 DIRECT PRIOR-ART COLLISION: NOT FOUND
 PRIORITY: NOT ESTABLISHED
 NOVELTY: NOT ESTABLISHED
-NOVELTY RISK: HIGH BECAUSE THE PROOF IS ELEMENTARY
+NOVELTY RISK: HIGH
 ```
 
-No `first`, `novel`, or priority language is authorized without a stronger external priority check.
+No `first`, `novel`, or priority wording is authorized.
 
 ---
 
-# Manuscript state
+# Manuscript and journal state
 
 Current scientific submission-candidate text:
 
 `MANUSCRIPT_REV6_2026-08-14.md`
 
-Final hostile QA:
+Final internal hostile QA:
 
 `MANUSCRIPT_REV6_FINAL_QA_2026-08-14.md`
 
-Final QA disposition:
+Journal plan:
 
 ```text
-FERMI ALGEBRA: PASS
-KUBO NORMALIZATION: PASS
-BASIS INVARIANCE: PASS
-TRACE-RANK ACTIVE-SUBSPACE REFINEMENT: PASS
-FINITE-WINDOW EQUALITY: PASS
-2-D NORMALIZATION: PASS
-PARABOLIC VALIDATION: PASS
-DIRAC VALIDATION: PASS
-LOW-ENERGY INTERPRETATION: PASS
-CLAIM SCOPE: PASS
-BIBLIOGRAPHY CORE: PASS
-DIRECT PRIOR-ART COLLISION: NOT FOUND
-NOVELTY: NOT ESTABLISHED
+FIRST TARGET: Physical Review B — Regular Article
+FALLBACK: Journal of Applied Physics — Article
+LESS CLEAN FIT: Physical Review Applied
 ```
 
-Rev6 uses `v_B^{cap}` throughout and supersedes the Rev3–Rev5 `u/nu` notation history.
+Rationale is recorded in:
+
+`JOURNAL_FIT_AND_SUBMISSION_PLAN_2026-08-14.md`
+
+PRB is the preferred first target because the manuscript is fundamentally a general semiconductor/condensed-matter optical-response theorem. The photodetector motivation should remain, but the manuscript should not be weakened into an HgCdTe-only or device-performance claim.
 
 ---
 
-# Next action — NO MORE THEORY BY DEFAULT
-
-Do not add mechanisms or extend the theorem unless an external/referee-style review identifies a blocking scientific gap.
-
-Next work should be:
+# ACTIVE NEXT ACTION — PRB PRODUCTION, NOT MORE THEORY
 
 ```text
-1. select the most appropriate journal;
-2. perform journal-specific scope and reference-style audit;
-3. typeset Rev6;
-4. independently review the rendered manuscript;
-5. prepare submission materials only after the rendered QA passes.
+1. convert Rev6 into PRB-compatible LaTeX;
+2. perform PRB-specific reference/style audit;
+3. compile and visually inspect the PDF;
+4. run an independent review of the rendered manuscript;
+5. prepare cover-letter/submission metadata only after rendered QA passes.
 ```
+
+Add new physics only if a referee identifies a blocking scientific gap.
