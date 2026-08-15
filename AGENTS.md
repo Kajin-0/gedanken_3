@@ -36,7 +36,7 @@ Do not add phenomenology merely to rescue a weak novelty case.
 
 ---
 
-# Experiment 12 — REV6 SCIENCE FROZEN / PRB PRODUCTION PHASE
+# Experiment 12 — REV6 SCIENCE FROZEN / PRB RENDER PASS / SUBMISSION PRODUCTION
 
 Branch:
 
@@ -48,11 +48,12 @@ Recovery order:
 
 1. `experiments/12-oscillator-strength-state-count-bound/CURRENT_STATE.md`
 2. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV6_2026-08-14.md`
-3. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV6_FINAL_QA_2026-08-14.md`
-4. `experiments/12-oscillator-strength-state-count-bound/JOURNAL_FIT_AND_SUBMISSION_PLAN_2026-08-14.md`
-5. `experiments/12-oscillator-strength-state-count-bound/ACTIVE_SUBSPACE_REFINEMENT_2026-08-14.md`
-6. `experiments/12-oscillator-strength-state-count-bound/NOVELTY_AUDIT_ADDENDUM_TRK_CONDUCTIVITY_PARTICLE_COUNT_2026-08-14.md`
-7. `experiments/12-oscillator-strength-state-count-bound/PROGRESS_LOG.md`
+3. `experiments/12-oscillator-strength-state-count-bound/PRB_RENDER_QA_2026-08-14.md`
+4. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV6_FINAL_QA_2026-08-14.md`
+5. `experiments/12-oscillator-strength-state-count-bound/PRB_COVER_LETTER_DRAFT_2026-08-14.md`
+6. `experiments/12-oscillator-strength-state-count-bound/PRB_SUBMISSION_METADATA_2026-08-14.md`
+7. `experiments/12-oscillator-strength-state-count-bound/JOURNAL_FIT_AND_SUBMISSION_PLAN_2026-08-14.md`
+8. `experiments/12-oscillator-strength-state-count-bound/PROGRESS_LOG.md`
 
 Older manuscript revisions preserve the development/correction history. Rev6 is controlling.
 
@@ -174,7 +175,7 @@ NOVELTY RISK: HIGH
 
 No `first`, `novel`, or priority wording is authorized.
 
-## Manuscript / journal state
+## Manuscript / journal / render state
 
 ```text
 CURRENT SCIENTIFIC TEXT: MANUSCRIPT_REV6_2026-08-14.md
@@ -183,17 +184,46 @@ FIRST TARGET: Physical Review B — Regular Article
 FALLBACK: Journal of Applied Physics — Article
 ```
 
-PRB is preferred because the result is fundamentally a condensed-matter / semiconductor optical-response theorem. Do not distort the paper into a device-performance claim to target a more applied venue.
-
-# ACTIVE NEXT ACTION — NO MORE THEORY BY DEFAULT
+PRB REVTeX 4.2 production render has passed:
 
 ```text
-1. prepare PRB-compatible LaTeX from Rev6;
-2. perform PRB-specific reference/style QA;
-3. compile and visually inspect the PDF;
-4. independently review the rendered manuscript;
-5. prepare submission metadata and cover letter only after rendered QA passes.
+6 pages
+US letter
+no overfull boxes
+no undefined references/citations
+no stuck floats
+PDF preflight pass
+all six pages visually inspected
+no clipping, overlap, broken glyphs, or missing tables/equations
 ```
+
+The local QA-passed `.tex` and `.pdf` SHA-256 hashes are recorded in `PRB_RENDER_QA_2026-08-14.md`.
+
+A conservative PRB cover-letter draft and submission-metadata/Data Availability checklist are committed.
+
+# ACTIVE NEXT ACTION — AUTHOR METADATA / FINAL SUBMISSION PACKAGE
+
+```text
+NO MORE THEORY BY DEFAULT.
+```
+
+The current blockers are author-owned:
+
+```text
+author names/order;
+affiliations;
+corresponding email;
+funding;
+conflicts/disclosures;
+authorship approval;
+simultaneous-submission confirmation;
+prior Physical Review submission history;
+joint-submission status;
+final Data Availability/archive decision;
+optional referee recommendations/exclusions.
+```
+
+Once those are supplied, insert them into the PRB REVTeX source, recompile, rerender, inspect the exact final PDF, and prepare the submission package.
 
 Add new theory only if an external/referee-style review identifies a blocking scientific gap.
 
