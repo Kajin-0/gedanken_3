@@ -4,26 +4,30 @@
 **Branch:** `experiment-12-oscillator-strength-state-count-bound`  
 **Scope:** analytical/theoretical only
 
-**Status:** **REV11 MINOR REFEREE CLEANUP COMPLETE / CENTRAL EQ. (29) UNCHANGED / PRB TYPESET QA PASS / NO MAJOR TECHNICAL DEFECT REMAINS IN LATEST ADVERSARIAL REVIEW / NOVELTY PLAUSIBLE BUT PRIORITY NOT ESTABLISHED**
+**Status:** **REV11 CENTRAL THEORY AND HgCdTe VALIDATION PASS FINAL ADVERSARIAL REGRESSION / ONE PRE-SUBMISSION LITERATURE-COMPLETENESS AMENDMENT IDENTIFIED / REV11 REMAINS LAST FULLY TYPESET-QA'D CANDIDATE**
 
 ## Read first
 
-1. `PRB_REV11_MINOR_REVISION_QA_2026-08-15.md`
-2. `REV10_MINOR_REREVIEW_RESPONSE_2026-08-15.md`
-3. `typeset/rev10_to_rev11_minor_revision.patch`
-4. `numerics/parameter_sensitivity_audit.py`
-5. `PRB_REV10_REFEREE_REPAIR_QA_2026-08-15.md`
-6. `REV9_SUPREMUM_REREVIEW_RESOLUTION_2026-08-15.md`
-7. `numerics/supremum_active_support_audit.py`
-8. `typeset/rev9_exposition_to_rev10_referee_repaired.patch`
-9. `MANUSCRIPT_REV9_EXPOSITION_REVISED_2026-08-15.md`
-10. `numerics/kane_8band_tightness.py`
+1. `REV11_FINAL_ADVERSARIAL_REGRESSION_AUDIT_2026-08-15.md`
+2. `typeset/rev11_literature_completeness_candidate.patch`
+3. `PRB_REV11_MINOR_REVISION_QA_2026-08-15.md`
+4. `REV10_MINOR_REREVIEW_RESPONSE_2026-08-15.md`
+5. `typeset/rev10_to_rev11_minor_revision.patch`
+6. `numerics/parameter_sensitivity_audit.py`
+7. `PRB_REV10_REFEREE_REPAIR_QA_2026-08-15.md`
+8. `REV9_SUPREMUM_REREVIEW_RESOLUTION_2026-08-15.md`
+9. `numerics/supremum_active_support_audit.py`
+10. `typeset/rev9_exposition_to_rev10_referee_repaired.patch`
+11. `MANUSCRIPT_REV9_EXPOSITION_REVISED_2026-08-15.md`
+12. `numerics/kane_8band_tightness.py`
 
-The exact Rev11 source is reconstructed by first reconstructing Rev10 and then applying item 3. The final Rev11 TeX was verified byte-for-byte against that reconstruction.
+The exact Rev11 source is reconstructed from the archived Rev9 source by applying the Rev9→Rev10 patch followed by the Rev10→Rev11 patch. Rev11 remains the last package whose TeX and PDF hashes, compile state, and all-page visual QA are recorded.
+
+The new literature-completeness patch is a **candidate delta only**. Do not call the amended source Rev12 or submission-ready until it is reconstructed, compiled, hashed, and visually QA'd.
 
 ---
 
-# Controlling theorem — unchanged
+# Controlling theorem — unchanged and independently rechecked
 
 For selected positive-frequency direct transitions crossing the chemical potential,
 
@@ -39,19 +43,34 @@ n_e+n_h
 }
 ```
 
-Eq. (29), the pointwise Fermi inequality, the projected-shell rank/capacity proof, the fixed-window thermodynamic hypothesis, and the moving-window low-energy theorem are unchanged in Rev11.
+The final regression audit independently re-derived and passed:
 
-The intrinsic one-species corollary remains restricted to the case in which `mu` lies in a gap and the cross-`mu` partition coincides with the valence/conduction manifolds.
+```text
+pointwise Fermi inequality;
+Kubo-Greenwood normalization and thermal-kernel conversion;
+exact-shell projected-block capacity;
+singular-value/rank conversion to active population;
+active-population <= total-population step;
+fixed-window thermodynamic uniform-capacity condition;
+moving-window low-energy quantifiers;
+clean-bulk complete-shell -> k-block ordinary-supremum specialization.
+```
+
+Eq. (29) itself is unchanged.
+
+The intrinsic one-species corollary remains restricted to the case where `mu` lies in a gap and the cross-`mu` partition coincides with the valence/conduction manifolds.
 
 ---
 
-# Rev11 minor referee cleanup
+# Rev10/Rev11 repairs retained
 
-The latest adversarial rereview judged the Rev9 ordinary-supremum objection correctly repaired and found no major technical defect. Rev11 addresses the remaining cleanup requests without reopening the central theory.
+## Ordinary supremum
 
-## Eq. (49) now explicitly matches the complete energy-shell definition
+The finite-system theorem uses an ordinary exact-shell supremum. Eq. (49) remains an ordinary `k` supremum in the clean bulk validation, not an essential supremum.
 
-For a finite periodic normalization volume, translational invariance makes the homogeneous velocity operator block diagonal in crystal momentum:
+## Complete shell to momentum blocks
+
+In a finite periodic clean system,
 
 ```math
 P_\epsilon v_xQ_{\epsilon,B}
@@ -59,84 +78,29 @@ P_\epsilon v_xQ_{\epsilon,B}
 P_{\epsilon,\mathbf k}v_x(\mathbf k)Q_{\epsilon,\mathbf k,B}.
 ```
 
-Therefore the operator norm of a complete exact-energy shell is the maximum of its finite-`k` block norms, becoming the ordinary `k` supremum in the bulk limit. This directly links Eq. (49) to Eq. (21).
+Because the homogeneous velocity operator conserves crystal momentum, the complete-shell operator norm is the maximum finite-`k` block norm and becomes the ordinary bulk supremum.
 
-Do not revert Eq. (49) to `ess sup`.
+## Gamma-point selection
 
-## Support-rank numerical criterion is now explicit
-
-The exact theorem uses exact rank. The Table-II numerical active-support diagnostic counts a singular value as nonzero when
+The chemical potential lies `11.477 meV` above the nominal Gamma6 edge. Gamma6 and Gamma8 are all below `mu` at `k=0`, so there is no selected cross-`mu` Gamma8→Gamma6 block exactly at Gamma. The selected set begins near
 
 ```text
-s > 1e-6 m/s.
+|k| ~= 0.05535 nm^-1.
 ```
 
-This threshold affects only the diagnostic decomposition, not the central lower bound.
+## Active-support numerical criterion
 
-Reduced broad-window `40 x 6 x 8` audit:
+The exact theorem uses exact mathematical rank. The Table-II diagnostic counts a singular value as numerically nonzero above
 
 ```text
-rank threshold (m/s)     n_B^act/n_ref
-1e-9                     0.660512373
-1e-6                     0.660512373
-1e-3                     0.660512373
-1                        0.660512373
-1e2                      0.660512373
-1e4                      0.660512373
+1e-6 m/s.
 ```
 
-Thus the numerical support diagnostic is stable over the tested threshold range. Production Table-II broad support fraction remains `~0.669`.
-
-## Onishi–Fu neighboring literature added
-
-Rev11 cites:
-
-```text
-Y. Onishi and L. Fu,
-Phys. Rev. X 14, 011052 (2024),
-DOI 10.1103/PhysRevX.14.011052.
-```
-
-Positioning:
-
-```text
-Onishi–Fu: generalized optical weight / topology / quantum geometry / topological-gap bound.
-Experiment 12: finite-temperature cross-mu thermal population bound / thermal kernel / per-shell velocity capacity.
-```
-
-This is neighboring literature, not an identified collision with Eq. (29). No priority claim is introduced.
-
-## Lightweight parameter-sensitivity diagnostic added
-
-One-at-a-time `+/-5%` perturbations of
-
-```text
-EP, Delta, F, gamma1, gamma2, gamma3
-```
-
-are evaluated on a common reduced `24 x 4 x 6` diagnostic quadrature with charge neutrality re-solved and the projected-block capacity searched continuously.
-
-```text
-reduced-grid baseline ratio = 0.1226
-perturbed range             = 0.1098 ... 0.1293
-relative range              ~= -10.5% ... +5.5%
-```
-
-This is not an uncertainty propagation and does not replace the production value. It supports only the robustness statement that the realistic-model tightness remains of order `10^-1` under modest independent parameter perturbations.
-
-Reproducibility: `numerics/parameter_sensitivity_audit.py`.
-
-## Appendix B1
-
-The secondary occupation-variance inequality now includes its one-line proof:
-
-```math
-[\sqrt a(1+b)-\sqrt b(1+a)]^2\ge0.
-```
+A reduced broad-window sweep from `1e-9` through `1e4 m/s` leaves the active-support fraction unchanged to printed precision. The central lower bound does not depend on this threshold.
 
 ---
 
-# Controlling HgCdTe production result
+# Controlling HgCdTe result
 
 Representative second-order eight-band bounded-domain model at 300 K / 10 um:
 
@@ -154,19 +118,79 @@ selected k onset               ~= 0.05535 nm^-1
 selected k max                 ~= 0.583 nm^-1
 ```
 
-The isolated Gamma point is not a selected cross-`mu` block because `mu` lies 11.477 meV above the nominal Gamma6 edge; Gamma6 and Gamma8 are both below `mu` at `k=0`.
-
-Production quadrature remains
+Production quadrature:
 
 ```text
 160 radial Gauss-Legendre x 10 cos(theta) Gauss-Legendre x 16 uniform phi
 ```
 
-with `1e-7 eV` degeneracy clustering. A `200 x 12 x 20` grid is an additional support-population check.
+with `1e-7 eV` degeneracy clustering. `200 x 12 x 20` is an additional support check.
+
+The final regression audit found the Hamiltonian derivative/velocity construction, integration measure, cross-`mu` counting, projected-block SVD logic, and reported interpretation internally consistent.
+
+The ordinary capacity supremum is a reproducible numerical global-optimization result rather than an interval-certified mathematical maximum. This is consistent with the manuscript's claim of a numerical HgCdTe validation. If a referee demands stronger certification, multi-seed replication or deterministic/interval bracketing is the next numerical check.
 
 ---
 
-# Rev11 production / QA
+# Parameter-sensitivity diagnostic
+
+A one-at-a-time `+/-5%` perturbation of
+
+```text
+EP, Delta, F, gamma1, gamma2, gamma3
+```
+
+on a common reduced `24 x 4 x 6` diagnostic quadrature gives
+
+```text
+baseline ratio   = 0.1226
+perturbed range  = 0.1098 ... 0.1293
+relative range   ~= -10.5% ... +5.5%
+```
+
+This is not an uncertainty propagation and does not replace the production `0.1175` value. It only supports the statement that the representative multiband result remains order `10^-1` under modest independent parameter perturbations.
+
+---
+
+# Final literature audit
+
+## Onishi-Fu
+
+Rev11 already cites Y. Onishi and L. Fu, Phys. Rev. X 14, 011052 (2024), and correctly distinguishes their generalized optical-weight/topology/quantum-geometry gap bound from the Experiment-12 thermal quasiparticle population inequality.
+
+## Newly identified neighboring work
+
+The final regression audit identified a closer omitted reference:
+
+```text
+D. Mao, J. F. Mendez-Valderrama, and D. Chowdhury,
+Low-energy optical absorption in correlated insulators:
+Projected sum rules and the role of quantum geometry,
+Phys. Rev. B 112, 075116 (2025),
+DOI 10.1103/xmz7-jgl6.
+```
+
+This work develops a projected low-energy inverse-frequency optical sum and discusses a finite-temperature weighted form related to many-body quantum geometry/QFI.
+
+It is **not a direct collision** with Eq. (29): Experiment 12 instead uses direct cross-`mu` one-body transitions, the distinct Fermi kernel
+
+```math
+\hbar\omega/[e^{\hbar\omega/(2k_BT)}-1],
+```
+
+and a per-exact-shell projected velocity-capacity/support-rank construction to lower-bound equilibrium thermal quasiparticle population.
+
+The overlap is close enough in low-energy projected/windowed optical-sum methodology that the reference should be cited and distinguished before submission.
+
+Candidate amendment:
+
+`typeset/rev11_literature_completeness_candidate.patch`
+
+No central equation or numerical result changes.
+
+---
+
+# Rev11 production / QA identity
 
 ```text
 Rev11 TeX SHA-256 a75b75d6016d335746751b7c75a01d49deea7c4796c2eff30a7dd99c1f73cd68
@@ -187,12 +211,7 @@ Tables I-III
 19 references
 ```
 
-Source reconstruction path:
-
-1. recover `typeset/experiment12_prb_rev9_exposition_revised.tex.gz.b64`;
-2. apply `typeset/rev9_exposition_to_rev10_referee_repaired.patch`;
-3. apply `typeset/rev10_to_rev11_minor_revision.patch`;
-4. verify the Rev11 TeX SHA above.
+These hashes apply to Rev11 **before** the new literature candidate patch.
 
 ---
 
@@ -202,10 +221,13 @@ No universal dark-current, generation-rate, `D*`, or finite-bandwidth-noise clai
 
 ```text
 DIRECT PRIOR-ART COLLISION: NOT FOUND IN TARGETED SEARCH
-NOVELTY: PLAUSIBLE / HISTORICAL PRIORITY NOT ESTABLISHED
-PRIORITY: NOT ESTABLISHED
+NOVELTY: PLAUSIBLE
+HISTORICAL PRIORITY: NOT ESTABLISHED
+PRIORITY LANGUAGE: NOT AUTHORIZED
 ```
+
+The realistic HgCdTe bound remains an order-`10^-1` validation rather than a tight detector-design limit. Near-edge windows are looser than the broad validation window. This is an editorial/significance limitation, not a failed inequality.
 
 # ACTIVE NEXT ACTION
 
-Treat Rev11 as the controlling submission candidate. Another adversarial pass may be used as a final regression check, but do not continue defensive rewriting absent a concrete mathematical defect, numerical inconsistency, direct prior-art collision, or specific journal-facing requirement. The latest rereview has moved the risk from elementary technical correctness to ordinary publication significance/editorial judgment.
+Reconstruct exact Rev11 TeX, apply `typeset/rev11_literature_completeness_candidate.patch`, compile with the same PRB workflow, verify bibliography count/citations/boxes/floats, compute new TeX/PDF hashes, and visually inspect every page. If that passes, record the amended production package and stop defensive rewriting absent a new concrete mathematical defect, numerical inconsistency, direct literature collision, or journal-specific requirement.
