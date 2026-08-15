@@ -1,0 +1,77 @@
+--- experiment12_prb_rev10_referee_repaired.tex	2026-08-15 13:00:16.036232434 +0000
++++ experiment12_prb_rev11_minor_revision.tex	2026-08-15 13:03:36.802403623 +0000
+@@ -647,7 +647,13 @@
+ \end{equation}
+ with the maximum also taken over the corresponding lower-shell blocks.
+ 
+-Equation (49) is the bulk realization of the same ordinary projected-shell supremum defined abstractly in Eq. (21); it is not a pairwise $\max|v_{cv}|$ approximation. The distinction from an essential supremum matters formally even though it does not materially alter the present HgCdTe result.
++The $\mathbf k$-resolved form in Eq. (49) is exactly the bulk specialization of the complete-energy-shell construction in Eq. (21). In a finite periodic normalization volume, translational invariance makes the velocity operator block diagonal in crystal momentum, so for a complete exact-energy shell
++\begin{equation*}
++P_\epsilon v_xQ_{\epsilon,\mathcal B}
++=\bigoplus_{\mathbf k}
++P_{\epsilon,\mathbf k}v_x(\mathbf k)Q_{\epsilon,\mathbf k,\mathcal B}.
++\end{equation*}
++The operator norm of this direct sum is the maximum of the finite-$\mathbf k$ block norms, which becomes the ordinary supremum in the bulk limit. Equation (49) therefore implements Eq. (21) without replacing a complete energy shell by a single momentum block, and it is not a pairwise $\max|v_{cv}|$ approximation. The distinction from an essential supremum matters formally even though it does not materially alter the present HgCdTe result.
+ 
+ In particular, the isolated $\Gamma$ point does not supply a selected cross-$\mu$ block in this charge-neutral state. The chemical potential lies $11.477\ \mathrm{meV}$ above the nominal $\Gamma_6$ edge, so at $\mathbf k=0$ the $\Gamma_6$ pair and the $\Gamma_8$ manifold are all below $\mu$. The selected $\Gamma_8$-derived to $\Gamma_6$-derived cross-$\mu$ set begins only at finite momentum, near $|\mathbf k|=0.055\ \mathrm{nm^{-1}}$. A separate continuous-parameter search of the projected blocks, including the special-point check, gives
+ $v_{\mathcal B}^{\rm cap}\simeq1.01764\times10^6\ \mathrm{m/s}$
+@@ -655,6 +661,8 @@
+ 
+ The production integrals use 160 radial Gauss-Legendre nodes, 10 Gauss-Legendre nodes in $\cos\theta$, and 16 uniform azimuthal nodes. The degeneracy-clustering tolerance is $10^{-7}\ \mathrm{eV}$ for the model's exact twofold degeneracies. A denser $200\times12\times20$ grid is used as an additional support-population check; the ordinary capacity supremum is searched directly in the continuous $(k,\theta,\phi)$ parameterization rather than identified with the largest quadrature node.
+ 
++For the two active-support diagnostic columns in Table~\ref{tab:hgcdte}, a numerical singular value is counted as nonzero when it exceeds $10^{-6}\ \mathrm{m/s}$. This threshold is only a floating-point realization of the exact support rank in Eqs. (23)--(25); it does not enter the population lower bound itself. On a reduced $40\times6\times8$ audit grid, the broad-window active-support fraction is unchanged to the printed precision when this threshold is swept from $10^{-9}$ through $10^{4}\ \mathrm{m/s}$. The Table~\ref{tab:hgcdte} support columns should therefore be read as stable numerical diagnostics of the exact-rank decomposition, while the central bound/reference ratio is threshold independent.
++
+ \begin{table*}[t]
+ \caption{Second-order eight-band HgCdTe test at $300\ \mathrm K$ and $E_g=0.123984\ \mathrm{eV}$. The capacity column uses the continuous ordinary-supremum audit required by Eqs. (21), (22), and (49). The two middle diagnostic columns decompose the total tightness into selected-support and Fermi/capacity factors. The last column gives the largest selected momentum on the production optical quadrature.}
+ \label{tab:hgcdte}
+@@ -688,7 +696,9 @@
+ 
+ Varying the degeneracy-clustering tolerance from $10^{-10}$ to $10^{-5}\ \mathrm{eV}$ leaves the sampled capacity unchanged to the reported precision at fixed quadrature. The selected $0.5\ \mathrm{eV}$ production grid samples transitions through $|k|=0.583\ \mathrm{nm^{-1}}$; a denser grid gives the same broad-window conclusions. The selected transitions connect the $\Gamma_8$-derived branches to the $\Gamma_6$-derived pair, while the $\Gamma_7$-derived split-off pair does not enter the selected set over this domain. Increasing the carrier cutoff from $1.5$ to $2.0\ \mathrm{nm^{-1}}$ changes the cross-$\mu$ reference population by less than $1\%$; denser radial/angular quadrature and optical-domain variations change the broad-window ratio only at the few-$10^{-4}$ level.
+ 
+-These are convergence and branch-selection diagnostics inside the bounded-domain $k\cdot p$ model. They are not a claim that the continuum expansion is valid to arbitrary momentum.
++As a lightweight model-sensitivity check, we independently perturb $E_P$, $\Delta$, $F$, $\gamma_1$, $\gamma_2$, and $\gamma_3$ one at a time by $\pm5\%$, re-solving charge neutrality and the broad-window optical problem each time. On a common reduced $24\times4\times6$ diagnostic quadrature with a continuous projected-block capacity search, the baseline ratio is $0.1226$ and the perturbed ratios span $0.1098$--$0.1293$. This is not a parameter-uncertainty analysis and is not used for the production number; it shows only that the conclusion that the realistic-model bound remains of order $10^{-1}$ is not tied to the exact representative interpolation.
++
++These are convergence, rank-stability, branch-selection, and parameter-sensitivity diagnostics inside the bounded-domain $k\cdot p$ model. They are not a claim that the continuum expansion is valid to arbitrary momentum or that the chosen parameter perturbations represent experimental uncertainties.
+ 
+ \section{Relation to established theory}
+ 
+@@ -704,7 +714,7 @@
+ 
+ Optical sum rules also connect spectral weight to microscopic quantities, so the distinction in response moment and particle count matters. Conventional and generalized $f$-sum rules constrain conductivity moments through total charge density, kinetic energy, or Hamiltonian derivatives.\cite{Watanabe2020} Quantum-geometric sums use different frequency moments to access Wannier spread or quantum metric.\cite{Cardenas2024} Conductivity sum rules have also been used to infer electronic particle counts, for example the ionization degree of warm dense matter via the Thomas-Reiche-Kuhn sum rule.\cite{Bethkenhagen2020}
+ 
+-Equation (29) instead uses the finite-temperature kernel in Eq. (15) and bounds thermal occupation of the optically active cross-$\mu$ one-body subspaces. It is complementary to, rather than a replacement for, these established sum rules. The broad idea ``conductivity spectral weight $\rightarrow$ particle count'' is therefore not a novelty claim here.
++Recent optical-bound work by Onishi and Fu relates generalized optical weight to topology, quantum geometry, and an upper bound on the topological energy gap, with applications including infrared absorption near band inversion.\cite{OnishiFu2024} That construction targets a different response moment and a topology/geometry-conditioned gap bound. Equation (29) instead uses the finite-temperature kernel in Eq. (15) to bound equilibrium thermal occupation of cross-$\mu$ one-body optical-support subspaces, conditioned on a per-shell optical-velocity capacity. The results are therefore neighboring but not interchangeable. More broadly, the idea ``conductivity spectral weight $\rightarrow$ microscopic constraint'' is not a novelty claim here.
+ 
+ \subsection{Detailed balance and fluctuation-dissipation}
+ 
+@@ -804,7 +814,10 @@
+ \left[p_c(1-p_c)+h_v(1-h_v)\right].
+ \tag{B1}
+ \end{equation}
+-Equation (B1) relates the same crossing-transition population difference to the sum of the independent-Fermi occupation variances of its two endpoint states.
++Equation (B1) relates the same crossing-transition population difference to the sum of the independent-Fermi occupation variances of its two endpoint states. A one-line proof follows from the variables in Eq. (7): after multiplication by the positive common denominator, Eq. (B1) is equivalent to
++\begin{equation*}
++\left[\sqrt a(1+b)-\sqrt b(1+a)\right]^2\ge0.
++\end{equation*}
+ 
+ Summing with the same selected optical resource yields a lower bound on total independent-Fermi one-body occupation variance. The statement is frequency integrated; a finite-bandwidth noise bound requires kinetic information and is not claimed here.
+ 
+@@ -830,7 +843,7 @@
+ \end{center}
+ \twocolumngrid
+ 
+-\begin{thebibliography}{18}
++\begin{thebibliography}{19}
+ 
+ \bibitem{Piotrowski1997}
+ J. Piotrowski and W. Gawron, Infrared Phys. Technol. \textbf{38}, 63 (1997), doi:10.1016/S1350-4495(96)00030-8.
+@@ -886,6 +899,9 @@
+ \bibitem{Bethkenhagen2020}
+ M. Bethkenhagen \textit{et al.}, Phys. Rev. Research \textbf{2}, 023260 (2020), doi:10.1103/PhysRevResearch.2.023260.
+ 
++\bibitem{OnishiFu2024}
++Y. Onishi and L. Fu, Phys. Rev. X \textbf{14}, 011052 (2024), doi:10.1103/PhysRevX.14.011052.
++
+ \end{thebibliography}
+ 
+ \end{document}
