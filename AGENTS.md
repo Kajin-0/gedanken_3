@@ -27,54 +27,63 @@ premise
 -> theorem/bound/invariant/counterexample
 -> quantitative witness
 -> adversarial audit
--> manuscript only if novelty survives.
+-> manuscript only if novelty survives sufficiently to justify a draft
+-> hostile manuscript review
+-> typeset only after claim scope remains stable.
 ```
 
-Do not keep adding phenomenology to rescue a weak novelty case.
+Do not add phenomenology merely to rescue a weak novelty case.
 
 ---
 
-# Recovery order — Experiment 12
+# Experiment 12 — ACTIVE MANUSCRIPT STAGE
 
-Read in this order:
+Branch:
+
+```text
+experiment-12-oscillator-strength-state-count-bound
+```
+
+Recovery order:
 
 1. `experiments/12-oscillator-strength-state-count-bound/CURRENT_STATE.md`
-2. `experiments/12-oscillator-strength-state-count-bound/THERMAL_OPTICAL_SUM_INEQUALITY_STEP_2026-08-14.md`
-3. `experiments/12-oscillator-strength-state-count-bound/DISPERSIVE_MULTIBAND_GENERALIZATION_STEP_2026-08-14.md`
-4. `experiments/12-oscillator-strength-state-count-bound/OSCILLATOR_STRENGTH_STATE_COUNT_THEOREM_STEP_2026-08-14.md`
-5. `experiments/12-oscillator-strength-state-count-bound/FOUNDING_GEDANKEN_2026-08-14.md`
-6. `experiments/12-oscillator-strength-state-count-bound/PROGRESS_LOG.md`
-7. candidate-audit files only as needed.
+2. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV3_2026-08-14.md`
+3. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV3_NOTATION_ERRATUM_2026-08-14.md`
+4. `experiments/12-oscillator-strength-state-count-bound/THEOREM_CORE_2026-08-14.md`
+5. `experiments/12-oscillator-strength-state-count-bound/BASIS_INVARIANT_VELOCITY_RESOURCE_CORRECTION_2026-08-14.md`
+6. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV1_ADVERSARIAL_REVIEW_2026-08-14.md`
+7. `experiments/12-oscillator-strength-state-count-bound/NOVELTY_AUDIT_2026-08-14.md`
+8. `experiments/12-oscillator-strength-state-count-bound/NOVELTY_AUDIT_ADDENDUM_LOW_CARRIER_OPTICS_2026-08-14.md`
+9. `experiments/12-oscillator-strength-state-count-bound/PROGRESS_LOG.md`
 
----
+## Controlling theorem
 
-# Experiment 12 — controlling result
+For exact independent-quasiparticle states below and above a chemical potential, use only the direct cross-chemical-potential optical conductivity `sigma_1^cross`.
 
-For exact independent-particle eigenstates below and above a chemical potential, define thermal upper-state electron density `n_e`, lower-state hole density `n_h`, and direct interband optical conductivity `sigma_1^inter`.
-
-Assume a finite crossing-transition velocity-strength resource `v_*`:
-
-```math
-\sum_v|v_{cv}|^2\le v_*^2
-\quad\forall c,
-```
+For every crossing transition,
 
 ```math
-\sum_c|v_{cv}|^2\le v_*^2
-\quad\forall v.
+\boxed{
+\frac{2[f(E_v)-f(E_c)]}
+{e^{(E_c-E_v)/(2k_BT)}-1}
+\le
+f(E_c)+1-f(E_v).
+}
 ```
 
-Exact Fermi algebra gives the global thermal-optical spectral-weight inequality
+For any measurable useful positive-frequency window `B`, define the basis-invariant optical-velocity shell resource `u_B` using projected physical velocity operators within exact degenerate energy eigenspaces.
+
+Then
 
 ```math
 \boxed{
 n_e+n_h
 \ge
-\frac{2}{\pi e^2v_*^2}
-\int_0^\infty
-\frac{\hbar\omega\,\sigma_1^{inter}(\omega)}
+\frac{2}{\pi e^2u_B^2}
+\int_B
+\frac{\hbar\omega\,\sigma_1^{cross}(\omega)}
 {e^{\hbar\omega/(2k_BT)}-1}
-d\omega.
+\,d\omega.
 }
 ```
 
@@ -84,85 +93,89 @@ For an intrinsic neutral absorber,
 \boxed{
 n_{th}
 \ge
-\frac{1}{\pi e^2v_*^2}
-\int_0^\infty
-\frac{\hbar\omega\,\sigma_1^{inter}(\omega)}
+\frac{1}{\pi e^2u_B^2}
+\int_B
+\frac{\hbar\omega\,\sigma_1^{cross}(\omega)}
 {e^{\hbar\omega/(2k_BT)}-1}
-d\omega.
+\,d\omega.
 }
 ```
 
-This is currently the strongest surviving theorem in the branch.
+The low-energy kernel tends to `2 kBT`, so a finite amount of **integrated** low-energy direct spectral weight has a finite thermal quasiparticle population cost at fixed optical-velocity resource.
 
-The thermal kernel tends to `2 kBT` at low transition energy, so fixed low-energy intrinsic interband spectral weight cannot coexist with vanishing thermal quasiparticle population unless the velocity-strength resource also changes.
-
-## Nontrivial validations
+## Tightness / validation
 
 ```text
-2-D neutral massless Dirac / graphene: bound/exact = 1/2
-3-D massless Dirac:                    bound/exact = 2/3
-3-D massive Dirac at 10 um / 300 K:    bound/exact = 0.794684
+3-D equal-mass parabolic direct bands:
+    exact saturation at all temperatures in the ideal model
+
+2-D neutral massless Dirac:
+    bound/exact = 0.5000
+
+3-D massless Dirac:
+    bound/exact = 0.6667
+
+3-D massive Dirac, 10 um / 300 K:
+    bound/exact = 0.794684
 ```
 
-The finite-gap Dirac validation is important: the generalized theorem recovers about 79.5% of the exact thermal population without assuming the Dirac DOS in the derivation.
-
-Reproduce with:
-
-`experiments/12-oscillator-strength-state-count-bound/numerics/thermal_optical_sum_dirac_validation.py`
-
-## Corollaries
-
-Partial spectral weight below `E_Omega`:
+For unequal parabolic masses in the nondegenerate limit,
 
 ```math
-\boxed{
-n_e+n_h
-\ge
-\frac{2E_\Omega}{\pi e^2v_*^2}
-\frac{W(E_\Omega)}
-{e^{E_\Omega/(2k_BT)}-1}.
-}
+n_bound/n_exact
+=
+[4m_em_h/(m_e+m_h)^2]^{3/4}.
 ```
 
-The original two-flat-manifold theorem is the tight equality structure of this more general result.
+## Scope boundary
 
----
-
-# Scope boundary
-
-Current valid class:
+Valid class:
 
 ```text
-independent-quasiparticle direct interband charge absorbers.
+independent-quasiparticle direct cross-mu charge absorbers.
 ```
 
-The theorem survives arbitrary dispersive multiband state reuse and static single-particle disorder when exact eigenstates are used.
-
-It does **not** automatically cover:
+Do not automatically extend to:
 
 ```text
-bound excitons;
-collective/superradiant many-body optical states;
-phonon-assisted transitions;
-interaction-generated lifetime broadening;
-arbitrary passive photonic path enhancement when translating intrinsic conductivity to external absorptance.
+bound excitons / neutral collective states;
+phonon-assisted / indirect absorption;
+interaction-generated many-body spectral functions;
+unconstrained passive photonic path enhancement.
 ```
 
-Bound excitons are a genuine free-carrier counterexample: strong neutral low-energy oscillator strength can lie below the free pair continuum and photocurrent then requires a separate dissociation process.
+Localized states do not invalidate the population theorem but block any automatic conversion to DC dark current.
 
-Also do not infer dark current directly from thermal population without an explicit electrical-activity/collection assumption. Localized-state detectors show why that distinction matters.
+Do not claim a universal dark-current, thermal-generation-rate, D*, or finite-bandwidth-noise lower bound. The attempted `G_th >= n_th/tau_response` theorem was rejected by a depleted-photodiode counterexample.
 
----
+## Manuscript state
 
-# Novelty status
+Current manuscript:
 
-Focused audits have checked Kubo-Greenwood, ordinary/generalized `f`-sums, restricted optical sums, quantum-geometric conductivity bounds, finite-temperature QFI response integrals, graphene finite-T optical sum rules, and the classic IR `alpha/G_th` material criterion.
+`MANUSCRIPT_REV3_2026-08-14.md`
 
-No direct collision with the exact Experiment-12 thermal kernel and carrier-population inequality has yet been found.
+Rev3 is scientifically controlling but contains four stale **Greek-nu** renderings where the intended basis-invariant resource is Latin `u_B` / `u_{\mathcal B}`. Exact locations and correction are recorded in:
+
+`MANUSCRIPT_REV3_NOTATION_ERRATUM_2026-08-14.md`
+
+Treat Rev3 + erratum as the archival manuscript state. No scientific quantity changes.
 
 ```text
 NOVELTY NOT ESTABLISHED.
-NO MANUSCRIPT YET.
+REV3 IS READY FOR ANOTHER INDEPENDENT EXTERNAL-STYLE REVIEW.
+```
+
+## Next action
+
+Do not add new physics by default.
+
+Proceed with:
+
+```text
+1. fold the four-symbol erratum into the next rendered/journal-facing revision;
+2. perform another independent hostile manuscript review;
+3. verify every bibliography entry and journal-fit statement;
+4. typeset only after claim scope remains unchanged.
 ```
 
 ---
@@ -177,11 +190,7 @@ NO MANUSCRIPT YET.
 CLOSED BY DEFAULT AS NOVELTY / MANUSCRIPT PATH.
 ```
 
-Retained conditional single-pass theorem:
-
-```math
-\Sigma_c\ge C/[\min(V_{hop},v_{spec})]^2.
-```
+Retained conditional results remain useful but should not be mechanically extended.
 
 ## Experiment 11
 
@@ -191,21 +200,6 @@ Retained conditional single-pass theorem:
 CLOSED BY DEFAULT AS NOVELTY / MANUSCRIPT PATH.
 ```
 
-Retained prompt-slew identity/bound reduces to Maxwell relaxation / reciprocal sensitivity theory.
+The prompt-slew/capacitance identity was retained as an established Maxwell-relaxation / reciprocal-sensitivity consequence.
 
-Candidate-audit files on the Experiment-11 lineage record rejected premises and should be consulted before reopening old ideas.
-
----
-
-# ACTIVE NEXT ACTION
-
-Attack Experiment 12 rather than drafting it.
-
-Priority order:
-
-```text
-1. localized-state / electrical-activity loophole;
-2. carrier-number fluctuation/noise corollary without arbitrary lifetime assumptions;
-3. dedicated novelty audit centered on the exact thermal kernel;
-4. only if those survive, theorem compression and manuscript viability review.
-```
+Candidate-audit files from the Experiment-10/11 lineage document rejected premises; consult them before reopening old ideas.
