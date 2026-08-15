@@ -1,0 +1,43 @@
+name: HgCdTe full homogeneous BIA robustness
+
+on:
+  push:
+    branches:
+      - experiment-13-observable-resource-unification
+    paths:
+      - 'experiments/13-observable-resource-unification/numerics/hgcdte_bia_full_bulk_robustness.py'
+      - 'experiments/13-observable-resource-unification/numerics/hgcdte_bia_full_bulk.py'
+      - 'experiments/13-observable-resource-unification/numerics/hgcdte_bia_c_linear_refined.py'
+      - 'experiments/13-observable-resource-unification/numerics/hgcdte_bia_c_linear_stress.py'
+      - 'experiments/12-oscillator-strength-state-count-bound/numerics/kane_8band_tightness.py'
+      - '.github/workflows/hgcdte-bia-full-bulk-robustness.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  robustness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install numerical dependencies
+        run: python -m pip install --upgrade numpy scipy
+      - name: Run capacity, quadrature, and cluster robustness audit
+        run: |
+          python experiments/13-observable-resource-unification/numerics/hgcdte_bia_full_bulk_robustness.py \
+            | tee hgcdte_bia_full_bulk_robustness.txt
+      - name: Require audit sections
+        shell: bash
+        run: |
+          grep -q '^\[FULL_BIA_CAPACITY_MULTI_SEED\]$' hgcdte_bia_full_bulk_robustness.txt
+          grep -q '^\[GRID_80x8x12_RELATIVE\]$' hgcdte_bia_full_bulk_robustness.txt
+          grep -q '^\[GRID_100x10x12_RELATIVE\]$' hgcdte_bia_full_bulk_robustness.txt
+          grep -q '^\[FULL_BIA_CLUSTER_TOLERANCE\]$' hgcdte_bia_full_bulk_robustness.txt
+      - name: Upload result
+        uses: actions/upload-artifact@v4
+        with:
+          name: hgcdte-bia-full-bulk-robustness
+          retention-days: 30
+          path: hgcdte_bia_full_bulk_robustness.txt
