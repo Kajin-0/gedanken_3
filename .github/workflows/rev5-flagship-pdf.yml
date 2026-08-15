@@ -1,0 +1,108 @@
+name: Rev5 flagship PDF
+
+on:
+  push:
+    branches:
+      - experiment-13-observable-resource-unification
+    paths:
+      - 'experiments/13-observable-resource-unification/typeset/**'
+      - '.github/workflows/rev5-flagship-pdf.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install TeX and PDF utilities
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            latexmk texlive-latex-base texlive-latex-recommended \
+            texlive-latex-extra texlive-publishers texlive-pictures \
+            texlive-fonts-recommended lmodern poppler-utils patch
+
+      - name: Reconstruct frozen Rev4 source
+        working-directory: experiments/13-observable-resource-unification/typeset
+        run: python3 build_rev4.py
+
+      - name: Apply recorded Rev5 scientific delta
+        working-directory: experiments/13-observable-resource-unification/typeset
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat rev5_from_rev4.patch.part1 \
+              rev5_from_rev4.patch.part2 \
+              rev5_from_rev4.patch.part3 > rev5_from_rev4.patch
+          patch -o rev5_prapplied.tex rev4_unified_prapplied_built.tex < rev5_from_rev4.patch
+          grep -Fq 'Stage-specific spectral geometry of photodetection' rev5_prapplied.tex
+          grep -Fq 'r_{\rm eff}' rev5_prapplied.tex
+          grep -Fq 'eq:full-factorization' rev5_prapplied.tex
+          grep -Fq 'immigration--death--exchange' rev5_prapplied.tex
+          grep -Fq 'single fixed-$\mathbf k$ $PT$ Kramers doublet' rev5_prapplied.tex
+
+      - name: Compile REVTeX manuscript
+        working-directory: experiments/13-observable-resource-unification/typeset
+        run: |
+          latexmk -pdf -interaction=nonstopmode -halt-on-error -file-line-error rev5_prapplied.tex
+
+      - name: Production QA summary
+        working-directory: experiments/13-observable-resource-unification/typeset
+        shell: bash
+        run: |
+          set -o pipefail
+          PDF=rev5_prapplied.pdf
+          LOG=rev5_prapplied.log
+          mkdir -p rev5_rendered_pages
+          pdftoppm -png -r 150 "$PDF" rev5_rendered_pages/page >/dev/null 2>&1
+          {
+            echo 'Experiment 13 Rev5 production QA'
+            echo "commit: $GITHUB_SHA"
+            echo
+            pdfinfo "$PDF" | grep -E '^(Pages|Page size|PDF version):' || true
+            echo
+            sha256sum rev5_prapplied.tex "$PDF" rev4_unified.bib rev5_figures.tex \
+              rev5_from_rev4.patch.part1 rev5_from_rev4.patch.part2 rev5_from_rev4.patch.part3
+            echo
+            echo 'Undefined-reference/citation warnings:'
+            grep -Ei 'undefined references|undefined citations|Citation .* undefined|Reference .* undefined' "$LOG" || echo 'none'
+            echo
+            echo 'Overfull/underfull boxes:'
+            grep -E 'Overfull|Underfull' "$LOG" || echo 'none'
+            echo
+            echo 'LaTeX warnings:'
+            grep -E 'LaTeX Warning|Package .* Warning' "$LOG" || echo 'none'
+          } | tee REV5_PRODUCTION_QA.txt
+
+          if grep -Eqi 'undefined references|undefined citations|Citation .* undefined|Reference .* undefined' "$LOG"; then
+            echo 'Fatal QA: undefined citation/reference detected.' >&2
+            exit 1
+          fi
+          if grep -Eq 'Overfull \\hbox|Overfull \\vbox' "$LOG"; then
+            echo 'Fatal QA: overfull box detected.' >&2
+            exit 1
+          fi
+
+      - name: Upload production package
+        uses: actions/upload-artifact@v4
+        with:
+          name: experiment13-rev5-production
+          if-no-files-found: error
+          retention-days: 30
+          path: |
+            experiments/13-observable-resource-unification/typeset/rev5_prapplied.pdf
+            experiments/13-observable-resource-unification/typeset/rev5_prapplied.tex
+            experiments/13-observable-resource-unification/typeset/rev5_prapplied.log
+            experiments/13-observable-resource-unification/typeset/rev5_prapplied.bbl
+            experiments/13-observable-resource-unification/typeset/rev5_figures.tex
+            experiments/13-observable-resource-unification/typeset/rev5_from_rev4.patch.part1
+            experiments/13-observable-resource-unification/typeset/rev5_from_rev4.patch.part2
+            experiments/13-observable-resource-unification/typeset/rev5_from_rev4.patch.part3
+            experiments/13-observable-resource-unification/typeset/REV5_PRODUCTION_QA.txt
+            experiments/13-observable-resource-unification/typeset/rev5_rendered_pages/*.png
