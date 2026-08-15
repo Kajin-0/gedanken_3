@@ -7,9 +7,11 @@ The calculation is deliberately restricted to a bounded k-domain.
 
 Outputs:
   * alloy composition solving the Laurenti Eg(x,T) convention for 10 um at 300 K;
-  * charge-neutral chemical potential and carrier densities;
+  * charge-neutral chemical potential and conventional/cross-mu carrier populations;
   * selected-window optical-capacity v_B^cap;
-  * theorem lower bound and bound/exact ratio for several low-energy windows;
+  * theorem lower bound and bound/reference ratio for several low-energy windows;
+  * projected-block SVD versus pairwise-matrix-element diagnostics;
+  * selected-window momentum support and degeneracy-tolerance checks;
   * simple k-domain convergence checks.
 
 No phenomenological linewidth is required because the theorem's frequency
@@ -46,7 +48,7 @@ def eg_laurenti(x: float, T: float) -> float:
 
 X = brentq(lambda xx: eg_laurenti(xx, T_K) - EG, 0.10, 0.30)
 
-# Representative linear interpolation of Novik Table-I endpoint parameters.
+# Linear interpolation of Novik Table-I remote-band parameters.
 DELTA = (1 - X) * 1.08 + X * 0.91
 F = (1 - X) * 0.0 + X * (-0.09)
 G1 = (1 - X) * 4.1 + X * 1.47
@@ -70,7 +72,8 @@ def h8(kx: float, ky: float, kz: float) -> np.ndarray:
     V = -A0 * G2 * (kp2 - 2.0 * kz * kz)
     R = -A0 * math.sqrt(3.0) * (MUW * kp * kp - GBAR * km * km)
 
-    # Bulk constant parameters: commutators vanish and Sbar=S_tilde.
+    # For bulk constant material parameters, commutators [kappa,kz] vanish and
+    # {gamma3,kz}=2 gamma3 kz, hence Sbar=S_tilde.
     Sm = -2.0 * A0 * math.sqrt(3.0) * G3 * km * kz
     Sp = -2.0 * A0 * math.sqrt(3.0) * G3 * kp * kz
     tSm, tSp = Sm, Sp
@@ -192,7 +195,7 @@ def energy_clusters(vals, tol=1.0e-7):
     return groups
 
 
-def optical_point(kk, mu, elo, ehi):
+def optical_point(kk, mu, elo, ehi, cluster_tol=1.0e-7):
     vals, U = np.linalg.eigh(h8(*kk))
     M = U.conj().T @ vx(*kk) @ U
     f = fermi(vals, mu)
@@ -202,17 +205,22 @@ def optical_point(kk, mu, elo, ehi):
     # The theorem-weighted optical integral after performing the delta-function
     # frequency integral. Units: density * velocity^2.
     s = 0.0
+    pairmax2 = 0.0
+    selected_pairs = set()
     for i in lower:
         for j in upper:
             de = vals[j] - vals[i]
             if elo <= de <= ehi:
-                s += (f[i] - f[j]) * abs(M[j, i]) ** 2 / (math.exp(de / (2.0 * KT)) - 1.0)
+                amp2 = abs(M[j, i]) ** 2
+                s += (f[i] - f[j]) * amp2 / (math.exp(de / (2.0 * KT)) - 1.0)
+                pairmax2 = max(pairmax2, amp2)
+                selected_pairs.add((int(i), int(j)))
 
     # Basis-invariant selected-shell capacity. Because v_x conserves k, the
-    # energy-shell operator is block diagonal in k. Exact Kramers degeneracies
+    # energy-shell operator is block diagonal in k. Exact model degeneracies
     # are grouped before taking the singular value.
     cap2 = 0.0
-    groups = energy_clusters(vals)
+    groups = energy_clusters(vals, tol=cluster_tol)
     for g in groups:
         eg = float(np.mean(vals[g]))
         if eg > mu:
@@ -231,20 +239,39 @@ def optical_point(kk, mu, elo, ehi):
                     partners += gu
             if partners:
                 cap2 = max(cap2, np.linalg.svd(M[np.ix_(partners, g)], compute_uv=False)[0] ** 2)
-    return s, cap2
+    return s, cap2, pairmax2, selected_pairs
 
 
-def optical_bound(mu, exact_cross_population, elo, ehi, kmax,
-                  nr=160, nmu=10, nphi=16):
+def optical_bound(mu, reference_cross_population, elo, ehi, kmax,
+                  nr=160, nmu=10, nphi=16, cluster_tol=1.0e-7):
     weighted = 0.0
     cap2 = 0.0
+    pairmax2 = 0.0
+    selected_pairs = set()
+    ksel_min = float("inf")
+    ksel_max = 0.0
     for kk, w in grid(kmax, nr, nmu, nphi):
-        s, c2 = optical_point(kk, mu, elo, ehi)
+        s, c2, p2, pairs = optical_point(kk, mu, elo, ehi, cluster_tol=cluster_tol)
         weighted += w * s
         cap2 = max(cap2, c2)
+        pairmax2 = max(pairmax2, p2)
+        if pairs:
+            kmag = float(np.linalg.norm(kk))
+            ksel_min = min(ksel_min, kmag)
+            ksel_max = max(ksel_max, kmag)
+            selected_pairs.update(pairs)
     cap = math.sqrt(cap2)
+    pairmax = math.sqrt(pairmax2)
     bound = 2.0 * weighted / cap2
-    return cap, bound, bound / exact_cross_population
+    return {
+        "capacity": cap,
+        "pairwise_max": pairmax,
+        "bound": bound,
+        "ratio": bound / reference_cross_population,
+        "k_selected_min": ksel_min,
+        "k_selected_max": ksel_max,
+        "selected_pairs": sorted(selected_pairs),
+    }
 
 
 def main():
@@ -275,10 +302,29 @@ def main():
         ("Eg..0.5eV", EG, 0.50, 1.00),
     ]
     print("\nWindowed theorem test:")
-    print("window          vcap(m/s)      n_bound(cm^-3)   bound/exact")
+    print("window          vcap(m/s)    pairmax(m/s)  ksel,max(nm^-1)  n_bound(cm^-3)  bound/reference")
+    results = {}
     for name, lo, hi, km in windows:
-        cap, bound, ratio = optical_bound(mu, ncross, lo, hi, km)
-        print(f"{name:12s} {cap:12.3f}   {bound:14.6e}   {ratio:10.6f}")
+        r = optical_bound(mu, ncross, lo, hi, km)
+        results[name] = r
+        print(
+            f"{name:12s} {r['capacity']:12.3f} {r['pairwise_max']:13.3f} "
+            f"{r['k_selected_max']:15.6f} {r['bound']:14.6e} {r['ratio']:15.6f}"
+        )
+
+    broad = results["Eg..0.5eV"]
+    print("\nProjected-block diagnostic for Eg..0.5eV:")
+    print(f"projected-block singular-value capacity = {broad['capacity']:.6f} m/s")
+    print(f"largest individual |v_cv|               = {broad['pairwise_max']:.6f} m/s")
+    print(f"capacity/pairwise ratio                 = {broad['capacity']/broad['pairwise_max']:.9f}")
+    print(f"bound overstatement if pairwise max used = {(broad['capacity']/broad['pairwise_max'])**2 - 1.0:.3%}")
+    print(f"selected ordered eigenband pairs        = {broad['selected_pairs']}")
+    print("The two lowest eigenvalue branches (Gamma7-derived split-off pair) do not enter this selected set.")
+
+    print("\nDegenerate-shell clustering tolerance check, Eg..0.5eV (reduced quadrature):")
+    for tol in (1e-10, 1e-8, 1e-7, 1e-6, 1e-5):
+        r = optical_bound(mu, ncross, EG, 0.50, 1.00, nr=80, nmu=8, nphi=12, cluster_tol=tol)
+        print(f"tol={tol:.0e} eV  vcap={r['capacity']:.6f} m/s  ratio={r['ratio']:.9f}")
 
     print("\nCarrier k-domain convergence (nr=100,nmu=8,nphi=12):")
     for km in (1.2, 1.5, 1.8, 2.0):
