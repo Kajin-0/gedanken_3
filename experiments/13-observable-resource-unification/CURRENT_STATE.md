@@ -3,43 +3,41 @@
 **Date:** 2026-08-15  
 **Scope:** analytical/theoretical only  
 **Target:** Physical Review Applied — Regular Article  
-**Status:** **FLAGSHIP REV. 4 SCIENTIFICALLY FROZEN / PRODUCTION PDF QA-PASSED / RENDERED HOSTILE REVIEW PASSED / HUMAN METADATA REQUIRED**
+**Status:** **FLAGSHIP REV. 4 SCIENTIFICALLY FROZEN / TITLE-COMPLETE PRODUCTION PDF QA-PASSED / HUMAN SUBMISSION INPUTS REQUIRED**
 
 ## Read first
 
 1. `00_ACTIVE_FRONTIER_REV4_FLAGSHIP_2026-08-15.md`
-2. `REV4_PRAPPLIED_PRODUCTION_QA_2026-08-15.md`
+2. `REV4_PRAPPLIED_TITLE_COMPLETE_PRODUCTION_QA_2026-08-15.md`
 3. `PAPER_REV4_RENDERED_HOSTILE_REVIEW_2026-08-15.md`
-4. `PAPER_DRAFT_REV4_CLAIM_REFERENCE_CLEAN_2026-08-15.md`
-5. `PAPER_REV4_REFERENCE_QA_2026-08-15.md`
-6. `PAPER_REV4_FINAL_HOSTILE_CLAIM_REFERENCE_REVIEW_2026-08-15.md`
-7. `HGCDTE_STABLE_RANK_PRODUCTION_QA_2026-08-15.md`
-8. `HGCDTE_PT_SYMMETRY_STABLE_RANK_EXPLANATION_2026-08-15.md`
-9. `CHANNEL_SPECIFIC_OBSERVABILITY_GEOMETRY_2026-08-15.md`
+4. `PRAPPLIED_SUBMISSION_PREFLIGHT_2026-08-15.md`
+5. `PAPER_DRAFT_REV4_CLAIM_REFERENCE_CLEAN_2026-08-15.md`
+6. `PAPER_REV4_REFERENCE_QA_2026-08-15.md`
+7. `PAPER_REV4_FINAL_HOSTILE_CLAIM_REFERENCE_REVIEW_2026-08-15.md`
+8. `HGCDTE_STABLE_RANK_PRODUCTION_QA_2026-08-15.md`
+9. `HGCDTE_PT_SYMMETRY_STABLE_RANK_EXPLANATION_2026-08-15.md`
+10. `CHANNEL_SPECIFIC_OBSERVABILITY_GEOMETRY_2026-08-15.md`
 
-If an older Experiment-13 note disagrees with the files above, this recovery order controls.
-
-## Production identity
+## Controlling title-complete PDF
 
 ```text
-GitHub Actions run:   31900965632
-head commit:          f41bdc6a4e580bfadd8155903f4127b2b63655ca
-artifact ID:          9251078733
-artifact digest:      1b4375f9953707ddf1e6b35bf55f91377370274d230298429398096f1b42e01a
-PDF SHA-256:          84c86c30019a0517246493ad4b9aacd60ac54051164b27ca7dfedac2fdba800f
-built TeX SHA-256:    c1459c18e4bf5d20f09a9a956c23b565c76bd0a913fe9636adc2ca7fe1e2b8f9
-pages:                7
-undefined refs/cites: none
-overfull boxes:       none
-all-page visual QA:   PASS
-rendered hostile QA:  PASS
+Actions run:            31901326001
+head commit:            7b2f8fe1a9e92ba8ea778828c2682c5a374a1abb
+artifact ID:            9251170031
+artifact digest:        11d4bf5bd6262d6a19c6b1f0bdbdb7a7d16644981b9bd597c199e7a23ddbf32e
+PDF SHA-256:            d2e65ab9b0953e1f987c8c2c2b47e4d8558ac72989b84325590b3a0a67086ee8
+built TeX SHA-256:      c1459c18e4bf5d20f09a9a956c23b565c76bd0a913fe9636adc2ca7fe1e2b8f9
+BibTeX SHA-256:         029d1029c487c99e277a24dc95ad536d10a41742992c89916a1991d423f39d3d
+pages:                  7
+undefined refs/cites:   none
+overfull boxes:         none
+reference titles:       complete for current bibliography
+visual QA:              PASS
 ```
 
-Five native vector figures are present and visually clean. The remaining underfull/float warnings are nonblocking in the inspected artifact.
+Pages 1–6 are rendered byte-for-byte identically to the hostile-reviewed pre-title-completion package. Only bibliography page 7 changed; it separately passed visual QA.
 
 ## Scientific center
-
-The controlling theorem remains
 
 ```math
 \boxed{
@@ -53,29 +51,15 @@ The controlling theorem remains
 }
 ```
 
-It uses selected direct cross-`mu` conductivity and the basis-invariant exact-shell capacity. It is an equilibrium one-body population theorem, not a universal dark-current, generation-rate, finite-bandwidth-noise, or `D*` theorem.
+The theorem uses selected direct cross-`mu` conductivity and the basis-invariant exact-shell capacity. It bounds equilibrium one-body endpoint population, not universal dark current, generation rate, finite-bandwidth noise, or `D*`.
 
-## Unified connector
-
-For a physically declared admissible domain,
+Unified connector:
 
 ```math
-\boxed{
-\mathcal S_{X|D}\tau_{X|D}=1.
-}
+\boxed{\mathcal S_{X|D}\tau_{X|D}=1.}
 ```
 
-This is organizing algebra, not a generic matrix novelty claim.
-
-Specializations:
-
-```text
-uniform task ensemble:       S=d/r_st
-coherent rank-one detector:  S=N_eff=1/sum_j w_j^2
-thermal endpoint ensemble:   S_th,B^act=1/tau_cap^act
-```
-
-The shell-resolved thermal decomposition is
+Shell-resolved thermal decomposition:
 
 ```math
 \tau_{cap}^{act}=\sum_aw_a^{act}\frac{c_a}{\mathcal S_a^{act}},
@@ -102,87 +86,52 @@ bound/reference               ~= 0.118
 bound/active                  ~= 0.176
 ```
 
-The factor closure is
-
 ```math
 0.306836598\times0.572622972=0.175701685.
 ```
 
-Every contributing selected active shell has `S_a^act=1` to about `4e-14` in the BIA-neglecting second-order Kane model. This exact isotropy is model-specific and is not generalized to full zincblende HgCdTe with BIA.
+`S_a^act=1` to about `4e-14` only within the BIA-neglecting second-order Kane validation model. Do not universalize the exact shell isotropy to real zincblende HgCdTe without a BIA-inclusive calculation.
 
 ## Recycling / observability result
 
-A terminal has positive observability effect
+Under independent conservative one-final-sink Poisson lineages, ideal final-sink counting can have exactly zero interterminal cross-spectrum despite internal recycling and mean crosstalk. Finite-transit Shockley-Ramo current can lift the endpoint source-channel null at finite frequency even though an internally created/recombined pair has zero integrated induced charge. A nonzero ensemble cross-spectrum is allowed, not guaranteed.
 
-```math
-G_i(\omega)=M^\dagger|i><i|M.
-```
-
-A positive internal sector null to one terminal cannot contribute cross-noise with another terminal.
-
-Under independent conservative one-final-sink Poisson lineages, ideal endpoint counting can therefore have exactly zero interterminal cross-spectrum despite internal recycling and mean crosstalk.
-
-For an internally created/recombined pair,
-
-```math
-Q_i^{rec}=0
-```
-
-while finite-transit Shockley-Ramo motion can give finite-frequency waveform support. The endpoint source-channel null can therefore be lifted at finite frequency; a nonzero ensemble cross-spectrum is allowed, not guaranteed.
-
-## Novelty / significance state
-
-No direct prior-art collision was found in the completed targeted audits. Historical priority is not established and priority language is not authorized.
-
-The strongest remaining referee vulnerabilities are:
+## Strategy
 
 ```text
-breadth / significance of the unified paper;
-practical isolation of sigma_cross;
-need to establish v_B^cap for a target material;
-independent-quasiparticle scope;
-realistic bound tightness (~11.8% full / ~17.6% active);
-idealized endpoint-Poisson assumptions in the recycling result.
+Experiment 13 flagship:       primary submission path
+Experiment 01 manuscript:     frozen fallback
+Experiment 09 manuscript:     frozen fallback
+Experiment 12 manuscript:     frozen fallback
+new theory by default:        stop
 ```
 
-These are applicability/editorial questions, not identified theorem defects.
+No direct prior-art collision was found in completed targeted audits. Historical priority remains unproven; avoid priority language.
 
-## Standalone manuscripts
+## APS submission preflight
+
+Current Physical Review Applied requirements were checked. The repository now contains:
 
 ```text
-Experiment 01 Applied Optics: frozen fallback
-Experiment 09 PRA:            frozen fallback
-Experiment 12 PRB:            frozen fallback
-Experiment 13 flagship:       primary path
+100-word suitability justification
+cover-letter draft
+data-availability/archive decision guidance
+source-package checklist
+reference-title completion
 ```
 
-Do not delete the standalones and do not simultaneously submit materially overlapping versions.
+No standalone Supplemental Material is required by default.
 
-## Remaining blockers
-
-The production source intentionally still contains placeholders for:
+## Remaining human/submission inputs
 
 ```text
 author name
 institutional affiliation
 corresponding email
-acknowledgments / funding
+acknowledgments / funding statement
+submission-history / joint-submission declaration
+final Data Availability Statement / archival citation decision
+optional ORCID and referee recommendations/exclusions
 ```
 
-Those are the only known submission blockers.
-
-## Next action
-
-Do not open a new theory branch by default.
-
-When human metadata is supplied:
-
-```text
-insert metadata only;
-rebuild through CI;
-record the new hashes;
-inspect all pages again;
-submit if the metadata-only build remains clean.
-```
-
-Reopen science only for a concrete mathematical defect, numerical inconsistency, direct prior-art collision, explicit referee/editor request, or specific journal requirement.
+When these are supplied, make metadata/submission-only changes, rebuild, rehash, and visually inspect every page. Reopen science only for a concrete scientific defect, direct prior-art collision, or explicit editor/referee requirement.
