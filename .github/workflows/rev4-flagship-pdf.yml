@@ -1,0 +1,85 @@
+name: Rev4 flagship PDF
+
+on:
+  push:
+    branches:
+      - experiment-13-observable-resource-unification
+    paths:
+      - 'experiments/13-observable-resource-unification/typeset/**'
+      - '.github/workflows/rev4-flagship-pdf.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install TeX and PDF utilities
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            latexmk texlive-latex-base texlive-latex-recommended \
+            texlive-latex-extra texlive-publishers texlive-pictures \
+            texlive-fonts-recommended poppler-utils
+
+      - name: Build production source
+        working-directory: experiments/13-observable-resource-unification/typeset
+        run: python3 build_rev4.py
+
+      - name: Compile REVTeX manuscript
+        working-directory: experiments/13-observable-resource-unification/typeset
+        run: |
+          latexmk -pdf -interaction=nonstopmode -halt-on-error -file-line-error \
+            rev4_unified_prapplied_built.tex
+
+      - name: Production QA summary
+        working-directory: experiments/13-observable-resource-unification/typeset
+        shell: bash
+        run: |
+          set -o pipefail
+          PDF=rev4_unified_prapplied_built.pdf
+          LOG=rev4_unified_prapplied_built.log
+          mkdir -p rendered_pages
+          pdftoppm -png -r 150 "$PDF" rendered_pages/page >/dev/null 2>&1
+          {
+            echo 'Experiment 13 Rev4 production QA'
+            echo "commit: $GITHUB_SHA"
+            echo
+            pdfinfo "$PDF" | grep -E '^(Pages|Page size|PDF version):' || true
+            echo
+            sha256sum rev4_unified_prapplied_built.tex "$PDF" rev4_unified.bib rev4_figures.tex
+            echo
+            echo 'Undefined-reference/citation warnings:'
+            grep -Ei 'undefined references|undefined citations|Citation .* undefined|Reference .* undefined' "$LOG" || echo 'none'
+            echo
+            echo 'Overfull/underfull boxes:'
+            grep -E 'Overfull|Underfull' "$LOG" || echo 'none'
+            echo
+            echo 'LaTeX warnings:'
+            grep -E 'LaTeX Warning|Package .* Warning' "$LOG" || echo 'none'
+          } | tee REV4_PRODUCTION_QA.txt
+
+          if grep -Eqi 'undefined references|undefined citations|Citation .* undefined|Reference .* undefined' "$LOG"; then
+            echo 'Fatal QA: undefined citation/reference detected.' >&2
+            exit 1
+          fi
+
+      - name: Upload production package
+        uses: actions/upload-artifact@v4
+        with:
+          name: experiment13-rev4-production
+          if-no-files-found: error
+          retention-days: 30
+          path: |
+            experiments/13-observable-resource-unification/typeset/rev4_unified_prapplied_built.pdf
+            experiments/13-observable-resource-unification/typeset/rev4_unified_prapplied_built.tex
+            experiments/13-observable-resource-unification/typeset/rev4_unified_prapplied_built.log
+            experiments/13-observable-resource-unification/typeset/rev4_unified_prapplied_built.bbl
+            experiments/13-observable-resource-unification/typeset/REV4_PRODUCTION_QA.txt
+            experiments/13-observable-resource-unification/typeset/rendered_pages/*.png
