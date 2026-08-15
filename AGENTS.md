@@ -2,56 +2,53 @@
 
 **Date:** 2026-08-15  
 **Active research branch:** `experiment-13-observable-resource-unification`  
-**Current repository frontier:** **Experiment 13 unified flagship Rev. 4 — science frozen; title-complete Physical Review Applied production PDF QA-passed; human submission inputs required**
+**Current repository frontier:** **Experiment 13 Rev. 5 — Physical Review Applied flagship, production QA + rendered hostile review passed**
 
 ## Recovery order
 
-Read these first, in order:
+Read these first:
 
 1. `agent.md`
-2. `experiments/13-observable-resource-unification/00_ACTIVE_FRONTIER_REV4_FLAGSHIP_2026-08-15.md`
-3. `experiments/13-observable-resource-unification/REV4_PRAPPLIED_TITLE_COMPLETE_PRODUCTION_QA_2026-08-15.md`
-4. `experiments/13-observable-resource-unification/PAPER_REV4_RENDERED_HOSTILE_REVIEW_2026-08-15.md`
-5. `experiments/13-observable-resource-unification/PRAPPLIED_SUBMISSION_PREFLIGHT_2026-08-15.md`
-6. `experiments/13-observable-resource-unification/PAPER_DRAFT_REV4_CLAIM_REFERENCE_CLEAN_2026-08-15.md`
-7. `experiments/13-observable-resource-unification/PAPER_REV4_REFERENCE_QA_2026-08-15.md`
-8. `experiments/13-observable-resource-unification/PAPER_REV4_FINAL_HOSTILE_CLAIM_REFERENCE_REVIEW_2026-08-15.md`
-9. `experiments/13-observable-resource-unification/HGCDTE_STABLE_RANK_PRODUCTION_QA_2026-08-15.md`
-10. `experiments/13-observable-resource-unification/HGCDTE_PT_SYMMETRY_STABLE_RANK_EXPLANATION_2026-08-15.md`
+2. `experiments/13-observable-resource-unification/00_ACTIVE_FRONTIER_REV5_FLAGSHIP_2026-08-15.md`
+3. `experiments/13-observable-resource-unification/PAPER_REV5_RENDERED_HOSTILE_REVIEW_2026-08-15.md`
+4. `experiments/13-observable-resource-unification/REV5_PRAPPLIED_PRODUCTION_QA_2026-08-15.md`
+5. `experiments/13-observable-resource-unification/PAPER_REV5_ADVERSARIAL_RESPONSE_2026-08-15.md`
+6. `experiments/13-observable-resource-unification/CURRENT_STATE.md`
+7. `experiments/13-observable-resource-unification/PRAPPLIED_SUBMISSION_PREFLIGHT_2026-08-15.md`
 
-Older Experiment-13 notes are derivation history. If they conflict with the recovery order above, the newer files control.
+Rev. 4 and earlier Experiment-13 files are derivation/production history. Preserve them, but Rev. 5 controls whenever states conflict.
 
-## Controlling title-complete production identity
+## Controlling production identity
 
 ```text
-GitHub Actions run:   31901326001
-head commit:          7b2f8fe1a9e92ba8ea778828c2682c5a374a1abb
-artifact ID:          9251170031
-artifact digest:      11d4bf5bd6262d6a19c6b1f0bdbdb7a7d16644981b9bd597c199e7a23ddbf32e
-PDF SHA-256:          d2e65ab9b0953e1f987c8c2c2b47e4d8558ac72989b84325590b3a0a67086ee8
-built TeX SHA-256:    c1459c18e4bf5d20f09a9a956c23b565c76bd0a913fe9636adc2ca7fe1e2b8f9
-BibTeX SHA-256:       029d1029c487c99e277a24dc95ad536d10a41742992c89916a1991d423f39d3d
-pages:                7
+GitHub Actions run:   31903046137
+head commit:          8ac77c06accd02e56c43910b903ff53bb07a72dd
+artifact ID:          9251615353
+artifact digest:      64046cfd6972a9fbc810ab4a67ef61b27b9cd16249b7c666ecd75fabd5c5f843
+PDF SHA-256:          ce0fd199bb43652edf598ce7fa516e093e41fdc7a664d336092b8161ea7fa1c9
+TeX SHA-256:          9f45c235d3e2852fe04bf77a2adf519213e7af76ef8c9a7e26194a2cb10c72e7
+figure SHA-256:       19c7b0f83ddadc9ff7000144ea09e257bb9d130fd898a519f88707bf54cbcf6d
+pages:                8
 undefined refs/cites: none
 overfull boxes:       none
-reference titles:     complete for current bibliography
 visual QA:            PASS
+hostile review:       PASS
 ```
 
-Pages 1–6 are render-identical to the hostile-reviewed pre-title-completion package. Only bibliography page 7 changed during title completion, and page 7 separately passed visual QA.
+## Why Rev. 5 exists
 
-## Strategic state
+An external extreme adversarial review found no collapse of the central optical population theorem but correctly identified weaknesses in Rev. 4:
 
 ```text
-FLAGSHIP-FIRST STRATEGY:   ACTIVE
-TARGET:                    Physical Review Applied Regular Article
-SCIENTIFIC CONTENT:        FROZEN
-PRODUCTION PDF:            QA-PASSED
-REFERENCE TITLES:          COMPLETE
-NEW THEORY BY DEFAULT:     STOP
+stable-rank terminology was imprecise;
+S tau = 1 was definitional and too prominent;
+PT symmetry was stated too broadly for multidoublet blocks;
+the occupancy-noise stochastic process was underdefined;
+the full support/Fermi/capacity/selectivity hierarchy was not foregrounded;
+the manuscript's unity needed to be stage-specific inference rather than one universal operator.
 ```
 
-The Experiment-01 Applied Optics, Experiment-09 PRA, and Experiment-12 PRB manuscripts remain mature frozen fallback packages. Preserve them. Do not simultaneously submit materially overlapping standalone and flagship manuscripts.
+Rev. 5 fixes these issues and passed a second rendered hostile review. No Rev. 6 scientific revision is currently required.
 
 ## Central theorem
 
@@ -67,94 +64,119 @@ The Experiment-01 Applied Optics, Experiment-09 PRA, and Experiment-12 PRB manus
 }
 ```
 
-Use selected direct cross-chemical-potential conductivity and the basis-invariant exact-energy-shell capacity. Do not substitute arbitrary total conductivity or a pairwise velocity maximum.
+Use selected direct cross-chemical-potential conductivity and the exact-shell capacity. Do not substitute arbitrary total conductivity or a pairwise velocity maximum.
 
-The theorem bounds equilibrium one-body endpoint population. It is not a universal dark-current, generation-rate, finite-bandwidth-noise, or `D*` theorem.
+## Stage-specific conceptual thesis
 
-## Unified connector and shell decomposition
+```text
+H_task -> H_exc -> H_int -> H_term
+```
 
-For a physically declared admissible domain,
+Capacity, selectivity, internal correlation, and terminal observability belong to different stage maps. None can be transferred between stages without the intervening physical dynamics.
+
+The fixed-map identity
 
 ```math
-\boxed{\mathcal S_{X|D}\tau_{X|D}=1.}
+\mathcal S_{X|D}\tau_{X|D}=1
 ```
 
-This is organizing algebra, not a generic novelty claim.
+is explicitly treated as definitional bookkeeping, not a novelty claim.
 
-Important realizations:
-
-```text
-Experiment 09:   S=N_eff=1/sum_j w_j^2
-Experiment 12:   S_th,B^act=1/tau_cap^act
-uniform tasks:   S=d/r_st
-readout stage:   channel-specific positive effects and null sectors
-```
-
-The dispersive thermal decomposition is
+For a maximally mixed task ensemble the generic positive-effect quantity is
 
 ```math
-\tau_{cap}^{act}=\sum_aw_a^{act}\frac{c_a}{\mathcal S_a^{act}},
-\qquad
-\tau_{obs}^{act}=\eta_F\sum_aw_a^{act}\frac{c_a}{\mathcal S_a^{act}}.
+r_{eff}(G)=Tr(G)/lambda_max(G)=srank(sqrt(G)),
 ```
 
-## Production HgCdTe result
+not generally the stable rank of `G` itself.
+
+## Full population-bound hierarchy
+
+```math
+\boxed{
+\frac{n_{bound}}{n_{ref}}
+=
+\frac{n_{\mathcal B}^{act}}{n_{ref}}
+\eta_F
+\sum_a w_a^{act}\frac{c_a}{\mathcal S_a^{act}}.
+}
+```
+
+This resolves lost tightness into:
 
 ```text
-n_ref             = 1.005140525e17 cm^-3
-v_B^cap           = 1.01764e6 m/s
-eta_F             = 0.306836598
-tau_cap^act       = 0.572622972
-tau_obs^act       = 0.175701685
-bound/reference   ~= 0.118
-bound/active      ~= 0.176
+support coverage;
+Fermi/Kubo asymmetry;
+shell/global capacity mismatch;
+within-shell response selectivity.
+```
+
+## HgCdTe production closure
+
+```text
+n_B^act / n_ref      = 0.66897
+eta_F                = 0.30684
+tau_cap^act          = 0.57262
+tau_obs^act          = 0.17570
+full bound/reference ~= 0.1175
+v_B^cap              = 1.01764e6 m/s
 ```
 
 ```math
-0.306836598\times0.572622972=0.175701685.
+0.66897\times0.30684\times0.57262=0.1175398\ldots
 ```
 
-Selected active exact-shell blocks have `S_a^act=1` to floating-point precision only in the **BIA-neglecting second-order Kane validation model**. Do not generalize the exact equality to real zincblende HgCdTe without a BIA-inclusive calculation.
+Complete singular-value isotropy is claimed only for the thermally relevant selected **single-parent-doublet** sectors in the BIA-neglecting validation. Generic multidoublet `PT` blocks need only have Kramers-paired singular values. Real zincblende HgCdTe contains BIA.
 
-## Recycling observability result
+## Recycling / terminal-observability boundary
 
-Under independent conservative one-final-sink Poisson lineages, ideal endpoint counting can have zero interterminal cross-spectrum despite internal recycling and mean crosstalk. Finite-transit Shockley-Ramo coupling can lift the endpoint source-channel null at finite frequency even though an internally created/recombined pair has zero integrated induced charge. A nonzero ensemble cross-spectrum is allowed, not guaranteed.
+The two-pixel internal cross-spectrum now refers to an explicit immigration-death-exchange Markov model with two-sided angular-frequency PSD.
 
-## Novelty boundary
+Ideal final-sink zero cross-spectrum requires Poisson primaries, independent noninteracting lineages, exactly one final sink, final-sink-only readout, no branching/gain, and no shared electronics.
 
-Do not claim generic matrix, stable-rank, task-information, bright/dark-state, Shockley-Ramo, GR-noise, Poisson-output, photon-recycling, or optical-sum-rule theory as new.
+Finite-transit Shockley-Ramo motion can restore finite-frequency source-channel support even when an internally created/recombined pair segment has zero integrated induced charge. Nonzero ensemble cross-spectrum is allowed, not guaranteed.
 
-The candidate contribution remains the detector-specific cross-closure, shell decomposition/material diagnosis, and conservative-recycling readout boundary. No direct prior-art collision was found in completed targeted audits; historical priority remains unproven.
+## Reproducible Rev. 5 production
 
-## Production / submission infrastructure
+Rev. 5 is mechanically constructed from the frozen Rev. 4 built source:
 
 ```text
-experiments/13-observable-resource-unification/typeset/rev4_unified_prapplied.tex
-experiments/13-observable-resource-unification/typeset/rev4_unified.bib
-experiments/13-observable-resource-unification/typeset/rev4_figures.tex
-experiments/13-observable-resource-unification/typeset/build_rev4.py
-.github/workflows/rev4-flagship-pdf.yml
-experiments/13-observable-resource-unification/PRAPPLIED_SUBMISSION_PREFLIGHT_2026-08-15.md
+experiments/13-observable-resource-unification/typeset/rev5_from_rev4.patch.part1
+experiments/13-observable-resource-unification/typeset/rev5_from_rev4.patch.part2
+experiments/13-observable-resource-unification/typeset/rev5_from_rev4.patch.part3
+experiments/13-observable-resource-unification/typeset/rev5_figures.tex
+.github/workflows/rev5-flagship-pdf.yml
 ```
 
-Do not replace the theorem-label/environment slicing in `build_rev4.py` with a broad multiline regex. An earlier broad regex swallowed preceding manuscript content in an intermediate built copy; the authoritative scientific source remained intact and the regression was caught during visual QA.
+CI reconstructs Rev. 4, applies the recorded Rev. 5 patch, compiles, runs automated QA, renders every page, and uploads the artifact.
 
-## Next work
-
-Do **not** reopen theory by default.
-
-Remaining human/submission inputs:
+## Strategy
 
 ```text
-author name
-institutional affiliation
-corresponding email
-acknowledgments / funding statement
-submission-history / joint-submission declaration
-final Data Availability Statement / archival citation decision
-optional ORCID and referee recommendations/exclusions
+Experiment 13 Rev. 5:     PRIMARY flagship submission path
+Experiment 13 Rev. 4:     preserved historical checkpoint
+Experiment 01 manuscript: frozen fallback
+Experiment 09 manuscript: frozen fallback
+Experiment 12 manuscript: frozen fallback
+new theory by default:    STOP
 ```
 
-Once supplied, make metadata/submission-only edits, rebuild through CI, record new hashes, and inspect every rendered page again.
+Do not simultaneously submit materially overlapping flagship and standalone versions.
 
-Reopen science only for a concrete mathematical defect, numerical inconsistency, direct prior-art collision, explicit referee/editor request, or specific journal requirement.
+## Remaining work
+
+No new scientific revision is currently required.
+
+Human/submission inputs still needed:
+
+```text
+author name;
+affiliation;
+corresponding email;
+acknowledgments/funding statement;
+submission-history declaration;
+final Data Availability / archival citation decision;
+optional ORCID and referee recommendations/exclusions.
+```
+
+After metadata insertion, rebuild through CI, record new hashes, inspect all pages again, and submit if clean. Reopen science only for a concrete mathematical defect, numerical inconsistency, direct prior-art collision, or explicit editor/referee requirement.
