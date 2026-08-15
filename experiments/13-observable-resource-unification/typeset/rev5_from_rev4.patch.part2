@@ -1,0 +1,80 @@
+ \begin{equation}
+-\cS_{\rm mix}=d/r_{\rm st},
++\cS_{\rm mix}=d/r_{\rm eff},
+ \qquad
+-\tau_{\rm mix}=r_{\rm st}/d.
++\tau_{\rm mix}=r_{\rm eff}/d.
+ \end{equation}
+ For the equal-trace isotropic comparator $G_{\rm iso}=(T/d)I_{\cD}$, the maximum task advantage is
+ \begin{equation}
+-\mathcal A_{\max}=\frac{\lambda_{\cD}}{T/d}=d/r_{\rm st}.
++\mathcal A_{\max}=\frac{\lambda_{\cD}}{T/d}=d/r_{\rm eff}.
+ \end{equation}
+-At least one orthogonal task obeys the tight bound
++For $d>1$, at least one orthogonal task obeys the tight bound
+ \begin{equation}
+ \boxed{
+ \frac{q_{\rm worst}}{q_{\rm iso}}\le
+@@ -290,7 +292,6 @@
+ \end{equation}
+ For this rank-one effect, the bright projector also minimizes accepted dark probability among yes/no effects constrained to unit signal acceptance. The inverse-participation form itself belongs to established coherence and collective-state physics~\cite{Helstrom1976,Dicke1954,Scully2009}; the connection to the thermal capacity quantity is the present cross-identification.
+ 
+-\RevFigGeometry
+ 
+ \section{Dispersive decomposition of the population-bound tightness}
+ 
+@@ -315,12 +316,28 @@
+ \tau_{\rm obs}^{\rm act}=\eta_F\sum_aw_a^{\rm act}\frac{c_a}{\cS_a^{\rm act}}.}
+ \label{eq:shell-observable}
+ \end{equation}
+-Thus the full observable tightness separates thermal/Fermi asymmetry, shell-to-global capacity mismatch, and within-shell singular-spectrum concentration.
++Thus the selected active-population tightness separates thermal/Fermi asymmetry, shell-to-global capacity mismatch, and within-shell singular-spectrum concentration. To expose the complete relation to a broader reference population, define
++\begin{equation}
++n_{\rm bound}=\frac{\cL_{\cB}}{(v_{\cB}^{\rm cap})^2}
++\end{equation}
++and let $n_{\rm ref}$ be a reference electron-plus-hole population containing the selected active population $n_{\cB}^{\rm act}$. Then
++\begin{equation}
++\boxed{
++\frac{n_{\rm bound}}{n_{\rm ref}}
++=
++\underbrace{\frac{n_{\cB}^{\rm act}}{n_{\rm ref}}}_{\text{support coverage}}
++\underbrace{\eta_F}_{\text{Fermi/Kubo}}
++\underbrace{\sum_a w_a^{\rm act}\frac{c_a}{\cS_a^{\rm act}}}_{\text{spectral capacity}}.}
++\label{eq:full-factorization}
++\end{equation}
++The last factor further resolves into shell-to-global capacity utilization $c_a$ and within-shell inverse selectivity $1/\cS_a^{\rm act}$. Equation~\eqref{eq:full-factorization}, rather than the reciprocal normalization alone, gives the complete hierarchy of where the population bound loses tightness.
++
++\RevFigGeometry
+ 
+ \section{Production eight-band HgCdTe validation}
+ 
+ We evaluate Eqs.~\eqref{eq:shell-decomp}--\eqref{eq:shell-observable} in the second-order bulk eight-band Kane validation used for a 300-K, $10\,\mu$m-class HgCdTe absorber. The model follows the bulk constant-parameter limit of Novik \textit{et al.}~\cite{Novik2005}, uses the empirical gap relation of Laurenti \textit{et al.}~\cite{Laurenti1990}, and evaluates the physical velocity from the analytic Hamiltonian derivative. For the broad selected transition-energy window $E_g\le\Delta E\le0.5$ eV, the production quadrature gives the quantities summarized in Table~\ref{tab:hgcdte}.
+-\begin{table}[b]
++\begin{table}[tbp]
+ \caption{Production broad-window HgCdTe quantities.}
+ \label{tab:hgcdte}
+ \begin{ruledtabular}
+@@ -347,18 +364,22 @@
+ \begin{equation}
+ \cS_{\rm th,\cB}^{\rm act}=1/0.57262\simeq1.746.
+ \end{equation}
+-The lower bound remains approximately $11.8\%$ of the full cross-$\mu$ reference population and $17.6\%$ of the selected active population.
++The selected active-support fraction is
++\begin{equation}
++\frac{n_{\cB}^{\rm act}}{n_{\rm ref}}=0.66897,
++\end{equation}
++so Eq.~\eqref{eq:full-factorization} gives $0.66897\times0.30684\times0.57262\simeq0.1175$, consistent with the lower bound being approximately $11.8\%$ of the full cross-$\mu$ reference population and $17.6\%$ of the selected active population.
+ 
+-Every thermally important selected active shell satisfies $\cS_a^{\rm act}=1$ to machine precision in the present validation. This equality is symmetry enforced in the model rather than a numerical accident. The second-order Kane Hamiltonian used here omits explicit bulk-inversion-asymmetry (BIA) terms. In that approximation, inversion $P$ and spinful time reversal $T$ produce a fixed-$\mathbf k$ antiunitary $PT$ doublet. Because velocity is odd under both $P$ and $T$, it is $PT$ even. In $PT$-adapted doublet bases the selected velocity block has quaternionic form
++Every thermally important selected active shell satisfies $\cS_a^{\rm act}=1$ to machine precision in the present validation. The relevant qualification is dimensional. In the present numerical domain, each thermally relevant selected \emph{parent} exact shell is a single fixed-$\mathbf k$ $PT$ Kramers doublet. The second-order Kane Hamiltonian used here omits explicit bulk-inversion-asymmetry (BIA) terms, so inversion $P$ and spinful time reversal $T$ generate that fixed-$\mathbf k$ doublet. Because velocity is odd under both $P$ and $T$, it is $PT$ even. For one two-dimensional parent doublet coupling to one partner doublet, the $PT$-adapted velocity block has quaternionic form
+ \begin{equation}
+-M=\begin{pmatrix}a&b\\-b^*&a^*\end{pmatrix},
++M_j=\begin{pmatrix}a_j&b_j\\-b_j^*&a_j^*\end{pmatrix},
+ \qquad
+-MM^\dagger=(|a|^2+|b|^2)I_2,
++M_jM_j^\dagger=(|a_j|^2+|b_j|^2)I_2.
+ \label{eq:quaternion}
+ \end{equation}
+-which forces equal nonzero singular values. Concatenating partner doublets preserves Eq.~\eqref{eq:quaternion}.
++If that same parent doublet couples to several partner doublets, horizontal concatenation gives $MM^\dagger=\sum_jM_jM_j^\dagger\propto I_2$, so the two nonzero singular values remain equal. By contrast, $PT$ symmetry for a general multidoublet parent block guarantees Kramers-paired singular values but does \emph{not} require all nonzero singular values to be equal.
+ 
