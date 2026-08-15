@@ -6,7 +6,11 @@ Read `AGENTS.md` first, then this file. Do not infer chronology from `main` alon
 
 All research is analytical/theoretical only. Preserve failed, corrected, conditional, and negative paths. Do not claim novelty or priority without a dedicated audit.
 
-# ACTIVE — Experiment 12 / PRB Rev9
+## Continuity discipline
+
+Important work must not exist only in chat or in untracked local artifacts. As soon as a reasoning milestone, manuscript revision, QA result, numerical result, or change of scientific disposition becomes important enough to affect later work, record it on the active repository branch and commit it. Keep recovery documentation synchronized with the controlling manuscript state. Preserve prior revisions and audit files rather than silently replacing the historical record.
+
+# ACTIVE — Experiment 12 / PRB Rev9 exposition revision
 
 Branch:
 
@@ -22,7 +26,7 @@ experiment-12-oscillator-strength-state-count-bound
 4. `experiments/12-oscillator-strength-state-count-bound/PRB_REV9_RENDER_QA_2026-08-15.md`
 5. `experiments/12-oscillator-strength-state-count-bound/numerics/kane_8band_tightness.py`
 6. `experiments/12-oscillator-strength-state-count-bound/HGCDTE_SECOND_ORDER_8BAND_TIGHTNESS_2026-08-15.md`
-7. `experiments/12-oscillator-strength-state-count-bound/NOVELTY_AUDIT_2026-08-14.md`
+7. `experiments/12-oscillator-strength-state-count-bound/INDEPENDENT_NOVELTY_SIGNIFICANCE_ASSESSMENT_2026-08-15.md`
 
 ## Controlling result
 
@@ -62,15 +66,17 @@ Rev9 PDF SHA-256 849e0653b6007c35a92967e812ab584ede70914714c2315bf849839701232e0
 9 pages / US letter / compile clean / visual QA pass.
 ```
 
+The exact Rev9 TeX/PDF are recorded by checksum but were not committed to the repository. The tracked scientific reconstruction therefore uses the complete Rev6 manuscript plus the authoritative Rev7, Rev8, and Rev9 scientific changesets and QA records.
+
 ## Scope / novelty
 
 No universal dark-current, D*, generation-rate, or finite-bandwidth-noise claim. Excitons, indirect transitions, interacting many-body spectral functions, and unconstrained photonic enhancement remain outside scope.
 
 ```text
 DIRECT PRIOR-ART COLLISION: NOT FOUND
-NOVELTY: NOT ESTABLISHED
+NOVELTY: PLAUSIBLE / PRIORITY NOT ESTABLISHED
 ```
 
-## Next action
+## Current action
 
-Perform a fresh hostile review of Rev9. Do not add more theory unless that review finds a concrete defect.
+Revise the Rev9-equivalent manuscript exposition for clarity only. Preserve every equation, theorem hypothesis, inequality, hedge, caveat, validation result, numerical qualification, scope limitation, and reference. Add physical glosses before new formal objects, explicit "why this step" transitions, plain-language restatements after major results, and use the equal-mass mirror-symmetric parabolic equality case earlier as a running intuition anchor. Do not introduce new science or silently weaken any qualification.
