@@ -10,8 +10,8 @@
 2. `experiments/13-observable-resource-unification/PAPER_REV6_FINAL_HOSTILE_REVIEW_2026-08-15.md`
 3. `experiments/13-observable-resource-unification/REV6_PRAPPLIED_PRODUCTION_QA_2026-08-15.md`
 4. `experiments/13-observable-resource-unification/PAPER_REV6_RESPONSE_TO_REREVIEW_2026-08-15.md`
-5. `experiments/13-observable-resource-unification/CURRENT_STATE.md`
-6. `experiments/13-observable-resource-unification/PRAPPLIED_SUBMISSION_PREFLIGHT_2026-08-15.md` — submission guidance; Rev. 4 identifiers inside are historical
+5. `experiments/13-observable-resource-unification/PRAPPLIED_SUBMISSION_PREFLIGHT_REV6_2026-08-15.md`
+6. `experiments/13-observable-resource-unification/CURRENT_STATE.md`
 
 Rev. 4 and Rev. 5 are historical checkpoints. Rev. 6 controls.
 
@@ -31,19 +31,6 @@ visual QA:            PASS
 hostile review:       PASS
 ```
 
-## Rev. 6 corrections
-
-The Rev. 5 re-review found no theorem-breaking error but identified formal/reproducibility issues. Rev. 6 fixes them:
-
-```text
-restores the thermodynamic uniform-capacity condition;
-explicitly connects the bounded-domain HgCdTe model to that condition;
-restores key HgCdTe parameters, k cutoff, quadrature, support grid, clustering tolerance, and continuous capacity-search details;
-states support-rank threshold s > 1e-6 m/s and its 1e-9 to 1e4 m/s stability sweep;
-renames optical tau_obs^act -> tau_bound^act so observability is terminal/readout terminology only;
-renames the 0.3068 loss the Fermi-statistical factor and states Kubo-Greenwood adds no inequality/slack.
-```
-
 ## Central theorem
 
 ```math
@@ -58,11 +45,13 @@ renames the 0.3068 loss the Fermi-statistical factor and states Kubo-Greenwood a
 }
 ```
 
-Finite-system exact statement. Macroscopic density floor requires
+At finite normalization volume this is exact. A macroscopic density floor requires
 
 ```math
 \bar v_{\mathcal B}^{cap}=\limsup_{j\to\infty}v_{\mathcal B,V_j}^{cap}<\infty.
 ```
+
+The bounded-domain second-order HgCdTe validation satisfies this within its stated model because the finite-dimensional velocity matrix has a volume-independent operator bound on the compact momentum domain.
 
 ## Full tightness hierarchy
 
@@ -76,20 +65,26 @@ Finite-system exact statement. Macroscopic density floor requires
 }
 ```
 
-HgCdTe broad-window closure:
+`eta_F` is the **Fermi-statistical factor**. Kubo-Greenwood is exact spectral bookkeeping and does not introduce additional inequality/slack.
+
+Optical bound tightness is `tau_bound^act`; reserve `observability` for terminal/readout null spaces.
+
+## HgCdTe broad-window closure
 
 ```text
-support fraction   = 0.66897
-eta_F              = 0.30684
-tau_cap^act        = 0.57262
-tau_bound^act      = 0.17570
-full ratio         ~= 0.1175
-v_B^cap            = 1.01764e6 m/s
+support fraction       = 0.66897
+eta_F                  = 0.30684
+tau_cap^act            = 0.57262
+tau_bound^act          = 0.17570
+full bound/reference   ~= 0.1175
+v_B^cap                = 1.01764e6 m/s
+production quadrature  = 160 x 10 x 16
+support check          = 200 x 12 x 20
+rank threshold         = 1e-6 m/s
+rank audit             = 1e-9 through 1e4 m/s, stable to printed precision
 ```
 
 ## Publication architecture — mandatory
-
-The unified flagship substantially inherits Experiment 12's theorem and HgCdTe validation. Therefore:
 
 ```text
 Experiment 13 Rev. 6:     SOLE PRIMARY ACTIVE SUBMISSION MANUSCRIPT
@@ -108,16 +103,17 @@ If this supersession policy is changed, publication overlap must be re-audited b
 
 Do not create Rev. 7 or reopen theory by default.
 
-Human/submission inputs:
+The Rev. 6 submission preflight is complete in `PRAPPLIED_SUBMISSION_PREFLIGHT_REV6_2026-08-15.md`. Human inputs still required:
 
 ```text
 author name;
 affiliation;
 corresponding email;
 acknowledgments/funding;
-submission-history declaration;
-final Data Availability / archive decision;
+conflicts/disclosures as applicable;
+truthful submission-history declaration;
+final Data Availability / persistent-archive decision;
 optional ORCID/referee recommendations/exclusions.
 ```
 
-Before submission, update the old Rev. 4 preflight/cover-letter wording to the Rev. 6 title and terminology, insert human-owned declarations, rebuild through CI, record hashes, and visually inspect all pages.
+After inserting those human-owned fields, rebuild through CI, record the final hashes, and visually inspect every page before submission.
