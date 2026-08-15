@@ -7,67 +7,34 @@ Before material writes, fetch live targets and exact blob SHAs. Preserve failed,
 
 ## Primary objective
 
-Generate analytical/theoretical photodetector research from simple Gedanken experiments. The target is a defensible theorem, bound, invariant, counterexample, scaling law, or escape condition—not a materials list or a new scalar FOM.
+Generate analytical/theoretical photodetector research from simple Gedanken experiments. Target defensible theorems, bounds, invariants, counterexamples, scaling laws, or escape conditions—not a materials list or new scalar FOM.
 
-## Hard global scope — ANALYTICAL / THEORETICAL ONLY
+## Hard scope
 
-Allowed work: first-principles derivations, exact toy models, analytical bounds/no-go theorems, asymptotics, numerical thought experiments, analytical comparisons, and prior-art audits.
-
-Do not make fabrication, measurement, instrumentation, sample procurement, or laboratory optimization the next step.
-
-## Research protocol
-
-```text
-premise
--> minimal model
--> first nontrivial result
--> immediate primary-literature audit
--> kill if established
--> deepen only if something survives
--> theorem/bound/invariant/counterexample
--> quantitative witness
--> adversarial audit
--> manuscript
--> hostile manuscript review
--> revise only against concrete scientific defects
--> realistic model stress test where significance depends on a resource parameter
--> typeset and render QA
--> repeat hostile review before submission.
-```
-
-Do not add phenomenology merely to rescue a weak novelty case.
+Analytical/theoretical only. Do not make fabrication, measurements, instrumentation, sample procurement, or laboratory optimization the next step.
 
 ---
 
-# Experiment 12 — PRB REV8 / POST-REV7-RE-REVIEW STATE
-
-Branch:
-
-```text
-experiment-12-oscillator-strength-state-count-bound
-```
+# Experiment 12 — PRB REV9 / HOSTILE-REVIEW STAGE
 
 Recovery order:
 
 1. `experiments/12-oscillator-strength-state-count-bound/CURRENT_STATE.md`
-2. `experiments/12-oscillator-strength-state-count-bound/REV7_EXTERNAL_REREVIEW_RESPONSE_2026-08-15.md`
-3. `experiments/12-oscillator-strength-state-count-bound/HGCDTE_SECOND_ORDER_8BAND_TIGHTNESS_2026-08-15.md`
-4. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV8_CHANGESET_2026-08-15.md`
-5. `experiments/12-oscillator-strength-state-count-bound/PRB_REV8_RENDER_QA_2026-08-15.md`
-6. `experiments/12-oscillator-strength-state-count-bound/numerics/kane_8band_tightness.py`
+2. `experiments/12-oscillator-strength-state-count-bound/REV8_EXTERNAL_REREVIEW_RESPONSE_2026-08-15.md`
+3. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV9_CHANGESET_2026-08-15.md`
+4. `experiments/12-oscillator-strength-state-count-bound/PRB_REV9_RENDER_QA_2026-08-15.md`
+5. `experiments/12-oscillator-strength-state-count-bound/numerics/kane_8band_tightness.py`
+6. `experiments/12-oscillator-strength-state-count-bound/HGCDTE_SECOND_ORDER_8BAND_TIGHTNESS_2026-08-15.md`
 7. `experiments/12-oscillator-strength-state-count-bound/NOVELTY_AUDIT_2026-08-14.md`
 
-Older revisions and review responses preserve the development/correction history. Rev8 is the current QA-passed manuscript state; exact source/PDF hashes are recorded in the changeset and render-QA files.
+## Controlling theorem
 
-## Controlling theorem — unchanged
-
-For direct transitions crossing `mu` in selected positive-frequency window `B`, exact Fermi statistics plus Kubo-Greenwood and the per-shell singular-value/rank resource give
+For selected direct cross-mu optical window `B`,
 
 ```math
 \boxed{
 n_e+n_h
-\ge
-n_{e,B}^{act}+n_{h,B}^{act}
+\ge n_{e,B}^{act}+n_{h,B}^{act}
 \ge
 \frac{2}{\pi e^2(v_B^{cap})^2}
 \int_B
@@ -76,127 +43,46 @@ n_{e,B}^{act}+n_{h,B}^{act}
 }
 ```
 
-Do not modify the central theorem without a new mathematical counterexample.
+The low-energy moving-window corollary requires uniform capacity over both system size and the sequence of windows.
 
-## Thermodynamic and low-energy quantifiers — Rev8
+The intrinsic one-species form is authorized only when the chemical potential lies in a gap so the cross-mu lower/upper partition coincides with valence/conduction manifolds.
 
-For fixed `B`, macroscopic density statements require
-
-```math
-\limsup_{V\to\infty}v_{B,V}^{cap}<\infty.
-```
-
-For moving low-energy windows `B_m`, Rev8 requires the stronger joint condition
-
-```math
-\boxed{
-\sup_m\left[\limsup_{V\to\infty}v_{B_m,V}^{cap}\right]<\infty.
-}
-```
-
-With shrinking transition energies and nonzero limiting integrated spectral weight, this gives a strictly positive liminf active-population floor.
-
-## First-order HgCdTe Kane resource
-
-For the standard first-order 8x8 Kane Hamiltonian,
-
-```math
-\|\hat v_x\|_{op}=\sqrt{3/2}\,v_K,
-```
-
-so
-
-```math
-v_B^{cap}\le\sqrt{3/2}\,v_K=P/\hbar.
-```
-
-This is a global first-order **upper bound**, not the actual selected-window capacity.
-
-HgCdTe scale:
+## HgCdTe second-order validation
 
 ```text
-v_K=(1.07 +/- 0.05)e6 m/s -> upper bound ~=1.31e6 m/s.
+T = 300 K
+Eg = 0.123984198 eV
+mu - E_Gamma6 = +11.477 meV
+cross-mu reference population = 1.005141e17 cm^-3
+conventional e+h total        = 1.010043e17 cm^-3
 ```
 
-For higher-order k.p Hamiltonians, make capacity statements only on finite spectral windows inside bounded momentum domains where the model is used.
-
-## Full second-order realistic multiband test — Rev8
-
-Using the bulk constant-parameter second-order 8-band Hamiltonian of Novik et al. with a representative 300-K, 10-um HgCdTe-like parameter interpolation:
+Window results:
 
 ```text
-cross-mu exact theorem population = 1.005141e17 cm^-3
+Eg..1.5Eg : vcap 1.016823e6 m/s, bound/reference 0.032046, ksel,max 0.149 nm^-1
+Eg..2Eg   : vcap 1.017273e6 m/s, bound/reference 0.074922, ksel,max 0.240 nm^-1
+Eg..3Eg   : vcap 1.015473e6 m/s, bound/reference 0.110977, ksel,max 0.415 nm^-1
+Eg..0.5eV : vcap 1.015611e6 m/s, bound/reference 0.118010, ksel,max 0.583 nm^-1
 ```
 
-and
+The capacity is computed from complete projected velocity blocks and their largest singular values, not from `max |v_cv|`. In the broad window the pairwise maximum is `0.868123e6 m/s`; using it would overstate the lower bound by 36.9%.
+
+Selected broad-window transitions involve Gamma8-derived -> Gamma6-derived branches. Gamma7-derived split-off branches do not enter the selected set.
+
+## Rev9 production
 
 ```text
-window          v_B^cap (m/s)    bound/exact
-Eg..1.5Eg       1.016823e6        0.032046
-Eg..2Eg         1.017273e6        0.074922
-Eg..3Eg         1.015473e6        0.110977
-Eg..0.5eV       1.015611e6        0.118010
+TeX SHA-256 da4d929d77d817e48c6661d61ffcdcaac82a8503b9594a8dafcca27e838c0f7b
+PDF SHA-256 849e0653b6007c35a92967e812ab584ede70914714c2315bf849839701232e0b
+9 pages / US letter / compile clean / all pages visually inspected.
 ```
 
-Headline broad-window result:
+## Scope / novelty
 
-```math
-\boxed{
-(n_e+n_h)_{bound}/(n_e+n_h)_{exact}\simeq0.118.
-}
-```
+Valid class: independent-quasiparticle direct cross-mu charge absorbers.
 
-This shows the bound remains quantitatively nontrivial in a heavy-hole/multiband narrow-gap model, although substantially looser than the ideal Dirac/parabolic examples.
-
-The 0.5-eV upper limit is a model-validation window, not a detector bandwidth.
-
-Reproducibility and convergence:
-
-`HGCDTE_SECOND_ORDER_8BAND_TIGHTNESS_2026-08-15.md`
-
-`numerics/kane_8band_tightness.py`
-
-## Appendix-A correction
-
-The illustrative internal-absorptance window is now
-
-```text
-[1.02 omega_g, 1.10 omega_g]
-```
-
-and the first-order Kane upper bound gives only a **conservative** lower column
-
-```text
-Sigma_e >= 4.19e11 cm^-2.
-```
-
-## Rev8 production state
-
-```text
-experiment12_prb_rev8.tex
-SHA-256 18424af7052262b2974a94a5ed6f85495951674fdcc0333624f3426f635df3a9
-
-experiment12_prb_rev8.pdf
-SHA-256 36e3fa7c01053bd5ec20f235cbb3f4f99c5297c3d44f11845440f77dff1da402
-
-8 pages / US letter / warning-free compile / PDF preflight pass / all 8 pages visually inspected.
-```
-
-## Scope boundary
-
-Valid class:
-
-```text
-independent-quasiparticle direct cross-mu charge absorbers.
-```
-
-Do not automatically extend to bound excitons/collective states, indirect phonon-assisted absorption, interacting many-body spectral functions, or arbitrary passive photonic path enhancement.
-
-Do not infer universal dark current, thermal generation rate, `D*`, or finite-bandwidth noise.
-
-Applying the theorem to measured optical conductivity requires isolating `sigma_1^cross` or a window in which it dominates.
-
-## Novelty status
+Do not infer universal dark current, generation rate, D*, or finite-bandwidth noise. Do not extend automatically to excitons/collective states, indirect absorption, many-body spectral functions, or arbitrary passive photonic enhancement.
 
 ```text
 DIRECT PRIOR-ART COLLISION: NOT FOUND
@@ -205,26 +91,12 @@ NOVELTY: NOT ESTABLISHED
 NOVELTY RISK: HIGH
 ```
 
-No `first`, `novel`, or priority wording is authorized.
+No `first`, `novel`, or priority language is authorized.
 
-## ACTIVE NEXT ACTION
+## Active next action
 
-Perform a new **extreme adversarial review of Rev8**.
-
-Priority attacks:
-
-```text
-1. verify the second-order 8-band Hamiltonian implementation and theorem normalization independently;
-2. test whether the 0.118 ratio is robust to reasonable parameter/interpolation choices and bounded-k-domain choices;
-3. ask whether a semiconductor-optics prior result already implies this bound more directly;
-4. attack the meaning of cross-mu population when the charge-neutral mu lies weakly inside the nominal conduction sector;
-5. verify that the new realistic-material section materially strengthens significance rather than overfitting one model.
-```
-
-Do not add further theory unless that review identifies a genuine blocker.
+Perform an extreme hostile review of **Rev9**. Do not inflate the theory. Further scientific changes require a concrete referee-level defect. Otherwise move toward author metadata, reproducibility archive, and PRB submission production.
 
 ---
 
-# Closed previous branches
-
-Experiment 10 and Experiment 11 remain closed by default as novelty/manuscript paths. Consult their retained results and candidate-audit files before reopening old directions.
+Experiment 10 and Experiment 11 remain closed by default as novelty/manuscript paths.
