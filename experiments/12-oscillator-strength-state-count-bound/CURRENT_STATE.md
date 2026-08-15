@@ -1,28 +1,27 @@
 # Current State — Experiment 12
 
-**Date:** 2026-08-14  
+**Date:** 2026-08-15  
 **Branch:** `experiment-12-oscillator-strength-state-count-bound`  
 **Scope:** analytical/theoretical only
 
-**Status:** **THEOREM-LEVEL INTERNAL QA PASS / REV6 SCIENCE FROZEN / PRB REVTeX RENDER PASS / COVER LETTER + SUBMISSION METADATA DRAFTED / PRB FIRST TARGET / JAP FALLBACK / NOVELTY NOT ESTABLISHED / NO MORE THEORY BY DEFAULT**
+**Status:** **EXTERNAL REV6 MAJOR REVIEW ADDRESSED / CENTRAL THEOREM SURVIVES / THERMODYNAMIC CAPACITY HYPOTHESIS FORMALIZED / REALISTIC 8x8 HgCdTe KANE CAPACITY DERIVED / VRS+FDT POSITIONING ADDED / PRB REV7 COMPILE+7-PAGE VISUAL QA PASS / NOVELTY NOT ESTABLISHED**
 
 ## Read first
 
-1. `MANUSCRIPT_REV6_2026-08-14.md`
-2. `MANUSCRIPT_REV6_FINAL_QA_2026-08-14.md`
-3. `PRB_RENDER_QA_2026-08-14.md`
-4. `PRB_COVER_LETTER_DRAFT_2026-08-14.md`
-5. `PRB_SUBMISSION_METADATA_2026-08-14.md`
-6. `JOURNAL_FIT_AND_SUBMISSION_PLAN_2026-08-14.md`
-7. `ACTIVE_SUBSPACE_REFINEMENT_2026-08-14.md`
-8. `NOVELTY_AUDIT_ADDENDUM_TRK_CONDUCTIVITY_PARTICLE_COUNT_2026-08-14.md`
-9. `PROGRESS_LOG.md`
+1. `REV6_EXTERNAL_REVIEW_RESPONSE_2026-08-15.md`
+2. `MANUSCRIPT_REV7_CHANGESET_2026-08-15.md`
+3. `PRB_REV7_RENDER_QA_2026-08-15.md`
+4. `numerics/kane_8band_capacity.py`
+5. `MANUSCRIPT_REV6_2026-08-14.md`
+6. `MANUSCRIPT_REV6_FINAL_QA_2026-08-14.md`
+7. `NOVELTY_AUDIT_2026-08-14.md`
+8. `PROGRESS_LOG.md`
 
-Older Rev0–Rev5 manuscripts preserve the derivation/correction history. Rev6 is scientifically controlling.
+Rev6 remains the last full manuscript text stored directly in the branch. The QA-passed Rev7 PRB source/PDF were produced locally; their exact SHA-256 hashes and the complete scientific changeset are recorded in items 2–3 above.
 
 ---
 
-# Controlling theorem
+# Controlling finite-volume theorem
 
 For exact independent-quasiparticle states with `E_v < mu < E_c`, define the direct cross-chemical-potential conductivity
 
@@ -45,7 +44,7 @@ f(E_c)+1-f(E_v).
 }
 ```
 
-For any positive-frequency window `B`, use exact energy-shell projectors to define selected optical blocks `A_{epsilon_c,B}`, `B_{epsilon_v,B}` and the basis-invariant capacity
+For a selected positive-frequency window `B`, exact energy-shell projectors define selected optical blocks and the basis-invariant capacity
 
 ```math
 \boxed{
@@ -57,7 +56,7 @@ For any positive-frequency window `B`, use exact energy-shell projectors to defi
 }
 ```
 
-Define thermal optical-support populations
+Define support-rank thermal populations
 
 ```math
 n_{e,B}^{act}
@@ -99,24 +98,121 @@ n_{th}
 }
 ```
 
-`n_B^act` is a support-dimension population, not an oscillator-strength-weighted participation ratio. In 2-D, replace volume by sample area and bulk conductivity by sheet conductivity.
+Finite-volume correctness is unchanged by Rev7.
 
 ---
 
-# Main consequence / validation
+# New formal thermodynamic hypothesis
+
+A nonzero macroscopic density-floor interpretation requires uniform boundedness of the optical capacity along the thermodynamic sequence:
 
 ```math
-K_T(E)=E/[e^{E/(2k_BT)}-1]\to2k_BT
+\boxed{
+\bar v_B^{cap}
+\equiv
+\limsup_{V\to\infty}v_{B,V}^{cap}<\infty.
+}
 ```
 
-as `E -> 0`. Finite **integrated** low-energy direct spectral weight therefore carries a finite thermal population cost at fixed `v_B^{cap}`. A vanishing-bandwidth peak can evade this because its integrated spectral weight can vanish.
+The finite-system inequality does not require this assumption; the thermodynamic density consequence does.
 
-Validation summary:
+The low-energy conclusion is therefore stated only as
 
 ```text
-Equal-mass mirror-symmetric parabolic model:
+low transition energy
++ finite nonvanishing integrated direct cross-mu spectral weight
++ uniformly bounded per-shell optical capacity
++ independent-quasiparticle direct-transition description
+-> nonvanishing active thermal population floor.
+```
+
+---
+
+# Realistic narrow-gap capacity validation — HgCdTe 8x8 Kane model
+
+For the standard first-order 8x8 Kane Hamiltonian used for bulk HgCdTe optical calculations,
+
+```math
+\hat v_x=(1/\hbar)\partial H_K/\partial k_x=v_KM_x.
+```
+
+The published matrix structure gives two nontrivial weighted-star blocks with squared coupling sum
+
+```math
+3/4+1/4+1/2=3/2.
+```
+
+Hence
+
+```math
+\boxed{\|\hat v_x\|_{op}=\sqrt{3/2}\,v_K}
+```
+
+and for every selected optical window
+
+```math
+\boxed{v_B^{cap}\le\sqrt{3/2}\,v_K.}
+```
+
+This ceiling is independent of system volume in the first-order model and therefore supplies the requested uniform thermodynamic bound automatically.
+
+Equivalent Kane-energy form:
+
+```math
+\boxed{
+v_B^{cap}
+\le\frac{P}{\hbar}
+=\sqrt{\frac{E_P}{2m_0}}.
+}
+```
+
+Numerical scales retained in Rev7:
+
+```text
+measured HgCdTe v_K = (1.07 +/- 0.05)e6 m/s
+-> central v_B^cap <= 1.31e6 m/s;
+
+E_P ~= 18.8 eV
+-> v_K ~= 1.050e6 m/s
+-> v_B^cap <= 1.286e6 m/s.
+```
+
+The exact `sqrt(3/2)` coefficient is restricted to the first-order 8x8 Kane Hamiltonian. Second-order 8x8 k.p models introduce finite k-dependent corrections; Rev7 states this explicitly.
+
+For the same ideal internal single-pass 10-um/300-K witness used previously, the measured-central capacity scale gives an illustrative total intrinsic electron-column lower bound of about
+
+```text
+5.33e11 cm^-2.
+```
+
+This is an ideal optical-model illustration, not a claim that real bulk HgCdTe realizes that absorptance model exactly.
+
+---
+
+# Other Rev7 corrections from the external review
+
+Rev7 now also:
+
+```text
+adds a limiting prescription for selected endpoints exactly at E=mu;
+qualifies n_B^act as an exact but rank-discontinuous support-dimension construct;
+states that experimental use requires sigma_1 ~= sigma_1^cross in the chosen window or a decomposition;
+qualifies global parabolic saturation as an ideal effective two-band optical-model result;
+clarifies the Appendix-A 90% value as internal absorptance of admitted power / ideal AR or index matching;
+adds van Roosbroeck-Shockley detailed-balance context;
+adds fluctuation-dissipation context and distinguishes it from the theorem.
+```
+
+No dark-current, `D*`, generation-rate, or finite-bandwidth-noise theorem was added.
+
+---
+
+# Equality / independent checks retained
+
+```text
+Ideal equal-mass mirror-symmetric parabolic model:
     active-subspace theorem exact for any selected direct window;
-    total-population theorem exact for full relevant direct spectrum.
+    total-population theorem exact only within the stated ideal full-spectrum model.
 
 2-D neutral massless Dirac: 0.5000
 3-D massless Dirac:         0.6667
@@ -145,13 +241,13 @@ Do not automatically extend to bound excitons, neutral collective states, phonon
 
 Localized states do not break the state-count theorem but block automatic inference to DC dark current.
 
-Do not claim universal dark-current, thermal-generation-rate, `D*`, or finite-bandwidth-noise bounds. The proposed `G_th >= n_th/tau_response` theorem was explicitly rejected by a depleted-photodiode counterexample.
+`n_B^act` is a support-dimension mathematical construct, not automatically an experimentally robust participation count.
+
+Measured total optical conductivity may contain intraband, same-side interband, phonon-assisted, and excitonic contributions. Apply the theorem only to isolated `sigma_1^cross` or a window where it dominates.
 
 ---
 
 # Novelty status
-
-Adjacent audited theory includes phase-space filling, Kubo-Greenwood, ordinary/generalized `f`/TRK sums, restricted and quantum-geometric optical sums, graphene optical sum rules, classic IR `alpha/G_th`, Yablonovitch-Kane low-carrier laser engineering, and Bethkenhagen et al. conductivity-to-ionization TRK particle counting.
 
 ```text
 DIRECT PRIOR-ART COLLISION: NOT FOUND
@@ -164,81 +260,38 @@ No `first`, `novel`, or priority wording is authorized.
 
 ---
 
-# PRB production state
+# PRB Rev7 production state
 
-First target:
+Local QA-passed artifacts:
 
 ```text
-Physical Review B — Regular Article
+experiment12_prb_rev7.tex
+SHA-256 ec5f46f0256b320861fabdd3ad5e61832c1f20c03ea95216979207fe92dc488d
+
+experiment12_prb_rev7.pdf
+SHA-256 e481354dc25a0526dbe0b4eb636a0ca733aae8678f3a12b7a2d0a349d25c0740
 ```
 
-Fallback:
+Render state:
 
 ```text
-Journal of Applied Physics — Article
-```
-
-A PRB-oriented REVTeX 4.2 rendering of frozen Rev6 has passed production QA.
-
-Final local artifact hashes:
-
-```text
-experiment12_prb_rev6.tex
-ecd9e09621c6fc3e87e9e6293f51ae4499b68a9e9ca878662a076e5d21700ced
-
-experiment12_prb_rev6.pdf
-b705d0868c3f2349a1821b5856f09792e8b2e0599d98efe38745c4e353229896
-```
-
-Render disposition:
-
-```text
-REVTeX 4.2 COMPILE: PASS
-US-LETTER MEDIA BOX: PASS
-PAGES: 6
+REVTeX COMPILE: PASS
+PAGES: 7
+US LETTER: PASS
 OVERFULL BOXES: NONE
 UNDEFINED REFERENCES/CITATIONS: NONE
-STUCK FLOATS: NONE
+LATEX/PACKAGE WARNINGS: NONE
 PDF PREFLIGHT: PASS
-PAGE-LEVEL VISUAL QA: PASS
+ALL 7 PAGES VISUALLY INSPECTED: PASS
 CLIPPING/OVERLAP/BROKEN GLYPHS: NONE
 ```
 
-Details: `PRB_RENDER_QA_2026-08-14.md`.
-
-Current cover-letter template: `PRB_COVER_LETTER_DRAFT_2026-08-14.md`.
-
-Current submission checklist / Data Availability options: `PRB_SUBMISSION_METADATA_2026-08-14.md`.
+Details: `PRB_REV7_RENDER_QA_2026-08-15.md`.
 
 ---
 
-# Remaining blockers are author-owned / production-only
+# ACTIVE NEXT ACTION
 
-Before actual submission, complete:
+The correct next action is **another independent hostile review of Rev7 itself**.
 
-```text
-[ ] exact author name(s) and order
-[ ] affiliation(s)
-[ ] corresponding-author email
-[ ] funding statement
-[ ] conflict/disclosure statement
-[ ] authorship approval
-[ ] simultaneous-submission confirmation
-[ ] prior Physical Review submission history
-[ ] joint-submission status
-[ ] referee suggestions/exclusions if desired
-[ ] final Data Availability Statement
-[ ] decision whether to archive validation scripts with persistent DOI
-```
-
-After these are supplied, insert them into the REVTeX source, recompile, and repeat rendered-PDF QA.
-
----
-
-# ACTIVE NEXT ACTION — SUBMISSION PRODUCTION ONLY
-
-```text
-NO MORE THEORY BY DEFAULT.
-```
-
-Next work is to finalize author-owned metadata and Data Availability, then produce the exact submission PDF/source and cover letter. Add new science only if an external referee identifies a blocking scientific defect.
+Do not add new theory by default. The main Rev6 referee criticism about an unconstrained/formal `v_B^cap` has now been answered with a realistic, uniformly bounded multiband Kane example. Further additions should occur only if the Rev7 review exposes a genuine remaining blocker.
