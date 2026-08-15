@@ -1,149 +1,273 @@
-# Agent recovery entrypoint
+# Agent Handoff — Gedanken 3
 
-Read `AGENTS.md` first, then this file. Do not infer chronology from `main` alone.
+**Date:** 2026-08-15  
+**Active branch:** `experiment-13-observable-resource-unification`  
+**Repository-wide frontier:** **Experiment 13 unified flagship Rev. 4 — scientific content frozen; submission production next**
 
-## Hard scope
+## Read first
 
-All research is analytical/theoretical only. Preserve failed, corrected, conditional, and negative paths. Do not claim novelty or priority without a dedicated audit.
+1. `experiments/13-observable-resource-unification/00_ACTIVE_FRONTIER_REV4_FLAGSHIP_2026-08-15.md`
+2. `experiments/13-observable-resource-unification/PAPER_DRAFT_REV4_CLAIM_REFERENCE_CLEAN_2026-08-15.md`
+3. `experiments/13-observable-resource-unification/PAPER_REV4_REFERENCE_QA_2026-08-15.md`
+4. `experiments/13-observable-resource-unification/PAPER_REV4_FINAL_HOSTILE_CLAIM_REFERENCE_REVIEW_2026-08-15.md`
+5. `experiments/13-observable-resource-unification/PAPER_REV3_EXTREME_NOVELTY_SIGNIFICANCE_REVIEW_2026-08-15.md`
+6. `experiments/13-observable-resource-unification/HGCDTE_STABLE_RANK_PRODUCTION_QA_2026-08-15.md`
+7. `experiments/13-observable-resource-unification/HGCDTE_PT_SYMMETRY_STABLE_RANK_EXPLANATION_2026-08-15.md`
+8. `experiments/13-observable-resource-unification/CHANNEL_SPECIFIC_OBSERVABILITY_GEOMETRY_2026-08-15.md`
 
-## Continuity discipline
+If those files conflict with older Experiment-13 notes, the order above controls.
 
-Important work must not exist only in chat or untracked local artifacts. Commit significant reasoning milestones, manuscript revisions, numerical audits, QA results, and changes of scientific disposition on the active branch. Keep this file and the experiment `CURRENT_STATE.md` synchronized with the controlling manuscript state. Preserve prior revisions and audits rather than silently replacing them.
+---
 
-# ACTIVE — Experiment 12 / Rev11 PRB submission candidate
+# 1. Strategic state
 
-Branch:
+Experiment 13 has passed the scientific-unity, production-HgCdTe, novelty/significance, claim/reference, and final hostile-review gates.
 
 ```text
-experiment-12-oscillator-strength-state-count-bound
+SCIENTIFIC CONTENT FREEZE:       AUTHORIZED
+FLAGSHIP-FIRST STRATEGY:         AUTHORIZED
+NEW THEORY BY DEFAULT:           STOP
+SUBMISSION PRODUCTION:           NEXT
 ```
 
-Rev11 remains the last fully typeset and QA-passed manuscript. A final independent regression audit has now been completed and found no central theorem defect or HgCdTe numerical inconsistency. It identified one concrete pre-submission literature-completeness amendment: cite and distinguish Mao, Mendez-Valderrama, and Chowdhury, Phys. Rev. B 112, 075116 (2025), on projected low-energy optical sum rules.
+The mature standalone manuscripts remain frozen fallback packages:
 
-A candidate literature patch is committed, but it is **not yet a new QA-passed revision**. Do not call it Rev12 or submission-ready until the exact Rev11 source is reconstructed, the patch is applied, and compile/hash/all-page QA is complete.
+```text
+Experiment 01 — Applied Optics task-order manuscript
+Experiment 09 — PRA coherence-selective manuscript
+Experiment 12 — PRB optical population-bound manuscript
+```
 
-## Recovery order
+Do not delete or casually rewrite them. Do not submit substantially overlapping standalone and flagship versions simultaneously.
 
-1. `experiments/12-oscillator-strength-state-count-bound/CURRENT_STATE.md`
-2. `experiments/12-oscillator-strength-state-count-bound/REV11_FINAL_ADVERSARIAL_REGRESSION_AUDIT_2026-08-15.md`
-3. `experiments/12-oscillator-strength-state-count-bound/typeset/rev11_literature_completeness_candidate.patch`
-4. `experiments/12-oscillator-strength-state-count-bound/PRB_REV11_MINOR_REVISION_QA_2026-08-15.md`
-5. `experiments/12-oscillator-strength-state-count-bound/REV10_MINOR_REREVIEW_RESPONSE_2026-08-15.md`
-6. `experiments/12-oscillator-strength-state-count-bound/typeset/rev10_to_rev11_minor_revision.patch`
-7. `experiments/12-oscillator-strength-state-count-bound/numerics/parameter_sensitivity_audit.py`
-8. `experiments/12-oscillator-strength-state-count-bound/PRB_REV10_REFEREE_REPAIR_QA_2026-08-15.md`
-9. `experiments/12-oscillator-strength-state-count-bound/REV9_SUPREMUM_REREVIEW_RESOLUTION_2026-08-15.md`
-10. `experiments/12-oscillator-strength-state-count-bound/numerics/supremum_active_support_audit.py`
-11. `experiments/12-oscillator-strength-state-count-bound/typeset/rev9_exposition_to_rev10_referee_repaired.patch`
-12. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV9_EXPOSITION_REVISED_2026-08-15.md`
+---
 
-## Controlling theorem
+# 2. Controlling physical theorem
+
+For selected direct cross-chemical-potential transitions,
 
 ```math
-n_e+n_h
-\ge n_{e,B}^{act}+n_{h,B}^{act}
-\ge
-\frac{2}{\pi e^2(v_B^{cap})^2}
-\int_B
-\frac{\hbar\omega\sigma_1^{cross}(\omega)}
-{e^{\hbar\omega/(2k_BT)}-1}\,d\omega.
+\boxed{
+ n_e+n_h
+ \ge n_{e,\mathcal B}^{act}+n_{h,\mathcal B}^{act}
+ \ge
+ \frac{2}{\pi e^2(v_{\mathcal B}^{cap})^2}
+ \int_{\mathcal B}
+ \frac{\hbar\omega\sigma_1^{cross}(\omega)}
+ {e^{\hbar\omega/(2k_BT)}-1}d\omega.
+}
 ```
 
-Eq. (29) and its proof remain unchanged through Rev11 and survived the final regression audit.
-
-## Repairs that must not be lost
-
-- Eq. (49) is an ordinary supremum, not an essential supremum.
-- The isolated-Gamma correction is inapplicable because `mu` is 11.477 meV above the nominal Gamma6 edge and the selected cross-mu set begins only at finite `k`.
-- For the translationally invariant bulk model,
+Authoritative conductivity convention:
 
 ```math
-P_\epsilon v_xQ_{\epsilon,B}
-=\bigoplus_{\mathbf k}
-P_{\epsilon,\mathbf k}v_x(\mathbf k)Q_{\epsilon,\mathbf k,B},
+\sigma_1^{cross}(\omega)
+=\frac{\pi e^2}{V}
+\sum_{cv}^{cross}
+\frac{D_{cv}|v_{cv}|^2}{E_{cv}}
+\delta\!\left(\omega-\frac{E_{cv}}{\hbar}\right).
 ```
 
-so the complete-shell operator norm is the maximum finite-k block norm and becomes the ordinary bulk `k` supremum.
-- The exact theorem uses exact support rank. `1e-6 m/s` is only the numerical Table-II diagnostic threshold.
+This requires the selected/direct cross-`mu` conductivity contribution, not arbitrary total measured conductivity.
 
-## Controlling HgCdTe result
+---
+
+# 3. Unified admissible-domain connector
+
+For a physically declared domain `D`,
+
+```math
+G_D=P_DGP_D,
+\qquad
+\lambda_D=\lambda_{max}(G_D),
+```
+
+and positive activity `X` supported in `D`,
+
+```math
+\mathcal S_{X|D}
+=\frac{\lambda_DTrX}{Tr(G_DX)},
+```
+
+```math
+\tau_{X|D}
+=\frac{Tr(G_DX)}{\lambda_DTrX}.
+```
+
+Hence
+
+```math
+\boxed{\mathcal S_{X|D}\tau_{X|D}=1.}
+```
+
+This is organizing algebra, not the novelty headline.
+
+Important specializations:
 
 ```text
-n_ref                      = 1.005141e17 cm^-3
-v_B^cap ordinary sup       ~= 1.01764e6 m/s
-precise bound/reference    ~= 0.1175
-headline rounded value     = 0.118 / 11.8%
-lower bound                ~= 1.18e16 cm^-3
-n_B^act/n_ref              ~= 0.669
-n_bound/n_B^act            ~= 0.176
-pairwise ordinary sup      ~= 0.87165e6 m/s
-pairwise substitution bias ~= +36.3%
-selected k onset           ~= 0.05535 nm^-1
-selected k max             ~= 0.583 nm^-1
+uniform task ensemble:
+    S=d/r_st;
+
+Experiment 09 bright projector:
+    S=N_eff=1/sum_j w_j^2;
+
+Experiment 12 endpoint-lifted thermal space:
+    S_th,B^act=1/tau_cap^act.
 ```
 
-Production quadrature is `160 x 10 x 16`; `200 x 12 x 20` is a support check. The reduced one-at-a-time `+/-5%` parameter diagnostic spans `0.1098 ... 0.1293` and is not an uncertainty interval.
+---
 
-## Final regression-audit result
+# 4. Dispersive shell decomposition
 
-The following all passed independent re-derivation/regression checking:
+For selected endpoint shells `a`,
+
+```math
+\boxed{
+\tau_{cap}^{act}
+=\sum_aw_a^{act}\frac{c_a}{\mathcal S_a^{act}},
+}
+```
+
+and
+
+```math
+\boxed{
+\tau_{obs}^{act}
+=\eta_F
+\sum_aw_a^{act}\frac{c_a}{\mathcal S_a^{act}}.
+}
+```
+
+This separates:
 
 ```text
-pointwise Fermi lemma;
-Kubo-Greenwood prefactor and thermal-kernel conversion;
-projected-shell singular-value/rank step;
-active-population <= total-population step;
-fixed-window thermodynamic hypothesis;
-moving-window low-energy quantifiers;
-Rev11 complete-shell -> k-block ordinary-supremum specialization;
-HgCdTe cross-mu versus conventional population interpretation;
-forbidden downstream dark-current/D*/noise inferences.
+Fermi/Kubo asymmetry;
+shell-to-global capacity mismatch;
+within-shell singular-spectrum concentration.
 ```
 
-The HgCdTe ordinary supremum is a numerical global-optimization result, not an interval-certified mathematical maximum. This is acceptable at the manuscript's stated numerical-validation claim level. If a referee demands stronger certification, multi-seed replication or deterministic/interval bracketing is the next numerical check.
+---
 
-## Literature amendment
+# 5. Production HgCdTe numbers
 
-Rev11 already cites Onishi-Fu (PRX 14, 011052 (2024)). The final audit additionally identified:
+Broad 300-K `Eg..0.5 eV` production result:
 
 ```text
-D. Mao, J. F. Mendez-Valderrama, D. Chowdhury,
-Phys. Rev. B 112, 075116 (2025),
-DOI 10.1103/xmz7-jgl6.
+mu                            = 0.1354615106 eV
+n_ref                         = 1.005140525e17 cm^-3
+R_B                           = 3.987420232e28 cm^-3 (m/s)^2
+L_B                           = 1.223486457e28 cm^-3 (m/s)^2
+n_B^act                       = 6.724111444e16 cm^-3
+v_B^cap                       = 1.01764e6 m/s
+eta_F                         = 0.306836598
+tau_cap^act                   = 0.572622972
+tau_obs^act                   = 0.175701685
+S_th,B^act                    ~= 1.746
 ```
 
-Their projected low-energy/inverse-frequency optical sum and finite-temperature geometry/QFI discussion are methodologically close enough that omission is avoidable referee risk. They do not state Eq. (29): the target quantity, kernel, many-body scope, and per-shell state-count construction differ.
+So
 
-Candidate patch:
+```math
+0.306836598\times0.572622972=0.175701685.
+```
 
-`typeset/rev11_literature_completeness_candidate.patch`
-
-## Rev11 production identity
-
-Exact Rev11 source is reconstructed by applying, in order:
-
-1. `typeset/rev9_exposition_to_rev10_referee_repaired.patch`
-2. `typeset/rev10_to_rev11_minor_revision.patch`
-
-to the archived Rev9 exposition source.
+Headline Experiment-12 values remain:
 
 ```text
-Rev11 TeX SHA-256 a75b75d6016d335746751b7c75a01d49deea7c4796c2eff30a7dd99c1f73cd68
-Rev11 PDF SHA-256 ed5a558ac561cb67f0e918de96f4774c493cacd54fd6f3bea01e597890a7df5d
-13 pages / US letter / REVTeX PRB / compile clean / all-page visual QA pass
-19 references
+bound/reference ~= 0.118
+bound/active    ~= 0.176
+lower bound     ~= 1.18e16 cm^-3.
 ```
 
-## Scope / novelty
+Every contributing selected active shell in the current validation has
 
-No universal dark-current, `D*`, generation-rate, or finite-bandwidth-noise theorem. Excitons, indirect transitions, interacting many-body spectral functions, and unconstrained photonic enhancement remain outside scope.
+```math
+S_a^{act}=1
+```
+
+to about `4e-14`.
+
+That equality is enforced by fixed-k `PT` doublets and quaternionic `PT`-even velocity blocks **only in the BIA-neglecting second-order Kane validation model**. Real zincblende HgCdTe has BIA; do not universalize this result.
+
+---
+
+# 6. Recycling / terminal-observability result
+
+At fixed frequency, terminal `i` has positive effect
+
+```math
+G_i(\omega)=M^\dagger|i><i|M.
+```
+
+A positive internal sector null to one terminal has zero cross contribution with every other terminal.
+
+Under independent conservative one-final-sink Poisson lineages, final-sink-only counting can therefore give exactly zero interterminal cross-noise despite internal recycling and mean crosstalk.
+
+For a pair created internally and later recombining internally at one point,
+
+```math
+Q_i^{rec}=0,
+```
+
+but
+
+```math
+H_i^{rec}(\omega)
+=i\omega e\int\Delta\phi_i(t)e^{-i\omega t}dt
+```
+
+can have finite-frequency support. Finite-transit Shockley-Ramo readout can lift the endpoint source-channel null at finite frequency; an ensemble cross-spectrum becomes allowed, not guaranteed.
+
+---
+
+# 7. Novelty boundary
+
+Generic ingredients are established. Do not claim novelty for Gram operators, stable rank, task/Fisher matrices, generic bright/dark states, Shockley-Ramo theory, GR-noise coupling, Poisson output, photon recycling/mean crosstalk, or optical sum rules.
+
+Candidate-new detector content is narrowly:
 
 ```text
-DIRECT PRIOR-ART COLLISION: NOT FOUND IN TARGETED SEARCH
-NOVELTY: PLAUSIBLE
-HISTORICAL PRIORITY: NOT ESTABLISHED
+- forward-selectivity / inverse-certification cross-identification;
+- exact mapping of nonuniform N_eff and thermal endpoint capacity;
+- shell-resolved population-bound tightness decomposition;
+- production HgCdTe factor diagnosis and PT/BIA model interpretation;
+- conservative recycling final-sink channel null versus finite-transit Ramo lifting;
+- one staged causal organization of these detector limits.
 ```
 
-## Current action
+Use “we derive,” not unsupported priority language.
 
-Reconstruct exact Rev11 TeX, apply the literature-completeness candidate patch, compile and run the same QA, then record the amended TeX/PDF hashes and bibliography count. If that passes, stop defensive rewriting absent a new concrete mathematical defect, numerical inconsistency, direct prior-art collision, or specific journal requirement.
+---
+
+# 8. Reference correction
+
+Rev. 4 Ref. 33 must be replaced in final typeset source by:
+
+```text
+X. Cartoixà, D. Z.-Y. Ting, and T. C. McGill,
+“Description of bulk inversion asymmetry in the effective-bond-orbital model,”
+Phys. Rev. B 68, 235319 (2003),
+doi:10.1103/PhysRevB.68.235319.
+```
+
+See `PAPER_REV4_REFERENCE_QA_2026-08-15.md`.
+
+---
+
+# 9. Next action
+
+No new Gedanken branch is authorized by default.
+
+Proceed with unified manuscript production:
+
+```text
+1. choose an appropriate broad journal target and article format;
+2. produce a lean typeset manuscript from Rev. 4;
+3. create only theorem-bearing figures;
+4. import/normalize the verified bibliography;
+5. compile and perform all-page visual QA;
+6. perform an extreme hostile review of the rendered manuscript;
+7. only then decide submission target/final package.
+```
+
+If production reveals a real scientific defect, repair it. Do not reopen theory merely to make the paper longer or more ornate.
