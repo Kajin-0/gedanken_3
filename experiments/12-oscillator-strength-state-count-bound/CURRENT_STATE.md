@@ -2,29 +2,33 @@
 
 **Date:** 2026-08-14  
 **Scope:** analytical/theoretical only  
-**Status:** **GLOBAL THERMAL–OPTICAL SPECTRAL-WEIGHT INEQUALITY DERIVED FOR INDEPENDENT-QUASIPARTICLE INTERBAND ABSORBERS / DISPERSIVE MULTIBAND STATE-REUSE LOOPHOLE CLOSED / DIRAC VALIDATIONS STRONG / MANY-BODY EXCITON ESCAPE IDENTIFIED / NOVELTY NOT ESTABLISHED / NO MANUSCRIPT YET**
+**Status:** **WINDOWED CROSS-mu THERMAL–OPTICAL INEQUALITY SURVIVED HOSTILE REVIEW / DISPERSIVE MULTIBAND STATE REUSE CLOSED / DIRAC VALIDATIONS STRONG / MANY-BODY AND DARK-CURRENT SCOPE LIMITS EXPLICIT / DIRECT PRIOR-ART COLLISION NOT FOUND / MANUSCRIPT VIABILITY UNDER REVIEW**
 
 ## Read first
 
-1. `THERMAL_OPTICAL_SUM_INEQUALITY_STEP_2026-08-14.md`
-2. `DISPERSIVE_MULTIBAND_GENERALIZATION_STEP_2026-08-14.md`
-3. `OSCILLATOR_STRENGTH_STATE_COUNT_THEOREM_STEP_2026-08-14.md`
-4. `FOUNDING_GEDANKEN_2026-08-14.md`
-5. `PROGRESS_LOG.md`
+1. `THEOREM_CORE_2026-08-14.md`
+2. `HOSTILE_THEOREM_REVIEW_2026-08-14.md`
+3. `NOVELTY_AUDIT_2026-08-14.md`
+4. `NOVELTY_AUDIT_ADDENDUM_LOW_CARRIER_OPTICS_2026-08-14.md`
+5. `THERMAL_OPTICAL_SUM_INEQUALITY_STEP_2026-08-14.md` — historical derivation; some legacy `inter` notation is superseded by `cross`
+6. `THERMAL_OCCUPATION_FLUCTUATION_COROLLARY_STEP_2026-08-14.md`
+7. `MICROSCOPIC_VELOCITY_RESOURCE_COROLLARY_2026-08-14.md`
+8. `FAILED_RESPONSE_TIME_TO_GENERATION_BOUND_2026-08-14.md`
+9. `PROGRESS_LOG.md`
 
 ---
 
 # Research question
 
-Can a direct interband charge absorber carry a fixed amount of low-energy optical spectral weight while its equilibrium thermal free-carrier population tends to zero, if the microscopic interband velocity-strength resource remains finite?
+For an equilibrium independent-quasiparticle **direct charge absorber**, can a material retain fixed low-energy optical spectral weight while the thermal upper-state electron / lower-state hole population tends to zero, if the available optical velocity strength per participating state remains finite?
 
-The current answer is **no** for the independent-quasiparticle class defined below.
+The current answer is **no**, in the precise resource-conditioned sense below.
 
 ---
 
-# Controlling theorem — global cutoff-free form
+# Controlling notation
 
-Let exact single-particle eigenstates below the chemical potential be `v` and above it be `c`:
+Use exact one-particle states split by the chemical potential:
 
 ```math
 E_v<\mu<E_c,
@@ -42,21 +46,21 @@ h_v=1-f(E_v),
 D_{cv}=f(E_v)-f(E_c).
 ```
 
-For one optical/current polarization, assume the crossing-transition velocity matrix satisfies the row/column strength bounds
+Use
 
 ```math
-\sum_v|v_{cv}|^2\le v_*^2
-\quad\forall c,
+\boxed{\sigma_1^{cross}(\omega)}
 ```
 
-```math
-\sum_c|v_{cv}|^2\le v_*^2
-\quad\forall v.
-```
+for the positive-frequency conductivity contributed only by **direct one-particle transitions from below `mu` to above `mu`**.
 
-A sufficient condition is a finite relevant velocity-operator norm `||v_i|| <= v_*`.
+Do not use generic `sigma_inter` in theorem claims; finite-temperature same-side transitions are outside the strong half-gap proof.
 
-Exact Fermi algebra plus AM-GM gives, for every crossing transition,
+---
+
+# Pointwise Fermi lemma
+
+For every crossing transition,
 
 ```math
 \boxed{
@@ -66,15 +70,73 @@ Exact Fermi algebra plus AM-GM gives, for every crossing transition,
 }
 ```
 
-Using Kubo-Greenwood and the row/column velocity budget gives
+Equality occurs only for a transition symmetric about `mu`.
+
+---
+
+# Controlling theorem hierarchy — arbitrary spectral window
+
+Let `B` be any measurable set of positive angular frequencies. Define selected row/column velocity strengths
+
+```math
+R_c(B)=\sum_{v:(c,v)\in B}|v_{cv}|^2,
+```
+
+```math
+C_v(B)=\sum_{c:(c,v)\in B}|v_{cv}|^2.
+```
+
+Define the thermally weighted velocity-strength density
+
+```math
+\boxed{
+\mathcal R_B
+=V^{-1}\left[
+\sum_cp_cR_c(B)+\sum_vh_vC_v(B)
+\right].
+}
+```
+
+Then the exact first inequality is
+
+```math
+\boxed{
+\mathcal R_B
+\ge
+\frac{2}{\pi e^2}
+\int_B
+\frac{\hbar\omega\,\sigma_1^{cross}(\omega)}
+{e^{\hbar\omega/(2k_BT)}-1}
+d\omega.
+}
+```
+
+This statement contains no global maximum-velocity assumption.
+
+Now define the selected per-state velocity-strength resource
+
+```math
+\boxed{
+v_{*,B}^2
+=\max[\sup_cR_c(B),\sup_vC_v(B)].
+}
+```
+
+Since
+
+```math
+\mathcal R_B\le v_{*,B}^2(n_e+n_h),
+```
+
+obtain
 
 ```math
 \boxed{
 n_e+n_h
 \ge
-\frac{2}{\pi e^2v_*^2}
-\int_0^\infty
-\frac{\hbar\omega\,\sigma_1^{inter}(\omega)}
+\frac{2}{\pi e^2v_{*,B}^2}
+\int_B
+\frac{\hbar\omega\,\sigma_1^{cross}(\omega)}
 {e^{\hbar\omega/(2k_BT)}-1}
 d\omega.
 }
@@ -83,224 +145,217 @@ d\omega.
 For an intrinsic neutral absorber,
 
 ```math
-n_e=n_h\equiv n_{th},
-```
-
-so
-
-```math
 \boxed{
 n_{th}
 \ge
-\frac{1}{\pi e^2v_*^2}
-\int_0^\infty
-\frac{\hbar\omega\,\sigma_1^{inter}(\omega)}
+\frac{1}{\pi e^2v_{*,B}^2}
+\int_B
+\frac{\hbar\omega\,\sigma_1^{cross}(\omega)}
 {e^{\hbar\omega/(2k_BT)}-1}
 d\omega.
 }
 ```
 
-This is the current core Experiment-12 inequality.
-
-The thermal kernel is
-
-```math
-K_T(E)=\frac{E}{e^{E/(2k_BT)}-1}.
-```
-
-It approaches `2 kBT` at low energy and falls as `E exp[-E/(2kBT)]` at high energy.
+This **windowed form** is controlling. The older all-frequency formula is a corollary only when a finite global row/column resource exists.
 
 ---
 
-# Earlier flat-manifold and cutoff results are corollaries
+# Microscopic resource
 
-For two exactly resonant manifolds separated by `E_gamma`, the tight result is
+`v_{*,B}` is not a universal speed or a fit parameter.
 
-```math
-\boxed{
-N_{th}
-\ge
-\frac{S_{abs}}{v_{max}^2}
-\frac{1}{e^{E_\gamma/(2k_BT)}-1}.
-}
-```
-
-For partial interband spectral weight
+Completeness gives
 
 ```math
-W(E_\Omega)
-=\int_0^{E_\Omega/\hbar}
-\sigma_1^{inter}(\omega)d\omega,
+R_c(B)\le\langle c|\hat v_i^2|c\rangle,
 ```
-
-the global theorem implies
 
 ```math
-\boxed{
-n_e+n_h
-\ge
-\frac{2E_\Omega}{\pi e^2v_*^2}
-\frac{W(E_\Omega)}
-{e^{E_\Omega/(2k_BT)}-1}.
-}
+C_v(B)\le\langle v|\hat v_i^2|v\rangle.
 ```
 
-Intrinsic form is half this total excitation bound.
-
-A useful spectroscopic corollary is
+In a bounded orthonormal Wannier/tight-binding representation,
 
 ```math
-\boxed{
-n_{th}
-\ge
-\sup_{E_\Omega>0}
-\left[
-\frac{E_\Omega W(E_\Omega)}
-{\pi e^2v_*^2[e^{E_\Omega/(2k_BT)}-1]}
-\right].
-}
+v_{*,B}\le
+V_i^{hop}
+=\hbar^{-1}\sum_R|R_i|\|H_R\|.
 ```
+
+No universal numerical `v_*` is claimed.
 
 ---
 
 # Low-energy implication
 
-At fixed low-energy intrinsic interband spectral weight,
+The thermal kernel
 
 ```math
-K_T(E)\to2k_BT.
+K_T(E)=\frac{E}{e^{E/(2k_BT)}-1}
 ```
 
-Therefore lowering the transition energy toward zero cannot make the thermal-population lower bound vanish while `v_*` and the required optical spectral weight remain fixed.
+satisfies
 
-This is the dispersion-independent version of the high-velocity tradeoff that first appeared in Experiment 10.
+```math
+K_T(E)\to2k_BT
+```
+
+as `E->0`.
+
+Therefore fixed low-energy cross-`mu` optical spectral weight cannot coexist with vanishing thermal quasiparticle population at fixed `v_{*,B}` merely by lowering the transition energy.
 
 ---
 
 # Validation
 
-Reproducible script:
+Reproduce with:
 
 `numerics/thermal_optical_sum_dirac_validation.py`
 
-## 2-D neutral massless Dirac / graphene
-
-Exact:
-
-```math
-n_e
-=\frac{\pi}{6}
-\left(\frac{k_BT}{\hbar v_F}\right)^2.
+```text
+2-D neutral massless Dirac / graphene: bound/exact = 1/2
+3-D massless Dirac:                    bound/exact = 2/3
+3-D massive Dirac at 10 um / 300 K:    bound/exact = 0.794684
 ```
 
-Experiment-12 bound:
+For the finite-gap 3-D Dirac family the ratio approaches unity as `Delta/kBT` increases.
 
-```math
-n_e^{bound}
-=\frac{\pi}{12}
-\left(\frac{k_BT}{\hbar v_F}\right)^2.
-```
+Random finite-dimensional stress test:
 
-Thus
+`numerics/random_matrix_theorem_stress_test.py`
 
-```math
-\boxed{n_e^{bound}/n_e^{exact}=1/2.}
-```
+The script checks arbitrary asymmetric spectra, dense complex transition matrices, and random spectral windows against both the strong cross-`mu` theorem and the weaker all-transition fallback.
 
-## 3-D massless Dirac
+---
 
-```math
-\boxed{(n_e+n_h)_{bound}/(n_e+n_h)_{exact}=2/3.}
-```
+# Corrected 10-um single-pass illustration
 
-## 3-D massive Dirac at 10 um / 300 K
+The old constant-kernel 10%-band witness is superseded.
 
 For
 
-```math
-\Delta/k_BT=2.39796146,
+```text
+T = 300 K
+10-um edge
+n_b = 3.5
+A >= 0.90
+B = [omega_g, 1.1 omega_g]
 ```
 
-exact finite-T conductivity inserted into the global theorem gives
-
-```math
-\boxed{
-(n_e+n_h)_{bound}/(n_e+n_h)_{exact}=0.794684.
-}
-```
-
-The ratio increases toward unity as `Delta/kBT` grows:
+exact kernel integration gives
 
 ```text
-Delta/kBT       bound/exact
-0                0.6667
-0.5              0.6863
-1.0              0.7191
-2.398            0.7947
-4.0              0.8454
-8.0              0.9045
-16.0             0.9459
+v_{*,B} (m/s)      Sigma_e,min (cm^-2)
+5.0e5                 3.6598e12
+1.0e6                 9.1495e11
+1.07e6                7.9915e11
+2.0e6                 2.2874e11
+3.0e6                 1.0166e11
 ```
 
-This is a strong nontrivial check: the theorem recovers most of the actual finite-gap Dirac thermal population without using its DOS in the derivation.
+This remains only a material-dominant single-pass illustration. Arbitrary photonic path enhancement introduces separate resources.
+
+Reproduce with:
+
+`numerics/state_count_bound_witness.py`
 
 ---
 
-# Static disorder / broadening boundary
+# Supporting corollaries / negative results
 
-Static disorder is allowed in principle if one uses exact single-particle eigenstates: the proof does not require Bloch momentum or translational invariance.
+## Occupation variance
 
-Do not apply the theorem naively to phenomenologically Lorentzian-broadened clean transitions and reinterpret high-energy tails as genuine low-energy transitions. Interaction-generated lifetime broadening lies outside the present independent-particle theorem class.
-
----
-
-# Many-body escape — explicit boundary
-
-Bound excitons and other neutral collective optical states can carry strong low-energy optical spectral weight while the free electron-hole continuum remains at a larger energy.
-
-Thus Experiment 12 is **not** a theorem for all photodetectors.
-
-Current valid class:
+For independent grand-canonical Fermi occupations,
 
 ```math
-\boxed{
-\text{independent-quasiparticle direct interband charge absorbers}
-}
+\mathcal V_{1b}
+\ge
+\frac{1}{\pi e^2v_*^2}
+\int
+\frac{\hbar\omega\,\sigma_1^{cross}(\omega)}
+{\sinh[\hbar\omega/(2k_BT)]}d\omega.
 ```
 
-or systems reducible to that description over the relevant thermal/optical window.
+This is **not** a universal finite-bandwidth detector-noise bound.
 
-For a photodetector interpretation, the thermally occupied states counted by the inequality must also be electrically active enough to affect collection or carrier-number fluctuations. The theorem itself presently bounds thermal population, not dark current or D*.
+## All-transition fallback
+
+If cross-`mu` optical weight cannot be decomposed, a weaker all-transition theorem exists with kernel
+
+```math
+E/[e^{E/(k_BT)}-1].
+```
+
+See `ALL_TRANSITION_FALLBACK_COROLLARY_2026-08-14.md`.
+
+## Failed generation-rate shortcut
+
+Do not claim
+
+```math
+G_{th}\ge n_{th}/\tau_{response}
+```
+
+for arbitrary detectors. Depleted photovoltaic collection is a counterexample.
+
+---
+
+# Scope boundary
+
+Current valid theorem class:
+
+```text
+independent-quasiparticle direct cross-mu charge absorbers.
+```
+
+The mathematical population theorem survives arbitrary dispersive multiband state reuse and static one-body disorder when exact eigenstates and the physical current operator are used.
+
+It does not automatically cover:
+
+```text
+bound excitons / neutral collective optical excitations;
+phonon-assisted / indirect absorption;
+interaction-generated many-body spectral broadening;
+external absorptance produced mainly by unconstrained passive photonic enhancement.
+```
+
+Localized one-particle states do not break the population inequality but can decouple population from dc dark current.
+
+Therefore Experiment 12 is currently a **necessary material-state-count condition**, not a universal dark-current, D*, or noise theorem.
 
 ---
 
 # Novelty status
 
-Focused audits have checked:
+Focused audit has found strong adjacency to:
 
 ```text
-Kubo-Greenwood finite-T conductivity;
-standard/generalized optical f-sum rules;
-restricted/partial optical sums;
-quantum-geometric optical conductivity bounds;
-finite-T QFI/susceptibility integrals;
-graphene finite-T optical conductivity and sum rules;
-classical infrared alpha/G_th material criteria.
+semiconductor phase-space filling / Pauli blocking;
+Kubo-Greenwood;
+ordinary/generalized f-sum rules;
+graphene interband/Drude spectral-weight transfer;
+quantum-geometric optical sums;
+classic infrared alpha/G_th criteria;
+Yablonovitch-Kane / Adams low-carrier-density band engineering for semiconductor lasers.
 ```
 
-No direct prior source has yet been identified with the Experiment-12 thermal kernel and carrier-population inequality.
-
-This is not a priority claim.
+No direct source has yet been identified with the corrected windowed inverse inequality.
 
 ```text
-NOVELTY NOT ESTABLISHED.
+DIRECT COLLISION: NOT FOUND IN FOCUSED AUDIT.
+CONCEPTUAL ADJACENCY: HIGH.
+MATHEMATICAL NOVELTY: MODEST.
+PHYSICAL / DETECTOR-SPECIFIC NOVELTY: PLAUSIBLE, UNPROVEN.
 ```
 
 ---
 
 # Active next action
 
-1. Audit localized-state / electrical-activity escape routes.
-2. Decide whether a detector-level noise statement can be added without assuming an arbitrary mobility or lifetime.
-3. Continue dedicated novelty search around the exact global kernel.
-4. Do not draft a manuscript until those tests survive.
+Perform the manuscript-viability decision on the **corrected theorem only**.
+
+Question:
+
+> After all scope limits are stated, is the inverse cross-mu optical-spectral-weight / thermal-population inequality sufficiently general, nontrivial, and distinct from phase-space filling and optical sum rules to justify a short theoretical manuscript?
+
+Do not broaden the claim to dark current to make it look stronger.
