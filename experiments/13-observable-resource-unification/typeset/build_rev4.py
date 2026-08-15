@@ -7,7 +7,7 @@ only production transformations:
   * enable T1 font encoding and scalable Latin Modern for bibliography diacritics;
   * load native TikZ figure definitions;
   * replace the five explicit figure placeholders by figure macros;
-  * give the central population theorem full-width treatment without changing it;
+  * format the central population theorem as an equivalent two-line column display;
   * emit rev4_unified_prapplied_built.tex for compilation.
 
 It intentionally does not change scientific claims, algebra, numerical values,
@@ -69,20 +69,28 @@ for label, macro in replacements.items():
     if count != 1:
         raise RuntimeError(f"expected one placeholder for {label}, replaced {count}")
 
-# The central theorem was only ~14 pt too wide in a single APS column. Give the
-# unchanged equation a full-width REVTeX widetext block so it remains the visual
-# center of the manuscript instead of shrinking or abbreviating the formula.
+# Preserve the exact theorem while breaking the long inequality at its natural
+# logical boundary so it fits a standard APS column without widetext grid rules.
 main_eq = re.compile(
-    r"(\\begin\{equation\}\s*\\boxed\{.*?\\label\{eq:main-theorem\}\s*\\end\{equation\})",
+    r"\\begin\{equation\}\s*\\boxed\{\s*n_e\+n_h\s*\\ge\s*n_\{e,\\cB\}\^\{\\rm act\}\+n_\{h,\\cB\}\^\{\\rm act\}\s*\\ge\s*\\frac\{2\}\{\\pi e\^2\(v_\{\\cB\}\^\{\\rm cap\}\)\^2\}\s*\\int_\{\\cB\}\s*\\frac\{\\hbar\\omega\\,\\sigma_1\^\{\\rm cross\}\(\\omega\)\}\s*\{e\^\{\\hbar\\omega/\(2k_BT\)\}-1\}\s*d\\omega\.\s*\}\s*\\label\{eq:main-theorem\}\s*\\end\{equation\}",
     re.DOTALL,
 )
-text, theorem_count = main_eq.subn(
-    lambda m: "\\begin{widetext}\n" + m.group(1) + "\n\\end{widetext}",
-    text,
-    count=1,
-)
+main_replacement = r"""\begin{equation}
+\boxed{
+\begin{aligned}
+n_e+n_h
+&\ge n_{e,\cB}^{\rm act}+n_{h,\cB}^{\rm act}\\
+&\ge
+\frac{2}{\pi e^2(v_{\cB}^{\rm cap})^2}
+\int_{\cB}
+\frac{\hbar\omega\,\sigma_1^{\rm cross}(\omega)}
+{e^{\hbar\omega/(2k_BT)}-1}\,d\omega .
+\end{aligned}}
+\label{eq:main-theorem}
+\end{equation}"""
+text, theorem_count = main_eq.subn(lambda _m: main_replacement, text, count=1)
 if theorem_count != 1:
-    raise RuntimeError(f"expected one main theorem display, wrapped {theorem_count}")
+    raise RuntimeError(f"expected one main theorem display, reformatted {theorem_count}")
 
 if "placeholder:" in text:
     raise RuntimeError("one or more figure placeholders remain in built source")
@@ -92,6 +100,6 @@ print(f"wrote {OUT.name}")
 print(f"bytes: {OUT.stat().st_size}")
 print("journal style: prapplied")
 print("font encoding: T1 + Latin Modern")
-print("main theorem: widetext")
+print("main theorem: two-line single-column display")
 for label in replacements:
     print(f"replaced {label}")
