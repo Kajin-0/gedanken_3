@@ -2,36 +2,49 @@
 
 **Date:** 2026-08-15  
 **Active branch:** `experiment-13-observable-resource-unification`  
-**Repository frontier:** **Experiment 13 flagship Rev. 4 — science frozen; title-complete Physical Review Applied PDF QA-passed; human submission inputs required**
+**Repository frontier:** **Experiment 13 Rev. 5 — Physical Review Applied production/rendered-hostile-review pass; human submission inputs remain**
 
 ## Read first
 
-1. `experiments/13-observable-resource-unification/00_ACTIVE_FRONTIER_REV4_FLAGSHIP_2026-08-15.md`
-2. `experiments/13-observable-resource-unification/REV4_PRAPPLIED_TITLE_COMPLETE_PRODUCTION_QA_2026-08-15.md`
-3. `experiments/13-observable-resource-unification/PAPER_REV4_RENDERED_HOSTILE_REVIEW_2026-08-15.md`
-4. `experiments/13-observable-resource-unification/PRAPPLIED_SUBMISSION_PREFLIGHT_2026-08-15.md`
-5. `experiments/13-observable-resource-unification/PAPER_DRAFT_REV4_CLAIM_REFERENCE_CLEAN_2026-08-15.md`
-6. `experiments/13-observable-resource-unification/HGCDTE_STABLE_RANK_PRODUCTION_QA_2026-08-15.md`
-7. `experiments/13-observable-resource-unification/HGCDTE_PT_SYMMETRY_STABLE_RANK_EXPLANATION_2026-08-15.md`
+1. `experiments/13-observable-resource-unification/00_ACTIVE_FRONTIER_REV5_FLAGSHIP_2026-08-15.md`
+2. `experiments/13-observable-resource-unification/PAPER_REV5_RENDERED_HOSTILE_REVIEW_2026-08-15.md`
+3. `experiments/13-observable-resource-unification/REV5_PRAPPLIED_PRODUCTION_QA_2026-08-15.md`
+4. `experiments/13-observable-resource-unification/PAPER_REV5_ADVERSARIAL_RESPONSE_2026-08-15.md`
+5. `experiments/13-observable-resource-unification/PRAPPLIED_SUBMISSION_PREFLIGHT_2026-08-15.md`
+6. `experiments/13-observable-resource-unification/CURRENT_STATE.md`
+
+Rev. 4 is historical. Do not revert to it unless specifically comparing pre/post hostile-review states.
 
 ## Controlling production identity
 
 ```text
-Actions run:          31901326001
-head commit:          7b2f8fe1a9e92ba8ea778828c2682c5a374a1abb
-artifact ID:          9251170031
-artifact digest:      11d4bf5bd6262d6a19c6b1f0bdbdb7a7d16644981b9bd597c199e7a23ddbf32e
-PDF SHA-256:          d2e65ab9b0953e1f987c8c2c2b47e4d8558ac72989b84325590b3a0a67086ee8
-built TeX SHA-256:    c1459c18e4bf5d20f09a9a956c23b565c76bd0a913fe9636adc2ca7fe1e2b8f9
-BibTeX SHA-256:       029d1029c487c99e277a24dc95ad536d10a41742992c89916a1991d423f39d3d
-pages:                7
+Actions run:          31903046137
+head commit:          8ac77c06accd02e56c43910b903ff53bb07a72dd
+artifact ID:          9251615353
+artifact digest:      64046cfd6972a9fbc810ab4a67ef61b27b9cd16249b7c666ecd75fabd5c5f843
+PDF SHA-256:          ce0fd199bb43652edf598ce7fa516e093e41fdc7a664d336092b8161ea7fa1c9
+TeX SHA-256:          9f45c235d3e2852fe04bf77a2adf519213e7af76ef8c9a7e26194a2cb10c72e7
+pages:                8
 undefined refs/cites: none
 overfull boxes:       none
-reference titles:     complete
 visual QA:            PASS
+hostile review:       PASS
 ```
 
-Pages 1–6 are render-identical to the hostile-reviewed package; only bibliography page 7 changed during title completion and it separately passed visual QA.
+## What changed from Rev. 4
+
+An external extreme adversarial review found the central optical theorem sound but identified real weaknesses. Rev. 5 fixes them:
+
+```text
+Tr(G)/lambda_max(G) -> r_eff(G)=srank(sqrt(G));
+S tau = 1 explicitly demoted to definitional bookkeeping;
+stage-specific non-transferability promoted as the conceptual thesis;
+full bound/reference tightness factorization added;
+PT isotropy restricted to single-parent-doublet validation sectors;
+immigration-death-exchange Markov model and PSD convention specified;
+channel-null and final-sink Poisson proofs made explicit;
+d>1 and conditional-certification qualifications added.
+```
 
 ## Central theorem
 
@@ -47,79 +60,82 @@ Pages 1–6 are render-identical to the hostile-reviewed package; only bibliogra
 }
 ```
 
-Use selected direct cross-`mu` conductivity, not arbitrary total measured conductivity. This is an equilibrium one-body endpoint-population theorem, not a universal dark-current, generation-rate, noise, or `D*` theorem.
+Unchanged from the previous audited theorem.
 
-Unified organizing identity:
-
-```math
-\boxed{\mathcal S_{X|D}\tau_{X|D}=1.}
-```
-
-Do not sell this generic algebra as the novelty headline.
-
-Shell decomposition:
+## New controlling hierarchy
 
 ```math
-\tau_{cap}^{act}=\sum_aw_a^{act}\frac{c_a}{\mathcal S_a^{act}},
-\qquad
-\tau_{obs}^{act}=\eta_F\sum_aw_a^{act}\frac{c_a}{\mathcal S_a^{act}}.
+\boxed{
+\frac{n_{bound}}{n_{ref}}
+=
+\frac{n_{\mathcal B}^{act}}{n_{ref}}
+\eta_F
+\sum_a w_a^{act}\frac{c_a}{\mathcal S_a^{act}}.
+}
 ```
 
-## Production HgCdTe result
+This is the physically informative organization:
 
 ```text
-n_ref             = 1.005140525e17 cm^-3
-v_B^cap           = 1.01764e6 m/s
-eta_F             = 0.306836598
-tau_cap^act       = 0.572622972
-tau_obs^act       = 0.175701685
-S_th,B^act        ~= 1.746
-bound/reference   ~= 0.118
-bound/active      ~= 0.176
+support coverage;
+Fermi/Kubo asymmetry;
+shell/global capacity mismatch;
+within-shell selectivity.
 ```
 
-`S_a^act=1` to about `4e-14` only in the BIA-neglecting second-order Kane validation. Do not generalize exact isotropy to real zincblende HgCdTe without a BIA-inclusive calculation.
+HgCdTe broad-window closure:
 
-## Recycling / observability result
+```text
+support fraction  = 0.66897
+eta_F             = 0.30684
+tau_cap^act       = 0.57262
+active tightness  = 0.17570
+full ratio        ~= 0.1175
+```
 
-Under independent conservative one-final-sink Poisson lineages, ideal endpoint counting can have zero interterminal cross-spectrum despite internal recycling and mean crosstalk. Finite-transit Shockley-Ramo coupling can lift that endpoint source-channel null at finite frequency while an internally created/recombined pair still has zero integrated induced charge. Nonzero ensemble cross-spectrum is allowed, not guaranteed.
+## Stage-specific thesis
+
+```text
+H_task -> H_exc -> H_int -> H_term
+```
+
+Capacity, selectivity, internal correlation, and terminal observability belong to different physical maps. None may be transferred between stages without the intervening dynamics.
+
+## PT boundary
+
+Complete nonzero singular-value isotropy is claimed only for the thermally relevant selected parent shells that are single fixed-k `PT` Kramers doublets in the BIA-neglecting validation. Generic multidoublet `PT` blocks have paired singular values, not necessarily equal singular values. Real zincblende HgCdTe contains BIA.
+
+## Recycling boundary
+
+The occupancy spectrum now refers to an explicit immigration-death-exchange Markov model with two-sided angular-frequency PSD.
+
+Ideal final-sink zero cross-spectrum requires Poisson primaries, independent lineages, one exclusive final sink, no branching/gain, and no shared electronics. Finite-transit Shockley-Ramo motion can lift the single-lineage source-channel null at finite frequency despite zero integrated induced charge. Ensemble cross-spectrum is allowed, not guaranteed.
 
 ## Strategy
 
 ```text
-Experiment 13 flagship:       PRIMARY
-Experiment 01 manuscript:     FROZEN fallback
-Experiment 09 manuscript:     FROZEN fallback
-Experiment 12 manuscript:     FROZEN fallback
-new theory by default:        STOP
+Experiment 13 Rev. 5:     PRIMARY submission path
+Experiment 13 Rev. 4:     historical checkpoint
+Experiment 01 manuscript: frozen fallback
+Experiment 09 manuscript: frozen fallback
+Experiment 12 manuscript: frozen fallback
+new theory by default:    STOP
 ```
 
-No direct prior-art collision was found in completed targeted audits. Historical priority remains unproven.
+## Remaining work
 
-## Submission materials already prepared
+No new scientific revision is currently authorized.
 
-`PRAPPLIED_SUBMISSION_PREFLIGHT_2026-08-15.md` contains:
+Required human/submission inputs:
 
 ```text
-100-word suitability justification;
-cover-letter draft;
-Data Availability/archive guidance;
-source-package checklist;
-reference-title compliance note.
+author name;
+affiliation;
+corresponding email;
+acknowledgments/funding;
+submission-history declaration;
+final Data Availability / archive decision;
+optional ORCID/referee recommendations/exclusions.
 ```
 
-## Remaining human/submission inputs
-
-```text
-author name
-institutional affiliation
-corresponding email
-acknowledgments / funding statement
-submission-history / joint-submission declaration
-final Data Availability Statement / archival citation decision
-optional ORCID and referee recommendations/exclusions
-```
-
-When supplied, make metadata/submission-only changes, rebuild through CI, record new hashes, and inspect every page again.
-
-No new Gedanken branch or theory rewrite is authorized by default. Reopen science only for a concrete mathematical defect, numerical inconsistency, direct prior-art collision, or explicit editor/referee requirement.
+When supplied, make metadata-only changes, rebuild through CI, record new hashes, inspect all pages, and submit if clean.
