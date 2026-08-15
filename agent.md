@@ -6,7 +6,7 @@ Read `AGENTS.md` first, then this file. Do not infer chronology from `main` alon
 
 All research in this repo is analytical/theoretical only. Preserve failed, corrected, conditional, and negative paths. Do not use novelty or priority language without a dedicated audit.
 
-# ACTIVE — Experiment 12 / PRB Rev7
+# ACTIVE — Experiment 12 / PRB Rev8
 
 Branch:
 
@@ -17,27 +17,12 @@ experiment-12-oscillator-strength-state-count-bound
 ## Recovery order
 
 1. `experiments/12-oscillator-strength-state-count-bound/CURRENT_STATE.md`
-2. `experiments/12-oscillator-strength-state-count-bound/REV6_EXTERNAL_REVIEW_RESPONSE_2026-08-15.md`
-3. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV7_CHANGESET_2026-08-15.md`
-4. `experiments/12-oscillator-strength-state-count-bound/PRB_REV7_RENDER_QA_2026-08-15.md`
-5. `experiments/12-oscillator-strength-state-count-bound/numerics/kane_8band_capacity.py`
-6. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV6_2026-08-14.md`
+2. `experiments/12-oscillator-strength-state-count-bound/REV7_EXTERNAL_REREVIEW_RESPONSE_2026-08-15.md`
+3. `experiments/12-oscillator-strength-state-count-bound/HGCDTE_SECOND_ORDER_8BAND_TIGHTNESS_2026-08-15.md`
+4. `experiments/12-oscillator-strength-state-count-bound/MANUSCRIPT_REV8_CHANGESET_2026-08-15.md`
+5. `experiments/12-oscillator-strength-state-count-bound/PRB_REV8_RENDER_QA_2026-08-15.md`
+6. `experiments/12-oscillator-strength-state-count-bound/numerics/kane_8band_tightness.py`
 7. `experiments/12-oscillator-strength-state-count-bound/NOVELTY_AUDIT_2026-08-14.md`
-8. `experiments/12-oscillator-strength-state-count-bound/PROGRESS_LOG.md`
-
-## What changed after Rev6
-
-A supplied extreme adversarial review rated the theorem mathematically sound but recommended major revision, focusing on:
-
-```text
-uniform thermodynamic boundedness of v_B^cap;
-physical significance of the capacity resource;
-missing realistic narrow-gap multiband validation;
-missing van Roosbroeck-Shockley / fluctuation-dissipation context;
-several smaller interpretation qualifications.
-```
-
-Rev7 addresses all of these without changing the central theorem.
 
 ## Controlling theorem
 
@@ -56,73 +41,102 @@ n_{e,B}^{act}+n_{h,B}^{act}
 }
 ```
 
-Intrinsic neutral form:
+The central finite-volume theorem is unchanged from Rev7.
+
+## Rev8 low-energy quantifier fix
+
+For a moving low-energy window sequence `B_m`, require
+
+```math
+E_m=\sup_{\omega\in B_m}\hbar\omega\to0,
+```
+
+```math
+W_m=\int_{B_m}\sigma_1^{cross}d\omega\to W_0>0,
+```
+
+and
 
 ```math
 \boxed{
-n_{th}
-\ge
-\frac{1}{\pi e^2(v_B^{cap})^2}
-\int_B
-\frac{\hbar\omega\sigma_1^{cross}(\omega)}
-{e^{\hbar\omega/(2k_BT)}-1}\,d\omega.
+v_*=\sup_m\left[\limsup_{V\to\infty}v_{B_m,V}^{cap}\right]<\infty.
 }
 ```
 
-## Thermodynamic condition added in Rev7
-
-For a nonzero macroscopic density floor, require
+Then
 
 ```math
-\boxed{
-\bar v_B^{cap}
-=\limsup_{V\to\infty}v_{B,V}^{cap}<\infty.
-}
+\liminf_m(n_{e,B_m}^{act}+n_{h,B_m}^{act})
+\ge4k_BT W_0/(\pi e^2v_*^2)>0.
 ```
 
-The finite-volume inequality itself remains exact without this extra condition.
+## Full realistic multiband test added in Rev8
 
-## New realistic HgCdTe Kane validation
+A bulk second-order 8-band HgCdTe-like `k.p` model based on Novik et al. was evaluated end-to-end at 300 K and a 10-um gap.
 
-For the standard first-order 8x8 Kane Hamiltonian,
-
-```math
-\boxed{
-\|\hat v_x\|_{op}=\sqrt{3/2}\,v_K,
-\qquad
-v_B^{cap}\le\sqrt{3/2}\,v_K.
-}
-```
-
-Thus the capacity is uniformly bounded in system size in this realistic multiband narrow-gap model.
-
-Numerical scales:
+Representative charge-neutral state:
 
 ```text
-measured HgCdTe v_K = (1.07 +/- 0.05)e6 m/s
--> central capacity <= 1.31e6 m/s;
-
-E_P ~= 18.8 eV
--> capacity <= 1.286e6 m/s.
+mu - Ec = +11.477 meV
+cross-mu exact population = 1.005141e17 cm^-3
 ```
 
-The exact coefficient is first-order Kane only; second-order 8x8 k.p models add finite k-dependent corrections.
-
-## Rev7 production state
+Windowed results:
 
 ```text
-experiment12_prb_rev7.tex
-SHA-256 ec5f46f0256b320861fabdd3ad5e61832c1f20c03ea95216979207fe92dc488d
-
-experiment12_prb_rev7.pdf
-SHA-256 e481354dc25a0526dbe0b4eb636a0ca733aae8678f3a12b7a2d0a349d25c0740
-
-7 pages / US letter / compile pass / all pages visually inspected / no layout regression.
+Eg..1.5Eg  bound/exact = 0.0320
+Eg..2Eg    bound/exact = 0.0749
+Eg..3Eg    bound/exact = 0.1110
+Eg..0.5eV  bound/exact = 0.1180
 ```
 
-## Scope and novelty
+Broad-window selected capacity:
 
-Valid only for independent-quasiparticle direct cross-`mu` charge absorbers. Do not promote this into universal dark-current, `D*`, generation-rate, or finite-bandwidth-noise claims. Excitonic/collective, indirect, many-body, and arbitrary photonic-enhancement cases remain outside scope.
+```text
+v_B^cap ~= 1.016e6 m/s
+```
+
+Headline result:
+
+```math
+\boxed{
+(n_e+n_h)_{bound}/(n_e+n_h)_{exact}\simeq0.118.
+}
+```
+
+The model-validation window through 0.5 eV is not a proposed detector bandwidth.
+
+The first-order Kane value near 1.31e6 m/s is an **upper bound**, not the actual selected-window capacity. Higher-order k.p capacity claims are restricted to a bounded momentum domain of model validity.
+
+## Appendix correction
+
+Internal absorptance illustration now uses
+
+```text
+[1.02 omega_g, 1.10 omega_g]
+```
+
+and the conservative column from the first-order Kane upper bound is
+
+```text
+Sigma_e >= 4.19e11 cm^-2.
+```
+
+## Rev8 production
+
+```text
+experiment12_prb_rev8.tex
+SHA-256 18424af7052262b2974a94a5ed6f85495951674fdcc0333624f3426f635df3a9
+
+experiment12_prb_rev8.pdf
+SHA-256 36e3fa7c01053bd5ec20f235cbb3f4f99c5297c3d44f11845440f77dff1da402
+
+8 pages / US letter / compile warning-free / all pages visually inspected.
+```
+
+## Scope / novelty
+
+Valid only for independent-quasiparticle direct cross-`mu` charge absorbers. Do not promote to universal dark-current, `D*`, generation-rate, or finite-bandwidth-noise claims.
 
 ```text
 DIRECT PRIOR-ART COLLISION: NOT FOUND
@@ -133,11 +147,8 @@ NOVELTY RISK: HIGH
 
 ## ACTIVE NEXT ACTION
 
-Perform a fresh hostile review of **Rev7**, with special attention to whether the Kane-capacity subsection genuinely resolves the prior significance objection and whether any stronger prior-art collision emerges from the VRS/FDT/Kane additions.
-
-Do not add more theory by default.
+Perform a new extreme hostile review of **Rev8**. Do not add more theory by default unless that review finds a genuine blocker.
 
 ## Closed previous branches
 
-- Experiment 10: closed by default as novelty/manuscript path.
-- Experiment 11: closed by default; retained result reduces to Maxwell-relaxation / reciprocal-sensitivity theory.
+Experiment 10 and Experiment 11 remain closed by default as novelty/manuscript paths.
