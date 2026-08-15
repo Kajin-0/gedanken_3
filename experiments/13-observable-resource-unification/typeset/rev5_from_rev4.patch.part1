@@ -1,0 +1,80 @@
+--- rev4_unified_prapplied_built.tex
++++ rev5_prapplied.tex
+@@ -20,11 +20,11 @@
+ \newcommand{\cL}{\mathcal L}
+ \newcommand{\cS}{\mathcal S}
+ 
+-\input{rev4_figures.tex}
++\input{rev5_figures.tex}
+ 
+ \begin{document}
+ 
+-\title{Spectral geometry of photodetection: optical state-count bounds, selectivity, and internal observability}
++\title{Stage-specific spectral geometry of photodetection: state-count bounds, selectivity, and observability}
+ 
+ \author{Author}
+ \affiliation{Affiliation to be supplied at submission}
+@@ -33,7 +33,7 @@
+ \date{\today}
+ 
+ \begin{abstract}
+-Direct optical response constrains more than absorption alone: under a finite microscopic coupling capacity it can certify a minimum population of the one-body states that carry that response. We derive an equilibrium bound in which the selected direct cross-chemical-potential conductivity over an arbitrary frequency window lower-bounds the thermally occupied electron-plus-hole endpoint population through a basis-invariant exact-shell velocity capacity. We then show that this inverse bound is one realization of a broader detector relation. On a physically declared admissible domain, the strongest allowed response relative to the actual activity-ensemble average is exactly the reciprocal of the fraction of total activity certified by a maximum-capacity inversion. The maximally mixed limit gives a stable-rank task-selectivity relation, while a rank-one coherent detector gives the nonuniform coherence dimension $N_{\rm eff}=1/\sum_j w_j^2$. For dispersive bands, the optical population-bound tightness decomposes into Fermi asymmetry, shell-to-global capacity utilization, and inverse shell response selectivity. A production-resolution second-order eight-band HgCdTe calculation gives factors $0.3068$ and $0.5726$, whose product $0.1757$ reproduces the broad-window active-population tightness. Within the bulk-inversion-asymmetry-neglecting validation model, the active exact-shell velocity blocks are singular-value isotropic by fixed-$\mathbf k$ $PT$ symmetry; that exact isotropy is not asserted for full zincblende HgCdTe. Finally, terminal observability is formulated with channel-specific positive effects. Under independent conservative one-final-sink lineages, ideal endpoint counting can force zero interpixel cross-noise even with internal photon recycling, whereas finite-transit Shockley--Ramo motion can lift the source-channel null at finite frequency while preserving zero integrated charge for an internally created and recombined pair. The results connect inverse material inference, task/coherence selectivity, and terminal observability without proposing a replacement scalar figure of merit.
++Direct optical response can certify more than absorption: under a finite microscopic coupling capacity it imposes a minimum thermal population of the one-body states that carry that response. We derive an equilibrium bound in which selected direct cross-chemical-potential conductivity lower-bounds the occupied electron-plus-hole endpoint population through a basis-invariant exact-shell velocity capacity. The bound's tightness then admits a stage-specific decomposition into support coverage, Fermi/Kubo asymmetry, shell-to-global capacity utilization, and within-shell response selectivity. In a production-resolution second-order eight-band HgCdTe calculation, the selected active-population tightness is $0.3068\times0.5726=0.1757$ and the active-support fraction is $0.6690$, giving a full bound/reference ratio of about $0.1175$. In this BIA-neglecting validation, each thermally relevant selected parent shell is a single fixed-$\mathbf k$ $PT$ Kramers doublet, for which the velocity block is singular-value isotropic; $PT$ symmetry alone does not imply complete isotropy for general multidoublet blocks. Downstream, an explicit immigration--death--exchange model and a conservative Poisson-lineage construction show why internal photon-recycling correlations need not appear in ideal final-sink cross-noise, while finite-transit Shockley--Ramo motion can restore finite-frequency source-channel support despite zero integrated induced charge. The common principle is stage-specific: capacity, selectivity, and observability belong to different physical maps and cannot be transferred between detector stages without the intervening dynamics.
+ \end{abstract}
+ 
+ \maketitle
+@@ -44,7 +44,7 @@
+ 
+ We therefore do not propose a new generic measurement formalism. The physical center of the present work is an inverse semiconductor theorem: for equilibrium independent quasiparticles, selected direct transitions whose endpoints straddle the chemical potential cannot carry finite optical spectral weight with arbitrarily few thermally occupied endpoint states if the selected exact-shell velocity blocks have finite operator capacity. The result is upstream of recombination kinetics and is distinct from generation-based infrared material criteria~\cite{Piotrowski1997}, absorption--recombination detailed balance~\cite{VanRoosbroeck1954}, fluctuation--dissipation identities~\cite{Callen1951}, conventional optical sum rules~\cite{Watanabe2020,Gusynin2006,Gusynin2007}, and recent optical-response bounds associated with topology or quantum geometry~\cite{Onishi2024,Mao2025}.
+ 
+-Once the material theorem is expressed on an endpoint-lifted positive operator space, a broader structure appears. A detector stage has a physically allowed maximum response per direction and an actual ensemble-average response. Their ratio is a forward selectivity; its reciprocal is the fraction of total activity certified when the measured response is inverted using only the maximum per-direction capacity. The rank-one coherent limit recovers the effective coherence dimension $N_{\rm eff}$. A shell-resolved form identifies whether looseness in the thermal population bound arises from within-shell singular-value concentration or from shell-to-shell variation in absolute coupling strength.
++Once the material theorem is expressed on an endpoint-lifted positive operator space, the useful generalization is not a claim that one operator governs the whole detector. It is the opposite: each detector stage has its own admissible domain and physical map. A capacity or null inferred at one stage cannot be transferred to another without composing the intervening dynamics. Within a fixed stage, a maximum-capacity normalization relates forward response selectivity to the fraction of activity lower-bounded by inversion; its physically useful specializations include the nonuniform coherence dimension $N_{\rm eff}$ and the thermal endpoint-capacity tightness. For dispersive bands, that tightness can be resolved shell by shell and then combined with the support fraction and the independent Fermi/Kubo step.
+ 
+ A second information loss occurs downstream. Photon recycling and mean optical crosstalk in HgCdTe photodiodes are established~\cite{Jozwikowski2011,Jozwikowski2012,Jozwikowska2019,Kopytko2019}, as is the need for a proper Shockley--Ramo treatment of generation--recombination noise~\cite{Dabrowski1987,Dabrowski1989}. We show that, under a conservative independent-lineage final-sink model, the source terminal can be exactly null to a recycled lineage even while mean crosstalk and internal population correlations are nonzero. Finite-transit Shockley--Ramo current changes the terminal map and can lift that null at finite frequency.
+ 
+@@ -55,7 +55,7 @@
+ \xrightarrow{M_{\rm ro}(\omega)}\mathcal H_{\rm term}.
+ \label{eq:stages}
+ \end{equation}
+-The maps in these spaces are physically different. The unity developed below is the spectral geometry of the physical map at the stage being interrogated: its spectral edge controls a capacity, its distribution of singular values controls directional selectivity, and its null space controls observability.
++The maps in these spaces are physically different. The central inference principle is therefore stage-specific non-transferability: a spectral edge, singular-value distribution, or null space of one stage is not automatically the corresponding property of another stage. The intervening physical map must be included. Within the stage being interrogated, the spectral edge controls a capacity, the singular-value distribution controls directional selectivity, and the null space controls observability. The sections below use this distinction to separate what optical response can certify, what a detector preferentially accepts, and what internal dynamics survive terminal readout.
+ 
+ \RevFigStages
+ 
+@@ -159,9 +159,9 @@
+ 
+ \RevFigTheorem
+ 
+-\section{Endpoint-lifted spectral geometry and inverse certification}
++\section{Stage-specific capacity normalization and inverse certification}
+ 
+-\subsection{Admissible-domain reciprocity}
++\subsection{Capacity normalization on a declared domain}
+ 
+ Let $\cD$ be a physically declared admissible domain with projector $P_{\cD}$. For a positive coupling/effect $G$, define
+ \begin{equation}
+@@ -190,7 +190,7 @@
+ \boxed{\cS_{X|\cD}\tau_{X|\cD}=1.}
+ \label{eq:reciprocity}
+ \end{equation}
+-Equation~\eqref{eq:reciprocity} is a normalized spectral-capacity identity, not a claim of new matrix theory. Its detector content is that Eqs.~\eqref{eq:selectivity} and \eqref{eq:tightness} answer independent forward-selectivity and inverse-certification questions for the same physical map and declared capacity domain. The direction attaining $\lambda_{\cD}$ need not be appreciably populated in $X$.
++Equation~\eqref{eq:reciprocity} follows directly from the two normalizations and is not itself a new matrix theorem. Its detector use is only to compare physically distinct forward-selectivity and inverse-certification questions for the \emph{same} map and declared domain. Here ``certified'' is conditional on $X$ lying in the declared admissible domain, on $\lambda_{\cD}$ truly bounding the relevant physical coupling there, and on the measured response being attributable to $X$. The direction attaining $\lambda_{\cD}$ need not be appreciably populated in $X$.
+ 
+ \subsection{Thermal endpoint specialization}
+ 
+@@ -238,23 +238,25 @@
+ 
+ \subsection{Uniform task ensemble}
+ 
+-On a $d$-dimensional task domain choose $X=I_{\cD}$ and define
++On a $d$-dimensional task domain choose $X=I_{\cD}$ and define the effective response rank
+ \begin{equation}
+ T=\Tr G_{\cD},
+ \qquad
+-r_{\rm st}=T/\lambda_{\cD}.
++r_{\rm eff}(G_{\cD})=\frac{T}{\lambda_{\cD}}
++={\rm srank}(\sqrt{G_{\cD}}).
++\label{eq:reff}
+ \end{equation}
+-Then
++If $G_{\cD}=M^\dagger M$, this is the conventional stable rank of $M$, not generally the stable rank of $G_{\cD}$ itself. Then
