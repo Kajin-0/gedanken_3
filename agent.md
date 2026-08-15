@@ -22,138 +22,76 @@ CLOSED BY DEFAULT AS A NOVELTY / MANUSCRIPT PATH.
 
 Do not draft a paper from the current Experiment-10 theorem package. Do not mechanically extend it by composing more established electronic or photonic resource bounds.
 
-## Read in this order for recovery
+Recovery files:
 
 1. `experiments/10-room-temperature-lwir-admissibility/CURRENT_STATE.md`
 2. `experiments/10-room-temperature-lwir-admissibility/FINAL_PHOTONIC_AUDIT_AND_DISPOSITION_2026-08-14.md`
 3. `experiments/10-room-temperature-lwir-admissibility/RESONANT_PATH_ENHANCEMENT_RESPONSE_BOUND_STEP_2026-08-14.md`
 4. `experiments/10-room-temperature-lwir-admissibility/THEOREM_CORE_2026-08-14.md`
-5. `experiments/10-room-temperature-lwir-admissibility/GENERAL_SPECTATOR_BAND_ADMISSIBILITY_THEOREM_STEP_2026-08-14.md`
-6. earlier detailed derivations only if needed.
+
+Retained conditional result:
+
+```math
+\Sigma_c\ge C/[\min(V_{hop},v_{spec})]^2
+```
+
+under the stated single-pass, active-pair-optically-dominant, exact normal-momentum spectator-closure hypotheses. This is technically useful but not established as novel.
 
 ---
 
-# Retained Experiment-10 results
+# POST-EXP10 PREMISE SCREEN — FIVE REJECTIONS
 
-## Active-pair optical-depth scaling
+Read:
 
-For the finite-gap massive-Dirac active pair and the same required active-pair single-pass optical depth,
+`candidate-audits/POST_EXP10_THEORETICAL_SCREEN_2026-08-14.md`
 
-```math
-\boxed{\Sigma_c\ge C/v^2.}
-```
+Experiment 11 has **not** been opened.
 
-The equality is exact in the two-band neutral model; spectator hole states shift `mu>0`, increase active electron density and reduce active-pair interband absorption, so the relation becomes a conservative lower bound.
-
-Standard witness:
-
-```math
-C=1.06668\times10^{29}\ \mathrm{m^{-2}(m/s)^2}.
-```
-
-## Electronic velocity ceilings
-
-Microscopic lattice resource:
-
-```math
-\boxed{v\le V_{hop}.}
-```
-
-For positive isotropic convex spectator hole excitation `E_s(p)`:
-
-```math
-\boxed{v_s^{crit}=\inf_{p>0}E_s(p)/p.}
-```
-
-Exact finite-energy normal-momentum spectator-assisted CCCH closure is equivalent to
-
-```math
-\boxed{v\le v_s^{crit}.}
-```
-
-For multiple spectators:
-
-```math
-v_{spec}=\min_s v_s^{crit},
-\qquad
-v_{adm}=\min(V_{hop},v_{spec}).
-```
-
-The conditional single-pass exact-closure theorem is
-
-```math
-\boxed{\Sigma_c\ge C/v_{adm}^2.}
-```
-
-Parabolic heavy-hole corollary:
-
-```math
-\boxed{M_{hh}v^2\le2(\Delta+\delta_{hh})}
-```
-
-and, when the spectator ceiling dominates,
-
-```math
-\boxed{\Sigma_c\ge C M_{hh}/[2(\Delta+\delta_{hh})].}
-```
-
-The `min E/p` construction is Landau-like and equal-group-velocity threshold physics is classical. Do not claim it as a new kinematic principle.
-
-## Resonant-response extension
-
-One-port TCMT with finite field-envelope response gives
-
-```math
-\boxed{
-\Sigma_c\ge
-\frac{B}{v_{adm}^2}
-\frac{1-\sqrt{1-A_0}}
-{\Lambda_a\tau_{max}},
-}
-```
-
-where
-
-```math
-\Lambda_a=2\gamma_i/(\alpha_Dd)
-```
-
-is the electromagnetic absorber sampling-rate / participation resource.
-
-TCMT does not upper-bound `Lambda_a`; finite response alone does not restore universality.
-
----
-
-# Why Experiment 10 is closed
-
-The final audit found established prior art covering the resource classes needed to close the remaining optical loophole:
+The following candidates were screened and rejected:
 
 ```text
-Bode-Fano passive broadband matching;
-Rozanov passive thickness-bandwidth bounds;
-Miller slow-light delay bounds;
-Yu-Raman-Fan nanophotonic light-trapping limits;
-Miller et al. susceptibility-based absorption-per-volume bounds;
-resonant-cavity-enhanced photodetector efficiency/bandwidth engineering.
+1. Causal/nonminimum-phase detectivity.
+   First result: same |H| and PSD can give same full-record SNR but different hard-deadline SNR.
+   Rejected: standard minimum-phase / finite-window causal detection theory; photodiode phase response is established.
+
+2. Spatially correlated noise breaking sqrt(area) D* scaling.
+   First result: integrated variance is the double integral of spatial covariance; small-area and large-area scalings differ.
+   Rejected: standard covariance integration / FPA noise theory; detectivity area scaling is assumption-dependent classical theory.
+
+3. Non-normal detector transient amplification.
+   First result: stable eigenvalues do not prevent large transient amplification for nonorthogonal eigenvectors.
+   Rejected: generic non-normal systems result already established in photonics.
+
+4. Wide-gap material detecting LWIR through intersubband/intraband transition.
+   First result: detected wavelength can be decoupled from fundamental bulk gap.
+   Rejected: core QWIP/QCD architecture and established since the 1980s/1990s.
+
+5. Same D* variance but different false-alarm tails.
+   First result: second-order SNR does not determine Neyman-Pearson detection for non-Gaussian/event noise.
+   Rejected: standard statistical detection theory with direct photon-counting detector precedent.
 ```
 
-Nearly every electronic constituent is also established: `alpha/G_th`, heavy-hole CCCH, equal-group-velocity impact-ionization thresholds, Landau-like critical velocity, Dirac Auger suppression, multiband Auger engineering, radiative detailed balance, and photon recycling.
-
-The exact composed carrier-column inequality was not located verbatim, but its novelty case is too weak and its hypotheses too restrictive for manuscript development without a new non-compositional result.
-
----
-
-# Reopen Experiment 10 only if
-
-A future line yields something genuinely outside the above constituent theories, e.g.:
-
-```text
-architecture-independent electronic-photonic invariant;
-detector-specific no-go absent from known passivity theory;
-non-factorizable performance bound;
-new inverse theorem connecting detector observables directly to electronic structure.
-```
+Do not reopen any of these as Experiment 11 without a genuinely new physical constraint.
 
 # ACTIVE NEXT ACTION
 
-Screen new purely theoretical photodetector Gedanken premises. Start a new experiment only after a premise survives an aggressive prior-art check.
+Continue screening new purely theoretical photodetector Gedanken premises.
+
+A premise should survive an immediate primary-literature collision test before a new branch is created.
+
+Prefer questions where the first consequence depends on specifically photodetection physics—not merely generic LTI phase, covariance, non-normal state-space dynamics, standard likelihood theory, or an already established detector architecture.
+
+Avoid obvious restatements of:
+
+```text
+detailed balance / reciprocity / FDT;
+Landauer/reset thermodynamics;
+standard information theory / matched filtering;
+standard quantum measurement limits;
+critical coupling / delay-bandwidth / Bode-Fano / Rozanov;
+known Auger suppression / band engineering;
+ordinary shot-noise/Fano-factor arguments;
+QWIP/QCD intersubband detection;
+Experiment-08 zero-gap Kane statistics;
+Experiment-09 collective/coherence line unless a genuinely new invariant appears.
+```
