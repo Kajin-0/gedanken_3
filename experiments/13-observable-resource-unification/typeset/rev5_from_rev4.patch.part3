@@ -1,0 +1,75 @@
+-Real HgCdTe has zincblende BIA. More complete multiband models can include BIA terms~\cite{Cartoixa2003}, which can lift the exact fixed-$\mathbf k$ doublet/quaternionic relation. We therefore do not claim universal shell isotropy for real HgCdTe; the general population theorem itself does not rely on inversion symmetry.
++Real HgCdTe has zincblende BIA. More complete multiband models can include BIA terms~\cite{Cartoixa2003}, which can also lift the exact fixed-$\mathbf k$ doublet/quaternionic relation. We therefore claim complete shell isotropy only for the single-parent-doublet sectors actually present in this BIA-neglecting validation; the general population theorem itself does not rely on inversion symmetry.
+ 
+ \RevFigHgCdTe
+ 
+@@ -381,23 +402,24 @@
+ \begin{equation}
+ |S_{ij}|^2\le S_{ii}S_{jj}.
+ \end{equation}
+-If a positive internal sector $X$ is null to channel $i$, $\Tr(G_iX)=0$, its cross contribution with every other channel is forced to vanish.
++If a positive internal sector $X$ is null to channel $i$, $\Tr(G_iX)=0$, define its output contribution $Y_X=MXM^\dagger\succeq0$. Then $(Y_X)_{ii}=0$, and positivity gives $|(Y_X)_{ij}|^2\le (Y_X)_{ii}(Y_X)_{jj}=0$. Its cross contribution with every other channel therefore vanishes.
+ 
+-For a symmetric two-pixel occupancy model with local non-transfer relaxation $\gamma$, conservative exchange rate $k$, and stationary mean $m$, the internal population cross-spectrum is
++For a concrete symmetric two-pixel population process, let independent particles immigrate into A and B at rate $\gamma m$ per pixel, die locally at rates $\gamma x_A$ and $\gamma x_B$, and exchange A$\to$B and B$\to$A at rates $kx_A$ and $kx_B$. The stationary means are $\langle x_A\rangle=\langle x_B\rangle=m$. For the two-sided angular-frequency PSD convention, the internal population cross-spectrum is
+ \begin{equation}
+ \boxed{
+ S_{x,12}(\omega)=m\left[
+ \frac{\gamma}{\gamma^2+\omega^2}
+ -\frac{\gamma+2k}{(\gamma+2k)^2+\omega^2}
+ \right],}
++\label{eq:occupancy-cross}
+ \end{equation}
+-with zero crossing $\omega_x=\sqrt{\gamma(\gamma+2k)}$. Internal conservative exchange is therefore visible to an occupancy-sensitive observable.
++with zero crossing $\omega_x=\sqrt{\gamma(\gamma+2k)}$. Equation~\eqref{eq:occupancy-cross} belongs to this explicit immigration--death--exchange Markov model; the drift rates and stationary mean alone would not determine the innovation covariance or the spectrum. Internal conservative exchange is therefore visible to an occupancy-sensitive observable in this model.
+ 
+ Now impose Poisson primary generation, independent noninteracting lineages, one final sink per lineage, final-sink-only measurement, no branching/gain, and no shared electronic coupling. A conservative lineage that begins in pixel A and ultimately exits through B has endpoint waveform
+ \begin{equation}
+ \bm H_{A\to B}^{\rm end}(\omega)=g_B(\omega)\bm e_B.
+ \end{equation}
+-It lies in the A-channel null. Independent final-sink marking, thinning, and displacement therefore give independent output streams~\cite{Mirasol1963,Harrison1981}, so
++It lies in the A-channel null. More explicitly, if the parent events form a Poisson process of rate $\Lambda$ and each lineage independently receives exactly one final-sink mark $J\in\{A,B\}$ with probabilities $p_A$ and $p_B$, independent marking gives independent Poisson processes of rates $\Lambda p_A$ and $\Lambda p_B$. Independent random delays/displacements preserve both Poisson character and independence~\cite{Mirasol1963,Harrison1981}. Hence
+ \begin{equation}
+ \boxed{S_{AB}^{\rm end}(\omega)=0}
+ \label{eq:endpoint-zero}
+@@ -427,32 +449,25 @@
+ 
+ \section{Discussion}
+ 
+-The common structure can be stated without introducing a new detector metric. For a physically declared domain, the spectral edge is the maximum admissible response per direction and $\Tr(G_{\cD}X)/\Tr X$ is the actual ensemble-average response. Their ratio is a forward selectivity; its inverse is the fraction of total activity certified by a maximum-capacity inversion. Stable rank appears for a maximally mixed ensemble, $N_{\rm eff}$ for a rank-one bright projector acting on a population-matched incoherent state, and the thermal optical capacity tightness for the equilibrium endpoint population.
++The common result is best stated as a restriction on inference across detector stages, not as a new scalar metric or a claim that one matrix describes the full device. Optical excitation, internal dynamics, and terminal readout are different maps. Capacity, directional selectivity, and null-space observability are therefore stage-specific, and transferring any of them downstream requires the intervening physical transformation.
+ 
+-The principal semiconductor theorem has an additional independent statistical step: $\cL_{\cB}\le\cR_{\cB}$. The observable tightness therefore factorizes into statistical and spectral contributions, and Eq.~\eqref{eq:shell-observable} resolves the latter shell by shell. This is complementary to established optical sum rules, which constrain other conductivity moments through charge density, kinetic energy, Hamiltonian derivatives, topology, or quantum geometry~\cite{Watanabe2020,Gusynin2006,Gusynin2007,Onishi2024,Mao2025}.
++Within the optical/material stage, Eq.~\eqref{eq:full-factorization} makes that accounting quantitative. The full bound/reference ratio loses tightness through four identifiable mechanisms: incomplete selected support, Fermi/Kubo asymmetry, shell-to-global capacity mismatch, and within-shell singular-spectrum concentration. The simple reciprocal normalization in Eq.~\eqref{eq:reciprocity} is only bookkeeping within a fixed map; the nontrivial semiconductor content is the physical identification of the capacity, the Fermi inequality, and the shell-resolved decomposition. The task and coherent limits show how the same fixed-map normalization specializes to a maximally mixed task ensemble or a bright-state projector without asserting that those systems share the semiconductor dynamics. This structure is complementary to established optical sum rules, which constrain other conductivity moments through charge density, kinetic energy, Hamiltonian derivatives, topology, or quantum geometry~\cite{Watanabe2020,Gusynin2006,Gusynin2007,Onishi2024,Mao2025}.
+ 
+-The downstream result illustrates a different information loss. Internal recycling can be present yet null to one terminal under a final-sink map. The readout operator, not the existence of internal coupling itself, determines observability. This is consistent with classical GR-noise/Ramo theory~\cite{Dabrowski1987,Dabrowski1989} but produces a specific conditional boundary for conservative photon-recycling lineages.
++The downstream recycling result supplies the complementary failure mode: even when internal dynamics create correlations, the terminal map can erase them. Under ideal final-sink counting, a conservative lineage can be exactly null to the source terminal; finite-transit Shockley--Ramo coupling can reopen that lineage at nonzero frequency. Thus internal correlation cannot be inferred from terminal correlation, or vice versa, without specifying the readout map. This is consistent with classical GR-noise/Ramo theory~\cite{Dabrowski1987,Dabrowski1989} but gives a specific conditional boundary for conservative photon-recycling lineages.
+ 
+ Important limitations are explicit. Equation~\eqref{eq:main-theorem} requires a selected direct cross-$\mu$ conductivity contribution and an independently justified finite capacity. It is an equilibrium independent-quasiparticle population theorem, not a dark-current or $D^*$ bound. Coherent rejection requires preserved and extractable coherence. The exact HgCdTe shell isotropy is a property of the BIA-neglecting validation model. Endpoint Poisson cancellation fails for branching, correlated generation, interacting lineages, or shared electronics. Finite-frequency Ramo support permits but does not guarantee a measurable ensemble cross-spectrum.
+ 
+ \section{Conclusion}
+ 
+-A selected direct optical response cannot be carried by arbitrarily few thermally populated one-body endpoint states when the exact-shell optical velocity blocks have finite capacity. Equation~\eqref{eq:main-theorem} is the central physical result.
++A selected direct optical response cannot be carried by arbitrarily few thermally populated one-body endpoint states when the selected exact-shell optical velocity blocks have finite capacity. Equation~\eqref{eq:main-theorem} is the central physical theorem.
+ 
+-Expressing the theorem on an endpoint-lifted positive activity space reveals a broader reciprocity:
+-\begin{equation}
+-\boxed{
+-\frac{\lambda_{\cD}}{\Tr(G_{\cD}X)/\Tr X}
+-\times
+-\frac{\Tr(G_{\cD}X)}{\lambda_{\cD}\Tr X}=1.}
+-\end{equation}
+-The maximally mixed limit gives stable-rank task selectivity, while the rank-one coherent specialization gives the nonuniform $N_{\rm eff}$ rejection factor. For dispersive semiconductor bands, the capacity tightness separates into within-shell selectivity and shell-to-global capacity utilization, with the independent Fermi/Kubo factor multiplying afterward.
++For dispersive bands, the physically informative hierarchy is Eq.~\eqref{eq:full-factorization}: the full bound/reference tightness separates support coverage, Fermi/Kubo asymmetry, shell-to-global capacity utilization, and within-shell response selectivity. The reciprocal capacity normalization is exact but definitional; its role is to show how particular fixed-stage limits, including uniform-task concentration and the nonuniform $N_{\rm eff}$ bright-state factor, use the same maximum-capacity bookkeeping.
+ 
+-In the production BIA-neglecting eight-band HgCdTe validation, the active-population tightness $0.1757$ factors into $0.5726$ from shell-capacity utilization and $0.3068$ from the Fermi/Kubo step. The absence of a further within-shell selectivity penalty is enforced by the model's fixed-$\bm k$ $PT$ doublet structure and is not generalized to full zincblende HgCdTe.
++In the production BIA-neglecting eight-band HgCdTe validation, the selected active-population tightness $0.1757$ factors into $0.5726$ from shell-capacity utilization and $0.3068$ from the Fermi/Kubo step. Multiplying by the active-support fraction $0.6690$ gives the full bound/reference ratio $\simeq0.1175$. The absence of a further within-shell selectivity penalty follows because every thermally relevant selected parent shell in this validation is a single fixed-$\bm k$ $PT$ Kramers doublet; $PT$ symmetry is not asserted to make arbitrary multidoublet blocks fully isotropic, and real zincblende HgCdTe also contains BIA.
+ 
+-Downstream, terminal-specific observability effects determine whether internal activity reaches the readout. Conservative photon recycling can be exactly null to a source terminal under ideal final-sink counting, whereas finite-transit Shockley--Ramo motion can lift that null at finite frequency despite zero integrated charge for an internally created and recombined pair segment.
++Downstream, terminal-specific observability effects determine whether internal activity reaches the readout. Conservative photon recycling can be exactly null to a source terminal under ideal final-sink counting, whereas finite-transit Shockley--Ramo motion can lift that single-lineage null at finite frequency despite zero integrated charge for an internally created and recombined pair segment.
+ 
+-The common result is not a replacement scalar for specific detectivity, responsivity, or noise. It is a spectral accounting principle for determining what a detector preferentially measures, what microscopic activity its response can certify, and what internal dynamics its readout can hide.
++The common principle is stage-specific inference. Optical capacity, response selectivity, internal correlation, and terminal observability belong to different physical maps; none can be transferred between stages without the intervening dynamics. This is the sense in which the results form one detector framework, rather than three consequences of one universal operator.
+ 
+ \begin{acknowledgments}
+ Acknowledgments and funding statements to be supplied at submission.
