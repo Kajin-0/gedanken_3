@@ -1,0 +1,95 @@
+--- /mnt/data/experiment12_prb_rev9_exposition_revised.tex	2026-08-15 11:38:53.881322371 +0000
++++ /mnt/data/experiment12_prb_rev10_referee_repaired.tex	2026-08-15 11:47:48.074042308 +0000
+@@ -616,27 +616,29 @@
+ \end{equation}
+ Equation (47) makes explicit that the reference population follows the theorem's exact lower/upper-$\mu$ partition rather than a nominal band-label partition.
+ 
+-The second numerical object is the thermally weighted transition sum that corresponds directly to the optical integral in Eq. (29). Evaluating it before any linewidth broadening avoids introducing a phenomenological lineshape into the theorem test:
++The second numerical object is the thermally weighted transition sum that corresponds directly to the optical integral in Eq. (29). The theorem's window $\mathcal B$ is a set of angular frequencies, whereas the numerical eigensolver works with transition energies. To keep those domains explicit, define the corresponding energy window $\mathcal E_{\mathcal B}\equiv\{\hbar\omega:\omega\in\mathcal B\}$. Evaluating the transition sum before any linewidth broadening avoids introducing a phenomenological lineshape into the theorem test:
+ \begin{equation}
+ \boxed{
+ \begin{aligned}
+ S_{\mathcal B}
+ &=\sum_{nm}\int_{\mathcal K}\frac{d^3k}{(2\pi)^3}
+ (f_{n\mathbf k}-f_{m\mathbf k})|v^x_{mn}(\mathbf k)|^2\\
+-&\quad\times\frac{\chi_{\mathcal B}(E_{m\mathbf k}-E_{n\mathbf k})}
++&\quad\times\frac{\chi_{\mathcal E_{\mathcal B}}(E_{m\mathbf k}-E_{n\mathbf k})}
+ {e^{(E_{m\mathbf k}-E_{n\mathbf k})/(2k_BT)}-1}.
+ \end{aligned}
+ }
+ \tag{48}
+ \end{equation}
+-The sum in Eq. (48) is restricted to $E_{n\mathbf k}<\mu<E_{m\mathbf k}$. The population lower bound is $2S_{\mathcal B}/(v_{\mathcal B}^{\rm cap})^2$. Equation (48) is therefore the direct transition-sum implementation of the thermally weighted cross-$\mu$ optical numerator.
++The sum in Eq. (48) is restricted to $E_{n\mathbf k}<\mu<E_{m\mathbf k}$. The population lower bound is $2S_{\mathcal B}/(v_{\mathcal B}^{\rm cap})^2$. Equation (48) is therefore the direct transition-sum implementation of the thermally weighted cross-$\mu$ optical numerator, with $\mathcal E_{\mathcal B}$ only translating the same selected window from frequency to energy units.
+ 
+-The third numerical object is the capacity itself. This distinction is important: the theorem requires the largest singular value of the \textbf{full projected block}, not the largest individual pairwise matrix element. At each $\mathbf k$, complete degenerate eigenspaces are grouped, all opposite-side partner eigenspaces satisfying the window criterion are assembled, and the largest singular value of the full projected block $P_{\lambda\mathbf k}v_xQ_{\lambda\mathbf k,\mathcal B}$ and its lower-shell counterpart is computed. Translational invariance makes the full bulk operator block diagonal in $\mathbf k$, so
++The third numerical object is the capacity itself. This distinction is important: the theorem requires the largest singular value of the \textbf{full projected block}, not the largest individual pairwise matrix element. At each $\mathbf k$, complete degenerate eigenspaces are grouped, all opposite-side partner eigenspaces satisfying the window criterion are assembled, and the largest singular value of the full projected block $P_{\lambda\mathbf k}v_xQ_{\lambda\mathbf k,\mathcal B}$ and its lower-shell counterpart is computed.
++
++To preserve the finite-system definition in Eqs. (21) and (22), the bulk validation uses the \emph{ordinary} supremum over the stated bounded momentum domain rather than replacing it by an essential supremum. This is conservative with respect to isolated high-symmetry shells:
+ \begin{equation}
+ \boxed{
+ \begin{aligned}
+ v_{\mathcal B}^{\rm cap}
+-=\operatorname*{ess\,sup}_{\mathbf k,\lambda}
++=\sup_{\mathbf k\in\mathcal K,\lambda}
+  s_{\max}\!\Bigl[&P_{\lambda\mathbf k}v_x(\mathbf k)\\[-2pt]
+ &Q_{\lambda\mathbf k,\mathcal B}\Bigr],
+ \end{aligned}
+@@ -645,26 +647,30 @@
+ \end{equation}
+ with the maximum also taken over the corresponding lower-shell blocks.
+ 
+-Equation (49) is the bulk specialization of the same projected-shell operator norm defined abstractly in Eq. (21); it is not a pairwise $\max|v_{cv}|$ approximation.
++Equation (49) is the bulk realization of the same ordinary projected-shell supremum defined abstractly in Eq. (21); it is not a pairwise $\max|v_{cv}|$ approximation. The distinction from an essential supremum matters formally even though it does not materially alter the present HgCdTe result.
++
++In particular, the isolated $\Gamma$ point does not supply a selected cross-$\mu$ block in this charge-neutral state. The chemical potential lies $11.477\ \mathrm{meV}$ above the nominal $\Gamma_6$ edge, so at $\mathbf k=0$ the $\Gamma_6$ pair and the $\Gamma_8$ manifold are all below $\mu$. The selected $\Gamma_8$-derived to $\Gamma_6$-derived cross-$\mu$ set begins only at finite momentum, near $|\mathbf k|=0.055\ \mathrm{nm^{-1}}$. A separate continuous-parameter search of the projected blocks, including the special-point check, gives
++$v_{\mathcal B}^{\rm cap}\simeq1.01764\times10^6\ \mathrm{m/s}$
++for all four Table~\ref{tab:hgcdte} windows to the reported numerical resolution.
+ 
+-The production calculation uses Gauss-Legendre quadrature in $k$ and $\cos\theta$, uniform azimuthal quadrature, and a $10^{-7}\ \mathrm{eV}$ degeneracy-clustering tolerance for the model's exact twofold degeneracies.
++The production integrals use 160 radial Gauss-Legendre nodes, 10 Gauss-Legendre nodes in $\cos\theta$, and 16 uniform azimuthal nodes. The degeneracy-clustering tolerance is $10^{-7}\ \mathrm{eV}$ for the model's exact twofold degeneracies. A denser $200\times12\times20$ grid is used as an additional support-population check; the ordinary capacity supremum is searched directly in the continuous $(k,\theta,\phi)$ parameterization rather than identified with the largest quadrature node.
+ 
+ \begin{table*}[t]
+-\caption{Second-order eight-band HgCdTe test at $300\ \mathrm K$ and $E_g=0.123984\ \mathrm{eV}$. The last column gives the largest momentum at which a selected cross-$\mu$ transition occurs in the numerical quadrature.}
++\caption{Second-order eight-band HgCdTe test at $300\ \mathrm K$ and $E_g=0.123984\ \mathrm{eV}$. The capacity column uses the continuous ordinary-supremum audit required by Eqs. (21), (22), and (49). The two middle diagnostic columns decompose the total tightness into selected-support and Fermi/capacity factors. The last column gives the largest selected momentum on the production optical quadrature.}
+ \label{tab:hgcdte}
+ \begin{ruledtabular}
+-\begin{tabular}{lccc}
+-Window & $v_{\mathcal B}^{\rm cap}$ ($10^6\ \mathrm{m/s}$) & Bound/reference & $k_{\rm sel,max}$ ($\mathrm{nm^{-1}}$) \\
++\begin{tabular}{lccccc}
++Window & $v_{\mathcal B}^{\rm cap}$ ($10^6\ \mathrm{m/s}$) & Bound/reference & $n_{\mathcal B}^{\rm act}/n_{\rm ref}$ & Bound/$n_{\mathcal B}^{\rm act}$ & $k_{\rm sel,max}$ ($\mathrm{nm^{-1}}$) \\
+ \hline
+-$E_g$--$1.5E_g$ & 1.017 & 0.0320 & 0.149 \\
+-$E_g$--$2E_g$ & 1.017 & 0.0749 & 0.240 \\
+-$E_g$--$3E_g$ & 1.015 & 0.1110 & 0.415 \\
+-$E_g$--$0.5\ \mathrm{eV}$ & 1.016 & 0.1180 & 0.583 \\
++$E_g$--$1.5E_g$ & 1.018 & 0.0320 & 0.264 & 0.121 & 0.149 \\
++$E_g$--$2E_g$ & 1.018 & 0.0749 & 0.450 & 0.166 & 0.240 \\
++$E_g$--$3E_g$ & 1.018 & 0.1105 & 0.562 & 0.197 & 0.415 \\
++$E_g$--$0.5\ \mathrm{eV}$ & 1.018 & 0.1175 & 0.669 & 0.176 & 0.583 \\
+ \end{tabular}
+ \end{ruledtabular}
+ \end{table*}
+ 
+-Table~\ref{tab:hgcdte} evaluates both the selected-shell capacity and the thermally weighted optical sum. The capacity stays nearly constant while the bound tightens as additional cross-$\mu$ spectral weight is accumulated. Over the broad direct-transition validation window $E_g\le E_{cv}\le0.5\ \mathrm{eV}$ we obtain
++Table~\ref{tab:hgcdte} evaluates the selected-shell capacity, thermally weighted optical sum, and the two distinct sources of slack in the hierarchy. The capacity is effectively window independent at the reported precision while the bound tightens as additional cross-$\mu$ spectral weight is accumulated. Over the broad direct-transition validation window $E_g\le E_{cv}\le0.5\ \mathrm{eV}$ we obtain
+ \begin{equation}
+ \boxed{
+ v_{\mathcal B}^{\rm cap}\simeq1.02\times10^6\ \mathrm{m/s},
+@@ -674,13 +680,13 @@
+ }
+ \tag{50}
+ \end{equation}
+-Equation (50) says that, over this broad validation window, the theorem recovers about $11.8\%$ of the numerically converged cross-$\mu$ reference population while using the full projected-block capacity required by the theorem.
++Equation (50) says that, over this broad validation window, the theorem recovers about $11.8\%$ of the numerically converged cross-$\mu$ reference population while using the ordinary projected-block supremum required by the finite-system theorem. The more precise audit value is $0.1175$; the headline $0.118$ is unchanged at the precision used in the abstract.
+ 
+-The corresponding lower bound is $1.19\times10^{16}\ \mathrm{cm^{-3}}$. Thus the heavy-hole and multiband asymmetry substantially loosen the constraint relative to the ideal parabolic and Dirac checks, but the bound remains order $10^{-1}$ rather than numerically negligible. The $0.5\ \mathrm{eV}$ interval is a model-validation window, not a proposed detector operating bandwidth.
++The corresponding lower bound is $1.18\times10^{16}\ \mathrm{cm^{-3}}$. The decomposition in Table~\ref{tab:hgcdte} shows why the realistic result is looser than the ideal equality families without assigning the entire loss to a single mechanism. In the broad window, about $66.9\%$ of the cross-$\mu$ reference population lies in the selected optical-support subspaces, while the Fermi/capacity step recovers about $17.6\%$ of that active population. Heavy-hole particle-hole asymmetry, multiband singular-value structure, and incomplete selected support therefore contribute through distinct parts of the hierarchy. The $0.5\ \mathrm{eV}$ interval is a model-validation window, not a proposed detector operating bandwidth.
+ 
+-The broad-window projected-block singular value is $1.0156\times10^6\ \mathrm{m/s}$, whereas the largest individual pairwise matrix element is only $0.8681\times10^6\ \mathrm{m/s}$. Replacing the projected-block norm by a pairwise maximum would therefore overstate the population lower bound by about $37\%$. This numerical difference is why the basis-invariant block capacity is required rather than a simpler pairwise velocity maximum.
++The continuous broad-window ordinary projected-block supremum is $1.01764\times10^6\ \mathrm{m/s}$, whereas the corresponding continuous supremum of an individual pairwise matrix element is about $0.87165\times10^6\ \mathrm{m/s}$. Replacing the projected-block norm by a pairwise maximum would therefore overstate the population lower bound by about $36.3\%$. This numerical difference is why the basis-invariant block capacity is required rather than a simpler pairwise velocity maximum.
+ 
+-Varying the degeneracy-clustering tolerance from $10^{-10}$ to $10^{-5}\ \mathrm{eV}$ leaves the capacity unchanged to the reported precision at fixed quadrature. The selected $0.5\ \mathrm{eV}$ window samples only $|k|\le0.583\ \mathrm{nm^{-1}}$. The selected transitions connect the $\Gamma_8$-derived branches to the $\Gamma_6$-derived pair, while the $\Gamma_7$-derived split-off pair does not enter the selected set over this domain. Increasing the carrier cutoff from $1.5$ to $2.0\ \mathrm{nm^{-1}}$ changes the cross-$\mu$ reference population by less than $1\%$; denser radial/angular quadrature and optical-domain variations change the broad-window ratio only at the few-$10^{-4}$ level.
++Varying the degeneracy-clustering tolerance from $10^{-10}$ to $10^{-5}\ \mathrm{eV}$ leaves the sampled capacity unchanged to the reported precision at fixed quadrature. The selected $0.5\ \mathrm{eV}$ production grid samples transitions through $|k|=0.583\ \mathrm{nm^{-1}}$; a denser grid gives the same broad-window conclusions. The selected transitions connect the $\Gamma_8$-derived branches to the $\Gamma_6$-derived pair, while the $\Gamma_7$-derived split-off pair does not enter the selected set over this domain. Increasing the carrier cutoff from $1.5$ to $2.0\ \mathrm{nm^{-1}}$ changes the cross-$\mu$ reference population by less than $1\%$; denser radial/angular quadrature and optical-domain variations change the broad-window ratio only at the few-$10^{-4}$ level.
+ 
+ These are convergence and branch-selection diagnostics inside the bounded-domain $k\cdot p$ model. They are not a claim that the continuum expansion is valid to arbitrary momentum.
