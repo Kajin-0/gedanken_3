@@ -11,10 +11,10 @@
 3. `experiments/13-observable-resource-unification/PAPER_REV7_RESPONSE_TO_REREVIEW_2026-08-15.md`
 4. `experiments/13-observable-resource-unification/REV7_PRAPPLIED_PRODUCTION_QA_2026-08-15.md`
 5. `experiments/13-observable-resource-unification/PAPER_REV6_FINAL_HOSTILE_REVIEW_2026-08-15.md`
-6. `experiments/13-observable-resource-unification/CURRENT_STATE.md`
-7. `experiments/13-observable-resource-unification/PRAPPLIED_SUBMISSION_PREFLIGHT_REV6_2026-08-15.md` — submission guidance; production identifiers must be advanced to Rev. 7 during final metadata insertion
+6. `experiments/13-observable-resource-unification/PRAPPLIED_SUBMISSION_PREFLIGHT_REV7_2026-08-15.md`
+7. `experiments/13-observable-resource-unification/CURRENT_STATE.md`
 
-Rev. 6 and earlier are historical development checkpoints. Rev. 7 controls whenever states conflict.
+Rev. 6 and earlier are historical checkpoints. Rev. 7 controls whenever states conflict.
 
 ## Controlling production identity
 
@@ -48,13 +48,13 @@ Central finite-system theorem:
 }
 ```
 
-Macroscopic density interpretation requires
+Thermodynamic uniform-capacity condition:
 
 ```math
 \bar v_{\mathcal B}^{cap}=\limsup_{j\to\infty}v_{\mathcal B,V_j}^{cap}<\infty.
 ```
 
-Rev. 7 formal fallback when ordinary intensive thermodynamic limits are not assumed:
+Rev. 7 adds the explicit liminf fallback when ordinary intensive thermodynamic limits are not assumed:
 
 ```math
 \liminf_{j\to\infty}n_{\mathcal B,V_j}^{act}
@@ -66,16 +66,14 @@ Rev. 7 formal fallback when ordinary intensive thermodynamic limits are not assu
 Full tightness hierarchy:
 
 ```math
-\boxed{
 \frac{n_{bound}}{n_{ref}}
 =
 \frac{n_{\mathcal B}^{act}}{n_{ref}}
 \eta_F
 \sum_a w_a^{act}\frac{c_a}{\mathcal S_a^{act}}.
-}
 ```
 
-Rev. 7 explicitly states that `n_B^act/n_ref` is reference-domain dependent. `eta_F` is the Fermi-statistical factor; Kubo-Greenwood is exact spectral bookkeeping. Optical bound tightness is `tau_bound^act`; `observability` is reserved for terminal/readout null spaces.
+Support coverage `n_B^act/n_ref` is reference-domain dependent. `eta_F` is the Fermi-statistical factor. Kubo-Greenwood is exact spectral bookkeeping. Optical bound tightness is `tau_bound^act`; `observability` is reserved for terminal/readout null spaces.
 
 HgCdTe broad-window closure:
 
@@ -92,7 +90,7 @@ rank threshold         = 1e-6 m/s
 carrier-cutoff check   = 1.5 -> 2.0 nm^-1 changes n_ref by <1%
 ```
 
-The abstract uses `numerically converged` for the HgCdTe calculation. Explicit BIA remains omitted, so do not generalize the exact shell-isotropy result beyond the stated BIA-neglecting single-parent-doublet validation.
+The abstract uses `numerically converged` for the HgCdTe calculation. Explicit BIA remains omitted, so the exact shell-isotropy result remains restricted to the stated BIA-neglecting single-parent-doublet validation.
 
 ## Publication architecture — mandatory
 
@@ -126,7 +124,7 @@ Workflow:
 
 ## Why Rev. 7 exists
 
-The final Rev. 6 hostile re-review found the central manuscript technically sound and requested only:
+The final Rev. 6 adversarial re-review found the central manuscript technically sound and requested only:
 
 ```text
 thermodynamic convergence/liminf precision;
@@ -134,7 +132,7 @@ reference-domain qualification of support coverage;
 carrier-cutoff convergence statement for n_ref.
 ```
 
-Rev. 7 closes those points, removes the dangling unknown-arrival sentence, changes `production-resolution` to `numerically converged`, and enlarges only the smallest figure annotations.
+Rev. 7 closes those points, removes the dangling unknown-arrival sentence, changes `production-resolution` to `numerically converged`, and enlarges only the smallest Fig. 1/3/4 annotations.
 
 No production numerical value or central theorem changed.
 
@@ -142,11 +140,14 @@ No production numerical value or central theorem changed.
 
 Do not create Rev. 8 or new theory by default.
 
-A BIA-inclusive stress test is optional scientific follow-up, not a submission prerequisite under the current claim set.
+A BIA-inclusive stress test is optional follow-up, not a submission prerequisite under the current claim set.
 
 Reopen science only for a concrete mathematical counterexample, numerical inconsistency, direct prior-art collision, or explicit editor/referee request.
 
-## Remaining work
+## Submission layer
+
+Use:
+`experiments/13-observable-resource-unification/PRAPPLIED_SUBMISSION_PREFLIGHT_REV7_2026-08-15.md`.
 
 Human-owned fields still required:
 
@@ -161,4 +162,4 @@ final Data Availability / persistent archive decision;
 optional ORCID/referee recommendations/exclusions.
 ```
 
-After metadata insertion, update the submission preflight identifiers to Rev. 7, rebuild through Rev. 7 CI, record final hashes, inspect every page, and verify that the submitted source compiles to the submitted PDF.
+After metadata insertion, rebuild through Rev. 7 CI, record final hashes, inspect every page, and verify that the submitted source reproduces the submitted PDF.
