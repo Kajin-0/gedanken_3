@@ -2,67 +2,38 @@
 
 **Date:** 2026-08-15  
 **Active branch:** `experiment-13-observable-resource-unification`  
-**Repository frontier:** **Experiment 13 Rev. 7 — Physical Review Applied flagship; final adversarial technical loop closed; 8-page production QA pass; Rev. 7 submission preflight complete; human inputs remain**
+**Repository frontier:** **Experiment 13 Rev. 8 — Physical Review Applied flagship; homogeneous full-BIA robustness added; 8-page production and hostile-review pass; human submission inputs remain**
 
 ## Read first
 
-1. `experiments/13-observable-resource-unification/00_ACTIVE_FRONTIER_REV7_FLAGSHIP_2026-08-15.md`
-2. `experiments/13-observable-resource-unification/PAPER_REV7_RESPONSE_TO_REREVIEW_2026-08-15.md`
-3. `experiments/13-observable-resource-unification/REV7_PRAPPLIED_PRODUCTION_QA_2026-08-15.md`
-4. `experiments/13-observable-resource-unification/PAPER_REV6_FINAL_HOSTILE_REVIEW_2026-08-15.md`
-5. `experiments/13-observable-resource-unification/PRAPPLIED_SUBMISSION_PREFLIGHT_REV7_2026-08-15.md`
+1. `experiments/13-observable-resource-unification/00_ACTIVE_FRONTIER_REV8_FLAGSHIP_2026-08-15.md`
+2. `experiments/13-observable-resource-unification/PAPER_REV8_BIA_ROBUST_HOSTILE_REVIEW_2026-08-15.md`
+3. `experiments/13-observable-resource-unification/REV8_PRAPPLIED_PRODUCTION_QA_2026-08-15.md`
+4. `experiments/13-observable-resource-unification/HGCDTE_FULL_HOMOGENEOUS_BIA_ROBUSTNESS_2026-08-15.md`
+5. `experiments/13-observable-resource-unification/PRAPPLIED_SUBMISSION_PREFLIGHT_REV8_2026-08-15.md`
 6. `experiments/13-observable-resource-unification/CURRENT_STATE.md`
 
-Rev. 6 and earlier are historical checkpoints. Rev. 7 controls.
+Rev. 7 and earlier are historical checkpoints. Rev. 8 controls.
 
 ## Controlling production identity
 
 ```text
-Actions run:          31912951827
-head commit:          f464dc966e0223f6b8c3ff1e51f82f948c8e950c
-artifact ID:          9254179157
-artifact digest:      29072be047b7a8174404ba02f32de1615c45c06daebcd5627b9f5cda54339d56
-PDF SHA-256:          e40627dfb12f122cafb013415a475efffabda02befbff757ebd80b2da993da50
-TeX SHA-256:          806ebffeb398a892550c62b9bcb7bcfa0c85c75a9c349add6f0ad628103ac5d6
-figure SHA-256:       e60d35acc894ca5317d4ca5b8dce1b7b8869cfa62ca0cb6475181cfb5728d0c6
+Actions run:          31916728949
+source commit:        813fd8a2fc3011ef6e3ba63a0567cb3eee30297b
+artifact ID:          9255118533
+artifact digest:      a5d7aac0a5f3a68783a3510c9c2e8632af3e5b4e34f326e3012dd1aa6316bfcd
+PDF SHA-256:          309655aec80a7778428beedad4c95b53b27b8ebae24143310b1f4fdc1c6faf87
+TeX SHA-256:          08efd63da8e5558a07bbc5a4bc9be8667811bf2314705c69f257e30b9b565973
 pages:                8
 undefined refs/cites: none
 overfull/underfull:   none
-all-page visual QA:   PASS
+visual QA:            PASS
+hostile review:       PASS
 ```
 
-## Scientific core
+## Core theorem and hierarchy
 
-Finite-system population theorem:
-
-```math
-\boxed{
- n_e+n_h
- \ge n_{e,\mathcal B}^{act}+n_{h,\mathcal B}^{act}
- \ge
- \frac{2}{\pi e^2(v_{\mathcal B}^{cap})^2}
- \int_{\mathcal B}
- \frac{\hbar\omega\sigma_1^{cross}(\omega)}
- {e^{\hbar\omega/(2k_BT)}-1}d\omega.
-}
-```
-
-Macroscopic condition:
-
-```math
-\bar v_{\mathcal B}^{cap}=\limsup_{j\to\infty}v_{\mathcal B,V_j}^{cap}<\infty.
-```
-
-Rev. 7 nonconvergent fallback:
-
-```math
-\liminf_{j\to\infty}n_{\mathcal B,V_j}^{act}
-\ge
-\frac{\liminf_{j\to\infty}\mathcal L_{\mathcal B,V_j}}
-{(\bar v_{\mathcal B}^{cap})^2}.
-```
-
-Full hierarchy:
+Unchanged from Rev. 7. The cross-mu population theorem remains the central result, with the existing thermodynamic uniform-capacity/liminf qualifications.
 
 ```math
 \frac{n_{bound}}{n_{ref}}
@@ -72,9 +43,7 @@ Full hierarchy:
 \sum_a w_a^{act}\frac{c_a}{\mathcal S_a^{act}}.
 ```
 
-Rev. 7 explicitly states that `n_B^act/n_ref` is reference-domain dependent. `eta_F` is Fermi-statistical; Kubo-Greenwood is exact bookkeeping. Optical bound tightness is `tau_bound^act`; `observability` is terminal/readout terminology.
-
-## HgCdTe closure
+## Baseline HgCdTe production values
 
 ```text
 support fraction       = 0.66897
@@ -83,40 +52,58 @@ tau_cap^act            = 0.57262
 tau_bound^act          = 0.17570
 full bound/reference   ~= 0.1175
 v_B^cap                = 1.01764e6 m/s
-production quadrature  = 160 x 10 x 16
-support check          = 200 x 12 x 20
-rank threshold         = 1e-6 m/s
-carrier-cutoff check   = 1.5 -> 2.0 nm^-1 changes n_ref by <1%
 ```
 
-Use `numerically converged second-order eight-band HgCdTe calculation`, not `production-resolution`. Explicit BIA remains omitted; do not generalize the exact single-parent-doublet isotropy beyond the stated validation.
+These remain the Table-I/Fig.-4 baseline.
+
+## Rev. 8 BIA robustness result
+
+A separate symmetry-checked homogeneous effective eight-band model adds `B8v+`, `B8v-`, and complete `C_k` bulk couplings.
+
+At the present composition:
+
+```text
+B8v+ = -0.2026 eV nm^2
+B8v- = +0.00706 eV nm^2
+C_k  = -0.00654 eV nm
+```
+
+Refined results:
+
+```text
+BIA off:  capacity 1.01764e6 m/s; full ratio 0.11747; 20072 dim-2 active blocks; S_a=1
+BIA on:   capacity 1.02203e6 m/s; full ratio 0.11651; 40452 dim-1 active blocks; S_a=1
+```
+
+Relative:
+
+```text
+capacity +0.43%
+full ratio -0.82%
+within-shell factor unchanged at 1
+```
+
+Key mechanism: generic BIA splitting makes the sampled active exact parents one-dimensional, so a nonzero block has one singular value and `rank = stable rank = 1`.
+
+Implementation QA and multi-seed/grid/cluster robustness all pass. The 26.6-meV number is only an adjacent-pair separation diagnostic, not a theorem input.
+
+Scope: homogeneous effective eight-band BIA only; not atomistic/interface complete and not universal for exceptional multidimensional exact degeneracies.
 
 ## Publication architecture — mandatory
 
 ```text
-Experiment 13 Rev. 7:     SOLE PRIMARY ACTIVE SUBMISSION MANUSCRIPT
+Experiment 13 Rev. 8:     SOLE PRIMARY ACTIVE SUBMISSION MANUSCRIPT
 Experiment 12 manuscript: FROZEN FALLBACK / DEVELOPMENT PROVENANCE
 Experiment 01 manuscript: FROZEN FALLBACK
 Experiment 09 manuscript: FROZEN FALLBACK
 concurrent overlapping submission: DO NOT DO
 ```
 
-Experiment-12 hold:
-`experiments/12-oscillator-strength-state-count-bound/00_SUBMISSION_HOLD_EXPERIMENT13_SUPERSESSION_2026-08-15.md`
-
-If this supersession policy changes, re-audit publication overlap before submission.
-
 ## Stop rule
 
-Do not create Rev. 8 or reopen theory by default.
+Do not create Rev. 9 or reopen science by default. The current technical loop is closed.
 
-The final adversarial re-review found no theorem, normalization, degeneracy, HgCdTe, recycling, Poisson, or Shockley-Ramo defect. Rev. 7 closed its remaining bounded technical suggestions.
-
-A BIA-inclusive HgCdTe stress test is optional follow-up, not a pre-submission requirement.
-
-## Remaining work
-
-Human-owned submission fields only:
+Human/submission inputs only:
 
 ```text
 author name;
@@ -129,4 +116,4 @@ final Data Availability / persistent-archive decision;
 optional ORCID/referee recommendations/exclusions.
 ```
 
-After insertion, rebuild through Rev. 7 CI, record final hashes, visually inspect every page, and verify that submitted source reproduces the submitted PDF.
+After insertion, rebuild through Rev. 8 CI, record hashes, inspect every page, and verify submitted source reproduces submitted PDF.
