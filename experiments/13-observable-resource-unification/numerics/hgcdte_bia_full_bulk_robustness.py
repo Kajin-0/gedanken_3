@@ -61,12 +61,14 @@ def print_result(label, r):
 
 
 def main():
-    # Multi-seed continuous ordinary supremum for full BIA.
+    # Multi-seed continuous ordinary supremum at the same 120x10x16 chemical
+    # potential used by the controlling five-case refined hierarchy audit.
     mu_ref, _ = bs.carrier_state(
-        fb.h8_full_bia, kmax=2.0, nr=100, nmu=8, nphi=12
+        fb.h8_full_bia, kmax=2.0, nr=120, nmu=10, nphi=16
     )
     caps = []
     print("[FULL_BIA_CAPACITY_MULTI_SEED]")
+    print(f"controlling_mu_eV={mu_ref:.12g}")
     for seed in (20260819, 20260829, 20260839, 20260849):
         cap, kk = rf.numerical_supremum(
             fb.h8_full_bia, fb.vx_full_bia,
