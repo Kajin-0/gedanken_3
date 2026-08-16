@@ -50,10 +50,12 @@ jobs:
         working-directory: experiments/13-observable-resource-unification/typeset
         run: |
           python3 build_rev8.py
+          python3 finalize_rev8.py
           grep -Fq 'homogeneous $B_{8v}^{+}/B_{8v}^{-}/C_k$' rev8_prapplied.tex
           grep -Fq '40452 one-dimensional BIA-split shells' rev8_prapplied.tex
           grep -Fq '0.82\%' rev8_prapplied.tex
           grep -Fq 'Li2017HgTeBIA' rev8_prapplied.tex
+          grep -Fq 'adjacent-pair separation diagnostic' rev8_prapplied.tex
           grep -Fq '\bibliography{rev4_unified,rev8_extra}' rev8_prapplied.tex
 
       - name: Compile REVTeX manuscript
@@ -76,7 +78,7 @@ jobs:
             echo
             pdfinfo "$PDF" | grep -E '^(Pages|Page size|PDF version):' || true
             echo
-            sha256sum rev8_prapplied.tex "$PDF" rev4_unified.bib rev8_extra.bib rev8_figures.tex build_rev8.py
+            sha256sum rev8_prapplied.tex "$PDF" rev4_unified.bib rev8_extra.bib rev8_figures.tex build_rev8.py finalize_rev8.py
             echo
             echo 'Undefined-reference/citation warnings:'
             grep -Ei 'undefined references|undefined citations|Citation .* undefined|Reference .* undefined' "$LOG" || echo 'none'
@@ -105,5 +107,6 @@ jobs:
             experiments/13-observable-resource-unification/typeset/rev8_figures.tex
             experiments/13-observable-resource-unification/typeset/rev8_extra.bib
             experiments/13-observable-resource-unification/typeset/build_rev8.py
+            experiments/13-observable-resource-unification/typeset/finalize_rev8.py
             experiments/13-observable-resource-unification/typeset/REV8_PRODUCTION_QA.txt
             experiments/13-observable-resource-unification/typeset/rev8_rendered_pages/*.png
